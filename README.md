@@ -2,7 +2,7 @@
 
 Interaktive Quellen-Labore für Geschichte (GGK) am beruflichen Gymnasium – gebaut nach dem Orientierungsmodell „Lernwirksame digitale Lernumgebungen“ und mit derselben Technik wie das [Psycho-Labor](https://github.com/GeschichtefuerdieGegenwart/psycho-labor).
 
-**Für Schüler\*innen:** https://geschichtefuerdiegegenwart.github.io/ggk-labor/
+**Für Schüler\*innen:** https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/
 
 | Datei | Inhalt |
 | --- | --- |

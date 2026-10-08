@@ -90,7 +90,7 @@
      der Anker wird beim Öffnen nicht an den Server übertragen. */
   Lab.resultURL = function (payload) {
     /* Läuft die Seite nicht über https (z. B. aus IServ geladen), gilt die feste Adresse des GGK-Labors. */
-    var base = /^https?:$/.test(window.location.protocol) ? window.location.href : "https://geschichtefuerdiegegenwart.github.io/ggk-labor/";
+    var base = /^https?:$/.test(window.location.protocol) ? window.location.href : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
     var u = new URL("auswertung.html", base);
     u.hash = "d=" + payload;
     return u.toString();
