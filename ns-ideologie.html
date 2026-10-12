@@ -344,6 +344,18 @@ html.dm[data-theme="dark"] {
   .lv { display: inline-block; padding: 1px 9px; border-radius: 999px; font-size: 13px; font-weight: 700; margin-right: 6px; color: #fff; }
   .lv.k { background: var(--ok); } .lv.b { background: var(--gold); } .lv.n { background: var(--warm); }
 
+  /* Expertengruppe, Expertenrunde, Anwenden */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0; }
+  .chips button { -webkit-appearance: none; appearance: none; min-height: 48px; padding: 0 16px; border: 2px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); font: 600 16px var(--font); cursor: pointer; }
+  .chips button.on { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .chips button:disabled { cursor: default; }
+  .qscreen { font-size: 19px; }
+  .qscreen p { margin: 0 0 10px; display: grid; grid-template-columns: 34px 1fr; }
+  .abs-n { font: 700 14px var(--font); color: var(--accent); padding-top: 4px; }
+  .xrow { padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .xrow textarea { min-height: 64px; margin-top: 6px; }
+  .xown { margin-top: 6px; background: var(--accent-soft); border-radius: 12px; padding: 10px 14px; font-size: 17px; }
+
   /* ---------- Übersicht als Schublade: Eingaben und Position bleiben erhalten ---------- */
   .drawer-bg { position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 40; }
   .drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(680px, 100%); background: var(--bg); z-index: 41; display: flex; flex-direction: column; box-shadow: -8px 0 30px rgba(0,0,0,.2); }
@@ -429,6 +441,10 @@ html.dm[data-theme="dark"] {
     .ue .zl li { padding: 1.5pt 0; grid-template-columns: 15mm 1fr; }
     .ue .status { margin-top: 4pt; font-size: 8.8pt; }
     .ue .figbox { max-width: 150mm; margin: 0 auto; }
+    .res h3 { font-size: 11pt; margin: 6pt 0 2pt; }
+    .res .mine-p { margin: 2pt 0 4pt; }
+    .res .mine-p td, .res .mine-p th { font-size: 9.4pt; padding: 2.5pt 5pt; }
+    .res .ln { height: 7mm; }
     .loes td, .loes th { font-size: 9.4pt; padding: 3pt 6pt !important; line-height: 1.3; }
     .loes tr { break-inside: avoid; page-break-inside: avoid; }
   }
@@ -455,19 +471,20 @@ html.dm[data-theme="dark"] {
   <p class="lead">In M17 hast du erlebt, wie Jüdinnen und Juden ab 1933 Schritt für Schritt ausgegrenzt und entrechtet wurden. Heute untersuchst du, <strong>mit welchen Ideen</strong> die Nationalsozialisten das begründeten.</p>
   <div class="grid2">
     <div class="card">
-      <h3>So läuft das Labor (ca. 25 Min.)</h3>
+      <h3>So läuft die Stunde (90 Min.)</h3>
       <ol class="plan">
-        <li>Erinnern: drei Fragen zu M17 <span>· allein · 4 Min.</span></li>
-        <li>Deine Vermutung <span>· allein · 2 Min.</span></li>
+        <li>Erinnern und vermuten <span>· allein · 6 Min.</span></li>
         <li>Sechs Zeugnisse untersuchen <span>· allein · 12 Min.</span></li>
-        <li>Ergebnis an die Lehrkraft (QR-Code)</li>
-        <li>Auflösung: Die Denkmuster bekommen Namen <span>· gemeinsam · 7 Min.</span></li>
-        <li>Lernmappe als PDF sichern – <strong>Ende des Labors</strong></li>
+        <li>Auflösung: Die Denkmuster bekommen Namen <span>· gemeinsam · 10 Min.</span></li>
+        <li>Expertengruppe: eine Quelle genau <span>· in Gruppen · 15 Min.</span></li>
+        <li>Expertenrunde: alle fünf Säulen <span>· gemischte Gruppen · 15 Min.</span></li>
+        <li>Von der Idee zur Tat <span>· zu zweit · 10 Min.</span></li>
+        <li>Ergebnissicherung und Lernmappe <span>· allein · 10 Min.</span></li>
       </ol>
     </div>
     <div class="card">
       <h3>Am Ende hast du …</h3>
-      <p>eine <strong>Lernmappe (PDF)</strong> mit der Lernübersicht, deinen Antworten aus dem Labor, den Quellen und den Arbeitsblättern. Damit arbeitest du in GoodNotes weiter.</p>
+      <p>eine schlanke <strong>Lernmappe (PDF)</strong>: <strong>zwei Merkseiten</strong> und <strong>deine eigenen Ergebnisse</strong> – sonst keine Blätter. Alle Aufgaben bearbeitest du hier im Labor.</p>
       <p class="small">Die Lernübersicht (Knopf oben rechts) wird bei der Auflösung freigeschaltet. Vorher sollst du die Zeugnisse mit deinen eigenen Worten deuten.</p>
     </div>
   </div>
@@ -478,7 +495,7 @@ html.dm[data-theme="dark"] {
 
 <!-- ===================== Abruf M17 ===================== -->
 <section class="step" id="s-2">
-  <div class="timebox"><b>⏱ 4 Min.</b><i>allein</i><span>Schritt 1 von 6 · Erinnern</span></div>
+  <div class="timebox"><b>⏱ 4 Min.</b><i>allein</i><span>Schritt 1 von 10 · Erinnern</span></div>
   <h2>Was weißt du noch aus M17?</h2>
   <div class="auftrag">
     <span class="label a">Auftrag</span>
@@ -490,7 +507,7 @@ html.dm[data-theme="dark"] {
 
 <!-- ===================== Vermutung ===================== -->
 <section class="step" id="s-3">
-  <div class="timebox"><b>⏱ 2 Min.</b><i>allein</i><span>Schritt 2 von 6 · Vermutung</span></div>
+  <div class="timebox"><b>⏱ 2 Min.</b><i>allein</i><span>Schritt 2 von 10 · Vermutung</span></div>
   <h2>Deine Vermutung</h2>
   <div class="auftrag">
     <span class="label a">Auftrag</span>
@@ -505,7 +522,7 @@ html.dm[data-theme="dark"] {
 
 <!-- ===================== Zeugnisse ===================== -->
 <section class="step" id="s-4">
-  <div class="timebox"><b>⏱ 12 Min.</b><i>allein</i><span>Schritt 3 von 6 · Zeugnisse untersuchen</span></div>
+  <div class="timebox"><b>⏱ 12 Min.</b><i>allein</i><span>Schritt 3 von 10 · Zeugnisse untersuchen</span></div>
   <h2>Sechs Zeugnisse aus den Jahren 1920 bis 1935</h2>
   <div class="auftrag">
     <span class="label a">Auftrag</span>
@@ -533,7 +550,7 @@ html.dm[data-theme="dark"] {
 
 <!-- ===================== Kursvergleich ===================== -->
 <section class="step" id="s-5">
-  <div class="timebox"><b>Schritt 4 von 6</b><i>Ergebnis an die Lehrkraft</i></div>
+  <div class="timebox"><b>Schritt 4 von 10</b><i>Ergebnis an die Lehrkraft</i></div>
   <h2>Dein Ergebnis für den Kurs</h2>
   <p>Zeig diesen QR-Code deiner Lehrkraft. Deine Zuordnungen erscheinen <strong>ohne Namen</strong> im Kursbild.</p>
   <div class="card"><div class="qr-box"><div id="qr"></div><div style="flex:1;min-width:220px"><p class="small">Im Code stehen nur Zahlen: welche Denkmuster du bei jedem Zeugnis gewählt hast und deine Vermutung. Deine Begründungen bleiben auf dem iPad.</p><p class="small">Falls das Scannen nicht klappt:</p><div class="code" id="code"></div></div></div></div>
@@ -543,7 +560,7 @@ html.dm[data-theme="dark"] {
 
 <!-- ===================== Auflösung 1: Namen ===================== -->
 <section class="step" id="s-6">
-  <div class="timebox"><b>⏱ 3 Min.</b><i>gemeinsam</i><span>Schritt 5 von 6 · Auflösung 1 von 2</span></div>
+  <div class="timebox"><b>⏱ 3 Min.</b><i>gemeinsam</i><span>Schritt 5 von 10 · Auflösung 1 von 2</span></div>
   <h2>Die Denkmuster haben Namen: die fünf Säulen</h2>
   <div class="info">
     <span class="label i">Information</span>
@@ -560,7 +577,7 @@ html.dm[data-theme="dark"] {
 
 <!-- ===================== Auflösung 2: Rückmeldung ===================== -->
 <section class="step" id="s-7">
-  <div class="timebox"><b>⏱ 7 Min.</b><i>gemeinsam, dann allein schreiben</i><span>Schritt 5 von 6 · Auflösung 2 von 2</span></div>
+  <div class="timebox"><b>⏱ 7 Min.</b><i>gemeinsam, dann allein schreiben</i><span>Schritt 5 von 10 · Auflösung 2 von 2</span></div>
   <h2>Deine Zuordnungen – mit Rückmeldung</h2>
   <div class="info">
     <span class="label i">Information</span>
@@ -576,20 +593,133 @@ html.dm[data-theme="dark"] {
   <div class="auftrag">
     <span class="label a">Auftrag 2 · Erste Vermutung</span>
     <p>Welche Säule taucht in den Zeugnissen am häufigsten auf? Warum könnte sie für die anderen Säulen wichtig sein?</p>
-    <div class="hilfe">Schau, wie oft „Blut“ oder „Rasse“ vorkommt. Deine Vermutung darf falsch sein – du prüfst sie gleich an den Quellen.</div>
+    <div class="hilfe">Schau, wie oft „Blut“ oder „Rasse“ vorkommt. Deine Vermutung darf falsch sein – du prüfst sie gleich in der Expertengruppe.</div>
     <textarea id="v1" class="short" aria-label="Vermutung"></textarea>
   </div>
-  <div class="actions"><button class="btn secondary" data-prev>Zurück</button><button class="btn" data-next id="to-mappe" disabled>Weiter: Lernmappe</button><span class="small" id="a-hint">Schreib zuerst etwas in beide Felder.</span></div>
+  <div class="actions"><button class="btn secondary" data-prev>Zurück</button><button class="btn" data-next id="to-mappe" disabled>Weiter: Expertengruppe</button><span class="small" id="a-hint">Schreib zuerst etwas in beide Felder.</span></div>
+</section>
+
+<!-- ===================== Expertengruppe (AB 1) ===================== -->
+<section class="step" id="s-8">
+  <div class="timebox"><b>⏱ 15 Min.</b><i>in der Expertengruppe</i><span>Schritt 6 von 10 · Quelle untersuchen</span></div>
+  <h2>Expertengruppe: Untersuche eine Quelle genau</h2>
+  <div class="auftrag">
+    <span class="label a">Auftrag</span>
+    <p style="margin:0 0 8px">Deine Lehrkraft teilt dir eine Quelle zu. Wähle sie hier aus.</p>
+    <div class="choices" id="eg"></div>
+  </div>
+  <div id="eq" hidden>
+    <div class="info">
+      <span class="label i">Das brauchst du</span>
+      <p id="e-def" style="margin:0"></p>
+    </div>
+    <div class="card">
+      <p class="ctx" id="e-ctx"></p>
+      <div class="zitat qscreen" id="e-text"></div>
+      <p class="mini" id="e-wort"></p>
+      <p class="fund" id="e-fund"></p>
+    </div>
+    <div class="auftrag">
+      <span class="label a">Auftrag 1</span>
+      <p>Welche <strong>zwei Abschnitte</strong> zeigen die Säule am deutlichsten? Tippe sie an.</p>
+      <div class="chips" id="e-abs"></div>
+    </div>
+    <div class="auftrag">
+      <span class="label a">Auftrag 2</span>
+      <p>Erkläre die Säule <strong>in eigenen Worten</strong> (2–3 Sätze) – so, dass du sie gleich in der Expertenrunde vorstellen kannst.</p>
+      <textarea id="e2" class="short" aria-label="Säule in eigenen Worten"></textarea>
+    </div>
+    <div class="auftrag">
+      <span class="label a">Auftrag 3</span>
+      <p><strong>Wen trifft diese Idee</strong> – und was soll mit diesen Menschen geschehen?</p>
+      <textarea id="e3" class="short" aria-label="Wen trifft diese Idee"></textarea>
+      <details class="hint"><summary>Hilfekarte (nur bei Bedarf)</summary><div id="e-hk"></div></details>
+    </div>
+    <div class="actions"><button class="btn" id="e-check" type="button" disabled>Mit der Erwartung vergleichen</button><span class="small" id="e-hint">Wähle zwei Abschnitte und schreib in beide Felder.</span></div>
+    <div id="e-erw" hidden>
+      <div class="fbx ok" aria-live="polite"><strong>Erwartung:</strong> <span id="e-erwt"></span></div>
+      <label class="field-label" for="e5">Was ergänzt oder korrigierst du nach dem Vergleich? (Stichworte genügen)</label>
+      <textarea id="e5" class="short" aria-label="Ergänzung nach dem Vergleich"></textarea>
+      <details class="hint"><summary>Profi-Aufgabe (freiwillig)</summary><div><p id="e-profi" style="margin:0 0 6px"></p><textarea id="e4" class="short" aria-label="Profi-Aufgabe"></textarea></div></details>
+    </div>
+  </div>
+  <div class="actions"><button class="btn secondary" data-prev>Zurück</button><button class="btn" data-next id="to-runde" disabled>Weiter: Expertenrunde</button></div>
+</section>
+
+<!-- ===================== Expertenrunde (AB 2) ===================== -->
+<section class="step" id="s-9">
+  <div class="timebox"><b>⏱ 15 Min.</b><i>in gemischten Gruppen</i><span>Schritt 7 von 10 · Expertenrunde</span></div>
+  <h2>Expertenrunde: Alle fünf Säulen</h2>
+  <div class="auftrag">
+    <span class="label a">Teil A</span>
+    <p>Stellt euch reihum eure Säule vor. Notiere zu jeder anderen Säule <strong>einen Satz</strong>. Deine eigene ist schon eingetragen.</p>
+    <div id="x-rows"></div>
+  </div>
+  <div class="auftrag">
+    <span class="label a">Teil B · Zusammenhänge</span>
+    <p style="margin:0">Wie hängen die Säulen zusammen? Wähle jeweils die Aussage, die die Quellen stützen. Besprecht eure Wahl in der Gruppe, bevor ihr tippt.</p>
+  </div>
+  <div id="verb"></div>
+  <div class="auftrag">
+    <span class="label a">Teil C</span>
+    <p><strong>Rassismus und Antisemitismus:</strong> Was haben sie gemeinsam? Was ist beim Antisemitismus zusätzlich? Nutze Quelle 5, Abschnitt 3 (Lernübersicht, Teil 3).</p>
+    <textarea id="ra" class="short" aria-label="Rassismus und Antisemitismus"></textarea>
+    <div class="actions" style="margin-top:10px"><button class="btn secondary" id="ra-check" type="button" disabled>Vergleichen</button></div>
+    <div class="fbx ok" id="ra-erw" hidden aria-live="polite"></div>
+  </div>
+  <div class="actions"><button class="btn secondary" data-prev>Zurück</button><button class="btn" data-next id="to-tat" disabled>Weiter: Von der Idee zur Tat</button><span class="small" id="x-hint">Bearbeite Teil B und Teil C.</span></div>
+</section>
+
+<!-- ===================== Anwenden (AB 3) ===================== -->
+<section class="step" id="s-10">
+  <div class="timebox"><b>⏱ 10 Min.</b><i>zu zweit</i><span>Schritt 8 von 10 · Anwenden</span></div>
+  <h2>Von der Idee zur Tat</h2>
+  <div class="auftrag">
+    <span class="label a">Auftrag</span>
+    <p style="margin:0">Du kennst diese Maßnahmen aus M17. Welche Säulen stecken dahinter? Wähle sie aus und begründe mit einem <strong>Detail der Maßnahme</strong>. Danach tippst du auf „Prüfen“.</p>
+  </div>
+  <div class="card" style="border-style:dashed">
+    <span class="label i">Beispiel</span>
+    <p style="margin:0"><b>Boykott jüdischer Geschäfte, 1.4.1933</b> → <b>Antisemitismus, Volksgemeinschaft</b>. SA-Männer rufen „Deutsche! Wehrt Euch! Kauft nicht bei Juden!“ Juden werden als Feinde dargestellt und aus der Gemeinschaft der „Deutschen“ ausgeschlossen.</p>
+  </div>
+  <div id="mass"></div>
+  <div class="actions"><button class="btn secondary" data-prev>Zurück</button><button class="btn" data-next id="to-sich" disabled>Weiter: Ergebnissicherung</button><span class="small" id="m-hint">Prüfe zuerst alle vier Maßnahmen.</span></div>
+</section>
+
+<!-- ===================== Ergebnissicherung ===================== -->
+<section class="step" id="s-11">
+  <div class="timebox"><b>⏱ 8 Min.</b><i>allein</i><span>Schritt 9 von 10 · Ergebnissicherung</span></div>
+  <h2>Was nimmst du mit?</h2>
+  <div class="auftrag">
+    <span class="label a">A · Zurück zu deiner Vermutung</span>
+    <p id="s-verm" class="mini" style="margin:0 0 8px"></p>
+    <p>Was denkst du jetzt – und warum?</p>
+    <textarea id="sA" class="short" aria-label="Was denkst du jetzt"></textarea>
+  </div>
+  <div class="auftrag">
+    <span class="label a">B · Erklären</span>
+    <p>Erkläre in 3–4 Sätzen, wie die NS-Ideologie die Ausgrenzung der Jüdinnen und Juden „begründete“. Nutze mindestens <strong>zwei Säulen</strong> und <strong>ein Zeugnis oder eine Quelle</strong>.</p>
+    <textarea id="sB" aria-label="Erklärung"></textarea>
+    <details class="hint"><summary>Satzanfänge (nur bei Bedarf)</summary><div>Grundlage war … · Daraus folgte, dass … · Das zeigt zum Beispiel …</div></details>
+    <div class="actions" style="margin-top:10px"><button class="btn secondary" id="sB-check" type="button" disabled>Mit einem Beispiel vergleichen</button></div>
+    <div class="fbx ok" id="sB-erw" hidden aria-live="polite"></div>
+  </div>
+  <div class="auftrag">
+    <span class="label a">C · Selbsteinschätzung</span>
+    <div id="sC"></div>
+  </div>
+  <div class="actions"><button class="btn secondary" data-prev>Zurück</button><button class="btn" data-next id="to-mappe2" disabled>Weiter: Lernmappe</button><span class="small" id="s-hint">Bearbeite A, B und C.</span></div>
 </section>
 
 <!-- ===================== Lernmappe ===================== -->
-<section class="step" id="s-8">
-  <div class="timebox"><b>Schritt 6 von 6</b><i>allein</i><span>Ende des Labors</span></div>
+<section class="step" id="s-12">
+  <div class="timebox"><b>Schritt 10 von 10</b><i>allein</i><span>Ende der Stunde</span></div>
   <h2>Sichere deine Lernmappe</h2>
   <div class="grid2">
     <div class="card">
       <h3>Das steht in deiner Lernmappe</h3>
       <ul class="checklist" id="checklist"></ul>
+      <p class="small" style="margin:8px 0 0">Nur das Wesentliche: <strong>zwei Merkseiten</strong> und <strong>deine Ergebnisse</strong>. Die Quellen bleiben im Labor.</p>
     </div>
     <div class="card">
       <h3>So kommt sie in GoodNotes</h3>
@@ -603,8 +733,8 @@ html.dm[data-theme="dark"] {
   </div>
   <div class="actions"><button class="btn big" id="btn-pdf">Lernmappe als PDF</button></div>
   <div class="card accent end">
-    <div class="big">Ende des Labors</div>
-    <p>Ab jetzt arbeitest du in GoodNotes weiter: zuerst in deiner Expertengruppe mit <strong>AB 1</strong>. Schließe das Labor.</p>
+    <div class="big">Ende der Stunde</div>
+    <p>Die zwei Merkseiten brauchst du für die Wiederholung und die Klausur. Tablet umdrehen.</p>
     <p class="small" style="margin:0"><button class="btn secondary" id="btn-reset" type="button">Alle Eingaben auf diesem iPad löschen</button></p>
   </div>
 </section>
@@ -740,18 +870,18 @@ html.dm[data-theme="dark"] {
 <template id="tpl-loesung">
   <div class="pg loes">
     <div class="ph"><span>M19 · Lösungskarte zur Selbstkontrolle</span><span>erst nach dem eigenen Versuch ansehen</span></div>
-    <h2 style="margin-top:0">Erwartungen zu AB 1 bis AB 3 und zur Ergebnissicherung</h2>
+    <h2 style="margin-top:0">Erwartungen zu allen Aufgaben</h2>
     <table class="tick">
       <tr><th style="width:22%">Aufgabe</th><th>Erwartung</th></tr>
-      <tr><td>AB 1 · Quelle 1<br>Rassismus</td><td><b>Eigene Worte:</b> Das Leben sei ein „Kampf der Rassen“ um Boden und Fortpflanzung. Die Menschen werden in höher- und minderwertige „Rassen“ eingeteilt; die „nordische Rasse“ mit den Deutschen an der Spitze soll herrschen. <b>Belege:</b> Abschnitt 1 („Kampf der Rassen um ihren Lebensraum“), Abschnitt 3 („Herren- und Kriegerrassen“, „niedere Rassen“), Abschnitt 4 („das Vorvolk dieser Rasse aber ist das deutsche“). <b>Wen trifft es:</b> alle, die als „niedere Rassen“ gelten – laut Text die Mehrheit der Menschheit; ihnen soll Lebensraum genommen werden, notfalls mit Gewalt („greifen auch zum Schwerte“).</td></tr>
-      <tr><td>AB 1 · Quelle 2<br>Lebensraum im Osten</td><td><b>Eigene Worte:</b> Ein großes Volk brauche mehr Boden, sonst gehe es unter. Deshalb soll Land im Osten erobert werden, vor allem in Russland. <b>Belege:</b> Abschnitt 1 („Das Recht auf Grund und Boden kann zur Pflicht werden“), Abschnitt 3 („weisen den Blick nach dem Land im Osten“), Abschnitt 4 („Russland und die ihm untertanen Randstaaten“). <b>Wen trifft es:</b> die Menschen in Osteuropa, deren Land erobert werden soll; Folge: Krieg.</td></tr>
-      <tr><td>AB 1 · Quelle 3<br>Volksgemeinschaft</td><td><b>Eigene Worte:</b> Jede und jeder Einzelne soll nur für die Gemeinschaft des Volkes leben – bis zur Bereitschaft, zu sterben. Ziel ist der Erhalt der eigenen „Rasse“ und die „Reinhaltung des Blutes“. <b>Belege:</b> Abschnitt 1 („‚national‘ und ‚sozial‘ sind zwei identische Begriffe“), Abschnitt 2 („dass jeder einzelne für die Volksgemeinschaft handelt“), Abschnitt 3 („Reinhaltung des Blutes“). <b>Wen trifft es:</b> alle, die nicht „deutschen Blutes“ sind oder sich nicht unterordnen; der Einzelne verliert seine Rechte gegenüber der Gemeinschaft.</td></tr>
-      <tr><td>AB 1 · Quelle 4<br>Führerprinzip</td><td><b>Eigene Worte:</b> Nicht Mehrheiten entscheiden, sondern der „Führer“. Seine Macht ist unbegrenzt; alle schulden ihm Gehorsam. Er verkörpere angeblich den wahren Willen des Volkes. <b>Belege:</b> Abschnitt 1 („lehnt … ein Prinzip der Majoritätsbestimmung ab“, „unbedingten Führerautorität“), Abschnitt 3 („umfassend und total“, „Treue und Gehorsam“), Abschnitt 4 („In seinem Willen tritt der Volkswille in Erscheinung“). <b>Wen trifft es:</b> alle – Parlament und Wahlen verlieren jede Entscheidungsmacht, abweichende Meinungen werden unterdrückt.</td></tr>
-      <tr><td>AB 1 · Quelle 5<br>Antisemitismus</td><td><b>Eigene Worte:</b> Juden werden zur „Rasse“ erklärt, nicht als Religionsgemeinschaft gesehen, und als fremd und gefährlich dargestellt. Sie sollen zuerst entrechtet und am Ende „entfernt“ werden. <b>Belege:</b> Abschnitt 1 („Judentum unbedingt Rasse und nicht Religionsgenossenschaft“), Abschnitt 3 (Vorurteil von Geld- und Machtgier), Abschnitte 4–5 („planmäßigen gesetzlichen Bekämpfung“, „Entfernung der Juden überhaupt“). <b>Wen trifft es:</b> Jüdinnen und Juden – Ziel ist ihre Entrechtung und Vertreibung; der Brief zeigt dieses Ziel schon 1919 – den Massenmord beschloss die NS-Führung erst im Krieg (1941/42).</td></tr>
-      <tr><td>AB 2 · B 1</td><td>Mögliche Pfeile: Rassismus → Volksgemeinschaft (bestimmt, wer dazugehört: „deutschen Blutes“) · Rassismus → Lebensraum („Kampf der Rassen“ um Boden) · Antisemitismus → Volksgemeinschaft (Juden werden ausgeschlossen) · Führerprinzip ↔ Volksgemeinschaft (der „Führer“ verkörpere den „Volkswillen“; alle müssen gehorchen) · Volksgemeinschaft → Lebensraum (das „Volk“ brauche Boden). Jeder begründete Pfeil zählt.</td></tr>
-      <tr><td>AB 2 · B 2</td><td>Gemeinsam: Einteilung nach angeblicher Abstammung („Rasse“). Zusätzlich beim Antisemitismus: Juden gelten nicht nur als „minderwertig“, sondern als mächtig und gefährlich – als Feinde, die angeblich nach Geld und Macht streben und Völker ausnutzen (Quelle 5, Abschnitt 3: „Blutegel“). Deshalb das Ziel der „Entfernung“.</td></tr>
-      <tr><td>AB 2 · B 3</td><td>Rassismus ist die Grundlage: Er bestimmt, wer zur Volksgemeinschaft gehört, macht Juden zur „Rasse“ und begründet den „Kampf“ um Lebensraum.</td></tr>
-      <tr><td>AB 3</td><td><b>Berufsbeamtengesetz:</b> R, A (V) – Entscheidend ist die Abstammung („ein jüdischer Eltern- oder Großelternteil“), nicht der eigene Glaube; Juden werden aus dem Staat ausgeschlossen. Gut zu wissen: Gemessen wurde die angebliche „Rasse“ an der Religion der Vorfahren – anders ließ sie sich gar nicht bestimmen. · <b>Nürnberger Gesetze:</b> R, A, V – Staatsbürgerrechte nur für „deutsches Blut“; Eheverbot soll das „Blut reinhalten“. · <b>Novemberpogrom:</b> A (F) – Gewalt gegen Juden; die Weisung kommt von oben und wird durch die Partei im ganzen Land befolgt. · <b>Überfall auf Polen:</b> L (R) – Beginn der Eroberung im Osten; die Menschen dort galten als „minderwertig“.</td></tr>
+      <tr><td>Expertengruppe · Quelle 1<br>Rassismus</td><td><b>Eigene Worte:</b> Das Leben sei ein „Kampf der Rassen“ um Boden und Fortpflanzung. Die Menschen werden in höher- und minderwertige „Rassen“ eingeteilt; die „nordische Rasse“ mit den Deutschen an der Spitze soll herrschen. <b>Belege:</b> Abschnitt 1 („Kampf der Rassen um ihren Lebensraum“), Abschnitt 3 („Herren- und Kriegerrassen“, „niedere Rassen“), Abschnitt 4 („das Vorvolk dieser Rasse aber ist das deutsche“). <b>Wen trifft es:</b> alle, die als „niedere Rassen“ gelten – laut Text die Mehrheit der Menschheit; ihnen soll Lebensraum genommen werden, notfalls mit Gewalt („greifen auch zum Schwerte“).</td></tr>
+      <tr><td>Expertengruppe · Quelle 2<br>Lebensraum im Osten</td><td><b>Eigene Worte:</b> Ein großes Volk brauche mehr Boden, sonst gehe es unter. Deshalb soll Land im Osten erobert werden, vor allem in Russland. <b>Belege:</b> Abschnitt 1 („Das Recht auf Grund und Boden kann zur Pflicht werden“), Abschnitt 3 („weisen den Blick nach dem Land im Osten“), Abschnitt 4 („Russland und die ihm untertanen Randstaaten“). <b>Wen trifft es:</b> die Menschen in Osteuropa, deren Land erobert werden soll; Folge: Krieg.</td></tr>
+      <tr><td>Expertengruppe · Quelle 3<br>Volksgemeinschaft</td><td><b>Eigene Worte:</b> Jede und jeder Einzelne soll nur für die Gemeinschaft des Volkes leben – bis zur Bereitschaft, zu sterben. Ziel ist der Erhalt der eigenen „Rasse“ und die „Reinhaltung des Blutes“. <b>Belege:</b> Abschnitt 1 („‚national‘ und ‚sozial‘ sind zwei identische Begriffe“), Abschnitt 2 („dass jeder einzelne für die Volksgemeinschaft handelt“), Abschnitt 3 („Reinhaltung des Blutes“). <b>Wen trifft es:</b> alle, die nicht „deutschen Blutes“ sind oder sich nicht unterordnen; der Einzelne verliert seine Rechte gegenüber der Gemeinschaft.</td></tr>
+      <tr><td>Expertengruppe · Quelle 4<br>Führerprinzip</td><td><b>Eigene Worte:</b> Nicht Mehrheiten entscheiden, sondern der „Führer“. Seine Macht ist unbegrenzt; alle schulden ihm Gehorsam. Er verkörpere angeblich den wahren Willen des Volkes. <b>Belege:</b> Abschnitt 1 („lehnt … ein Prinzip der Majoritätsbestimmung ab“, „unbedingten Führerautorität“), Abschnitt 3 („umfassend und total“, „Treue und Gehorsam“), Abschnitt 4 („In seinem Willen tritt der Volkswille in Erscheinung“). <b>Wen trifft es:</b> alle – Parlament und Wahlen verlieren jede Entscheidungsmacht, abweichende Meinungen werden unterdrückt.</td></tr>
+      <tr><td>Expertengruppe · Quelle 5<br>Antisemitismus</td><td><b>Eigene Worte:</b> Juden werden zur „Rasse“ erklärt, nicht als Religionsgemeinschaft gesehen, und als fremd und gefährlich dargestellt. Sie sollen zuerst entrechtet und am Ende „entfernt“ werden. <b>Belege:</b> Abschnitt 1 („Judentum unbedingt Rasse und nicht Religionsgenossenschaft“), Abschnitt 3 (Vorurteil von Geld- und Machtgier), Abschnitte 4–5 („planmäßigen gesetzlichen Bekämpfung“, „Entfernung der Juden überhaupt“). <b>Wen trifft es:</b> Jüdinnen und Juden – Ziel ist ihre Entrechtung und Vertreibung; der Brief zeigt dieses Ziel schon 1919 – den Massenmord beschloss die NS-Führung erst im Krieg (1941/42).</td></tr>
+      <tr><td>Expertenrunde · Zusammenhänge</td><td>Mögliche Pfeile: Rassismus → Volksgemeinschaft (bestimmt, wer dazugehört: „deutschen Blutes“) · Rassismus → Lebensraum („Kampf der Rassen“ um Boden) · Antisemitismus → Volksgemeinschaft (Juden werden ausgeschlossen) · Führerprinzip ↔ Volksgemeinschaft (der „Führer“ verkörpere den „Volkswillen“; alle müssen gehorchen) · Volksgemeinschaft → Lebensraum (das „Volk“ brauche Boden). Jeder begründete Pfeil zählt.</td></tr>
+      <tr><td>Expertenrunde · Teil C</td><td>Gemeinsam: Einteilung nach angeblicher Abstammung („Rasse“). Zusätzlich beim Antisemitismus: Juden gelten nicht nur als „minderwertig“, sondern als mächtig und gefährlich – als Feinde, die angeblich nach Geld und Macht streben und Völker ausnutzen (Quelle 5, Abschnitt 3: „Blutegel“). Deshalb das Ziel der „Entfernung“.</td></tr>
+      <tr><td>Auflösung · Vermutung</td><td>Rassismus ist die Grundlage: Er bestimmt, wer zur Volksgemeinschaft gehört, macht Juden zur „Rasse“ und begründet den „Kampf“ um Lebensraum.</td></tr>
+      <tr><td>Von der Idee zur Tat</td><td><b>Berufsbeamtengesetz:</b> R, A (V) – Entscheidend ist die Abstammung („ein jüdischer Eltern- oder Großelternteil“), nicht der eigene Glaube; Juden werden aus dem Staat ausgeschlossen. Gut zu wissen: Gemessen wurde die angebliche „Rasse“ an der Religion der Vorfahren – anders ließ sie sich gar nicht bestimmen. · <b>Nürnberger Gesetze:</b> R, A, V – Staatsbürgerrechte nur für „deutsches Blut“; Eheverbot soll das „Blut reinhalten“. · <b>Novemberpogrom:</b> A (F) – Gewalt gegen Juden; die Weisung kommt von oben und wird durch die Partei im ganzen Land befolgt. · <b>Überfall auf Polen:</b> L (R) – Beginn der Eroberung im Osten; die Menschen dort galten als „minderwertig“.</td></tr>
       <tr><td>Ergebnissicherung A</td><td>Eigene Antwort. Tragfähig ist eine Antwort, die mehrere Gründe zusammendenkt (Angst, Vorteile, Anpassung, Überzeugung) und dabei die Rolle der Ideologie benennt: Sie lieferte die Begründungen, die Ausgrenzung als „richtig“ erscheinen ließen.</td></tr>
       <tr><td>Ergebnissicherung B</td><td>Beispiel: „Grundlage war der Rassismus: Die Nationalsozialisten teilten Menschen nach ‚Blut‘ ein und erklärten Juden zur ‚Rasse‘. Daraus folgte, dass Juden nicht zur ‚Volksgemeinschaft‘ gehören sollten – im Parteiprogramm von 1920 heißt es: ‚Kein Jude kann daher Volksgenosse sein.‘ Der Antisemitismus stellte Juden außerdem als gefährliche Feinde dar. So erschien es vielen als ‚richtig‘, sie zu boykottieren, zu entlassen und zu entrechten.“</td></tr>
     </table>
@@ -2401,6 +2531,45 @@ var DATA = {
       profi: "Vergleiche mit M17: Welche Schritte von 1933 bis 1938 passen zum „Antisemitismus der Vernunft“ (Abschnitt 4)?" }
   ],
 
+  /* Erwartungen zur Expertengruppe (Selbstabgleich, P3) – je Quelle */
+  erwartung: [
+    "Das Leben sei ein „Kampf der Rassen“ um Boden und Fortpflanzung. Die Menschen werden in höher- und minderwertige „Rassen“ eingeteilt; die „nordische Rasse“ mit den Deutschen an der Spitze soll herrschen. Belege: Abschnitte 1, 3 und 4. Betroffen sind alle, die als „niedere Rassen“ gelten – laut Text die Mehrheit der Menschheit; ihnen soll Lebensraum genommen werden, notfalls mit Gewalt („greifen auch zum Schwerte“).",
+    "Ein großes Volk brauche mehr Boden, sonst gehe es unter. Deshalb soll Land im Osten erobert werden, vor allem in Russland. Belege: Abschnitte 1, 3 und 4. Betroffen sind die Menschen in Osteuropa, deren Land erobert werden soll; die Folge ist Krieg.",
+    "Jede und jeder Einzelne soll nur für die Gemeinschaft des „Volkes“ leben – bis zur Bereitschaft, zu sterben. Ziel ist der Erhalt der eigenen „Rasse“ und die „Reinhaltung des Blutes“. Belege: Abschnitte 2 und 3. Betroffen sind alle, die nicht „deutschen Blutes“ sind oder sich nicht unterordnen; der Einzelne verliert seine Rechte gegenüber der Gemeinschaft.",
+    "Nicht Mehrheiten entscheiden, sondern der „Führer“. Seine Macht ist unbegrenzt; alle schulden ihm Gehorsam. Er verkörpere angeblich den wahren Willen des Volkes. Belege: Abschnitte 1, 3 und 4. Betroffen sind alle: Parlament und Wahlen verlieren jede Entscheidungsmacht, abweichende Meinungen werden unterdrückt.",
+    "Juden werden zur „Rasse“ erklärt statt als Religionsgemeinschaft gesehen und als fremd und gefährlich dargestellt. Sie sollen zuerst entrechtet und am Ende „entfernt“ werden. Belege: Abschnitte 1, 4 und 5 (Abschnitt 3 zeigt das Vorurteil). Betroffen sind Jüdinnen und Juden; der Brief zeigt das Ziel ihrer Entrechtung und Vertreibung schon 1919 – den Massenmord beschloss die NS-Führung erst im Krieg (1941/42)."
+  ],
+  /* Expertenrunde, Teil B: Zusammenhänge mit erklärender Rückmeldung je Antwort */
+  verbindungen: [
+    { q: "Rassismus und Volksgemeinschaft",
+      o: [["Der Rassismus legt fest, wer zur Volksgemeinschaft gehören darf: nur, wer „deutschen Blutes“ ist.", 1, "Richtig: Das zeigt das Parteiprogramm von 1920 (Zeugnis 1) und Quelle 3, Abschnitt 3 („Reinhaltung des Blutes“)."],
+          ["Die Volksgemeinschaft sollte alle Menschen in Deutschland gleich behandeln.", 0, "Nein: Die Volksgemeinschaft war von Anfang an ausgrenzend. „Kein Jude kann daher Volksgenosse sein“ (Zeugnis 1)."],
+          ["Beide Säulen haben nichts miteinander zu tun.", 0, "Nein: Wer dazugehört, hängt laut NS-Ideologie gerade von der Abstammung ab – das ist der Kern des Rassismus."]] },
+    { q: "Rassismus und Lebensraum im Osten",
+      o: [["Lebensraum meinte vor allem Kolonien in Afrika.", 0, "Nein: Hitler grenzt sich in Quelle 2, Abschnitt 3, ausdrücklich von der Kolonialpolitik ab und weist „den Blick nach dem Land im Osten“."],
+          ["Der angebliche „Kampf der Rassen“ um Boden begründet die Eroberung im Osten.", 1, "Richtig: Quelle 1 erklärt das Leben zum „Kampf der Rassen um ihren Lebensraum“; Quelle 2 macht daraus das Ziel, im Osten zu erobern."],
+          ["Lebensraum war ein rein wirtschaftliches Ziel ohne Bezug zur Rasse.", 0, "Nein: Quelle 2, Abschnitt 2, nennt als Zweck, die „Rasse“ auf diesem Planeten zu sichern."]] },
+    { q: "Führerprinzip und Volksgemeinschaft",
+      o: [["Die Volksgemeinschaft wählt den Führer in freien Wahlen und kann ihn abwählen.", 0, "Nein: Quelle 4 lehnt Mehrheitsentscheidungen ausdrücklich ab („antiparlamentarisch“)."],
+          ["Der Führer ist nur ein Berater des Parlaments.", 0, "Nein: Umgekehrt – laut Quelle 4, Abschnitt 2, gibt es nur „Beratungskörper“, die dem Führer zur Seite stehen."],
+          ["Der „Führer“ soll angeblich den Willen der Volksgemeinschaft verkörpern – deshalb müssen alle gehorchen.", 1, "Richtig: „In seinem Willen tritt der Volkswille in Erscheinung“ (Quelle 4, Abschnitt 4). Der Eid von 1934 (Zeugnis 5) macht daraus Pflicht."]] }
+  ],
+  raErwartung: "Gemeinsam: Beide teilen Menschen nach angeblicher Abstammung („Rasse“) ein. Zusätzlich beim Antisemitismus: Juden gelten nicht nur als „minderwertig“, sondern als mächtig und gefährlich – als Feinde, die angeblich nach Geld und Macht streben und Völker ausnutzen (Quelle 5, Abschnitt 3: „Blutegel“). Deshalb das Ziel der „Entfernung“.",
+  /* Anwenden: Maßnahmen aus M17 */
+  massnahmen: [
+    { t: "Berufsbeamtengesetz, 7.4.1933", d: "Beamte mit einem jüdischen Eltern- oder Großelternteil werden – mit wenigen Ausnahmen – entlassen.", kern: ["R", "A"], auch: ["V"],
+      erw: "Entscheidend ist die Abstammung („ein jüdischer Eltern- oder Großelternteil“), nicht der eigene Glaube; Juden werden aus dem Staat ausgeschlossen. Gut zu wissen: Gemessen wurde die angebliche „Rasse“ an der Religion der Vorfahren – anders ließ sie sich gar nicht bestimmen." },
+    { t: "Nürnberger Gesetze, 15.9.1935", d: "Juden verlieren die politischen Rechte; Ehen mit Nichtjuden werden verboten.", kern: ["R", "A", "V"], auch: [],
+      erw: "Politische Rechte nur noch für „deutsches Blut“ (Reichsbürgergesetz, Zeugnis 6); das Eheverbot soll das „Blut reinhalten“. Rassismus, Antisemitismus und Volksgemeinschaft greifen ineinander." },
+    { t: "Novemberpogrom, 9./10.11.1938", d: "Die Weisung kommt von der Parteiführung in München; Synagogen brennen, rund 30.000 jüdische Männer werden verschleppt.", kern: ["A"], auch: ["F", "V"],
+      erw: "Offene Gewalt gegen Juden (Antisemitismus). Die Weisung kommt von oben und wird durch die Partei im ganzen Land befolgt (Führerprinzip). Auch Nachbar*innen machten mit – Juden galten nicht als Teil der „Volksgemeinschaft“." },
+    { t: "Überfall auf Polen, 1.9.1939 (Profi: ohne Hilfe)", d: "Die Wehrmacht greift Polen an – Beginn des Zweiten Weltkriegs.", kern: ["L"], auch: ["R"], profi: true,
+      erw: "Beginn der Eroberung im Osten (Lebensraum). Die Menschen dort galten als „minderwertig“ (Rassismus) – deshalb sollten sie verdrängt, unterworfen oder ermordet werden." }
+  ],
+  sBBeispiel: "„Grundlage war der Rassismus: Die Nationalsozialisten teilten Menschen nach ‚Blut‘ ein und erklärten Juden zur ‚Rasse‘. Daraus folgte, dass Juden nicht zur ‚Volksgemeinschaft‘ gehören sollten – im Parteiprogramm von 1920 heißt es: ‚Kein Jude kann daher Volksgenosse sein.‘ Der Antisemitismus stellte Juden außerdem als gefährliche Feinde dar. So erschien es vielen als ‚richtig‘, sie zu boykottieren, zu entlassen und zu entrechten.“",
+  ziele: ["… in eigenen Worten erklären, was eine Ideologie ist.", "… die fünf Säulen der NS-Ideologie erklären und mit einer Quellenstelle belegen.", "… an Maßnahmen von 1933 bis 1939 zeigen, welche Säulen dahinterstehen und wie sie zusammenhängen."],
+  stufen: ["sicher", "teilweise", "noch nicht"],
+
   /* klar gekennzeichnete Beispielantworten für die Musterausgabe (?druck=beispiel) */
   beispiel: {
     abruf: [1, 2, 1],
@@ -2408,7 +2577,14 @@ var DATA = {
     z: [{ m: ["V", "R"], g: "„deutschen Blutes“ und „Volksgenosse“" }, { m: ["V"], g: "Gemeinnutz vor Eigennutz – die Gruppe ist wichtiger" }, { m: ["A", "V"], g: "„Wehrt Euch!“ – als ob Juden Feinde wären" },
         { m: ["L"], g: "„Eroberung neuen Lebensraums im Osten“" }, { m: ["F"], g: "„unbedingten Gehorsam“" }, { m: ["R", "V"], g: "„deutschen oder artverwandten Blutes“" }],
     b1: "Im Parteiprogramm Punkt 4 geht es zugleich um Blut, um die Volksgemeinschaft und um Juden, die nicht dazugehören dürfen.",
-    v1: "Rassismus kommt am häufigsten vor. Vielleicht ist er wichtig, weil er bestimmt, wer dazugehört."
+    v1: "Rassismus kommt am häufigsten vor. Vielleicht ist er wichtig, weil er bestimmt, wer dazugehört.",
+    eg: 4, eabs: [1, 5], e2: "Hitler erklärt Juden zu einer „Rasse“ und nicht zu einer Religion. Er stellt sie als fremd und gierig dar. Am Ende sollen sie ganz „entfernt“ werden.", e3: "Es trifft Jüdinnen und Juden. Sie sollen zuerst ihre Rechte verlieren und dann vertrieben werden.", e5: "Abschnitt 3 ist ein Vorurteil, kein Fakt.",
+    x: { R: "Menschen werden nach „Rasse“ eingeteilt, die Deutschen sollen oben stehen.", L: "Deutschland soll im Osten Land erobern, vor allem in Russland.", V: "Der Einzelne zählt nur für das Volk; dazu gehört nur, wer „deutschen Blutes“ ist.", F: "Einer entscheidet, alle gehorchen, keine Wahlen mit echter Macht." },
+    verb: [0, 1, 2], ra: "Beide teilen Menschen nach Abstammung ein. Juden werden zusätzlich als mächtige Feinde dargestellt, die angeblich nach Geld und Macht streben.",
+    mass: [{ m: ["R", "A"], g: "Entscheidend war ein jüdischer Großelternteil, also die Abstammung.", done: true }, { m: ["R", "V"], g: "Rechte nur für „deutsches Blut“, Eheverbot.", done: true }, { m: ["A", "F"], g: "Synagogen brennen, die Weisung kam von der Parteiführung.", done: true }, { m: ["L"], g: "Angriff im Osten = Beginn der Eroberung von Lebensraum.", done: true }],
+    sA: "Ich bleibe bei mehreren Gründen, aber jetzt sehe ich, dass die Ideologie die Begründung geliefert hat.",
+    sB: "Grundlage war der Rassismus: Menschen wurden nach „Blut“ eingeteilt. Daraus folgte, dass Juden nicht zur Volksgemeinschaft gehören sollten („Kein Jude kann daher Volksgenosse sein“). Der Antisemitismus machte sie zusätzlich zu Feinden. Deshalb erschien vielen der Boykott als richtig.",
+    sC: [0, 1, 1]
   }
 };
 
@@ -2453,10 +2629,12 @@ var DATA = {
   Lab.Steps({ hash: true, onShow: function (id) {
     if (id === "s-4") showZ(firstOpenZ());
     if (id === "s-5") { st.zDone = true; save(); renderQR(); }
-    if (id === "s-6" || id === "s-7" || id === "s-8") unlock();
+    if (["s-6", "s-7", "s-8", "s-9", "s-10", "s-11", "s-12"].indexOf(id) >= 0) unlock();
+    if (id === "s-9") renderRunde();
+    if (id === "s-11") renderSich();
     if (id === "s-6") renderMap();
     if (id === "s-7") renderRes();
-    if (id === "s-8") renderChecklist();
+    if (id === "s-12") renderChecklist();
   } });
 
   /* ---------- Schritt 1: Abruf M17 ---------- */
@@ -2580,15 +2758,140 @@ var DATA = {
   }
   textReq(["b1", "v1"], "#to-mappe", "#a-hint");
 
+  /* ---------- Schritt 6: Expertengruppe ---------- */
+  $("#eg").innerHTML = D.quellen.map(function (q, i) { return '<button class="choice" type="button" data-q="' + i + '">Quelle ' + q.nr + " · " + Lab.esc(q.titel) + ' <span class="mini">– Säule: ' + S[q.s].name + "</span></button>"; }).join("");
+  function showEG() {
+    var i = st.eg; if (i == null) return;
+    var q = D.quellen[i];
+    $$("#eg .choice").forEach(function (b, j) { b.classList.toggle("selected", j === i); b.disabled = !!st.eDone; });
+    $("#eq").hidden = false;
+    $("#e-def").innerHTML = "<b>" + S[q.s].name + "</b> = " + Lab.esc(S[q.s].def);
+    $("#e-ctx").innerHTML = "<b>Wer?</b> " + q.wer + " · <b>Wann?</b> " + q.wann + " · <b>Für wen?</b> " + q.wem;
+    $("#e-text").innerHTML = q.abs.map(function (a, k) { return '<p><span class="abs-n">' + (k + 1) + "</span>" + Lab.esc(a) + "</p>"; }).join("");
+    $("#e-wort").innerHTML = "<b>Wörter:</b> " + Lab.esc(q.wort) + (q.einordnung ? " · <b>Achtung:</b> " + Lab.esc(q.einordnung) : "");
+    $("#e-fund").textContent = "Fundstelle: " + q.fund;
+    $("#e-hk").textContent = q.hilfe;
+    $("#e-profi").textContent = q.profi;
+    $("#e-abs").innerHTML = q.abs.map(function (a, k) { return '<button type="button" data-a="' + (k + 1) + '"' + ((st.eabs || []).indexOf(k + 1) >= 0 ? ' class="on"' : "") + ">Abschnitt " + (k + 1) + "</button>"; }).join("");
+    $$("#e-abs button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        if (st.eDone) return;
+        var a = +b.getAttribute("data-a"), arr = st.eabs || [], p = arr.indexOf(a);
+        if (p >= 0) arr.splice(p, 1); else if (arr.length < 2) arr.push(a);
+        st.eabs = arr.sort(); save(); showEG(); eUpd();
+      });
+    });
+    if (st.eDone) { $("#e-erw").hidden = false; $("#e-erwt").textContent = D.erwartung[i]; ["e2", "e3"].forEach(function (id) { $("#" + id).readOnly = true; }); $("#e-check").hidden = true; $("#e-hint").hidden = true; }
+  }
+  function eUpd() {
+    var ok = st.eg != null && (st.eabs || []).length >= 1 && ["e2", "e3"].every(function (id) { return (st[id] || "").trim().length >= 15; });
+    $("#e-check").disabled = !ok; $("#e-hint").hidden = ok || !!st.eDone;
+    $("#to-runde").disabled = !st.eDone;
+  }
+  $$("#eg .choice").forEach(function (b) { b.addEventListener("click", function () { if (st.eDone) return; var n = +b.getAttribute("data-q"); if (st.eg !== n) st.eabs = []; st.eg = n; save(); showEG(); eUpd(); }); });
+  ["e2", "e3", "e4", "e5"].forEach(function (id) { var t = $("#" + id); t.value = st[id] || ""; t.addEventListener("input", function () { st[id] = t.value; save(); eUpd(); }); });
+  $("#e-check").addEventListener("click", function () { st.eDone = true; save(); showEG(); eUpd(); });
+  showEG(); eUpd();
+
+  /* ---------- Schritt 7: Expertenrunde ---------- */
+  function renderRunde() {
+    $("#x-rows").innerHTML = D.quellen.map(function (q, i) {
+      var own = i === st.eg;
+      return '<div class="xrow"><b>' + S[q.s].name + ' <span class="mini">(Quelle ' + q.nr + ")</span></b>" +
+        (own ? '<div class="xown">' + Lab.esc(st.e2 || "") + '<span class="mini"> – deine Säule</span></div>' : '<textarea class="xin" data-s="' + q.s + '" aria-label="' + S[q.s].name + ' in einem Satz">' + Lab.esc((st.x || {})[q.s] || "") + "</textarea>") + "</div>";
+    }).join("");
+    $$("#x-rows .xin").forEach(function (t) { t.addEventListener("input", function () { st.x = st.x || {}; st.x[t.getAttribute("data-s")] = t.value; save(); }); });
+  }
+  st.verb = st.verb || [];
+  $("#verb").innerHTML = D.verbindungen.map(function (v, i) {
+    return '<div class="card" data-v="' + i + '"><p class="w-q">' + (i + 1) + ". " + Lab.esc(v.q) + '</p><div class="choices">' +
+      v.o.map(function (o, k) { return '<button class="choice" type="button" data-k="' + k + '">' + Lab.esc(o[0]) + "</button>"; }).join("") + '</div><div class="fbx" hidden aria-live="polite"></div></div>';
+  }).join("");
+  function showVerb(i) {
+    var card = $('#verb [data-v="' + i + '"]'), k = st.verb[i], v = D.verbindungen[i], ok = v.o[k][1] === 1, right = v.o.filter(function (o) { return o[1] === 1; })[0];
+    $$(".choice", card).forEach(function (b, j) { b.disabled = true; b.classList.toggle("right", v.o[j][1] === 1); b.classList.toggle("wrong", j === k && !ok); });
+    var fb = $(".fbx", card); fb.hidden = false; fb.className = "fbx " + (ok ? "ok" : "no");
+    fb.innerHTML = Lab.esc(v.o[k][2]) + (ok ? "" : "<br><strong>Richtig ist:</strong> " + Lab.esc(right[0]) + " – " + Lab.esc(right[2].replace(/^Richtig:\s*/, "")));
+  }
+  $$("#verb [data-v]").forEach(function (card) {
+    var i = +card.getAttribute("data-v");
+    $$(".choice", card).forEach(function (b) { b.addEventListener("click", function () { if (st.verb[i] != null) return; st.verb[i] = +b.getAttribute("data-k"); save(); showVerb(i); xUpd(); }); });
+    if (st.verb[i] != null) showVerb(i);
+  });
+  function xUpd() {
+    var b = D.verbindungen.every(function (v, i) { return st.verb[i] != null; }), c = (st.ra || "").trim().length >= 15;
+    $("#ra-check").disabled = !c || !!st.raDone;
+    var ok = b && st.raDone; $("#to-tat").disabled = !ok; $("#x-hint").hidden = ok;
+  }
+  (function () { var t = $("#ra"); t.value = st.ra || ""; t.addEventListener("input", function () { st.ra = t.value; save(); xUpd(); }); })();
+  function showRa() { if (!st.raDone) return; $("#ra-erw").hidden = false; $("#ra-erw").innerHTML = "<strong>Erwartung:</strong> " + Lab.esc(D.raErwartung); }
+  $("#ra-check").addEventListener("click", function () { st.raDone = true; save(); showRa(); xUpd(); });
+  showRa(); xUpd();
+
+  /* ---------- Schritt 8: Von der Idee zur Tat ---------- */
+  st.mass = st.mass || D.massnahmen.map(function () { return { m: [], g: "", done: false }; });
+  $("#mass").innerHTML = D.massnahmen.map(function (m, i) {
+    return '<div class="card" data-m="' + i + '"><p class="w-q" style="margin-bottom:2px">' + Lab.esc(m.t) + '</p><p class="mini" style="margin:0 0 8px">' + Lab.esc(m.d) + '</p><div class="chips">' +
+      K.map(function (k) { return '<button type="button" data-s="' + k + '">' + S[k].name + "</button>"; }).join("") +
+      '</div><label class="field-label">Begründung mit einem Detail der Maßnahme</label><textarea class="short mt" aria-label="Begründung"></textarea>' +
+      (m.profi ? "" : '<details class="hint"><summary>Hilfe</summary><div>Lernübersicht, Teil 2 (Säulen) und Teil 4 (Von der Idee zur Tat).</div></details>') +
+      '<div class="actions" style="margin-top:8px"><button class="btn secondary mcheck" type="button" disabled>Prüfen</button></div><div class="fbx" hidden aria-live="polite"></div></div>';
+  }).join("");
+  function showMass(i) {
+    var card = $('#mass [data-m="' + i + '"]'), a = st.mass[i], m = D.massnahmen[i];
+    $$(".chips button", card).forEach(function (b) { b.classList.toggle("on", a.m.indexOf(b.getAttribute("data-s")) >= 0); b.disabled = a.done; });
+    var t = $("textarea", card); t.value = a.g; t.readOnly = a.done;
+    $(".mcheck", card).disabled = a.done || !a.m.length || a.g.trim().length < 10; $(".mcheck", card).hidden = a.done;
+    if (a.done) {
+      var hit = m.kern.filter(function (k) { return a.m.indexOf(k) >= 0; }), extra = a.m.filter(function (k) { return m.kern.indexOf(k) < 0 && m.auch.indexOf(k) < 0; });
+      var fb = $(".fbx", card); fb.hidden = false; fb.className = "fbx " + (hit.length === m.kern.length && !extra.length ? "ok" : "no");
+      fb.innerHTML = "<strong>Im Kern:</strong> " + m.kern.map(function (k) { return S[k].name; }).join(", ") + (m.auch.length ? " · <strong>auch begründbar:</strong> " + m.auch.map(function (k) { return S[k].name; }).join(", ") : "") +
+        (extra.length ? "<br><strong>Kaum haltbar:</strong> " + extra.map(function (k) { return S[k].name; }).join(", ") : "") + "<br>" + Lab.esc(m.erw);
+    }
+  }
+  $$("#mass [data-m]").forEach(function (card) {
+    var i = +card.getAttribute("data-m");
+    $$(".chips button", card).forEach(function (b) { b.addEventListener("click", function () { var a = st.mass[i]; if (a.done) return; var k = b.getAttribute("data-s"), p = a.m.indexOf(k); if (p >= 0) a.m.splice(p, 1); else if (a.m.length < 3) a.m.push(k); a.m = K.filter(function (x) { return a.m.indexOf(x) >= 0; }); save(); showMass(i); }); });
+    $("textarea", card).addEventListener("input", function (e) { st.mass[i].g = e.target.value; save(); $(".mcheck", card).disabled = !st.mass[i].m.length || st.mass[i].g.trim().length < 10; });
+    $(".mcheck", card).addEventListener("click", function () { st.mass[i].done = true; save(); showMass(i); mUpd(); });
+    showMass(i);
+  });
+  function mUpd() { var ok = st.mass.every(function (a) { return a.done; }); $("#to-sich").disabled = !ok; $("#m-hint").hidden = ok; }
+  mUpd();
+
+  /* ---------- Schritt 9: Ergebnissicherung ---------- */
+  function renderSich() { $("#s-verm").innerHTML = st.vermutung ? "Deine Vermutung: <i>„" + Lab.esc(D.vermutungOptionen[st.vermutung.v]) + "“ – " + Lab.esc(st.vermutung.grund) + "</i>" : ""; }
+  st.sC = st.sC || [null, null, null];
+  $("#sC").innerHTML = "<p style=\"margin:0 0 6px\">Ich kann …</p>" + D.ziele.map(function (z, i) {
+    return '<div class="w-row"><div>' + Lab.esc(z) + '</div><div class="seg" data-c="' + i + '">' + D.stufen.map(function (s, k) { return '<button type="button" data-k="' + k + '"' + (st.sC[i] === k ? ' class="on"' : "") + ">" + s + "</button>"; }).join("") + "</div></div>";
+  }).join("");
+  $$("#sC .seg").forEach(function (seg) {
+    var i = +seg.getAttribute("data-c");
+    $$("button", seg).forEach(function (b) { b.addEventListener("click", function () { st.sC[i] = +b.getAttribute("data-k"); save(); $$("button", seg).forEach(function (x) { x.classList.toggle("on", x === b); }); sUpd(); }); });
+  });
+  ["sA", "sB"].forEach(function (id) { var t = $("#" + id); t.value = st[id] || ""; t.addEventListener("input", function () { st[id] = t.value; save(); sUpd(); }); });
+  function showSB() { if (!st.sBDone) return; $("#sB-erw").hidden = false; $("#sB-erw").innerHTML = "<strong>Beispiel:</strong> " + Lab.esc(D.sBBeispiel) + "<br><span class=\"mini\">Prüfe: Hast du zwei Säulen genannt, ihren Zusammenhang erklärt und einen Beleg angeführt?</span>"; }
+  $("#sB-check").addEventListener("click", function () { st.sBDone = true; save(); showSB(); sUpd(); });
+  function sUpd() {
+    var a = (st.sA || "").trim().length >= 10, b = (st.sB || "").trim().length >= 40, c = st.sC.every(function (x) { return x != null; });
+    $("#sB-check").disabled = !b || !!st.sBDone;
+    var ok = a && b && c; $("#to-mappe2").disabled = !ok; $("#s-hint").hidden = ok;
+  }
+  showSB(); sUpd();
+
+
   /* ---------- Lernmappe ---------- */
   function renderChecklist() {
     var items = [
-      ["Lernübersicht (2 Seiten)", true],
+      ["zwei Merkseiten (Lernübersicht)", true],
       ["deine Antworten zu M17", st.abruf.length === D.abruf.length],
       ["deine Vermutung", !!st.vermutung],
       ["deine Zuordnungen und Begründungen zu den sechs Zeugnissen", st.z.filter(Boolean).length === NZ],
       ["deine Beobachtung und Vermutung nach der Auflösung", !!(st.b1 && st.v1)],
-      ["AB 1 (fünf Quellen), AB 2, AB 3 und Ergebnissicherung zum Ausfüllen in GoodNotes", true]
+      ["Expertengruppe: deine Quelle in eigenen Worten", !!st.eDone],
+      ["Expertenrunde: alle fünf Säulen und ihre Zusammenhänge", !!st.raDone],
+      ["Von der Idee zur Tat: vier Maßnahmen", (st.mass || []).every(function (a) { return a.done; })],
+      ["Ergebnissicherung", !!(st.sA && st.sB)]
     ];
     $("#checklist").innerHTML = items.map(function (i) { return '<li class="' + (i[1] ? "" : "miss") + '">' + i[0] + (i[1] ? "" : " – fehlt noch") + "</li>"; }).join("");
   }
@@ -2625,7 +2928,54 @@ var DATA = {
     return h + "</div>";
   }
 
-  /* AB 1: fünf Quellenseiten aus dem Datenblock */
+  /* Kompakte Seite(n) „Meine Ergebnisse“: alle erledigten Aufgaben mit eigenen Antworten (person | beispiel) */
+  function txt(t) { return t ? Lab.esc(t).replace(/\n/g, "<br>") : '<span class="small">–</span>'; }
+  function seiteErgebnisse(s, mode) {
+    var demo = mode === "beispiel";
+    var h = '<div class="pg res"><div class="ph"><span>Lernmappe M19 · Meine Ergebnisse</span><span>' + (demo ? '<span class="demo">Beispielausgabe mit ausgedachten Antworten</span>' : "Daten aus dem GGK-Labor") + "</span></div>";
+    h += '<h2 style="margin-top:0">Meine Ergebnisse</h2>';
+    // 1 Einstieg
+    var ab = D.abruf.map(function (a, i) { var k = s.abruf ? s.abruf[i] : null; return k == null ? "–" : (a.o[k][1] ? "✓" : "✗ (richtig: " + Lab.esc(a.o.filter(function (o) { return o[1]; })[0][0]) + ")"); });
+    h += '<h3>1 · Einstieg</h3><table class="mine-p"><tr><th class="r">Erinnern (M17)</th><td>Boykott: ' + ab[0] + " · Nürnberger Gesetze: " + ab[1] + " · Novemberpogrom: " + ab[2] + "</td></tr>";
+    h += '<tr><th class="r">Meine Vermutung</th><td>' + (s.vermutung ? "<b>" + Lab.esc(D.vermutungOptionen[s.vermutung.v]) + "</b> " + txt(s.vermutung.grund) : "–") + "</td></tr></table>";
+    // 2 Zeugnisse
+    h += '<h3>2 · Sechs Zeugnisse: meine Zuordnung</h3><table class="mine-p"><tr><th style="width:30%">Zeugnis</th><th style="width:25%">meine Wahl</th><th style="width:27%">meine Begründung</th><th>im Kern</th></tr>';
+    D.zeugnisse.forEach(function (z, i) {
+      var m = s.z && s.z[i];
+      h += "<tr><td><b>" + (i + 1) + "</b> " + Lab.esc(z.kurz) + "</td><td>" + (m ? m.m.map(function (k) { return S[k].name + ' <span class="small">(' + LV[z.lv[k][0]] + ")</span>"; }).join("<br>") : "–") + "</td><td>" + (m ? txt(m.g) : "–") + "</td><td>" + kern(z).map(function (k) { return S[k].name; }).join(", ") + "</td></tr>";
+    });
+    h += "</table>";
+    h += '<table class="mine-p"><tr><th class="r">Beobachtung</th><td>' + txt(s.b1) + '</td></tr><tr><th class="r">Vermutung</th><td>' + txt(s.v1) + "</td></tr></table>";
+    // 3 Expertengruppe
+    var q = s.eg != null ? D.quellen[s.eg] : null;
+    h += '<div class="avoid"><h3>3 · Expertengruppe' + (q ? ": Quelle " + q.nr + " – " + S[q.s].name : "") + "</h3>";
+    if (q) {
+      h += '<table class="mine-p"><tr><th class="r">Quelle</th><td>' + Lab.esc(q.titel) + ' <span class="small">(' + Lab.esc(q.fund) + ")</span></td></tr>";
+      h += '<tr><th class="r">Wichtigste Abschnitte</th><td>' + ((s.eabs || []).join(" und ") || "–") + '</td></tr><tr><th class="r">In eigenen Worten</th><td>' + txt(s.e2) + '</td></tr><tr><th class="r">Wen trifft es?</th><td>' + txt(s.e3) + "</td></tr>";
+      if (s.e5) h += '<tr><th class="r">Nach dem Vergleich ergänzt</th><td>' + txt(s.e5) + "</td></tr>";
+      if (s.e4) h += '<tr><th class="r">Profi</th><td>' + txt(s.e4) + "</td></tr>";
+      h += "</table>";
+    } else h += '<p class="small">Noch nicht bearbeitet.</p>';
+    h += "</div>";
+    // 4 Expertenrunde
+    h += '<div class="avoid"><h3>4 · Expertenrunde</h3><table class="mine-p"><tr><th style="width:24%">Säule</th><th>notiert</th></tr>';
+    D.quellen.forEach(function (qq, i) { h += "<tr><td><b>" + S[qq.s].name + "</b></td><td>" + (i === s.eg ? txt(s.e2) + ' <span class="small">(meine Säule)</span>' : txt((s.x || {})[qq.s])) + "</td></tr>"; });
+    h += "</table></div>";
+    h += '<div class="avoid"><table class="mine-p"><tr><th style="width:24%">Zusammenhang</th><th>meine Wahl</th></tr>';
+    D.verbindungen.forEach(function (v, i) { var k = s.verb ? s.verb[i] : null; h += "<tr><td>" + Lab.esc(v.q) + "</td><td>" + (k == null ? "–" : Lab.esc(v.o[k][0]) + (v.o[k][1] ? " ✓" : " ✗ – richtig: " + Lab.esc(v.o.filter(function (o) { return o[1]; })[0][0]))) + "</td></tr>"; });
+    h += '<tr><td>Rassismus und Antisemitismus</td><td>' + txt(s.ra) + "</td></tr></table></div>";
+    // 5 Anwenden
+    h += '<div class="avoid"><h3>5 · Von der Idee zur Tat</h3><table class="mine-p"><tr><th style="width:28%">Maßnahme</th><th style="width:22%">meine Säulen</th><th style="width:30%">meine Begründung</th><th>im Kern</th></tr>';
+    D.massnahmen.forEach(function (m, i) { var a = s.mass && s.mass[i]; h += "<tr><td>" + Lab.esc(m.t.replace(/ \(Profi: ohne Hilfe\)/, "")) + "</td><td>" + (a && a.m.length ? a.m.map(function (k) { return S[k].name; }).join(", ") : "–") + "</td><td>" + (a ? txt(a.g) : "–") + "</td><td>" + m.kern.map(function (k) { return S[k].name; }).join(", ") + "</td></tr>"; });
+    h += "</table></div>";
+    // 6 Ergebnissicherung
+    h += '<div class="avoid"><h3>6 · Ergebnissicherung</h3><table class="mine-p"><tr><th class="r">A · Was ich jetzt denke</th><td>' + txt(s.sA) + '</td></tr><tr><th class="r">B · Meine Erklärung</th><td>' + txt(s.sB) + '</td></tr><tr><th class="r">C · Ich kann …</th><td>' +
+      D.ziele.map(function (z, i) { var v = s.sC ? s.sC[i] : null; return Lab.esc(z) + " <b>" + (v == null ? "–" : D.stufen[v]) + "</b>"; }).join("<br>") + "</td></tr></table></div>";
+    h += '<div class="avoid"><h3>Notizen</h3>' + lines(3) + "</div>";
+    return h + "</div>";
+  }
+
+  /* Papierfassung (?druck=leer): fünf Quellenseiten aus dem Datenblock */
   function seitenQuellen() {
     return D.quellen.map(function (q) {
       var h = '<div class="pg"><div class="ph"><span>Lernmappe M19 · AB 1 · Expertengruppe ' + q.nr + " von 5</span><span>Gruppenpuzzle · ca. 15 Min.</span></div>";
@@ -2647,7 +2997,8 @@ var DATA = {
     var s = mode === "beispiel" ? D.beispiel : st, h;
     if (mode === "loesung") h = $("#tpl-loesung").innerHTML;
     else {
-      h = uebersichtHTML() + seiteLabor(s, mode) + $("#tpl-ab").innerHTML.replace('<div data-slot="quellen"></div>', seitenQuellen());
+      /* Digital: nur zwei Merkseiten + eigene Ergebnisse. Papierfassung (leer) zusätzlich mit Quellen und Arbeitsblättern. */
+      h = uebersichtHTML() + (mode === "leer" ? seiteLabor(s, mode) + $("#tpl-ab").innerHTML.replace('<div data-slot="quellen"></div>', seitenQuellen()) : seiteErgebnisse(s, mode));
       var verm = (mode === "leer" || !s.vermutung) ? "____________________________________" : "„" + D.vermutungOptionen[s.vermutung.v] + "“ – " + Lab.esc(s.vermutung.grund);
       h = h.replace('<span data-slot="vermutung"></span>', "<i>" + verm + "</i>");
     }
