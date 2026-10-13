@@ -2,701 +2,751 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lagezentrum Appeasement</title>
-<meta name="description" content="GGK M19 Appeasement: lehrkraftgesteuertes historisches Lagezentrum (Prototyp mit zwei Stationen).">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Frieden durch Zugeständnisse? – Appeasement</title>
+<meta name="description" content="GGK M19 Appeasement: hybride Unterrichtsstunde mit Tablet-Arbeitsphasen und Plenum am Smartboard (Prototyp).">
 <style>
+/* Schriften lokal im Repository (SIL Open Font License), keine Verbindung zu Google */
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBoldItalic.woff) format("woff");font-weight:600;font-style:italic;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+
 :root{
-  --paper:#ECEEE8; --paper2:#F6F7F3; --ink:#1B2430; --ink2:#4A5563; --rule:#C9CEC4;
-  --red:#A3242B; --map:#5B7086; --brass:#9C7A22; --night:#18202A; --nightink:#E9ECE6;
-  --A:#2F5D7C; --B:#7A6A2E; --C:#A3242B;
-  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
-  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --bg:#F3EFE7; --surface:#FAF8F3; --surface2:#FFFDF8; --offset:#E9E2D7; --line:#D5CEC3; --border:rgba(36,34,31,.14);
+  --ink:#24221F; --muted:#625F59; --faint:#79746C; --inverse:#FFFAF2;
+  --red:#9B402D; --red-hi:#EAD7CF; --green:#2E5A47; --green-hi:#D6E4DC; --gold:#8C6717; --gold-hi:#EEE2BF;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:.75rem; --r-lg:1rem;
 }
-*{box-sizing:border-box}
-html,body{margin:0;height:100%}
-body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:clamp(16px,1.35vw,24px);line-height:1.45}
-button,input,select,textarea{font:inherit;font-family:var(--sans)}
-:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:none;text-size-adjust:none}
+body{min-height:100dvh;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:clamp(1rem,.95rem + .25vw,1.125rem);line-height:1.58;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.12;text-wrap:balance}
+p,li{text-wrap:pretty}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px;border-radius:.35rem}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-/* Kopfzeile */
-.top{display:grid;grid-template-columns:auto 1fr auto;gap:1.2em;align-items:center;padding:.55em 1.4em;border-bottom:1px solid var(--rule);font-family:var(--sans);font-size:.72em;color:var(--ink2)}
-.top .ort{font-weight:600;color:var(--ink)}
-.tl{position:relative;height:2.6em}
-.tl .axis{position:absolute;left:0;right:0;top:1.25em;height:2px;background:var(--rule)}
-.tl .past{position:absolute;left:0;top:1.25em;height:2px;background:var(--ink)}
-.tl .yr{position:absolute;top:1.7em;transform:translateX(-50%);font-variant-numeric:tabular-nums}
-.tl .tick{position:absolute;top:1em;width:1px;height:.6em;background:var(--rule)}
-.tl .dot{position:absolute;top:.85em;width:.85em;height:.85em;border-radius:50%;transform:translateX(-50%);background:var(--ink2)}
-.tl .dot.now{background:var(--brass);box-shadow:0 0 0 3px rgba(156,122,34,.25)}
-.tl .lbl{position:absolute;top:-.35em;transform:translateX(-50%);white-space:nowrap;color:var(--ink);font-weight:600}
-.tbtn{background:none;border:1px solid var(--rule);border-radius:4px;padding:.25em .7em;color:var(--ink);cursor:pointer}
-.tbtn[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+/* Gemeinsame Bausteine */
+.mark{width:34px;height:34px;flex:0 0 auto}
+.modus{display:inline-flex;align-items:center;gap:.55rem;font-weight:700;font-size:.92rem;padding:.35rem .85rem .35rem .6rem;border-radius:999px;background:var(--surface);border:1px solid var(--border)}
+.modus i{width:.7rem;height:.7rem;border-radius:50%;background:currentColor;display:inline-block}
+.modus small{font-weight:400;color:var(--muted);font-size:inherit}
+.m-input{color:var(--ink)} .m-arbeit{color:var(--red)} .m-plenum{color:var(--ink)} .m-abstimmung{color:var(--green)} .m-reflexion{color:var(--gold)} .m-sicherung{color:var(--gold)}
+.btn{min-height:48px;border:1px solid var(--border);border-radius:var(--r);padding:.6rem 1.3rem;background:var(--surface2);font-weight:700}
+.btn:hover{background:var(--offset)}
+.btn.primary{background:var(--red);color:var(--inverse);border-color:transparent}
+.btn.primary:hover{background:#7A3122}
+.btn.green{background:var(--green);color:var(--inverse);border-color:transparent}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.karte{display:inline-grid;place-items:center;min-width:2.4rem;height:2.4rem;border-radius:.55rem;font-weight:700;background:var(--green);color:var(--inverse)}
+.hinweis{font-size:.88rem;color:var(--muted)}
+.lead{font-size:clamp(1.15rem,1rem + .6vw,1.4rem);color:var(--muted);margin-bottom:2rem;max-width:40rem}
+.meld{list-style:none;border-top:1px solid var(--line);margin-bottom:2rem;counter-reset:m}
+.meld li{counter-increment:m;display:grid;grid-template-columns:2rem 1fr;gap:.5rem;padding:.9rem 0;border-bottom:1px solid var(--line)}
+.meld li::before{content:counter(m);font-family:var(--display);color:var(--red);font-size:1.25rem;line-height:1.3}
+@keyframes auf{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* Bühne */
-main{height:calc(100vh - 3.2em);overflow:auto}
-.station{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:2.2em;padding:1.4em 1.6em 5em}
-.datum{font-size:clamp(2.2em,4.6vw,4em);line-height:1;letter-spacing:-.01em;font-variant-numeric:lining-nums;margin:0}
-.ereignis{font-size:1.25em;margin:.35em 0 .9em;font-weight:normal;color:var(--ink2);font-style:italic}
-ol.meld{list-style:none;padding:0;margin:0 0 1em;counter-reset:m}
-ol.meld li{counter-increment:m;display:grid;grid-template-columns:1.6em 1fr;gap:.4em;padding:.45em 0;border-top:1px solid var(--rule);animation:in .5s ease}
-ol.meld li::before{content:counter(m);font-family:var(--sans);font-weight:700;color:var(--red)}
-@keyframes in{from{opacity:0;transform:translateY(.3em)}to{opacity:1}}
-figure{margin:.4em 0 0}
-figure img,figure svg{display:block;width:100%;max-height:31vh;object-fit:contain;background:var(--paper2);border:1px solid var(--rule)}
-figcaption{font-family:var(--sans);font-size:.62em;color:var(--ink2);margin-top:.35em;line-height:1.35}
-figcaption b{color:var(--ink)}
-.frage-bild{font-style:italic;margin:.3em 0 0}
-.bildfehlt{padding:1.2em;border:1px dashed var(--ink2);background:var(--paper2);font-family:var(--sans);font-size:.8em}
+/* ============ Tablet ============ */
+.t-top{position:sticky;top:0;z-index:20;background:color-mix(in oklab,var(--bg) 92%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.t-top-in{max-width:1280px;margin:auto;min-height:64px;padding:0 1.25rem;display:flex;align-items:center;gap:.9rem}
+.brand{font-weight:700;line-height:1.2}.brand small{display:block;color:var(--muted);font-weight:400;font-size:.85rem}
+.t-prog{margin-left:auto;font-size:.88rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.t-shell{max-width:1280px;margin:auto;display:grid;grid-template-columns:270px minmax(0,1fr);min-height:calc(100dvh - 65px)}
+.weg{border-right:1px solid var(--border);padding:1.6rem 1rem;position:sticky;top:65px;height:calc(100dvh - 65px);overflow:auto}
+.weg h2{font-family:var(--body);font-size:.85rem;color:var(--muted);font-weight:700;margin:0 .6rem 1rem}
+.weg .kap{font-size:.82rem;font-weight:700;color:var(--red);margin:1.2rem .6rem .35rem}
+.weg button{width:100%;display:grid;grid-template-columns:1.8rem 1fr 1.3rem;gap:.4rem;align-items:center;text-align:left;border:0;background:transparent;border-radius:.6rem;padding:.65rem .6rem;color:var(--muted);min-height:48px}
+.weg button .n{color:var(--red);font-weight:700;font-variant-numeric:tabular-nums}
+.weg button.akt{background:var(--surface2);color:var(--ink);box-shadow:0 1px 2px rgba(65,48,34,.08)}
+.weg button.zu{opacity:.55;cursor:default}
+.weg .st{width:1.2rem;height:1.2rem;border-radius:50%;border:1px solid var(--border);font-size:.72rem;display:grid;place-items:center}
+.weg .st.ok{background:var(--green);border-color:var(--green);color:var(--inverse)}
+.t-main{padding:clamp(1.5rem,4vw,3.5rem);min-width:0}
+.seite{max-width:46rem;animation:auf .35s cubic-bezier(.16,1,.3,1)}
+.seite h1{font-size:clamp(1.9rem,1.3rem + 2vw,2.8rem);margin:1rem 0 .6rem}
+.auftrag{background:var(--ink);color:var(--inverse);border-radius:var(--r-lg);padding:1.4rem 1.6rem;margin-bottom:1.6rem}
+.auftrag h2{font-size:1.3rem;margin-bottom:.4rem}
+.auftrag p{color:#DCD5CA}
+.frage{font-family:var(--display);font-weight:600;font-size:1.25rem;line-height:1.3;margin:.2rem 0 .7rem}
+.zeile{padding:1.1rem 0;border-bottom:1px solid var(--line)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.seg button,.wahl{border:1.5px solid var(--border);background:var(--surface2);border-radius:.65rem;padding:.75rem .7rem;min-height:52px;text-align:left;line-height:1.3}
+.seg button[aria-pressed="true"]{border-color:var(--red);background:var(--red-hi);font-weight:700}
+.wahl{display:grid;grid-template-columns:1.6rem 1fr;gap:.6rem;width:100%;margin:.45rem 0}
+.wahl .box{width:1.35rem;height:1.35rem;border-radius:.35rem;border:1.5px solid var(--faint);display:grid;place-items:center;font-size:.85rem;margin-top:.1rem}
+.wahl[aria-pressed="true"]{border-color:var(--red);background:var(--red-hi)}
+.wahl[aria-pressed="true"] .box{background:var(--red);border-color:var(--red);color:var(--inverse)}
+.pos{display:grid;gap:.6rem;margin:.6rem 0}
+.pos button{display:grid;grid-template-columns:2.6rem 1fr;gap:.8rem;align-items:center;text-align:left;border:1.5px solid var(--border);background:var(--surface2);border-radius:.8rem;padding:.7rem .9rem;min-height:60px}
+.pos button[aria-pressed="true"]{border-color:var(--green);background:var(--green-hi);font-weight:700}
+.pos button .karte{background:var(--surface);color:var(--green);border:1.5px solid var(--green)}
+.pos button[aria-pressed="true"] .karte{background:var(--green);color:var(--inverse)}
+.fuss{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-top:1px solid var(--line);margin-top:2.2rem;padding-top:1.3rem;flex-wrap:wrap}
+.code{display:flex;gap:.6rem;align-items:stretch;margin-top:.4rem;flex-wrap:wrap}
+.code input{flex:1 1 12rem;min-height:52px;border:1.5px solid var(--border);border-radius:var(--r);padding:.5rem 1rem;font-size:1.3rem;letter-spacing:.08em;text-transform:uppercase;background:var(--surface2)}
+.fehler{color:var(--red);margin-top:.5rem;min-height:1.5em}
+.schau{margin-top:1rem;padding:1.4rem 1.6rem;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--border)}
+.schau b{font-family:var(--display);font-size:1.35rem;font-weight:600;display:block;margin-bottom:.3rem}
+.stopp-t{min-height:60dvh;display:grid;align-content:center;gap:.6rem}
+.stopp-t h1{font-size:clamp(2.6rem,2rem + 3vw,4.2rem)}
+.stimmkarte{position:fixed;inset:0;z-index:50;background:var(--green);color:var(--inverse);display:grid;place-content:center;text-align:center;padding:2rem;gap:1rem}
+.stimmkarte .gross{font-family:var(--display);font-weight:600;font-size:min(50vw,50vh);line-height:.9}
+.stimmkarte p{font-size:1.35rem;max-width:30rem;margin:auto}
+.stimmkarte .zu{position:absolute;top:1rem;right:1rem;background:transparent;border:1px solid rgba(255,250,242,.5);color:var(--inverse);border-radius:var(--r);padding:.6rem 1rem;min-height:48px}
+.vgl{display:grid;gap:.6rem;margin:1rem 0}
+.vgl div{display:grid;grid-template-columns:1fr auto;gap:1rem;padding:.8rem 1rem;background:var(--surface);border-radius:.6rem;border-left:4px solid var(--line)}
+.vgl div.ok{border-left-color:var(--green)} .vgl div.nein{border-left-color:var(--red)}
+.mobil-weg{display:none}
+@media (max-width:860px){
+  .t-shell{grid-template-columns:1fr}
+  .weg{display:none}
+  .mobil-weg{display:flex;gap:.4rem;overflow-x:auto;padding:.6rem 1.25rem;border-bottom:1px solid var(--border);scrollbar-width:none}
+  .mobil-weg button{flex:0 0 auto;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:.4rem .8rem;font-size:.88rem;min-height:40px}
+  .mobil-weg button.akt{background:var(--ink);color:var(--inverse)}
+  .mobil-weg button.zu{opacity:.5}
+  .seg{grid-template-columns:1fr}
+  .vgl div{grid-template-columns:1fr}
+}
 
-aside .box{border-top:3px solid var(--ink);padding:.6em 0 .9em;margin-bottom:.6em}
-aside h3{font-family:var(--sans);font-size:.72em;margin:0 0 .4em;color:var(--ink)}
-.wissen{display:grid;gap:.45em;font-size:.82em}
-.wissen div{padding-left:.7em;border-left:4px solid var(--rule)}
-.wissen .g{border-color:var(--ink)} .wissen .v{border-color:var(--brass)} .wissen .o{border-color:var(--rule);border-left-style:dashed}
-.wissen b{font-family:var(--sans);font-size:.78em;display:block;color:var(--ink2)}
-.bedeutung{font-size:.82em;margin-top:.6em}
-.frage{font-size:1.05em;margin:0 0 .5em}
-.opt{display:grid;grid-template-columns:2em 1fr;gap:.5em;align-items:start;margin:.35em 0;font-size:.88em}
-.karte{display:inline-grid;place-items:center;width:1.7em;height:2.1em;border-radius:3px;color:#fff;font-family:var(--sans);font-weight:700}
-.kA{background:var(--A)} .kB{background:var(--B)} .kC{background:var(--C)}
-.erg{font-family:var(--sans);font-size:.72em}
-.erg .runde{margin:.5em 0 .2em;color:var(--ink2)}
-.bar{display:grid;grid-template-columns:1.6em 1fr 6.2em;gap:.4em;align-items:center;margin:.18em 0}
-.bar .spur{height:1.05em;background:var(--paper2);border:1px solid var(--rule)}
-.bar .f{height:100%;transition:width .6s ease}
-.bar .z{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.sich{color:var(--ink2);margin-top:.3em}
-.next{border:1px dashed var(--ink2);padding:.6em .8em;font-size:.82em;color:var(--ink2)}
-.next.offen{border:2px solid var(--brass);color:var(--ink);background:var(--paper2)}
-.next b{font-family:var(--sans);font-size:.8em;display:block}
+/* ============ Smartboard ============ */
+body.board{overflow:hidden}
+.b{height:100dvh;display:grid;grid-template-rows:auto 1fr auto}
+.b-top{display:grid;grid-template-columns:auto 1fr;gap:1.6rem;align-items:center;padding:1rem 2.4rem .6rem}
+.tl{position:relative;height:2.4rem;margin-right:2rem}
+.tl .ax{position:absolute;left:0;right:0;top:1rem;height:2px;background:var(--line)}
+.tl .ps{position:absolute;left:0;top:1rem;height:2px;background:var(--ink)}
+.tl .yr{position:absolute;top:1.35rem;transform:translateX(-50%);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.tl .pt{position:absolute;top:.62rem;width:.8rem;height:.8rem;border-radius:50%;background:var(--ink);transform:translateX(-50%)}
+.tl .pt.now{background:var(--red);box-shadow:0 0 0 5px var(--red-hi)}
+.tl .lb{position:absolute;top:-.55rem;transform:translateX(-50%);font-size:.85rem;font-weight:700;white-space:nowrap}
+.b-main{min-height:0;overflow:auto;padding:1rem 2.4rem;display:grid;align-content:center}
+.b-foot{display:flex;align-items:center;gap:1.5rem;padding:.8rem 2.4rem 1.1rem;border-top:1px solid var(--border);font-size:.95rem}
+.b-foot .stn{font-weight:700;min-width:12rem}
+.phasen{display:flex;gap:.35rem;flex:1;list-style:none}
+.phasen li{flex:1;padding:.5rem .7rem;border-radius:.55rem;color:var(--faint);border-top:3px solid var(--line);font-weight:700}
+.phasen li.vorbei{color:var(--muted);border-top-color:var(--muted)}
+.phasen li.jetzt{color:var(--ink);border-top-color:var(--red);background:var(--surface)}
+.b-nav{display:flex;gap:.4rem}
+.b-nav button{width:52px;height:52px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);font-size:1.4rem}
+.dunkel{background:var(--ink);color:var(--inverse)}
+.dunkel .b-foot{border-top-color:rgba(255,250,242,.14)}
+.dunkel .phasen li{border-top-color:#4A4640;color:#8D867C}
+.dunkel .phasen li.vorbei{border-top-color:#B9B1A6;color:#B9B1A6}
+.dunkel .phasen li.jetzt{background:#2F2C28;color:var(--inverse);border-top-color:#9CC7B2}
+.dunkel .b-nav button{background:#2F2C28;border-color:#4A4640;color:var(--inverse)}
+.dunkel .tl .ax{background:#4A4640}.dunkel .tl .ps,.dunkel .tl .pt{background:var(--inverse)}.dunkel .tl .yr{color:#A79F94}
+.dunkel .tl .pt.now{background:#9CC7B2;box-shadow:0 0 0 5px #3B4A43}
+.dunkel .modus{background:#2F2C28;border-color:#4A4640}
+.dunkel .modus small{color:#B9B1A6}
+.dunkel .m-plenum,.dunkel .m-input{color:var(--inverse)} .dunkel .m-abstimmung{color:#9CC7B2}
 
-/* Fokuskarte (Quiz, Stimmen, Ton, Sicherung) */
-.fokus{grid-column:1/-1;max-width:62em}
-.fokus .kopf{font-family:var(--sans);font-size:.72em;color:var(--ink2);margin-bottom:.3em}
-.aussage{font-size:1.55em;line-height:1.3;margin:.2em 0 .8em}
-.kat{display:grid;grid-template-columns:repeat(3,1fr);gap:.8em}
-.kat div{border:2px solid var(--rule);padding:.6em .7em;background:var(--paper2)}
-.kat div.richtig{border-color:var(--ink);background:#fff}
-.kat .n{font-family:var(--sans);font-size:.72em;color:var(--ink2);margin-top:.3em}
-.aufl{margin-top:1em;padding:.7em 1em;border-left:5px solid var(--brass);background:var(--paper2)}
-.zitate{display:grid;gap:1em}
-.zitat{display:grid;grid-template-columns:12em 1fr;gap:1.2em;padding:.8em 0;border-top:1px solid var(--rule);animation:in .5s ease}
-.zitat .wer{font-family:var(--sans);font-size:.72em}
-.zitat .wer b{display:block;font-size:1.25em}
-.zitat q{font-size:1.25em;quotes:"„" "“"}
-.zitat .orig{display:block;font-size:.72em;color:var(--ink2);margin-top:.3em;font-family:var(--sans)}
-.vergleich{display:grid;grid-template-columns:1fr 1fr;gap:2em;margin-top:.6em}
-.vergleich h4{font-family:var(--sans);font-size:.75em;margin:0 0 .3em}
-.gross{font-size:3em;line-height:1;font-variant-numeric:tabular-nums}
-.hinweis{font-family:var(--sans);font-size:.68em;color:var(--ink2)}
-.def{font-size:1.35em;line-height:1.35;border-left:6px solid var(--ink);padding:.3em 0 .3em .8em}
-.transkript p{margin:.3em 0}
-.transkript .en{font-family:var(--sans);font-size:.7em;color:var(--ink2)}
-
-/* Start */
-.start{padding:7vh 6vw;max-width:70em}
-.start .ort2{font-family:var(--sans);font-size:.8em;color:var(--ink2)}
-.start h1{font-size:clamp(2.6em,6vw,5em);line-height:1;margin:.15em 0 .3em;font-weight:normal}
-.start .leit{font-size:1.3em;font-style:italic;color:var(--ink2);max-width:36em}
-.start .rolle{margin-top:1.6em;max-width:38em;font-size:1.1em;border-top:3px solid var(--ink);padding-top:.7em}
-.karten{display:flex;gap:1.4em;margin-top:1.4em;flex-wrap:wrap;font-family:var(--sans);font-size:.8em;align-items:center}
-.karten span.karte{width:2.3em;height:3em;font-size:1.2em}
-
-/* Plenumsstopp */
-.stopp{position:fixed;inset:0;background:var(--night);color:var(--nightink);display:grid;place-content:center;text-align:center;padding:6vw;z-index:20}
-.stopp h2{font-size:clamp(2.2em,6vw,5em);font-weight:normal;margin:0}
-.stopp p{font-size:1.3em;max-width:30em;margin:1em auto 0;color:#B9C1C9;font-style:italic}
-
-/* Landkarte */
-.lk{display:grid;grid-template-columns:repeat(3,1fr);gap:1em;padding:1.4em 1.6em 5em}
-.lk h2{grid-column:1/-1;font-weight:normal;font-size:2em;margin:0}
-.lk .t{border-top:3px solid var(--ink);padding-top:.5em;font-size:.85em;min-height:9em}
-.lk .t.leer{border-top-style:dashed;color:var(--ink2)}
-.lk .t b{font-family:var(--sans);font-size:.85em;display:block}
-.lk .t i{display:block;color:var(--ink2);margin:.2em 0 .4em;font-size:.9em}
-.lk .t ul{margin:.2em 0;padding-left:1.1em}
-
-/* Lehrkraftleiste */
-.leiste{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:var(--paper);font-family:var(--sans);font-size:.62em;display:flex;flex-wrap:wrap;gap:.4em;align-items:center;padding:.45em .8em;z-index:30}
-.leiste button{background:transparent;color:var(--paper);border:1px solid #556070;border-radius:3px;padding:.3em .6em;cursor:pointer}
-.leiste button:hover{background:#2A3644}
-.leiste .pos{margin-right:auto;opacity:.8}
-.leiste.aus{display:none}
-.zeige{position:fixed;right:.6em;bottom:.5em;z-index:29;font-family:var(--sans);font-size:.6em;opacity:.5}
-
-/* Eingabe-Dialog */
-dialog{border:none;border-radius:6px;padding:1.2em 1.4em;font-family:var(--sans);font-size:.8em;max-width:34em;width:92vw}
-dialog::backdrop{background:rgba(24,32,42,.55)}
-dialog h3{margin:.1em 0 .6em}
-.felder{display:grid;grid-template-columns:repeat(3,1fr);gap:.6em}
-.felder label{display:grid;gap:.2em}
-.felder input{width:100%;padding:.3em;font-size:1.3em;text-align:center}
-dialog textarea,dialog input[type=text],dialog select{width:100%;padding:.35em}
-dialog .reihe{margin-top:.8em}
-dialog menu{display:flex;gap:.6em;justify-content:flex-end;padding:0;margin:1em 0 0}
-dialog menu button{padding:.4em .9em}
-
-/* Lehrkraftfenster */
-body.lehrer{font-size:16px;background:#fff}
-.lv{display:grid;grid-template-columns:1.2fr 1fr;gap:1.5em;padding:1em 1.4em;font-family:var(--sans);font-size:15px}
-.lv h2{font-size:1.1em;margin:.2em 0}
-.lv .jetzt{font-size:1.35em;font-weight:600}
-.lv .impulse li{margin:.35em 0;font-family:var(--serif);font-size:1.1em}
-.lv .knoepfe{display:flex;flex-wrap:wrap;gap:.4em;margin:.8em 0}
-.lv .knoepfe button{padding:.5em .8em;border:1px solid var(--ink);background:#fff;border-radius:4px;cursor:pointer}
-.lv .knoepfe button.haupt{background:var(--ink);color:#fff}
-.lv .meta{color:var(--ink2);font-size:.9em}
-.lv .uhr{font-size:2em;font-variant-numeric:tabular-nums}
-.lv ol.ablauf{font-size:.85em;max-height:78vh;overflow:auto;padding-left:2.6em}
-.lv ol.ablauf li.akt{font-weight:700;color:var(--red)}
-
+.lage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3rem;align-items:center}
+.lage .datum{font-family:var(--display);font-weight:600;font-size:clamp(3rem,6.2vw,6.4rem);line-height:.95;margin:1.2rem 0 1rem}
+.lage .ereignis{font-size:clamp(1.4rem,2.2vw,2.2rem);color:var(--muted);font-family:var(--display);font-style:italic;font-weight:600;max-width:20ch;line-height:1.2}
+.bild{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.bild img,.bild svg{display:block;width:100%;height:auto;max-height:56vh;object-fit:cover}
+.bild figcaption{padding:.7rem 1rem;font-size:.82rem;color:var(--muted);line-height:1.4}
+.bildfehlt{padding:2rem;font-size:1.05rem;color:var(--muted);min-height:16rem;display:grid;align-content:center}
+.gross-frage{font-family:var(--display);font-weight:600;font-size:clamp(2.4rem,4.6vw,4.8rem);line-height:1.08;max-width:18ch;margin:1.4rem 0}
+.mittel{font-size:clamp(2rem,3.4vw,3.4rem);max-width:24ch;margin:1rem 0 .4rem}
+.unter{font-size:clamp(1.1rem,1.6vw,1.6rem);color:#C9C1B6;max-width:40rem}
+.arbeit-b{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:3rem;align-items:center}
+.arbeit-b h2{font-size:clamp(2.2rem,4vw,4rem);margin:1.2rem 0 1rem}
+.codewort{border:2px solid var(--red);border-radius:var(--r-lg);padding:1.6rem 2rem;background:var(--surface2)}
+.codewort span{display:block;color:var(--muted);font-weight:700}
+.codewort b{display:block;font-family:var(--display);font-weight:600;font-size:clamp(2.8rem,5.4vw,5.6rem);letter-spacing:.05em;color:var(--red);line-height:1.05;margin:.3rem 0;word-break:break-word}
+.codewort.refl{border-color:var(--gold)} .codewort.refl b{color:var(--gold)}
+.uhr{font-family:var(--display);font-weight:600;font-size:clamp(2.4rem,4vw,4rem);font-variant-numeric:tabular-nums}
+.uhr.aus{color:var(--red)}
+.ergebnis{display:grid;gap:1.3rem;margin-top:1.6rem;max-width:76rem}
+.eb{display:grid;grid-template-columns:4rem minmax(12rem,22rem) 1fr auto;gap:1.2rem;align-items:center}
+.eb .karte{width:4rem;height:4rem;font-size:2rem;font-family:var(--display);font-weight:600;background:transparent;border:2px solid #9CC7B2;color:#9CC7B2}
+.eb .txt{font-size:clamp(1.05rem,1.4vw,1.4rem);line-height:1.3}
+.eb .bars{display:grid;gap:.35rem}
+.eb .bar{height:1.3rem;border-radius:.35rem;background:#2F2C28;overflow:hidden}
+.eb .bar i{display:block;height:100%;background:#9CC7B2;transition:width .6s cubic-bezier(.16,1,.3,1)}
+.eb .bar.r1 i{background:#5F7F70}
+.eb .zahl{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,2.4vw,2.6rem);font-variant-numeric:tabular-nums;min-width:7rem;text-align:right;white-space:nowrap}
+.eb .zahl small{font-family:var(--body);font-weight:400;font-size:.9rem;color:#A79F94;display:block}
+.zaehl{display:flex;gap:.4rem;margin-top:.4rem}
+.zaehl button{width:2.6rem;height:2.6rem;border-radius:.5rem;border:1px solid #4A4640;background:#2F2C28;color:var(--inverse);font-size:1.25rem}
+.legende{color:#A79F94;font-size:.95rem;margin-top:.6rem}
+.quiz-b{display:grid;max-width:76rem;margin-top:.6rem}
+.qz{display:grid;grid-template-columns:1fr 15rem;gap:.4rem 1.6rem;align-items:center;padding:.9rem 0;border-bottom:1px solid #4A4640}
+.qz p{font-size:clamp(1.05rem,1.45vw,1.45rem);line-height:1.35}
+.qz .lsg{font-weight:700;padding:.5rem .9rem;border-radius:.55rem;text-align:center}
+.qz .lsg.A{background:var(--inverse);color:var(--ink)} .qz .lsg.B{background:var(--gold-hi);color:#5E450F} .qz .lsg.C{background:var(--red-hi);color:#6E2C1F}
+.qz .lsg.zu{background:transparent;border:1.5px dashed #6A645B;color:#A79F94;font-weight:400}
+.qz .erkl{grid-column:1/-1;color:#B9B1A6;font-size:1rem}
+.zitate{display:grid;gap:2rem;max-width:72rem;margin-top:1.6rem}
+.zitat{display:grid;grid-template-columns:15rem 1fr;gap:2rem;animation:auf .5s ease}
+.zitat .wer b{display:block;font-family:var(--display);font-size:1.5rem;font-weight:600}
+.zitat .wer{color:#C9C1B6}
+.zitat q{font-family:var(--display);font-weight:600;font-size:clamp(1.5rem,2.3vw,2.4rem);line-height:1.25;quotes:"„" "“"}
+.zitat .orig{display:block;color:#A79F94;font-size:.95rem;margin-top:.5rem}
+.vergleich{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:1.6rem}
+.vergleich .z{font-family:var(--display);font-weight:600;font-size:clamp(4rem,9vw,9rem);line-height:1;font-variant-numeric:tabular-nums}
+.vergleich h3{font-family:var(--body);font-size:1.15rem;font-weight:700;color:#C9C1B6}
+.vergleich p{color:#A79F94;font-size:1rem;max-width:30rem}
+.ton{max-width:64rem}
+.ton p.de{font-family:var(--display);font-weight:600;font-size:clamp(1.35rem,2vw,2rem);line-height:1.3;margin:1rem 0 .2rem}
+.ton p.en{color:var(--muted);font-size:.98rem}
+.ton audio{width:100%;max-width:36rem;margin:.6rem 0 .2rem}
+.def{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,2.6vw,2.6rem);line-height:1.25;max-width:42ch;margin:1.2rem 0 1.4rem}
+.zwei{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:70rem}
+.zwei h3{font-family:var(--body);font-size:1.1rem;font-weight:700;margin-bottom:.4rem}
+.zwei ul{padding-left:1.2rem;font-size:clamp(1.05rem,1.4vw,1.35rem)}
+.lk{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem 2.2rem;margin-top:1.4rem}
+.lk>div{border-top:3px solid var(--ink);padding-top:.7rem;min-height:8rem}
+.lk>div.leer{border-top:2px dashed var(--line);color:var(--faint)}
+.lk b{font-family:var(--display);font-weight:600;font-size:1.35rem;display:block}
+.lk i{display:block;color:var(--muted);font-size:.95rem;margin:.2rem 0 .5rem}
+.lk ul{padding-left:1.1rem}
+.start-b h1{font-size:clamp(3.2rem,7vw,7.2rem);line-height:.95;margin:1.4rem 0 1.2rem;max-width:14ch}
+.start-b .lf{font-family:var(--display);font-style:italic;font-weight:600;font-size:clamp(1.4rem,2.2vw,2.2rem);color:var(--muted);max-width:34ch;line-height:1.25}
+.start-b .wie{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2rem;margin-top:2.6rem;color:var(--muted);max-width:80rem}
+.start-b .wie span{border-top:3px solid var(--line);padding-top:.6rem}
+.start-b .wie b{display:block;color:var(--ink);font-size:1.1rem}
+.start-b .wie span:nth-child(2){border-top-color:var(--red)} .start-b .wie span:nth-child(4){border-top-color:var(--green)}
+dialog{border:none;border-radius:var(--r-lg);padding:1.6rem;max-width:34rem;width:92vw;background:var(--surface2);color:var(--ink)}
+dialog::backdrop{background:rgba(36,34,31,.55)}
+dialog h3{margin-bottom:.8rem}
+dialog label{display:block}
+dialog select,dialog textarea{width:100%;border:1px solid var(--border);border-radius:.5rem;padding:.6rem;margin:.3rem 0 .8rem;background:#fff}
+dialog menu{display:flex;justify-content:flex-end;gap:.6rem}
 @media (max-width:900px){
-  .station{grid-template-columns:1fr}
-  .zitat{grid-template-columns:1fr}
-  .kat,.lk,.vergleich,.lv{grid-template-columns:1fr}
-  .top{grid-template-columns:1fr}
+  .lage,.arbeit-b,.vergleich,.zwei,.zitat{grid-template-columns:1fr}
+  .lk,.start-b .wie{grid-template-columns:1fr}
+  body.board{overflow:auto}.b{height:auto;min-height:100dvh}
+  .b-foot{flex-wrap:wrap}.qz{grid-template-columns:1fr}
+  .eb{grid-template-columns:3rem 1fr auto}.eb .bars{grid-column:1/-1}
 }
-@media print{.leiste,.zeige,.top{display:none}}
+
+/* Auswahl der Ansicht */
+.wahl-a{min-height:100dvh;display:grid;align-content:center;padding:2rem;gap:1.4rem;max-width:56rem;margin:auto}
+.wahl-a h1{font-size:clamp(2.4rem,5vw,4.4rem)}
+.wahl-a .zwei-a{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:.6rem}
+.wahl-a a{display:block;text-decoration:none;color:inherit;border:1px solid var(--border);background:var(--surface);border-radius:var(--r-lg);padding:1.6rem}
+.wahl-a a b{font-family:var(--display);font-weight:600;font-size:1.6rem;display:block;margin-bottom:.3rem}
+.wahl-a a.dk{background:var(--ink);color:var(--inverse)}
+@media (max-width:700px){.wahl-a .zwei-a{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div id="app"></div>
-
 <dialog id="dlg"></dialog>
-
 <script>
 "use strict";
-/* ============================================================
-   Lagezentrum Appeasement – Prototyp (Stationen S2 und S3)
-   Lehrkraftgesteuert. Keine Server, keine Konten, kein Tracking.
-   Gespeichert werden nur Summen (Stimmkarten) und Notizen der
-   Lehrkraft, lokal auf diesem Gerät.
-   Zwei Fenster (Beamer + Lehrkraft) synchronisieren sich auf
-   demselben Gerät über BroadcastChannel.
-   ============================================================ */
+/* ==================================================================
+   M19 Appeasement – hybrides Lagezentrum (Prototyp)
+   ?ansicht=tablet    Schüler*innen: kurze Arbeitsphasen, Stimmkarte
+   ?ansicht=board     Smartboard: Lage, Plenum, Abstimmung (Lehrkraft)
+   ?ansicht=lehrkraft zweites Fenster auf dem Laptop (Impulse, Ablauf)
+   Tablets und Smartboard sind NICHT verbunden (kein Server). Die
+   Lehrkraft gibt Arbeitsphasen per Codewort frei und zählt die
+   hochgehaltenen Tablets. Gespeichert wird nur lokal, ohne Namen.
+   ================================================================== */
 
-const KEY = "ggk-appeasement:v1";
-const ROLLE = new URLSearchParams(location.search).get("rolle") === "lehrkraft" ? "lehrkraft" : "beamer";
+const ANSICHT = new URLSearchParams(location.search).get("ansicht");
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const lade = (k, d) => { try { const x = JSON.parse(localStorage.getItem(k)); return x ?? d; } catch(e) { return d; } };
+const speichere = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} };
 
-/* ---------- Inhalte ---------- */
+/* Zeichen: Regierungs- und Oppositionsbank, dazwischen der Gang */
+const MARK = `<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="3" y="6" width="28" height="7" rx="3.5" fill="#2E5A47"/><rect x="3" y="21" width="28" height="7" rx="3.5" fill="#2E5A47" opacity=".55"/><rect x="15" y="13" width="4" height="8" rx="2" fill="#9B402D"/></svg>`;
 
-const KARTEN = {A:"damals bekannt", B:"damals vermutet", C:"erst später bekannt"};
+/* ---------------------- Inhalte ---------------------- */
 
-const STATIONEN = {
-  S2: {
-    jahr: 1938.2, kurz: "März 1938",
-    datum: "12./13. März 1938",
-    ereignis: "Deutsche Truppen marschieren in Österreich ein",
-    meldungen: [
-      "Am 12. März überschreiten deutsche Truppen die österreichische Grenze. Sie stoßen auf keinen Widerstand; viele Menschen jubeln ihnen zu.",
-      "Am 13. März wird Österreich per Gesetz Teil des Deutschen Reiches. Die NS-Führung begründet das damit, alle Deutschen in einem Reich zu vereinen.",
-      "In Wien werden Regimegegner verhaftet, Jüdinnen und Juden öffentlich gedemütigt und beraubt. London und Paris protestieren, handeln aber nicht."
-    ],
-    medium: "karte",
-    bildfrage: "Was bedeutet die neue Grenze für die Tschechoslowakei?",
-    wissen: {
-      g: "Österreich ist angegliedert. Großbritannien hat keine Verpflichtung, Österreich beizustehen.",
-      v: "Hitler will „nur“ Gebiete mit deutschsprachiger Bevölkerung.",
-      o: "Was folgt als Nächstes? Die Tschechoslowakei ist jetzt auf drei Seiten von deutschem Gebiet umgeben."
-    },
-    bedeutung: "Für Großbritannien: Die erste Grenzverschiebung in Europa seit 1919 – ohne Krieg, aber gegen geltende Verträge.",
-    naechstes: "September 1938: Hitler fordert von der Tschechoslowakei das Sudetengebiet."
-  },
-  S3: {
-    jahr: 1938.74, kurz: "Sept. 1938",
-    datum: "27. September 1938",
-    ereignis: "Sudetenkrise: Steht Europa vor einem Krieg?",
-    meldungen: [
-      "Hitler fordert, dass die Tschechoslowakei die überwiegend deutschsprachigen Grenzgebiete – das „Sudetengebiet“ – abtritt. Dort leben rund drei Millionen Deutschsprachige.",
-      "Premierminister Chamberlain ist zweimal zu Hitler geflogen (15. und 22. September). Beim zweiten Treffen verschärft Hitler seine Forderungen und setzt eine Frist.",
-      "Frankreich ist mit der Tschechoslowakei verbündet. In London werden Gasmasken ausgegeben und Schutzgräben ausgehoben."
-    ],
-    medium: "foto",
-    bildfrage: "Was erwarten diese Menschen?",
-    wissen: {
-      g: "Hitler fordert das Sudetengebiet mit Frist. Frankreich müsste der Tschechoslowakei beistehen. Großbritannien hat mit Prag keinen Bündnisvertrag.",
-      v: "Es geht Hitler nur um die Deutschsprachigen. Ein Krieg brächte schwere Luftangriffe auf London.",
-      o: "Kämpft Frankreich wirklich? Ist die britische Luftverteidigung bereit? Was fordert Hitler danach?"
-    },
-    bedeutung: "Für Großbritannien: Kämpft Frankreich, kann London kaum abseits stehen.",
-    votum: {
-      id: "v2",
-      frage: "Was soll Großbritannien jetzt tun?",
-      opt: {
-        A: "Der Abtretung zustimmen, um den Frieden zu sichern.",
-        B: "Zustimmen – aber nur gegen eine internationale Garantie für die übrige Tschechoslowakei.",
-        C: "Hitler entgegentreten – notfalls Krieg an der Seite Frankreichs."
-      }
-    },
-    naechstes: "29./30. September 1938: Konferenz in München."
-  }
-};
+const KAT = {A:"damals bekannt", B:"damals vermutet", C:"erst später bekannt"};
 
-const QUIZ1 = [
-  { t: "Hitler hat in „Mein Kampf“ „Lebensraum im Osten“ gefordert.", a: "A",
-    e: "Damals bekannt. Das Buch war seit 1925/26 öffentlich und auch in Großbritannien bekannt – viele hielten es aber für Propaganda aus früheren Jahren." },
-  { t: "Hitler will nur Gebiete mit deutschsprachiger Bevölkerung.", a: "B",
-    e: "Damals vermutet. Viele in London hielten das für plausibel; die NS-Propaganda sprach von „Selbstbestimmung“. Ob es stimmt, ist im März 1938 offen." },
-  { t: "Hitler hat im November 1937 intern Pläne vorgetragen, Österreich und die Tschechoslowakei bei günstiger Gelegenheit zu überwältigen.", a: "C",
-    e: "Erst später bekannt. Die Hoßbach-Niederschrift vom 5.11.1937 war ein internes Protokoll; öffentlich wurde sie erst im Nürnberger Prozess 1945/46. Wer hier „damals bekannt“ gewählt hat, hat mit unserem Wissen entschieden." },
-  { t: "Die Wehrmacht ist 1938 bereit für einen großen europäischen Krieg.", a: "B",
-    e: "Damals vermutet und gefürchtet, vor allem die Stärke der Luftwaffe. Die Forschung urteilt heute, dass die Wehrmacht 1938 für einen langen, großen Krieg nicht gerüstet war." }
+const QUIZ = [
+  { t:"Hitler hat in „Mein Kampf“ „Lebensraum im Osten“ gefordert.", a:"A",
+    e:"Das Buch war seit 1925/26 öffentlich und auch in Großbritannien bekannt – viele hielten es aber für Propaganda aus früheren Jahren." },
+  { t:"Hitler will nur Gebiete mit deutschsprachiger Bevölkerung.", a:"B",
+    e:"Viele in London hielten das für plausibel; die NS-Propaganda sprach von „Selbstbestimmung“. Ob es stimmt, ist im März 1938 offen." },
+  { t:"Hitler hat im November 1937 intern Pläne vorgetragen, Österreich und die Tschechoslowakei bei günstiger Gelegenheit zu überwältigen.", a:"C",
+    e:"Die Hoßbach-Niederschrift (5.11.1937) war ein internes Protokoll; öffentlich wurde sie erst im Nürnberger Prozess 1945/46. Wer „damals bekannt“ gewählt hat, hat mit unserem Wissen entschieden." },
+  { t:"Die Wehrmacht ist 1938 bereit für einen großen europäischen Krieg.", a:"B",
+    e:"Damals befürchtet, vor allem mit Blick auf die Luftwaffe. Die Forschung urteilt heute, dass die Wehrmacht 1938 für einen langen, großen Krieg nicht gerüstet war." }
 ];
 
+const S2 = {
+  datum:"12./13. März 1938", ereignis:"Deutsche Truppen marschieren in Österreich ein",
+  meldungen:[
+    "Am 12. März überschreiten deutsche Truppen die österreichische Grenze. Sie stoßen auf keinen Widerstand; viele Menschen jubeln ihnen zu.",
+    "Am 13. März wird Österreich per Gesetz Teil des Deutschen Reiches. Die NS-Führung begründet das damit, alle Deutschen in einem Reich zu vereinen.",
+    "In Wien werden Regimegegner verhaftet, Jüdinnen und Juden öffentlich gedemütigt und beraubt. London und Paris protestieren, handeln aber nicht."
+  ]
+};
+
+const S3 = {
+  datum:"27. September 1938", ereignis:"Sudetenkrise: Steht Europa vor einem Krieg?",
+  meldungen:[
+    "Hitler fordert, dass die Tschechoslowakei ihre überwiegend deutschsprachigen Grenzgebiete – das „Sudetengebiet“ – abtritt. Dort leben rund drei Millionen Deutschsprachige.",
+    "Premierminister Chamberlain ist zweimal zu Hitler geflogen (15. und 22. September). Beim zweiten Treffen verschärft Hitler seine Forderungen und setzt eine Frist.",
+    "Frankreich ist mit der Tschechoslowakei verbündet; Großbritannien hat mit Prag keinen Vertrag. In London werden Gasmasken ausgegeben und Schutzgräben ausgehoben."
+  ],
+  argumente:[
+    "Ein neuer Weltkrieg wäre schlimmer als jedes Zugeständnis. 1914–1918 darf sich nicht wiederholen.",
+    "Wer jetzt nachgibt, belohnt Drohungen. Hitler wird weitere Forderungen stellen.",
+    "Unsere Luftverteidigung ist noch nicht bereit. Jedes Jahr Aufrüstung macht uns stärker.",
+    "Die Tschechoslowakei ist eine Demokratie und mit Frankreich verbündet. Wir dürfen sie nicht im Stich lassen.",
+    "Im Sudetengebiet leben vor allem Deutschsprachige. Die Forderung hat einen nachvollziehbaren Kern.",
+    "Ohne ihre Grenzbefestigungen ist die Tschechoslowakei schutzlos – und Deutschland wird stärker."
+  ],
+  frage:"Was soll Großbritannien jetzt tun?",
+  opt:{ A:"Der Abtretung zustimmen, um den Frieden zu sichern.",
+        B:"Zustimmen – aber nur gegen eine internationale Garantie für die übrige Tschechoslowakei.",
+        C:"Hitler entgegentreten – notfalls Krieg an der Seite Frankreichs." },
+  kurz:{ A:"Abtretung zustimmen", B:"Nur gegen Garantie", C:"Hitler entgegentreten" }
+};
+
 const ZITATE = [
-  { wer: "Neville Chamberlain", rolle: "Premierminister, Konservative", dat: "3. Oktober 1938",
-    de: "… eine Katastrophe abgewendet, die die Zivilisation, wie wir sie kennen, beendet hätte.",
-    en: "… averted a catastrophe which would have ended civilisation as we have known it", sp: "Sp. 45",
-    url: "https://api.parliament.uk/historic-hansard/commons/1938/oct/03/prime-ministers-statement" },
-  { wer: "Clement Attlee", rolle: "Oppositionsführer, Labour", dat: "3. Oktober 1938",
-    de: "Das war kein Sieg der Vernunft und der Menschlichkeit. Es war ein Sieg der rohen Gewalt.",
-    en: "This has not been a victory for reason and humanity. It has been a victory for brute force.", sp: "Sp. 51",
-    url: "https://api.parliament.uk/historic-hansard/commons/1938/oct/03/prime-ministers-statement" },
-  { wer: "Winston Churchill", rolle: "Abgeordneter, Konservative", dat: "5. Oktober 1938",
-    de: "Das ist erst der Anfang der Abrechnung.",
-    en: "This is only the beginning of the reckoning.", sp: "Sp. 371",
-    url: "https://api.parliament.uk/historic-hansard/commons/1938/oct/05/policy-of-his-majestys-government" }
+  { wer:"Neville Chamberlain", rolle:"Premierminister, Konservative<br>3. Oktober 1938",
+    de:"… eine Katastrophe abgewendet, die die Zivilisation, wie wir sie kennen, beendet hätte.",
+    en:"… averted a catastrophe which would have ended civilisation as we have known it", sp:"Sp. 45" },
+  { wer:"Clement Attlee", rolle:"Oppositionsführer, Labour<br>3. Oktober 1938",
+    de:"Das war kein Sieg der Vernunft und der Menschlichkeit. Es war ein Sieg der rohen Gewalt.",
+    en:"This has not been a victory for reason and humanity. It has been a victory for brute force.", sp:"Sp. 51" },
+  { wer:"Winston Churchill", rolle:"Abgeordneter, Konservative<br>5. Oktober 1938",
+    de:"Das ist erst der Anfang der Abrechnung.",
+    en:"This is only the beginning of the reckoning.", sp:"Sp. 371" }
 ];
 
 const FOTO = {
-  src: "https://coimages.sciencemuseumgroup.org.uk/164/976/large_1983_5236_10691_1.jpg",
-  lokal: "media/schutzgraeben-1938.jpg",
-  alt: "Mittagspause in London: Eine Menschenmenge schaut Arbeitern zu, die in Lincoln’s Inn Schutzgräben gegen Luftangriffe ausheben.",
-  cap: "<b>Schutzgräben in Lincoln’s Inn, London, 27. September 1938.</b> Foto: Reg Sayers, Daily Herald Archive. Science Museum Group Collection, Inv. 1983-5236/10691. Nutzung: nicht-kommerziell, Bedingungen der Science Museum Group (vor Veröffentlichung prüfen)."
+  src:"https://coimages.sciencemuseumgroup.org.uk/164/976/large_1983_5236_10691_1.jpg",
+  lokal:"media/schutzgraeben-1938.jpg",
+  alt:"Mittagspause in London: Eine Menschenmenge schaut Arbeitern zu, die in Lincoln’s Inn Schutzgräben gegen Luftangriffe ausheben.",
+  cap:"Schutzgräben in Lincoln’s Inn, London, 27. September 1938. Foto: Reg Sayers, Daily Herald Archive · Science Museum Group Collection, Inv. 1983-5236/10691 · nicht-kommerzielle Nutzung nach den Bedingungen der Science Museum Group (vor Veröffentlichung prüfen)."
 };
-
 const TON = {
-  mp3: "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a1/Another_talk_with_the_German_Chancellor%2C_Herr_Hitler.ogg/Another_talk_with_the_German_Chancellor%2C_Herr_Hitler.ogg.mp3",
-  ogg: "https://upload.wikimedia.org/wikipedia/commons/a/a1/Another_talk_with_the_German_Chancellor%2C_Herr_Hitler.ogg",
-  cap: "Neville Chamberlain nach der Landung am Flugplatz Heston, 30. September 1938, 1:08 min. Wikimedia Commons, dort als gemeinfrei (Crown Copyright abgelaufen) geführt; Herkunft der Aufnahme vor Veröffentlichung prüfen. Wortlaut nach D. Faber, Munich 1938 (2008), und Internet Modern History Sourcebook; deutsche Übersetzung: eigene."
+  mp3:"https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a1/Another_talk_with_the_German_Chancellor%2C_Herr_Hitler.ogg/Another_talk_with_the_German_Chancellor%2C_Herr_Hitler.ogg.mp3",
+  ogg:"https://upload.wikimedia.org/wikipedia/commons/a/a1/Another_talk_with_the_German_Chancellor%2C_Herr_Hitler.ogg"
 };
 
-/* ---------- Ablauf (Prototyp) ---------- */
+/* Lageskizze März 1938 – bewusst keine Landkarte: nur, wer an wen grenzt */
+const SKIZZE = `<svg viewBox="0 0 900 470" role="img" aria-label="Lageskizze März 1938: Die Tschechoslowakei grenzt im Norden, Westen und Süden an das Deutsche Reich einschließlich des angegliederten Österreich; im Osten an Polen und Ungarn.">
+  <style>.w{font:700 22px 'Atkinson Hyperlegible',Arial,sans-serif;fill:#FFFAF2}.l{font:700 23px 'Atkinson Hyperlegible',Arial,sans-serif;fill:#24221F}.k{font:italic 600 20px Fraunces,Georgia,serif;fill:#79746C}.s{font:16px 'Atkinson Hyperlegible',Arial,sans-serif;fill:#FFFAF2}</style>
+  <rect width="900" height="470" fill="#FAF8F3"/>
+  <path d="M70 40H560V200H330V390H70Z" fill="#625F59"/>
+  <path d="M330 290H560V390H330Z" fill="#8E877D"/>
+  <path d="M330 290H560" stroke="#FAF8F3" stroke-width="3" stroke-dasharray="9 6"/>
+  <path d="M330 200H800V290H330Z" fill="#FFFDF8" stroke="#9B402D" stroke-width="4"/>
+  <path d="M560 40H830V200H560ZM560 290H830V390H560Z" fill="none" stroke="#D5CEC3" stroke-width="2"/>
+  <text x="96" y="104" class="w">Deutsches Reich</text>
+  <text x="350" y="332" class="w">Österreich</text><text x="350" y="358" class="s">angegliedert 12./13. März</text>
+  <text x="352" y="253" class="l">Tschechoslowakei</text>
+  <text x="650" y="128" class="k">Polen</text><text x="650" y="348" class="k">Ungarn</text>
+  <text x="400" y="440" class="k">Italien</text><text x="140" y="440" class="k">Schweiz</text>
+</svg>`;
 
-const IMP = {
-  start: ["Regel setzen: Nur was Sie heute – im jeweiligen Moment – wissen, zählt.", "Stimmkarten A, B, C austeilen. Hochhalten erst auf Ihr Zeichen."],
-  s2lage: ["„Ein Volk jubelt – sollen wir dagegen einen Krieg führen?“", "„Ist ein Vertragsbruch automatisch ein Kriegsgrund?“"],
-  quiz: ["Karten auf Zeichen hochhalten lassen, dann Zahl schätzen oder zählen.", "„Woher wissen Sie das – von 1938 oder aus dem Unterricht?“"],
-  s3lage: ["„Wegen eines Streits um ein Grenzgebiet wollen Sie einen europäischen Krieg riskieren?“", "„Wissen Sie sicher, dass Hitler danach weitere Forderungen stellt?“"],
-  votum: ["Karten verdeckt halten, dann gleichzeitig hochhalten.", "Danach per Handzeichen: Wer ist sehr sicher – eher sicher – unsicher?"],
-  p2: ["„Wären Sie bereit, einen Angehörigen für das Sudetengebiet in den Krieg zu schicken?“ (hypothetisch, keine Antwortpflicht)", "„Welche Verantwortung tragen Sie gegenüber der Tschechoslowakei, die nicht mit am Tisch sitzt?“", "„Welche Verantwortung tragen Sie gegenüber der eigenen Bevölkerung?“", "„Wie viele Zugeständnisse sind vertretbar, wenn dadurch Frieden erhalten werden könnte?“"],
-  m: ["„Wessen Argument haben Sie benutzt?“", "Festhalten: Kritik gab es schon 1938 – sie ist nicht nur Rückschau."],
-  unterhaus: ["Vorsicht beim Vergleich: Die Klasse stimmte vor München ab, das Unterhaus danach – und über die Politik der Regierung, nicht über A/B/C."],
-  ton: ["Ton erst nach Ankündigung starten. Danach: „Was hofft Chamberlain? Was hofft die Menge?“"],
-  sicherung: ["Definition gemeinsam lesen; nachfragen: „Was davon ist Ziel, was ist Mittel?“"],
-  lk: ["Beobachtungen der Stunde den Begriffen zuordnen lassen.", "„Welche Kritik bleibt, auch wenn man nur das damalige Wissen nimmt?“"]
-};
+function modus(kl, text, zusatz){ return `<span class="modus ${kl}"><i></i>${text}${zusatz?` <small>· ${zusatz}</small>`:""}</span>`; }
 
-const SCHRITTE = [
-  {id:"start",   typ:"start",   name:"Start: Rolle und Leitfrage", imp:IMP.start},
-  {id:"s2-0",    typ:"station", st:"S2", m:0, name:"S2 Datum und Ereignis", imp:IMP.s2lage},
-  {id:"s2-1",    typ:"station", st:"S2", m:1, name:"S2 Meldung 1"},
-  {id:"s2-2",    typ:"station", st:"S2", m:2, name:"S2 Meldung 2"},
-  {id:"s2-3",    typ:"station", st:"S2", m:3, name:"S2 Meldung 3"},
-  {id:"s2-med",  typ:"station", st:"S2", m:3, med:1, name:"S2 Medium: Lageskizze"},
-  {id:"s2-wis",  typ:"station", st:"S2", m:3, med:1, wis:1, name:"S2 Was wissen wir?"},
-  ...QUIZ1.flatMap((q,i)=>[
-    {id:"q"+i,     typ:"quiz", qi:i, auf:0, name:"Quiz 1 · Aussage "+(i+1), imp:IMP.quiz},
-    {id:"q"+i+"a", typ:"quiz", qi:i, auf:1, name:"Quiz 1 · Auflösung "+(i+1), imp:IMP.quiz}
-  ]),
-  {id:"s2-next", typ:"station", st:"S2", m:3, med:1, wis:1, nxt:1, name:"S2 Freigabe: Was geschieht als Nächstes?"},
-  {id:"s3-0",    typ:"station", st:"S3", m:0, name:"S3 Datum und Ereignis", imp:IMP.s3lage},
-  {id:"s3-1",    typ:"station", st:"S3", m:1, name:"S3 Meldung 1"},
-  {id:"s3-2",    typ:"station", st:"S3", m:2, name:"S3 Meldung 2"},
-  {id:"s3-3",    typ:"station", st:"S3", m:3, name:"S3 Meldung 3"},
-  {id:"s3-med",  typ:"station", st:"S3", m:3, med:1, name:"S3 Medium: Foto London", imp:["Bildfrage: „Was erwarten diese Menschen?“"]},
-  {id:"s3-wis",  typ:"station", st:"S3", m:3, med:1, wis:1, name:"S3 Was wissen wir?", imp:IMP.s3lage},
-  {id:"s3-v1",   typ:"station", st:"S3", m:3, wis:1, vot:"offen", runde:"r1", name:"Votum 2 · Runde 1 öffnen", imp:IMP.votum},
-  {id:"s3-e1",   typ:"station", st:"S3", m:3, wis:1, vot:"erg", runde:"r1", name:"Votum 2 · Ergebnis Runde 1", imp:IMP.votum},
-  {id:"p2",      typ:"stopp", st:"S3", text:"Stopp: Begründen und diskutieren", unter:"Was soll Großbritannien jetzt tun?", name:"Plenumsstopp P2", imp:IMP.p2},
-  {id:"s3-v2",   typ:"station", st:"S3", m:3, wis:1, vot:"offen", runde:"r2", name:"Votum 2 · Runde 2 öffnen", imp:IMP.votum},
-  {id:"s3-e2",   typ:"station", st:"S3", m:3, wis:1, vot:"erg", runde:"r2", name:"Votum 2 · Ergebnis beider Runden", imp:IMP.votum},
-  {id:"s3-next", typ:"muenchen", st:"S3", name:"S3 Freigabe: Münchner Abkommen"},
-  {id:"ton",     typ:"ton", st:"S3", name:"Originalton Heston (30.9.1938)", imp:IMP.ton},
-  {id:"m1",      typ:"zitate", st:"S3", n:1, name:"Option M · Stimme 1", imp:IMP.m},
-  {id:"m2",      typ:"zitate", st:"S3", n:2, name:"Option M · Stimme 2", imp:IMP.m},
-  {id:"m3",      typ:"zitate", st:"S3", n:3, frage:1, name:"Option M · Stimme 3 + Frage", imp:IMP.m},
-  {id:"uh",      typ:"unterhaus", st:"S3", name:"Unterhaus 6.10.1938: 366 : 144", imp:IMP.unterhaus},
-  {id:"sich",    typ:"sicherung", st:"S3", name:"Vorläufige Sicherung: Appeasement", imp:IMP.sicherung},
-  {id:"lk",      typ:"landkarte", name:"Kognitive Landkarte (Ausschnitt)", imp:IMP.lk},
-  {id:"ende",    typ:"ende", name:"Ende des Prototyps"}
+/* ======================================================
+   TABLET
+   ====================================================== */
+
+const TKEY = "ggk-appeasement-tablet:v2";
+const WEG = [
+  {kap:"Einstieg", id:"rolle", n:"0", t:"Deine Rolle", code:null},
+  {kap:"I · Vertragsbrüche", id:"s1", n:"1", t:"Rheinland 1936", spaeter:true},
+  {kap:"II · Expansion", id:"s2", n:"2", t:"„Anschluss“ 1938", code:"WIEN"},
+  {id:"s3", n:"3", t:"Sudetenkrise 1938", code:"SUDETEN"},
+  {kap:"III · Wendepunkt", id:"s4", n:"4", t:"Prag 1939", spaeter:true},
+  {id:"s5", n:"5", t:"Polen 1939", spaeter:true},
+  {kap:"IV · Rückblick", id:"rb", n:"6", t:"Dein Weg", code:"RUECKBLICK"}
 ];
+let T = Object.assign({ seite:"rolle", offen:{rolle:true}, fertig:{}, quiz:{}, arg:[], pos:null, sicher:null, karte:false }, lade(TKEY, {}));
+const tSave = () => speichere(TKEY, T);
 
-/* ---------- Zustand ---------- */
-
-const LEER = () => ({ i:0, stoppAn:false, ton:false, leiste:true, votes:{v2:{r1:null,r2:null,sicher:null,arg:"",sorge:""}}, quiz:{}, notizen:[], start:null });
-let S = laden();
-function laden(){ try{ const x = JSON.parse(localStorage.getItem(KEY)); if(x && typeof x.i==="number") return Object.assign(LEER(), x);}catch(e){} return LEER(); }
-function sichern(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
-let kanal = null; try{ kanal = new BroadcastChannel("ggk-appeasement"); }catch(e){}
-if(kanal) kanal.onmessage = ev => { if(ev.data && ev.data.S){ S = ev.data.S; zeichnen(); } };
-function setze(f){ f(S); sichern(); if(kanal) kanal.postMessage({S}); zeichnen(); }
-
-/* ---------- Hilfen ---------- */
-const $ = s => document.querySelector(s);
-const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const summe = o => o ? (+o.A||0)+(+o.B||0)+(+o.C||0) : 0;
-
-function zeitleiste(st){
-  const x = j => ((j-1933)/(1939.85-1933)*100).toFixed(2)+"%";
-  let h = '<div class="tl" aria-label="Zeitleiste 1933 bis 1939"><div class="axis"></div>';
-  const jetzt = st ? STATIONEN[st].jahr : 1933.05;
-  h += `<div class="past" style="width:${x(jetzt)}"></div>`;
-  for(let y=1933;y<=1939;y++) h += `<div class="tick" style="left:${x(y)}"></div><div class="yr" style="left:${x(y+.0)}">${y}</div>`;
-  // Nur bereits erreichte Stationen erscheinen; die Zukunft bleibt leer.
-  const reihe = ["S2","S3"];
-  for(const k of reihe){
-    const s = STATIONEN[k];
-    if(st && s.jahr <= jetzt){
-      h += `<div class="dot ${k===st?"now":""}" style="left:${x(s.jahr)}"></div>`;
-      if(k===st) h += `<div class="lbl" style="left:${x(s.jahr)}">${s.kurz}</div>`;
-    }
+function tablet(){
+  const w = WEG.find(x=>x.id===T.seite) || WEG[0];
+  const nOffen = WEG.filter(x=>!x.spaeter).length, nFertig = Object.keys(T.fertig).length;
+  let weg = "", mob = "";
+  for(const x of WEG){
+    if(x.kap) weg += `<div class="kap">${x.kap}</div>`;
+    const zu = x.spaeter, akt = x.id===T.seite;
+    const st = T.fertig[x.id] ? `<span class="st ok" aria-label="erledigt">✓</span>` : `<span class="st"></span>`;
+    weg += `<button class="${akt?"akt":""} ${zu?"zu":""}" data-weg="${x.id}" ${zu?'aria-disabled="true"':""} ${akt?'aria-current="step"':""}><span class="n">${x.n}</span><span>${esc(x.t)}${zu?' <small class="hinweis">· folgt</small>':""}</span>${st}</button>`;
+    if(!zu) mob += `<button class="${akt?"akt":""} ${T.offen[x.id]?"":"zu"}" data-weg="${x.id}">${x.n} · ${esc(x.t)}</button>`;
   }
-  return h+'</div>';
+  $("#app").innerHTML = `
+  <header class="t-top"><div class="t-top-in">${MARK}<div class="brand">Frieden durch Zugeständnisse?<small>M19 · Appeasement · deine Arbeitsseite</small></div><div class="t-prog">${nFertig} von ${nOffen} erledigt</div></div></header>
+  <nav class="mobil-weg" aria-label="Lernweg">${mob}</nav>
+  <div class="t-shell">
+    <nav class="weg" aria-label="Dein Lernweg"><h2>Dein Lernweg</h2>${weg}
+      <p class="hinweis" style="margin:2rem .6rem 0">Deine Antworten bleiben auf diesem Tablet. Es werden keine Namen gespeichert.</p></nav>
+    <main class="t-main">${T.offen[w.id] ? tSeite(w.id) : tGesperrt(w)}</main>
+  </div>
+  ${T.karte ? stimmkarte() : ""}`;
+  tVerdrahten();
 }
 
-function kopf(st){
-  return `<header class="top">
-    <div class="ort">Lagezentrum · House of Commons</div>
-    ${zeitleiste(st)}
-    <div style="display:flex;gap:.4em">
-      <button class="tbtn" id="bTon" aria-pressed="${S.ton}" title="Ton ein/aus (T)">${S.ton?"Ton an":"Ton aus"}</button>
-      <button class="tbtn" id="bVoll" title="Vollbild (F)">Vollbild</button>
-    </div></header>`;
+function tGesperrt(w){
+  return `<section class="seite">${modus("m-plenum","Plenum","schau nach vorn")}
+    <h1>${esc(w.t)}</h1>
+    <p class="lead">Dieser Schritt öffnet sich, sobald am Smartboard das Codewort erscheint.</p>
+    <label for="code" class="frage" style="display:block">Codewort</label>
+    <div class="code"><input id="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="vom Smartboard"><button class="btn primary" id="codeOk">Öffnen</button></div>
+    <p class="fehler" id="codeF" role="status"></p></section>`;
 }
 
-/* Lageskizze März 1938 – bewusst keine Landkarte: Sie zeigt nur, wer an wen grenzt. */
-function karte(){
-  return `<svg viewBox="0 0 900 470" role="img" aria-label="Lageskizze März 1938: Die Tschechoslowakei grenzt im Norden, Westen und Süden an das Deutsche Reich einschließlich des angegliederten Österreich. Im Osten grenzen Polen und Ungarn an.">
-    <style>.w{font:600 21px system-ui,sans-serif;fill:#fff}.l{font:600 22px system-ui,sans-serif;fill:#1B2430}.k{font:italic 19px Georgia,serif;fill:#4A5563}.s{font:15px system-ui,sans-serif;fill:#fff}</style>
-    <path d="M70 40H560V200H330V390H70Z" fill="#5B7086" stroke="#1B2430" stroke-width="2"/>
-    <path d="M330 290H560V390H330Z" fill="#8A9AAB" stroke="#1B2430" stroke-width="2" stroke-dasharray="8 5"/>
-    <path d="M330 200H800V290H330Z" fill="#F6F7F3" stroke="#A3242B" stroke-width="4"/>
-    <path d="M560 40H830V200H560Z" fill="none" stroke="#C9CEC4" stroke-width="2"/>
-    <path d="M560 290H830V390H560Z" fill="none" stroke="#C9CEC4" stroke-width="2"/>
-    <text x="96" y="110" class="w">Deutsches Reich</text>
-    <text x="350" y="332" class="w">Österreich</text><text x="350" y="356" class="s">angegliedert 12./13.3.1938</text>
-    <text x="350" y="252" class="l">Tschechoslowakei</text>
-    <text x="640" y="128" class="k">Polen</text><text x="650" y="348" class="k">Ungarn</text>
-    <text x="400" y="436" class="k">Italien</text><text x="120" y="436" class="k">Schweiz</text><text x="6" y="220" class="k" transform="rotate(-90 22 220)">Frankreich</text>
-  </svg>`;
+function tSeite(id){
+  if(id==="rolle") return `<section class="seite">${modus("m-input","Einstieg","lies kurz")}
+    <h1>Sie sind Abgeordnete im House of Commons.</h1>
+    <p class="lead">Sie entscheiden über die britische Reaktion auf das Vorgehen des nationalsozialistischen Deutschlands. Sie kennen den späteren Verlauf nicht. Entscheiden Sie nur mit dem, was Sie im jeweiligen Moment wissen.</p>
+    <div class="auftrag"><h2>So läuft die Stunde</h2><p>Vorn am Smartboard führt die Lehrkraft in jede Lage ein. Dann arbeiten Sie hier kurz allein – ein Codewort öffnet den Schritt. Danach diskutieren wir gemeinsam, und Ihr Tablet wird zur Stimmkarte.</p></div>
+    <p class="frage">Leitfrage der Stunde</p>
+    <p class="lead" style="font-family:var(--display);font-style:italic;font-weight:600;color:var(--ink)">Warum setzte Großbritannien bis 1939 auf Appeasement – und wie gerecht ist unser heutiges Urteil darüber?</p>
+    <div class="fuss"><span class="hinweis">Weiter geht es mit dem Codewort für Schritt 2.</span><button class="btn primary" data-fertig="rolle" data-nach="s2">Verstanden</button></div></section>`;
+
+  if(id==="s2"){
+    if(T.fertig.s2) return stopp("Was wusste London im März 1938?", "Tablet zur Seite. Die Auflösung kommt vorn – vergleichen Sie sie mit Ihren Zuordnungen.", tQuizUebersicht());
+    const zeilen = QUIZ.map((q,i)=>`<div class="zeile"><p style="margin-bottom:.6rem">${esc(q.t)}</p><div class="seg" role="group" aria-label="Aussage ${i+1}">${["A","B","C"].map(k=>`<button data-quiz="${i}" data-k="${k}" aria-pressed="${T.quiz[i]===k}">${KAT[k]}</button>`).join("")}</div></div>`).join("");
+    const alle = QUIZ.every((q,i)=>T.quiz[i]);
+    return `<section class="seite">${modus("m-arbeit","Arbeitsphase","allein · 4 Minuten")}
+      <h1>Was weiß London im März 1938?</h1>
+      <p class="lead">${S2.datum}: ${S2.ereignis}.</p>
+      <ol class="meld">${S2.meldungen.map(m=>`<li>${esc(m)}</li>`).join("")}</ol>
+      <div class="auftrag"><h2>Ihr Auftrag</h2><p>Ordnen Sie jede Aussage ein: Was konnte man in London im März 1938 wissen – was nur vermuten – und was erfuhr man erst später?</p></div>
+      ${zeilen}
+      <div class="fuss"><span class="hinweis">${alle?"Alle vier eingeordnet.":"Ordnen Sie alle vier Aussagen ein."}</span><button class="btn primary" data-fertig="s2" ${alle?"":"disabled"}>Fertig</button></div></section>`;
+  }
+
+  if(id==="s3"){
+    if(T.fertig.s3) return stopp("Wie entscheiden wir als Parlament?", "Tablet zur Seite – wir diskutieren vorn. Zur Abstimmung wird Ihr Tablet zur Stimmkarte.",
+      `<div class="schau"><b>Ihre Position: ${T.pos} – ${esc(S3.kurz[T.pos])}</b><span class="hinweis">Sicherheit: ${esc(T.sicher)} · Ihre Argumente: Nr. ${T.arg.map(i=>i+1).join(" und ")}</span></div>
+       <div class="fuss"><button class="btn" data-aendern="1">Position ändern</button><button class="btn green" data-karte="1">Stimmkarte zeigen</button></div>`);
+    const args = S3.argumente.map((a,i)=>`<button class="wahl" data-arg="${i}" aria-pressed="${T.arg.includes(i)}"><span class="box">${T.arg.includes(i)?"✓":""}</span><span><b>${i+1}</b> · ${esc(a)}</span></button>`).join("");
+    const pos = ["A","B","C"].map(k=>`<button data-pos="${k}" aria-pressed="${T.pos===k}"><span class="karte">${k}</span><span>${esc(S3.opt[k])}</span></button>`).join("");
+    const sich = ["sehr sicher","eher sicher","unsicher"].map(s=>`<button data-sicher="${s}" aria-pressed="${T.sicher===s}">${s}</button>`).join("");
+    const ok = T.arg.length===2 && T.pos && T.sicher;
+    return `<section class="seite">${modus("m-arbeit","Arbeitsphase","allein oder zu zweit · 5 Minuten")}
+      <h1>Was soll Großbritannien jetzt tun?</h1>
+      <p class="lead">${S3.datum}. ${S3.ereignis}</p>
+      <ol class="meld">${S3.meldungen.map(m=>`<li>${esc(m)}</li>`).join("")}</ol>
+      <div class="auftrag"><h2>Ihr Auftrag</h2><p>Wählen Sie die zwei Argumente, die für Sie am schwersten wiegen. Legen Sie sich dann fest: Was soll die Regierung tun – und wie sicher sind Sie?</p></div>
+      <p class="frage">1 · Die zwei stärksten Argumente <span class="hinweis" style="font-family:var(--body)">(${T.arg.length} von 2)</span></p>
+      <p class="hinweis">Die Argumente sind sinngemäß zugespitzt, keine Zitate.</p>
+      ${args}
+      <p class="frage" style="margin-top:1.8rem">2 · Ihre Position</p>
+      <div class="pos">${pos}</div>
+      <p class="frage" style="margin-top:1.4rem">3 · Wie sicher sind Sie?</p>
+      <div class="seg">${sich}</div>
+      <div class="fuss"><span class="hinweis">${ok?"Bereit für das Plenum.":"Zwei Argumente, eine Position, eine Sicherheit."}</span><button class="btn primary" data-fertig="s3" ${ok?"":"disabled"}>Fertig</button></div></section>`;
+  }
+
+  if(id==="rb"){
+    const hoss = T.quiz[2];
+    return `<section class="seite">${modus("m-reflexion","Reflexion","allein · 3 Minuten")}
+      <h1>Ihr Weg – und was wir heute wissen</h1>
+      <p class="lead">Es geht nicht um richtig oder falsch, sondern darum, wo Sie heutiges Wissen benutzt haben.</p>
+      <p class="frage">März 1938 · Was wusste London?</p>
+      <div class="vgl">${QUIZ.map((q,i)=>`<div class="${T.quiz[i]===q.a?"ok":"nein"}"><span>${esc(q.t)}</span><span class="hinweis">Sie: ${esc(KAT[T.quiz[i]]||"–")}<br>tatsächlich: ${KAT[q.a]}</span></div>`).join("")}</div>
+      ${hoss==="A"?`<p class="hinweis">Die internen Pläne von 1937 haben Sie für damals bekannt gehalten – das ist Wissen aus unserer Zeit.</p>`:""}
+      <p class="frage" style="margin-top:1.8rem">September 1938 · Ihre Entscheidung</p>
+      <div class="vgl"><div><span>Sie: ${T.pos?T.pos+" – "+esc(S3.kurz[T.pos]):"–"}${T.sicher?" ("+esc(T.sicher)+")":""}</span></div>
+        <div><span>Tatsächlich: Großbritannien stimmt in München der Abtretung zu. Eine internationale Garantie für die übrige Tschechoslowakei wird in einem Zusatz angekündigt, kommt aber nie zustande. Das Unterhaus billigt die Politik der Regierung am 6. Oktober mit 366 zu 144 Stimmen.</span></div></div>
+      <div class="auftrag" style="margin-top:1.6rem"><h2>Denken Sie kurz nach</h2><p>Wo haben Sie mit Wissen entschieden, das 1938 niemand hatte? Und welche Kritik an Appeasement bleibt trotzdem – auch mit dem Wissen von damals?</p></div>
+      <div class="fuss"><span class="hinweis">Danach: kognitive Landkarte vorn.</span><button class="btn primary" data-fertig="rb">Fertig</button></div></section>`;
+  }
+  return "";
 }
 
-function medium(st){
-  if(st==="S2") return `<figure>${karte()}<figcaption><b>Lageskizze, keine Landkarte:</b> Sie zeigt nur, welche Staaten aneinandergrenzen. Eigene Darstellung.</figcaption></figure><p class="frage-bild">${STATIONEN.S2.bildfrage}</p>`;
-  return `<figure><img src="${FOTO.lokal}" data-alt2="${FOTO.src}" alt="${esc(FOTO.alt)}" onerror="bildFehler(this)"><figcaption>${FOTO.cap}</figcaption></figure><p class="frage-bild">${STATIONEN.S3.bildfrage}</p>`;
+function tQuizUebersicht(){
+  return `<div class="vgl">${QUIZ.map((q,i)=>`<div><span>${esc(q.t)}</span><span class="hinweis">Sie: ${esc(KAT[T.quiz[i]]||"–")}</span></div>`).join("")}</div>`;
+}
+function stopp(titel, text, extra){
+  return `<section class="seite stopp-t">${modus("m-plenum","Plenum","Tablet zur Seite")}
+    <h1>Stopp.</h1><p class="frage">${esc(titel)}</p><p class="lead" style="margin-bottom:.6rem">${esc(text)}</p>${extra||""}</section>`;
+}
+function stimmkarte(){
+  const k = T.pos || "?";
+  return `<div class="stimmkarte" role="dialog" aria-label="Stimmkarte"><button class="zu" data-karte="0">Schließen</button>
+    <div class="gross">${k}</div><p>${esc(S3.opt[k]||"Noch keine Position gewählt.")}</p>
+    <p style="font-size:1rem;opacity:.8">Hochhalten, wenn die Lehrkraft das Zeichen gibt.</p></div>`;
+}
+
+function tVerdrahten(){
+  document.querySelectorAll("[data-weg]").forEach(b=>b.onclick=()=>{ const w=WEG.find(x=>x.id===b.dataset.weg); if(w.spaeter) return; T.seite=w.id; tSave(); tablet(); scrollTo(0,0); });
+  const ok = $("#codeOk");
+  if(ok){ const pr=()=>{ const w=WEG.find(x=>x.id===T.seite); const v=($("#code").value||"").trim().toUpperCase().replace(/Ü/g,"UE");
+      if(v===w.code){ T.offen[w.id]=true; tSave(); tablet(); } else { $("#codeF").textContent="Das Codewort passt nicht. Schauen Sie noch einmal nach vorn."; } };
+    ok.onclick=pr; $("#code").onkeydown=e=>{ if(e.key==="Enter") pr(); }; }
+  document.querySelectorAll("[data-quiz]").forEach(b=>b.onclick=()=>{ T.quiz[b.dataset.quiz]=b.dataset.k; tSave(); tablet(); });
+  document.querySelectorAll("[data-arg]").forEach(b=>b.onclick=()=>{ const i=+b.dataset.arg; if(T.arg.includes(i)) T.arg=T.arg.filter(x=>x!==i); else if(T.arg.length<2) T.arg=[...T.arg,i]; else T.arg=[T.arg[1],i]; tSave(); tablet(); });
+  document.querySelectorAll("[data-pos]").forEach(b=>b.onclick=()=>{ T.pos=b.dataset.pos; tSave(); tablet(); });
+  document.querySelectorAll("[data-sicher]").forEach(b=>b.onclick=()=>{ T.sicher=b.dataset.sicher; tSave(); tablet(); });
+  document.querySelectorAll("[data-fertig]").forEach(b=>b.onclick=()=>{ T.fertig[b.dataset.fertig]=true; if(b.dataset.nach) T.seite=b.dataset.nach; tSave(); tablet(); scrollTo(0,0); });
+  document.querySelectorAll("[data-karte]").forEach(b=>b.onclick=()=>{ T.karte = b.dataset.karte==="1"; tSave(); tablet(); });
+  document.querySelectorAll("[data-aendern]").forEach(b=>b.onclick=()=>{ delete T.fertig.s3; tSave(); tablet(); });
+}
+
+/* ======================================================
+   SMARTBOARD
+   ====================================================== */
+
+const BKEY = "ggk-appeasement-board:v2";
+const PH = ["Lage","Arbeitsphase","Plenum","Abstimmung","Entwicklung"];
+const SCHRITTE = [
+  {id:"start", typ:"start", stn:"Einstieg", ph:null, name:"Start"},
+  {id:"s2-lage", typ:"lage", st:"S2", stn:"S2 · „Anschluss“", ph:0, jahr:1938.2, name:"Lage März 1938"},
+  {id:"s2-arbeit", typ:"arbeit", stn:"S2 · „Anschluss“", ph:1, jahr:1938.2, code:"WIEN", min:4, titel:"Was weiß London im März 1938?", tun:"Lesen Sie die drei Meldungen und ordnen Sie vier Aussagen ein: damals bekannt, damals vermutet oder erst später bekannt.", name:"Arbeitsphase: Quiz"},
+  {id:"s2-plenum", typ:"quiz", stn:"S2 · „Anschluss“", ph:2, jahr:1938.2, name:"Plenum: Auflösung"},
+  {id:"s2-weiter", typ:"weiter", stn:"S2 · „Anschluss“", ph:4, jahr:1938.2, name:"Entwicklung: Sudetenfrage"},
+  {id:"s3-lage", typ:"lage", st:"S3", stn:"S3 · Sudetenkrise", ph:0, jahr:1938.74, name:"Lage September 1938"},
+  {id:"s3-arbeit", typ:"arbeit", stn:"S3 · Sudetenkrise", ph:1, jahr:1938.74, code:"SUDETEN", min:5, titel:"Was soll Großbritannien jetzt tun?", tun:"Lesen Sie die drei Meldungen, wählen Sie die zwei stärksten Argumente und legen Sie Ihre Position fest.", name:"Arbeitsphase: Position"},
+  {id:"s3-plenum", typ:"plenum", stn:"S3 · Sudetenkrise", ph:2, jahr:1938.74, frage:S3.frage, unter:"Nennen Sie Ihre zwei stärksten Argumente. Wer hat anders entschieden – und warum?", name:"Plenum: Debatte"},
+  {id:"s3-v1", typ:"votum", runde:"r1", stn:"S3 · Sudetenkrise", ph:3, jahr:1938.74, name:"Abstimmung Runde 1"},
+  {id:"s3-debatte", typ:"plenum", stn:"S3 · Sudetenkrise", ph:3, jahr:1938.74, frage:"Wer überzeugt wen?", unter:"Debatte vor der zweiten Runde. Sie dürfen Ihre Position auf dem Tablet ändern.", name:"Debatte vor Runde 2"},
+  {id:"s3-v2", typ:"votum", runde:"r2", stn:"S3 · Sudetenkrise", ph:3, jahr:1938.74, name:"Abstimmung Runde 2"},
+  {id:"s3-muenchen", typ:"muenchen", stn:"S3 · Sudetenkrise", ph:4, jahr:1938.75, name:"Entwicklung: München"},
+  {id:"s3-ton", typ:"ton", stn:"S3 · Sudetenkrise", ph:4, jahr:1938.75, name:"Originalton Heston"},
+  {id:"s3-m", typ:"zitate", stn:"S3 · Sudetenkrise", ph:4, jahr:1938.76, name:"Stimmen aus dem Unterhaus"},
+  {id:"s3-uh", typ:"unterhaus", stn:"S3 · Sudetenkrise", ph:4, jahr:1938.76, name:"366 : 144"},
+  {id:"s3-sich", typ:"sicherung", stn:"S3 · Sudetenkrise", ph:null, jahr:1938.76, name:"Sicherung: Appeasement"},
+  {id:"rb", typ:"arbeit", stn:"Rückblick", ph:null, jahr:1938.76, code:"RUECKBLICK", min:3, titel:"Ihr Weg – und was wir heute wissen", tun:"Vergleichen Sie Ihre Entscheidungen mit dem Verlauf: Wo haben Sie Wissen benutzt, das 1938 niemand hatte?", refl:true, name:"Reflexion auf dem Tablet"},
+  {id:"lk", typ:"landkarte", stn:"Rückblick", ph:null, jahr:1938.76, name:"Kognitive Landkarte"}
+];
+const IMPULSE = {
+  "start":["Regel setzen: Nur was Sie im jeweiligen Moment wissen, zählt.","Tablets: appeasement.html?ansicht=tablet öffnen, Schritt 0 lesen lassen."],
+  "s2-lage":["Bildfrage zur Skizze: „Was bedeutet die neue Grenze für die Tschechoslowakei?“","„Ein Volk jubelt – sollen wir dagegen einen Krieg führen?“"],
+  "s2-plenum":["Je Aussage zuerst Handzeichen, dann mit › aufdecken.","„Woher wissen Sie das – von 1938 oder aus dem Unterricht?“"],
+  "s3-lage":["Bildfrage: „Was erwarten diese Menschen?“"],
+  "s3-plenum":["„Wegen eines Streits um ein Grenzgebiet wollen Sie einen europäischen Krieg riskieren?“","„Wissen Sie sicher, dass Hitler danach weitere Forderungen stellt?“"],
+  "s3-v1":["Tablets verdeckt halten, auf Zeichen gleichzeitig hoch.","Mit + zählen; Fehler mit − korrigieren."],
+  "s3-debatte":["„Wären Sie bereit, einen Angehörigen für das Sudetengebiet in den Krieg zu schicken?“ (hypothetisch, keine Antwortpflicht)","„Welche Verantwortung tragen Sie gegenüber der Tschechoslowakei, die nicht mit am Tisch sitzt?“","„Wie viele Zugeständnisse sind vertretbar, wenn dadurch Frieden erhalten werden könnte?“"],
+  "s3-v2":["Wer hat gewechselt? Ein, zwei Stimmen begründen lassen."],
+  "s3-m":["Mit › die nächste Stimme zeigen.","„Wessen Argument haben Sie benutzt?“","Festhalten: Kritik gab es schon 1938 – sie ist nicht nur Rückschau."],
+  "s3-uh":["Vorsicht: Die Klasse stimmte vor München ab, das Unterhaus danach über die Politik der Regierung."],
+  "lk":["Beobachtungen der Stunde den Begriffen zuordnen (Taste N für Notizen).","„Welche Kritik bleibt, auch wenn man nur das damalige Wissen nimmt?“"]
+};
+
+const LEERB = () => ({ i:0, votes:{r1:{A:0,B:0,C:0}, r2:{A:0,B:0,C:0}}, quizAuf:0, zit:1, notizen:[], uhr:{} });
+let B = Object.assign(LEERB(), lade(BKEY, {}));
+let kanal=null; try{ kanal=new BroadcastChannel("ggk-appeasement-board"); kanal.onmessage=e=>{ if(e.data&&e.data.B){ B=e.data.B; zeichneBoard(); } }; }catch(e){}
+const bSave = () => { speichere(BKEY, B); if(kanal) kanal.postMessage({B}); };
+const setB = f => { f(B); bSave(); zeichneBoard(); };
+const summe = r => B.votes[r].A+B.votes[r].B+B.votes[r].C;
+const letzte = () => summe("r2") ? B.votes.r2 : B.votes.r1;
+
+function zeitleiste(j){
+  const x = v => ((v-1933)/(1939.9-1933)*100).toFixed(2)+"%";
+  let h = `<div class="tl" aria-label="Zeitleiste 1933 bis 1939"><div class="ax"></div><div class="ps" style="width:${x(j)}"></div>`;
+  for(let y=1933;y<=1939;y++) h+=`<div class="yr" style="left:${x(y)}">${y}</div>`;
+  const pts=[[1938.2,"März 1938"],[1938.74,"Sept. 1938"]].filter(([v])=>v<=j+.001);
+  pts.forEach(([v,l],k)=>{ const now=k===pts.length-1; h+=`<div class="pt ${now?"now":""}" style="left:${x(v)}"></div>${now?`<div class="lb" style="left:${x(v)}">${l}</div>`:""}`; });
+  return h+"</div>";
+}
+
+function zeichneBoard(){
+  if(ANSICHT==="lehrkraft") return lehrkraftfenster();
+  document.body.classList.add("board");
+  const s = SCHRITTE[B.i];
+  const dunkel = ["plenum","votum","zitate","unterhaus","quiz"].includes(s.typ);
+  const phasen = s.ph===null ? `<span style="flex:1"></span>` : `<ol class="phasen" aria-label="Phasen dieser Station">${PH.map((p,k)=>`<li class="${k<s.ph?"vorbei":k===s.ph?"jetzt":""}" ${k===s.ph?'aria-current="step"':""}>${p}</li>`).join("")}</ol>`;
+  $("#app").innerHTML = `<div class="b ${dunkel?"dunkel":""}">
+    <header class="b-top">${MARK}${s.jahr?zeitleiste(s.jahr):"<div></div>"}</header>
+    <main class="b-main">${bInhalt(s)}</main>
+    <footer class="b-foot"><span class="stn">${esc(s.stn)}</span>${phasen}
+      <span class="b-nav"><button data-b="zurueck" aria-label="Zurück">‹</button><button data-b="weiter" aria-label="Weiter">›</button></span></footer></div>`;
+  bVerdrahten(); uhrStarten(s);
+}
+
+function bInhalt(s){
+  if(s.typ==="start") return `<section class="start-b">${modus("m-input","Input","wir schauen nach vorn")}
+    <h1>Frieden durch Zugeständnisse?</h1>
+    <p class="lf">Warum setzte Großbritannien bis 1939 auf Appeasement – und wie gerecht ist unser heutiges Urteil darüber?</p>
+    <div class="wie"><span><b>Lage</b>Wir schauen gemeinsam nach vorn.</span><span><b>Arbeitsphase</b>Sie arbeiten allein auf dem Tablet – mit Codewort.</span><span><b>Plenum</b>Wir begründen und streiten.</span><span><b>Abstimmung</b>Ihr Tablet ist Ihre Stimmkarte.</span></div></section>`;
+
+  if(s.typ==="lage"){
+    const d = s.st==="S2" ? S2 : S3;
+    const fig = s.st==="S2"
+      ? `<figure class="bild">${SKIZZE}<figcaption>Lageskizze, keine Landkarte: Sie zeigt nur, welche Staaten aneinandergrenzen. Eigene Darstellung.</figcaption></figure>`
+      : `<figure class="bild"><img src="${FOTO.lokal}" data-alt2="${FOTO.src}" alt="${esc(FOTO.alt)}" onerror="bildFehler(this)"><figcaption>${esc(FOTO.cap)}</figcaption></figure>`;
+    return `<section class="lage"><div>${modus("m-input","Lage","wir schauen nach vorn")}
+      <div class="datum">${d.datum}</div><p class="ereignis">${d.ereignis}</p></div>${fig}</section>`;
+  }
+
+  if(s.typ==="arbeit"){
+    const rest = restZeit(s);
+    return `<section class="arbeit-b"><div>${modus(s.refl?"m-reflexion":"m-arbeit", s.refl?"Reflexion":"Arbeitsphase", "auf dem Tablet · "+s.min+" Minuten")}
+      <h2>${esc(s.titel)}</h2><p class="lead">${esc(s.tun)}</p>
+      <div class="uhr ${rest<=0?"aus":""}" id="uhr" role="timer" aria-label="verbleibende Zeit">${fmt(rest)}</div></div>
+      <div class="codewort ${s.refl?"refl":""}"><span>Codewort für diesen Schritt</span><b>${s.code}</b><span style="font-weight:400">Auf dem Tablet den Schritt im Lernweg wählen und das Codewort eingeben.</span></div></section>`;
+  }
+
+  if(s.typ==="quiz"){
+    const n = B.quizAuf;
+    return `<section>${modus("m-plenum","Plenum · Einordnen","Tablets zur Seite")}
+      <h2 class="gross-frage mittel">Was wusste London im März 1938?</h2>
+      <div class="quiz-b">${QUIZ.map((q,i)=>`<div class="qz"><p>${esc(q.t)}</p>${i<n?`<span class="lsg ${q.a}">${KAT[q.a]}</span><span class="erkl">${esc(q.e)}</span>`:`<span class="lsg zu">Handzeichen – dann aufdecken</span>`}</div>`).join("")}</div></section>`;
+  }
+
+  if(s.typ==="weiter") return `<section>${modus("m-input","Entwicklung","was als Nächstes geschah")}
+    <h2 class="gross-frage">Ein halbes Jahr später fordert Hitler von der Tschechoslowakei das Sudetengebiet.</h2>
+    <p class="lead">Seit dem März ist die Tschechoslowakei auf drei Seiten von deutschem Gebiet umgeben.</p></section>`;
+
+  if(s.typ==="plenum") return `<section>${modus("m-plenum","Plenum","Tablets zur Seite – wir diskutieren")}
+    <h2 class="gross-frage">${esc(s.frage)}</h2><p class="unter">${esc(s.unter)}</p></section>`;
+
+  if(s.typ==="votum"){
+    const zwei = s.runde==="r2", n1 = summe("r1"), n2 = summe("r2");
+    const zeilen = ["A","B","C"].map(k=>{
+      const v1=B.votes.r1[k], v2=B.votes.r2[k], p1=n1?Math.round(v1/n1*100):0, p2=n2?Math.round(v2/n2*100):0;
+      return `<div class="eb"><span class="karte">${k}</span><div class="txt">${esc(S3.kurz[k])}<div class="zaehl"><button data-z="${s.runde}:${k}:-1" aria-label="${k}: eine Stimme weniger">−</button><button data-z="${s.runde}:${k}:1" aria-label="${k}: eine Stimme mehr">+</button></div></div>
+        <div class="bars">${zwei?`<div class="bar r1" title="Runde 1"><i style="width:${p1}%"></i></div>`:""}<div class="bar"><i style="width:${zwei?p2:p1}%"></i></div></div>
+        <span class="zahl">${zwei?`${v1} → ${v2}`:v1}<small>${zwei?`${p1} % → ${p2} %`:`${p1} %`}</small></span></div>`;
+    }).join("");
+    return `<section>${modus("m-abstimmung","Abstimmung · Runde "+(zwei?2:1),"Tablets hoch – auf mein Zeichen")}
+      <h2 class="gross-frage mittel">${esc(S3.frage)}</h2>
+      <div class="ergebnis">${zeilen}</div>
+      <p class="legende">${zwei?`Runde 1 dunkel (${n1} Stimmen) → Runde 2 hell (${n2} Stimmen)`:`${n1} Stimmen gezählt`}</p></section>`;
+  }
+
+  if(s.typ==="muenchen") return `<section class="lage"><div>${modus("m-input","Entwicklung","was tatsächlich geschah")}
+    <div class="datum" style="font-size:clamp(2.6rem,5vw,5rem)">29./30. September 1938</div><p class="ereignis">Das Münchner Abkommen</p></div>
+    <ol class="meld" style="font-size:clamp(1.05rem,1.4vw,1.35rem)">
+      <li>Deutschland, Großbritannien, Frankreich und Italien beschließen in München: Die Tschechoslowakei muss das Sudetengebiet vom 1. bis 10. Oktober räumen.</li>
+      <li>Die Tschechoslowakei sitzt nicht mit am Tisch. Die Sowjetunion auch nicht.</li>
+      <li>Am Morgen danach unterzeichnen Hitler und Chamberlain eine Erklärung: Beide Völker wollen nie wieder gegeneinander Krieg führen.</li></ol></section>`;
+
+  if(s.typ==="ton") return `<section class="ton">${modus("m-input","Originalton","Flugplatz Heston bei London · 30. September 1938")}
+    <h2 class="gross-frage mittel">Chamberlain kehrt zurück</h2>
+    <audio controls preload="none"><source src="${TON.mp3}" type="audio/mpeg"><source src="${TON.ogg}" type="audio/ogg"></audio>
+    <p class="hinweis">Der Ton startet nur auf Knopfdruck. Der Wortlaut steht darunter.</p>
+    <p class="de">„Die Lösung des tschechoslowakischen Problems, die jetzt erreicht ist, ist meiner Ansicht nach nur der Auftakt zu einer größeren Regelung, in der ganz Europa Frieden finden kann.“</p>
+    <p class="en">“The settlement of the Czechoslovak problem which has now been achieved is, in my view, only the prelude to a larger settlement in which all Europe may find peace.”</p>
+    <p class="de">Aus der verlesenen Erklärung: „… symbolisch für den Wunsch unserer beiden Völker, nie wieder gegeneinander Krieg zu führen.“</p>
+    <p class="en">“… symbolic of the desire of our two peoples never to go to war with one another again.”</p>
+    <p class="hinweis" style="margin-top:1.2rem">Neville Chamberlain, 30.9.1938, 1:08 min · Wikimedia Commons (dort gemeinfrei, Crown Copyright abgelaufen; Herkunft der Aufnahme vor Veröffentlichung prüfen) · Wortlaut nach D. Faber, Munich 1938 (2008), und Internet Modern History Sourcebook · Übersetzung: eigene.</p></section>`;
+
+  if(s.typ==="zitate"){
+    const n = Math.min(ZITATE.length, Math.max(1, B.zit));
+    return `<section>${modus("m-plenum","Plenum · Vergleichen","Stimmen aus dem House of Commons, Oktober 1938")}
+      <div class="zitate">${ZITATE.slice(0,n).map(z=>`<div class="zitat"><div class="wer"><b>${z.wer}</b>${z.rolle}</div><div><q>${esc(z.de)}</q><span class="orig">“${esc(z.en)}” – Hansard, ${z.sp} · Übersetzung: eigene</span></div></div>`).join("")}</div>
+      ${n>=3?`<h2 class="gross-frage mittel" style="margin-top:2.2rem">Wessen Argument haben Sie benutzt?</h2>`:""}</section>`;
+  }
+
+  if(s.typ==="unterhaus"){
+    const d = letzte(), n = d.A+d.B+d.C;
+    return `<section>${modus("m-plenum","Plenum · Einordnen","6. Oktober 1938")}
+      <div class="vergleich"><div><h3>House of Commons</h3><div class="z">366 : 144</div><p>für : gegen die Politik der Regierung. Churchill und weitere Konservative enthielten sich. Hansard, 6.10.1938, Sp. 558–562.</p></div>
+      <div><h3>Unsere Klasse</h3><div class="z">${n?`${d.A+d.B} : ${d.C}`:"–"}</div><p>Zugeständnis (A + B) : Hitler entgegentreten (C).${n?"":" Noch keine Stimmen gezählt."}</p></div></div>
+      <p class="unter" style="margin-top:2rem">Vorsicht beim Vergleich: Wir haben vor München entschieden, das Unterhaus danach – und über die Politik der Regierung insgesamt.</p></section>`;
+  }
+
+  if(s.typ==="sicherung") return `<section>${modus("m-sicherung","Sicherung","ins Heft oder in GoodNotes")}
+    <p class="def"><b>Appeasement</b> (engl. „Beschwichtigung“) nennt man die Politik Großbritanniens und Frankreichs in den 1930er-Jahren, einen großen Krieg durch Verhandlungen und begrenzte Zugeständnisse an Deutschland zu verhindern – bei gleichzeitiger eigener Aufrüstung.</p>
+    <div class="zwei"><div><h3>Was 1938 dafür sprach</h3><ul><li>Erfahrung des Ersten Weltkriegs</li><li>Angst vor Luftangriffen auf Städte</li><li>Aufrüstung nicht abgeschlossen</li><li>Hoffnung auf begrenzte Ziele Hitlers</li></ul></div>
+    <div><h3>Was schon 1938 dagegen sprach</h3><ul><li>belohnt Drohung und Gewalt</li><li>die Tschechoslowakei saß nicht am Tisch</li><li>Deutschland wird stärker</li><li>kleinere Staaten verlieren das Vertrauen</li></ul></div></div>
+    <p class="hinweis" style="margin-top:1.4rem">Im Rückblick wird der Begriff oft abwertend für schwaches Nachgeben gegenüber einem Aggressor verwendet.</p></section>`;
+
+  if(s.typ==="landkarte"){
+    const d = letzte(), n = d.A+d.B+d.C;
+    const no = t => B.notizen.filter(x=>x.t===t).map(x=>`<li>${esc(x.x)}</li>`).join("");
+    const feld = (t, f, auto) => { const nn = no(t), leer = !auto && !nn;
+      return `<div class="${leer?"leer":""}"><b>${t}</b><i>${f}</i>${auto?`<p>${auto}</p>`:""}${nn?`<ul>${nn}</ul>`:""}${leer?"Wird im Gespräch gefüllt.":""}</div>`; };
+    return `<section>${modus("m-sicherung","Sicherung · Kognitive Landkarte","gemeinsam zuordnen")}
+      <div class="lk">
+      ${feld("Retrospektivität","Was wissen wir heute, das die Beteiligten nicht wissen konnten?","Hitlers interne Pläne von 1937 – öffentlich erst 1945/46.")}
+      ${feld("Perspektivität","Warum konnten vernünftige Menschen dieselbe Lage unterschiedlich beurteilen?",`Chamberlain, Attlee, Churchill${n?` – und wir: A ${d.A}, B ${d.B}, C ${d.C}`:""}`)}
+      ${feld("Kontingenz","Welche anderen Entwicklungen erschienen damals möglich?")}
+      ${feld("Agency","Was konnten sie tun – und was schränkte sie ein?")}
+      ${feld("Sachurteil","Wie ist Appeasement unter den damaligen Voraussetzungen zu beurteilen?")}
+      ${feld("Werturteil","Welche Verantwortung bestand gegenüber Frieden, Bevölkerung und bedrohten Staaten?")}
+      </div></section>`;
+  }
+  return "";
+}
+
+/* Uhr der Arbeitsphase */
+let uhrT=null;
+const fmt = s => { s=Math.max(0,Math.round(s)); return Math.floor(s/60)+":"+String(s%60).padStart(2,"0"); };
+function restZeit(s){ const st=B.uhr[s.id]; return st ? s.min*60-(Date.now()-st)/1000 : s.min*60; }
+function uhrStarten(s){
+  clearInterval(uhrT);
+  if(s.typ!=="arbeit") return;
+  if(!B.uhr[s.id]){ B.uhr[s.id]=Date.now(); bSave(); }
+  uhrT=setInterval(()=>{ const u=$("#uhr"); if(!u) return; const r=restZeit(s); u.textContent=fmt(r); u.classList.toggle("aus", r<=0); },1000);
+}
+
+function weiter(){
+  const s=SCHRITTE[B.i];
+  if(s.typ==="quiz" && B.quizAuf<QUIZ.length) return setB(b=>b.quizAuf++);
+  if(s.typ==="zitate" && B.zit<ZITATE.length) return setB(b=>b.zit++);
+  setB(b=>{ b.i=Math.min(SCHRITTE.length-1,b.i+1); });
+}
+function zurueck(){
+  const s=SCHRITTE[B.i];
+  if(s.typ==="quiz" && B.quizAuf>0) return setB(b=>b.quizAuf--);
+  if(s.typ==="zitate" && B.zit>1) return setB(b=>b.zit--);
+  setB(b=>b.i=Math.max(0,b.i-1));
+}
+
+function bVerdrahten(){
+  document.querySelectorAll("[data-b]").forEach(b=>b.onclick=()=> b.dataset.b==="weiter"?weiter():zurueck());
+  document.querySelectorAll("[data-z]").forEach(b=>b.onclick=()=>{ const [r,k,d]=b.dataset.z.split(":"); setB(x=>x.votes[r][k]=Math.max(0,x.votes[r][k]+(+d))); });
 }
 window.bildFehler = img => {
-  if(img.dataset.alt2){ const u = img.dataset.alt2; delete img.dataset.alt2; img.src = u; return; }
-  const d = document.createElement("div"); d.className = "bildfehlt";
-  d.textContent = "Bild nicht geladen (kein Internet oder Datei fehlt). Bildbeschreibung: " + img.alt;
-  img.replaceWith(d);
+  if(img.dataset.alt2){ const u=img.dataset.alt2; delete img.dataset.alt2; img.src=u; return; }
+  const d=document.createElement("div"); d.className="bildfehlt"; d.textContent="Bild nicht geladen (kein Internet oder Datei fehlt). Bildbeschreibung: "+img.alt; img.replaceWith(d);
 };
 
-function ergebnisHTML(v, runde){
-  const vt = S.votes[v.id]; const rn = runde==="r2" ? ["r1","r2"] : ["r1"];
-  let h = '<div class="erg">';
-  for(const r of rn){
-    const d = vt[r]; const n = summe(d);
-    h += `<div class="runde">${r==="r1"?"Runde 1":"Runde 2"} · ${n?n+" Stimmen":"noch keine Zahlen eingetragen"}</div>`;
-    for(const k of ["A","B","C"]){
-      const z = d ? (+d[k]||0) : 0, p = n ? Math.round(z/n*100) : 0;
-      h += `<div class="bar"><span class="karte k${k}" aria-hidden="true">${k}</span><div class="spur" role="img" aria-label="Option ${k}: ${z} Stimmen, ${p} Prozent"><div class="f k${k}" style="width:${p}%"></div></div><span class="z">${z} · ${p} %</span></div>`;
-    }
-  }
-  if(vt.sicher && summe({A:vt.sicher.s,B:vt.sicher.e,C:vt.sicher.u})) h += `<div class="sich">Sicherheit: sehr sicher ${vt.sicher.s||0} · eher sicher ${vt.sicher.e||0} · unsicher ${vt.sicher.u||0}</div>`;
-  if(vt.arg) h += `<div class="sich"><b>Wichtigstes Argument:</b> ${esc(vt.arg)}</div>`;
-  if(vt.sorge) h += `<div class="sich"><b>Größte Sorge:</b> ${esc(vt.sorge)}</div>`;
-  return h+'</div>';
-}
-
-/* ---------- Bildschirme ---------- */
-
-function station(sch){
-  const s = STATIONEN[sch.st];
-  const meld = s.meldungen.slice(0, sch.m).map(t => `<li>${esc(t)}</li>`).join("");
-  let rechts = "";
-  if(sch.wis) rechts += `<div class="box"><h3>Was wissen wir?</h3><div class="wissen">
-      <div class="g"><b>gesichert</b>${esc(s.wissen.g)}</div>
-      <div class="v"><b>vermutet</b>${esc(s.wissen.v)}</div>
-      <div class="o"><b>offen</b>${esc(s.wissen.o)}</div></div>
-      <p class="bedeutung">${esc(s.bedeutung)}</p></div>`;
-  if(sch.vot && s.votum){
-    const v = s.votum;
-    rechts += `<div class="box"><h3>Entscheidung${sch.runde==="r2"?" · Runde 2":""}</h3><p class="frage">${esc(v.frage)}</p>
-      ${["A","B","C"].map(k=>`<div class="opt"><span class="karte k${k}">${k}</span><span>${esc(v.opt[k])}</span></div>`).join("")}</div>`;
-    if(sch.vot==="erg") rechts += `<div class="box"><h3>Wie haben wir entschieden?</h3>${ergebnisHTML(v, sch.runde)}</div>`;
-  }
-  rechts += `<div class="next ${sch.nxt?"offen":""}"><b>Was geschieht als Nächstes?</b>${sch.nxt ? esc(s.naechstes) : "Gesperrt – wird von der Lehrkraft freigegeben."}</div>`;
-  return `<section class="station">
-    <div>
-      <h1 class="datum">${s.datum}</h1>
-      <h2 class="ereignis">${esc(s.ereignis)}</h2>
-      <ol class="meld">${meld}</ol>
-      ${sch.med && !sch.vot ? medium(sch.st) : ""}
-    </div>
-    <aside>${rechts}</aside></section>`;
-}
-
-function quiz(sch){
-  const q = QUIZ1[sch.qi]; const z = S.quiz["q"+sch.qi] || {};
-  const n = summe(z);
-  const kat = ["A","B","C"].map(k => `<div class="${sch.auf && q.a===k ? "richtig":""}"><span class="karte k${k}">${k}</span> ${KARTEN[k]}${sch.auf && n ? `<div class="n">${+z[k]||0} von ${n}</div>`:""}</div>`).join("");
-  return `<section class="station"><div class="fokus">
-    <div class="kopf">Was weiß London im März 1938? · Aussage ${sch.qi+1} von ${QUIZ1.length} · Karte hochhalten</div>
-    <p class="aussage">${esc(q.t)}</p>
-    <div class="kat">${kat}</div>
-    ${sch.auf ? `<div class="aufl">${esc(q.e)}${z.sicher!=null && z.sicher!=="" ? `<div class="hinweis">Sehr sicher waren: ${esc(z.sicher)}</div>`:""}</div>` : ""}
-  </div></section>`;
-}
-
-function muenchen(){
-  return `<section class="station"><div>
-    <h1 class="datum">29./30. September 1938</h1>
-    <h2 class="ereignis">Das Münchner Abkommen</h2>
-    <ol class="meld">
-      <li>Deutschland, Großbritannien, Frankreich und Italien beschließen in München: Die Tschechoslowakei muss das Sudetengebiet vom 1. bis 10. Oktober räumen.</li>
-      <li>Die Tschechoslowakei ist an der Konferenz nicht beteiligt. Die Sowjetunion auch nicht.</li>
-      <li>Am Morgen danach unterzeichnen Hitler und Chamberlain eine Erklärung: Beide Völker wollen nie wieder gegeneinander Krieg führen.</li>
-    </ol></div>
-    <aside><div class="box"><h3>Ihr Votum</h3>${ergebnisHTML(STATIONEN.S3.votum,"r2")}</div>
-    <div class="next offen"><b>Was geschieht als Nächstes?</b>30. September 1938: Chamberlain landet in London.</div></aside></section>`;
-}
-
-function ton(){
-  const player = S.ton
-    ? `<audio controls preload="none" style="width:100%"><source src="${TON.mp3}" type="audio/mpeg"><source src="${TON.ogg}" type="audio/ogg"></audio>`
-    : `<p class="hinweis">Ton ist aus. Einschalten mit „Ton aus“ oben rechts oder Taste T. Der Wortlaut steht unten.</p>`;
-  return `<section class="station"><div class="fokus">
-    <div class="kopf">Originalton · Flugplatz Heston bei London · 30. September 1938</div>
-    ${player}
-    <div class="transkript" style="margin-top:1em">
-      <p>„Die Lösung des tschechoslowakischen Problems, die jetzt erreicht ist, ist meiner Ansicht nach nur der Auftakt zu einer größeren Regelung, in der ganz Europa Frieden finden kann.“</p>
-      <p class="en">“The settlement of the Czechoslovak problem which has now been achieved is, in my view, only the prelude to a larger settlement in which all Europe may find peace.”</p>
-      <p>„Heute Morgen hatte ich ein weiteres Gespräch mit dem deutschen Reichskanzler, Herrn Hitler, und hier ist ein Papier, das seinen Namen trägt und auch meinen.“</p>
-      <p class="en">“This morning I had another talk with the German Chancellor, Herr Hitler, and here is a paper which bears his name upon it as well as mine.”</p>
-      <p>Aus der verlesenen Erklärung: „Wir betrachten das gestern Abend unterzeichnete Abkommen und das deutsch-englische Flottenabkommen als symbolisch für den Wunsch unserer beiden Völker, nie wieder gegeneinander Krieg zu führen.“</p>
-      <p class="en">“We regard the agreement signed last night and the Anglo-German Naval Agreement as symbolic of the desire of our two peoples never to go to war with one another again.”</p>
-    </div>
-    <p class="hinweis" style="margin-top:1em">${TON.cap}</p>
-  </div></section>`;
-}
-
-function zitate(sch){
-  const z = ZITATE.slice(0, sch.n).map(q => `<div class="zitat"><div class="wer"><b>${q.wer}</b>${q.rolle}<br>${q.dat}</div>
-    <div><q>${esc(q.de)}</q><span class="orig">“${esc(q.en)}” – Hansard, ${q.sp} · Übersetzung: eigene</span></div></div>`).join("");
-  return `<section class="station"><div class="fokus">
-    <div class="kopf">Stimmen aus dem Unterhaus · Debatte über das Münchner Abkommen, Oktober 1938</div>
-    <div class="zitate">${z}</div>
-    ${sch.frage ? `<p class="aussage" style="margin-top:1em">Wessen Argument haben Sie benutzt?</p>` : ""}
-  </div></section>`;
-}
-
-function unterhaus(){
-  const v = S.votes.v2; const d = v.r2 || v.r1; const n = summe(d);
-  const ab = d ? (+d.A||0)+(+d.B||0) : 0, c = d ? (+d.C||0) : 0;
-  return `<section class="station"><div class="fokus">
-    <div class="kopf">6. Oktober 1938 · Abstimmung im House of Commons über die Politik der Regierung</div>
-    <div class="vergleich">
-      <div><h4>House of Commons</h4><div class="gross">366 : 144</div>
-        <p class="hinweis">Zustimmung : Ablehnung. Churchill und weitere Konservative enthielten sich. Quelle: Hansard, 6.10.1938, Sp. 558–562.</p></div>
-      <div><h4>Unsere Klasse (${v.r2?"Runde 2":"Runde 1"})</h4><div class="gross">${n ? ab+" : "+c : "–"}</div>
-        <p class="hinweis">Zugeständnis (A + B) : Hitler entgegentreten (C).${n?"":" Noch keine Zahlen eingetragen."}</p></div>
-    </div>
-    <p class="hinweis" style="margin-top:1em">Vorsicht beim Vergleich: Die Klasse hat vor München entschieden, das Unterhaus danach – und über die Politik der Regierung insgesamt.</p>
-  </div></section>`;
-}
-
-function sicherung(){
-  return `<section class="station"><div class="fokus">
-    <div class="kopf">Vorläufige Sicherung</div>
-    <p class="def"><b>Appeasement</b> (engl. „Beschwichtigung“) nennt man die Politik Großbritanniens und Frankreichs in den 1930er-Jahren, einen großen Krieg durch Verhandlungen und begrenzte Zugeständnisse an Deutschland zu verhindern – bei gleichzeitiger eigener Aufrüstung.</p>
-    <p class="hinweis" style="font-size:.8em">Im Rückblick wird der Begriff oft abwertend für schwaches Nachgeben gegenüber einem Aggressor verwendet.</p>
-    <div class="vergleich">
-      <div><h4>Was dafür sprach (aus Sicht von 1938)</h4><ul><li>Erfahrung des Ersten Weltkriegs</li><li>Angst vor Luftangriffen auf Städte</li><li>Aufrüstung noch nicht abgeschlossen</li><li>Hoffnung auf begrenzte Ziele Hitlers</li></ul></div>
-      <div><h4>Was dagegen sprach (schon 1938)</h4><ul><li>Belohnt Drohung und Gewalt</li><li>Die Tschechoslowakei saß nicht am Tisch</li><li>Deutschland wird stärker</li><li>Vertrauen kleiner Staaten schwindet</li></ul></div>
-    </div>
-  </div></section>`;
-}
-
-function landkarte(){
-  const z = S.quiz.q2 || {}; const n = summe(z);
-  const retro = n ? `${+z.A||0} von ${n} ordneten Hitlers interne Pläne von 1937 als „damals bekannt“ ein.` : "Quiz 1, Aussage 3: Wie viele hielten die internen Pläne von 1937 für damals bekannt?";
-  const v = S.votes.v2; const d = v.r2 || v.r1;
-  const persp = `Chamberlain: Katastrophe abgewendet · Attlee: Sieg der Gewalt · Churchill: Anfang der Abrechnung${summe(d)?` · unsere Klasse: A ${+d.A||0}, B ${+d.B||0}, C ${+d.C||0}`:""}`;
-  const no = t => S.notizen.filter(x=>x.t===t).map(x=>`<li>${esc(x.x)}</li>`).join("");
-  const T = (t, frage, auto) => { const nn = no(t); const leer = !auto && !nn;
-    return `<div class="t ${leer?"leer":""}"><b>${t}</b><i>${frage}</i>${auto?`<p>${esc(auto)}</p>`:""}${nn?`<ul>${nn}</ul>`:""}${leer?"Wird im Gespräch gefüllt (Notiz mit Taste B).":""}</div>`; };
-  return `<section class="lk"><h2>Kognitive Landkarte</h2>
-    ${T("Retrospektivität","Was wissen wir heute, das die damaligen Beteiligten nicht wissen konnten?", retro)}
-    ${T("Perspektivität","Warum konnten vernünftige Menschen dieselbe Situation unterschiedlich beurteilen?", persp)}
-    ${T("Kontingenz","Welche anderen Entwicklungen erschienen damals möglich?")}
-    ${T("Agency","Was konnten sie tun – und was schränkte ihre Handlungsmöglichkeiten ein?")}
-    ${T("Sachurteil","Wie ist Appeasement unter den damaligen Voraussetzungen zu beurteilen?")}
-    ${T("Werturteil","Welche Verantwortung bestand gegenüber Frieden, Bevölkerung und bedrohten Staaten?")}
-  </section>`;
-}
-
-function start(){
-  return `<section class="start">
-    <div class="ort2">London, House of Commons · GGK M19</div>
-    <h1>Frieden durch Zugeständnisse?</h1>
-    <p class="leit">Warum setzte Großbritannien bis 1939 auf Appeasement – und wie gerecht ist unser heutiges Urteil darüber?</p>
-    <div class="rolle">Sie sind Abgeordnete des britischen Unterhauses. Sie entscheiden über die britische Reaktion auf das Vorgehen des nationalsozialistischen Deutschlands. <b>Sie kennen den späteren Verlauf nicht.</b> Entscheiden Sie nur mit den Informationen, die Ihnen im jeweiligen Moment vorliegen.</div>
-    <div class="karten"><span class="karte kA">A</span><span class="karte kB">B</span><span class="karte kC">C</span><span>Abgestimmt wird mit Stimmkarten – erst auf Zeichen hochhalten.</span></div>
-  </section>`;
-}
-
-function ende(){
-  return `<section class="start"><div class="ort2">Prototyp</div><h1>Ende des Prototyps</h1>
-    <p class="leit">Die vollständige Fassung enthält zusätzlich die Ausgangslage, S1 Rheinland, S4 Prag, S5 Polen, den Rückblick mit Meinungsverlauf, Quiz 2 und die Sicherungsseite.</p></section>`;
-}
-
-/* ---------- Zeichnen ---------- */
-
-function zeichnen(){
-  if(ROLLE==="lehrkraft") return lehrerZeichnen();
-  const sch = SCHRITTE[S.i]; let body = "", st = sch.st || null;
-  if(sch.typ==="start") body = start();
-  else if(sch.typ==="station") body = station(sch);
-  else if(sch.typ==="quiz"){ st = "S2"; body = quiz(sch); }
-  else if(sch.typ==="stopp") body = station(SCHRITTE.find(x=>x.id==="s3-e1"));
-  else if(sch.typ==="muenchen") body = muenchen();
-  else if(sch.typ==="ton") body = ton();
-  else if(sch.typ==="zitate") body = zitate(sch);
-  else if(sch.typ==="unterhaus") body = unterhaus();
-  else if(sch.typ==="sicherung") body = sicherung();
-  else if(sch.typ==="landkarte"){ st = "S3"; body = landkarte(); }
-  else { st = "S3"; body = ende(); }
-  const stopp = sch.typ==="stopp" ? `<div class="stopp" role="dialog" aria-label="Plenumsstopp"><h2>${esc(sch.text)}</h2><p>${esc(sch.unter)}</p></div>`
-    : S.stoppAn ? `<div class="stopp" role="dialog" aria-label="Plenumsstopp"><h2>Stopp: Begründen und diskutieren</h2><p>Weiter mit der Leertaste.</p></div>` : "";
-  $("#app").innerHTML = kopf(st) + `<main id="main">${body}</main>` + stopp + leiste(sch);
-  verdrahten();
-}
-
-function leiste(sch){
-  if(!S.leiste) return `<button class="zeige tbtn" id="bLeiste">Steuerung (H)</button>`;
-  return `<nav class="leiste" aria-label="Lehrkraftsteuerung">
-    <span class="pos">${S.i+1}/${SCHRITTE.length} · ${esc(sch.name)}</span>
-    <button data-a="zurueck" title="Pfeil links">Zurück</button>
-    <button data-a="weiter" title="Leertaste oder Pfeil rechts">Weiter</button>
-    ${(sch.vot||sch.typ==="quiz")?`<button data-a="eintragen" title="E">Stimmen eintragen</button>`:""}
-    <button data-a="stopp" title="P">Plenumsstopp</button>
-    <button data-a="notiz" title="B">Notiz für Landkarte</button>
-    <button data-a="landkarte" title="L">Landkarte</button>
-    <button data-a="lehrer" title="Zweites Fenster für den Laptop">Lehrkraftfenster</button>
-    <button data-a="leiste" title="H">Ausblenden</button>
-  </nav>`;
-}
-
-/* ---------- Lehrkraftfenster ---------- */
-
-let uhrT = null;
-function lehrerZeichnen(){
-  document.body.classList.add("lehrer");
-  const sch = SCHRITTE[S.i], nx = SCHRITTE[S.i+1];
-  const imp = (sch.imp||[]).map(t=>`<li>${esc(t)}</li>`).join("") || "<li class='meta'>Keine Impulse für diesen Schritt.</li>";
-  $("#app").innerHTML = `<div class="lv">
-    <div>
-      <div class="meta">Lehrkraftfenster · Prototyp · Schritt ${S.i+1} von ${SCHRITTE.length}</div>
-      <div class="jetzt">${esc(sch.name)}</div>
-      <div class="meta">Als Nächstes: ${nx?esc(nx.name):"–"}</div>
-      <div class="knoepfe">
-        <button data-a="zurueck">Zurück</button>
-        <button data-a="weiter" class="haupt">Weiter</button>
-        ${(sch.vot||sch.typ==="quiz")?`<button data-a="eintragen">Stimmen eintragen</button>`:""}
-        <button data-a="stopp">Plenumsstopp</button>
-        <button data-a="notiz">Notiz für Landkarte</button>
-        <button data-a="landkarte">Landkarte</button>
-        <button data-a="ton">${S.ton?"Ton ausschalten":"Ton einschalten"}</button>
-        <button data-a="reset">Alles zurücksetzen</button>
-      </div>
-      <h2>Impulse (sinngemäße Zuspitzungen)</h2><ul class="impulse">${imp}</ul>
-    </div>
-    <div>
-      <div class="meta">Zeit seit Start</div><div class="uhr" id="uhr">–</div>
-      <h2>Ablauf</h2><ol class="ablauf">${SCHRITTE.map((x,i)=>`<li class="${i===S.i?"akt":""}"><a href="#" data-sprung="${i}">${esc(x.name)}</a></li>`).join("")}</ol>
-    </div></div>`;
-  verdrahten();
-  clearInterval(uhrT); uhrT = setInterval(()=>{ const u=$("#uhr"); if(u&&S.start){ const s=Math.floor((Date.now()-S.start)/1000); u.textContent = Math.floor(s/60)+":"+String(s%60).padStart(2,"0"); } }, 1000);
-}
-
-/* ---------- Aktionen ---------- */
-
-function aktion(a){
-  const sch = SCHRITTE[S.i];
-  if(a==="weiter") setze(s=>{ if(s.stoppAn){ s.stoppAn=false; return; } if(!s.start) s.start = Date.now(); s.i = Math.min(SCHRITTE.length-1, s.i+1); });
-  else if(a==="zurueck") setze(s=>{ s.stoppAn=false; s.i = Math.max(0, s.i-1); });
-  else if(a==="stopp"){ if(sch.typ==="stopp") aktion("weiter"); else setze(s=>{ s.stoppAn = !s.stoppAn; }); }
-  else if(a==="landkarte") setze(s=>{ s.i = SCHRITTE.findIndex(x=>x.id==="lk"); });
-  else if(a==="ton") setze(s=>{ s.ton = !s.ton; });
-  else if(a==="leiste") setze(s=>{ s.leiste = !s.leiste; });
-  else if(a==="lehrer") window.open(location.pathname+"?rolle=lehrkraft","lagezentrum-lehrkraft","width=1100,height=760");
-  else if(a==="eintragen") eintragen(sch);
-  else if(a==="notiz") notiz();
-  else if(a==="reset"){ if(confirm("Alle eingetragenen Stimmen und Notizen löschen und zum Start zurückkehren?")) setze(s=>Object.assign(s, LEER())); }
-}
-
-function verdrahten(){
-  document.querySelectorAll("[data-a]").forEach(b => b.onclick = () => aktion(b.dataset.a));
-  document.querySelectorAll("[data-sprung]").forEach(b => b.onclick = e => { e.preventDefault(); const n=+b.dataset.sprung; setze(s=>{ s.i=n; }); });
-  const t = $("#bTon"); if(t) t.onclick = () => aktion("ton");
-  const v = $("#bVoll"); if(v) v.onclick = vollbild;
-  const l = $("#bLeiste"); if(l) l.onclick = () => aktion("leiste");
-}
-function vollbild(){ if(!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); }
-
-function dialog(html, ok){
-  const d = $("#dlg"); d.innerHTML = `<form method="dialog">${html}<menu><button value="x">Abbrechen</button><button value="ok" class="haupt">Übernehmen</button></menu></form>`;
-  d.onclose = () => { if(d.returnValue==="ok") ok(new FormData(d.querySelector("form"))); };
-  d.showModal(); const f = d.querySelector("input,select,textarea"); if(f) f.focus();
-}
-
-function eintragen(sch){
-  if(sch.typ==="quiz"){
-    const k = "q"+sch.qi, z = S.quiz[k]||{};
-    dialog(`<h3>Quiz 1 · Aussage ${sch.qi+1}: Karten zählen</h3><p class="hinweis">Schätzen genügt. Leer lassen, wenn nicht gezählt.</p>
-      <div class="felder">${["A","B","C"].map(c=>`<label>${c} – ${KARTEN[c]}<input name="${c}" type="number" min="0" inputmode="numeric" value="${z[c]??""}"></label>`).join("")}</div>
-      <div class="reihe"><label>Davon „sehr sicher“ (Handzeichen)<input name="sicher" type="number" min="0" value="${z.sicher??""}"></label></div>`,
-      fd => setze(s=>{ s.quiz[k] = {A:fd.get("A"),B:fd.get("B"),C:fd.get("C"),sicher:fd.get("sicher")}; }));
-    return;
-  }
-  if(sch.vot){
-    const r = sch.runde, v = S.votes.v2, d = v[r]||{}, si = v.sicher||{};
-    dialog(`<h3>Votum 2 · ${r==="r1"?"Runde 1":"Runde 2"}: Stimmkarten zählen</h3>
-      <div class="felder">${["A","B","C"].map(c=>`<label>Karte ${c}<input name="${c}" type="number" min="0" inputmode="numeric" value="${d[c]??""}"></label>`).join("")}</div>
-      <div class="reihe felder"><label>sehr sicher<input name="s" type="number" min="0" value="${si.s??""}"></label><label>eher sicher<input name="e" type="number" min="0" value="${si.e??""}"></label><label>unsicher<input name="u" type="number" min="0" value="${si.u??""}"></label></div>
-      <div class="reihe"><label>Wichtigstes Argument (ein Satz)<input type="text" name="arg" maxlength="140" value="${esc(v.arg)}"></label></div>
-      <div class="reihe"><label>Größte Sorge (ein Satz)<input type="text" name="sorge" maxlength="140" value="${esc(v.sorge)}"></label></div>`,
-      fd => setze(s=>{ s.votes.v2[r] = {A:fd.get("A"),B:fd.get("B"),C:fd.get("C")}; s.votes.v2.sicher = {s:fd.get("s"),e:fd.get("e"),u:fd.get("u")}; s.votes.v2.arg = fd.get("arg"); s.votes.v2.sorge = fd.get("sorge");
-        const erg = SCHRITTE.findIndex(x=>x.vot==="erg" && x.runde===r); if(SCHRITTE[s.i].vot==="offen") s.i = erg; }));
-  }
-}
-
 function notiz(){
-  dialog(`<h3>Notiz für die kognitive Landkarte</h3>
-    <div class="reihe"><label>Begriff<select name="t">${["Retrospektivität","Perspektivität","Kontingenz","Agency","Sachurteil","Werturteil"].map(t=>`<option>${t}</option>`).join("")}</select></label></div>
-    <div class="reihe"><label>Beobachtung aus dem Gespräch (ohne Namen)<textarea name="x" rows="3" maxlength="200"></textarea></label></div>`,
-    fd => { const x = (fd.get("x")||"").trim(); if(x) setze(s=>{ s.notizen.push({t:fd.get("t"), x}); }); });
+  const d=$("#dlg");
+  d.innerHTML=`<form method="dialog"><h3>Notiz für die Landkarte</h3>
+    <label>Begriff<select name="t">${["Retrospektivität","Perspektivität","Kontingenz","Agency","Sachurteil","Werturteil"].map(t=>`<option>${t}</option>`).join("")}</select></label>
+    <label>Beobachtung aus dem Gespräch (ohne Namen)<textarea name="x" rows="3" maxlength="200"></textarea></label>
+    <menu><button class="btn" value="x">Abbrechen</button><button class="btn primary" value="ok">Übernehmen</button></menu></form>`;
+  d.onclose=()=>{ if(d.returnValue!=="ok") return; const f=new FormData(d.querySelector("form")); const x=(f.get("x")||"").trim(); if(x) setB(b=>b.notizen.push({t:f.get("t"),x})); };
+  d.showModal();
 }
 
-document.addEventListener("keydown", e => {
+/* Lehrkraftfenster: zweites Fenster auf dem Laptop, gleicher Zustand */
+function lehrkraftfenster(){
+  const s=SCHRITTE[B.i], imp=(IMPULSE[s.id]||[]).map(t=>`<li>${esc(t)}</li>`).join("")||`<li class="hinweis">Keine Impulse für diesen Schritt.</li>`;
+  $("#app").innerHTML=`<main class="t-main" style="max-width:60rem;margin:auto">${modus("m-plenum","Lehrkraftfenster","gleicher Stand wie das Smartboard")}
+    <h1 style="font-size:2rem;margin:1rem 0 .3rem">${esc(s.stn)} – ${esc(s.name)}</h1>
+    <p class="hinweis">Schritt ${B.i+1} von ${SCHRITTE.length}${SCHRITTE[B.i+1]?" · als Nächstes: "+esc(SCHRITTE[B.i+1].name):""}</p>
+    <div class="fuss" style="border:0;justify-content:flex-start;gap:.6rem"><button class="btn" data-b="zurueck">Zurück</button><button class="btn primary" data-b="weiter">Weiter</button><button class="btn" id="nz">Notiz für die Landkarte</button><button class="btn" id="rs">Alles zurücksetzen</button></div>
+    <h2 style="font-size:1.3rem;margin:1.4rem 0 .4rem">Impulse (sinngemäße Zuspitzungen)</h2><ul style="padding-left:1.2rem;font-size:1.15rem">${imp}</ul>
+    <h2 style="font-size:1.3rem;margin:1.4rem 0 .4rem">Ablauf</h2><ol style="padding-left:1.8rem">${SCHRITTE.map((x,i)=>`<li style="${i===B.i?"color:var(--red);font-weight:700":""}"><a href="#" data-sprung="${i}" style="color:inherit">${esc(x.stn)} · ${esc(x.name)}</a></li>`).join("")}</ol></main>`;
+  bVerdrahten();
+  $("#nz").onclick=notiz;
+  $("#rs").onclick=()=>{ if(confirm("Alle Stimmen, Uhren und Notizen löschen und zum Start zurück?")) setB(b=>Object.assign(b,LEERB())); };
+  document.querySelectorAll("[data-sprung]").forEach(a=>a.onclick=e=>{ e.preventDefault(); const n=+a.dataset.sprung; setB(b=>b.i=n); });
+}
+
+/* Auswahl der Ansicht */
+function auswahl(){
+  $("#app").innerHTML=`<main class="wahl-a">${MARK}
+    <h1>Frieden durch Zugeständnisse?</h1>
+    <p class="lead" style="margin:0">M19 · Appeasement. Wählen Sie Ihre Ansicht.</p>
+    <div class="zwei-a"><a href="?ansicht=tablet"><b>Tablet</b>Für Schüler*innen: Arbeitsphasen und Stimmkarte.</a>
+    <a class="dk" href="?ansicht=board"><b>Smartboard</b>Für die Lehrkraft: Lage, Plenum, Abstimmung.<br><span style="opacity:.75;font-size:.9rem">Tasten: → weiter · ← zurück · N Notiz · L Lehrkraftfenster · F Vollbild</span></a></div></main>`;
+}
+
+document.addEventListener("keydown", e=>{
+  if(ANSICHT!=="board" && ANSICHT!=="lehrkraft") return;
   if($("#dlg").open || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
-  const k = e.key;
-  if(k==="ArrowRight"||k===" "||k==="PageDown"){ e.preventDefault(); aktion("weiter"); }
-  else if(k==="ArrowLeft"||k==="PageUp"){ e.preventDefault(); aktion("zurueck"); }
-  else if(k==="e"||k==="E") aktion("eintragen");
-  else if(k==="p"||k==="P") aktion("stopp");
-  else if(k==="b"||k==="B") aktion("notiz");
-  else if(k==="l"||k==="L") aktion("landkarte");
-  else if(k==="t"||k==="T") aktion("ton");
-  else if(k==="h"||k==="H") aktion("leiste");
-  else if(k==="f"||k==="F") vollbild();
+  if(["ArrowRight"," ","PageDown"].includes(e.key)){ e.preventDefault(); weiter(); }
+  else if(["ArrowLeft","PageUp"].includes(e.key)){ e.preventDefault(); zurueck(); }
+  else if(e.key==="n"||e.key==="N") notiz();
+  else if(e.key==="l"||e.key==="L") window.open(location.pathname+"?ansicht=lehrkraft","m19-lehrkraft","width=1000,height=760");
+  else if(e.key==="f"||e.key==="F"){ if(!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); }
 });
 
-zeichnen();
+if(ANSICHT==="tablet") tablet();
+else if(ANSICHT==="board"||ANSICHT==="lehrkraft") zeichneBoard();
+else auswahl();
 </script>
 </body>
 </html>

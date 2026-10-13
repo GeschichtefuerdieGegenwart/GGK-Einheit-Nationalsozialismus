@@ -5,6 +5,13 @@
   var B = {};
   var SAEULEN = [["R", "Rassismus", "#0e6b68"], ["A", "Antisemitismus", "#d9643f"], ["V", "Volksgemeinschaft", "#b9871c"], ["F", "Führerprinzip", "#545b6b"], ["L", "Lebensraum im Osten", "#2f7d4a"]];
 
+  B.appeasement = {
+    nr: "M19 · Appeasement",
+    titel: "Frieden durch Zugeständnisse?",
+    thema: "Hybrides Lagezentrum · Tablet-Arbeitsphasen und Plenum am Smartboard (Prototyp)",
+    datei: "appeasement.html"
+  };
+
   B.m19 = {
     nr: "M19",
     titel: "Die fünf Säulen der NS-Ideologie",
