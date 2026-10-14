@@ -5,15 +5,8 @@
   var B = {};
   var SAEULEN = [["R", "Rassismus", "#0e6b68"], ["A", "Antisemitismus", "#d9643f"], ["V", "Volksgemeinschaft", "#b9871c"], ["F", "Führerprinzip", "#545b6b"], ["L", "Lebensraum im Osten", "#2f7d4a"]];
 
-  B.appeasement = {
-    nr: "M19 · Appeasement",
-    titel: "Frieden durch Zugeständnisse?",
-    thema: "Hybrides Lagezentrum · Tablet-Arbeitsphasen und Plenum am Smartboard (Prototyp)",
-    datei: "appeasement.html"
-  };
-
-  B.m19 = {
-    nr: "M19",
+  B.m18 = {
+    nr: "M18",
     titel: "Die fünf Säulen der NS-Ideologie",
     thema: "NS-Herrschaft · Quellen-Labor zu Ideologie",
     datei: "ns-ideologie.html",
@@ -26,7 +19,7 @@
       { t: "Reichsbürgergesetz 1935 („deutschen oder artverwandten Blutes“)", kern: ["R", "V"] }
     ],
     vermutung: ["vor allem Angst", "vor allem überzeugt", "vor allem Vorteile", "mehrere Gründe"],
-    /* Code: m19.id.z1.z2.z3.z4.z5.z6.vermutung – z = Bitmaske der gewählten Säulen (R=1, A=2, V=4, F=8, L=16) */
+    /* Code: m18. (ältere Codes mit m19. werden in der Auswertung umgeschrieben) id.z1.z2.z3.z4.z5.z6.vermutung – z = Bitmaske der gewählten Säulen (R=1, A=2, V=4, F=8, L=16) */
     decode: function (parts) {
       if (parts.length !== 9) return null;
       var z = parts.slice(2, 8).map(Number);
@@ -65,8 +58,15 @@
     beispiel: function () {
       /* klar gekennzeichnete Beispieldaten zum Ausprobieren */
       var rows = [[6, 4, 2, 16, 8, 5, 3], [5, 4, 6, 17, 8, 1, 3], [7, 12, 2, 16, 12, 5, 1], [4, 4, 3, 16, 8, 4, 3], [6, 8, 6, 1, 8, 5, 0], [2, 4, 2, 16, 4, 1, 3], [5, 6, 2, 16, 8, 5, 2]];
-      return rows.map(function (r, i) { return ["m19", "bsp" + i].concat(r).join("."); });
+      return rows.map(function (r, i) { return ["m18", "bsp" + i].concat(r).join("."); });
     }
+  };
+
+  B.m19 = {
+    nr: "M19",
+    titel: "Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg?",
+    thema: "NS-Außenpolitik 1933–1939 · fünf Bausteine, drei Entscheidungen",
+    datei: "appeasement.html"
   };
 
   B.geplant = [];

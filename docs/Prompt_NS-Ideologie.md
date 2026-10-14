@@ -4,7 +4,7 @@
 
 ---
 
-Analysiere zunächst die überarbeitete „Orientierung für den digitalen Unterricht“ sowie die vorhandene GGK-Stunde **M19 „Die fünf Säulen – die nationalsozialistische Ideologie“**. Dazu gehören:
+Analysiere zunächst die überarbeitete „Orientierung für den digitalen Unterricht“ sowie die vorhandene GGK-Stunde **M18 (früher M19) „Die fünf Säulen – die nationalsozialistische Ideologie“**. Dazu gehören:
 - die Einleitung mit Ideologie-Definition und dem Auftrag zur kognitiven Landkarte,
 - die fünf Quellen mit Lösungstabelle,
 - M18.1 „Gelebte Ideologie“ (Bildanalyse),

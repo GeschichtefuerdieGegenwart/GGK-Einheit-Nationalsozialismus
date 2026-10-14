@@ -34,7 +34,7 @@
     <p>Scannen Sie den QR-Code auf dem iPad einer Schülerin oder eines Schülers mit der Kamera-App Ihres iPads. Es öffnet sich diese Seite, und das Ergebnis wird <strong>nur auf Ihrem Gerät</strong> gespeichert. Jeder Scan öffnet einen neuen Tab – zeigen Sie am Ende einfach den letzten am Beamer.</p>
     <p>Alternativ den Code von Hand eingeben:</p>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <input id="manual" placeholder="z. B. m19.k3f9.6.4.2.16.8.5.3" style="flex:1;min-width:260px;min-height:52px;border:2px solid var(--line);border-radius:12px;padding:0 14px;font:17px ui-monospace,Menlo,monospace">
+      <input id="manual" placeholder="z. B. m18.k3f9.6.4.2.16.8.5.3" style="flex:1;min-width:260px;min-height:52px;border:2px solid var(--line);border-radius:12px;padding:0 14px;font:17px ui-monospace,Menlo,monospace">
       <button class="btn" id="btn-add">Hinzufügen</button>
     </div>
   </div>
@@ -50,9 +50,9 @@
   var keys = Object.keys(B).filter(function (k) { return B[k] && B[k].decode; });
   var active = Lab.load("auswertung-aktiv", keys[0]);
 
-  function list(k) { return Lab.load("kurs-" + k, []); }
+  function list(k) { var a = Lab.load("kurs-" + k, []); if (k === "m18") { Lab.load("kurs-m19", []).forEach(function (c) { c = c.replace(/^m19\./, "m18."); if (a.indexOf(c) < 0) a.push(c); }); } return a; }
   function add(code, silent) {
-    code = String(code || "").trim();
+    code = String(code || "").trim().replace(/^m19\./, "m18."); /* alte Nummer M19 = heute M18 */
     var parts = code.split("."), k = parts[0];
     if (!B[k] || !B[k].decode) { if (!silent) alert("Unbekannter Code."); return false; }
     var rec = B[k].decode(parts);

@@ -7,11 +7,13 @@ Interaktive Quellen-Labore für Geschichte (GGK) am beruflichen Gymnasium – ge
 | Datei | Inhalt |
 | --- | --- |
 | `index.html` | Übersicht aller Bausteine |
-| `ns-ideologie.html` | M19 · Die fünf Säulen der NS-Ideologie (eine Datei, aus `src/` erzeugt) |
-| `appeasement.html` | M19 · Appeasement – hybrides Lagezentrum (Prototyp): `?ansicht=tablet` für Schüler\*innen, `?ansicht=board` für das Smartboard, `?ansicht=lehrkraft` als zweites Fenster |
+| `ns-ideologie.html` | M18 · Die fünf Säulen der NS-Ideologie (eine Datei, aus `src/` erzeugt) |
+| `appeasement.html` | M19 · Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg? (iPad-Fassung nach der Print-Stunde; `?ansicht=lehrkraft` zeigt Ablauf, Codewörter, Tafelbild) |
+| `docs/M19_Faktensicherung.pdf` | Faktensicherung M19, 2 Seiten (Quelle: `src/m19-faktensicherung.html`) |
 | `auswertung.html` | Kursbild für die Lehrkraft (QR-Codes scannen) |
 | `lehrkraft.html` | Diagnose, Entscheidung, Stundenablauf, Quellenprüfung |
 | `assets/` | gemeinsames Design und Werkzeuge, Schaubilder, Foto |
+| `docs/M18_*.pdf` | Lernmappe, Lösungskarte und Hinweise zu M18 (früher als M19 nummeriert) |
 | `docs/Prompt_NS-Ideologie.md` | Prompt für die Überarbeitung |
 
 Druckvorlagen: `ns-ideologie.html?druck=leer`, `?druck=beispiel`, `?druck=loesung`.
@@ -20,7 +22,7 @@ Bauen: `node tools/inline.js src/ns-ideologie.html` bettet CSS, Skripte und das 
 
 ## Datenschutz
 
-Keine externen Skripte oder Tracking. Schriften liegen lokal in `assets/fonts/`. Ausnahme in `appeasement.html` (nur Smartboard-Ansicht): Das Foto und der Originalton werden von der Science Museum Group bzw. Wikimedia Commons nachgeladen; liegen die Dateien in `media/`, wird nichts extern geladen. Eingaben bleiben im Browser des iPads (localStorage). Der QR-Code enthält nur Zahlen; die Daten stehen im Anker der Adresse und werden nicht an den Server übertragen.
+Keine externen Skripte oder Tracking. Schriften liegen lokal in `assets/fonts/`. Ausnahme in `appeasement.html`: Das Foto und der Originalton werden von der Science Museum Group bzw. Wikimedia Commons nachgeladen; liegen die Dateien in `media/`, wird nichts extern geladen. Eingaben bleiben im Browser des iPads (localStorage). Der QR-Code enthält nur Zahlen; die Daten stehen im Anker der Adresse und werden nicht an den Server übertragen.
 
 ## Bilder und Lizenzen
 
