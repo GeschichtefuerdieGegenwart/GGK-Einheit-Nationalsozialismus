@@ -6,6 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>M19 Appeasement – Der Weg zum Frieden oder in den Krieg?</title>
 <meta name="description" content="GGK M19: Appeasement-Politik 1933–1939 auf dem iPad – fünf Bausteine nach der Print-Stunde, drei Entscheidungen, Sicherung an der Tafel.">
+<script src="assets/karten.js"></script>
 <style>
 /* Schriften lokal im Repository (SIL Open Font License) – keine Verbindung zu Google */
 @font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
@@ -537,11 +538,11 @@ const KARTEN = {
   europa1936:{ datei:"media/karte-europa-1936.jpg", titel:"Europa im März 1936", skizze:"",
     text:"Großbritannien im Nordwesten, durch den Ärmelkanal vom Kontinent getrennt. Östlich davon Frankreich und Belgien, dann das Deutsche Reich. Von London bis ins Rheinland sind es rund 500 km.", cap:"" },
   rheinland:{ datei:"media/karte-rheinland-1936.jpg", titel:"Das entmilitarisierte Rheinland 1936", skizze:SK_RHEIN,
-    text:"Das Rheinland liegt im Westen Deutschlands an der Grenze zu Frankreich, Belgien und den Niederlanden.", cap:"" },
+    text:"Das Rheinland liegt im Westen Deutschlands an der Grenze zu Frankreich, Belgien und den Niederlanden.", cap:"Zone nach Art. 42 Versailler Vertrag: links des Rheins und 50 km rechts davon; Verlauf vereinfacht." },
   lage1938:{ datei:"media/karte-mitteleuropa-1938.jpg", titel:"Mitteleuropa nach dem „Anschluss“ (März 1938)", skizze:SK_1938,
     text:"Die Tschechoslowakei ist nun im Norden, Westen und Süden von deutschem Gebiet umgeben.", cap:"" },
   lage1939:{ datei:"media/karte-mitteleuropa-maerz-1939.jpg", titel:"Mitteleuropa im März 1939", skizze:SK_1939,
-    text:"Böhmen und Mähren sind besetzt, die Slowakei ist ein abhängiger Staat. Polen grenzt nun auch im Süden an deutsch kontrolliertes Gebiet.", cap:"" },
+    text:"Böhmen und Mähren sind besetzt, die Slowakei ist ein abhängiger Staat. Polen grenzt nun auch im Süden an deutsch kontrolliertes Gebiet.", cap:"Grenze zwischen Slowakei und Karpato-Ukraine vereinfacht." },
   ausweitung:{ datei:"media/karte-ausweitung-1935-1939.jpg", titel:"Rückblick: Die territoriale Ausweitung des Deutschen Reiches 1935–1939", skizze:"",
     text:"Vorgesehen: eine Übersichtskarte aller Gebietsveränderungen von der Saar (1935) bis Memel (1939). Erst nach allen Entscheidungen zeigen.", cap:"" }
 };
@@ -588,8 +589,10 @@ function linkliste(titel, items){
   return `<div class="auswert">${titel?`<h4>${esc(titel)}</h4>`:""}<ul style="padding-left:1.2rem;display:grid;gap:.35rem">${items.join("")}</ul>
     <p class="hinweis" style="margin-top:.4rem">Externe Seiten öffnen in einem neuen Tab. Dabei erhält der jeweilige Anbieter Ihre IP-Adresse.</p></div>`;
 }
+const KARTEN_QUELLE = "Heutige Rekonstruktion (eigene Kartendarstellung) auf Grundlage von CShapes 2.0: Schvitz, Rüegger, Girardin, Cederman, Weidmann, Gleditsch, Journal of Conflict Resolution 66 (2022). Lizenz CC BY-NC-SA 4.0.";
 function karte(id){
-  const k = KARTEN[id];
+  const k = KARTEN[id], svg = (window.KARTEN_SVG || {})[id];
+  if(svg) return `<figure class="karte">${svg}<figcaption><span class="typ darst">Karte · heutige Rekonstruktion</span> ${esc(k.titel)}. ${k.cap?esc(k.cap)+" ":""}${esc(KARTEN_QUELLE)}</figcaption></figure>`;
   if(FEHLT.has(id)) return platzhalter(k);
   return `<figure class="karte" data-karte-id="${id}"><img src="${k.datei}" alt="Karte: ${esc(k.titel)}" onerror="karteFehlt(this)"><figcaption>${esc(k.titel)}${k.cap?" · "+k.cap:""}</figcaption></figure>`;
 }

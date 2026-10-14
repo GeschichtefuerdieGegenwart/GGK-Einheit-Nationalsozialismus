@@ -22,7 +22,7 @@ Bauen: `node tools/inline.js src/ns-ideologie.html` bettet CSS, Skripte und das 
 
 ## Datenschutz
 
-Keine externen Skripte oder Tracking. Schriften liegen lokal in `assets/fonts/`. In `appeasement.html` werden Foto und Originalton aus `media/` geladen; fehlen die Dateien, lädt die Seite sie erst nach einem Klick von der Science Museum Group bzw. Wikimedia Commons (Zwei-Klick-Lösung). Karten fehlen noch und erscheinen als gekennzeichnete Platzhalter.
+Keine externen Skripte oder Tracking. Schriften liegen lokal in `assets/fonts/`. In `appeasement.html` werden Foto und Originalton aus `media/` geladen; fehlen die Dateien, lädt die Seite sie erst nach einem Klick von der Science Museum Group bzw. Wikimedia Commons (Zwei-Klick-Lösung). Die vier Orientierungskarten erzeugt `tools/karten.py` aus dem Datensatz CShapes 2.0 (Schvitz u. a. 2022, CC BY-NC-SA 4.0) als `assets/karten.js`; die Karten stehen unter derselben Lizenz.
 
 **Lehrkraftbereich M19:** `lk/m19-lehrkraft.enc.json` ist mit AES-GCM verschlüsselt (Schlüssel per PBKDF2 aus dem Passwort). Der Klartext liegt nicht im Repository (`privat/` steht in `.gitignore`). Neu verschlüsseln: `tools/lk-verschluesseln.html` im Browser öffnen oder `LK_PASS='…' node tools/lk-verschluesseln.mjs`. Grenzen: Wer das Passwort kennt, kann es weitergeben; ein Widerruf ist nur durch Neuverschlüsselung möglich. Ältere Fassungen im Git-Verlauf enthalten die früheren Hinweise im Klartext. Eingaben bleiben im Browser des iPads (localStorage). Der QR-Code enthält nur Zahlen; die Daten stehen im Anker der Adresse und werden nicht an den Server übertragen.
 
