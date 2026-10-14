@@ -350,6 +350,7 @@ const ENT = {
         <li>Der Völkerbundsrat stellt den Vertragsbruch fest. Sanktionen bleiben aus.</li>
         <li>Die Wehrmacht bleibt im Rheinland. Deutschland beginnt, die Westgrenze zu befestigen.</li></ul>`,
     tat:"Protest, aber keine Sanktionen und kein militärisches Eingreifen; das Rheinland bleibt besetzt.",
+    links:[["https://www.dhm.de/lemo/kapitel/ns-regime/aussenpolitik/einmarsch-ins-rheinland-1936","Einmarsch ins Rheinland 1936 – mit dem Foto „Wehrmacht marschiert über die Rheinbrücke nach Köln“ (7. März 1936)","LeMO, Deutsches Historisches Museum"]],
     fragen:["Welche Begründungen wurden in unserer Klasse genannt? Welche ähneln den Überlegungen von 1936?","Wer hätte eine militärische Antwort tatsächlich beschließen können – und wer nicht?","Welche Rolle spielte die Erinnerung an 1914–1918 bei Ihrer Entscheidung?"],
     rueck:[`Hitlers Dolmetscher Paul Schmidt überliefert in seinen Erinnerungen (1949), Hitler habe die 48 Stunden nach dem Einmarsch als die aufregendsten seines Lebens bezeichnet.`,
            `Ob ein entschlossenes Vorgehen 1936 Hitler gestoppt hätte, ist in der Forschung umstritten. Sicher ist: 1936 war die deutsche Aufrüstung noch nicht weit fortgeschritten.`]
@@ -385,6 +386,7 @@ const ENT = {
         <li>Großbritannien und Frankreich stellen eine Garantie für die verkleinerte Tschechoslowakei in Aussicht; vertraglich vollzogen wird sie nie.</li>
         <li>Am Morgen danach unterzeichnen Hitler und Chamberlain eine Erklärung: Beide Völker wollen nie wieder gegeneinander Krieg führen.</li></ul>`,
     tat:"Münchner Abkommen: Abtretung des Sudetengebiets, angekündigte Garantie für die übrige Tschechoslowakei.",
+    links:[["https://www.dhm.de/lemo/kapitel/ns-regime/aussenpolitik/anschluss-oesterreich-1938","„Anschluss“ Österreichs 1938","LeMO, Deutsches Historisches Museum"],["https://www.dhm.de/lemo/kapitel/ns-regime/aussenpolitik/muenchner-abkommen-1938","Münchner Abkommen 1938","LeMO, Deutsches Historisches Museum"],["https://www.dhm.de/lemo/kapitel/ns-regime/aussenpolitik/besetzung-des-sudetengebietes-1938","Besetzung des Sudetengebietes 1938","LeMO, Deutsches Historisches Museum"]],
     fragen:["Was sprach damals für München – was dagegen, ohne das Wissen von heute?","Die Tschechoslowakei saß nicht mit am Tisch. Wessen Handlungsspielraum war am kleinsten?","366 Abgeordnete stimmten für die Regierung, 144 dagegen. Was konnten die 144 tatsächlich bewirken?"],
     rueck:[`Eine Gruppe deutscher Offiziere und Diplomaten plante für den Fall eines Krieges, Hitler zu stürzen. Ob das gelungen wäre, ist umstritten.`,
            `Ob der Zeitgewinn Großbritannien mehr nützte als Deutschland, wird bis heute diskutiert. Großbritannien baute bis 1939 vor allem Jagdflugzeuge und Radarstationen aus.`]
@@ -422,6 +424,7 @@ const ENT = {
         <li>13. April 1939: Garantien auch für Rumänien und Griechenland.</li>
         <li>Großbritannien führt im Frühjahr 1939 erstmals in Friedenszeiten die Wehrpflicht ein. Verhandlungen mit der Sowjetunion beginnen, kommen aber zu keinem Ergebnis.</li></ul>`,
     tat:"Garantie für Polen (31.3.1939), Einführung der Wehrpflicht, Verhandlungen mit der Sowjetunion ohne Ergebnis.",
+    links:[["https://www.dhm.de/lemo/kapitel/ns-regime/aussenpolitik/zerschlagung-der-rest-tschechei-1939","„Zerschlagung der Rest-Tschechei“ 1939","LeMO, Deutsches Historisches Museum","Titel in der NS-Sprache, auf der Seite eingeordnet"]],
     fragen:["Was hat sich zwischen September 1938 und März 1939 an Ihrem Wissen geändert?","Für wen ist eine Garantie ein Risiko – und für wen ein Schutz?","Wie frei war Großbritannien bei der Wahl seiner Partner?"],
     rueck:[`Am 3. April 1939 ließ Hitler den Angriff auf Polen vorbereiten (Weisung „Fall Weiß“).`,
            `Im August 1939 verhandelte Stalin parallel mit Großbritannien und Frankreich und mit Deutschland. Er schloss den Pakt mit Hitler.`]
@@ -491,6 +494,14 @@ const KARTEN = {
 const FEHLT = new Set();
 function platzhalter(k){
   return `<div class="platzhalter"><div class="ph-kopf">Platzhalter · Karte folgt: ${esc(k.titel)}</div>${k.skizze ? k.skizze + `<div class="ph-text">Vereinfachte Behelfsskizze, keine Karte. Eigene Darstellung.</div>` : ""}<div class="ph-text">${esc(k.text)}</div></div>`;
+}
+/* Externe Links: nichts wird eingebettet oder vorab geladen. */
+function extern(url, titel, wer, hinweis=""){
+  return `<li><a href="${url}" target="_blank" rel="noopener noreferrer">${esc(titel)}</a> <span class="hinweis">· ${esc(wer)}${hinweis?" · "+esc(hinweis):""}</span></li>`;
+}
+function linkliste(titel, items){
+  return `<div class="auswert"><h4>${esc(titel)}</h4><ul style="padding-left:1.2rem;display:grid;gap:.35rem">${items.join("")}</ul>
+    <p class="hinweis" style="margin-top:.4rem">Externe Seiten öffnen in einem neuen Tab. Dabei erhält der jeweilige Anbieter Ihre IP-Adresse.</p></div>`;
 }
 function karte(id){
   const k = KARTEN[id];
@@ -622,6 +633,7 @@ function entscheidungsweg(key){
   if(S.stufe >= E.stufe){
     h += `<div class="aufl"><div class="kopfzeile">Was geschah</div>${E.aufl}</div>
       <div class="auswert"><h4>Zum Besprechen</h4><ol>${E.fragen.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>
+      ${linkliste("Mehr dazu – erst jetzt, nach der Abstimmung", E.links.map(l=>extern(...l)))}
       <div class="spaeter">${TYP.rueck}<ul style="padding-left:1.2rem;display:grid;gap:.35rem">${E.rueck.map(x=>`<li>${x}</li>`).join("")}</ul>
       <p class="hinweis" style="margin-top:.4rem">Dieses Wissen hatte im ${esc(E.datum)} niemand in London.</p></div>
       <p class="hinweis">Übertragen Sie das Tafelbild zu Entscheidung ${E.nr} ins <a href="#" data-geh="protokoll">Protokoll</a>.</p>`;
@@ -702,6 +714,7 @@ function seite(){
         <p>Schon kurz nach Inkrafttreten des Versailler Vertrages 1920 wollten fast alle politischen Kräfte im Deutschen Reich ihn revidieren, weil sie seine Beschränkungen für zu hart hielten. Adolf Hitler brach nach der „Machtergreifung“ wesentliche Bestimmungen des Vertrages – durch die Aufrüstung, die Einführung der allgemeinen Wehrpflicht und den Einmarsch ins entmilitarisierte Rheinland.</p>
         <p class="q">Nach Padlet M1, gekürzt. Die Karikatur von D. R. Fitzpatrick zur Reichstagswahl 1930 zeigt die Lehrkraft vorn.</p></div>
       ${karte("rheinland")}
+      ${linkliste("Karte zum Nachschlagen", [extern("https://de.wikipedia.org/wiki/Datei:Karte_des_Deutschen_Reiches,_Weimarer_Republik-Drittes_Reich_1919%E2%80%931937.svg","Karte des Deutschen Reiches 1919–1937","Wikipedia / Wikimedia Commons","Grenzen bis 1937")])}
       <div class="auftrag"><h3>1.1 Der Bruch mit dem Versailler Vertrag</h3><p>Welche dieser Schritte des Deutschen Reiches verstoßen gegen den Versailler Vertrag? Nutzen Sie M1, wählen Sie aus und prüfen Sie dann.</p></div>
       <div class="liste">${items}</div>
       ${geprueft ? "" : `<div class="mehr"><button class="btn" data-pruefen="1" ${sel.length?"":"disabled"}>Prüfen</button></div>`}
@@ -800,6 +813,7 @@ function seite(){
       ${da ? `<div class="aufl"><div class="kopfzeile">Was dann geschah · September 1939</div><ul>
         <li>Die Wehrmacht führt den Krieg vom ersten Tag an mit großer Härte. Deutsche Truppen, Einsatzkommandos von Polizei und SS ermorden eine große Zahl polnischer Zivilisten und Kriegsgefangener (M6).</li>
         <li>Am 17. September marschiert auch die Sowjetunion in Polen ein. Beide Staaten teilen das Land unter sich auf.</li></ul></div>
+      ${linkliste("Mehr dazu", [extern("https://www.dhm.de/lemo/kapitel/der-zweite-weltkrieg/kriegsverlauf/ueberfall-auf-polen-1939.html","Überfall auf Polen 1939","LeMO, Deutsches Historisches Museum"), extern("https://www.dhm.de/lemo/kapitel/ns-regime/aussenpolitik/hitler-stalin-pakt-1939","Hitler-Stalin-Pakt 1939","LeMO, Deutsches Historisches Museum")])}
       <div class="spaeter">${TYP.rueck}<div class="kopfzeile">In London 1939 unbekannt</div>
         <ul style="padding-left:1.2rem;display:grid;gap:.35rem">
         <li>Schon am 5. November 1937 hatte Hitler vor der Militärführung erklärt, Österreich und die Tschechoslowakei bei günstiger Gelegenheit überwältigen zu wollen (Hoßbach-Niederschrift).</li>
@@ -823,7 +837,11 @@ function seite(){
       ${row("März 1939 · Prag", `${w("e3")}${S.erf?` · Erwartung: ${esc(S.erf)}`:""}`, "Garantie für Polen, Wehrpflicht, Verhandlungen mit der UdSSR ohne Ergebnis")}
       ${row("September 1939", "–", "Angriff auf Polen; Kriegserklärung am 3. September")}
       </tbody></table>
-      ${karte("ausweitung")}
+      <div class="spaeter">${TYP.rueck}<div class="kopfzeile">Karten im Rückblick</div>
+        <ul style="padding-left:1.2rem;display:grid;gap:.35rem">
+        ${extern("https://germanhistorydocs.org/de/deutschland-nationalsozialismus-1933-1945/ghdi:map-2884","Territoriale Ausweitung Deutschlands 1935–1939","German History in Documents and Images (GHDI), Deutsches Historisches Institut Washington","Kartografie nach MGFA 1990, überarbeitet 2021")}
+        ${extern("https://www.spiegel.de/fotostrecke/maps-the-third-reich-prepares-for-war-fotostrecke-46092.html","Maps: The Third Reich Prepares for War","Der Spiegel (englisch), Fotostrecke")}</ul>
+        <p class="hinweis" style="margin-top:.4rem">Externe Seiten öffnen in einem neuen Tab. Dabei erhält der jeweilige Anbieter Ihre IP-Adresse. Fragen Sie beim Betrachten: Was zeigt die Karte, was konnte man 1936, 1938 und 1939 davon schon wissen?</p></div>
       <div class="def-box"><div><b>Retrospektivität</b>Wir blicken zurück und kennen den Ausgang. Das ist unvermeidlich und notwendig: Erst im Rückblick werden Folgen und geheime Pläne sichtbar.</div>
         <div><b>Rückschaufehler</b>Wer den Ausgang kennt, hält ihn leicht für vorhersehbar oder unvermeidlich („Das hätte man doch wissen müssen“). Dann wird die damalige Unsicherheit unterschätzt.</div></div>
       <div class="auftrag"><h3>Nachdenken, bevor Sie urteilen</h3><p>Wo haben Sie mit Wissen entschieden, das 1936–1939 niemand hatte? Wo waren Sie sich unsicher – und warum? Welche Kritik an Appeasement bleibt trotzdem, auch mit dem Wissen von damals?</p></div>
