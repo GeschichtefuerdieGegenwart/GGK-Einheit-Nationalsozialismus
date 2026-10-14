@@ -104,6 +104,9 @@ input[type=text]{width:100%;min-height:48px;border:1.5px solid var(--border);bor
 .aufl{border-left:5px solid var(--green);background:var(--surface);border-radius:0 var(--r-lg) var(--r-lg) 0;padding:1.2rem 1.4rem;margin:1.6rem 0;animation:auf .5s ease}
 .aufl .kopfzeile{color:var(--green);font-weight:700;font-size:.95rem;margin-bottom:.4rem}
 .aufl ul{padding-left:1.2rem;display:grid;gap:.35rem}
+.mat{border:1px solid var(--border);background:var(--surface2);border-radius:var(--r-lg);padding:1.1rem 1.3rem;margin:1.2rem 0}
+.mat .kopfzeile{font-weight:700;font-size:.92rem;color:var(--red);margin-bottom:.3rem}
+.mat .q{font-size:.82rem;color:var(--muted);margin-top:.4rem}
 .spaeter{border-left:5px solid var(--gold);background:var(--gold-hi);border-radius:0 var(--r-lg) var(--r-lg) 0;padding:1.1rem 1.3rem;margin:1.4rem 0}
 .spaeter .kopfzeile{color:#5E450F;font-weight:700;font-size:.92rem;margin-bottom:.3rem}
 .stimmkarte{position:fixed;inset:0;z-index:50;background:var(--green);color:var(--inverse);display:grid;place-content:center;text-align:center;padding:2rem;gap:1rem}
@@ -347,8 +350,11 @@ function seite(){
     return `<section class="seite"><div class="zeit"><span class="nr">Baustein 1</span><span>1933 bis März 1936</span></div>
       <h1>Was bedroht uns?</h1>
       <p class="lead">Seit dem 30. Januar 1933 ist Adolf Hitler Reichskanzler. Mit der Reichstagsbrandverordnung (28. Februar 1933) und dem Ermächtigungsgesetz (24. März 1933) beseitigen die Nationalsozialisten die Demokratie. Jüdinnen und Juden werden ausgegrenzt und verfolgt – vom Boykott 1933 bis zu den Nürnberger Gesetzen 1935.</p>
+      <div class="mat"><div class="kopfzeile">M1 · Der Bruch mit dem Versailler Vertrag</div>
+        <p>Schon kurz nach Inkrafttreten des Versailler Vertrages 1920 wollten fast alle politischen Kräfte im Deutschen Reich ihn revidieren, weil sie seine Beschränkungen für zu hart hielten. Adolf Hitler brach nach der „Machtergreifung“ wesentliche Bestimmungen des Vertrages – durch die Aufrüstung, die Einführung der allgemeinen Wehrpflicht und den Einmarsch ins entmilitarisierte Rheinland.</p>
+        <p class="q">Nach Padlet M1, gekürzt. Die Karikatur von D. R. Fitzpatrick zur Reichstagswahl 1930 zeigt die Lehrkraft vorn.</p></div>
       <figure>${SK_RHEIN}<figcaption>Lageskizze, keine Landkarte. Eigene Darstellung.</figcaption></figure>
-      <div class="auftrag"><h3>1.1 Der Bruch mit dem Versailler Vertrag</h3><p>Welche dieser Schritte des Deutschen Reiches verstoßen gegen den Versailler Vertrag? Wählen Sie aus und prüfen Sie dann.</p></div>
+      <div class="auftrag"><h3>1.1 Der Bruch mit dem Versailler Vertrag</h3><p>Welche dieser Schritte des Deutschen Reiches verstoßen gegen den Versailler Vertrag? Nutzen Sie M1, wählen Sie aus und prüfen Sie dann.</p></div>
       <div class="liste">${items}</div>
       ${geprueft ? "" : `<div class="mehr"><button class="btn" data-pruefen="1" ${sel.length?"":"disabled"}>Prüfen</button></div>`}
       ${geprueft ? `<p class="frage">1.2 Welcher Vertragsbruch verunsichert Sie als britische Abgeordnete am meisten?</p><div class="liste">${sorgen}</div>
@@ -360,7 +366,7 @@ function seite(){
     const L = [
       "Am Morgen des 7. März 1936 marschieren deutsche Truppen in das entmilitarisierte Rheinland ein. Am selben Tag bietet Hitler neue Nichtangriffspakte und eine Rückkehr in den Völkerbund an.",
       "Frankreich fühlt sich unmittelbar bedroht, will aber nicht ohne Großbritannien handeln. Beide Staaten haben im Locarno-Vertrag von 1925 die entmilitarisierte Zone garantiert.",
-      "In Großbritannien ist die Erinnerung an den Weltkrieg 1914–1918 allgegenwärtig. Beim „Peace Ballot“ 1934/35 sprachen sich Millionen für Abrüstung und den Völkerbund aus. Die britische Aufrüstung beginnt gerade erst."
+      "M2 · Die britische Regierung zeigt teilweise Verständnis für die deutsche Revisionspolitik. Das Land leidet noch unter der Wirtschaftskrise, die Öffentlichkeit ist kriegsmüde: König Georg V. soll gesagt haben, er würde eher abdanken, als seinem Land noch einmal einen Krieg wie 1914–1918 zuzumuten. Zugleich erhöht Großbritannien seine Rüstungsausgaben."
     ];
     const da = alleGelesen("b2", L);
     return `<section class="seite"><div class="zeit"><span class="nr">Baustein 2</span><span>London, 7./8. März 1936</span></div>
@@ -378,8 +384,8 @@ function seite(){
 
   if(id==="b3"){
     const L = [
-      "Am 12. März 1938 überschreiten deutsche Truppen die österreichische Grenze. Sie stoßen auf keinen Widerstand; viele Menschen jubeln ihnen zu.",
-      "Am 13. März wird Österreich per Gesetz Teil des Deutschen Reiches. Die NS-Führung begründet das damit, alle Deutschen in einem Reich zu vereinen.",
+      "Bundeskanzler Schuschnigg setzt eine Volksabstimmung für ein unabhängiges Österreich an. Hitler erzwingt mit einem Ultimatum ihre Absage und Schuschniggs Rücktritt am 11. März 1938; der Nationalsozialist Seyß-Inquart soll die Regierung übernehmen. Schuschniggs Hilferuf an die europäischen Mächte bleibt ungehört.",
+      "Am 12. März marschiert die Wehrmacht ein und stößt auf keinen Widerstand. Viele Menschen jubeln. Hitler, der zunächst wohl nur eine Union beider Staaten plante, entscheidet sich nun für den vollständigen „Anschluss“ (Gesetz vom 13. März).",
       "In Wien werden Regimegegner verhaftet, Jüdinnen und Juden öffentlich gedemütigt und beraubt. London und Paris protestieren, handeln aber nicht."
     ];
     const da = alleGelesen("b3", L);
@@ -388,6 +394,7 @@ function seite(){
       <p class="datum">Der „Anschluss“ Österreichs</p>
       ${meldungen("b3", L)}
       ${da ? `<figure>${SK_1938}<figcaption>Lageskizze, keine Landkarte. Eigene Darstellung.</figcaption></figure>
+      <p class="hinweis">Nach M3: Bei einer nicht freien Volksabstimmung am 10. April 1938 stimmen offiziell 99,73 % der Österreicher für den „Anschluss“.</p>
       <p class="frage">3.2 Wie erfolgreich war die britische Politik bisher?</p>
       <div class="skala" role="group" aria-label="Skala von 1 bis 6">${[1,2,3,4,5,6].map(x=>`<button data-skala="${x}" aria-pressed="${S.skala===x}">${x}</button>`).join("")}</div>
       <div class="skala-leg"><span>1 = kein Erfolg</span><span>6 = sehr erfolgreich</span></div>
@@ -397,7 +404,7 @@ function seite(){
   if(id==="b4"){
     const L = [
       "Seit dem „Anschluss“ ist die Tschechoslowakei auf drei Seiten von deutschem Gebiet umgeben. In ihren Grenzgebieten leben rund drei Millionen Deutschsprachige, die sich seit der Staatsgründung am 28. Oktober 1918 benachteiligt sehen.",
-      "Hitler fordert die Abtretung dieser Gebiete – des „Sudetengebiets“. Premierminister Chamberlain fliegt am 15. und am 22. September zu ihm. Beim zweiten Treffen verschärft Hitler seine Forderungen und setzt eine Frist.",
+      "M4 · Auf Hitlers Weisung verlangen die Vertreter der Sudetendeutschen weitreichende Autonomie und spitzen die Krise zu. Dann fordert Hitler die Abtretung des „Sudetengebiets“. Er beruft sich auf das Selbstbestimmungsrecht der Völker und betont, dies sei seine letzte territoriale Forderung. Anfang September droht er öffentlich mit einem Einmarsch; Chamberlain fliegt am 15. und 22. September als Vermittler zu ihm.",
       "Frankreich ist mit der Tschechoslowakei verbündet; Großbritannien hat mit Prag keinen Vertrag. In London werden Gasmasken ausgegeben und Schutzgräben ausgehoben."
     ];
     const da = alleGelesen("b4", L);
@@ -408,7 +415,7 @@ function seite(){
       ${entscheidung("e2", E2, 2, "September 1938")}${codeFeld("e2", 2)}` : ""}
       ${S.stufe>=2 ? `<div class="aufl"><div class="kopfzeile">Was geschah · 29./30. September 1938</div><ul>
         <li>Deutschland, Großbritannien, Frankreich und Italien beschließen im Münchner Abkommen: Die Tschechoslowakei muss das Sudetengebiet bis zum 10. Oktober räumen. Sie selbst saß nicht mit am Tisch.</li>
-        <li>Ein Zusatz kündigt eine internationale Garantie für die übrige Tschechoslowakei an.</li>
+        <li>Großbritannien und Frankreich stellen eine Garantie für die verkleinerte Tschechoslowakei in Aussicht; vertraglich vollzogen wird sie nie (M4, korrigiert).</li>
         <li>Am Morgen danach unterzeichnen Hitler und Chamberlain eine Erklärung: Beide Völker wollen nie wieder gegeneinander Krieg führen.</li></ul></div>
       <h2 class="abschnitt">Chamberlain kehrt zurück</h2>
       <p class="hinweis">Originalton vom Flugplatz Heston bei London, 30. September 1938 (1:08 min). Der Wortlaut steht darunter.</p>
@@ -437,6 +444,7 @@ function seite(){
       ${da ? `<figure>${SK_1939}<figcaption>Lageskizze, keine Landkarte. Eigene Darstellung.</figcaption></figure>
       ${entscheidung("e3", E3, 3, "März 1939")}${codeFeld("e3", 3)}` : ""}
       ${S.stufe>=3 ? `<div class="aufl"><div class="kopfzeile">Was geschah · Frühjahr und Sommer 1939</div><ul>
+        <li>M5 · Zuerst bleibt es bei Worten: Großbritannien und Frankreich verurteilen die Besetzung und erkennen sie – wie Polen, die USA und die Sowjetunion – nicht an. Sie handeln nicht, um einen Krieg vorerst zu vermeiden.</li>
         <li>31. März 1939: Chamberlain erklärt im Unterhaus, Großbritannien werde Polen beistehen, wenn dessen Unabhängigkeit bedroht wird. Frankreich schließt sich an.</li>
         <li>13. April 1939: Garantien auch für Rumänien und Griechenland.</li>
         <li>Großbritannien führt im Frühjahr 1939 erstmals in Friedenszeiten die Wehrpflicht ein. Verhandlungen mit der Sowjetunion beginnen, kommen aber zu keinem Ergebnis.</li></ul></div>
@@ -448,17 +456,21 @@ function seite(){
 
   if(id==="b5"){
     const L = [
-      "Das Deutsche Reich fordert von Polen die Freie Stadt Danzig und eine Verkehrsverbindung durch den „Polnischen Korridor“. Polen lehnt ab.",
-      "23. August 1939: Deutschland und die Sowjetunion schließen einen Nichtangriffspakt. In London und Paris ist man überrascht.",
-      "1. September 1939: Deutsche Truppen greifen Polen an. Am 3. September läuft ein britisches Ultimatum ab; Großbritannien und Frankreich erklären Deutschland den Krieg."
+      "M6 · Das Deutsche Reich fordert den Anschluss der Freien Stadt Danzig und exterritoriale Verkehrswege durch den polnischen „Korridor“ nach Ostpreußen. Polen lehnt ab; die Spannungen wachsen.",
+      "Im August 1939 melden deutsche Zeitungen und Rundfunk fast täglich angebliche polnische Grenzverletzungen und Gewalt gegen die deutsche Minderheit. Am 23. August schließen Deutschland und die Sowjetunion einen Nichtangriffspakt – in London und Paris eine Überraschung.",
+      "Am 1. September 1939 eröffnet das Linienschiff „Schleswig-Holstein“ das Feuer auf die Westerplatte bei Danzig; die Wehrmacht greift Polen an. Am 3. September läuft ein britisches Ultimatum ab: Großbritannien und Frankreich erklären Deutschland den Krieg."
     ];
     const da = alleGelesen("b5", L);
     return `<section class="seite"><div class="zeit"><span class="nr">Baustein 5</span><span>August und September 1939</span></div>
       <h1>Der Angriff auf Polen</h1>
       ${meldungen("b5", L)}
-      ${da ? `<div class="spaeter"><div class="kopfzeile">Nachträgliches Wissen – in London 1939 unbekannt</div>
+      ${da ? `<div class="aufl"><div class="kopfzeile">Was dann geschah · September 1939</div><ul>
+        <li>Die Wehrmacht führt den Krieg vom ersten Tag an mit großer Härte. Deutsche Truppen, Einsatzkommandos von Polizei und SS ermorden eine große Zahl polnischer Zivilisten und Kriegsgefangener (M6).</li>
+        <li>Am 17. September marschiert auch die Sowjetunion in Polen ein. Beide Staaten teilen das Land unter sich auf.</li></ul></div>
+      <div class="spaeter"><div class="kopfzeile">Nachträgliches Wissen – in London 1939 unbekannt</div>
         <ul style="padding-left:1.2rem;display:grid;gap:.35rem">
         <li>Schon am 5. November 1937 hatte Hitler vor der Militärführung erklärt, Österreich und die Tschechoslowakei bei günstiger Gelegenheit überwältigen zu wollen (Hoßbach-Niederschrift).</li>
+        <li>Im August 1936 forderte Hitler in einer geheimen Denkschrift zum Vierjahresplan (M7): „I. Die deutsche Armee muß in 4 Jahren einsatzfähig sein. II. Die deutsche Wirtschaft muß in 4 Jahren kriegsfähig sein.“ <span class="hinweis">(zit. nach Lautemann/Schlenke, Geschichte in Quellen, 1961, S. 321 f.)</span></li>
         <li>Am 3. April 1939 ließ er den Angriff auf Polen vorbereiten (Weisung „Fall Weiß“): Er sollte ab dem 1. September 1939 jederzeit möglich sein.</li>
         <li>Ein geheimes Zusatzprotokoll zum Pakt vom 23. August teilte Ostmitteleuropa in deutsche und sowjetische Interessensphären auf.</li></ul>
         <p class="hinweis" style="margin-top:.5rem">Diese Dokumente wurden erst nach dem Krieg bekannt, unter anderem im Nürnberger Prozess 1945/46.</p></div>
@@ -580,6 +592,17 @@ function lehrkraft(){
       <li>Entscheidung 2: „Wären Sie bereit, einen Angehörigen für das Sudetengebiet in den Krieg zu schicken?“ (hypothetisch, keine Antwortpflicht) · „Welche Verantwortung tragen Sie gegenüber der Tschechoslowakei, die nicht mit am Tisch sitzt?“</li>
       <li>Entscheidung 3: „Wissen Sie sicher, was Hitler als Nächstes tut?“ · „Ab wann wird Nachgeben selbst zur Gefahr?“</li>
       <li>Konsolidierung: „Wann hätte man Hitler stoppen sollen?“ – und dann: „Woher wissen Sie das?“</li></ul>
+    <h2 style="font-size:1.5rem;margin:2rem 0 .4rem">Padlet-Materialien M1–M7 (Stand 7.12.2020)</h2>
+    <div style="overflow-x:auto"><table><thead><tr><th>Padlet</th><th>Im Labor</th><th>Korrektur / Hinweis</th></tr></thead><tbody>
+      <tr><td>M1 Bruch mit Versailles</td><td>Baustein 1, Materialkasten vor 1.1</td><td>Tippfehler „Vertag“. Fitzpatrick-Karikatur (1930) <b>nicht online</b> (in DE geschützt bis 2039) – nur im Unterricht zeigen.</td></tr>
+      <tr><td>M2 Umgang mit Vertragsbrüchen</td><td>Baustein 2, Meldung 3</td><td>Georg-V.-Zitat nur als Überlieferung („soll gesagt haben“). Handschlag-Foto Chamberlain/Hitler stammt von 1938 – nicht zu 1935/36 zeigen.</td></tr>
+      <tr><td>M3 „Anschluss“ 1938</td><td>Baustein 3, Meldungen 1–2 + Hinweis vor 3.2</td><td>Heldenplatz-Foto (Propagandabild) nur mit Quellenkritik.</td></tr>
+      <tr><td>M4 Sudetenkrise</td><td>Baustein 4, Meldung 2; Auflösung</td><td>Überschrift „1939“ → <b>1938</b>. „garantierten den Bestand“ → Garantie nur in Aussicht gestellt, nie vollzogen. Expansionskarte zeigt Ausgänge: erst nach Entscheidung 3.</td></tr>
+      <tr><td>M5 Reaktionen</td><td>Baustein 4b, Auflösung</td><td>–</td></tr>
+      <tr><td>M6 Angriff auf Polen</td><td>Baustein 5, Meldungen + „Was dann geschah“</td><td>Kriegserklärung erst am <b>3.9.</b> (Ultimatum), nicht „mit dem Angriff“. Schlagbaum-Foto ist inszeniertes Propagandabild.</td></tr>
+      <tr><td>M7 Vierjahresplan 1936</td><td>Baustein 5, Kasten „Nachträgliches Wissen“</td><td>Denkschrift war geheim – zeitgenössisch nicht bekannt, daher nur im Rückblick. Titelblatt-Abbildung nicht übernommen.</td></tr>
+      <tr><td>Video „Hitlers Außenpolitik einfach erklärt“</td><td>–</td><td>Nur Konsolidierung oder Hausaufgabe; zeigt Ausgänge vorweg.</td></tr>
+    </tbody></table></div>
     <p class="hinweis" style="margin-top:2rem">Material: <a href="docs/M19_Faktensicherung.pdf">Faktensicherung (PDF, 2 Seiten)</a> – erst in der Konsolidierung ausgeben. <a href="#" id="reset">Antworten auf diesem Gerät löschen</a>.</p>
   </main>`;
   $("#reset").onclick=e=>{ e.preventDefault(); if(confirm("Alle Antworten auf diesem Gerät löschen?")){ try{localStorage.removeItem(KEY);}catch(x){} location.href="appeasement.html"; } };
