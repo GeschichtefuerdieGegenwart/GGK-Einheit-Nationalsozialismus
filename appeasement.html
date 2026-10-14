@@ -15,7 +15,7 @@
 @font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
 :root{
   --bg:#F3EFE7; --surface:#FAF8F3; --surface2:#FFFDF8; --offset:#E9E2D7; --line:#D5CEC3; --border:rgba(36,34,31,.14);
-  --ink:#24221F; --muted:#625F59; --faint:#79746C; --inverse:#FFFAF2;
+  --ink:#24221F; --muted:#625F59; --faint:#6A655E; --inverse:#FFFAF2;
   --red:#9B402D; --red-hi:#EAD7CF; --green:#2E5A47; --green-hi:#D6E4DC; --gold:#8C6717; --gold-hi:#EEE2BF;
   --display:"Fraunces",Georgia,"Times New Roman",serif;
   --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
@@ -190,10 +190,6 @@ audio{width:100%;margin:.6rem 0}
 @media (max-width:640px){.ebenen{grid-template-columns:1fr}}
 
 /* Sieben Schritte je Entscheidung */
-.phasen{display:flex;gap:.25rem;margin:.2rem 0 1rem;flex-wrap:wrap}
-.phasen span{flex:1 1 4.5rem;font-size:.72rem;line-height:1.2;color:var(--faint);border-top:3px solid var(--line);padding-top:.3rem}
-.phasen span.da{color:var(--muted);border-top-color:var(--green)}
-.phasen span.akt{color:var(--ink);font-weight:700;border-top-color:var(--red)}
 .phase{border-top:1px solid var(--line);padding:1.2rem 0 .4rem;animation:auf .45s ease}
 .phase>h3{font-size:1.3rem;margin-bottom:.5rem}
 .phase .pnr{display:block;font-family:var(--body);font-size:.8rem;font-weight:700;color:var(--green);margin-bottom:.15rem;letter-spacing:.02em}
@@ -233,6 +229,64 @@ audio{width:100%;margin:.6rem 0}
 .auswert{border:1px solid var(--border);border-radius:var(--r-lg);padding:1rem 1.2rem;margin:1rem 0;background:var(--surface)}
 .auswert h4{font-size:1rem;margin-bottom:.4rem}
 .auswert ol{padding-left:1.2rem;display:grid;gap:.35rem}
+
+/* Schrittleiste */
+.phasen{list-style:none;display:flex;gap:.3rem;margin:.4rem 0 1rem;flex-wrap:wrap;padding:0}
+.phasen li{flex:1 1 5.2rem}
+.phasen button{width:100%;min-height:48px;display:flex;align-items:center;gap:.1rem;border:0;border-top:4px solid var(--line);background:transparent;text-align:left;padding:.35rem .2rem;font-size:.8rem;line-height:1.2;color:var(--muted)}
+.phasen button .pn{flex:0 0 auto;display:inline-grid;place-items:center;width:1.35rem;height:1.35rem;border-radius:50%;border:1.5px solid currentColor;font-size:.72rem;font-weight:700;margin-right:.3rem}
+.phasen button.da{border-top-color:var(--green);color:var(--green)}
+.phasen button.akt{border-top-color:var(--red);color:var(--ink);font-weight:700}
+.phasen button:disabled{cursor:default}
+.phasen button:disabled:not(.da):not(.akt){opacity:.7}
+.ziel{background:var(--surface2);border:1px solid var(--border);border-radius:.7rem;padding:.6rem .85rem;margin:.2rem 0 1rem;font-size:.95rem}
+.ziel .wozu{display:block;color:var(--muted);font-size:.9rem;margin-top:.15rem}
+.ph-titel:focus{outline:none}.ph-titel:focus-visible{outline:3px solid var(--red)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+fieldset{border:0;padding:0;margin:0}
+fieldset.ohne legend{font-weight:700;margin-bottom:.4rem}
+.abw{margin-top:1rem;border-top:1px solid var(--line);padding-top:.8rem}
+.abw legend{font-family:var(--display);font-weight:600;font-size:1.08rem;margin-bottom:.5rem}
+.tabs button[aria-pressed="true"]{background:var(--surface2);border-color:var(--green)}
+.matrix{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.92rem;background:var(--surface2);border-radius:.7rem;overflow:hidden}
+.matrix caption{text-align:left;font-weight:700;padding:.2rem 0 .4rem}
+.matrix th,.matrix td{border-bottom:1px solid var(--line);padding:.5rem .4rem;text-align:center}
+.matrix th[scope="row"]{text-align:left;font-weight:600}
+.matrix thead th{font-size:.8rem;color:var(--muted);font-weight:700}
+.matrix .marke{font-size:1.2rem;color:var(--green)}
+.matrix .leer{color:var(--line)}
+.matrix.kompakt{font-size:.85rem}
+.macht{display:grid;gap:.5rem;margin:.6rem 0}
+.ebene{display:grid;grid-template-columns:9.5rem 1fr;grid-template-rows:auto auto;column-gap:.9rem;background:var(--surface2);border:1px solid var(--border);border-radius:.7rem;padding:.7rem .9rem;font-size:.95rem}
+.ebene .stufe{grid-row:1/3;align-self:start;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border-left:5px solid var(--line);padding-left:.5rem}
+.ebene.e0 .stufe{border-left-color:var(--red);color:var(--red)}
+.ebene.e1 .stufe{border-left-color:var(--green);color:var(--green)}
+@media (max-width:600px){.ebene{grid-template-columns:1fr}.ebene .stufe{grid-row:auto;margin-bottom:.3rem}}
+.wechsel{border:2px dashed var(--gold);border-radius:.8rem;padding:.7rem 1rem;margin:1.2rem 0;font-size:.95rem;background:var(--surface)}
+.wechsel b{display:block;color:#5E450F;text-transform:uppercase;font-size:.78rem;letter-spacing:.06em}
+.vergleich{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:1rem 0}
+.vergleich>div{background:var(--surface2);border:1px solid var(--border);border-radius:.7rem;padding:.7rem .9rem;display:grid;gap:.2rem;font-size:.95rem}
+.vergleich b{font-family:var(--display);font-size:1.8rem;line-height:1}
+@media (max-width:600px){.vergleich{grid-template-columns:1fr}}
+details.vertiefung,details.nichtwissen{border:1.5px dashed var(--muted);border-radius:.8rem;padding:.6rem 1rem;margin:1rem 0}
+details summary{cursor:pointer;font-weight:700;min-height:32px}
+details[open] summary{margin-bottom:.4rem}
+details .auswert{border:0;padding:0;margin:.4rem 0;background:none}
+.punkte{display:flex;gap:.4rem;margin:.2rem 0 .4rem}.punkte span{width:2.2rem;height:4px;border-radius:2px;background:var(--line)}.punkte span.an{background:var(--red)}
+.karte-ein h2:focus{outline:none}
+/* Zeitleiste */
+.zeitleiste{list-style:none;display:flex;gap:0;overflow-x:auto;margin:.2rem 0 1.4rem;padding:.2rem 0 .4rem;scrollbar-width:thin}
+.zeitleiste li{flex:0 0 7.3rem;border-top:3px solid var(--muted);padding:.45rem .5rem 0 0;position:relative;font-size:.8rem;line-height:1.25}
+.zeitleiste li::before{content:"";position:absolute;top:-7.5px;left:0;width:12px;height:12px;border-radius:50%;background:var(--muted)}
+.zeitleiste .zl-d{display:block;font-weight:700;color:var(--muted)}
+.zeitleiste .zl-t{display:block;color:var(--ink)}
+.zeitleiste li.jetzt{border-top-color:var(--red)}
+.zeitleiste li.jetzt::before{background:var(--red);width:14px;height:14px;top:-8.5px}
+.zeitleiste li.jetzt .zl-d{color:var(--red)}
+.zeitleiste .zl-hier{display:inline-block;margin-top:.2rem;font-size:.72rem;font-weight:700;background:var(--red);color:var(--inverse);border-radius:999px;padding:.05rem .45rem}
+.zeitleiste li.offen{border-top:3px dashed var(--line)}
+.zeitleiste li.offen::before{background:var(--bg);border:2px dashed var(--muted)}
+.zeitleiste li.offen .zl-t{color:var(--muted);font-style:italic}
 
 /* Karten-Platzhalter */
 .platzhalter{border:2px dashed var(--gold);border-radius:var(--r-lg);background:var(--surface);margin:1.4rem 0;overflow:hidden}
@@ -531,7 +585,7 @@ function extern(url, titel, wer, hinweis=""){
   return `<li><a href="${url}" target="_blank" rel="noopener noreferrer">${esc(titel)}</a> <span class="hinweis">· ${esc(wer)}${hinweis?" · "+esc(hinweis):""}</span></li>`;
 }
 function linkliste(titel, items){
-  return `<div class="auswert"><h4>${esc(titel)}</h4><ul style="padding-left:1.2rem;display:grid;gap:.35rem">${items.join("")}</ul>
+  return `<div class="auswert">${titel?`<h4>${esc(titel)}</h4>`:""}<ul style="padding-left:1.2rem;display:grid;gap:.35rem">${items.join("")}</ul>
     <p class="hinweis" style="margin-top:.4rem">Externe Seiten öffnen in einem neuen Tab. Dabei erhält der jeweilige Anbieter Ihre IP-Adresse.</p></div>`;
 }
 function karte(id){
@@ -543,6 +597,25 @@ window.karteFehlt = img => {
   const fig = img.closest("figure"); const id = fig.dataset.karteId; FEHLT.add(id);
   const d = document.createElement("div"); d.innerHTML = platzhalter(KARTEN[id]); fig.replaceWith(d.firstElementChild);
 };
+
+/* Zeitleiste: zeigt nur, was zum jeweiligen Zeitpunkt schon geschehen ist.
+   Die Zukunft bleibt offen – so wie für die Menschen damals. */
+const EREIGNISSE = [
+  ["1933-01-30","Jan. 1933","Hitler wird Reichskanzler"],
+  ["1933-10-14","Okt. 1933","Austritt aus dem Völkerbund"],
+  ["1935-03-16","März 1935","Wehrpflicht in Deutschland"],
+  ["1936-03-07","März 1936","Einmarsch ins Rheinland"],
+  ["1938-03-12","März 1938","„Anschluss“ Österreichs"],
+  ["1938-09-29","Sept. 1938","Münchner Abkommen"],
+  ["1939-03-15","März 1939","Besetzung Prags"],
+  ["1939-09-01","Sept. 1939","Angriff auf Polen, Kriegsbeginn"]
+];
+const JETZT = { b1:"1936-03-07", b2:"1936-03-08", b3:"1938-04-10", b4:"1938-09-27", b4b:"1939-03-16", b5:"1939-09-03", ende:"9999" };
+function zeitleiste(id){
+  const j = JETZT[id]; if(!j) return "";
+  const bekannt = EREIGNISSE.filter(e=>e[0] <= j), letzt = bekannt.length-1;
+  return `<ol class="zeitleiste" aria-label="Zeitleiste: was bisher geschehen ist">${bekannt.map((e,i)=>`<li class="${i===letzt && id!=="ende"?"jetzt":""}"><span class="zl-d">${e[1]}</span><span class="zl-t">${e[2]}</span>${i===letzt && id!=="ende"?`<span class="zl-hier">Sie sind hier</span>`:""}</li>`).join("")}${id!=="ende"?`<li class="offen"><span class="zl-d">danach</span><span class="zl-t">noch offen</span></li>`:""}</ol>`;
+}
 
 /* ------------------------------ Ablauf ------------------------------- */
 
@@ -557,7 +630,7 @@ const SEITEN = [
   {id:"ende", nr:"", kurz:"Beurteilung", stufe:3}
 ];
 
-let S = Object.assign({ seite:"start", stufe:0, ein:1, pers:"sie", m:{}, ph:{}, tab:{}, ges:{}, ueb:{}, pt:{}, v:{}, sich:{}, e:{}, prog:null, skala:null, erf:null, sorge:null, sorgeT:"", prot:{e1:{},e2:{},e3:{}}, karte:null, extern:{} }, lade());
+let S = Object.assign({ seite:"start", stufe:0, ein:1, pers:"sie", m:{}, ph:{}, pv:{}, abw:{}, tab:{}, ges:{}, ueb:{}, pt:{}, v:{}, sich:{}, e:{}, prog:null, skala:null, erf:null, sorge:null, sorgeT:"", prot:{e1:{},e2:{},e3:{}}, karte:null, extern:{} }, lade());
 const setze = f => { f(S); speichere(); zeichne(); };
 
 /* --------------------------- Darstellung ---------------------------- */
@@ -584,98 +657,129 @@ function perspSchalter(){
     <button data-pers="dritte" aria-pressed="${S.pers==="dritte"}">einer anderen Abgeordneten</button></div>`;
 }
 
+/* Schrittleiste: erreichte Schritte sind anwählbar, der aktuelle ist markiert.
+   Status steht als Text daneben, nicht nur als Farbe. */
 function phasenLeiste(key){
-  const fertig = S.stufe >= ENT[key].stufe, akt = fertig ? 8 : (S.e[key] ? 7 : (S.ph[key] || 2));
-  return `<div class="phasen" aria-label="Schritte der Entscheidung">${PHASEN.map((t,i)=>{ const n=i+1;
-    return `<span class="${n<akt?"da":n===akt?"akt":""}">${n} ${t}</span>`; }).join("")}</div>`;
+  const max = maxPhase(key), pv = sichtPhase(key);
+  return `<ol class="phasen" aria-label="Schritte der Entscheidung">${PHASEN.map((t,i)=>{ const n=i+1;
+    const zu = n > max, akt = n === pv, da = n < max || (n===max && S.stufe>=ENT[key].stufe);
+    const status = akt ? "aktueller Schritt" : da ? "erledigt" : zu ? "noch gesperrt" : "offen";
+    return `<li><button class="${akt?"akt":da?"da":""}" data-pv="${key}:${n}" ${zu||n===1?"disabled":""} ${akt?'aria-current="step"':""} aria-label="Schritt ${n}: ${t} – ${status}"><span class="pn">${da&&!akt?"✓":n}</span>${t}</button></li>`; }).join("")}</ol>`;
 }
+const maxPhase = key => S.e[key] ? 7 : (S.ph[key] || 2);
+const sichtPhase = key => Math.min(S.pv[key] || maxPhase(key), maxPhase(key));
 
-const phKopf = (n, titel) => `<h3><span class="pnr">Schritt ${n} von 7 · ${PHASEN[n-1]}</span>${titel}</h3>`;
+const ZIEL = {
+  2:["Lesen Sie, wer damals entschied und was Abgeordnete tun konnten.","Ihre Stimme in der Klasse ist nicht dasselbe wie die Macht einer Regierung."],
+  3:["Lesen Sie die drei Möglichkeiten.","Damals waren mehrere Wege denkbar – keiner war von vornherein der richtige."],
+  4:["Sehen Sie sich zu jeder Option Hoffnungen und Risiken an und geben Sie an, was für Sie überwiegt.","Wer abwägt, merkt: Jede Option hatte Folgen – auch für Menschen, die nicht mitentscheiden konnten."],
+  5:["Wählen Sie die zwei Überlegungen, die am schwersten wiegen.","So wird sichtbar, wovon Ihre Entscheidung abhängt."],
+  6:["Entscheiden Sie, begründen Sie in einem Satz und geben Sie an, wie sicher Sie sind.","Eine gute Begründung ist wichtiger als die gewählte Option."],
+  7:["Vergleichen Sie Ihre Entscheidung mit dem, was geschah – und denken Sie über den Unterschied nach.","Erst jetzt kommt das Wissen dazu, das man damals noch nicht hatte."]
+};
+const phKopf = (n, titel) => `<h3 tabindex="-1" class="ph-titel"><span class="pnr">Schritt ${n} von 7 · ${PHASEN[n-1]}</span>${titel}</h3>
+  <p class="ziel"><b>Ihr Auftrag:</b> ${ZIEL[n][0]} <span class="wozu"><b>Wozu?</b> ${ZIEL[n][1]}</span></p>`;
 
 function bereit(key){ const b = S[key+"b"] || ""; return !!(S.v[key] && S.sich[key] && b.trim().length >= 10 && (key!=="e1" || S.prog)); }
 
-/* Die sieben Schritte einer Entscheidung. Schritt 1 (Lage) steht auf der Seite davor. */
+const ABW = [["h","Hoffnungen überwiegen"],["g","hält sich die Waage"],["r","Risiken überwiegen"]];
+/* Abwägungsmatrix: je Option eine Zeile, die Markierung steht an der gewählten Stelle.
+   Keine Punkte, keine Summe – nur das eigene Urteil sichtbar machen. */
+function matrix(key, kompakt){
+  const E = ENT[key], a = S.abw[key] || {};
+  return `<table class="matrix${kompakt?" kompakt":""}"><caption>Ihre Abwägung${kompakt?"":" auf einen Blick"}</caption>
+    <thead><tr><th scope="col">Option</th>${ABW.map(([,t])=>`<th scope="col">${t}</th>`).join("")}</tr></thead>
+    <tbody>${["A","B","C"].map(k=>`<tr><th scope="row">${k} · ${esc(E.opt[k].t)}</th>${ABW.map(([c,t])=>`<td>${a[k]===c?`<span class="marke" aria-label="${t}">●</span>`:`<span class="leer" aria-hidden="true">·</span>`}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+}
+
+/* Die Schritte 2–7 einer Entscheidung. Schritt 1 (Lage) steht darüber auf der Seite.
+   Es wird immer nur ein Schritt gezeigt; erledigte Schritte lassen sich über die Leiste wieder öffnen. */
 function entscheidungsweg(key){
-  const E = ENT[key], ph = S.ph[key] || 2, fertig = !!S.e[key], K = KREIS();
+  const E = ENT[key], max = maxPhase(key), pv = sichtPhase(key), fertig = !!S.e[key], K = KREIS();
+  const nav = (n, text, an=true, hinweis="") => `<div class="fuss">${pv>2?`<button class="btn" data-pv="${key}:${pv-1}">Zurück</button>`:"<span></span>"}<span class="hinweis" aria-live="polite">${hinweis}</span>${max>pv?`<button class="btn primary" data-pv="${key}:${pv+1}">Weiter</button>`:`<button class="btn primary" data-ph="${key}:${n}" ${an?"":"disabled"}>${text}</button>`}</div>`;
   let h = `<section class="entscheidung" aria-labelledby="h-${key}"><div class="kopfzeile">Entscheidung ${E.nr} von 3 · ${E.datum}</div>
-    <h2 id="h-${key}">${esc(E.frage)}</h2>${phasenLeiste(key)}`;
+    <h2 id="h-${key}">${esc(E.frage)}</h2>${phasenLeiste(key)}<div class="phase" id="ph-${key}">`;
 
-  // 2 Handlungsspielraum
-  h += `<div class="phase">${phKopf(2,"Wer entscheidet – und was können Sie tun?")}${TYP.darst}
-    <div class="spiel">${E.spiel.map(([w,t])=>`<div><b>${esc(w)}</b><span>${esc(t)}</span></div>`).join("")}</div>
-    <div class="zwei"><div><h4>Als Abgeordnete können Sie …</h4><ul>${E.koennen.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
-      <div><h4>Grenzen</h4><ul>${E.grenzen.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>
-    ${ph===2 ? `<div class="fuss"><span class="hinweis">Unsere Klasse stimmt gleich ab. Damals entschied die Regierung.</span><button class="btn primary" data-ph="${key}:3">Weiter: die Optionen</button></div>` : ""}</div>`;
-  if(ph < 3) return h + `</section>`;
+  if(pv===2){
+    h += `${phKopf(2,"Wer entscheidet – und was können Sie tun?")}${TYP.darst}
+      <div class="macht" role="list">${E.spiel.map(([w,t],i)=>`<div class="ebene e${i}" role="listitem"><span class="stufe">${["entscheidet","berät und kontrolliert","nimmt Einfluss"][i] || ""}</span><b>${esc(w)}</b><span>${esc(t)}</span></div>`).join("")}</div>
+      <div class="zwei"><div><h4>Als Abgeordnete können Sie …</h4><ul>${E.koennen.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+        <div><h4>Grenzen</h4><ul>${E.grenzen.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>
+      ${nav(3,"Weiter: die Optionen")}`;
+  }
 
-  // 3 Optionen
-  h += `<div class="phase">${phKopf(3,"Welche Möglichkeiten werden in London diskutiert?")}
-    ${["A","B","C"].map(k=>`<div class="optinfo"><span class="k">${k}</span><span><b>${esc(E.opt[k].t)}</b><span class="cr">${esc(E.opt[k].was)}</span></span></div>`).join("")}
-    <p class="hinweis">Die Optionen sind für den Unterricht zugespitzt. Sie entsprechen Positionen, die damals vertreten wurden. Die Reihenfolge A–B–C ist keine Rangfolge und keine politische Einordnung.</p>
-    ${ph===3 ? `<div class="fuss"><span></span><button class="btn primary" data-ph="${key}:4">Weiter: Folgen abwägen</button></div>` : ""}</div>`;
-  if(ph < 4) return h + `</section>`;
+  if(pv===3){
+    h += `${phKopf(3,"Welche Möglichkeiten werden in London diskutiert?")}
+      ${["A","B","C"].map(k=>`<div class="optinfo"><span class="k" aria-hidden="true">${k}</span><span><b><span class="sr">Option ${k}: </span>${esc(E.opt[k].t)}</b><span class="cr">${esc(E.opt[k].was)}</span></span></div>`).join("")}
+      <p class="hinweis">Die Optionen sind für den Unterricht zugespitzt. Sie entsprechen Positionen, die damals vertreten wurden. Die Reihenfolge A–B–C ist keine Rangfolge und keine politische Einordnung.</p>
+      ${nav(4,"Weiter: Folgen abwägen")}`;
+  }
 
-  // 4 Folgenabwägung
-  const tab = S.tab[key] || "A", ges = S.ges[key] || [tab];
-  const F = E.folgen[tab];
-  const liste = arr => ["ich","land","welt"].map(kr=>{ const it = arr.filter(x=>x[0]===kr); if(!it.length) return "";
-      return `<div class="kreis">${esc(K[kr])}</div><ul>${it.map(([,c,t])=>`<li><span class="chip ${c}">${CHIP[c]}</span>${esc(t)}</li>`).join("")}</ul>`; }).join("");
-  h += `<div class="phase">${phKopf(4,"Was könnte jede Option bewirken?")}
-    <p>Schauen Sie sich alle drei Optionen an. Es gibt keine Punkte und keine richtige Lösung – es geht darum, abzuwägen.</p>
-    ${perspSchalter()}
-    <div class="tabs" role="tablist">${["A","B","C"].map(k=>`<button role="tab" data-tab="${key}:${k}" aria-selected="${tab===k}">${k} · ${esc(E.opt[k].t)}<small>${ges.includes(k)?'<span class="gesehen">✓ angesehen</span>':"noch nicht angesehen"}</small></button>`).join("")}</div>
-    <div class="folgen" role="tabpanel"><div class="zwei" style="margin:0"><div><h4>Hoffnungen</h4>${liste(F.H)}</div><div><h4>Risiken</h4>${liste(F.R)}</div></div></div>
-    <div class="nichtwissen"><b>Was Sie im ${esc(E.datum)} noch nicht wissen können:</b><ul>${E.nichtwissen.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
-    <p class="hinweis">„damals erfahren“ = Menschen kannten das aus eigener Erfahrung oder aus Berichten. „damals befürchtet / erhofft / diskutiert“ = eine Erwartung, keine Gewissheit.</p>
-    ${ph===4 ? `<div class="fuss"><span class="hinweis">${ges.length<3?`Noch ${3-ges.length} Option${3-ges.length>1?"en":""} ansehen.`:"Alle Optionen angesehen."}</span><button class="btn primary" data-ph="${key}:5" ${ges.length<3?"disabled":""}>Weiter: kurz nachdenken</button></div>` : ""}</div>`;
-  if(ph < 5) return h + `</section>`;
+  if(pv===4){
+    const tab = S.tab[key] || "A", F = E.folgen[tab], a = S.abw[key] || {}, n = Object.keys(a).length;
+    const liste = arr => ["ich","land","welt"].map(kr=>{ const it = arr.filter(x=>x[0]===kr); if(!it.length) return "";
+        return `<div class="kreis">${esc(K[kr])}</div><ul>${it.map(([,c,t])=>`<li><span class="chip ${c}">${CHIP[c]}</span>${esc(t)}</li>`).join("")}</ul>`; }).join("");
+    h += `${phKopf(4,"Was könnte jede Option bewirken?")}
+      ${perspSchalter()}
+      <div class="tabs" role="group" aria-label="Option wählen">${["A","B","C"].map(k=>`<button data-tab="${key}:${k}" aria-pressed="${tab===k}">${k} · ${esc(E.opt[k].t)}<small>${a[k]?"✓ abgewogen":"noch offen"}</small></button>`).join("")}</div>
+      <div class="folgen" aria-live="polite"><div class="zwei" style="margin:0"><div><h4>Hoffnungen</h4>${liste(F.H)}</div><div><h4>Risiken</h4>${liste(F.R)}</div></div>
+        <fieldset class="abw"><legend>Was überwiegt ${P("für Sie","für die Abgeordnete")} bei Option ${tab}?</legend>
+          <div class="seg">${ABW.map(([c,t])=>`<button data-abw="${key}:${tab}:${c}" aria-pressed="${a[tab]===c}" ${fertig?"disabled":""}>${t}</button>`).join("")}</div></fieldset></div>
+      <details class="nichtwissen"><summary>Was Sie im ${esc(E.datum)} noch nicht wissen können</summary><ul>${E.nichtwissen.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></details>
+      ${n ? matrix(key) : ""}
+      <p class="hinweis">„damals erfahren“ = aus eigener Erfahrung oder Berichten bekannt. „befürchtet / erhofft / diskutiert“ = eine Erwartung, keine Gewissheit. Es gibt keine Punkte und keine richtige Lösung.</p>
+      ${nav(5,"Weiter: gewichten", n>=3, n<3?`Noch ${3-n} Option${3-n>1?"en":""} abwägen.`:"")}`;
+  }
 
-  // 5 Denkphase
-  const ueb = S.ueb[key] || [];
-  h += `<div class="phase">${phKopf(5,"Was wiegt für Sie am schwersten?")}
-    <p>Wählen Sie die <b>zwei</b> Überlegungen, die ${P("für Sie","für die Abgeordnete")} am meisten Gewicht haben.</p>
-    <div class="liste">${E.ueber.map((t,i)=>{ const an = ueb.includes(i), voll = ueb.length>=2 && !an;
-      return `<button class="wahl" data-ueb="${key}:${i}" aria-pressed="${an}" ${fertig||voll?"disabled":""}><span class="box">${an?"✓":""}</span><span>${esc(t)}</span></button>`; }).join("")}</div>
-    <p class="frage" style="font-size:1.08rem">${esc(E.pers())}</p>
-    <textarea data-pt="${key}" ${fertig?"readonly":""} placeholder="Ihre Gedanken (freiwillig, bleibt auf diesem iPad)">${esc(S.pt[key]||"")}</textarea>
-    <p class="hinweis">Sie müssen hier nichts Persönliches preisgeben. Sie können ${P("jederzeit auch aus Sicht einer anderen Abgeordneten antworten (Schalter oben).","so weiter antworten oder zur eigenen Sicht wechseln.")}</p>
-    ${ph===5 ? `<div class="fuss"><span class="hinweis">${ueb.length<2?"Zwei Überlegungen wählen.":"Bereit."}</span><button class="btn primary" data-ph="${key}:6" ${ueb.length<2?"disabled":""}>Weiter zur Abstimmung</button></div>` : ""}</div>`;
-  if(ph < 6) return h + `</section>`;
+  if(pv===5){
+    const ueb = S.ueb[key] || [];
+    h += `${phKopf(5,"Was wiegt für Sie am schwersten?")}
+      <fieldset class="ohne"><legend>Zwei Überlegungen wählen (${ueb.length} von 2)</legend>
+      <div class="liste">${E.ueber.map((t,i)=>{ const an = ueb.includes(i), voll = ueb.length>=2 && !an;
+        return `<button class="wahl" data-ueb="${key}:${i}" aria-pressed="${an}" ${fertig||voll?"disabled":""}><span class="box" aria-hidden="true">${an?"✓":""}</span><span>${esc(t)}</span></button>`; }).join("")}</div></fieldset>
+      <details class="vertiefung" ${S.pt[key]?"open":""}><summary>Zum Weiterdenken (freiwillig)</summary>
+        <p class="frage" style="font-size:1.05rem">${esc(E.pers())}</p>
+        ${perspSchalter()}
+        <textarea data-pt="${key}" ${fertig?"readonly":""} aria-label="Ihre Gedanken" placeholder="Ihre Gedanken – bleiben auf diesem iPad, niemand sammelt sie ein">${esc(S.pt[key]||"")}</textarea></details>
+      ${nav(6,"Weiter zur Abstimmung", ueb.length>=2, ueb.length<2?"Zwei Überlegungen wählen.":"")}`;
+  }
 
-  // 6 Abstimmung
-  const v = S.v[key];
-  h += `<div class="phase">${phKopf(6,"Ihre Stimme")}
-    <p class="hinweis">Dies ist eine Abstimmung in unserer Klasse. Sie zeigt Ihre persönliche Haltung – damals hatten Abgeordnete keine solche Entscheidungsmacht.</p>
-    ${["A","B","C"].map(k=>`<button class="opt" data-opt="${key}:${k}" aria-pressed="${v===k}" ${fertig?"disabled":""}><span class="k">${k}</span><span><b>${esc(E.opt[k].t)}</b><span class="cr">${esc(E.opt[k].was)}</span></span></button>`).join("")}`;
-  if(key==="e1") h += `<p class="frage">Glauben Sie, dass Deutschland danach Ruhe gibt?</p>
-    <div class="seg">${["ja","nein","weiß nicht"].map(x=>`<button data-prog="${x}" aria-pressed="${S.prog===x}" ${fertig?"disabled":""}>${x}</button>`).join("")}</div>`;
-  h += `<p class="frage">Begründen Sie Ihre Entscheidung in einem Satz.</p>
-    <textarea data-begr="${key}" ${fertig?"readonly":""} placeholder="Ich entscheide mich so, weil …">${esc(S[key+"b"]||"")}</textarea>
-    <p class="frage">Wie sicher sind Sie sich?</p>
-    <div class="seg">${["sicher","eher sicher","unsicher"].map(x=>`<button data-sich="${key}:${x}" aria-pressed="${S.sich[key]===x}" ${fertig?"disabled":""}>${x}</button>`).join("")}</div>
-    <p class="hinweis" style="margin-top:.5rem">Eine Option „unentschieden“ gibt es nicht: Auch eine Regierung, die abwartet, entscheidet sich. Ihre Unsicherheit können Sie hier gesondert zeigen.</p>`;
-  if(!fertig) h += `<div class="fuss"><span class="hinweis" data-status="${key}">${bereit(key)?"Bereit zur Abstimmung.":"Option wählen, einen Satz schreiben, Sicherheit angeben."}</span><button class="btn green" data-abgabe="${key}" ${bereit(key)?"":"disabled"}>Entscheidung abgeben</button></div>`;
-  else h += `<div class="fuss"><span class="hinweis">Ihre Entscheidung: <b>${v}</b> (${esc(S.sich[key]||"")}). Gleich stimmt die Klasse ab.</span><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button></div>`;
-  h += `</div>`;
-  if(!fertig) return h + `</section>`;
+  if(pv===6){
+    const v = S.v[key];
+    h += `${phKopf(6,"Ihre Stimme")}
+      ${matrix(key, true)}
+      <fieldset class="ohne"><legend>Ihre Wahl</legend>${["A","B","C"].map(k=>`<button class="opt" data-opt="${key}:${k}" aria-pressed="${v===k}" ${fertig?"disabled":""}><span class="k" aria-hidden="true">${k}</span><span><b><span class="sr">Option ${k}: </span>${esc(E.opt[k].t)}</b><span class="cr">${esc(E.opt[k].was)}</span></span></button>`).join("")}</fieldset>`;
+    if(key==="e1") h += `<p class="frage" id="prog-l">Glauben Sie, dass Deutschland danach Ruhe gibt?</p>
+      <div class="seg" role="group" aria-labelledby="prog-l">${["ja","nein","weiß nicht"].map(x=>`<button data-prog="${x}" aria-pressed="${S.prog===x}" ${fertig?"disabled":""}>${x}</button>`).join("")}</div>`;
+    h += `<label class="frage" for="begr-${key}" style="display:block">Begründen Sie Ihre Entscheidung in einem Satz.</label>
+      <textarea id="begr-${key}" data-begr="${key}" ${fertig?"readonly":""} placeholder="Ich entscheide mich so, weil …">${esc(S[key+"b"]||"")}</textarea>
+      <p class="frage" id="sich-l-${key}">Wie sicher sind Sie sich?</p>
+      <div class="seg" role="group" aria-labelledby="sich-l-${key}">${["sicher","eher sicher","unsicher"].map(x=>`<button data-sich="${key}:${x}" aria-pressed="${S.sich[key]===x}" ${fertig?"disabled":""}>${x}</button>`).join("")}</div>
+      <p class="hinweis" style="margin-top:.5rem">Dies ist eine Abstimmung in unserer Klasse. Sie zeigt Ihre Haltung – damals entschied die Regierung. Eine Option „unentschieden“ gibt es nicht, weil auch Abwarten eine Politik ist; Ihre Unsicherheit zeigen Sie oben.</p>`;
+    if(!fertig) h += `<div class="fuss"><button class="btn" data-pv="${key}:5">Zurück</button><span class="hinweis" data-status="${key}" aria-live="polite">${bereit(key)?"Bereit zur Abstimmung.":"Option wählen, einen Satz schreiben, Sicherheit angeben."}</span><button class="btn green" data-abgabe="${key}" ${bereit(key)?"":"disabled"}>Entscheidung abgeben</button></div>`;
+    else h += `<div class="fuss"><span class="hinweis">Ihre Entscheidung: <b>${v}</b> (${esc(S.sich[key]||"")}).</span><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button><button class="btn primary" data-pv="${key}:7">Weiter</button></div>`;
+  }
 
-  // 7 Auswertung
-  h += `<div class="phase">${phKopf(7,"Auswertung")}${codeFeld(key, E.stufe)}`;
-  if(S.stufe >= E.stufe){
-    h += `<div class="aufl"><div class="kopfzeile">Was geschah</div>${E.aufl}</div>
-      <div class="auswert"><h4>Zum Besprechen</h4><ol>${E.fragen.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>
-      ${linkliste("Mehr dazu – erst jetzt, nach der Abstimmung", E.links.map(l=>extern(...l)))}
-      <div class="spaeter">${TYP.rueck}<ul style="padding-left:1.2rem;display:grid;gap:.35rem">${E.rueck.map(x=>`<li>${x}</li>`).join("")}</ul>
-      <p class="hinweis" style="margin-top:.4rem">Dieses Wissen hatte im ${esc(E.datum)} niemand in London.</p></div>
-      <p class="hinweis">Übertragen Sie das Tafelbild zu Entscheidung ${E.nr} ins <a href="#" data-geh="protokoll">Protokoll</a>.</p>`;
+  if(pv===7){
+    h += `${phKopf(7,"Vergleichen und nachdenken")}${codeFeld(key, E.stufe)}`;
+    if(S.stufe >= E.stufe){
+      h += `<div class="wechsel" role="note"><b>Perspektivwechsel</b> Bis hierher haben Sie mit dem Wissen von ${esc(E.datum)} entschieden. Ab hier blicken wir zurück.</div>
+        <div class="aufl"><div class="kopfzeile">Was dann geschah</div>${E.aufl}</div>
+        <div class="vergleich"><div><span class="hinweis">Ihre Entscheidung</span><b>${S.v[key]||"–"}</b><span>${esc(E.opt[S.v[key]]?.t||"")}${S.sich[key]?` · ${esc(S.sich[key])}`:""}</span></div>
+          <div><span class="hinweis">Was London tat</span><span>${esc(E.tat)}</span></div></div>
+        <div class="auswert"><h4>Zum Besprechen</h4><ol>${E.fragen.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>
+        <div class="spaeter">${TYP.rueck}<ul style="padding-left:1.2rem;display:grid;gap:.35rem">${E.rueck.map(x=>`<li>${x}</li>`).join("")}</ul>
+          <p class="hinweis" style="margin-top:.4rem">Dieses Wissen hatte im ${esc(E.datum)} niemand in London.</p></div>
+        <details class="vertiefung"><summary>Mehr dazu (externe Seiten, freiwillig)</summary>${linkliste("", E.links.map(l=>extern(...l)))}</details>
+        <p class="hinweis">Übertragen Sie das Tafelbild zu Entscheidung ${E.nr} ins <a href="#" data-geh="protokoll">Protokoll</a>.</p>`;
+    }
   }
   return h + `</div></section>`;
 }
 
-
 function codeFeld(key, stufe){
   if(S.stufe >= stufe) return "";
-  return `<div class="gesperrt nodruck"><b>Abstimmung in der Klasse</b><p class="hinweis">Halten Sie Ihre Stimmkarte hoch, wenn die Lehrkraft das Zeichen gibt. Übertragen Sie danach das Tafelbild ins <a href="#" data-geh="protokoll">Protokoll</a>. Das Codewort steht an der Tafel.</p>
+  return `<div class="gesperrt nodruck"><b>Abstimmung in der Klasse</b><p><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button></p><p class="hinweis">Halten Sie Ihre Stimmkarte hoch, wenn die Lehrkraft das Zeichen gibt. Übertragen Sie danach das Tafelbild ins <a href="#" data-geh="protokoll">Protokoll</a>. Das Codewort steht an der Tafel.</p>
     <div class="code"><input type="text" id="code-${key}" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Codewort von der Tafel" aria-label="Codewort"><button class="btn primary" data-code="${key}:${stufe}">Weiter</button></div><p class="fehler" id="f-${key}" role="status"></p></div>`;
 }
 
@@ -684,11 +788,11 @@ function weiter(nach, text){ return `<div class="fuss"><span></span><button clas
 function einstieg(){
   const n = S.ein || 1;
   const karten = [
-    `<div class="karte-ein"><div class="schritt-nr">1 von 5 · Wo und wann?</div><h2>London, Anfang März 1936</h2>${TYP.darst}
+    `<div class="karte-ein"><div class="schritt-nr">1 von 5 · Wo und wann?</div><h2 tabindex="-1">London, Anfang März 1936</h2>${TYP.darst}
       <p>Wir sind in London, der Hauptstadt Großbritanniens. Großbritannien herrscht damals über ein Weltreich, das <i>Empire</i>. Im Parlament, dem <b>Unterhaus</b> (House of Commons), sitzen 615 gewählte Abgeordnete.</p>
       <p>Seit 1933 regiert in Deutschland Adolf Hitler. In London fragen sich viele: Was hat er vor?</p>
       ${karte("europa1936")}</div>`,
-    `<div class="karte-ein"><div class="schritt-nr">2 von 5 · Was ist vorher geschehen?</div><h2>Fünf Ereignisse, die jeder in London kennt</h2>${TYP.darst}
+    `<div class="karte-ein"><div class="schritt-nr">2 von 5 · Was ist vorher geschehen?</div><h2 tabindex="-1">Fünf Ereignisse, die jeder in London kennt</h2>${TYP.darst}
       <ol class="zeitl">
         <li><b>1914–1918</b><span>Erster Weltkrieg. Großbritannien kämpft gegen Deutschland und gewinnt – mit sehr vielen Toten.<small>Fast jede Stadt hat ein Denkmal für die Gefallenen.</small></span></li>
         <li><b>1919</b><span>Versailler Vertrag. Deutschland muss Gebiete abgeben und darf kaum Soldaten haben.<small>Manche in London halten den Vertrag für zu hart.</small></span></li>
@@ -696,19 +800,19 @@ function einstieg(){
         <li><b>1933</b><span>Hitler wird Reichskanzler und beseitigt die Demokratie in Deutschland.<small>Britische Zeitungen berichten über die Verfolgung von Gegnern und von Jüdinnen und Juden.</small></span></li>
         <li><b>1935</b><span>Deutschland führt die Wehrpflicht wieder ein. Italien überfällt Abessinien (heute Äthiopien).<small>Der Völkerbund kann beides nicht verhindern.</small></span></li>
       </ol></div>`,
-    `<div class="karte-ein"><div class="schritt-nr">3 von 5 · Worum wird gestritten?</div><h2>Drei Staaten, drei Ziele</h2>${TYP.darst}
+    `<div class="karte-ein"><div class="schritt-nr">3 von 5 · Worum wird gestritten?</div><h2 tabindex="-1">Drei Staaten, drei Ziele</h2>${TYP.darst}
       <div class="akteure"><div><b>Deutschland</b>will den Versailler Vertrag abschütteln, aufrüsten und wieder Großmacht sein.</div>
         <div><b>Frankreich</b>will sich vor Deutschland schützen und setzt auf Verträge und Verbündete.</div>
         <div><b>Großbritannien</b>will Frieden in Europa und sein Weltreich sichern. Ein neuer Krieg soll vermieden werden.</div></div>
       <div class="begriff"><b>Völkerbund</b> – Zusammenschluss von Staaten seit 1920. Er soll Streit friedlich lösen. Deutschland ist 1933 ausgetreten.</div>
       <div class="begriff"><b>Appeasement</b> (englisch: Beschwichtigung) – Konflikte durch Verhandlungen und Zugeständnisse entschärfen. Damals für viele ein positives Wort.</div></div>`,
-    `<div class="karte-ein"><div class="schritt-nr">4 von 5 · Was steht auf dem Spiel?</div><h2>Erinnerung und Angst</h2>${TYP.darst}
+    `<div class="karte-ein"><div class="schritt-nr">4 von 5 · Was steht auf dem Spiel?</div><h2 tabindex="-1">Erinnerung und Angst</h2>${TYP.darst}
       <p>Im Ersten Weltkrieg sind Hunderttausende britische Soldaten gestorben. Viele Familien haben Väter, Brüder oder Söhne verloren. 1916 wurden junge Männer zum ersten Mal zum Kriegsdienst gezwungen. Auch London wurde aus der Luft angegriffen.</p>
       <p>1934/35 beteiligen sich über elf Millionen Menschen an einer Friedensumfrage, dem <i>Peace Ballot</i>. Die große Mehrheit stimmt für Abrüstung und für den Völkerbund.</p>
       <div class="mat">${TYP.quelle}<p class="de">„Der Mann auf der Straße sollte begreifen, dass ihn keine Macht der Welt davor schützen kann, bombardiert zu werden. … Der Bomber kommt immer durch.“</p>
-        <p class="en">“I think it is well also for the man in the street to realise that there is no power on earth that can protect him from being bombed. Whatever people may tell him, the bomber will always get through.”</p>
+        <p class="en" lang="en">“I think it is well also for the man in the street to realise that there is no power on earth that can protect him from being bombed. Whatever people may tell him, the bomber will always get through.”</p>
         <p class="q">Stanley Baldwin, damals stellvertretender Regierungschef, im Unterhaus am 10. November 1932 (Hansard) · Übersetzung: eigene, gekürzt.</p></div></div>`,
-    `<div class="karte-ein"><div class="schritt-nr">5 von 5 · Ihre Rolle</div><h2>Sie sind Abgeordnete im Unterhaus</h2>
+    `<div class="karte-ein"><div class="schritt-nr">5 von 5 · Ihre Rolle</div><h2 tabindex="-1">Sie sind Abgeordnete im Unterhaus</h2>
       <p>In fünf Bausteinen erfahren Sie, was von 1933 bis 1939 geschieht – immer nur so viel, wie man in London zum jeweiligen Zeitpunkt wusste. Dreimal stimmen Sie ab.</p>
       <h3 style="font-size:1.1rem;margin:1rem 0 .3rem">Drei Dinge auseinanderhalten</h3>
       <div class="ebenen"><div><b>Ihre Haltung</b>Was halten Sie für richtig – mit dem Wissen von damals?</div>
@@ -724,8 +828,9 @@ function einstieg(){
   ];
   return `<section class="seite"><div class="zeit"><span>Einstieg</span></div>
     <h1>Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg?</h1>
-    ${karten.slice(0,n).join("")}
-    ${n < karten.length ? `<div class="fuss"><span class="hinweis">${n} von ${karten.length}</span><button class="btn primary" data-ein="${n+1}">Weiter</button></div>` : weiter("b1","Baustein 1 beginnen")}</section>`;
+    <div class="punkte" aria-hidden="true">${karten.map((_,i)=>`<span class="${i<n?"an":""}"></span>`).join("")}</div>
+    <div id="einkarte">${karten[n-1]}</div>
+    <div class="fuss">${n>1?`<button class="btn" data-ein="${n-1}">Zurück</button>`:"<span></span>"}<span class="hinweis">${n} von ${karten.length}</span>${n < karten.length ? `<button class="btn primary" data-ein="${n+1}">Weiter</button>` : `<button class="btn primary" data-geh="b1">Baustein 1 beginnen</button>`}</div></section>`;
 }
 
 function seite(){
@@ -738,7 +843,7 @@ function seite(){
     const items = VERTRAG.map((x,i)=>{ const an = sel.includes(i); const kl = geprueft ? (x.ok ? "richtig" : (an ? "falsch" : "")) : "";
       return `<button class="wahl ${kl}" data-vt="${i}" aria-pressed="${an}" ${geprueft?"disabled":""}><span class="box">${an||(geprueft&&x.ok)?"✓":""}</span><span>${esc(x.t)}${geprueft?`<span class="fb">${esc(x.fb)}</span>`:""}</span></button>`; }).join("");
     const sorgen = VERTRAG.filter(x=>x.ok).map(x=>`<button class="wahl rund" data-sorge="${esc(x.t)}" aria-pressed="${S.sorge===x.t}"><span class="box">${S.sorge===x.t?"●":""}</span><span>${esc(x.t)}</span></button>`).join("");
-    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 1</span><span>1933 bis März 1936</span></div>
+    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 1</span><span>1933 bis März 1936</span></div>${zeitleiste(id)}
       <h1>Was bedroht uns?</h1>
       ${TYP.darst}<p class="lead">Seit Januar 1933 regiert Adolf Hitler in Deutschland. In wenigen Monaten schaffen die Nationalsozialisten die Demokratie ab. Jüdinnen und Juden werden ausgegrenzt und verfolgt. In London fragt man sich: Bleibt es bei Deutschland selbst – oder bedroht Hitler auch die Nachbarn?</p>
       <div class="mat"><div class="kopfzeile">M1 · Der Bruch mit dem Versailler Vertrag</div>${TYP.darst}
@@ -762,7 +867,7 @@ function seite(){
       "M2 · Die britische Regierung zeigt teilweise Verständnis für die deutsche Revisionspolitik. Das Land leidet noch unter der Wirtschaftskrise, die Öffentlichkeit ist kriegsmüde: König Georg V. soll gesagt haben, er würde eher abdanken, als seinem Land noch einmal einen Krieg wie 1914–1918 zuzumuten. Zugleich erhöht Großbritannien seine Rüstungsausgaben."
     ];
     const da = alleGelesen("b2", L);
-    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 2</span><span>London, 7./8. März 1936</span></div>
+    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 2</span><span>London, 7./8. März 1936</span></div>${zeitleiste(id)}
       <h1>Was tun wir? Die Nazis stoppen – aber wie?</h1>
       <p class="hinweis"><b>Schritt 1 von 7 · Lage</b> – lesen Sie die Meldungen nacheinander.</p>
       ${meldungen("b2", L)}
@@ -777,7 +882,7 @@ function seite(){
       "In Wien werden Regimegegner verhaftet, Jüdinnen und Juden öffentlich gedemütigt und beraubt. London und Paris protestieren, handeln aber nicht."
     ];
     const da = alleGelesen("b3", L);
-    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 3</span><span>März 1938</span></div>
+    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 3</span><span>März 1938</span></div>${zeitleiste(id)}
       <h1>Das Ende der Konflikte oder der Beginn von neuen?</h1>
       <p class="datum">Der „Anschluss“ Österreichs</p>
       ${meldungen("b3", L)}
@@ -796,7 +901,7 @@ function seite(){
       "Frankreich ist mit der Tschechoslowakei verbündet; Großbritannien hat mit Prag keinen Vertrag. In London werden Gasmasken ausgegeben und Schutzgräben ausgehoben."
     ];
     const da = alleGelesen("b4", L);
-    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 4</span><span>London, 27. September 1938</span></div>
+    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 4</span><span>London, 27. September 1938</span></div>${zeitleiste(id)}
       <h1>Die Sudetenfrage. Es hört nicht auf!</h1>
       <p class="hinweis"><b>Schritt 1 von 7 · Lage</b> – lesen Sie die Meldungen nacheinander.</p>
       ${meldungen("b4", L)}
@@ -806,10 +911,10 @@ function seite(){
       ${TYP.quelle}<p class="hinweis">Originalton vom Flugplatz Heston bei London, 30. September 1938 (1:08 min). Der Wortlaut steht darunter.</p>
       ${ton()}
       <p class="de">„Die Lösung des tschechoslowakischen Problems, die jetzt erreicht ist, ist meiner Ansicht nach nur der Auftakt zu einer größeren Regelung, in der ganz Europa Frieden finden kann.“</p>
-      <p class="en">“The settlement of the Czechoslovak problem which has now been achieved is, in my view, only the prelude to a larger settlement in which all Europe may find peace.”</p>
+      <p class="en" lang="en">“The settlement of the Czechoslovak problem which has now been achieved is, in my view, only the prelude to a larger settlement in which all Europe may find peace.”</p>
       <p class="hinweis" style="margin-top:.6rem">Aufnahme: Wikimedia Commons · Wortlaut nach D. Faber, Munich 1938 (2008) · Übersetzung: eigene.</p>
       <h2 class="abschnitt">Stimmen aus dem Unterhaus</h2>${TYP.quelle}
-      ${ZITATE.map(z=>`<div class="zitat"><q>${esc(z.de)}</q><div class="wer">${esc(z.wer)} · „${esc(z.en)}“ (Hansard, ${z.sp}) · Übersetzung: eigene</div></div>`).join("")}
+      ${ZITATE.map(z=>`<div class="zitat"><q>${esc(z.de)}</q><div class="wer">${esc(z.wer)} · <span lang="en">„${esc(z.en)}“</span> (Hansard, ${z.sp}) · Übersetzung: eigene</div></div>`).join("")}
       <div class="zahlen"><div><span class="hinweis">House of Commons, 6. Oktober 1938</span><b>366 : 144</b><span class="hinweis">für : gegen die Politik der Regierung (Hansard, Sp. 558–562)</span></div>
         <div><span class="hinweis">Unsere Klasse (aus dem Protokoll)</span><b>${klasse("e2")}</b><span class="hinweis">Zustimmung (A + B) : Ablehnung (C)</span></div></div>
       ${weiter("b4b","Weiter: März 1939")}` : ""}</section>`;
@@ -822,7 +927,7 @@ function seite(){
       "In London kursieren Gerüchte über deutsche Pläne gegen Polen und Rumänien. Was davon zutrifft, ist unklar."
     ];
     const da = alleGelesen("b4b", L);
-    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 4</span><span>London, Mitte März 1939</span></div>
+    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 4</span><span>London, Mitte März 1939</span></div>${zeitleiste(id)}
       <h1>Das Deutsche Reich zerschlägt die Tschechoslowakei</h1>
       <p class="hinweis"><b>Schritt 1 von 7 · Lage</b> – lesen Sie die Meldungen nacheinander.</p>
       ${meldungen("b4b", L)}
@@ -839,7 +944,7 @@ function seite(){
       "Am 1. September 1939 eröffnet das Linienschiff „Schleswig-Holstein“ das Feuer auf die Westerplatte bei Danzig; die Wehrmacht greift Polen an. Am 3. September läuft ein britisches Ultimatum ab: Großbritannien und Frankreich erklären Deutschland den Krieg."
     ];
     const da = alleGelesen("b5", L);
-    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 5</span><span>August und September 1939</span></div>
+    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 5</span><span>August und September 1939</span></div>${zeitleiste(id)}
       <h1>Der Angriff auf Polen</h1>
       ${meldungen("b5", L)}
       ${da ? `<div class="aufl"><div class="kopfzeile">Was dann geschah · September 1939</div><ul>
@@ -861,7 +966,7 @@ function seite(){
   if(id==="ende"){
     const row = (t, du, tat) => `<tr><td>${t}</td><td>${du}</td><td>${tat}</td></tr>`;
     const w = k => S.v[k] ? `${S.v[k]}${S.sich[k]?` (${esc(S.sich[k])})`:""}` : "–";
-    return `<section class="seite"><div class="zeit"><span>Konsolidierung</span></div>
+    return `<section class="seite"><div class="zeit"><span>Konsolidierung</span></div>${zeitleiste("ende")}
       <h1>Ihre abschließende Beurteilung</h1>
       <p class="lead">Vergleichen Sie Ihre Entscheidungen von damals mit dem, was tatsächlich geschah.</p>
       <table class="weg-tab"><thead><tr><th>Zeitpunkt</th><th>Sie</th><th>Was geschah</th></tr></thead><tbody>
@@ -929,24 +1034,32 @@ function stimmkarte(){
 
 const FUSS = `<footer class="seitenfuss nodruck"><span>GGK-Labor · keine Namen, keine Übertragung: Antworten bleiben auf diesem Gerät.</span>${IN_MOODLE ? "" : `<a href="?ansicht=lehrkraft">Hinweise für die Lehrkraft</a>`}</footer>`;
 
+let fokusZiel = null;
 function zeichne(){
+  // Fokus nach dem Neuzeichnen wiederherstellen (Tastaturbedienung)
+  const a = document.activeElement; let sel = null;
+  if(a && a !== document.body && a.attributes){ for(const at of a.attributes){ if(at.name.startsWith("data-") || at.name==="id"){ sel = at.name==="id" ? "#"+CSS.escape(at.value) : `[${at.name}="${String(at.value).replace(/"/g,'\\"')}"]`; break; } } }
   $("#app").innerHTML = kopf() + `<main>${seite()}</main>` + FUSS + (S.karte ? stimmkarte() : "");
   verdrahten();
+  const ziel = fokusZiel ? $(fokusZiel) : (sel ? $(sel) : null); const war = fokusZiel; fokusZiel = null;
+  if(ziel){ if(war && ziel.matches(".ph-titel")){ ziel.focus({preventScroll:true}); ziel.closest(".entscheidung").scrollIntoView({block:"start"}); scrollBy(0,-120); } else ziel.focus({preventScroll:true}); }
 }
+document.addEventListener("keydown", e => { if(e.key==="Escape" && S.karte){ const k=S.karte; fokusZiel=`#ph-${k} .ph-titel`; setze(x=>{ x.karte=null; }); } });
 
 function verdrahten(){
   $$("[data-geh]").forEach(b=>b.onclick=e=>{ e.preventDefault(); const z=b.dataset.geh; const s=SEITEN.find(x=>x.id===z);
     if(s && s.stufe > S.stufe) return; setze(x=>{ if(z==="protokoll" && x.seite!=="protokoll") x.zurueck=x.seite; x.seite=z; }); scrollTo(0,0); });
-  $$("[data-ein]").forEach(b=>b.onclick=()=>setze(x=>{ x.ein=+b.dataset.ein; }));
+  $$("[data-ein]").forEach(b=>b.onclick=()=>{ fokusZiel="#einkarte h2"; setze(x=>{ x.ein=+b.dataset.ein; }); });
   $$("[data-pers]").forEach(b=>b.onclick=()=>setze(x=>{ x.pers=b.dataset.pers; }));
   $$("[data-meld]").forEach(b=>b.onclick=()=>setze(x=>{ const k=b.dataset.meld; x.m[k]=(x.m[k]??1)+1; }));
   $$("[data-vt]").forEach(b=>b.onclick=()=>setze(x=>{ const i=+b.dataset.vt; x.vt=x.vt||[]; x.vt = x.vt.includes(i) ? x.vt.filter(y=>y!==i) : [...x.vt,i]; }));
   $$("[data-pruefen]").forEach(b=>b.onclick=()=>setze(x=>{ x.vtOk=true; }));
   $$("[data-sorge]").forEach(b=>b.onclick=()=>setze(x=>{ x.sorge=b.dataset.sorge; }));
   const st=$("[data-sorget]"); if(st) st.oninput=()=>{ S.sorgeT=st.value; speichere(); };
-  $$("[data-ph]").forEach(b=>b.onclick=()=>{ const [k,n]=b.dataset.ph.split(":"); setze(x=>{ x.ph[k]=Math.max(x.ph[k]||2,+n); });
-    const ziel=document.querySelectorAll(`#h-${k} ~ .phase`); const letzte=ziel[ziel.length-1]; if(letzte) letzte.scrollIntoView({behavior:"smooth",block:"start"}); });
-  $$("[data-tab]").forEach(b=>b.onclick=()=>{ const [k,o]=b.dataset.tab.split(":"); setze(x=>{ x.tab[k]=o; x.ges[k]=x.ges[k]||["A"]; if(!x.ges[k].includes(o)) x.ges[k].push(o); }); });
+  $$("[data-ph]").forEach(b=>b.onclick=()=>{ const [k,n]=b.dataset.ph.split(":"); fokusZiel=`#ph-${k} .ph-titel`; setze(x=>{ x.ph[k]=Math.max(x.ph[k]||2,+n); x.pv[k]=+n; }); });
+  $$("[data-pv]").forEach(b=>b.onclick=()=>{ const [k,n]=b.dataset.pv.split(":"); fokusZiel=`#ph-${k} .ph-titel`; setze(x=>{ x.pv[k]=+n; }); });
+  $$("[data-tab]").forEach(b=>b.onclick=()=>{ const [k,o]=b.dataset.tab.split(":"); setze(x=>{ x.tab[k]=o; }); });
+  $$("[data-abw]").forEach(b=>b.onclick=()=>{ const [k,o,c]=b.dataset.abw.split(":"); setze(x=>{ x.abw[k]=x.abw[k]||{}; x.abw[k][o]=c; }); });
   $$("[data-ueb]").forEach(b=>b.onclick=()=>{ const [k,i]=b.dataset.ueb.split(":"); setze(x=>{ const a=x.ueb[k]||[]; const n=+i; x.ueb[k] = a.includes(n) ? a.filter(y=>y!==n) : (a.length<2 ? [...a,n] : a); }); });
   $$("[data-pt]").forEach(t=>t.oninput=()=>{ S.pt[t.dataset.pt]=t.value; speichere(); });
   $$("[data-opt]").forEach(b=>b.onclick=()=>{ const [k,o]=b.dataset.opt.split(":"); setze(x=>{ x.v[k]=o; }); });
@@ -954,8 +1067,8 @@ function verdrahten(){
   $$("[data-begr]").forEach(t=>{ t.oninput=()=>{ const k=t.dataset.begr; S[k+"b"]=t.value; speichere();
     const btn=$(`[data-abgabe="${k}"]`), stt=$(`[data-status="${k}"]`); if(btn){ btn.disabled=!bereit(k); stt.textContent = bereit(k)?"Bereit zur Abstimmung.":"Option wählen, einen Satz schreiben, Sicherheit angeben."; } }; });
   $$("[data-prog]").forEach(b=>b.onclick=()=>setze(x=>{ x.prog=b.dataset.prog; }));
-  $$("[data-abgabe]").forEach(b=>b.onclick=()=>setze(x=>{ x.e[b.dataset.abgabe]=true; x.ph[b.dataset.abgabe]=7; x.karte=b.dataset.abgabe; }));
-  $$("[data-karte]").forEach(b=>b.onclick=()=>setze(x=>{ x.karte=b.dataset.karte||null; }));
+  $$("[data-abgabe]").forEach(b=>b.onclick=()=>{ const k=b.dataset.abgabe; fokusZiel=".stimmkarte .zu"; setze(x=>{ x.e[k]=true; x.ph[k]=7; x.pv[k]=7; x.karte=k; }); });
+  $$("[data-karte]").forEach(b=>b.onclick=()=>{ const k=b.dataset.karte; fokusZiel = k ? ".stimmkarte .zu" : (S.karte ? `#ph-${S.karte} .ph-titel` : null); setze(x=>{ x.karte=k||null; }); });
   $$("[data-skala]").forEach(b=>b.onclick=()=>setze(x=>{ x.skala=+b.dataset.skala; }));
   $$("[data-erf]").forEach(b=>b.onclick=()=>setze(x=>{ x.erf=b.dataset.erf; }));
   $$("[data-extern]").forEach(b=>b.onclick=()=>setze(x=>{ x.extern[b.dataset.extern]="an"; }));
