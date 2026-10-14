@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lehrkraftbereich verschlüsseln</title>
+<style>body{font:17px/1.5 system-ui,sans-serif;max-width:40rem;margin:2rem auto;padding:0 1rem;background:#F3EFE7;color:#24221F}
+input,button{font:inherit;padding:.6rem .8rem;border:1px solid #bbb;border-radius:.5rem;width:100%;margin:.3rem 0 1rem}button{background:#9B402D;color:#fff;border:0;font-weight:700;cursor:pointer}
+.h{color:#625F59;font-size:.9rem}</style></head><body>
+<h1>Lehrkraftbereich verschlüsseln</h1>
+<p>Dieses Werkzeug läuft nur in Ihrem Browser. Nichts wird übertragen.</p>
+<ol><li>Klartext-Datei wählen (z.&nbsp;B. <code>m19-lehrkraft.html</code>, nicht im Repository speichern).</li>
+<li>Langes Passwort eingeben (mind. 12 Zeichen, besser eine Passphrase aus 4–5 Wörtern).</li>
+<li>Die erzeugte Datei <code>m19-lehrkraft.enc.json</code> im Repository im Ordner <code>lk/</code> ersetzen.</li></ol>
+<label>Klartext-Datei<input type="file" id="f" accept=".html,.htm,.txt"></label>
+<label>Passwort<input type="password" id="p" autocomplete="new-password"></label>
+<label>Passwort wiederholen<input type="password" id="p2" autocomplete="new-password"></label>
+<button id="go">Verschlüsseln und herunterladen</button>
+<p id="s" class="h" role="status"></p>
+<script>
+const b64=u=>{let s="";u.forEach(b=>s+=String.fromCharCode(b));return btoa(s);};
+document.getElementById("go").onclick=async()=>{const st=document.getElementById("s");
+  const f=document.getElementById("f").files[0],p=document.getElementById("p").value;
+  if(!f){st.textContent="Bitte eine Datei wählen.";return;} if(p.length<12){st.textContent="Das Passwort ist zu kurz.";return;}
+  if(p!==document.getElementById("p2").value){st.textContent="Die Passwörter stimmen nicht überein.";return;}
+  st.textContent="Wird verschlüsselt …";
+  const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),iter=600000;
+  const km=await crypto.subtle.importKey("raw",new TextEncoder().encode(p),"PBKDF2",false,["deriveKey"]);
+  const key=await crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:iter,hash:"SHA-256"},km,{name:"AES-GCM",length:256},false,["encrypt"]);
+  const ct=new Uint8Array(await crypto.subtle.encrypt({name:"AES-GCM",iv},key,new TextEncoder().encode(await f.text())));
+  const blob=new Blob([JSON.stringify({v:1,alg:"AES-GCM-256/PBKDF2-SHA256",iter,salt:b64(salt),iv:b64(iv),ct:b64(ct)})],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="m19-lehrkraft.enc.json";a.click();
+  st.textContent="Fertig. Die Datei wurde heruntergeladen.";};
+</script></body></html>

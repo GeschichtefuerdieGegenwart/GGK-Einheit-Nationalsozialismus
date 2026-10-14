@@ -8,7 +8,7 @@ Interaktive Quellen-Labore für Geschichte (GGK) am beruflichen Gymnasium – ge
 | --- | --- |
 | `index.html` | Übersicht aller Bausteine |
 | `ns-ideologie.html` | M18 · Die fünf Säulen der NS-Ideologie (eine Datei, aus `src/` erzeugt) |
-| `appeasement.html` | M19 · Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg? (iPad-Fassung nach der Print-Stunde; `?ansicht=lehrkraft` zeigt Ablauf, Codewörter, Tafelbild) |
+| `appeasement.html` | M19 · Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg? (iPad-Fassung nach der Print-Stunde; drei Entscheidungen in je sieben Schritten; `?ansicht=lehrkraft` öffnet den verschlüsselten Lehrkraftbereich) |
 | `docs/M19_Faktensicherung.pdf` | Faktensicherung M19, 2 Seiten (Quelle: `src/m19-faktensicherung.html`) |
 | `auswertung.html` | Kursbild für die Lehrkraft (QR-Codes scannen) |
 | `lehrkraft.html` | Diagnose, Entscheidung, Stundenablauf, Quellenprüfung |
@@ -22,7 +22,9 @@ Bauen: `node tools/inline.js src/ns-ideologie.html` bettet CSS, Skripte und das 
 
 ## Datenschutz
 
-Keine externen Skripte oder Tracking. Schriften liegen lokal in `assets/fonts/`. Ausnahme in `appeasement.html`: Das Foto und der Originalton werden von der Science Museum Group bzw. Wikimedia Commons nachgeladen; liegen die Dateien in `media/`, wird nichts extern geladen. Eingaben bleiben im Browser des iPads (localStorage). Der QR-Code enthält nur Zahlen; die Daten stehen im Anker der Adresse und werden nicht an den Server übertragen.
+Keine externen Skripte oder Tracking. Schriften liegen lokal in `assets/fonts/`. In `appeasement.html` werden Foto und Originalton aus `media/` geladen; fehlen die Dateien, lädt die Seite sie erst nach einem Klick von der Science Museum Group bzw. Wikimedia Commons (Zwei-Klick-Lösung). Karten fehlen noch und erscheinen als gekennzeichnete Platzhalter.
+
+**Lehrkraftbereich M19:** `lk/m19-lehrkraft.enc.json` ist mit AES-GCM verschlüsselt (Schlüssel per PBKDF2 aus dem Passwort). Der Klartext liegt nicht im Repository (`privat/` steht in `.gitignore`). Neu verschlüsseln: `tools/lk-verschluesseln.html` im Browser öffnen oder `LK_PASS='…' node tools/lk-verschluesseln.mjs`. Grenzen: Wer das Passwort kennt, kann es weitergeben; ein Widerruf ist nur durch Neuverschlüsselung möglich. Ältere Fassungen im Git-Verlauf enthalten die früheren Hinweise im Klartext. Eingaben bleiben im Browser des iPads (localStorage). Der QR-Code enthält nur Zahlen; die Daten stehen im Anker der Adresse und werden nicht an den Server übertragen.
 
 ## Bilder und Lizenzen
 
