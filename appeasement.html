@@ -495,6 +495,37 @@ const FEHLT = new Set();
 function platzhalter(k){
   return `<div class="platzhalter"><div class="ph-kopf">Platzhalter · Karte folgt: ${esc(k.titel)}</div>${k.skizze ? k.skizze + `<div class="ph-text">Vereinfachte Behelfsskizze, keine Karte. Eigene Darstellung.</div>` : ""}<div class="ph-text">${esc(k.text)}</div></div>`;
 }
+/* Geschützte Bilder: liegen nur im Moodle-Paket (media/), nie im öffentlichen
+   Repository. Fehlt die Datei, verschwindet die Abbildung ohne Platzhalter. */
+const BILDER = {
+  fitzpatrick:{ datei:"media/fitzpatrick-1930.jpg", alt:"Karikatur: Eine Figur mit Pickelhaube und der Aufschrift „Hitler Party“ greift nach einem Blatt mit der Aufschrift „Versailles Treaty“.",
+    cap:"Karikatur von Daniel R. Fitzpatrick (St. Louis Post-Dispatch) zur Reichstagswahl 1930 · aus Padlet M1 · nur für den Unterricht in diesem Kurs (§ 60a UrhG)",
+    frage:"Was befürchtete ein amerikanischer Zeichner schon 1930?" },
+  rheinbruecke:{ datei:"media/rheinbruecke-koeln-1936.jpg", alt:"Wehrmachtssoldaten mit Stahlhelm und Gewehr marschieren über eine Stahlbrücke; am linken Rand stehen dicht gedrängt Menschen, viele heben den Arm zum Hitlergruß.",
+    cap:"Wehrmacht marschiert über die Rheinbrücke nach Köln, 7. März 1936 · Deutsches Historisches Museum, Berlin, Inv. BA 90/6009 · nur für den Unterricht in diesem Kurs (§ 60a UrhG)",
+    frage:"Solche Bilder erschienen damals in Zeitungen und Wochenschauen. Wer hat das Foto vermutlich gemacht und verbreitet? Was soll es zeigen – und was zeigt es nicht?" },
+  heldenplatz:{ datei:"media/heldenplatz-wien-1938.jpg", alt:"Eine riesige Menschenmenge füllt einen Platz vor monumentalen Gebäuden in Wien.",
+    cap:"Kundgebung auf dem Heldenplatz in Wien, März 1938 · aus Padlet M3 · nur für den Unterricht in diesem Kurs (§ 60a UrhG)",
+    frage:"Wer war auf dem Platz – und wer nicht? Was erfahren Sie aus den Meldungen über Menschen, die nicht jubelten?" },
+  schlagbaum:{ datei:"media/schlagbaum-1939.jpg", alt:"Deutsche Soldaten reißen lachend einen Grenzschlagbaum nieder.",
+    cap:"Deutsche Soldaten reißen einen polnischen Grenzschlagbaum nieder, 1. September 1939 · gilt als für die Propaganda nachgestellte Aufnahme · aus Padlet M6 · nur für den Unterricht in diesem Kurs (§ 60a UrhG)",
+    frage:"Warum stellte die Propaganda gerade diese Szene nach? Was verschweigt das Bild über den Krieg gegen Polen?" },
+  vierjahresplan:{ datei:"media/vierjahresplan-titel.jpg", alt:"Farbiges Titelblatt: Flugzeuge über Fabriken, Fördertürmen und Schornsteinen, darunter der Schriftzug „Der Vierjahresplan“.",
+    cap:"Titelblatt der Zeitschrift „Der Vierjahresplan“ · aus Padlet M7 · nur für den Unterricht in diesem Kurs (§ 60a UrhG)",
+    frage:"Öffentlich war der Vierjahresplan ein Wirtschaftsprogramm. Vergleichen Sie das Titelblatt mit der geheimen Denkschrift: Was verrät das Bild, was verschweigt es?" },
+  ausweitung:{ datei:"media/ghdi-ausweitung-1935-1939.png", alt:"Karte: Territoriale Ausweitung Deutschlands 1935–1939 mit Saarland, Rheinland, Österreich, Sudetenland, Protektorat Böhmen und Mähren und Memelgebiet.",
+    cap:"Territoriale Ausweitung Deutschlands (1935–1939) · German History in Documents and Images (GHDI), Deutsches Historisches Institut Washington · Kartografie: Cherie Norton/Mapping Solutions, überarbeitet von Gabriel Moss 2021, nach: MGFA (Hg.), Germany and the Second World War, Bd. I, Oxford 1990, Karte 1 · germanhistorydocs.org/de/deutschland-nationalsozialismus-1933-1945/ghdi:map-2884 · nur für den Unterricht in diesem Kurs (§ 60a UrhG)",
+    frage:"" }
+};
+const BILD_FEHLT = new Set();
+function bild(id){
+  if(BILD_FEHLT.has(id)) return "";
+  const b = BILDER[id];
+  return `<figure data-bild-id="${id}"><img src="${b.datei}" alt="${esc(b.alt)}" loading="lazy" onerror="bildFehlt(this)"><figcaption>${TYP.quelle} ${esc(b.cap)}${b.frage?`<br><b>Zum Bild:</b> ${esc(b.frage)}`:""}</figcaption></figure>`;
+}
+window.bildFehlt = img => { const f = img.closest("figure"); BILD_FEHLT.add(f.dataset.bildId); f.remove(); };
+const IN_MOODLE = location.pathname.includes("pluginfile.php");
+
 /* Externe Links: nichts wird eingebettet oder vorab geladen. */
 function extern(url, titel, wer, hinweis=""){
   return `<li><a href="${url}" target="_blank" rel="noopener noreferrer">${esc(titel)}</a> <span class="hinweis">· ${esc(wer)}${hinweis?" · "+esc(hinweis):""}</span></li>`;
@@ -712,7 +743,8 @@ function seite(){
       ${TYP.darst}<p class="lead">Seit Januar 1933 regiert Adolf Hitler in Deutschland. In wenigen Monaten schaffen die Nationalsozialisten die Demokratie ab. Jüdinnen und Juden werden ausgegrenzt und verfolgt. In London fragt man sich: Bleibt es bei Deutschland selbst – oder bedroht Hitler auch die Nachbarn?</p>
       <div class="mat"><div class="kopfzeile">M1 · Der Bruch mit dem Versailler Vertrag</div>${TYP.darst}
         <p>Schon kurz nach Inkrafttreten des Versailler Vertrages 1920 wollten fast alle politischen Kräfte im Deutschen Reich ihn revidieren, weil sie seine Beschränkungen für zu hart hielten. Adolf Hitler brach nach der „Machtergreifung“ wesentliche Bestimmungen des Vertrages – durch die Aufrüstung, die Einführung der allgemeinen Wehrpflicht und den Einmarsch ins entmilitarisierte Rheinland.</p>
-        <p class="q">Nach Padlet M1, gekürzt. Die Karikatur von D. R. Fitzpatrick zur Reichstagswahl 1930 zeigt die Lehrkraft vorn.</p></div>
+        <p class="q">Nach Padlet M1, gekürzt.${IN_MOODLE?"":" Die Karikatur von D. R. Fitzpatrick zur Reichstagswahl 1930 zeigt die Lehrkraft vorn."}</p></div>
+      ${bild("fitzpatrick")}
       ${karte("rheinland")}
       ${linkliste("Karte zum Nachschlagen", [extern("https://de.wikipedia.org/wiki/Datei:Karte_des_Deutschen_Reiches,_Weimarer_Republik-Drittes_Reich_1919%E2%80%931937.svg","Karte des Deutschen Reiches 1919–1937","Wikipedia / Wikimedia Commons","Grenzen bis 1937")])}
       <div class="auftrag"><h3>1.1 Der Bruch mit dem Versailler Vertrag</h3><p>Welche dieser Schritte des Deutschen Reiches verstoßen gegen den Versailler Vertrag? Nutzen Sie M1, wählen Sie aus und prüfen Sie dann.</p></div>
@@ -734,7 +766,7 @@ function seite(){
       <h1>Was tun wir? Die Nazis stoppen – aber wie?</h1>
       <p class="hinweis"><b>Schritt 1 von 7 · Lage</b> – lesen Sie die Meldungen nacheinander.</p>
       ${meldungen("b2", L)}
-      ${da ? entscheidungsweg("e1") : ""}
+      ${da ? bild("rheinbruecke") + entscheidungsweg("e1") : ""}
       ${S.stufe>=1 ? weiter("b3","Weiter zu Baustein 3") : ""}</section>`;
   }
 
@@ -749,7 +781,7 @@ function seite(){
       <h1>Das Ende der Konflikte oder der Beginn von neuen?</h1>
       <p class="datum">Der „Anschluss“ Österreichs</p>
       ${meldungen("b3", L)}
-      ${da ? `${karte("lage1938")}
+      ${da ? `${bild("heldenplatz")}${karte("lage1938")}
       <p class="hinweis">Nach M3: Bei einer nicht freien Volksabstimmung am 10. April 1938 stimmen offiziell 99,73 % der Österreicher für den „Anschluss“.</p>
       <p class="frage">3.2 Wie erfolgreich war die britische Politik bisher?</p>
       <div class="skala" role="group" aria-label="Skala von 1 bis 6">${[1,2,3,4,5,6].map(x=>`<button data-skala="${x}" aria-pressed="${S.skala===x}">${x}</button>`).join("")}</div>
@@ -813,6 +845,7 @@ function seite(){
       ${da ? `<div class="aufl"><div class="kopfzeile">Was dann geschah · September 1939</div><ul>
         <li>Die Wehrmacht führt den Krieg vom ersten Tag an mit großer Härte. Deutsche Truppen, Einsatzkommandos von Polizei und SS ermorden eine große Zahl polnischer Zivilisten und Kriegsgefangener (M6).</li>
         <li>Am 17. September marschiert auch die Sowjetunion in Polen ein. Beide Staaten teilen das Land unter sich auf.</li></ul></div>
+      ${bild("schlagbaum")}
       ${linkliste("Mehr dazu", [extern("https://www.dhm.de/lemo/kapitel/der-zweite-weltkrieg/kriegsverlauf/ueberfall-auf-polen-1939.html","Überfall auf Polen 1939","LeMO, Deutsches Historisches Museum"), extern("https://www.dhm.de/lemo/kapitel/ns-regime/aussenpolitik/hitler-stalin-pakt-1939","Hitler-Stalin-Pakt 1939","LeMO, Deutsches Historisches Museum")])}
       <div class="spaeter">${TYP.rueck}<div class="kopfzeile">In London 1939 unbekannt</div>
         <ul style="padding-left:1.2rem;display:grid;gap:.35rem">
@@ -821,6 +854,7 @@ function seite(){
         <li>Am 3. April 1939 ließ er den Angriff auf Polen vorbereiten (Weisung „Fall Weiß“): Er sollte ab dem 1. September 1939 jederzeit möglich sein.</li>
         <li>Ein geheimes Zusatzprotokoll zum Pakt vom 23. August teilte Ostmitteleuropa in deutsche und sowjetische Interessensphären auf.</li></ul>
         <p class="hinweis" style="margin-top:.5rem">Diese Dokumente wurden erst nach dem Krieg bekannt, unter anderem im Nürnberger Prozess 1945/46.</p></div>
+      ${bild("vierjahresplan")}
       ${weiter("ende","Weiter zur Beurteilung")}` : ""}</section>`;
   }
 
@@ -837,7 +871,7 @@ function seite(){
       ${row("März 1939 · Prag", `${w("e3")}${S.erf?` · Erwartung: ${esc(S.erf)}`:""}`, "Garantie für Polen, Wehrpflicht, Verhandlungen mit der UdSSR ohne Ergebnis")}
       ${row("September 1939", "–", "Angriff auf Polen; Kriegserklärung am 3. September")}
       </tbody></table>
-      <div class="spaeter">${TYP.rueck}<div class="kopfzeile">Karten im Rückblick</div>
+      <div class="spaeter">${TYP.rueck}<div class="kopfzeile">Karten im Rückblick</div>${bild("ausweitung")}
         <ul style="padding-left:1.2rem;display:grid;gap:.35rem">
         ${extern("https://germanhistorydocs.org/de/deutschland-nationalsozialismus-1933-1945/ghdi:map-2884","Territoriale Ausweitung Deutschlands 1935–1939","German History in Documents and Images (GHDI), Deutsches Historisches Institut Washington","Kartografie nach MGFA 1990, überarbeitet 2021")}
         ${extern("https://www.spiegel.de/fotostrecke/maps-the-third-reich-prepares-for-war-fotostrecke-46092.html","Maps: The Third Reich Prepares for War","Der Spiegel (englisch), Fotostrecke")}</ul>
@@ -893,7 +927,7 @@ function stimmkarte(){
     <div class="gross">${k}</div><p>${esc(E && E.opt[k] ? E.opt[k].t : "")}</p><p style="font-size:1rem;opacity:.8">Hochhalten, wenn die Lehrkraft das Zeichen gibt.</p></div>`;
 }
 
-const FUSS = `<footer class="seitenfuss nodruck"><span>GGK-Labor · keine Namen, keine Übertragung: Antworten bleiben auf diesem Gerät.</span><a href="?ansicht=lehrkraft">Hinweise für die Lehrkraft</a></footer>`;
+const FUSS = `<footer class="seitenfuss nodruck"><span>GGK-Labor · keine Namen, keine Übertragung: Antworten bleiben auf diesem Gerät.</span>${IN_MOODLE ? "" : `<a href="?ansicht=lehrkraft">Hinweise für die Lehrkraft</a>`}</footer>`;
 
 function zeichne(){
   $("#app").innerHTML = kopf() + `<main>${seite()}</main>` + FUSS + (S.karte ? stimmkarte() : "");
