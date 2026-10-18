@@ -7,6 +7,8 @@
 <title>M19 Appeasement – Der Weg zum Frieden oder in den Krieg?</title>
 <meta name="description" content="GGK M19: Appeasement-Politik 1933–1939 auf dem iPad – fünf Bausteine nach der Print-Stunde, drei Entscheidungen, Sicherung an der Tafel.">
 <script src="assets/karten.js"></script>
+<link rel="stylesheet" href="assets/motion.css">
+<script src="assets/motion.js"></script>
 <style>
 /* Schriften lokal im Repository (SIL Open Font License) – keine Verbindung zu Google */
 @font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
@@ -48,7 +50,7 @@ a{color:var(--red)}
 .weg button.zu{cursor:default;opacity:.55}
 
 main{max-width:46rem;margin:auto;padding:clamp(1.5rem,4vw,3rem) 1.25rem 5rem}
-.seite{animation:auf .4s cubic-bezier(.16,1,.3,1)}
+.seite{}
 .zeit{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;color:var(--red);font-weight:700;font-size:.95rem}
 .zeit .nr{font-family:var(--display);font-size:1.1rem}
 .seite h1{font-size:clamp(2rem,1.4rem + 2.4vw,3.1rem);margin:.5rem 0 .7rem}
@@ -56,7 +58,7 @@ main{max-width:46rem;margin:auto;padding:clamp(1.5rem,4vw,3rem) 1.25rem 5rem}
 .lead{font-size:clamp(1.1rem,1rem + .5vw,1.3rem);color:var(--muted);margin-bottom:1.6rem}
 h2.abschnitt{font-size:1.45rem;margin:2.4rem 0 .8rem}
 .meld{list-style:none;border-top:1px solid var(--line);margin-bottom:1rem;counter-reset:m}
-.meld li{counter-increment:m;display:grid;grid-template-columns:2rem 1fr;gap:.5rem;padding:.9rem 0;border-bottom:1px solid var(--line);animation:auf .45s ease}
+.meld li{counter-increment:m;display:grid;grid-template-columns:2rem 1fr;gap:.5rem;padding:.9rem 0;border-bottom:1px solid var(--line)}
 .meld li::before{content:counter(m);font-family:var(--display);color:var(--red);font-size:1.25rem;line-height:1.3}
 .mehr{margin:.2rem 0 1.4rem}
 .auftrag{background:var(--ink);color:var(--inverse);border-radius:var(--r-lg);padding:1.3rem 1.5rem;margin:1.6rem 0 1.2rem}
@@ -102,7 +104,7 @@ input[type=text]{width:100%;min-height:48px;border:1.5px solid var(--border);bor
 .code{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem}
 .code input{flex:1 1 12rem;text-transform:uppercase;letter-spacing:.08em;font-size:1.2rem}
 .fehler{color:var(--red);min-height:1.4em;margin-top:.4rem}
-.aufl{border-left:5px solid var(--green);background:var(--surface);border-radius:0 var(--r-lg) var(--r-lg) 0;padding:1.2rem 1.4rem;margin:1.6rem 0;animation:auf .5s ease}
+.aufl{border-left:5px solid var(--green);background:var(--surface);border-radius:0 var(--r-lg) var(--r-lg) 0;padding:1.2rem 1.4rem;margin:1.6rem 0}
 .aufl .kopfzeile{color:var(--green);font-weight:700;font-size:.95rem;margin-bottom:.4rem}
 .aufl ul{padding-left:1.2rem;display:grid;gap:.35rem}
 .mat{border:1px solid var(--border);background:var(--surface2);border-radius:var(--r-lg);padding:1.1rem 1.3rem;margin:1.2rem 0}
@@ -171,7 +173,7 @@ audio{width:100%;margin:.6rem 0}
 .legende .typ{margin:0;white-space:nowrap}
 
 /* Einstieg in Schritten */
-.karte-ein{border:1px solid var(--border);background:var(--surface);border-radius:var(--r-lg);padding:1.3rem 1.4rem;margin:1.2rem 0;animation:auf .45s ease}
+.karte-ein{border:1px solid var(--border);background:var(--surface);border-radius:var(--r-lg);padding:1.3rem 1.4rem;margin:1.2rem 0}
 .karte-ein h2{font-size:clamp(1.35rem,1.15rem + .8vw,1.7rem);margin-bottom:.55rem}
 .karte-ein p+p{margin-top:.6rem}
 .schritt-nr{font-size:.82rem;font-weight:700;color:var(--red);margin-bottom:.2rem}
@@ -191,7 +193,7 @@ audio{width:100%;margin:.6rem 0}
 @media (max-width:640px){.ebenen{grid-template-columns:1fr}}
 
 /* Sieben Schritte je Entscheidung */
-.phase{border-top:1px solid var(--line);padding:1.2rem 0 .4rem;animation:auf .45s ease}
+.phase{border-top:1px solid var(--line);padding:1.2rem 0 .4rem}
 .phase>h3{font-size:1.3rem;margin-bottom:.5rem}
 .phase .pnr{display:block;font-family:var(--body);font-size:.8rem;font-weight:700;color:var(--green);margin-bottom:.15rem;letter-spacing:.02em}
 .spiel{display:grid;gap:.55rem;margin:.6rem 0}
@@ -302,6 +304,11 @@ details .auswert{border:0;padding:0;margin:.4rem 0;background:none}
 .tor{max-width:28rem;margin:3rem auto;display:grid;gap:.8rem}
 .tor input{width:100%;min-height:48px;border:1.5px solid var(--border);border-radius:.6rem;padding:.5rem .8rem;background:var(--surface2)}
 
+@media (max-width:420px){.legende .typ{white-space:normal}}
+.weg-tab td{overflow-wrap:break-word;hyphens:auto}
+@media (max-width:600px){.weg-tab thead{display:none}.weg-tab tr{display:grid;border-bottom:1px solid var(--line);padding:.4rem 0}.weg-tab td{border:0;padding:.2rem .3rem}.weg-tab td:first-child{font-weight:700}}
+.seite > h1{view-transition-name:stunde-m19}
+.vorschau{border-left-color:var(--ink)}
 @media print{
   .kopf,.fuss,.protokoll-btn,.nodruck{display:none!important}
   body{background:#fff;font-size:11pt}
@@ -489,7 +496,7 @@ const ENT = {
 const ZITATE = [
   { wer:"Neville Chamberlain, Premierminister (Konservative), 3. Oktober 1938", de:"… eine Katastrophe abgewendet, die die Zivilisation, wie wir sie kennen, beendet hätte.", en:"… averted a catastrophe which would have ended civilisation as we have known it", sp:"Sp. 45" },
   { wer:"Clement Attlee, Oppositionsführer (Labour), 3. Oktober 1938", de:"Das war kein Sieg der Vernunft und der Menschlichkeit. Es war ein Sieg der rohen Gewalt.", en:"This has not been a victory for reason and humanity. It has been a victory for brute force.", sp:"Sp. 51" },
-  { wer:"Winston Churchill, Abgeordneter (Konservative), 5. Oktober 1938", de:"Das ist erst der Anfang der Abrechnung.", en:"This is only the beginning of the reckoning.", sp:"Sp. 371" }
+  { wer:"Winston Churchill, Abgeordneter (Konservative), 5. Oktober 1938", de:"Das ist erst der Anfang der Abrechnung.", en:"This is only the beginning of the reckoning.", sp:"Sp. 373" }
 ];
 
 /* Medien. Lokale Dateien in media/ haben Vorrang. Externe Quellen werden
@@ -617,7 +624,7 @@ const JETZT = { b1:"1936-03-07", b2:"1936-03-08", b3:"1938-04-10", b4:"1938-09-2
 function zeitleiste(id){
   const j = JETZT[id]; if(!j) return "";
   const bekannt = EREIGNISSE.filter(e=>e[0] <= j), letzt = bekannt.length-1;
-  return `<ol class="zeitleiste" aria-label="Zeitleiste: was bisher geschehen ist">${bekannt.map((e,i)=>`<li class="${i===letzt && id!=="ende"?"jetzt":""}"><span class="zl-d">${e[1]}</span><span class="zl-t">${e[2]}</span>${i===letzt && id!=="ende"?`<span class="zl-hier">Sie sind hier</span>`:""}</li>`).join("")}${id!=="ende"?`<li class="offen"><span class="zl-d">danach</span><span class="zl-t">noch offen</span></li>`:""}</ol>`;
+  return `<ol class="zeitleiste" aria-label="Zeitleiste: was bisher geschehen ist">${bekannt.map((e,i)=>`<li class="${i===letzt && id!=="ende"?"jetzt":""}" data-d="${e[0]}"><span class="zl-d">${e[1]}</span><span class="zl-t">${e[2]}</span>${i===letzt && id!=="ende"?`<span class="zl-hier" data-ml="${e[0]}">Sie sind hier</span>`:""}</li>`).join("")}${id!=="ende"?`<li class="offen"><span class="zl-d">danach</span><span class="zl-t">noch offen</span></li>`:""}</ol>`;
 }
 
 /* ------------------------------ Ablauf ------------------------------- */
@@ -648,7 +655,7 @@ function kopf(){
 
 function meldungen(id, liste){
   const n = S.m[id] ?? 1;
-  const li = liste.slice(0, n).map(t=>`<li>${t}</li>`).join("");
+  const li = liste.slice(0, n).map((t,i)=>`<li class="mv-auf" data-mk="M:${id}:${i}">${t}</li>`).join("");
   const mehr = n < liste.length ? `<div class="mehr"><button class="btn" data-meld="${id}">Nächste Meldung (${n} von ${liste.length})</button></div>` : "";
   return `${TYP.lage}<ol class="meld">${li}</ol>${mehr}`;
 }
@@ -667,7 +674,7 @@ function phasenLeiste(key){
   return `<ol class="phasen" aria-label="Schritte der Entscheidung">${PHASEN.map((t,i)=>{ const n=i+1;
     const zu = n > max, akt = n === pv, da = n < max || (n===max && S.stufe>=ENT[key].stufe);
     const status = akt ? "aktueller Schritt" : da ? "erledigt" : zu ? "noch gesperrt" : "offen";
-    return `<li><button class="${akt?"akt":da?"da":""}" data-pv="${key}:${n}" ${zu||n===1?"disabled":""} ${akt?'aria-current="step"':""} aria-label="Schritt ${n}: ${t} – ${status}"><span class="pn">${da&&!akt?"✓":n}</span>${t}</button></li>`; }).join("")}</ol>`;
+    return `<li><button class="${akt?"akt":da?"da":""}" data-pv="${key}:${n}" ${zu||n===1?"disabled":""} ${akt?'aria-current="step"':""} aria-label="Schritt ${n}: ${t} – ${status}"><span class="pn">${da&&!akt?`<span class="mv-G" data-mk="G:${key}:${n}">✓</span>`:n}</span>${t}</button></li>`; }).join("")}</ol>`;
 }
 const maxPhase = key => S.e[key] ? 7 : (S.ph[key] || 2);
 const sichtPhase = key => Math.min(S.pv[key] || maxPhase(key), maxPhase(key));
@@ -701,7 +708,7 @@ function entscheidungsweg(key){
   const E = ENT[key], max = maxPhase(key), pv = sichtPhase(key), fertig = !!S.e[key], K = KREIS();
   const nav = (n, text, an=true, hinweis="") => `<div class="fuss">${pv>2?`<button class="btn" data-pv="${key}:${pv-1}">Zurück</button>`:"<span></span>"}<span class="hinweis" aria-live="polite">${hinweis}</span>${max>pv?`<button class="btn primary" data-pv="${key}:${pv+1}">Weiter</button>`:`<button class="btn primary" data-ph="${key}:${n}" ${an?"":"disabled"}>${text}</button>`}</div>`;
   let h = `<section class="entscheidung" aria-labelledby="h-${key}"><div class="kopfzeile">Entscheidung ${E.nr} von 3 · ${E.datum}</div>
-    <h2 id="h-${key}">${esc(E.frage)}</h2>${phasenLeiste(key)}<div class="phase" id="ph-${key}">`;
+    <h2 id="h-${key}">${esc(E.frage)}</h2>${phasenLeiste(key)}<div class="phase mv-auf" id="ph-${key}" data-mk="P:${key}:${pv}">`;
 
   if(pv===2){
     h += `${phKopf(2,"Wer entscheidet – und was können Sie tun?")}${TYP.darst}
@@ -760,18 +767,19 @@ function entscheidungsweg(key){
       <div class="seg" role="group" aria-labelledby="sich-l-${key}">${["sicher","eher sicher","unsicher"].map(x=>`<button data-sich="${key}:${x}" aria-pressed="${S.sich[key]===x}" ${fertig?"disabled":""}>${x}</button>`).join("")}</div>
       <p class="hinweis" style="margin-top:.5rem">Dies ist eine Abstimmung in unserer Klasse. Sie zeigt Ihre Haltung – damals entschied die Regierung. Eine Option „unentschieden“ gibt es nicht, weil auch Abwarten eine Politik ist; Ihre Unsicherheit zeigen Sie oben.</p>`;
     if(!fertig) h += `<div class="fuss"><button class="btn" data-pv="${key}:5">Zurück</button><span class="hinweis" data-status="${key}" aria-live="polite">${bereit(key)?"Bereit zur Abstimmung.":"Option wählen, einen Satz schreiben, Sicherheit angeben."}</span><button class="btn green" data-abgabe="${key}" ${bereit(key)?"":"disabled"}>Entscheidung abgeben</button></div>`;
-    else h += `<div class="fuss"><span class="hinweis">Ihre Entscheidung: <b>${v}</b> (${esc(S.sich[key]||"")}).</span><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button><button class="btn primary" data-pv="${key}:7">Weiter</button></div>`;
+    else h += `<div class="fuss"><span class="hinweis">Ihre Entscheidung: <b>${v}</b> (${esc(S.sich[key]||"")}).</span><span class="stempel" data-mk="F:${key}">ABGEGEBEN</span><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button><button class="btn primary" data-pv="${key}:7">Weiter</button></div>`;
   }
 
   if(pv===7){
-    h += `${phKopf(7,"Vergleichen und nachdenken")}${codeFeld(key, E.stufe)}`;
+    h += `${phKopf(7,"Vergleichen und nachdenken")}${codeFeld(key, E.stufe)}${S.stufe < E.stufe ? vorschau() : ""}`;
     if(S.stufe >= E.stufe){
       h += `<div class="wechsel" role="note"><b>Perspektivwechsel</b> Bis hierher haben Sie mit dem Wissen von ${esc(E.datum)} entschieden. Ab hier blicken wir zurück.</div>
-        <div class="aufl"><div class="kopfzeile">Was dann geschah</div>${E.aufl}</div>
-        <div class="vergleich"><div><span class="hinweis">Ihre Entscheidung</span><b>${S.v[key]||"–"}</b><span>${esc(E.opt[S.v[key]]?.t||"")}${S.sich[key]?` · ${esc(S.sich[key])}`:""}</span></div>
+        <div class="aufl"><div class="kopfzeile">Was dann geschah <span class="marke-h">im Rückblick aufgedeckt</span></div>${aufdecken(E.aufl, key)}</div>
+        <div class="vergleich"><div><span class="hinweis">Ihre Entscheidung <span class="stempel" data-mk="F:${key}">ABGEGEBEN</span></span><b>${S.v[key]||"–"}</b><span>${esc(E.opt[S.v[key]]?.t||"")}${S.sich[key]?` · ${esc(S.sich[key])}`:""}</span></div>
           <div><span class="hinweis">Was London tat</span><span>${esc(E.tat)}</span></div></div>
+        ${S[key+"b"] ? `<p class="randnotiz" data-mk="J:${key}"><b>Ihre Begründung:</b> ${esc(S[key+"b"])}</p>` : ""}${S.pt[key] ? `<p class="randnotiz" data-mk="J:${key}:pt"><b>Ihr Gedanke:</b> ${esc(S.pt[key])}</p>` : ""}
         <div class="auswert"><h4>Zum Besprechen</h4><ol>${E.fragen.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>
-        <div class="spaeter">${TYP.rueck}<ul style="padding-left:1.2rem;display:grid;gap:.35rem">${E.rueck.map(x=>`<li>${x}</li>`).join("")}</ul>
+        <div class="spaeter">${TYP.rueck}<ul style="padding-left:1.2rem;display:grid;gap:.35rem">${E.rueck.map((x,i)=>`<li><span class="aufgedeckt" data-mk="H:${key}:r${i}">${x}</span></li>`).join("")}</ul>
           <p class="hinweis" style="margin-top:.4rem">Dieses Wissen hatte im ${esc(E.datum)} niemand in London.</p></div>
         <details class="vertiefung"><summary>Mehr dazu (externe Seiten, freiwillig)</summary>${linkliste("", E.links.map(l=>extern(...l)))}</details>
         <p class="hinweis">Übertragen Sie das Tafelbild zu Entscheidung ${E.nr} ins <a href="#" data-geh="protokoll">Protokoll</a>.</p>`;
@@ -780,9 +788,17 @@ function entscheidungsweg(key){
   return h + `</div></section>`;
 }
 
+/* H · Schwärzung: Was damals niemand wusste, bleibt bis zur Abstimmung geschwärzt. */
+function vorschau(){
+  return `<div class="aufl vorschau"><div class="kopfzeile">Was dann geschah <span class="marke-h">geschwärzt</span></div>
+    <div class="geschwaerzt-zeilen" role="img" aria-label="geschwärzter Text"><span class="geschwaerzt" style="width:94%"></span><span class="geschwaerzt" style="width:78%"></span><span class="geschwaerzt" style="width:86%"></span><span class="geschwaerzt" style="width:52%"></span></div>
+    <p class="hinweis">Wird nach der Abstimmung in der Klasse aufgedeckt.</p></div>`;
+}
+function aufdecken(html, key){ let i = 0; return html.replace(/<li>([\s\S]*?)<\/li>/g, (m, inner) => `<li><span class="aufgedeckt" data-mk="H:${key}:a${i++}">${inner}</span></li>`); }
+
 function codeFeld(key, stufe){
   if(S.stufe >= stufe) return "";
-  return `<div class="gesperrt nodruck"><b>Abstimmung in der Klasse</b><p><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button></p><p class="hinweis">Halten Sie Ihre Stimmkarte hoch, wenn die Lehrkraft das Zeichen gibt. Übertragen Sie danach das Tafelbild ins <a href="#" data-geh="protokoll">Protokoll</a>. Das Codewort steht an der Tafel.</p>
+  return `<div class="gesperrt nodruck"><b>Abstimmung in der Klasse</b> ${S.e[key]?`<span class="stempel" data-mk="F:${key}">ABGEGEBEN</span>`:""}<p><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button></p><p class="hinweis">Halten Sie Ihre Stimmkarte hoch, wenn die Lehrkraft das Zeichen gibt. Übertragen Sie danach das Tafelbild ins <a href="#" data-geh="protokoll">Protokoll</a>. Das Codewort steht an der Tafel.</p>
     <div class="code"><input type="text" id="code-${key}" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Codewort von der Tafel" aria-label="Codewort"><button class="btn primary" data-code="${key}:${stufe}">Weiter</button></div><p class="fehler" id="f-${key}" role="status"></p></div>`;
 }
 
@@ -829,10 +845,10 @@ function einstieg(){
       ${perspSchalter()}
       <p class="hinweis">Ihre Antworten bleiben auf diesem iPad. Es werden keine Namen gespeichert. Am Ende können Sie alles löschen.</p></div>`
   ];
-  return `<section class="seite"><div class="zeit"><span>Einstieg</span></div>
+  return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span>Einstieg</span></div>
     <h1>Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg?</h1>
     <div class="punkte" aria-hidden="true">${karten.map((_,i)=>`<span class="${i<n?"an":""}"></span>`).join("")}</div>
-    <div id="einkarte">${karten[n-1]}</div>
+    <div id="einkarte" class="mv-auf" data-mk="Ein:${n}">${karten[n-1]}</div>
     <div class="fuss">${n>1?`<button class="btn" data-ein="${n-1}">Zurück</button>`:"<span></span>"}<span class="hinweis">${n} von ${karten.length}</span>${n < karten.length ? `<button class="btn primary" data-ein="${n+1}">Weiter</button>` : `<button class="btn primary" data-geh="b1">Baustein 1 beginnen</button>`}</div></section>`;
 }
 
@@ -846,7 +862,7 @@ function seite(){
     const items = VERTRAG.map((x,i)=>{ const an = sel.includes(i); const kl = geprueft ? (x.ok ? "richtig" : (an ? "falsch" : "")) : "";
       return `<button class="wahl ${kl}" data-vt="${i}" aria-pressed="${an}" ${geprueft?"disabled":""}><span class="box">${an||(geprueft&&x.ok)?"✓":""}</span><span>${esc(x.t)}${geprueft?`<span class="fb">${esc(x.fb)}</span>`:""}</span></button>`; }).join("");
     const sorgen = VERTRAG.filter(x=>x.ok).map(x=>`<button class="wahl rund" data-sorge="${esc(x.t)}" aria-pressed="${S.sorge===x.t}"><span class="box">${S.sorge===x.t?"●":""}</span><span>${esc(x.t)}</span></button>`).join("");
-    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 1</span><span>1933 bis März 1936</span></div>${zeitleiste(id)}
+    return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span class="nr">Baustein 1</span><span>1933 bis März 1936</span></div>${zeitleiste(id)}
       <h1>Was bedroht uns?</h1>
       ${TYP.darst}<p class="lead">Seit Januar 1933 regiert Adolf Hitler in Deutschland. In wenigen Monaten schaffen die Nationalsozialisten die Demokratie ab. Jüdinnen und Juden werden ausgegrenzt und verfolgt. In London fragt man sich: Bleibt es bei Deutschland selbst – oder bedroht Hitler auch die Nachbarn?</p>
       <div class="mat"><div class="kopfzeile">M1 · Der Bruch mit dem Versailler Vertrag</div>${TYP.darst}
@@ -870,7 +886,7 @@ function seite(){
       "M2 · Die britische Regierung zeigt teilweise Verständnis für die deutsche Revisionspolitik. Das Land leidet noch unter der Wirtschaftskrise, die Öffentlichkeit ist kriegsmüde: König Georg V. soll gesagt haben, er würde eher abdanken, als seinem Land noch einmal einen Krieg wie 1914–1918 zuzumuten. Zugleich erhöht Großbritannien seine Rüstungsausgaben."
     ];
     const da = alleGelesen("b2", L);
-    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 2</span><span>London, 7./8. März 1936</span></div>${zeitleiste(id)}
+    return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span class="nr">Baustein 2</span><span>London, 7./8. März 1936</span></div>${zeitleiste(id)}
       <h1>Was tun wir? Die Nazis stoppen – aber wie?</h1>
       <p class="hinweis"><b>Schritt 1 von 7 · Lage</b> – lesen Sie die Meldungen nacheinander.</p>
       ${meldungen("b2", L)}
@@ -885,7 +901,7 @@ function seite(){
       "In Wien werden Regimegegner verhaftet, Jüdinnen und Juden öffentlich gedemütigt und beraubt. London und Paris protestieren, handeln aber nicht."
     ];
     const da = alleGelesen("b3", L);
-    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 3</span><span>März 1938</span></div>${zeitleiste(id)}
+    return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span class="nr">Baustein 3</span><span>März 1938</span></div>${zeitleiste(id)}
       <h1>Das Ende der Konflikte oder der Beginn von neuen?</h1>
       <p class="datum">Der „Anschluss“ Österreichs</p>
       ${meldungen("b3", L)}
@@ -904,7 +920,7 @@ function seite(){
       "Frankreich ist mit der Tschechoslowakei verbündet; Großbritannien hat mit Prag keinen Vertrag. In London werden Gasmasken ausgegeben und Schutzgräben ausgehoben."
     ];
     const da = alleGelesen("b4", L);
-    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 4</span><span>London, 27. September 1938</span></div>${zeitleiste(id)}
+    return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span class="nr">Baustein 4</span><span>London, 27. September 1938</span></div>${zeitleiste(id)}
       <h1>Die Sudetenfrage. Es hört nicht auf!</h1>
       <p class="hinweis"><b>Schritt 1 von 7 · Lage</b> – lesen Sie die Meldungen nacheinander.</p>
       ${meldungen("b4", L)}
@@ -930,7 +946,7 @@ function seite(){
       "In London kursieren Gerüchte über deutsche Pläne gegen Polen und Rumänien. Was davon zutrifft, ist unklar."
     ];
     const da = alleGelesen("b4b", L);
-    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 4</span><span>London, Mitte März 1939</span></div>${zeitleiste(id)}
+    return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span class="nr">Baustein 4</span><span>London, Mitte März 1939</span></div>${zeitleiste(id)}
       <h1>Das Deutsche Reich zerschlägt die Tschechoslowakei</h1>
       <p class="hinweis"><b>Schritt 1 von 7 · Lage</b> – lesen Sie die Meldungen nacheinander.</p>
       ${meldungen("b4b", L)}
@@ -947,7 +963,7 @@ function seite(){
       "Am 1. September 1939 eröffnet das Linienschiff „Schleswig-Holstein“ das Feuer auf die Westerplatte bei Danzig; die Wehrmacht greift Polen an. Am 3. September läuft ein britisches Ultimatum ab: Großbritannien und Frankreich erklären Deutschland den Krieg."
     ];
     const da = alleGelesen("b5", L);
-    return `<section class="seite"><div class="zeit"><span class="nr">Baustein 5</span><span>August und September 1939</span></div>${zeitleiste(id)}
+    return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span class="nr">Baustein 5</span><span>August und September 1939</span></div>${zeitleiste(id)}
       <h1>Der Angriff auf Polen</h1>
       ${meldungen("b5", L)}
       ${da ? `<div class="aufl"><div class="kopfzeile">Was dann geschah · September 1939</div><ul>
@@ -969,7 +985,7 @@ function seite(){
   if(id==="ende"){
     const row = (t, du, tat) => `<tr><td>${t}</td><td>${du}</td><td>${tat}</td></tr>`;
     const w = k => S.v[k] ? `${S.v[k]}${S.sich[k]?` (${esc(S.sich[k])})`:""}` : "–";
-    return `<section class="seite"><div class="zeit"><span>Konsolidierung</span></div>${zeitleiste("ende")}
+    return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span>Konsolidierung</span></div>${zeitleiste("ende")}
       <h1>Ihre abschließende Beurteilung</h1>
       <p class="lead">Vergleichen Sie Ihre Entscheidungen von damals mit dem, was tatsächlich geschah.</p>
       <table class="weg-tab"><thead><tr><th>Zeitpunkt</th><th>Sie</th><th>Was geschah</th></tr></thead><tbody>
@@ -1015,13 +1031,13 @@ function klasse(key){ const p = S.prot[key]||{}; const a=+p.A||0,b=+p.B||0,c=+p.
 
 function protokoll(){
   const block = key => { const E = ENT[key], p = S.prot[key]||{};
-    return `<section><h3>Entscheidung ${E.nr} · ${E.datum}</h3><p class="hinweis">${esc(E.frage)} · Ihre Wahl: <b>${S.v[key]||"–"}</b>${S.sich[key]?` (${esc(S.sich[key])})`:""}</p>
+    return `<section><h3>Entscheidung ${E.nr} · ${E.datum} ${S.e[key]?`<span class="stempel" data-mk="F:p:${key}">ABGEGEBEN</span>`:""}</h3><p class="hinweis">${esc(E.frage)} · Ihre Wahl: <b>${S.v[key]||"–"}</b>${S.sich[key]?` (${esc(S.sich[key])})`:""}</p>
       <div class="drei">${["A","B","C"].map(k=>`<label>${k} – Stimmen<input type="number" min="0" inputmode="numeric" data-prot="${key}:${k}" value="${esc(p[k]??"")}"></label>`).join("")}</div>
       <label>davon unsicher (Handzeichen, freiwillig)<input type="number" min="0" inputmode="numeric" data-prot="${key}:u" value="${esc(p.u??"")}"></label>
       <label style="margin-top:.5rem">Stärkstes Argument der Mehrheit<input type="text" data-prot="${key}:arg" value="${esc(p.arg||"")}"></label>
       <label style="margin-top:.5rem">Stärkstes Gegenargument<input type="text" data-prot="${key}:gegen" value="${esc(p.gegen||"")}"></label>
       <div class="tat"><b>Was London tat:</b> ${S.stufe>=E.stufe ? E.tat : "<span class='hinweis'>erscheint nach der Abstimmung</span>"}</div></section>`; };
-  return `<section class="seite"><div class="zeit"><span>Protokoll · Übertrag von der Tafel</span></div>
+  return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span>Protokoll · Übertrag von der Tafel</span></div>
     <h1>Unsere Entscheidungen</h1>
     <p class="lead">Tragen Sie nach jeder Abstimmung das Ergebnis und die zentralen Argumente aus dem Tafelbild ein.</p>
     <div class="prot">${block("e1")}${block("e2")}${block("e3")}</div>
@@ -1044,6 +1060,7 @@ function zeichne(){
   if(a && a !== document.body && a.attributes){ for(const at of a.attributes){ if(at.name.startsWith("data-") || at.name==="id"){ sel = at.name==="id" ? "#"+CSS.escape(at.value) : `[${at.name}="${String(at.value).replace(/"/g,'\\"')}"]`; break; } } }
   $("#app").innerHTML = kopf() + `<main>${seite()}</main>` + FUSS + (S.karte ? stimmkarte() : "");
   verdrahten();
+  if(window.Bewegung) Bewegung.spiele($("#app"));
   const ziel = fokusZiel ? $(fokusZiel) : (sel ? $(sel) : null); const war = fokusZiel; fokusZiel = null;
   if(ziel){ if(war && ziel.matches(".ph-titel")){ ziel.focus({preventScroll:true}); ziel.closest(".entscheidung").scrollIntoView({block:"start"}); scrollBy(0,-120); } else ziel.focus({preventScroll:true}); }
 }

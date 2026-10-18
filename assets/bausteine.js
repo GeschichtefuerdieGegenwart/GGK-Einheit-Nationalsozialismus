@@ -69,6 +69,13 @@
     datei: "appeasement.html"
   };
 
+  B.m20 = {
+    nr: "M20",
+    titel: "Großbritannien im Zweiten Weltkrieg – drei Dilemmata",
+    thema: "Mai 1940, Juli 1941, Februar 1944 · drei Entscheidungen mit geprüften Quellen",
+    datei: "m20-dilemmata.html"
+  };
+
   B.geplant = [];
   window.BAUSTEINE = B;
 })();

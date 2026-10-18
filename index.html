@@ -7,6 +7,8 @@
 <meta name="apple-mobile-web-app-title" content="GGK-Labor">
 <title>GGK-Labor – Geschichte untersuchen</title>
 <link rel="stylesheet" href="assets/lab.css">
+<link rel="stylesheet" href="assets/motion.css">
+<script src="assets/motion.js"></script>
 <style>
   .hero { padding: 26px 0 8px; }
   .hero h1 { font-size: 42px; margin-bottom: 10px; }
@@ -43,10 +45,14 @@
 (function () {
   var B = window.BAUSTEINE;
   document.getElementById("logo").innerHTML = Lab.logo;
-  document.getElementById("tiles").innerHTML = Object.keys(B).filter(function (k) { return B[k] && B[k].datei; }).map(function (k) {
-    var b = B[k];
-    return '<a class="tile" href="' + b.datei + '"><div class="ds">' + Lab.esc(b.nr) + "</div><h3>" + Lab.esc(b.titel) + "</h3><p>" + Lab.esc(b.thema) + '</p><span class="go">›</span></a>';
+  /* D · Reiter: Jede Stunde ist eine Karteikarte; die neueste steht als „aktuell“ vorn.
+     E · Karte wird gezogen: view-transition-name verbindet Kachel und Überschrift der Stunde. */
+  var keys = Object.keys(B).filter(function (k) { return B[k] && B[k].datei; }), letzte = keys[keys.length - 1];
+  document.getElementById("tiles").innerHTML = keys.map(function (k) {
+    var b = B[k], akt = k === letzte;
+    return '<a class="tile' + (akt ? " aktuell" : "") + '" href="' + b.datei + '" style="view-transition-name:stunde-' + k + '"><span class="reiter">' + Lab.esc(b.nr) + (akt ? " · aktuell" : "") + '</span><h3>' + Lab.esc(b.titel) + "</h3><p>" + Lab.esc(b.thema) + '</p><span class="go">›</span></a>';
   }).join("");
+  if (window.Bewegung) Bewegung.einmal(document.querySelector(".tile.aktuell"), "D");
 })();
 </script>
 </body>

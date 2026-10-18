@@ -9,6 +9,7 @@ Interaktive Quellen-Labore für Geschichte (GGK) am beruflichen Gymnasium – ge
 | `index.html` | Übersicht aller Bausteine |
 | `ns-ideologie.html` | M18 · Die fünf Säulen der NS-Ideologie (eine Datei, aus `src/` erzeugt) |
 | `appeasement.html` | M19 · Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg? (iPad-Fassung nach der Print-Stunde; drei Entscheidungen in je sieben Schritten; `?ansicht=lehrkraft` öffnet den verschlüsselten Lehrkraftbereich) |
+| `m20-dilemmata.html` | M20 · Großbritannien im Zweiten Weltkrieg – drei Dilemmata (Mai 1940, Juli 1941, Februar 1944), durchgängige iPad-Fassung mit geprüften Quellen; `?ansicht=lehrkraft` öffnet den verschlüsselten Lehrkraftbereich (`lk/m20-lehrkraft.enc.json`). Karten: `tools/karten_m20.py` → `assets/karten-m20.js` (CShapes 2.0, CC BY-NC-SA 4.0) |
 | `docs/M19_Faktensicherung.pdf` | Faktensicherung M19, 2 Seiten (Quelle: `src/m19-faktensicherung.html`) |
 | `auswertung.html` | Kursbild für die Lehrkraft (QR-Codes scannen) |
 | `lehrkraft.html` | Diagnose, Entscheidung, Stundenablauf, Quellenprüfung |
@@ -23,6 +24,10 @@ Bauen: `node tools/inline.js src/ns-ideologie.html` bettet CSS, Skripte und das 
 ## Datenschutz
 
 Keine externen Skripte oder Tracking. Schriften liegen lokal in `assets/fonts/`. In `appeasement.html` werden Foto und Originalton aus `media/` geladen; fehlen die Dateien, lädt die Seite sie erst nach einem Klick von der Science Museum Group bzw. Wikimedia Commons (Zwei-Klick-Lösung). Die vier Orientierungskarten erzeugt `tools/karten.py` aus dem Datensatz CShapes 2.0 (Schvitz u. a. 2022, CC BY-NC-SA 4.0) als `assets/karten.js`; die Karten stehen unter derselben Lizenz.
+
+**Bewegung:** `assets/motion.css` und `assets/motion.js` (Muster D–L aus dem Motion-Musterbuch: Reiter, Karte wird gezogen, Stempel, Laufzettel, Schwärzung, Textmarker, Randnotiz, Lupe, „Du bist hier“). Jede Bewegung läuft nur einmal, wenn ein Element neu erscheint, nie nach Tastaturbedienung und bei „Weniger Bewegung“ (Systemeinstellung) nur als kurzes Überblenden. Der Endzustand ist immer der Ruhezustand. Gespeichert wird nur ein Sitzungsmerker für den Reiter der Startseite (sessionStorage).
+
+**Bilder M20:** Die Bilder aus dem Unterrichtsheft liegen nur im Moodle-Paket (`media/`, nicht im Repository). Fehlen sie, verschwinden die Abbildungen ohne Lücke.
 
 **Lehrkraftbereich M19:** `lk/m19-lehrkraft.enc.json` ist mit AES-GCM verschlüsselt (Schlüssel per PBKDF2 aus dem Passwort). Der Klartext liegt nicht im Repository (`privat/` steht in `.gitignore`). Neu verschlüsseln: `tools/lk-verschluesseln.html` im Browser öffnen oder `LK_PASS='…' node tools/lk-verschluesseln.mjs`. Grenzen: Wer das Passwort kennt, kann es weitergeben; ein Widerruf ist nur durch Neuverschlüsselung möglich. Ältere Fassungen im Git-Verlauf enthalten die früheren Hinweise im Klartext. Eingaben bleiben im Browser des iPads (localStorage). Der QR-Code enthält nur Zahlen; die Daten stehen im Anker der Adresse und werden nicht an den Server übertragen.
 
