@@ -1,0 +1,99 @@
+/* =====================================================================
+   GGK-Labor · Bewegung
+   Muster aus dem Motion-Musterbuch (signatur-design), gewählt am 18.10.2026:
+   Route A Findbuch: D Reiter · E Karte wird gezogen · F Stempel · G Laufzettel
+   Route B Lupe und Schwärzung: H Schwärzung · I Textmarker · J Randnotiz · K Lupe
+   Route C Fahrplan der Zeit: L „Du bist hier“ fährt weiter
+   Regeln: Endzustand = Ruhezustand (auch ohne JavaScript und im Druck).
+   Nur transform und opacity; Ausnahme H und I: background-size (nur Malen,
+   kein Layout), weil Balken und Textmarker über Zeilenumbrüche laufen müssen.
+   Nie ease-in. Tastaturaktionen werden nicht animiert (motion.js).
+   „Weniger Bewegung“ (Systemeinstellung): Endzustand sofort, höchstens
+   Überblenden in 150 ms.
+   ===================================================================== */
+:root{
+  --dauer-druck:100ms; --dauer-schnell:140ms; --dauer-mittel:200ms; --dauer-aus:150ms;
+  --ease-out:cubic-bezier(.23,1,.32,1); --ease-weg:cubic-bezier(.77,0,.175,1);
+  --kuli:#1E4FB5;    /* J · Randnotiz: „dein Gedanke“ (7,0 : 1 auf Fläche) */
+  --marker:#F3D54E;  /* I · Textmarker, nur hinter Text (10,9 : 1 mit Schrift) */
+}
+
+[data-mk]{transition-property:transform,opacity;transition-timing-function:var(--ease-out);transition-duration:var(--dauer-mittel)}
+[data-mk].mv-von{transition:none!important}
+
+/* Erscheinen: Seite, Schritt, Meldung, Einstiegskarte – nur wenn sie neu sind */
+.mv-auf{transition-duration:300ms}
+.mv-auf.mv-von{opacity:0;transform:translateY(8px)}
+
+/* D · Reiter schiebt sich vor (Startseite) */
+.tiles{row-gap:40px!important;padding-top:22px}
+.tile{border-top-left-radius:0!important}
+.tile .reiter{position:absolute;top:-27px;left:-1px;line-height:19px;font:700 14px var(--font);padding:4px 14px;border-radius:10px 10px 0 0;background:var(--ink-soft);color:#fff}
+.tile.aktuell .reiter{background:var(--accent)}
+.tile.aktuell{transform:translateY(-8px);transition:transform var(--dauer-mittel) var(--ease-out)}
+.tile.aktuell.mv-von{transform:none;transition:none}
+@media (hover:hover) and (pointer:fine){
+  .tile:not(.aktuell){transition:transform var(--dauer-schnell) var(--ease-out)}
+  .tile:not(.aktuell):hover{transform:translateY(-4px)}
+}
+
+/* E · Karte wird gezogen: Kachel der Startseite → Überschrift der Stunde */
+@view-transition{navigation:auto}
+::view-transition-group(*){animation-duration:300ms;animation-timing-function:var(--ease-out)}
+::view-transition-old(root),::view-transition-new(root){animation-duration:var(--dauer-aus)}
+
+/* F · Stempel „abgegeben“ */
+.stempel{display:inline-block;border:3px solid var(--green,#2E5A47);color:var(--green,#2E5A47);font-weight:700;font-size:.82rem;letter-spacing:.08em;padding:.05rem .55rem;border-radius:.3rem;transform:rotate(-6deg);white-space:nowrap}
+.stempel[data-mk]{transition-duration:180ms}
+.stempel.mv-von{transform:rotate(-6deg) scale(1.6);opacity:0}
+
+/* G · Laufzettel: Haken erscheinen */
+.mv-G{display:inline-block}
+.mv-G[data-mk]{transition-duration:var(--dauer-schnell)}
+.mv-G.mv-von{transform:scale(0);opacity:0}
+
+/* H · Schwärzung: geschwärzt = damals unbekannt; aufgedeckt = im Rückblick */
+.geschwaerzt{display:inline-block;max-width:100%;height:1.05em;vertical-align:-.15em;background:var(--ink);border-radius:2px}
+.geschwaerzt-zeilen{display:grid;gap:.55rem;margin:.6rem 0}
+.geschwaerzt-zeilen .geschwaerzt{display:block;height:1.1rem}
+.aufgedeckt{background-image:linear-gradient(var(--ink),var(--ink));background-repeat:no-repeat;background-position:100% 0;background-size:0% 100%;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.aufgedeckt[data-mk]{transition-property:background-size;transition-duration:420ms;transition-timing-function:var(--ease-weg)}
+.aufgedeckt.mv-von{background-size:100% 100%}
+.marke-h{display:inline-block;font-size:.78rem;font-weight:700;border:2px solid var(--ink);border-radius:.3rem;padding:0 .45rem;margin-left:.4rem;letter-spacing:.02em;text-transform:none}
+
+/* I · Textmarker: Beleg in der Quelle */
+mark.beleg{color:inherit;background-color:transparent;background-image:linear-gradient(var(--marker),var(--marker));background-repeat:no-repeat;background-position:0 0;background-size:100% 100%;-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .1em}
+mark.beleg[data-mk]{transition-property:background-size;transition-duration:260ms}
+mark.beleg.mv-von{background-size:0% 100%}
+
+/* J · Randnotiz in Kuli-Blau */
+.randnotiz{color:var(--kuli);border-left:3px solid var(--kuli);padding:.1rem 0 .1rem .75rem;margin:.8rem 0;font-size:1rem}
+.randnotiz b{color:var(--kuli)}
+.randnotiz.mv-von{transform:translateX(-10px);opacity:0}
+
+/* K · Lupe: Herkunft aufklappen */
+details.herkunft{margin-top:.35rem;font-size:.88rem;color:var(--muted)}
+details.herkunft summary{display:inline-flex;align-items:center;gap:.35rem;min-height:44px;font-weight:700;color:var(--ink);cursor:pointer;list-style:none}
+details.herkunft summary::-webkit-details-marker{display:none}
+details.herkunft summary svg{width:18px;height:18px;flex:0 0 auto}
+details.herkunft .hk{border-top:2px dashed var(--line);padding-top:.45rem;display:grid;gap:.2rem;transition:transform var(--dauer-mittel) var(--ease-out),opacity var(--dauer-mittel) var(--ease-out)}
+details.herkunft .hk.mv-von{transform:translateY(-6px);opacity:0;transition:none}
+
+/* L · „Du bist hier“ fährt weiter (Zeitleiste) */
+.zeitleiste .zl-hier.mv-L{transition:transform 440ms var(--ease-weg)}
+
+@media (prefers-reduced-motion:reduce){
+  [data-mk],details.herkunft .hk{transition-property:opacity!important;transition-duration:var(--dauer-aus)!important}
+  [data-mk].mv-von,details.herkunft .hk.mv-von{transition:none!important}
+  .mv-von{transform:none!important}
+  .stempel.mv-von{transform:rotate(-6deg)!important}
+  .aufgedeckt.mv-von{background-size:0% 100%}
+  mark.beleg.mv-von{background-size:100% 100%}
+  .tile.aktuell{transition:none}
+  .zeitleiste .zl-hier.mv-L{transition:none}
+  ::view-transition-group(*){animation:none!important}
+}
+@media print{
+  .mv-von{opacity:1!important;transform:none!important}
+  .aufgedeckt{background:none!important}
+}

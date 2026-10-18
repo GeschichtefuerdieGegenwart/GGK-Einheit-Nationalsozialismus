@@ -7,6 +7,8 @@
 <title>M20 Großbritannien im Krieg – drei Dilemmata</title>
 <meta name="description" content="GGK M20: Großbritannien im Zweiten Weltkrieg auf dem iPad – drei Dilemmata 1940, 1941 und 1944 mit geprüften Quellen, Abstimmung und Sicherung an der Tafel.">
 <script src="assets/karten-m20.js"></script>
+<link rel="stylesheet" href="assets/motion.css">
+<script src="assets/motion.js"></script>
 <style>
 /* Schriften lokal im Repository (SIL Open Font License) – keine Verbindung zu Google */
 @font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
@@ -48,7 +50,7 @@ a{color:var(--red)}
 .weg button.zu{cursor:default;opacity:.55}
 
 main{max-width:46rem;margin:auto;padding:clamp(1.5rem,4vw,3rem) 1.25rem 5rem}
-.seite{animation:auf .4s cubic-bezier(.16,1,.3,1)}
+.seite{}
 .zeit{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;color:var(--red);font-weight:700;font-size:.95rem}
 .zeit .nr{font-family:var(--display);font-size:1.1rem}
 .seite h1{font-size:clamp(2rem,1.4rem + 2.4vw,3.1rem);margin:.5rem 0 .7rem}
@@ -56,7 +58,7 @@ main{max-width:46rem;margin:auto;padding:clamp(1.5rem,4vw,3rem) 1.25rem 5rem}
 .lead{font-size:clamp(1.1rem,1rem + .5vw,1.3rem);color:var(--muted);margin-bottom:1.6rem}
 h2.abschnitt{font-size:1.45rem;margin:2.4rem 0 .8rem}
 .meld{list-style:none;border-top:1px solid var(--line);margin-bottom:1rem;counter-reset:m}
-.meld li{counter-increment:m;display:grid;grid-template-columns:2rem 1fr;gap:.5rem;padding:.9rem 0;border-bottom:1px solid var(--line);animation:auf .45s ease}
+.meld li{counter-increment:m;display:grid;grid-template-columns:2rem 1fr;gap:.5rem;padding:.9rem 0;border-bottom:1px solid var(--line)}
 .meld li::before{content:counter(m);font-family:var(--display);color:var(--red);font-size:1.25rem;line-height:1.3}
 .mehr{margin:.2rem 0 1.4rem}
 .auftrag{background:var(--ink);color:var(--inverse);border-radius:var(--r-lg);padding:1.3rem 1.5rem;margin:1.6rem 0 1.2rem}
@@ -102,7 +104,7 @@ input[type=text]{width:100%;min-height:48px;border:1.5px solid var(--border);bor
 .code{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem}
 .code input{flex:1 1 12rem;text-transform:uppercase;letter-spacing:.08em;font-size:1.2rem}
 .fehler{color:var(--red);min-height:1.4em;margin-top:.4rem}
-.aufl{border-left:5px solid var(--green);background:var(--surface);border-radius:0 var(--r-lg) var(--r-lg) 0;padding:1.2rem 1.4rem;margin:1.6rem 0;animation:auf .5s ease}
+.aufl{border-left:5px solid var(--green);background:var(--surface);border-radius:0 var(--r-lg) var(--r-lg) 0;padding:1.2rem 1.4rem;margin:1.6rem 0}
 .aufl .kopfzeile{color:var(--green);font-weight:700;font-size:.95rem;margin-bottom:.4rem}
 .aufl ul{padding-left:1.2rem;display:grid;gap:.35rem}
 .mat{border:1px solid var(--border);background:var(--surface2);border-radius:var(--r-lg);padding:1.1rem 1.3rem;margin:1.2rem 0}
@@ -171,7 +173,7 @@ audio{width:100%;margin:.6rem 0}
 .legende .typ{margin:0;white-space:nowrap}
 
 /* Einstieg in Schritten */
-.karte-ein{border:1px solid var(--border);background:var(--surface);border-radius:var(--r-lg);padding:1.3rem 1.4rem;margin:1.2rem 0;animation:auf .45s ease}
+.karte-ein{border:1px solid var(--border);background:var(--surface);border-radius:var(--r-lg);padding:1.3rem 1.4rem;margin:1.2rem 0}
 .karte-ein h2{font-size:clamp(1.35rem,1.15rem + .8vw,1.7rem);margin-bottom:.55rem}
 .karte-ein p+p{margin-top:.6rem}
 .schritt-nr{font-size:.82rem;font-weight:700;color:var(--red);margin-bottom:.2rem}
@@ -191,7 +193,7 @@ audio{width:100%;margin:.6rem 0}
 @media (max-width:640px){.ebenen{grid-template-columns:1fr}}
 
 /* Sieben Schritte je Entscheidung */
-.phase{border-top:1px solid var(--line);padding:1.2rem 0 .4rem;animation:auf .45s ease}
+.phase{border-top:1px solid var(--line);padding:1.2rem 0 .4rem}
 .phase>h3{font-size:1.3rem;margin-bottom:.5rem}
 .phase .pnr{display:block;font-family:var(--body);font-size:.8rem;font-weight:700;color:var(--green);margin-bottom:.15rem;letter-spacing:.02em}
 .spiel{display:grid;gap:.55rem;margin:.6rem 0}
@@ -310,6 +312,8 @@ details .auswert{border:0;padding:0;margin:.4rem 0;background:none}
 @media (max-width:420px){.legende .typ{white-space:normal}}
 .weg-tab td{overflow-wrap:break-word;hyphens:auto}
 @media (max-width:600px){.weg-tab thead{display:none}.weg-tab tr{display:grid;border-bottom:1px solid var(--line);padding:.4rem 0}.weg-tab td{border:0;padding:.2rem .3rem}.weg-tab td:first-child{font-weight:700}}
+.seite > h1{view-transition-name:stunde-m20}
+.vorschau{border-left-color:var(--ink)}
 @media print{
   .kopf,.fuss,.protokoll-btn,.nodruck{display:none!important}
   body{background:#fff;font-size:11pt}
@@ -385,15 +389,15 @@ const QUELLEN = {
   kabinett26mai:{ wer:"Protokoll des Kriegskabinetts, 26. Mai 1940 (geheim, indirekte Rede)",
     de:"Halifax: Gespräche wären denkbar, „wenn er [Churchill] davon überzeugt wäre, dass Dinge, die für die Unabhängigkeit dieses Landes lebenswichtig sind, unberührt blieben“. Churchill: „Das Einzige, was zu tun sei, sei ihm [Hitler] zu zeigen, dass er dieses Land nicht erobern könne.“",
     en:"If he was satisfied that matters vital to the independence of this country were unaffected … The only thing to do was to show him that he could not conquer this country",
-    fund:"The National Archives, CAB 65/13; zitiert nach dem Blog der National Archives", url:"https://blog.nationalarchives.gov.uk/light-in-the-darkest-hour/" },
+    fund:"The National Archives, CAB 65/13; zitiert nach dem Blog der National Archives", pruef:"Das Protokoll gibt die Beiträge in indirekter Rede wieder. Der Wortlaut hier folgt dem Zitat im Blog der National Archives, nicht der Akte selbst.", url:"https://blog.nationalarchives.gov.uk/light-in-the-darkest-hour/" },
   dalton28mai:{ wer:"Tagebuch von Hugh Dalton (Minister, Labour) über Churchills Worte vor den Ministern, 28. Mai 1940",
     de:"Wir werden weitermachen und es ausfechten, hier oder anderswo. … Niemand äußerte auch nur den leisesten Anflug von Widerspruch.",
     en:"We shall go on and we shall fight it out, here or elsewhere … No one expressed even the faintest flicker of dissent.",
-    fund:"Tagebuch Hugh Dalton; zitiert nach The National Archives und International Churchill Society", url:"https://winstonchurchill.org/life-of-churchill/war-leader/convinces-cabinet-to-fight-on-belgium-surrenders/" },
+    fund:"Tagebuch Hugh Dalton; zitiert nach The National Archives und International Churchill Society", pruef:"Tagebucheintrag eines Teilnehmers, hier nach einem Zitat in der Sekundärliteratur, nicht nach der Edition des Tagebuchs.", url:"https://winstonchurchill.org/life-of-churchill/war-leader/convinces-cabinet-to-fight-on-belgium-surrenders/" },
   churchill28mai:{ wer:"Winston Churchill vor den Ministern, 28. Mai 1940 (überliefert)",
     de:"Nationen, die kämpfend untergingen, erhoben sich wieder; die aber, die sich zahm ergaben, waren erledigt.",
     en:"Nations that went down fighting rose again, but those which surrendered tamely were finished.",
-    fund:"International Churchill Society, „Convinces Cabinet to fight on“", url:"https://winstonchurchill.org/life-of-churchill/war-leader/convinces-cabinet-to-fight-on-belgium-surrenders/" },
+    fund:"International Churchill Society, „Convinces Cabinet to fight on“", pruef:"Vor den Ministern gesprochen und nicht mitgeschrieben. Der Satz ist nur indirekt überliefert; hier nach der International Churchill Society.", url:"https://winstonchurchill.org/life-of-churchill/war-leader/convinces-cabinet-to-fight-on-belgium-surrenders/" },
   churchill4juni:{ wer:"Winston Churchill im Unterhaus, 4. Juni 1940",
     de:"Wir werden an den Stränden kämpfen … wir werden niemals kapitulieren … bis zu Gottes guter Zeit die Neue Welt mit all ihrer Kraft und Macht vortritt zur Rettung und Befreiung der Alten.",
     en:"We shall fight on the beaches … we shall never surrender … until, in God's good time, the new world, with all its power and might, steps forth to the rescue and the liberation of the old.",
@@ -435,19 +439,39 @@ const QUELLEN = {
     en:"The hard, inescapable fact is that war is a horrible thing, and that it cannot be carried on without suffering … the great centres of administration, of production and of communication are themselves military targets in a total war. … The only way to end this horror is to beat our enemies rapidly and completely",
     fund:"Hansard, House of Lords, Bd. 130, Sp. 751–754", url:H+"lords/1944/feb/09/bombing-policy" }
 };
-function quelle(id){
+/* Quellenkarte. Optionen: beleg (I · Textmarker), schwarz (H · Schwärzung). K · Lupe: Herkunft aufklappbar. */
+const LUPE = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15 15l6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>`;
+const HK = new Set();
+document.addEventListener("toggle", e => { const d = e.target; if(d.matches && d.matches("details.herkunft")) d.open ? HK.add(d.dataset.hk) : HK.delete(d.dataset.hk); }, true);
+function bearbeite(text, id, sprache, o){
+  let h = esc(text);
+  (o.schwarz && o.schwarz[sprache] || []).forEach((ph, i) => {
+    const e = esc(ph);
+    h = h.replace(e, o.schwarz.frei
+      ? `<span class="aufgedeckt" data-mk="H:q:${id}:${sprache}${i}">${e}</span>`
+      : `<span class="geschwaerzt" role="img" aria-label="geschwärzt" style="width:${Math.min(ph.length * .47, 22).toFixed(1)}em"></span>`);
+  });
+  if(sprache === "de") (o.beleg || []).forEach(b => { const e = esc(b.text); h = h.replace(e, `<mark class="beleg" data-mk="I:${b.mk}">${e}</mark>`); });
+  return h;
+}
+function quelle(id, o = {}){
   const q = QUELLEN[id];
-  return `<div class="mat quellenkarte">${TYP.quelle}<p class="de">„${esc(q.de)}“</p>${q.en?`<p class="en" lang="en">“${esc(q.en)}”</p>`:""}
-    <p class="q">${esc(q.wer)} · ${esc(q.fund)}${q.en?" · Übersetzung: eigene":""} · <a href="${q.url}" target="_blank" rel="noopener noreferrer">Fundstelle</a></p></div>`;
+  const zu = o.schwarz && !o.schwarz.frei, auf = o.schwarz && o.schwarz.frei;
+  return `<div class="mat quellenkarte">${TYP.quelle}${zu ? ` <span class="marke-h">teilweise geschwärzt</span>` : auf ? ` <span class="marke-h">im Rückblick aufgedeckt</span>` : ""}
+    <p class="de">„${bearbeite(q.de, id, "de", o)}“</p>${q.en?`<p class="en" lang="en">“${bearbeite(q.en, id, "en", o)}”</p>`:""}
+    ${zu ? `<p class="hinweis">Geschwärzt ist, was damals geheim war. Es wird nach der Abstimmung aufgedeckt.</p>` : ""}
+    <p class="q">${esc(q.wer)} · <a href="${q.url}" target="_blank" rel="noopener noreferrer">Fundstelle</a></p>
+    <details class="herkunft" data-hk="${id}" ${HK.has(id)?"open":""}><summary>${LUPE} Herkunft</summary>
+      <div class="hk"><span><b>Fundstelle:</b> ${esc(q.fund)}</span>${q.en?`<span><b>Übersetzung:</b> eigene, gekürzt (Auslassungen mit …)</span>`:""}${q.pruef?`<span><b>Zum Wortlaut:</b> ${esc(q.pruef)}</span>`:""}</div></details></div>`;
 }
 
 /* Argumente-Check (aus der Print-Stunde): Welche Argumente stecken in Churchills Worten? */
 const ARGUMENTE = [
-  { t:"Mit Hitlers Regime ist kein ehrlicher Frieden möglich.", q:"churchill13mai", fb:"13. Mai 1940: „eine ungeheuerliche Tyrannei“." },
-  { t:"Großbritannien ist militärisch stark genug, eine Landung abzuwehren.", q:"churchill18juni", fb:"18. Juni 1940: über eineinviertel Millionen Mann unter Waffen." },
-  { t:"Die USA („die Neue Welt“) werden helfen.", q:"churchill4juni", fb:"4. Juni 1940: die Neue Welt tritt vor „zur Rettung und Befreiung der Alten“." },
-  { t:"Kampf ohne Kompromiss: Sieg um jeden Preis.", q:["churchill13mai","churchill4juni"], fb:"13. Mai 1940: „Sieg um jeden Preis“; 4. Juni: „niemals kapitulieren“." },
-  { t:"Wer kämpfend untergeht, kann wieder aufstehen; wer sich ergibt, ist erledigt.", q:"churchill28mai", fb:"28. Mai 1940, vor den Ministern (überliefert)." }
+  { beleg:[["churchill13mai","ungeheuerliche Tyrannei"]], t:"Mit Hitlers Regime ist kein ehrlicher Frieden möglich.", q:"churchill13mai", fb:"13. Mai 1940: „eine ungeheuerliche Tyrannei“." },
+  { beleg:[["churchill18juni","über eineinviertel Millionen Mann unter Waffen"]], t:"Großbritannien ist militärisch stark genug, eine Landung abzuwehren.", q:"churchill18juni", fb:"18. Juni 1940: über eineinviertel Millionen Mann unter Waffen." },
+  { beleg:[["churchill4juni","die Neue Welt mit all ihrer Kraft und Macht vortritt zur Rettung und Befreiung der Alten"]], t:"Die USA („die Neue Welt“) werden helfen.", q:"churchill4juni", fb:"4. Juni 1940: die Neue Welt tritt vor „zur Rettung und Befreiung der Alten“." },
+  { beleg:[["churchill13mai","Sieg um jeden Preis"],["churchill4juni","niemals kapitulieren"]], t:"Kampf ohne Kompromiss: Sieg um jeden Preis.", q:["churchill13mai","churchill4juni"], fb:"13. Mai 1940: „Sieg um jeden Preis“; 4. Juni: „niemals kapitulieren“." },
+  { beleg:[["churchill28mai","Nationen, die kämpfend untergingen, erhoben sich wieder"]], t:"Wer kämpfend untergeht, kann wieder aufstehen; wer sich ergibt, ist erledigt.", q:"churchill28mai", fb:"28. Mai 1940, vor den Ministern (überliefert)." }
 ];
 
 const ENT = {
@@ -488,7 +512,7 @@ const ENT = {
     rueck:["Ab Juli 1940 kämpft die Royal Air Force in der Luftschlacht um England. Ab dem 7. September 1940 bombardiert die deutsche Luftwaffe London monatelang („Blitz“).",
            "Am 19. Juli 1940 bietet Hitler im Reichstag öffentlich Frieden an. London lehnt ab.",
            "Ob 1940 ein Frieden zu annehmbaren Bedingungen möglich gewesen wäre, ist in der Forschung umstritten."],
-    links:[["https://blog.nationalarchives.gov.uk/light-in-the-darkest-hour/","Light in the darkest hour – die Kabinettssitzungen im Mai 1940","The National Archives (englisch)"]]
+    links:[["https://blog.nationalarchives.gov.uk/light-in-the-darkest-hour/","Light in the darkest hour – die Kabinettssitzungen im Mai 1940","The National Archives (englisch)"],["https://geschichtefuerdiegegenwart.github.io/Karte-Zweiter-Weltkrieg/","Karte Zweiter Weltkrieg – Jahr 1940","GGK, mit geprüften Quellen"]]
   },
   e2: {
     nr:2, datum:"Juli 1941", stufe:2,
@@ -525,7 +549,7 @@ const ENT = {
     fragen:["Churchill war jahrzehntelang Gegner des Kommunismus. Wie begründet er die Hilfe?","Wessen Interessen kamen in der Entscheidung kaum vor – zum Beispiel Polens?","Ist ein Bündnis mit Stalin etwas anderes als das Nachgeben gegenüber Hitler 1938? Begründe."],
     rueck:["Im Frühjahr 1940 ließ die sowjetische Geheimpolizei NKWD in Katyn und an anderen Orten rund 22 000 polnische Offiziere und andere Gefangene erschießen. Bekannt wurde das erst 1943; die Sowjetunion leugnete es bis 1990.",
            "Die Sowjetunion trug die größten Verluste des Krieges. Neuere Studien gehen von 27 Millionen Toten aus (Bundeszentrale für politische Bildung)."],
-    links:[["https://avalon.law.yale.edu/wwii/brsov41.asp","Text des Abkommens vom 12. Juli 1941","Avalon Project (englisch)"]]
+    links:[["https://avalon.law.yale.edu/wwii/brsov41.asp","Text des Abkommens vom 12. Juli 1941","Avalon Project (englisch)"],["https://geschichtefuerdiegegenwart.github.io/Karte-Zweiter-Weltkrieg/","Karte Zweiter Weltkrieg – Jahr 1941","GGK, mit geprüften Quellen"]]
   },
   e3: {
     nr:3, datum:"Februar 1944", stufe:3,
@@ -563,7 +587,7 @@ const ENT = {
     rueck:["Im Luftkrieg starben in Deutschland wohl mehr als 500 000 Menschen, in Großbritannien rund 50 000 Zivilisten (LeMO).",
            "Ob die Flächenangriffe den Krieg verkürzt haben, ist bis heute umstritten.",
            "Churchills Notiz vom 28. März 1945 liegt im Zuckerman-Archiv der University of East Anglia (SZ/BBSU/58/51-52)."],
-    links:[["https://www.dhm.de/lemo/kapitel/der-zweite-weltkrieg/kriegsverlauf/luftangriffe.html","Luftangriffe","LeMO, Deutsches Historisches Museum"],["https://dresden.de/en/city/07/03/historical_commission.php","Dresden historical commission publishes final report","Landeshauptstadt Dresden (englisch)"]]
+    links:[["https://www.dhm.de/lemo/kapitel/der-zweite-weltkrieg/kriegsverlauf/luftangriffe.html","Luftangriffe","LeMO, Deutsches Historisches Museum"],["https://dresden.de/en/city/07/03/historical_commission.php","Dresden historical commission publishes final report","Landeshauptstadt Dresden (englisch)"],["https://geschichtefuerdiegegenwart.github.io/Karte-Zweiter-Weltkrieg/","Karte Zweiter Weltkrieg – Jahr 1942 bis 1944","GGK, mit geprüften Quellen"]]
   }
 };
 
@@ -576,6 +600,38 @@ const FEHLT = new Set();
 function platzhalter(k){
   return `<div class="platzhalter"><div class="ph-kopf">Platzhalter · Karte folgt: ${esc(k.titel)}</div><div class="ph-text">${esc(k.text)}</div></div>`;
 }
+/* Bilder aus dem Unterrichtsheft: liegen nur im Moodle-Paket (media/), nie im
+   öffentlichen Repository. Fehlt die Datei, verschwindet die Abbildung ohne Platzhalter. */
+const BILDER = {
+  pakt:{ datei:"media/m20-hitler-stalin-pakt-1939.jpg", typ:"quelle",
+    alt:"Ein Mann unterschreibt sitzend an einem Schreibtisch ein Dokument. Hinter ihm stehen mehrere Männer, darunter Josef Stalin in heller Uniformjacke.",
+    cap:"Moskau, 23. August 1939: Der sowjetische Außenminister Molotow (vorn) unterschreibt den deutsch-sowjetischen Nichtangriffspakt; dahinter Ribbentrop (links) und Stalin · picture-alliance / dpa · aus dem Unterrichtsheft · nur für den Unterricht in diesem Kurs (§ 60a UrhG)",
+    frage:"Das Foto ging 1939 um die Welt. Was denkst du im Juli 1941 als britische Abgeordnete, wenn du es siehst?" },
+  film:{ datei:"media/m20-film-dunkelste-stunde.jpg", typ:"film",
+    alt:"Filmszene: Ein älterer Mann mit runder Brille und Fliege spricht in einem vollen, dunklen Saal; hinter ihm sitzen und stehen Männer in Anzügen.",
+    cap:"Szene aus dem Spielfilm „Die dunkelste Stunde“ (Großbritannien 2017, Regie: Joe Wright); Churchill wird von Gary Oldman gespielt · Bildschirmfoto eines YouTube-Ausschnitts · aus dem Unterrichtsheft · nur für den Unterricht in diesem Kurs (§ 60a UrhG)",
+    frage:"Das ist keine historische Aufnahme, sondern ein Film von heute. Vergleiche mit den Quellen: Was zeigt der Film, was lässt er weg?" },
+  london:{ datei:"media/m20-london-7-september-1940.jpg", typ:"quelle",
+    alt:"Schwarzweißfoto: Dichte Rauchwolken über London, im Vordergrund die Themse mit der Tower Bridge.",
+    cap:"London, 7. September 1940: Rauch über der Stadt, im Vordergrund die Tower Bridge · Datum nach dem Heft; Fotograf und Herkunft: noch offen · aus dem Unterrichtsheft · nur für den Unterricht in diesem Kurs (§ 60a UrhG)",
+    frage:"Im Mai 1940 befürchteten viele genau solche Angriffe. War die Entscheidung zum Weiterkämpfen deshalb falsch? Begründe – und denk an den Rückschaufehler." },
+  kinder:{ datei:"media/m20-kinder-truemmer.jpg", typ:"quelle",
+    alt:"Schwarzweißfoto: Kinder klettern und spielen auf Trümmern; im Hintergrund stehen ausgebrannte Häuserruinen.",
+    cap:"Kinder in den Trümmern einer zerstörten deutschen Stadt · Ort, Datum und Herkunft: noch offen (im Heft als Dresden 1945 bezeichnet) · aus dem Unterrichtsheft · nur für den Unterricht in diesem Kurs (§ 60a UrhG)",
+    frage:"Wer trug die Folgen der Luftangriffe, ohne mitentscheiden zu können?" },
+  ghetto:{ datei:"media/m20-warschau-ghetto-1943.jpg", typ:"taeter",
+    alt:"Schwarzweißfoto: Frauen und Kinder mit erhobenen Händen, vorn ein Junge mit Schirmmütze; rechts stehen bewaffnete Männer in Uniform.",
+    cap:"Niederschlagung des Aufstands im Warschauer Ghetto, April/Mai 1943: Männer der Waffen-SS treiben Frauen und Kinder aus einem Bunker. Das Foto stammt aus dem Bericht des SS- und Polizeiführers Jürgen Stroop an Heinrich Himmler · Bundesarchiv, Bild 183-41636-0002 / CC-BY-SA 3.0 · aus dem Unterrichtsheft",
+    frage:"Die Täter haben dieses Foto gemacht, um ihren „Erfolg“ zu belegen. Was bedeutet das für deinen Blick auf das Bild – und auf die Menschen darauf?" }
+};
+const BILD_TYP = { quelle:TYP.quelle, film:`<span class="typ darst">Spielfilm · Darstellung von heute</span>`, taeter:`<span class="typ quelle">Quelle · von den Tätern aufgenommen</span>` };
+const BILD_FEHLT = new Set();
+function bild(id){
+  if(BILD_FEHLT.has(id)) return "";
+  const b = BILDER[id];
+  return `<figure data-bild-id="${id}"><img src="${b.datei}" alt="${esc(b.alt)}" loading="lazy" onerror="bildFehlt(this)"><figcaption>${BILD_TYP[b.typ]} ${esc(b.cap)}${b.frage?`<br><b>Zum Bild:</b> ${esc(b.frage)}`:""}</figcaption></figure>`;
+}
+window.bildFehlt = img => { const f = img.closest("figure"); BILD_FEHLT.add(f.dataset.bildId); f.remove(); };
 const IN_MOODLE = location.pathname.includes("pluginfile.php");
 
 /* Externe Links: nichts wird eingebettet oder vorab geladen. */
@@ -611,7 +667,7 @@ const JETZT = { d1:"1940-05-26", d2:"1941-07-05", d3:"1944-02-09", ende:"9999" }
 function zeitleiste(id){
   const j = JETZT[id]; if(!j) return "";
   const bekannt = EREIGNISSE.filter(e=>e[0] <= j), letzt = bekannt.length-1;
-  return `<ol class="zeitleiste" aria-label="Zeitleiste: was bisher geschehen ist">${bekannt.map((e,i)=>`<li class="${i===letzt && id!=="ende"?"jetzt":""}"><span class="zl-d">${e[1]}</span><span class="zl-t">${e[2]}</span>${i===letzt && id!=="ende"?`<span class="zl-hier">Du bist hier</span>`:""}</li>`).join("")}${id!=="ende"?`<li class="offen"><span class="zl-d">danach</span><span class="zl-t">noch offen</span></li>`:""}</ol>`;
+  return `<ol class="zeitleiste" aria-label="Zeitleiste: was bisher geschehen ist">${bekannt.map((e,i)=>`<li class="${i===letzt && id!=="ende"?"jetzt":""}" data-d="${e[0]}"><span class="zl-d">${e[1]}</span><span class="zl-t">${e[2]}</span>${i===letzt && id!=="ende"?`<span class="zl-hier" data-ml="${e[0]}">Du bist hier</span>`:""}</li>`).join("")}${id!=="ende"?`<li class="offen"><span class="zl-d">danach</span><span class="zl-t">noch offen</span></li>`:""}</ol>`;
 }
 
 /* ------------------------------ Ablauf ------------------------------- */
@@ -640,7 +696,7 @@ function kopf(){
 
 function meldungen(id, liste){
   const n = S.m[id] ?? 1;
-  const li = liste.slice(0, n).map(t=>`<li>${t}</li>`).join("");
+  const li = liste.slice(0, n).map((t,i)=>`<li class="mv-auf" data-mk="M:${id}:${i}">${t}</li>`).join("");
   const mehr = n < liste.length ? `<div class="mehr"><button class="btn" data-meld="${id}">Nächste Meldung (${n} von ${liste.length})</button></div>` : "";
   return `${TYP.lage}<ol class="meld">${li}</ol>${mehr}`;
 }
@@ -659,7 +715,7 @@ function phasenLeiste(key){
   return `<ol class="phasen" aria-label="Schritte der Entscheidung">${PHASEN.map((t,i)=>{ const n=i+1;
     const zu = n > max, akt = n === pv, da = n < max || (n===max && S.stufe>=ENT[key].stufe);
     const status = akt ? "aktueller Schritt" : da ? "erledigt" : zu ? "noch gesperrt" : "offen";
-    return `<li><button class="${akt?"akt":da?"da":""}" data-pv="${key}:${n}" ${zu||n===1?"disabled":""} ${akt?'aria-current="step"':""} aria-label="Schritt ${n}: ${t} – ${status}"><span class="pn">${da&&!akt?"✓":n}</span>${t}</button></li>`; }).join("")}</ol>`;
+    return `<li><button class="${akt?"akt":da?"da":""}" data-pv="${key}:${n}" ${zu||n===1?"disabled":""} ${akt?'aria-current="step"':""} aria-label="Schritt ${n}: ${t} – ${status}"><span class="pn">${da&&!akt?`<span class="mv-G" data-mk="G:${key}:${n}">✓</span>`:n}</span>${t}</button></li>`; }).join("")}</ol>`;
 }
 const maxPhase = key => S.e[key] ? 7 : (S.ph[key] || 2);
 const sichtPhase = key => Math.min(S.pv[key] || maxPhase(key), maxPhase(key));
@@ -693,7 +749,7 @@ function entscheidungsweg(key){
   const E = ENT[key], max = maxPhase(key), pv = sichtPhase(key), fertig = !!S.e[key], K = KREIS();
   const nav = (n, text, an=true, hinweis="") => `<div class="fuss">${pv>2?`<button class="btn" data-pv="${key}:${pv-1}">Zurück</button>`:"<span></span>"}<span class="hinweis" aria-live="polite">${hinweis}</span>${max>pv?`<button class="btn primary" data-pv="${key}:${pv+1}">Weiter</button>`:`<button class="btn primary" data-ph="${key}:${n}" ${an?"":"disabled"}>${text}</button>`}</div>`;
   let h = `<section class="entscheidung" aria-labelledby="h-${key}"><div class="kopfzeile">Entscheidung ${E.nr} von 3 · ${E.datum}</div>
-    <h2 id="h-${key}">${esc(E.frage)}</h2>${phasenLeiste(key)}<div class="phase" id="ph-${key}">`;
+    <h2 id="h-${key}">${esc(E.frage)}</h2>${phasenLeiste(key)}<div class="phase mv-auf" id="ph-${key}" data-mk="P:${key}:${pv}">`;
 
   if(pv===2){
     h += `${phKopf(2,"Wer entscheidet – und was kannst du tun?")}${TYP.darst}
@@ -750,18 +806,19 @@ function entscheidungsweg(key){
       <div class="seg" role="group" aria-labelledby="sich-l-${key}">${["sicher","eher sicher","unsicher"].map(x=>`<button data-sich="${key}:${x}" aria-pressed="${S.sich[key]===x}" ${fertig?"disabled":""}>${x}</button>`).join("")}</div>
       <p class="hinweis" style="margin-top:.5rem">Dies ist eine Abstimmung in unserer Klasse. Sie zeigt deine Haltung – damals entschied die Regierung. Eine Option „unentschieden“ gibt es nicht, weil auch Abwarten eine Politik ist. Deine Unsicherheit zeigst du oben.</p>`;
     if(!fertig) h += `<div class="fuss"><button class="btn" data-pv="${key}:5">Zurück</button><span class="hinweis" data-status="${key}" aria-live="polite">${bereit(key)?"Bereit zur Abstimmung.":"Option wählen, einen Satz schreiben, Sicherheit angeben."}</span><button class="btn green" data-abgabe="${key}" ${bereit(key)?"":"disabled"}>Entscheidung abgeben</button></div>`;
-    else h += `<div class="fuss"><span class="hinweis">Deine Entscheidung: <b>${v}</b> (${esc(S.sich[key]||"")}).</span><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button><button class="btn primary" data-pv="${key}:7">Weiter</button></div>`;
+    else h += `<div class="fuss"><span class="hinweis">Deine Entscheidung: <b>${v}</b> (${esc(S.sich[key]||"")}).</span><span class="stempel" data-mk="F:${key}">ABGEGEBEN</span><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button><button class="btn primary" data-pv="${key}:7">Weiter</button></div>`;
   }
 
   if(pv===7){
-    h += `${phKopf(7,"Vergleichen und nachdenken")}${codeFeld(key, E.stufe)}`;
+    h += `${phKopf(7,"Vergleichen und nachdenken")}${codeFeld(key, E.stufe)}${S.stufe < E.stufe ? vorschau() : ""}`;
     if(S.stufe >= E.stufe){
       h += `<div class="wechsel" role="note"><b>Perspektivwechsel</b> Bis hierher hast du mit dem Wissen von ${esc(E.datum)} entschieden. Ab hier blicken wir zurück.</div>
-        <div class="aufl"><div class="kopfzeile">Was dann geschah</div>${E.aufl}</div>
-        <div class="vergleich"><div><span class="hinweis">Deine Entscheidung</span><b>${S.v[key]||"–"}</b><span>${esc(E.opt[S.v[key]]?.t||"")}${S.sich[key]?` · ${esc(S.sich[key])}`:""}</span></div>
+        <div class="aufl"><div class="kopfzeile">Was dann geschah <span class="marke-h">im Rückblick aufgedeckt</span></div>${aufdecken(E.aufl, key)}</div>
+        <div class="vergleich"><div><span class="hinweis">Deine Entscheidung <span class="stempel" data-mk="F:${key}">ABGEGEBEN</span></span><b>${S.v[key]||"–"}</b><span>${esc(E.opt[S.v[key]]?.t||"")}${S.sich[key]?` · ${esc(S.sich[key])}`:""}</span></div>
           <div><span class="hinweis">Was London tat</span><span>${esc(E.tat)}</span></div></div>
+        ${S[key+"b"] ? `<p class="randnotiz" data-mk="J:${key}"><b>Deine Randnotiz:</b> ${esc(S[key+"b"])}</p>` : ""}${S.pt[key] ? `<p class="randnotiz" data-mk="J:${key}:pt"><b>Dein Gedanke:</b> ${esc(S.pt[key])}</p>` : ""}
         <div class="auswert"><h4>Zum Besprechen</h4><ol>${E.fragen.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>
-        <div class="spaeter">${TYP.rueck}<ul style="padding-left:1.2rem;display:grid;gap:.35rem">${E.rueck.map(x=>`<li>${x}</li>`).join("")}</ul>
+        <div class="spaeter">${TYP.rueck}<ul style="padding-left:1.2rem;display:grid;gap:.35rem">${E.rueck.map((x,i)=>`<li><span class="aufgedeckt" data-mk="H:${key}:r${i}">${x}</span></li>`).join("")}</ul>
           <p class="hinweis" style="margin-top:.4rem">Dieses Wissen hatte im ${esc(E.datum)} niemand in London.</p></div>
         <details class="vertiefung"><summary>Mehr dazu (externe Seiten, freiwillig)</summary>${linkliste("", E.links.map(l=>extern(...l)))}</details>
         <p class="hinweis">Übertrage das Tafelbild zu Entscheidung ${E.nr} ins <a href="#" data-geh="protokoll">Protokoll</a>.</p>`;
@@ -770,9 +827,17 @@ function entscheidungsweg(key){
   return h + `</div></section>`;
 }
 
+/* H · Schwärzung: Was damals niemand wusste, bleibt bis zur Abstimmung geschwärzt. */
+function vorschau(){
+  return `<div class="aufl vorschau"><div class="kopfzeile">Was dann geschah <span class="marke-h">geschwärzt</span></div>
+    <div class="geschwaerzt-zeilen" role="img" aria-label="geschwärzter Text"><span class="geschwaerzt" style="width:94%"></span><span class="geschwaerzt" style="width:78%"></span><span class="geschwaerzt" style="width:86%"></span><span class="geschwaerzt" style="width:52%"></span></div>
+    <p class="hinweis">Wird nach der Abstimmung in der Klasse aufgedeckt.</p></div>`;
+}
+function aufdecken(html, key){ let i = 0; return html.replace(/<li>([\s\S]*?)<\/li>/g, (m, inner) => `<li><span class="aufgedeckt" data-mk="H:${key}:a${i++}">${inner}</span></li>`); }
+
 function codeFeld(key, stufe){
   if(S.stufe >= stufe) return "";
-  return `<div class="gesperrt nodruck"><b>Abstimmung in der Klasse</b><p><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button></p><p class="hinweis">Halte deine Stimmkarte hoch, wenn die Lehrkraft das Zeichen gibt. Übertrage danach das Tafelbild ins <a href="#" data-geh="protokoll">Protokoll</a>. Das Codewort steht an der Tafel.</p>
+  return `<div class="gesperrt nodruck"><b>Abstimmung in der Klasse</b> ${S.e[key]?`<span class="stempel" data-mk="F:${key}">ABGEGEBEN</span>`:""}<p><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button></p><p class="hinweis">Halte deine Stimmkarte hoch, wenn die Lehrkraft das Zeichen gibt. Übertrage danach das Tafelbild ins <a href="#" data-geh="protokoll">Protokoll</a>. Das Codewort steht an der Tafel.</p>
     <div class="code"><input type="text" id="code-${key}" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Codewort von der Tafel" aria-label="Codewort"><button class="btn primary" data-code="${key}:${stufe}">Weiter</button></div><p class="fehler" id="f-${key}" role="status"></p></div>`;
 }
 
@@ -817,24 +882,26 @@ function einstieg(){
       ${perspSchalter()}
       <p class="hinweis">Deine Antworten bleiben auf diesem iPad. Es werden keine Namen gespeichert. Am Ende kannst du alles löschen.</p></div>`
   ];
-  return `<section class="seite"><div class="zeit"><span>Einstieg</span></div>
+  return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span>Einstieg</span></div>
     <h1>Großbritannien im Zweiten Weltkrieg – drei Dilemmata</h1>
     <div class="punkte" aria-hidden="true">${karten.map((_,i)=>`<span class="${i<n?"an":""}"></span>`).join("")}</div>
-    <div id="einkarte">${karten[n-1]}</div>
+    <div id="einkarte" class="mv-auf" data-mk="Ein:${n}">${karten[n-1]}</div>
     <div class="fuss">${n>1?`<button class="btn" data-ein="${n-1}">Zurück</button>`:"<span></span>"}<span class="hinweis">${n} von ${karten.length}</span>${n < karten.length ? `<button class="btn primary" data-ein="${n+1}">Weiter</button>` : `<button class="btn primary" data-geh="d1">Dilemma 1 beginnen</button>`}</div></section>`;
 }
 
 /* Argumente-Check: Wann hat Churchill das gesagt? Erst nach Entscheidung 1. */
 const ARG_DATEN = [["churchill13mai","13. Mai"],["churchill28mai","28. Mai"],["churchill4juni","4. Juni"],["churchill18juni","18. Juni"]];
+/* I · Textmarker: nach dem Prüfen sind die Belege in den Reden markiert */
+const belege = qid => ARGUMENTE.flatMap((x,i) => x.beleg.filter(b=>b[0]===qid).map(b=>({text:b[1], mk:`arg${i}:${qid}`})));
 function argumente(){
   const a = S.arg || {}, ok = !!S.argOk, n = Object.keys(a).length;
   return `<h2 class="abschnitt">Churchills Argumente</h2>
     <div class="auftrag"><h3>Wann sagt Churchill was?</h3><p>Lies die Quellen. Ordne jedes Argument der Rede zu, in der es vorkommt. Prüfe dann.</p></div>
-    ${quelle("churchill13mai")}${quelle("churchill28mai")}${quelle("churchill4juni")}${quelle("churchill18juni")}
+    ${["churchill13mai","churchill28mai","churchill4juni","churchill18juni"].map(qid=>quelle(qid, {beleg: ok ? belege(qid) : []})).join("")}
     <div class="liste">${ARGUMENTE.map((x,i)=>{ const treffer = [].concat(x.q).includes(a[i]), r = ok ? (treffer ? "richtig" : "falsch") : "";
       return `<div class="wahl argument ${r}" role="group" aria-labelledby="arg-${i}"><span id="arg-${i}"><b>${esc(x.t)}</b>${ok?`<span class="fb">${treffer?"Richtig. ":"Nicht ganz. "}${esc(x.fb)}</span>`:""}</span>
         <span class="seg">${ARG_DATEN.map(([q,t])=>`<button data-arg="${i}:${q}" aria-pressed="${a[i]===q}" ${ok?"disabled":""}>${t}</button>`).join("")}</span></div>`; }).join("")}</div>
-    ${ok ? `<p class="hinweis">Die Reden vom 13. Mai, 4. Juni und 18. Juni waren öffentlich. Die Worte vom 28. Mai fielen vor den Ministern und sind nur aus Tagebüchern und Erinnerungen überliefert.</p>`
+    ${ok ? `<p class="hinweis">Gelb markiert: die Stellen in den Reden, die das jeweilige Argument belegen. Die Reden vom 13. Mai, 4. Juni und 18. Juni waren öffentlich. Die Worte vom 28. Mai fielen vor den Ministern und sind nur aus Tagebüchern und Erinnerungen überliefert.</p>`
          : `<div class="mehr"><button class="btn" data-argpruefen="1" ${n>=ARGUMENTE.length?"":"disabled"}>Prüfen</button><span class="hinweis">${n} von ${ARGUMENTE.length} zugeordnet</span></div>`}`;
 }
 
@@ -851,12 +918,14 @@ function seite(){
       "Belgien steht kurz vor der Kapitulation. Italien ist mit Deutschland verbündet, aber noch nicht im Krieg. Die USA sind neutral."
     ];
     const da = alleGelesen("d1", L);
-    return `<section class="seite"><div class="zeit"><span class="nr">Dilemma 1</span><span>London, 26. Mai 1940</span></div>${zeitleiste(id)}
+    return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span class="nr">Dilemma 1</span><span>London, 26. Mai 1940</span></div>${zeitleiste(id)}
       <h1>Weiterkämpfen oder Frieden suchen?</h1>
       <p class="hinweis"><b>Schritt 1 von 7 · Lage</b> – lies die Meldungen nacheinander.</p>
       ${meldungen("d1", L)}
-      ${da ? `${karte("europa1940")}${quelle("churchill13mai")}${entscheidungsweg("e1")}` : ""}
-      ${S.stufe>=1 ? `${E_NACHHER("e1")}${argumente()}${S.argOk ? weiter("d2","Weiter zu Dilemma 2") : ""}` : ""}</section>`;
+      ${da ? `${karte("europa1940")}${quelle("churchill13mai")}
+        ${TYP.darst}<p>Das Kriegskabinett berät seit dem 26. Mai im Geheimen. Was dort gesagt wird, erfährt das Unterhaus nicht.</p>
+        ${quelle("kabinett26mai", {schwarz:{frei:S.stufe>=1, de:["Gespräche wären denkbar, „wenn er [Churchill] davon überzeugt wäre, dass Dinge, die für die Unabhängigkeit dieses Landes lebenswichtig sind, unberührt blieben“","„Das Einzige, was zu tun sei, sei ihm [Hitler] zu zeigen, dass er dieses Land nicht erobern könne.“"], en:["If he was satisfied that matters vital to the independence of this country were unaffected","The only thing to do was to show him that he could not conquer this country"]}})}${entscheidungsweg("e1")}` : ""}
+      ${S.stufe>=1 ? `${E_NACHHER("e1")}<h2 class="abschnitt">Rückblick: der „Blitz“</h2>${bild("london")}${argumente()}${S.argOk ? bild("film") : ""}${S.argOk ? weiter("d2","Weiter zu Dilemma 2") : ""}` : ""}</section>`;
   }
 
   if(id==="d2"){
@@ -867,38 +936,38 @@ function seite(){
       "Die Sowjetunion hat 1939 einen Pakt mit Hitler geschlossen und den Osten Polens besetzt. Sie hat Finnland angegriffen und 1940 die baltischen Staaten besetzt. Viele britische Militärs glauben, dass sie nur wenige Wochen standhält."
     ];
     const da = alleGelesen("d2", L);
-    return `<section class="seite"><div class="zeit"><span class="nr">Dilemma 2</span><span>London, Anfang Juli 1941</span></div>${zeitleiste(id)}
+    return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span class="nr">Dilemma 2</span><span>London, Anfang Juli 1941</span></div>${zeitleiste(id)}
       <h1>Ein Bündnis mit Stalin?</h1>
       <p class="hinweis"><b>Schritt 1 von 7 · Lage</b> – lies die Meldungen nacheinander.</p>
       ${meldungen("d2", L)}
-      ${da ? `${karte("europa1941")}${quelle("churchill22juni41")}${quelle("stalin3juli41")}${entscheidungsweg("e2")}` : ""}
+      ${da ? `${karte("europa1941")}${bild("pakt")}${quelle("churchill22juni41")}${quelle("stalin3juli41")}${entscheidungsweg("e2")}` : ""}
       ${S.stufe>=2 ? `${E_NACHHER("e2")}${weiter("d3","Weiter zu Dilemma 3")}` : ""}</section>`;
   }
 
   if(id==="d3"){
     const L = [
-      "Seit Februar 1942 sollen britische Bomber vor allem die Wohngebiete deutscher Städte angreifen. Die Weisung dazu ist geheim.",
+      "Seit 1942 greifen britische Bomber vor allem nachts ganze deutsche Städte an. Was genau in den Weisungen an die Bomberflotte steht, ist geheim.",
       "1942 zerstören Angriffe große Teile von Lübeck, Rostock und Köln. Im Juli 1943 sterben bei Angriffen auf Hamburg über 30 000 Menschen. Seit November 1943 fliegt das Bomber Command immer wieder nach Berlin.",
       "Viele britische Besatzungen kehren nicht zurück. Viele Menschen in Großbritannien haben selbst Luftangriffe erlebt und fordern Vergeltung.",
       "Öffentlich spricht die Regierung von Angriffen auf Industrie und Verkehr. Am 9. Februar 1944 kritisiert Bischof George Bell im Oberhaus die Angriffe auf ganze Städte."
     ];
     const da = alleGelesen("d3", L);
-    return `<section class="seite"><div class="zeit"><span class="nr">Dilemma 3</span><span>London, Februar 1944</span></div>${zeitleiste(id)}
+    return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span class="nr">Dilemma 3</span><span>London, Februar 1944</span></div>${zeitleiste(id)}
       <h1>Bomben auf Städte?</h1>
       <p class="hinweis"><b>Schritt 1 von 7 · Lage</b> – lies die Meldungen nacheinander.</p>
       ${meldungen("d3", L)}
-      ${da ? `${karte("luftkrieg1944")}${quelle("weisung42")}${quelle("harris42")}
+      ${da ? `${karte("luftkrieg1944")}${quelle("weisung42", {schwarz:{frei:S.stufe>=3, de:["die Moral der feindlichen Zivilbevölkerung","insbesondere der Industriearbeiter","die bebauten Gebiete, und nicht etwa die Werften oder Flugzeugfabriken"], en:["the morale of the enemy civil population and in particular the industrial workers","the built up areas, and not, for instance, the dockyards or aircraft factories"]}})}${quelle("harris42")}
         <h2 class="abschnitt">Debatte im Oberhaus, 9. Februar 1944</h2>${quelle("bell44")}
         <details class="vertiefung"><summary>Eine Stimme aus Hamburg (damals in Großbritannien unbekannt)</summary>${quelle("hamburg43")}
           <p class="hinweis">Diesen Brief konnte damals in London niemand lesen. Er zeigt, was die Angriffe für die Menschen am Boden bedeuteten.</p></details>
         ${entscheidungsweg("e3")}` : ""}
-      ${S.stufe>=3 ? `${E_NACHHER("e3")}${weiter("ende","Weiter zur Beurteilung")}` : ""}</section>`;
+      ${S.stufe>=3 ? `${E_NACHHER("e3")}${bild("kinder")}${weiter("ende","Weiter zur Beurteilung")}` : ""}</section>`;
   }
 
   if(id==="ende"){
     const row = (t, du, tat) => `<tr><td>${t}</td><td>${du}</td><td>${tat}</td></tr>`;
     const w = k => S.v[k] ? `${S.v[k]} · ${esc(ENT[k].opt[S.v[k]].t)}${S.sich[k]?` (${esc(S.sich[k])})`:""}` : "–";
-    return `<section class="seite"><div class="zeit"><span>Konsolidierung</span></div>${zeitleiste("ende")}
+    return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span>Konsolidierung</span></div>${zeitleiste("ende")}
       <h1>Deine abschließende Beurteilung</h1>
       <p class="lead">Vergleiche deine Entscheidungen von damals mit dem, was tatsächlich geschah.</p>
       <table class="weg-tab"><thead><tr><th>Zeitpunkt</th><th>Du</th><th>Was geschah</th></tr></thead><tbody>
@@ -906,7 +975,9 @@ function seite(){
       </tbody></table>
       <div class="spaeter">${TYP.rueck}<ul style="padding-left:1.2rem;display:grid;gap:.35rem">
         <li>Am 8. Mai 1945 endet der Krieg in Europa, im August 1945 auch in Asien.</li>
-        <li>Im Zweiten Weltkrieg starben weltweit zwischen 55 und 70 Millionen Menschen, darunter rund sechs Millionen ermordete Jüdinnen und Juden.</li></ul>
+        <li>Im Zweiten Weltkrieg starben weltweit zwischen 55 und 70 Millionen Menschen, darunter rund sechs Millionen ermordete Jüdinnen und Juden.</li>
+        <li>Am 17. Dezember 1942 erklärten die Alliierten öffentlich, dass das NS-Regime die Jüdinnen und Juden Europas ermordet. Davon wusste man in London also, als 1944 über die Luftangriffe gestritten wurde.</li></ul>
+        ${bild("ghetto")}
         <p class="hinweis" style="margin-top:.4rem">Zahlen nach der Bundeszentrale für politische Bildung (bpb).</p></div>
       <div class="def-box"><div><b>Retrospektivität</b>Wir blicken zurück und kennen den Ausgang. Das ist unvermeidlich und notwendig: Erst im Rückblick werden Folgen und geheime Pläne sichtbar.</div>
         <div><b>Rückschaufehler</b>Wer den Ausgang kennt, hält ihn leicht für vorhersehbar („Das war doch klar“). Dann wird die damalige Unsicherheit unterschätzt.</div></div>
@@ -915,7 +986,7 @@ function seite(){
       <h2 class="abschnitt">Urteilsaufgabe</h2>
       <p>Beurteile eine der drei Entscheidungen. Nenne die Gründe von damals und ihre Folgen. Unterscheide dabei, was man damals wissen konnte und was wir heute wissen.</p>
       <p class="hinweis" style="margin-top:.6rem">Schreib dein Urteil in GoodNotes oder ins Heft.</p>
-      ${linkliste("Zum Weiterarbeiten", [extern("https://www.bpb.de/themen/nationalsozialismus-zweiter-weltkrieg/dossier-nationalsozialismus/","Nationalsozialismus und Zweiter Weltkrieg","Bundeszentrale für politische Bildung")])}
+      ${linkliste("Zum Weiterarbeiten", [extern("https://geschichtefuerdiegegenwart.github.io/Karte-Zweiter-Weltkrieg/","Karte Zweiter Weltkrieg","GGK, mit geprüften Quellen"), extern("https://www.bpb.de/themen/nationalsozialismus-zweiter-weltkrieg/dossier-nationalsozialismus/","Nationalsozialismus und Zweiter Weltkrieg","Bundeszentrale für politische Bildung")])}
       <div class="fuss nodruck"><span class="hinweis">Dein Protokoll kannst du ausdrucken oder als PDF sichern.</span><button class="btn" data-geh="protokoll">Zum Protokoll</button></div></section>`;
   }
 
@@ -933,13 +1004,13 @@ function klasse(key){ const p = S.prot[key]||{}; const a=+p.A||0,b=+p.B||0,c=+p.
 
 function protokoll(){
   const block = key => { const E = ENT[key], p = S.prot[key]||{};
-    return `<section><h3>Entscheidung ${E.nr} · ${E.datum}</h3><p class="hinweis">${esc(E.frage)} · Deine Wahl: <b>${S.v[key]||"–"}</b>${S.sich[key]?` (${esc(S.sich[key])})`:""}</p>
+    return `<section><h3>Entscheidung ${E.nr} · ${E.datum} ${S.e[key]?`<span class="stempel" data-mk="F:p:${key}">ABGEGEBEN</span>`:""}</h3><p class="hinweis">${esc(E.frage)} · Deine Wahl: <b>${S.v[key]||"–"}</b>${S.sich[key]?` (${esc(S.sich[key])})`:""}</p>
       <div class="drei">${["A","B","C"].map(k=>`<label>${k} – Stimmen<input type="number" min="0" inputmode="numeric" data-prot="${key}:${k}" value="${esc(p[k]??"")}"></label>`).join("")}</div>
       <label>davon unsicher (Handzeichen, freiwillig)<input type="number" min="0" inputmode="numeric" data-prot="${key}:u" value="${esc(p.u??"")}"></label>
       <label style="margin-top:.5rem">Stärkstes Argument der Mehrheit<input type="text" data-prot="${key}:arg" value="${esc(p.arg||"")}"></label>
       <label style="margin-top:.5rem">Stärkstes Gegenargument<input type="text" data-prot="${key}:gegen" value="${esc(p.gegen||"")}"></label>
       <div class="tat"><b>Was London tat:</b> ${S.stufe>=E.stufe ? E.tat : "<span class='hinweis'>erscheint nach der Abstimmung</span>"}</div></section>`; };
-  return `<section class="seite"><div class="zeit"><span>Protokoll · Übertrag von der Tafel</span></div>
+  return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span>Protokoll · Übertrag von der Tafel</span></div>
     <h1>Unsere Entscheidungen</h1>
     <p class="lead">Trag nach jeder Abstimmung das Ergebnis und die zentralen Argumente aus dem Tafelbild ein.</p>
     <div class="prot">${block("e1")}${block("e2")}${block("e3")}</div>
@@ -962,6 +1033,7 @@ function zeichne(){
   if(a && a !== document.body && a.attributes){ for(const at of a.attributes){ if(at.name.startsWith("data-") || at.name==="id"){ sel = at.name==="id" ? "#"+CSS.escape(at.value) : `[${at.name}="${String(at.value).replace(/"/g,'\\"')}"]`; break; } } }
   $("#app").innerHTML = kopf() + `<main>${seite()}</main>` + FUSS + (S.karte ? stimmkarte() : "");
   verdrahten();
+  if(window.Bewegung) Bewegung.spiele($("#app"));
   const ziel = fokusZiel ? $(fokusZiel) : (sel ? $(sel) : null); const war = fokusZiel; fokusZiel = null;
   if(ziel){ if(war && ziel.matches(".ph-titel")){ ziel.focus({preventScroll:true}); ziel.closest(".entscheidung").scrollIntoView({block:"start"}); scrollBy(0,-120); } else ziel.focus({preventScroll:true}); }
 }

@@ -25,6 +25,10 @@ Bauen: `node tools/inline.js src/ns-ideologie.html` bettet CSS, Skripte und das 
 
 Keine externen Skripte oder Tracking. Schriften liegen lokal in `assets/fonts/`. In `appeasement.html` werden Foto und Originalton aus `media/` geladen; fehlen die Dateien, lädt die Seite sie erst nach einem Klick von der Science Museum Group bzw. Wikimedia Commons (Zwei-Klick-Lösung). Die vier Orientierungskarten erzeugt `tools/karten.py` aus dem Datensatz CShapes 2.0 (Schvitz u. a. 2022, CC BY-NC-SA 4.0) als `assets/karten.js`; die Karten stehen unter derselben Lizenz.
 
+**Bewegung:** `assets/motion.css` und `assets/motion.js` (Muster D–L aus dem Motion-Musterbuch: Reiter, Karte wird gezogen, Stempel, Laufzettel, Schwärzung, Textmarker, Randnotiz, Lupe, „Du bist hier“). Jede Bewegung läuft nur einmal, wenn ein Element neu erscheint, nie nach Tastaturbedienung und bei „Weniger Bewegung“ (Systemeinstellung) nur als kurzes Überblenden. Der Endzustand ist immer der Ruhezustand. Gespeichert wird nur ein Sitzungsmerker für den Reiter der Startseite (sessionStorage).
+
+**Bilder M20:** Die Bilder aus dem Unterrichtsheft liegen nur im Moodle-Paket (`media/`, nicht im Repository). Fehlen sie, verschwinden die Abbildungen ohne Lücke.
+
 **Lehrkraftbereich M19:** `lk/m19-lehrkraft.enc.json` ist mit AES-GCM verschlüsselt (Schlüssel per PBKDF2 aus dem Passwort). Der Klartext liegt nicht im Repository (`privat/` steht in `.gitignore`). Neu verschlüsseln: `tools/lk-verschluesseln.html` im Browser öffnen oder `LK_PASS='…' node tools/lk-verschluesseln.mjs`. Grenzen: Wer das Passwort kennt, kann es weitergeben; ein Widerruf ist nur durch Neuverschlüsselung möglich. Ältere Fassungen im Git-Verlauf enthalten die früheren Hinweise im Klartext. Eingaben bleiben im Browser des iPads (localStorage). Der QR-Code enthält nur Zahlen; die Daten stehen im Anker der Adresse und werden nicht an den Server übertragen.
 
 ## Bilder und Lizenzen
