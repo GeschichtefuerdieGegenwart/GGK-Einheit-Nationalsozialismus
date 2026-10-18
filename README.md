@@ -9,6 +9,7 @@ Interaktive Quellen-Labore für Geschichte (GGK) am beruflichen Gymnasium – ge
 | `index.html` | Übersicht aller Bausteine |
 | `ns-ideologie.html` | M18 · Die fünf Säulen der NS-Ideologie (eine Datei, aus `src/` erzeugt) |
 | `appeasement.html` | M19 · Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg? (iPad-Fassung nach der Print-Stunde; drei Entscheidungen in je sieben Schritten; `?ansicht=lehrkraft` öffnet den verschlüsselten Lehrkraftbereich) |
+| `m20-dilemmata.html` | M20 · Großbritannien im Zweiten Weltkrieg – drei Dilemmata (Mai 1940, Juli 1941, Februar 1944), durchgängige iPad-Fassung mit geprüften Quellen; `?ansicht=lehrkraft` öffnet den verschlüsselten Lehrkraftbereich (`lk/m20-lehrkraft.enc.json`). Karten: `tools/karten_m20.py` → `assets/karten-m20.js` (CShapes 2.0, CC BY-NC-SA 4.0) |
 | `docs/M19_Faktensicherung.pdf` | Faktensicherung M19, 2 Seiten (Quelle: `src/m19-faktensicherung.html`) |
 | `auswertung.html` | Kursbild für die Lehrkraft (QR-Codes scannen) |
 | `lehrkraft.html` | Diagnose, Entscheidung, Stundenablauf, Quellenprüfung |

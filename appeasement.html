@@ -302,6 +302,9 @@ details .auswert{border:0;padding:0;margin:.4rem 0;background:none}
 .tor{max-width:28rem;margin:3rem auto;display:grid;gap:.8rem}
 .tor input{width:100%;min-height:48px;border:1.5px solid var(--border);border-radius:.6rem;padding:.5rem .8rem;background:var(--surface2)}
 
+@media (max-width:420px){.legende .typ{white-space:normal}}
+.weg-tab td{overflow-wrap:break-word;hyphens:auto}
+@media (max-width:600px){.weg-tab thead{display:none}.weg-tab tr{display:grid;border-bottom:1px solid var(--line);padding:.4rem 0}.weg-tab td{border:0;padding:.2rem .3rem}.weg-tab td:first-child{font-weight:700}}
 @media print{
   .kopf,.fuss,.protokoll-btn,.nodruck{display:none!important}
   body{background:#fff;font-size:11pt}
@@ -489,7 +492,7 @@ const ENT = {
 const ZITATE = [
   { wer:"Neville Chamberlain, Premierminister (Konservative), 3. Oktober 1938", de:"… eine Katastrophe abgewendet, die die Zivilisation, wie wir sie kennen, beendet hätte.", en:"… averted a catastrophe which would have ended civilisation as we have known it", sp:"Sp. 45" },
   { wer:"Clement Attlee, Oppositionsführer (Labour), 3. Oktober 1938", de:"Das war kein Sieg der Vernunft und der Menschlichkeit. Es war ein Sieg der rohen Gewalt.", en:"This has not been a victory for reason and humanity. It has been a victory for brute force.", sp:"Sp. 51" },
-  { wer:"Winston Churchill, Abgeordneter (Konservative), 5. Oktober 1938", de:"Das ist erst der Anfang der Abrechnung.", en:"This is only the beginning of the reckoning.", sp:"Sp. 371" }
+  { wer:"Winston Churchill, Abgeordneter (Konservative), 5. Oktober 1938", de:"Das ist erst der Anfang der Abrechnung.", en:"This is only the beginning of the reckoning.", sp:"Sp. 373" }
 ];
 
 /* Medien. Lokale Dateien in media/ haben Vorrang. Externe Quellen werden
