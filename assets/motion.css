@@ -5,6 +5,7 @@
    Route B Lupe und Schwärzung: H Schwärzung · I Textmarker · J Randnotiz · K Lupe
    Route C Fahrplan der Zeit: L „Du bist hier“ fährt weiter
    P Fächer (Kartenfächer für die Ereignisse nach einer Entscheidung)
+   Q Kartenstapel zum Blättern (Einstieg), Scroll-Snap plus Scroll-Timeline
    Regeln: Endzustand = Ruhezustand (auch ohne JavaScript und im Druck).
    Nur transform und opacity; Ausnahme H und I: background-size (nur Malen,
    kein Layout), weil Balken und Textmarker über Zeilenumbrüche laufen müssen.
@@ -102,3 +103,20 @@ details.herkunft .hk.mv-von{transform:translateY(-6px);opacity:0;transition:none
   .mv-von{opacity:1!important;transform:none!important}
   .aufgedeckt{background:none!important}
 }
+
+/* Q · Kartenstapel im Einstieg (ergänzt 19.10.2026): Die Karte in der Mitte steht
+   gerade und voll, die Nachbarn liegen leicht gedreht und blasser daneben.
+   Gesteuert von der Scrollposition (animation-timeline: view()), nur transform
+   und opacity. Ohne Unterstützung oder bei „Weniger Bewegung“: flache Reihe,
+   Einrasten bleibt. Der Ruhezustand der aktiven Karte ist immer voll sichtbar. */
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion: no-preference){
+    .karte-ein{animation:q-karte linear both;animation-timeline:view(inline);animation-range:cover}
+  }
+}
+@keyframes q-karte{
+  0%{transform:scale(.93) rotate(1.5deg);opacity:.55}
+  38%,62%{transform:none;opacity:1}
+  100%{transform:scale(.93) rotate(-1.5deg);opacity:.55}
+}
+@media print{.karte-ein{animation:none!important}}

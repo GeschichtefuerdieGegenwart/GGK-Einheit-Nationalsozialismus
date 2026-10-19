@@ -172,8 +172,58 @@ audio{width:100%;margin:.6rem 0}
 .legende div{display:flex;flex-wrap:wrap;gap:.2rem .6rem;align-items:baseline;font-size:.92rem}
 .legende .typ{margin:0;white-space:nowrap}
 
-/* Einstieg in Schritten */
-.karte-ein{border:1px solid var(--border);background:var(--surface);border-radius:var(--r-lg);padding:1.3rem 1.4rem;margin:1.2rem 0}
+/* Einstieg: Kartenstapel zum Blättern (Muster Q). Bewegung in assets/motion.css.
+   Natives Scrollen mit Einrasten: Der Finger führt die Karte, Pfeile und Punkte sind die Alternative (WCAG 2.5.7). */
+.stapel{position:relative;margin:1rem -1.25rem 0;outline-offset:-3px}
+.stapel-spur{display:flex;align-items:flex-start;gap:.9rem;transition:none;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:1.25rem;padding:.6rem 1.25rem 1rem;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.stapel-spur::-webkit-scrollbar{display:none}
+.stapel-spur:focus-visible{outline:3px solid var(--ink);outline-offset:-3px}
+.karte-ein{flex:0 0 calc(100% - 3.2rem);scroll-snap-align:start;scroll-snap-stop:always;border:1px solid var(--border);background:var(--surface);border-radius:var(--r-lg);padding:1.3rem 1.4rem;margin:0;box-shadow:0 2px 0 var(--line)}
+.stapel-leiste{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin:0;padding:0 1.25rem}
+.stapel-punkte{display:flex;gap:.15rem;flex-wrap:wrap}
+.stapel-punkte button{min-width:44px;min-height:44px;border:0;background:transparent;display:grid;place-items:center;padding:0;cursor:pointer}
+.stapel-punkte button span{display:block;width:1.9rem;height:5px;border-radius:3px;background:var(--line);transition:background-color 140ms var(--ease-out,ease-out)}
+.stapel-punkte button.da span{background:var(--muted)}
+.stapel-punkte button[aria-current="true"] span{background:var(--red)}
+.stapel-pfeile{display:flex;gap:.4rem}
+.stapel-pfeile .btn{min-width:48px;font-size:1.25rem;line-height:1}
+.stapel-tipp{font-size:.88rem;color:var(--muted);margin:0;padding:0 1.25rem}
+@media (min-width:760px){.karte-ein{flex-basis:calc(100% - 5rem)}}
+@media (max-width:480px){#stapel-stand{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}
+/* Zusammenfassung (zwei Seiten A4) */
+.zf{display:grid;gap:1rem}
+.zf-blatt{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.3rem 1.4rem;display:grid;gap:.9rem}
+.zf-blatt h2{font-size:1.35rem;margin:0}
+.zf-kopf{font-size:.82rem;font-weight:700;color:var(--red);letter-spacing:.02em}
+.zf-kern{border-left:5px solid var(--red);padding:.3rem 0 .3rem .9rem;font-size:1.05rem}
+.zf table{width:100%;border-collapse:collapse;font-size:.88rem}
+.zf th,.zf td{border-bottom:1px solid var(--line);padding:.35rem .4rem;text-align:left;vertical-align:top}
+.zf th{font-size:.78rem;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+.zf-zeit{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.15rem 1.2rem;font-size:.88rem;padding:0;margin:0}
+.zf-zeit li{display:grid;grid-template-columns:5.6rem 1fr;gap:.4rem}
+.zf-zeit b{color:var(--red)}
+.zf-begriffe{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem .9rem;margin:0}
+.zf-begriffe div{font-size:.88rem}
+.zf-begriffe dt{font-weight:700}
+.zf-begriffe dd{margin:0}
+.zf-modell{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;font-size:.86rem}
+.zf-modell div{border:1.5px solid var(--border);border-radius:.6rem;padding:.5rem .6rem}
+.zf-modell b{display:block}
+.zf-pruef{margin:0;padding-left:1.2rem;font-size:.9rem;display:grid;gap:.2rem}
+.zf-quellen{font-size:.75rem;color:var(--muted)}
+@media (max-width:640px){.zf-zeit,.zf-begriffe,.zf-modell{grid-template-columns:1fr}}
+@media print{
+  @page{size:A4;margin:12mm 13mm}
+  .zf-seite .kopf,.zf-seite .seitenfuss,.zf-seite .nodruck,.zf-seite .zeit{display:none!important}
+  .zf-seite main{max-width:none;padding:0}
+  .zf-blatt{border:0;border-radius:0;padding:0;gap:.55rem;font-size:10pt}
+  .zf-blatt+.zf-blatt{break-before:page}
+  .zf-blatt h2{font-size:13pt}
+  .zf table,.zf-zeit,.zf-begriffe div,.zf-modell,.zf-pruef{font-size:8.6pt}
+  .zf-kern{font-size:10pt}
+  .zf-blatt section{break-inside:avoid}
+  .zf td .hinweis{font-size:8pt}
+}
 .karte-ein h2{font-size:clamp(1.35rem,1.15rem + .8vw,1.7rem);margin-bottom:.55rem}
 .karte-ein p+p{margin-top:.6rem}
 .schritt-nr{font-size:.82rem;font-weight:700;color:var(--red);margin-bottom:.2rem}
@@ -275,7 +325,6 @@ details.vertiefung,details.nichtwissen{border:1.5px dashed var(--muted);border-r
 details summary{cursor:pointer;font-weight:700;min-height:32px}
 details[open] summary{margin-bottom:.4rem}
 details .auswert{border:0;padding:0;margin:.4rem 0;background:none}
-.punkte{display:flex;gap:.4rem;margin:.2rem 0 .4rem}.punkte span{width:2.2rem;height:4px;border-radius:2px;background:var(--line)}.punkte span.an{background:var(--red)}
 .karte-ein h2:focus{outline:none}
 /* Zeitleiste */
 .zeitleiste{list-style:none;display:flex;gap:0;overflow-x:auto;margin:.2rem 0 1.4rem;padding:.2rem 0 .4rem;scrollbar-width:thin}
@@ -393,7 +442,7 @@ details .auswert{border:0;padding:0;margin:.4rem 0;background:none}
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const KEY = "ggk-m20-dilemmata:v1";
+const KEY = "ggk-m20-dilemmata:v2";
 const lade = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { return {}; } };
 const speichere = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
 const MARK = `<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="3" y="6" width="28" height="7" rx="3.5" fill="#2E5A47"/><rect x="3" y="21" width="28" height="7" rx="3.5" fill="#2E5A47" opacity=".55"/><rect x="15" y="13" width="4" height="8" rx="2" fill="#9B402D"/></svg>`;
@@ -426,7 +475,7 @@ const CHIP = { erfahren:"damals erfahren", befuerchtet:"damals befürchtet", erh
 
 /* ----------------------------- Inhalte ------------------------------ */
 
-const PHASEN = ["Lage","Spielraum","Optionen","Folgen","Nachdenken","Abstimmung","Debatte","Auswertung"];
+const PHASEN = ["Lage","Spielraum","Optionen","Folgen","Nachdenken","Diskussion","Abstimmung","Auswertung"];
 const H = "https://api.parliament.uk/historic-hansard/";
 
 /* Geprüfte Quellen: Wortlaut nur aus der Fundstelle, Auslassungen mit …,
@@ -519,15 +568,6 @@ function quelle(id, o = {}){
       <div class="hk"><span><b>Fundstelle:</b> ${esc(q.fund)}</span>${q.en?`<span><b>Übersetzung:</b> eigene, gekürzt (Auslassungen mit …)</span>`:""}${q.pruef?`<span><b>Zum Wortlaut:</b> ${esc(q.pruef)}</span>`:""}</div></details></div>`;
 }
 
-/* Argumente-Check (aus der Print-Stunde): Welche Argumente stecken in Churchills Worten? */
-const ARGUMENTE = [
-  { beleg:[["churchill13mai","ungeheuerliche Tyrannei"]], t:"Mit Hitlers Regime ist kein ehrlicher Frieden möglich.", q:"churchill13mai", fb:"13. Mai 1940: „eine ungeheuerliche Tyrannei“." },
-  { beleg:[["churchill18juni","über eineinviertel Millionen Mann unter Waffen"]], t:"Großbritannien ist militärisch stark genug, eine Landung abzuwehren.", q:"churchill18juni", fb:"18. Juni 1940: über eineinviertel Millionen Mann unter Waffen." },
-  { beleg:[["churchill4juni","die Neue Welt mit all ihrer Kraft und Macht vortritt zur Rettung und Befreiung der Alten"]], t:"Die USA („die Neue Welt“) werden helfen.", q:"churchill4juni", fb:"4. Juni 1940: die Neue Welt tritt vor „zur Rettung und Befreiung der Alten“." },
-  { beleg:[["churchill13mai","Sieg um jeden Preis"],["churchill4juni","niemals kapitulieren"]], t:"Kampf ohne Kompromiss: Sieg um jeden Preis.", q:["churchill13mai","churchill4juni"], fb:"13. Mai 1940: „Sieg um jeden Preis“; 4. Juni: „niemals kapitulieren“." },
-  { beleg:[["churchill28mai","Nationen, die kämpfend untergingen, erhoben sich wieder"]], t:"Wer kämpfend untergeht, kann wieder aufstehen; wer sich ergibt, ist erledigt.", q:"churchill28mai", fb:"28. Mai 1940, vor den Ministern (überliefert)." }
-];
-
 const ENT = {
   e1: {
     nr:1, datum:"Mai 1940", stufe:1,
@@ -560,7 +600,7 @@ const ENT = {
         <li>Am 28. Mai entscheidet sich das Kabinett gegen Gespräche. Am selben Tag kapituliert Belgien.</li>
         <li>Bis zum 4. Juni werden rund 338 000 britische und französische Soldaten aus Dünkirchen über den Kanal gebracht.</li>
         <li>Am 22. Juni schließt Frankreich einen Waffenstillstand mit Deutschland. Großbritannien kämpft allein weiter.</li></ul>`,
-    quellenNachher:["dalton28mai"],
+    quellenNachher:["dalton28mai","churchill4juni"],
     tat:"Keine Friedensgespräche; Großbritannien kämpft weiter.",
     fragen:["Welche Argumente aus unserer Klasse tauchen bei Churchill auf – welche nicht?","Das Unterhaus wusste nichts vom Streit im Kabinett. Was heißt das für die Verantwortung der Abgeordneten?","War Halifax’ Vorschlag Schwäche oder Vorsicht – aus Sicht von Mai 1940?"],
     rueck:["Ab Juli 1940 kämpft die Royal Air Force in der Luftschlacht um England. Ab dem 7. September 1940 bombardiert die deutsche Luftwaffe London monatelang („Blitz“).",
@@ -766,7 +806,7 @@ const SEITEN = [
   {id:"ende", nr:"", kurz:"Beurteilung", stufe:3}
 ];
 
-let S = Object.assign({ seite:"start", stufe:0, ein:1, pers:"sie", m:{}, ph:{}, pv:{}, abw:{}, tab:{}, ges:{}, ueb:{}, pt:{}, v:{}, sich:{}, e:{}, prog:null, arg:{}, argOk:false, prot:{e1:{},e2:{},e3:{}}, karte:null, extern:{}, v2:{}, v2b:{}, fx:{}, runde:{}, tafel:null }, lade());
+let S = Object.assign({ seite:"start", stufe:0, ein:1, pers:"sie", m:{}, ph:{}, pv:{}, abw:{}, tab:{}, ges:{}, ueb:{}, pt:{}, v:{}, sich:{}, e:{}, prog:null, prot:{e1:{},e2:{},e3:{}}, karte:null, extern:{}, fx:{}, runde:{}, tafel:null }, lade());
 const setze = f => { f(S); speichere(); zeichne(); };
 
 
@@ -803,7 +843,7 @@ function phasenLeiste(key){
     const status = akt ? "aktueller Schritt" : da ? "erledigt" : zu ? "noch gesperrt" : "offen";
     return `<li><button class="${akt?"akt":da?"da":""}" data-pv="${key}:${n}" ${zu||n===1?"disabled":""} ${akt?'aria-current="step"':""} aria-label="Schritt ${n}: ${t} – ${status}"><span class="pn">${da&&!akt?`<span class="mv-G" data-mk="G:${key}:${n}">✓</span>`:n}</span>${t}</button></li>`; }).join("")}</ol>`;
 }
-const maxPhase = key => S.e[key] ? (S.v2[key] ? 8 : 7) : (S.ph[key] || 2);
+const maxPhase = key => S.e[key] ? 8 : (S.ph[key] || 2);
 const sichtPhase = key => Math.min(S.pv[key] || maxPhase(key), maxPhase(key));
 
 const ZIEL = {
@@ -811,9 +851,9 @@ const ZIEL = {
   3:["Lies die drei Möglichkeiten.","Damals waren mehrere Wege denkbar – keiner war von vornherein der richtige."],
   4:["Sieh dir zu jeder Option Hoffnungen und Risiken an und gib an, was für dich überwiegt.","Wer abwägt, merkt: Jede Option hatte Folgen – auch für Menschen, die nicht mitentscheiden konnten."],
   5:["Wähle die zwei Überlegungen, die am schwersten wiegen.","So wird sichtbar, wovon deine Entscheidung abhängt."],
-  6:["Entscheide dich, begründe in einem Satz und gib an, wie sicher du bist.","Eine gute Begründung ist wichtiger als die gewählte Option."],
-  7:["Diskutiert in der Klasse: Hört die anderen Gruppen, fragt nach, nennt eure Grenze. Stimm danach ein zweites Mal ab.","Im Gespräch merkt man, welche Argumente tragen – und ob man mit dem Wissen von damals argumentiert."],
-  8:["Vergleiche deine Entscheidung mit dem, was geschah – und denk über den Unterschied nach.","Erst jetzt kommt das Wissen dazu, das man damals noch nicht hatte."]
+  6:["Diskutiert in der Klasse: Sagt, wozu ihr neigt, fragt nach und nennt, was euch umstimmen würde.","Im Gespräch merkt man, welche Argumente tragen – und ob man mit dem Wissen von damals argumentiert."],
+  7:["Entscheide dich, begründe in einem Satz und gib an, wie sicher du bist.","Jetzt kennst du die Argumente der anderen. Eine gute Begründung ist wichtiger als die gewählte Option."],
+  8:["Gib das Codewort ein. Vergleiche dann deine Entscheidung mit dem, was geschah – Karte für Karte.","Erst jetzt kommt das Wissen dazu, das man damals noch nicht hatte."]
 };
 const phKopf = (n, titel) => `<h3 tabindex="-1" class="ph-titel"><span class="pnr">Schritt ${n} von 8 · ${PHASEN[n-1]}</span>${titel}</h3>
   <p class="ziel"><b>Dein Auftrag:</b> ${ZIEL[n][0]} <span class="wozu"><b>Wozu?</b> ${ZIEL[n][1]}</span></p>`;
@@ -879,12 +919,14 @@ function entscheidungsweg(key){
         <p class="frage" style="font-size:1.05rem">${esc(E.pers())}</p>
         ${perspSchalter()}
         <textarea data-pt="${key}" ${fertig?"readonly":""} aria-label="Deine Gedanken" placeholder="Deine Gedanken – bleiben auf diesem iPad, niemand sammelt sie ein">${esc(S.pt[key]||"")}</textarea></details>
-      ${nav(6,"Weiter zur Abstimmung", ueb.length>=2, ueb.length<2?"Zwei Überlegungen wählen.":"")}`;
+      ${nav(6,"Weiter zur Diskussion", ueb.length>=2, ueb.length<2?"Zwei Überlegungen wählen.":"")}`;
   }
 
-  if(pv===6){
+  if(pv===6) h += debatte(key);
+
+  if(pv===7){
     const v = S.v[key];
-    h += `${phKopf(6,"Deine Stimme")}
+    h += `${phKopf(7,"Deine Stimme")}
       ${matrix(key, true)}
       <fieldset class="ohne"><legend>Deine Wahl</legend>${["A","B","C"].map(k=>`<button class="opt" data-opt="${key}:${k}" aria-pressed="${v===k}" ${fertig?"disabled":""}><span class="k" aria-hidden="true">${k}</span><span><b><span class="sr">Option ${k}: </span>${esc(E.opt[k].t)}</b><span class="cr">${esc(E.opt[k].was)}</span></span></button>`).join("")}</fieldset>`;
     h += `<label class="frage" for="begr-${key}" style="display:block">Begründe deine Entscheidung in einem Satz.</label>
@@ -892,18 +934,16 @@ function entscheidungsweg(key){
       <p class="frage" id="sich-l-${key}">Wie sicher bist du dir?</p>
       <div class="seg" role="group" aria-labelledby="sich-l-${key}">${["sicher","eher sicher","unsicher"].map(x=>`<button data-sich="${key}:${x}" aria-pressed="${S.sich[key]===x}" ${fertig?"disabled":""}>${x}</button>`).join("")}</div>
       <p class="hinweis" style="margin-top:.5rem">Dies ist eine Abstimmung in unserer Klasse. Sie zeigt deine Haltung – damals entschied die Regierung. Eine Option „unentschieden“ gibt es nicht, weil auch Abwarten eine Politik ist. Deine Unsicherheit zeigst du oben.</p>`;
-    if(!fertig) h += `<div class="fuss"><button class="btn" data-pv="${key}:5">Zurück</button><span class="hinweis" data-status="${key}" aria-live="polite">${bereit(key)?"Bereit zur Abstimmung.":"Option wählen, einen Satz schreiben, Sicherheit angeben."}</span><button class="btn green" data-abgabe="${key}" ${bereit(key)?"":"disabled"}>Entscheidung abgeben</button></div>`;
-    else h += `<div class="fuss"><span class="hinweis">Deine Entscheidung: <b>${v}</b> (${esc(S.sich[key]||"")}).</span><span class="stempel" data-mk="F:${key}">ABGEGEBEN</span><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button><button class="btn primary" data-pv="${key}:7">Weiter</button></div>`;
+    if(!fertig) h += `<div class="fuss"><button class="btn" data-pv="${key}:6">Zurück</button><span class="hinweis" data-status="${key}" aria-live="polite">${bereit(key)?"Bereit zur Abstimmung.":"Option wählen, einen Satz schreiben, Sicherheit angeben."}</span><button class="btn green" data-abgabe="${key}" ${bereit(key)?"":"disabled"}>Entscheidung abgeben</button></div>`;
+    else h += `<div class="fuss"><span class="hinweis">Deine Entscheidung: <b>${v}</b> (${esc(S.sich[key]||"")}).</span><span class="stempel" data-mk="F:${key}">ABGEGEBEN</span><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button><button class="btn primary" data-pv="${key}:8">Weiter: Was geschah?</button></div>`;
   }
 
-  if(pv===7) h += debatte(key);
-
   if(pv===8){
-    h += `${phKopf(8,"Vergleichen und nachdenken")}${codeFeld(key, E.stufe)}${S.stufe < E.stufe ? vorschau() : ""}`;
+    h += `${phKopf(8,"Mit den Ereignissen abgleichen")}${codeFeld(key, E.stufe)}${S.stufe < E.stufe ? vorschau() : ""}`;
     if(S.stufe >= E.stufe){
       h += `<div class="wechsel" role="note"><b>Perspektivwechsel</b> Bis hierher hast du mit dem Wissen von ${esc(E.datum)} entschieden. Ab hier blicken wir zurück.</div>
         <div class="aufl"><div class="kopfzeile">Was dann geschah <span class="marke-h">im Rückblick aufgedeckt</span></div>${aufdecken(E.aufl, key)}</div>
-        <div class="vergleich"><div><span class="hinweis">Deine Entscheidung <span class="stempel" data-mk="F:${key}">ABGEGEBEN</span></span><b>${S.v[key]||"–"}</b><span>${esc(E.opt[S.v[key]]?.t||"")}${S.sich[key]?` · ${esc(S.sich[key])}`:""}</span>${S.v2[key]&&S.v2[key]!==S.v[key]?`<span class="hinweis">nach der Debatte: <b>${S.v2[key]}</b> · ${esc(E.opt[S.v2[key]].t)}</span>`:S.v2[key]?`<span class="hinweis">nach der Debatte: dabei geblieben</span>`:""}</div>
+        <div class="vergleich"><div><span class="hinweis">Deine Entscheidung <span class="stempel" data-mk="F:${key}">ABGEGEBEN</span></span><b>${S.v[key]||"–"}</b><span>${esc(E.opt[S.v[key]]?.t||"")}${S.sich[key]?` · ${esc(S.sich[key])}`:""}</span></div>
           <div><span class="hinweis">Was London tat</span><span>${esc(E.tat)}</span></div></div>
         ${faecher(key)}
         ${S[key+"b"] ? `<p class="randnotiz" data-mk="J:${key}"><b>Deine Randnotiz:</b> ${esc(S[key+"b"])}</p>` : ""}${S.pt[key] ? `<p class="randnotiz" data-mk="J:${key}:pt"><b>Dein Gedanke:</b> ${esc(S.pt[key])}</p>` : ""}
@@ -918,7 +958,7 @@ function entscheidungsweg(key){
 }
 
 /* ------------------------------ Debatte ------------------------------
-   Angeleitetes Klassengespräch nach der ersten Abstimmung. Die Argument-
+   Kurzes Klassengespräch VOR der Abstimmung (drei Runden, etwa 8 Minuten). Die Argument-
    karten kommen aus Schritt 4 (Hoffnungen und Risiken) und aus den
    öffentlichen Quellen – nichts, was damals geheim war. */
 const DEBATTE = {
@@ -930,13 +970,10 @@ const DEBATTE = {
        quellen:{A:["harris42"],B:["bell44"],C:["bell44"]}, beobachtung:["Werden Tote auf beiden Seiten genannt – oder nur auf einer?","Wer spricht über die eigenen Besatzungen?"] }
 };
 const RUNDEN = [
-  { t:"Gruppen bilden", sek:120, was:"Setzt euch nach eurer Wahl zusammen: A, B und C. Wer unsicher war, geht zu den Beobachter*innen. Verteilt die Rollen.", tafel:"Gruppen A · B · C bilden" },
-  { t:"Eröffnung", sek:60, was:"Jede Gruppe nennt ihr stärkstes Argument – eine Minute, eine Person spricht. Reihenfolge: A, B, C.", tafel:"Je Gruppe ein Argument · 1 Minute" },
+  { t:"Wozu neigst du?", sek:180, was:"Stellt euch zu der Option, zu der ihr nach dem Abwägen neigt: A, B oder C. Wer unsicher ist, beobachtet. Jede Gruppe nennt ihr stärkstes Argument – eine Person, eine Minute.", tafel:"Zu A · B · C stellen · je Gruppe ein Argument" },
   { t:"Nachfragen", sek:180, was:"Jede Gruppe stellt einer anderen Gruppe eine Frage. Die Impulsfragen helfen. Die gefragte Gruppe antwortet kurz.", tafel:"Fragen stellen und beantworten" },
-  { t:"Die eigene Grenze", sek:120, was:"Jede Gruppe sagt: Was müsste geschehen, damit wir unsere Meinung ändern? Beobachter*innen berichten, was ihnen aufgefallen ist.", tafel:"Was würde euch umstimmen?" },
-  { t:"Zweite Abstimmung", sek:0, was:"Stimm noch einmal ab – mit der Stimmkarte und hier. Du darfst bei deiner Wahl bleiben.", tafel:"Zweite Abstimmung · Stimmkarten hoch" }
+  { t:"Was würde euch umstimmen?", sek:120, was:"Jede Gruppe sagt in einem Satz, was geschehen müsste, damit sie ihre Meinung ändert. Die Beobachter*innen sagen, was ihnen aufgefallen ist. Danach stimmt jede*r für sich ab.", tafel:"Was würde euch umstimmen? · danach abstimmen" }
 ];
-const ROLLEN = [["Sprecher*in","nennt das Argument der Gruppe"],["Schreiber*in","hält Fragen und Antworten fest"],["Zeitwächter*in","achtet auf die Uhr"],["Beobachter*in","sitzt außerhalb der Gruppen und prüft den Beobachtungsauftrag"]];
 
 function debatte(key){
   const E = ENT[key], D = DEBATTE[key], r = S.runde[key] || 0, R = RUNDEN[r], K = KREIS();
@@ -945,27 +982,19 @@ function debatte(key){
       <p class="hinweis">Dafür spricht</p><ul>${F.H.map(([kr,c,x])=>`<li><span class="chip ${c}">${CHIP[c]}</span>${esc(x)}</li>`).join("")}</ul>
       <p class="hinweis">Dagegen halten die anderen</p><ul>${F.R.map(([kr,c,x])=>`<li><span class="chip ${c}">${CHIP[c]}</span>${esc(x)}</li>`).join("")}</ul>
       ${D.quellen[k].length?`<p class="hinweis">Quelle dazu: ${D.quellen[k].map(q=>esc(QUELLEN[q].wer)).join("; ")} – steht oben auf der Seite.</p>`:""}</div>`; };
-  let h = phKopf(7,"Die Klasse diskutiert");
+  let h = phKopf(6,"Die Klasse diskutiert");
   h += `<div class="runden" role="list" aria-label="Runden der Debatte">${RUNDEN.map((x,i)=>`<button role="listitem" class="runde ${i===r?"akt":i<r?"da":""}" data-runde="${key}:${i}" aria-current="${i===r?"step":"false"}"><span class="rn">${i<r?"✓":i+1}</span>${x.t}${x.sek?`<small>${x.sek/60} Min.</small>`:""}</button>`).join("")}</div>
     <div class="runde-karte" id="runde-${key}">
       <div class="runde-kopf"><h4>Runde ${r+1} · ${esc(R.t)}</h4>${R.sek?timer(key, R.sek):""}</div>
       <p>${esc(R.was)}</p>
-      <div class="fuss"><button class="btn" data-tafel="${key}">An die Tafel (Beamer)</button><span></span>${r<RUNDEN.length-1?`<button class="btn primary" data-runde="${key}:${r+1}">Nächste Runde</button>`:""}</div>
+      <div class="fuss"><button class="btn" data-tafel="${key}">An die Tafel (Beamer)</button><span></span>${r<RUNDEN.length-1?`<button class="btn primary" data-runde="${key}:${r+1}">Nächste Runde</button>`:`<button class="btn primary" data-ph="${key}:7">Weiter zur Abstimmung</button>`}</div>
     </div>`;
-  if(r===0) h += `<div class="zwei"><div><h4>Rollen in jeder Gruppe</h4><ul>${ROLLEN.map(([a,b])=>`<li><b>${a}</b> – ${b}</li>`).join("")}</ul></div>
-      <div><h4>Beobachtungsauftrag</h4><ul>${D.beobachtung.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>
-    <p class="hinweis">Deine eigene Begründung: ${S[key+"b"]?`<span class="randnotiz" style="display:inline-block;margin:0">${esc(S[key+"b"])}</span>`:"–"}</p>`;
-  if(r>=1 && r<=3) h += `<details class="vertiefung" ${r===1?"open":""}><summary>Argumentkarten der drei Gruppen</summary><div class="argkarten">${["A","B","C"].map(karte).join("")}</div>
+  if(r===0) h += `<div class="zwei"><div><h4>Deine Abwägung</h4>${matrix(key, true)}</div>
+      <div><h4>Beobachtungsauftrag</h4><ul>${D.beobachtung.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>`;
+  h += `<details class="vertiefung" ${r===0?"open":""}><summary>Argumentkarten der drei Gruppen</summary><div class="argkarten">${["A","B","C"].map(karte).join("")}</div>
       <p class="hinweis">Alles hier war im ${esc(E.datum)} bekannt oder wurde befürchtet. Was damals geheim war, kommt erst in der Auswertung.</p></details>`;
-  if(r===2) h += `<div class="auswert"><h4>Impulsfragen</h4><ol>${D.impulse.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>`;
-  if(r===3) h += `<div class="auswert"><h4>Beobachter*innen berichten</h4><ul>${D.beobachtung.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
-  if(r===4){
-    const v2 = S.v2[key];
-    h += `<fieldset class="ohne"><legend>Nach der Debatte: Wie entscheidest du jetzt?</legend>${["A","B","C"].map(k=>`<button class="opt" data-v2="${key}:${k}" aria-pressed="${v2===k}"><span class="k" aria-hidden="true">${k}</span><span><b><span class="sr">Option ${k}: </span>${esc(E.opt[k].t)}</b>${k===S.v[key]?`<span class="cr">deine erste Wahl</span>`:""}</span></button>`).join("")}</fieldset>
-      <label class="frage" for="v2b-${key}" style="display:block">${v2&&v2!==S.v[key]?"Was hat dich umgestimmt?":"Was hat dich bestärkt – oder nicht überzeugt?"}</label>
-      <textarea id="v2b-${key}" data-v2b="${key}" placeholder="In der Debatte hat mich … (ein Satz)">${esc(S.v2b[key]||"")}</textarea>
-      <div class="fuss"><button class="btn" data-runde="${key}:3">Zurück</button><span class="hinweis" aria-live="polite">${v2?"":"Wähle A, B oder C."}</span><button class="btn green" data-v2weiter="${key}" ${v2?"":"disabled"}>Weiter zur Auswertung</button></div>`;
-  }
+  if(r===1) h += `<div class="auswert"><h4>Impulsfragen</h4><ol>${D.impulse.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>`;
+  if(r===2) h += `<div class="auswert"><h4>Beobachter*innen berichten</h4><ul>${D.beobachtung.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
   return h;
 }
 
@@ -998,10 +1027,10 @@ function tafel(){
     <h2>${esc(E.frage)}</h2>
     <div class="t-runde">${esc(R.tafel)}</div>
     ${R.sek?`<div class="t-uhr" id="tafel-uhr-${key}">${mmss(u?u.rest:R.sek)}</div><div class="t-knoepfe"><button class="btn" data-uhr="${key}:${u&&u.lauf?"stop":"start"}">${u&&u.lauf?"Anhalten":"Start"}</button><button class="btn" data-uhr="${key}:reset">↺</button></div>`:""}
-    ${r===2?`<ol class="t-liste">${D.impulse.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`:""}
-    ${r===3?`<ul class="t-liste">${D.beobachtung.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}
-    ${r===0||r===1?`<div class="t-opt">${["A","B","C"].map(k=>`<div><b>${k}</b>${esc(E.opt[k].t)}</div>`).join("")}</div>`:""}
-    <div class="t-fuss">${r>0?`<button class="btn" data-runde="${key}:${r-1}">Zurück</button>`:"<span></span>"}${r<RUNDEN.length-1?`<button class="btn primary" data-runde="${key}:${r+1}">Nächste Runde</button>`:""}</div></div>`;
+    ${r===1?`<ol class="t-liste">${D.impulse.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`:""}
+    ${r===2?`<ul class="t-liste">${D.beobachtung.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}
+    ${r===0?`<div class="t-opt">${["A","B","C"].map(k=>`<div><b>${k}</b>${esc(E.opt[k].t)}</div>`).join("")}</div>`:""}
+    <div class="t-fuss">${r>0?`<button class="btn" data-runde="${key}:${r-1}">Zurück</button>`:"<span></span>"}${r<RUNDEN.length-1?`<button class="btn primary" data-runde="${key}:${r+1}">Nächste Runde</button>`:`<span class="t-runde" style="font-size:1.4rem">Jetzt abstimmen – jede*r für sich</span>`}</div></div>`;
 }
 
 /* ------------------------------ Fächer -------------------------------
@@ -1101,27 +1130,46 @@ function einstieg(){
       ${perspSchalter()}
       <p class="hinweis">Deine Antworten bleiben auf diesem iPad. Es werden keine Namen gespeichert. Am Ende kannst du alles löschen.</p></div>`
   ];
+  const N = karten.length;
   return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span>Einstieg</span></div>
     <h1>Großbritannien im Zweiten Weltkrieg – drei Dilemmata</h1>
-    <div class="punkte" aria-hidden="true">${karten.map((_,i)=>`<span class="${i<n?"an":""}"></span>`).join("")}</div>
-    <div id="einkarte" class="mv-auf" data-mk="Ein:${n}">${karten[n-1]}</div>
-    <div class="fuss">${n>1?`<button class="btn" data-ein="${n-1}">Zurück</button>`:"<span></span>"}<span class="hinweis">${n} von ${karten.length}</span>${n < karten.length ? `<button class="btn primary" data-ein="${n+1}">Weiter</button>` : `<button class="btn primary" data-geh="d1">Dilemma 1 beginnen</button>`}</div></section>`;
+    <div class="stapel">
+      <p class="stapel-tipp nodruck">Blättere selbst: wischen, die Pfeile oder die Pfeiltasten.</p>
+      <div class="stapel-leiste">
+        <div class="stapel-punkte">${karten.map((_,i)=>`<button type="button" data-ein="${i+1}" aria-label="Karte ${i+1} von ${N}" ${i+1===n?'aria-current="true"':""} class="${i+1<n?"da":""}"><span></span></button>`).join("")}</div>
+        <span class="hinweis" id="stapel-stand" aria-live="polite">${n} von ${N}</span>
+        <div class="stapel-pfeile"><button type="button" class="btn" data-ein-schritt="-1" aria-label="Vorherige Karte" ${n<=1?"disabled":""}>‹</button><button type="button" class="btn" data-ein-schritt="1" aria-label="Nächste Karte" ${n>=N?"disabled":""}>›</button></div>
+      </div>
+      <div class="stapel-spur" id="stapel" tabindex="0" role="group" aria-roledescription="Kartenstapel" aria-label="Einstieg in ${N} Karten">
+        ${karten.map((k,i)=>k.replace('<div class="karte-ein">',`<div class="karte-ein" role="group" aria-roledescription="Karte" aria-label="${i+1} von ${N}" data-ein-nr="${i+1}">`)).join("")}
+      </div>
+    </div>
+    <div class="fuss"><span></span><span class="hinweis">${n<N?"Lies alle fünf Karten.":""}</span><button class="btn primary" data-geh="d1">Dilemma 1 beginnen</button></div></section>`;
 }
 
-/* Argumente-Check: Wann hat Churchill das gesagt? Erst nach Entscheidung 1. */
-const ARG_DATEN = [["churchill13mai","13. Mai"],["churchill28mai","28. Mai"],["churchill4juni","4. Juni"],["churchill18juni","18. Juni"]];
-/* I · Textmarker: nach dem Prüfen sind die Belege in den Reden markiert */
-const belege = qid => ARGUMENTE.flatMap((x,i) => x.beleg.filter(b=>b[0]===qid).map(b=>({text:b[1], mk:`arg${i}:${qid}`})));
-function argumente(){
-  const a = S.arg || {}, ok = !!S.argOk, n = Object.keys(a).length;
-  return `<h2 class="abschnitt">Churchills Argumente</h2>
-    <div class="auftrag"><h3>Wann sagt Churchill was?</h3><p>Lies die Quellen. Ordne jedes Argument der Rede zu, in der es vorkommt. Prüfe dann.</p></div>
-    ${["churchill13mai","churchill28mai","churchill4juni","churchill18juni"].map(qid=>quelle(qid, {beleg: ok ? belege(qid) : []})).join("")}
-    <div class="liste">${ARGUMENTE.map((x,i)=>{ const treffer = [].concat(x.q).includes(a[i]), r = ok ? (treffer ? "richtig" : "falsch") : "";
-      return `<div class="wahl argument ${r}" role="group" aria-labelledby="arg-${i}"><span id="arg-${i}"><b>${esc(x.t)}</b>${ok?`<span class="fb">${treffer?"Richtig. ":"Nicht ganz. "}${esc(x.fb)}</span>`:""}</span>
-        <span class="seg">${ARG_DATEN.map(([q,t])=>`<button data-arg="${i}:${q}" aria-pressed="${a[i]===q}" ${ok?"disabled":""}>${t}</button>`).join("")}</span></div>`; }).join("")}</div>
-    ${ok ? `<p class="hinweis">Gelb markiert: die Stellen in den Reden, die das jeweilige Argument belegen. Die Reden vom 13. Mai, 4. Juni und 18. Juni waren öffentlich. Die Worte vom 28. Mai fielen vor den Ministern und sind nur aus Tagebüchern und Erinnerungen überliefert.</p>`
-         : `<div class="mehr"><button class="btn" data-argpruefen="1" ${n>=ARGUMENTE.length?"":"disabled"}>Prüfen</button><span class="hinweis">${n} von ${ARGUMENTE.length} zugeordnet</span></div>`}`;
+/* Q · Kartenstapel im Einstieg: Der Stand wird beim Blättern gemerkt, ohne die
+   Seite neu zu zeichnen. Zeiger und Finger gleiten, Tastatur springt (motion.js-Regel). */
+function einstiegStapel(){
+  const spur = $("#stapel"); if(!spur) return;
+  const karten = $$(".karte-ein", spur), N = karten.length;
+  const pos = i => karten[i-1].offsetLeft - spur.offsetLeft - parseFloat(getComputedStyle(spur).scrollPaddingInlineStart||0);
+  const ruhig = () => window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const geh = (i, sanft) => { i = Math.max(1, Math.min(N, i)); spur.scrollTo({left:pos(i), behavior: sanft && !ruhig() ? "smooth" : "auto"}); markiere(i); };
+  const hoehe = i => { const h = karten[i-1].offsetHeight + 26; if(spur.style.height !== h+"px") spur.style.height = h+"px"; };
+  const markiere = i => {
+    hoehe(i);
+    if(S.ein !== i){ S.ein = i; speichere(); }
+    $$(".stapel-punkte button").forEach((b,k)=>{ const an = k+1===i; b.classList.toggle("da", k+1<i); an ? b.setAttribute("aria-current","true") : b.removeAttribute("aria-current"); });
+    const st = $("#stapel-stand"); if(st && st.textContent !== `${i} von ${N}`) st.textContent = `${i} von ${N}`;
+    const [zu, vor] = $$("[data-ein-schritt]"); if(zu){ zu.disabled = i<=1; vor.disabled = i>=N; }
+  };
+  const aktuell = () => { const x = spur.scrollLeft; let best=1, d=1e9; karten.forEach((k,i)=>{ const dd=Math.abs(pos(i+1)-x); if(dd<d){ d=dd; best=i+1; } }); return best; };
+  spur.scrollLeft = pos(S.ein||1); hoehe(S.ein||1);
+  if(!window.__einResize){ window.__einResize = true; addEventListener("resize", ()=>{ const sp=$("#stapel"); if(sp){ const k=$$(".karte-ein",sp)[(S.ein||1)-1]; if(k) sp.style.height=(k.offsetHeight+26)+"px"; } }); }
+  let t; spur.addEventListener("scroll", ()=>{ clearTimeout(t); t = setTimeout(()=>markiere(aktuell()), 90); }, {passive:true});
+  $$("[data-ein]").forEach(b=>b.onclick=e=>geh(+b.dataset.ein, e.detail!==0));
+  $$("[data-ein-schritt]").forEach(b=>b.onclick=e=>geh(aktuell()+(+b.dataset.einSchritt), e.detail!==0));
+  spur.onkeydown = e => { if(e.key==="ArrowRight"||e.key==="ArrowLeft"){ e.preventDefault(); geh(aktuell()+(e.key==="ArrowRight"?1:-1), false); } };
 }
 
 function seite(){
@@ -1144,7 +1192,7 @@ function seite(){
       ${da ? `${bild("duenkirchen")}${karte("europa1940")}${quelle("churchill13mai")}
         ${TYP.darst}<p>Das Kriegskabinett berät seit dem 26. Mai im Geheimen. Was dort gesagt wird, erfährt das Unterhaus nicht.</p>
         ${quelle("kabinett26mai", {schwarz:{frei:S.stufe>=1, de:["Gespräche wären denkbar, „wenn er [Churchill] davon überzeugt wäre, dass Dinge, die für die Unabhängigkeit dieses Landes lebenswichtig sind, unberührt blieben“","„Das Einzige, was zu tun sei, sei ihm [Hitler] zu zeigen, dass er dieses Land nicht erobern könne.“"], en:["If he was satisfied that matters vital to the independence of this country were unaffected","The only thing to do was to show him that he could not conquer this country"]}})}${entscheidungsweg("e1")}` : ""}
-      ${S.stufe>=1 ? `${E_NACHHER("e1")}<h2 class="abschnitt">Rückblick: der „Blitz“</h2>${bild("london")}${bild("aldwych")}${bild("coventry")}${argumente()}${S.argOk ? bild("film") : ""}${S.argOk ? weiter("d2","Weiter zu Dilemma 2") : ""}` : ""}</section>`;
+      ${S.stufe>=1 ? `${E_NACHHER("e1")}<h2 class="abschnitt">Rückblick: der „Blitz“</h2>${bild("london")}${bild("aldwych")}${bild("coventry")}${bild("film")}${weiter("d2","Weiter zu Dilemma 2")}` : ""}</section>`;
   }
 
   if(id==="d2"){
@@ -1206,10 +1254,11 @@ function seite(){
       <p>Beurteile eine der drei Entscheidungen. Nenne die Gründe von damals und ihre Folgen. Unterscheide dabei, was man damals wissen konnte und was wir heute wissen.</p>
       <p class="hinweis" style="margin-top:.6rem">Schreib dein Urteil in GoodNotes oder ins Heft.</p>
       ${linkliste("Zum Weiterarbeiten", [extern("https://geschichtefuerdiegegenwart.github.io/Karte-Zweiter-Weltkrieg/","Karte Zweiter Weltkrieg","GGK, mit geprüften Quellen"), extern("https://www.bpb.de/themen/nationalsozialismus-zweiter-weltkrieg/dossier-nationalsozialismus/","Nationalsozialismus und Zweiter Weltkrieg","Bundeszentrale für politische Bildung")])}
-      <div class="fuss nodruck"><span class="hinweis">Dein Protokoll kannst du ausdrucken oder als PDF sichern.</span><button class="btn" data-geh="protokoll">Zum Protokoll</button></div></section>`;
+      <div class="fuss nodruck"><button class="btn" data-geh="protokoll">Zum Protokoll</button><span></span><button class="btn primary" data-geh="zusammenfassung">Zusammenfassung der Stunde (2 Seiten)</button></div></section>`;
   }
 
   if(id==="protokoll") return protokoll();
+  if(id==="zusammenfassung") return zusammenfassung();
   return "";
 }
 
@@ -1226,9 +1275,6 @@ function protokoll(){
     return `<section><h3>Entscheidung ${E.nr} · ${E.datum} ${S.e[key]?`<span class="stempel" data-mk="F:p:${key}">ABGEGEBEN</span>`:""}</h3><p class="hinweis">${esc(E.frage)} · Deine Wahl: <b>${S.v[key]||"–"}</b>${S.sich[key]?` (${esc(S.sich[key])})`:""}</p>
       <div class="drei">${["A","B","C"].map(k=>`<label>${k} – Stimmen<input type="number" min="0" inputmode="numeric" data-prot="${key}:${k}" value="${esc(p[k]??"")}"></label>`).join("")}</div>
       <label>davon unsicher (Handzeichen, freiwillig)<input type="number" min="0" inputmode="numeric" data-prot="${key}:u" value="${esc(p.u??"")}"></label>
-      <p class="hinweis" style="margin-top:.6rem"><b>Nach der Debatte</b>${S.v2[key]?` · deine zweite Wahl: <b>${S.v2[key]}</b>${S.v2[key]!==S.v[key]?" (geändert)":" (geblieben)"}`:""}</p>
-      <div class="drei">${["A","B","C"].map(k=>`<label>${k} – Stimmen danach<input type="number" min="0" inputmode="numeric" data-prot="${key}:n${k}" value="${esc(p["n"+k]??"")}"></label>`).join("")}</div>
-      <label>Wie viele haben ihre Meinung geändert? (Handzeichen)<input type="number" min="0" inputmode="numeric" data-prot="${key}:ge" value="${esc(p.ge??"")}"></label>
       <label style="margin-top:.5rem">Stärkstes Argument der Mehrheit<input type="text" data-prot="${key}:arg" value="${esc(p.arg||"")}"></label>
       <label style="margin-top:.5rem">Stärkstes Gegenargument<input type="text" data-prot="${key}:gegen" value="${esc(p.gegen||"")}"></label>
       <div class="tat"><b>Was London tat:</b> ${S.stufe>=E.stufe ? E.tat : "<span class='hinweis'>erscheint nach der Abstimmung</span>"}</div></section>`; };
@@ -1236,8 +1282,55 @@ function protokoll(){
     <h1>Unsere Entscheidungen</h1>
     <p class="lead">Trag nach jeder Abstimmung das Ergebnis und die zentralen Argumente aus dem Tafelbild ein.</p>
     <div class="prot">${block("e1")}${block("e2")}${block("e3")}</div>
-    <div class="fuss nodruck"><button class="btn" data-geh="${S.zurueck||"start"}">Zurück</button><button class="btn primary" onclick="print()">Drucken oder als PDF sichern</button></div>
+    <div class="fuss nodruck"><button class="btn" data-geh="${S.zurueck||"start"}">Zurück</button><button class="btn" data-geh="zusammenfassung">Zusammenfassung (2 Seiten)</button><button class="btn primary" onclick="print()">Drucken oder als PDF sichern</button></div>
     <div class="fuss nodruck"><span class="hinweis">Am Ende der Stunde: Antworten auf diesem iPad löschen, damit die nächste Person sie nicht sieht.</span><button class="btn" data-loeschen="1">Alles löschen</button></div></section>`;
+}
+
+/* Zusammenfassung der Stunde: höchstens zwei Seiten A4 (Standard „Merkseiten“).
+   Seite 1: Kernsatz, Zeitleiste, die drei Entscheidungen. Seite 2: Begriffe, Modell,
+   Prüffragen, eigene Ergebnisse. Alle Angaben stammen aus den Inhalten dieser Seite. */
+const BEGRIFFE = [
+  ["Unterhaus (House of Commons)","Die gewählte Kammer des britischen Parlaments. Abgeordnete können reden, fragen und abstimmen. Im Krieg entscheiden Regierung und Kriegskabinett."],
+  ["Kriegskabinett","Kleine Gruppe von Ministern, die im Krieg die wichtigsten Entscheidungen trifft. Ihre Sitzungen sind geheim."],
+  ["Dilemma","Eine Lage, in der jede Möglichkeit schwere Nachteile hat. Es gibt keinen Ausweg ohne Kosten."],
+  ["Flächenangriff","Bomber greifen ganze bebaute Stadtgebiete an, nicht nur einzelne militärische Ziele. So legte es die britische Weisung vom 14. Februar 1942 fest."],
+  ["Retrospektivität","Wir blicken zurück und kennen den Ausgang. Erst im Rückblick werden Folgen und geheime Pläne sichtbar."],
+  ["Rückschaufehler","Wer den Ausgang kennt, hält ihn leicht für vorhersehbar („Das war doch klar“). Dann wird die damalige Unsicherheit unterschätzt."]
+];
+function zusammenfassung(){
+  const opt = k => ["A","B","C"].map(o=>`${o} ${esc(ENT[k].opt[o].t)}`).join(" · ");
+  const du = k => S.v[k] ? `<b>${S.v[k]}</b> · ${esc(ENT[k].opt[S.v[k]].t)}${S.sich[k]?` (${esc(S.sich[k])})`:""}` : "–";
+  const kl = k => { const p = S.prot[k]||{}; return ["A","B","C"].some(o=>p[o]) ? ["A","B","C"].map(o=>`${o}: ${esc(p[o]||"0")}`).join(", ") : "–"; };
+  return `<section class="seite zf" aria-labelledby="zf-h"><div class="zeit nodruck"><span>Zusammenfassung · zwei Seiten</span></div>
+    <article class="zf-blatt">
+      <div class="zf-kopf">GGK · M20 · Großbritannien im Zweiten Weltkrieg – drei Dilemmata · Seite 1 von 2</div>
+      <h1 id="zf-h" style="font-size:1.6rem;margin:0">Weiterkämpfen, verbünden, bombardieren?</h1>
+      <p class="zf-kern"><b>Leitfrage:</b> Wie hat Großbritannien 1940, 1941 und 1944 entschieden – und was konnte man damals wissen?<br>
+        <b>Kernsatz:</b> Großbritannien kämpfte 1940 weiter, statt nach Frieden zu fragen. 1941 half es der Sowjetunion und schloss ein Abkommen mit ihr. Die Flächenangriffe auf deutsche Städte gingen bis 1945 weiter. Jede Entscheidung fiel unter großer Unsicherheit. Die Folgen trugen auch Menschen, die nicht mitentscheiden konnten.</p>
+      <section><h2>Zeitleiste</h2>
+        <ol class="zf-zeit">${EREIGNISSE.map(e=>`<li><b>${esc(e[1])}</b><span>${esc(e[2])}</span></li>`).join("")}</ol></section>
+      <section><h2>Die drei Entscheidungen</h2>
+        <table><thead><tr><th>Wann</th><th>Frage und Möglichkeiten</th><th>Was man damals nicht wissen konnte</th><th>Was London tat</th></tr></thead><tbody>
+        ${["e1","e2","e3"].map(k=>`<tr><td><b>${esc(ENT[k].datum)}</b></td><td>${esc(ENT[k].frage)}<br><span class="hinweis">${opt(k)}</span></td><td>${ENT[k].nichtwissen.slice(0,2).map(esc).join("<br>")}</td><td>${esc(ENT[k].tat)}</td></tr>`).join("")}
+        </tbody></table></section>
+      <p class="zf-quellen">Darstellung nach den Quellen und Darstellungen im GGK-Labor M20 (Hansard, The National Archives, Avalon Project, Imperial War Museums, LeMO, bpb).</p>
+    </article>
+    <article class="zf-blatt">
+      <div class="zf-kopf">GGK · M20 · Seite 2 von 2</div>
+      <section><h2>Fachbegriffe</h2>
+        <dl class="zf-begriffe">${BEGRIFFE.map(([b,t])=>`<div><dt>${esc(b)}</dt><dd>${esc(t)}</dd></div>`).join("")}</dl></section>
+      <section><h2>Modell: Haltung, Abstimmung, Macht</h2>
+        <div class="zf-modell"><div><b>Deine Haltung</b>Was hältst du für richtig – mit dem Wissen von damals?</div><div><b>Unsere Abstimmung</b>Die Klasse stimmt ab. Das zeigt Meinungen, keine Macht.</div><div><b>Die Macht damals</b>Regierung und Kriegskabinett entschieden. Abgeordnete konnten reden, fragen, abstimmen.</div></div>
+        <p class="hinweis" style="margin-top:.3rem">Modell für den Unterricht, keine Quelle.</p></section>
+      <section><h2>Prüffragen für dein Urteil</h2>
+        <ol class="zf-pruef"><li>Was konnte man zum Zeitpunkt der Entscheidung wissen – und was wissen wir erst heute?</li><li>Welche Gründe hatten die Menschen damals? Welche Folgen hatte die Entscheidung?</li><li>Wer trug die Folgen, ohne mitentscheiden zu können?</li><li>Damalige Gründe verstehen heißt nicht, sie gutzuheißen. Woran misst du dein Urteil?</li></ol></section>
+      <section><h2>Meine Ergebnisse</h2>
+        <table><thead><tr><th>Entscheidung</th><th>Meine Wahl</th><th>Meine Begründung</th><th>Klasse</th></tr></thead><tbody>
+        ${["e1","e2","e3"].map(k=>`<tr><td>${esc(ENT[k].datum)}</td><td>${du(k)}</td><td>${esc(S[k+"b"]||"–")}</td><td>${kl(k)}</td></tr>`).join("")}
+        </tbody></table>
+        <p class="hinweis" style="margin-top:.3rem">Mein Urteil (Hausaufgabe): ____________________________________________________________</p></section>
+    </article>
+    <div class="fuss nodruck"><button class="btn" data-geh="${S.zurueck||"ende"}">Zurück</button><span class="hinweis">Druckt auf zwei Seiten A4. In GoodNotes: „Drucken“ → „Als PDF sichern“.</span><button class="btn primary" onclick="print()">Drucken oder als PDF sichern</button></div></section>`;
 }
 
 function stimmkarte(){
@@ -1253,6 +1346,7 @@ function zeichne(){
   // Fokus nach dem Neuzeichnen wiederherstellen (Tastaturbedienung)
   const a = document.activeElement; let sel = null;
   if(a && a !== document.body && a.attributes){ for(const at of a.attributes){ if(at.name.startsWith("data-") || at.name==="id"){ sel = at.name==="id" ? "#"+CSS.escape(at.value) : `[${at.name}="${String(at.value).replace(/"/g,'\\"')}"]`; break; } } }
+  document.body.classList.toggle("zf-seite", S.seite==="zusammenfassung");
   $("#app").innerHTML = kopf() + `<main>${seite()}</main>` + FUSS + (S.karte ? stimmkarte() : "") + (S.tafel ? tafel() : "");
   verdrahten();
   $$(".faecher").forEach(f=>{ const a=f.querySelector(".f-karte.akt"); if(a) f.style.setProperty("--h", a.offsetHeight+"px"); });
@@ -1268,8 +1362,8 @@ document.addEventListener("keydown", e => {
 
 function verdrahten(){
   $$("[data-geh]").forEach(b=>b.onclick=e=>{ e.preventDefault(); const z=b.dataset.geh; const s=SEITEN.find(x=>x.id===z);
-    if(s && s.stufe > S.stufe) return; setze(x=>{ if(z==="protokoll" && x.seite!=="protokoll") x.zurueck=x.seite; x.seite=z; }); scrollTo(0,0); });
-  $$("[data-ein]").forEach(b=>b.onclick=()=>{ fokusZiel="#einkarte h2"; setze(x=>{ x.ein=+b.dataset.ein; }); });
+    if(s && s.stufe > S.stufe) return; setze(x=>{ if((z==="protokoll"||z==="zusammenfassung") && x.seite!==z) x.zurueck=x.seite; x.seite=z; }); scrollTo(0,0); });
+  einstiegStapel();
   $$("[data-pers]").forEach(b=>b.onclick=()=>setze(x=>{ x.pers=b.dataset.pers; }));
   $$("[data-meld]").forEach(b=>b.onclick=()=>setze(x=>{ const k=b.dataset.meld; x.m[k]=(x.m[k]??1)+1; }));
   $$("[data-vt]").forEach(b=>b.onclick=()=>setze(x=>{ const i=+b.dataset.vt; x.vt=x.vt||[]; x.vt = x.vt.includes(i) ? x.vt.filter(y=>y!==i) : [...x.vt,i]; }));
@@ -1286,15 +1380,10 @@ function verdrahten(){
   $$("[data-sich]").forEach(b=>b.onclick=()=>{ const [k,o]=b.dataset.sich.split(":"); setze(x=>{ x.sich[k]=o; }); });
   $$("[data-begr]").forEach(t=>{ t.oninput=()=>{ const k=t.dataset.begr; S[k+"b"]=t.value; speichere();
     const btn=$(`[data-abgabe="${k}"]`), stt=$(`[data-status="${k}"]`); if(btn){ btn.disabled=!bereit(k); stt.textContent = bereit(k)?"Bereit zur Abstimmung.":"Option wählen, einen Satz schreiben, Sicherheit angeben."; } }; });
-  $$("[data-arg]").forEach(b=>b.onclick=()=>{ const [i,q]=b.dataset.arg.split(":"); setze(x=>{ x.arg = (x.arg && !Array.isArray(x.arg)) ? x.arg : {}; x.arg[i]=q; }); });
-  $$("[data-argpruefen]").forEach(b=>b.onclick=()=>setze(x=>{ x.argOk=true; }));
   $$("[data-prog]").forEach(b=>b.onclick=()=>setze(x=>{ x.prog=b.dataset.prog; }));
   $$("[data-runde]").forEach(b=>b.onclick=()=>{ const [k,r]=b.dataset.runde.split(":"); if(!S.tafel) fokusZiel=`#runde-${k} h4`; setze(x=>{ x.runde[k]=+r; }); });
   $$("[data-uhr]").forEach(b=>b.onclick=()=>{ const [k,w]=b.dataset.uhr.split(":"); uhr(k,w); });
   $$("[data-tafel]").forEach(b=>b.onclick=()=>{ const k=b.dataset.tafel; fokusZiel = k ? ".tafel .zu" : (S.tafel ? `[data-tafel="${S.tafel}"]` : null); setze(x=>{ x.tafel=k||null; }); });
-  $$("[data-v2]").forEach(b=>b.onclick=()=>{ const [k,o]=b.dataset.v2.split(":"); setze(x=>{ x.v2[k]=o; }); });
-  $$("[data-v2b]").forEach(t=>t.oninput=()=>{ S.v2b[t.dataset.v2b]=t.value; speichere(); });
-  $$("[data-v2weiter]").forEach(b=>b.onclick=()=>{ const k=b.dataset.v2weiter; fokusZiel=`#ph-${k} .ph-titel`; setze(x=>{ x.ph[k]=8; x.pv[k]=8; }); });
   $$("[data-fx]").forEach(b=>b.onclick=()=>{ const [k,i]=b.dataset.fx.split(":"); if(b.classList.contains("f-karte") && +i===(S.fx[k]||0)) return; fokusZiel=`.faecher[data-fx-key="${k}"]`; setze(x=>{ x.fx[k]=Math.max(0, Math.min(NACHHER[k].length-1, +i)); }); });
   $$(".faecher").forEach(f=>{ let x0=null; f.onpointerdown=e=>{ x0=e.clientX; }; f.onpointerup=e=>{ if(x0===null) return; const dx=e.clientX-x0; x0=null; if(Math.abs(dx)<40) return; const k=f.dataset.fxKey; fokusZiel=`.faecher[data-fx-key="${k}"]`; setze(s=>{ s.fx[k]=Math.max(0, Math.min(NACHHER[k].length-1, (s.fx[k]||0)+(dx<0?1:-1))); }); }; });
   $$("[data-abgabe]").forEach(b=>b.onclick=()=>{ const k=b.dataset.abgabe; fokusZiel=".stimmkarte .zu"; setze(x=>{ x.e[k]=true; x.ph[k]=7; x.pv[k]=7; x.karte=k; }); });
