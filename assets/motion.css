@@ -4,6 +4,7 @@
    Route A Findbuch: D Reiter · E Karte wird gezogen · F Stempel · G Laufzettel
    Route B Lupe und Schwärzung: H Schwärzung · I Textmarker · J Randnotiz · K Lupe
    Route C Fahrplan der Zeit: L „Du bist hier“ fährt weiter
+   P Fächer (Kartenfächer für die Ereignisse nach einer Entscheidung)
    Regeln: Endzustand = Ruhezustand (auch ohne JavaScript und im Druck).
    Nur transform und opacity; Ausnahme H und I: background-size (nur Malen,
    kein Layout), weil Balken und Textmarker über Zeilenumbrüche laufen müssen.
@@ -79,6 +80,9 @@ details.herkunft summary svg{width:18px;height:18px;flex:0 0 auto}
 details.herkunft .hk{border-top:2px dashed var(--line);padding-top:.45rem;display:grid;gap:.2rem;transition:transform var(--dauer-mittel) var(--ease-out),opacity var(--dauer-mittel) var(--ease-out)}
 details.herkunft .hk.mv-von{transform:translateY(-6px);opacity:0;transition:none}
 
+/* P · Fächer: Karten gleiten und drehen in die Mitte (nur transform und opacity) */
+.f-karte{transition:transform 300ms var(--ease-out),opacity 300ms var(--ease-out)}
+
 /* L · „Du bist hier“ fährt weiter (Zeitleiste) */
 .zeitleiste .zl-hier.mv-L{transition:transform 440ms var(--ease-weg)}
 
@@ -91,6 +95,7 @@ details.herkunft .hk.mv-von{transform:translateY(-6px);opacity:0;transition:none
   mark.beleg.mv-von{background-size:100% 100%}
   .tile.aktuell{transition:none}
   .zeitleiste .zl-hier.mv-L{transition:none}
+  .f-karte{transition:opacity var(--dauer-aus)}
   ::view-transition-group(*){animation:none!important}
 }
 @media print{
