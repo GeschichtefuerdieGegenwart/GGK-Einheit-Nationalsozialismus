@@ -290,6 +290,7 @@ audio{width:100%;margin:.6rem 0}
 .phasen button .pn{flex:0 0 auto;display:inline-grid;place-items:center;width:1.35rem;height:1.35rem;border-radius:50%;border:1.5px solid currentColor;font-size:.72rem;font-weight:700;margin-right:.3rem}
 .phasen button.da{border-top-color:var(--green);color:var(--green)}
 .phasen button.akt{border-top-color:var(--red);color:var(--ink);font-weight:700}
+.phasen button.aus{border-top-style:dashed;opacity:.85}.phasen button.aus small{margin-left:.3rem;font-size:.72rem}
 .phasen button:disabled{cursor:default}
 .phasen button:disabled:not(.da):not(.akt){opacity:.7}
 .ziel{background:var(--surface2);border:1px solid var(--border);border-radius:.7rem;padding:.6rem .85rem;margin:.2rem 0 1rem;font-size:.95rem}
@@ -442,7 +443,7 @@ details .auswert{border:0;padding:0;margin:.4rem 0;background:none}
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const KEY = "ggk-m20-dilemmata:v2";
+const KEY = "ggk-m20-dilemmata:v3";
 const lade = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { return {}; } };
 const speichere = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
 const MARK = `<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="3" y="6" width="28" height="7" rx="3.5" fill="#2E5A47"/><rect x="3" y="21" width="28" height="7" rx="3.5" fill="#2E5A47" opacity=".55"/><rect x="15" y="13" width="4" height="8" rx="2" fill="#9B402D"/></svg>`;
@@ -475,7 +476,10 @@ const CHIP = { erfahren:"damals erfahren", befuerchtet:"damals befürchtet", erh
 
 /* ----------------------------- Inhalte ------------------------------ */
 
-const PHASEN = ["Lage","Spielraum","Optionen","Folgen","Nachdenken","Diskussion","Abstimmung","Auswertung"];
+const PHASEN = ["Lage","Optionen","Folgen","Nachdenken","Diskussion","Abstimmung","Auswertung"];
+/* K5 · Dilemma 2 ist die Kurzfassung: Schritt 4 (Nachdenken) entfällt. */
+const OHNE = { e2:[4] };
+const entfaellt = (key, n) => (OHNE[key]||[]).includes(n);
 const H = "https://api.parliament.uk/historic-hansard/";
 
 /* Geprüfte Quellen: Wortlaut nur aus der Fundstelle, Auslassungen mit …,
@@ -577,8 +581,8 @@ const ENT = {
       ["Unterhaus – deine Rolle","Du weißt nicht, dass das Kabinett gerade darüber streitet: Die Sitzungen sind geheim. Du kannst im Unterhaus Fragen stellen und reden."],
       ["Bevölkerung","Sie erfährt vom Krieg aus Zeitung und Rundfunk. Nachrichten unterliegen der Zensur."]
     ],
-    koennen:["im Unterhaus sprechen und Fragen stellen","mit Ministern und Parteifreunden reden","die Regierung öffentlich unterstützen oder kritisieren"],
-    grenzen:["Die Beratungen des Kriegskabinetts sind geheim.","Militärische Lageberichte kennt nur die Regierung.","Ob Frankreich weiterkämpft, entscheidet Paris."],
+    koennen:["im Unterhaus sprechen und Fragen stellen","mit Ministern und Parteifreunden reden"],
+    grenzen:["Die Beratungen des Kriegskabinetts sind geheim.","Militärische Lageberichte kennt nur die Regierung."],
     opt:{
       A:{t:"Weiterkämpfen", was:"Keine Gespräche über Frieden. Großbritannien kämpft weiter, auch wenn Frankreich fällt."},
       B:{t:"Vorsichtig nachfragen", was:"Über Mussolini erkunden lassen, welche Bedingungen Hitler stellen würde – ohne sich festzulegen."},
@@ -616,8 +620,8 @@ const ENT = {
       ["Unterhaus – deine Rolle","Du kannst in Debatten sprechen, Fragen stellen und die Regierung unterstützen oder kritisieren."],
       ["Andere Betroffene","Die polnische Exilregierung sitzt in London. Ein Teil Polens war seit 1939 von der Sowjetunion besetzt."]
     ],
-    koennen:["im Unterhaus für oder gegen ein Bündnis sprechen","die Regierung nach den Bedingungen fragen","auf die Interessen Polens hinweisen"],
-    grenzen:["Über das Bündnis entscheiden die Regierungen in London und Moskau.","Wie es an der Ostfront steht, weiß niemand genau.","Die USA sind noch nicht im Krieg."],
+    koennen:["im Unterhaus für oder gegen ein Bündnis sprechen","auf die Interessen Polens hinweisen"],
+    grenzen:["Über das Bündnis entscheiden die Regierungen in London und Moskau.","Die USA sind noch nicht im Krieg."],
     opt:{
       A:{t:"Förmliches Bündnis", was:"Einen Vertrag schließen: gegenseitige Hilfe und kein Sonderfrieden mit Hitler."},
       B:{t:"Hilfe ohne Bündnis", was:"Waffen und Material liefern, aber keinen Vertrag unterschreiben."},
@@ -653,8 +657,8 @@ const ENT = {
       ["Unterhaus – deine Rolle","Du kannst die Regierung nach den Zielen fragen. Kritik an den Angriffen äußern nur wenige Abgeordnete und Lords."],
       ["Bevölkerung","Sie liest in der Presse von erfolgreichen Angriffen. Viele haben selbst Luftangriffe erlebt."]
     ],
-    koennen:["im Parlament nach den Zielen der Angriffe fragen","öffentlich für oder gegen die Angriffe eintreten","Kritikern wie Bischof Bell zustimmen oder widersprechen"],
-    grenzen:["Über Ziele und Einsätze entscheiden Regierung und Militär.","Genaue Berichte über Wirkung und Tote bleiben geheim.","Die Planung der Landung in Frankreich ist geheim."],
+    koennen:["im Parlament nach den Zielen der Angriffe fragen","Kritikern wie Bischof Bell zustimmen oder widersprechen"],
+    grenzen:["Über Ziele und Einsätze entscheiden Regierung und Militär.","Genaue Berichte über Wirkung und Tote bleiben geheim."],
     opt:{
       A:{t:"Flächenangriffe fortsetzen", was:"Weiter Städte angreifen, um Rüstung und Kriegsmoral in Deutschland zu treffen."},
       B:{t:"Gezieltere Angriffe", was:"Die Bomber vor allem gegen Verkehrswege, Ölanlagen und Rüstungswerke einsetzen, auch wenn die Treffsicherheit begrenzt ist."},
@@ -752,10 +756,10 @@ const BILDER = {
 };
 const BILD_TYP = { quelle:TYP.quelle, film:`<span class="typ darst">Spielfilm · Darstellung von heute</span>`, taeter:`<span class="typ quelle">Quelle · von den Tätern aufgenommen</span>` };
 const BILD_FEHLT = new Set();
-function bild(id){
+function bild(id, o = {}){
   if(BILD_FEHLT.has(id)) return "";
   const b = BILDER[id];
-  return `<figure data-bild-id="${id}"><img src="${b.datei}" alt="${esc(b.alt)}" loading="lazy" onerror="bildFehlt(this)"><figcaption>${BILD_TYP[b.typ]} ${esc(b.cap)}${b.frage?`<br><b>Zum Bild:</b> ${esc(b.frage)}`:""}</figcaption></figure>`;
+  return `<figure data-bild-id="${id}"><img src="${b.datei}" alt="${esc(b.alt)}" loading="lazy" onerror="bildFehlt(this)"><figcaption>${BILD_TYP[b.typ]} ${esc(b.cap)}${b.frage && o.frage!==false?`<br><b>Zum Bild:</b> ${esc(b.frage)}`:""}</figcaption></figure>`;
 }
 window.bildFehlt = img => { const f = img.closest("figure"); BILD_FEHLT.add(f.dataset.bildId); f.remove(); };
 const IN_MOODLE = location.pathname.includes("pluginfile.php");
@@ -839,23 +843,23 @@ function perspSchalter(){
 function phasenLeiste(key){
   const max = maxPhase(key), pv = sichtPhase(key);
   return `<ol class="phasen" aria-label="Schritte der Entscheidung">${PHASEN.map((t,i)=>{ const n=i+1;
+    if(entfaellt(key, n)) return `<li><button class="aus" disabled aria-label="Schritt ${n}: ${t} – entfällt in dieser Kurzfassung"><span class="pn">–</span>${t}<small>entfällt</small></button></li>`;
     const zu = n > max, akt = n === pv, da = n < max || (n===max && S.stufe>=ENT[key].stufe);
     const status = akt ? "aktueller Schritt" : da ? "erledigt" : zu ? "noch gesperrt" : "offen";
     return `<li><button class="${akt?"akt":da?"da":""}" data-pv="${key}:${n}" ${zu||n===1?"disabled":""} ${akt?'aria-current="step"':""} aria-label="Schritt ${n}: ${t} – ${status}"><span class="pn">${da&&!akt?`<span class="mv-G" data-mk="G:${key}:${n}">✓</span>`:n}</span>${t}</button></li>`; }).join("")}</ol>`;
 }
-const maxPhase = key => S.e[key] ? 8 : (S.ph[key] || 2);
+const maxPhase = key => S.e[key] ? 7 : (S.ph[key] || 2);
 const sichtPhase = key => Math.min(S.pv[key] || maxPhase(key), maxPhase(key));
 
 const ZIEL = {
-  2:["Lies, wer damals entschied und was Abgeordnete tun konnten.","Deine Stimme in der Klasse ist nicht dasselbe wie die Macht einer Regierung."],
-  3:["Lies die drei Möglichkeiten.","Damals waren mehrere Wege denkbar – keiner war von vornherein der richtige."],
-  4:["Sieh dir zu jeder Option Hoffnungen und Risiken an und gib an, was für dich überwiegt.","Wer abwägt, merkt: Jede Option hatte Folgen – auch für Menschen, die nicht mitentscheiden konnten."],
-  5:["Wähle die zwei Überlegungen, die am schwersten wiegen.","So wird sichtbar, wovon deine Entscheidung abhängt."],
-  6:["Diskutiert in der Klasse: Sagt, wozu ihr neigt, fragt nach und nennt, was euch umstimmen würde.","Im Gespräch merkt man, welche Argumente tragen – und ob man mit dem Wissen von damals argumentiert."],
-  7:["Entscheide dich, begründe in einem Satz und gib an, wie sicher du bist.","Jetzt kennst du die Argumente der anderen. Eine gute Begründung ist wichtiger als die gewählte Option."],
-  8:["Gib das Codewort ein. Vergleiche dann deine Entscheidung mit dem, was geschah – Karte für Karte.","Erst jetzt kommt das Wissen dazu, das man damals noch nicht hatte."]
+  2:["Lies, wer damals entschied, was du als Abgeordnete tun konntest und welche drei Wege diskutiert wurden.","Deine Stimme in der Klasse ist nicht die Macht einer Regierung. Und damals waren mehrere Wege denkbar."],
+  3:["Sieh dir zu jeder Option Hoffnungen und Risiken an und gib an, was für dich überwiegt.","Wer abwägt, merkt: Jede Option hatte Folgen – auch für Menschen, die nicht mitentscheiden konnten."],
+  4:["Wähle die zwei Überlegungen, die am schwersten wiegen.","So wird sichtbar, wovon deine Entscheidung abhängt."],
+  5:["Diskutiert kurz in der Klasse: Sagt, wozu ihr neigt, und was euch umstimmen würde.","Im Gespräch merkt man, welche Argumente tragen – und ob man mit dem Wissen von damals argumentiert."],
+  6:["Entscheide dich, begründe in einem Satz und gib an, wie sicher du bist.","Jetzt kennst du die Argumente der anderen. Eine gute Begründung ist wichtiger als die gewählte Option."],
+  7:["Gib das Codewort ein. Vergleiche dann deine Entscheidung mit dem, was geschah – Karte für Karte.","Erst jetzt kommt das Wissen dazu, das man damals noch nicht hatte."]
 };
-const phKopf = (n, titel) => `<h3 tabindex="-1" class="ph-titel"><span class="pnr">Schritt ${n} von 8 · ${PHASEN[n-1]}</span>${titel}</h3>
+const phKopf = (n, titel) => `<h3 tabindex="-1" class="ph-titel"><span class="pnr">Schritt ${n} von 7 · ${PHASEN[n-1]}</span>${titel}</h3>
   <p class="ziel"><b>Dein Auftrag:</b> ${ZIEL[n][0]} <span class="wozu"><b>Wozu?</b> ${ZIEL[n][1]}</span></p>`;
 
 function bereit(key){ const b = S[key+"b"] || ""; return !!(S.v[key] && S.sich[key] && b.trim().length >= 10 && true); }
@@ -870,34 +874,30 @@ function matrix(key, kompakt){
     <tbody>${["A","B","C"].map(k=>`<tr><th scope="row">${k} · ${esc(E.opt[k].t)}</th>${ABW.map(([c,t])=>`<td>${a[k]===c?`<span class="marke" aria-label="${t}">●</span>`:`<span class="leer" aria-hidden="true">·</span>`}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
 }
 
-/* Die Schritte 2–8 einer Entscheidung. Schritt 1 (Lage) steht darüber auf der Seite.
+/* Die Schritte 2–7 einer Entscheidung. Schritt 1 (Lage) steht darüber auf der Seite.
    Es wird immer nur ein Schritt gezeigt; erledigte Schritte lassen sich über die Leiste wieder öffnen. */
 function entscheidungsweg(key){
   const E = ENT[key], max = maxPhase(key), pv = sichtPhase(key), fertig = !!S.e[key], K = KREIS();
-  const nav = (n, text, an=true, hinweis="") => `<div class="fuss">${pv>2?`<button class="btn" data-pv="${key}:${pv-1}">Zurück</button>`:"<span></span>"}<span class="hinweis" aria-live="polite">${hinweis}</span>${max>pv?`<button class="btn primary" data-pv="${key}:${pv+1}">Weiter</button>`:`<button class="btn primary" data-ph="${key}:${n}" ${an?"":"disabled"}>${text}</button>`}</div>`;
+  const nav = (n, text, an=true, hinweis="") => `<div class="fuss">${pv>2?`<button class="btn" data-pv="${key}:${entfaellt(key,pv-1)?pv-2:pv-1}">Zurück</button>`:"<span></span>"}<span class="hinweis" aria-live="polite">${hinweis}</span>${max>pv?`<button class="btn primary" data-pv="${key}:${entfaellt(key,pv+1)?pv+2:pv+1}">Weiter</button>`:`<button class="btn primary" data-ph="${key}:${n}" ${an?"":"disabled"}>${text}</button>`}</div>`;
   let h = `<section class="entscheidung" aria-labelledby="h-${key}"><div class="kopfzeile">Entscheidung ${E.nr} von 3 · ${E.datum}</div>
     <h2 id="h-${key}">${esc(E.frage)}</h2>${phasenLeiste(key)}<div class="phase mv-auf" id="ph-${key}" data-mk="P:${key}:${pv}">`;
 
   if(pv===2){
-    h += `${phKopf(2,"Wer entscheidet – und was kannst du tun?")}${TYP.darst}
+    h += `${phKopf(2,"Wer entscheidet – und welche Wege gibt es?")}${key==="e2"?`<p class="hinweis"><b>Kurzfassung:</b> Lest diesen Schritt gemeinsam am Beamer.</p>`:""}${TYP.darst}
       <div class="macht" role="list">${E.spiel.map(([w,t],i)=>`<div class="ebene e${i}" role="listitem"><span class="stufe">${["entscheidet","berät und kontrolliert","nimmt Einfluss"][i] || ""}</span><b>${esc(w)}</b><span>${esc(t)}</span></div>`).join("")}</div>
       <div class="zwei"><div><h4>Als Abgeordnete kannst du …</h4><ul>${E.koennen.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
         <div><h4>Grenzen</h4><ul>${E.grenzen.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>
-      ${nav(3,"Weiter: die Optionen")}`;
+      <h4 style="margin-top:1rem">Diese drei Wege werden in London diskutiert</h4>
+      ${["A","B","C"].map(k=>`<div class="optinfo"><span class="k" aria-hidden="true">${k}</span><span><b><span class="sr">Option ${k}: </span>${esc(E.opt[k].t)}</b><span class="cr">${esc(E.opt[k].was)}</span></span></div>`).join("")}
+      <p class="hinweis">Die Optionen sind für den Unterricht zugespitzt. Sie entsprechen Positionen, die damals vertreten wurden. Die Reihenfolge A–B–C ist keine Rangfolge und keine politische Einordnung.</p>
+      ${nav(3,"Weiter: Folgen abwägen")}`;
   }
 
   if(pv===3){
-    h += `${phKopf(3,"Welche Möglichkeiten werden in London diskutiert?")}
-      ${["A","B","C"].map(k=>`<div class="optinfo"><span class="k" aria-hidden="true">${k}</span><span><b><span class="sr">Option ${k}: </span>${esc(E.opt[k].t)}</b><span class="cr">${esc(E.opt[k].was)}</span></span></div>`).join("")}
-      <p class="hinweis">Die Optionen sind für den Unterricht zugespitzt. Sie entsprechen Positionen, die damals vertreten wurden. Die Reihenfolge A–B–C ist keine Rangfolge und keine politische Einordnung.</p>
-      ${nav(4,"Weiter: Folgen abwägen")}`;
-  }
-
-  if(pv===4){
     const tab = S.tab[key] || "A", F = E.folgen[tab], a = S.abw[key] || {}, n = Object.keys(a).length;
     const liste = arr => ["ich","land","welt"].map(kr=>{ const it = arr.filter(x=>x[0]===kr); if(!it.length) return "";
         return `<div class="kreis">${esc(K[kr])}</div><ul>${it.map(([,c,t])=>`<li><span class="chip ${c}">${CHIP[c]}</span>${esc(t)}</li>`).join("")}</ul>`; }).join("");
-    h += `${phKopf(4,"Was könnte jede Option bewirken?")}
+    h += `${phKopf(3,"Was könnte jede Option bewirken?")}
       ${perspSchalter()}
       <div class="tabs" role="group" aria-label="Option wählen">${["A","B","C"].map(k=>`<button data-tab="${key}:${k}" aria-pressed="${tab===k}">${k} · ${esc(E.opt[k].t)}<small>${a[k]?"✓ abgewogen":"noch offen"}</small></button>`).join("")}</div>
       <div class="folgen" aria-live="polite"><div class="zwei" style="margin:0"><div><h4>Hoffnungen</h4>${liste(F.H)}</div><div><h4>Risiken</h4>${liste(F.R)}</div></div>
@@ -906,12 +906,12 @@ function entscheidungsweg(key){
       <details class="nichtwissen"><summary>Was du im ${esc(E.datum)} noch nicht wissen kannst</summary><ul>${E.nichtwissen.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></details>
       ${n ? matrix(key) : ""}
       <p class="hinweis">„damals erfahren“ = aus eigener Erfahrung oder Berichten bekannt. „befürchtet / erhofft / diskutiert“ = eine Erwartung, keine Gewissheit. Es gibt keine Punkte und keine richtige Lösung.</p>
-      ${nav(5,"Weiter: gewichten", n>=3, n<3?`Noch ${3-n} Option${3-n>1?"en":""} abwägen.`:"")}`;
+      ${entfaellt(key,4) ? nav(5,"Weiter zur Diskussion", n>=3, n<3?`Noch ${3-n} Option${3-n>1?"en":""} abwägen.`:"") : nav(4,"Weiter: gewichten", n>=3, n<3?`Noch ${3-n} Option${3-n>1?"en":""} abwägen.`:"")}`;
   }
 
-  if(pv===5){
+  if(pv===4){
     const ueb = S.ueb[key] || [];
-    h += `${phKopf(5,"Was wiegt für dich am schwersten?")}
+    h += `${phKopf(4,"Was wiegt für dich am schwersten?")}
       <fieldset class="ohne"><legend>Zwei Überlegungen wählen (${ueb.length} von 2)</legend>
       <div class="liste">${E.ueber.map((t,i)=>{ const an = ueb.includes(i), voll = ueb.length>=2 && !an;
         return `<button class="wahl" data-ueb="${key}:${i}" aria-pressed="${an}" ${fertig||voll?"disabled":""}><span class="box" aria-hidden="true">${an?"✓":""}</span><span>${esc(t)}</span></button>`; }).join("")}</div></fieldset>
@@ -919,14 +919,14 @@ function entscheidungsweg(key){
         <p class="frage" style="font-size:1.05rem">${esc(E.pers())}</p>
         ${perspSchalter()}
         <textarea data-pt="${key}" ${fertig?"readonly":""} aria-label="Deine Gedanken" placeholder="Deine Gedanken – bleiben auf diesem iPad, niemand sammelt sie ein">${esc(S.pt[key]||"")}</textarea></details>
-      ${nav(6,"Weiter zur Diskussion", ueb.length>=2, ueb.length<2?"Zwei Überlegungen wählen.":"")}`;
+      ${nav(5,"Weiter zur Diskussion", ueb.length>=2, ueb.length<2?"Zwei Überlegungen wählen.":"")}`;
   }
 
-  if(pv===6) h += debatte(key);
+  if(pv===5) h += debatte(key);
 
-  if(pv===7){
+  if(pv===6){
     const v = S.v[key];
-    h += `${phKopf(7,"Deine Stimme")}
+    h += `${phKopf(6,"Deine Stimme")}
       ${matrix(key, true)}
       <fieldset class="ohne"><legend>Deine Wahl</legend>${["A","B","C"].map(k=>`<button class="opt" data-opt="${key}:${k}" aria-pressed="${v===k}" ${fertig?"disabled":""}><span class="k" aria-hidden="true">${k}</span><span><b><span class="sr">Option ${k}: </span>${esc(E.opt[k].t)}</b><span class="cr">${esc(E.opt[k].was)}</span></span></button>`).join("")}</fieldset>`;
     h += `<label class="frage" for="begr-${key}" style="display:block">Begründe deine Entscheidung in einem Satz.</label>
@@ -934,12 +934,12 @@ function entscheidungsweg(key){
       <p class="frage" id="sich-l-${key}">Wie sicher bist du dir?</p>
       <div class="seg" role="group" aria-labelledby="sich-l-${key}">${["sicher","eher sicher","unsicher"].map(x=>`<button data-sich="${key}:${x}" aria-pressed="${S.sich[key]===x}" ${fertig?"disabled":""}>${x}</button>`).join("")}</div>
       <p class="hinweis" style="margin-top:.5rem">Dies ist eine Abstimmung in unserer Klasse. Sie zeigt deine Haltung – damals entschied die Regierung. Eine Option „unentschieden“ gibt es nicht, weil auch Abwarten eine Politik ist. Deine Unsicherheit zeigst du oben.</p>`;
-    if(!fertig) h += `<div class="fuss"><button class="btn" data-pv="${key}:6">Zurück</button><span class="hinweis" data-status="${key}" aria-live="polite">${bereit(key)?"Bereit zur Abstimmung.":"Option wählen, einen Satz schreiben, Sicherheit angeben."}</span><button class="btn green" data-abgabe="${key}" ${bereit(key)?"":"disabled"}>Entscheidung abgeben</button></div>`;
-    else h += `<div class="fuss"><span class="hinweis">Deine Entscheidung: <b>${v}</b> (${esc(S.sich[key]||"")}).</span><span class="stempel" data-mk="F:${key}">ABGEGEBEN</span><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button><button class="btn primary" data-pv="${key}:8">Weiter: Was geschah?</button></div>`;
+    if(!fertig) h += `<div class="fuss"><button class="btn" data-pv="${key}:5">Zurück</button><span class="hinweis" data-status="${key}" aria-live="polite">${bereit(key)?"Bereit zur Abstimmung.":"Option wählen, einen Satz schreiben, Sicherheit angeben."}</span><button class="btn green" data-abgabe="${key}" ${bereit(key)?"":"disabled"}>Entscheidung abgeben</button></div>`;
+    else h += `<div class="fuss"><span class="hinweis">Deine Entscheidung: <b>${v}</b> (${esc(S.sich[key]||"")}).</span><span class="stempel" data-mk="F:${key}">ABGEGEBEN</span><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button><button class="btn primary" data-pv="${key}:7">Weiter: Was geschah?</button></div>`;
   }
 
-  if(pv===8){
-    h += `${phKopf(8,"Mit den Ereignissen abgleichen")}${codeFeld(key, E.stufe)}${S.stufe < E.stufe ? vorschau() : ""}`;
+  if(pv===7){
+    h += `${phKopf(7,"Mit den Ereignissen abgleichen")}${codeFeld(key, E.stufe)}${S.stufe < E.stufe ? vorschau() : ""}`;
     if(S.stufe >= E.stufe){
       h += `<div class="wechsel" role="note"><b>Perspektivwechsel</b> Bis hierher hast du mit dem Wissen von ${esc(E.datum)} entschieden. Ab hier blicken wir zurück.</div>
         <div class="aufl"><div class="kopfzeile">Was dann geschah <span class="marke-h">im Rückblick aufgedeckt</span></div>${aufdecken(E.aufl, key)}</div>
@@ -947,7 +947,7 @@ function entscheidungsweg(key){
           <div><span class="hinweis">Was London tat</span><span>${esc(E.tat)}</span></div></div>
         ${faecher(key)}
         ${S[key+"b"] ? `<p class="randnotiz" data-mk="J:${key}"><b>Deine Randnotiz:</b> ${esc(S[key+"b"])}</p>` : ""}${S.pt[key] ? `<p class="randnotiz" data-mk="J:${key}:pt"><b>Dein Gedanke:</b> ${esc(S.pt[key])}</p>` : ""}
-        <div class="auswert"><h4>Zum Besprechen</h4><ol>${E.fragen.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>
+        <div class="auswert"><h4>Zum Besprechen</h4><p>${esc(E.fragen[0])}</p></div>
         <div class="spaeter">${TYP.rueck}<ul style="padding-left:1.2rem;display:grid;gap:.35rem">${E.rueck.map((x,i)=>`<li><span class="aufgedeckt" data-mk="H:${key}:r${i}">${x}</span></li>`).join("")}</ul>
           <p class="hinweis" style="margin-top:.4rem">Dieses Wissen hatte im ${esc(E.datum)} niemand in London.</p></div>
         <details class="vertiefung"><summary>Mehr dazu (externe Seiten, freiwillig)</summary>${linkliste("", E.links.map(l=>extern(...l)))}</details>
@@ -958,8 +958,8 @@ function entscheidungsweg(key){
 }
 
 /* ------------------------------ Debatte ------------------------------
-   Kurzes Klassengespräch VOR der Abstimmung (drei Runden, etwa 8 Minuten). Die Argument-
-   karten kommen aus Schritt 4 (Hoffnungen und Risiken) und aus den
+   Kurzes Klassengespräch VOR der Abstimmung (zwei Runden: Dilemma 1 vier, Dilemma 2 und 3 drei Minuten). Die Argument-
+   karten kommen aus Schritt 3 (Hoffnungen und Risiken) und aus den
    öffentlichen Quellen – nichts, was damals geheim war. */
 const DEBATTE = {
   e1:{ impulse:["Was wäre der Preis eines Friedens 1940 gewesen – und wer hätte ihn bezahlt?","Hitler hat die Zusagen von München gebrochen. Kann man mit ihm überhaupt verhandeln?","Was wisst ihr über die USA – und was hofft ihr nur?","Wer trägt das Risiko eures Vorschlags: ihr, die Soldaten bei Dünkirchen, die Menschen in London, die Menschen in den besetzten Ländern?"],
@@ -970,10 +970,12 @@ const DEBATTE = {
        quellen:{A:["harris42"],B:["bell44"],C:["bell44"]}, beobachtung:["Werden Tote auf beiden Seiten genannt – oder nur auf einer?","Wer spricht über die eigenen Besatzungen?"] }
 };
 const RUNDEN = [
-  { t:"Wozu neigst du?", sek:180, was:"Stellt euch zu der Option, zu der ihr nach dem Abwägen neigt: A, B oder C. Wer unsicher ist, beobachtet. Jede Gruppe nennt ihr stärkstes Argument – eine Person, eine Minute.", tafel:"Zu A · B · C stellen · je Gruppe ein Argument" },
-  { t:"Nachfragen", sek:180, was:"Jede Gruppe stellt einer anderen Gruppe eine Frage. Die Impulsfragen helfen. Die gefragte Gruppe antwortet kurz.", tafel:"Fragen stellen und beantworten" },
-  { t:"Was würde euch umstimmen?", sek:120, was:"Jede Gruppe sagt in einem Satz, was geschehen müsste, damit sie ihre Meinung ändert. Die Beobachter*innen sagen, was ihnen aufgefallen ist. Danach stimmt jede*r für sich ab.", tafel:"Was würde euch umstimmen? · danach abstimmen" }
+  { t:"Wozu neigst du?", was:"Stellt euch zu der Option, zu der ihr nach dem Abwägen neigt: A, B oder C. Wer unsicher ist, beobachtet. Jede Gruppe sagt ihr stärkstes Argument in einem Satz.", tafel:"Zu A · B · C stellen · je Gruppe ein Satz" },
+  { t:"Was würde euch umstimmen?", was:"Jede Gruppe sagt in einem Satz, was geschehen müsste, damit sie ihre Meinung ändert. Die Beobachter*innen sagen kurz, was ihnen aufgefallen ist. Danach stimmt jede*r für sich ab.", tafel:"Was würde euch umstimmen? · danach abstimmen" }
 ];
+/* Sekunden je Runde: Dilemma 1 zweimal 2 Minuten, Dilemma 2 und 3 zweimal 1,5 Minuten */
+const RUNDE_SEK = { e1:120, e2:90, e3:90 };
+const minuten = sek => String(sek/60).replace(".", ",");
 
 function debatte(key){
   const E = ENT[key], D = DEBATTE[key], r = S.runde[key] || 0, R = RUNDEN[r], K = KREIS();
@@ -982,28 +984,26 @@ function debatte(key){
       <p class="hinweis">Dafür spricht</p><ul>${F.H.map(([kr,c,x])=>`<li><span class="chip ${c}">${CHIP[c]}</span>${esc(x)}</li>`).join("")}</ul>
       <p class="hinweis">Dagegen halten die anderen</p><ul>${F.R.map(([kr,c,x])=>`<li><span class="chip ${c}">${CHIP[c]}</span>${esc(x)}</li>`).join("")}</ul>
       ${D.quellen[k].length?`<p class="hinweis">Quelle dazu: ${D.quellen[k].map(q=>esc(QUELLEN[q].wer)).join("; ")} – steht oben auf der Seite.</p>`:""}</div>`; };
-  let h = phKopf(6,"Die Klasse diskutiert");
-  h += `<div class="runden" role="list" aria-label="Runden der Debatte">${RUNDEN.map((x,i)=>`<button role="listitem" class="runde ${i===r?"akt":i<r?"da":""}" data-runde="${key}:${i}" aria-current="${i===r?"step":"false"}"><span class="rn">${i<r?"✓":i+1}</span>${x.t}${x.sek?`<small>${x.sek/60} Min.</small>`:""}</button>`).join("")}</div>
+  let h = phKopf(5,"Die Klasse diskutiert");
+  h += `<div class="runden" role="list" aria-label="Runden der Debatte">${RUNDEN.map((x,i)=>`<button role="listitem" class="runde ${i===r?"akt":i<r?"da":""}" data-runde="${key}:${i}" aria-current="${i===r?"step":"false"}"><span class="rn">${i<r?"✓":i+1}</span>${x.t}<small>${minuten(RUNDE_SEK[key])} Min.</small></button>`).join("")}</div>
     <div class="runde-karte" id="runde-${key}">
-      <div class="runde-kopf"><h4>Runde ${r+1} · ${esc(R.t)}</h4>${R.sek?timer(key, R.sek):""}</div>
+      <div class="runde-kopf"><h4>Runde ${r+1} · ${esc(R.t)}</h4>${timer(key, RUNDE_SEK[key], r)}</div>
       <p>${esc(R.was)}</p>
-      <div class="fuss"><button class="btn" data-tafel="${key}">An die Tafel (Beamer)</button><span></span>${r<RUNDEN.length-1?`<button class="btn primary" data-runde="${key}:${r+1}">Nächste Runde</button>`:`<button class="btn primary" data-ph="${key}:7">Weiter zur Abstimmung</button>`}</div>
+      <div class="fuss"><button class="btn" data-tafel="${key}">An die Tafel (Beamer)</button><span></span>${r<RUNDEN.length-1?`<button class="btn primary" data-runde="${key}:${r+1}">Nächste Runde</button>`:`<button class="btn primary" data-ph="${key}:6">Weiter zur Abstimmung</button>`}</div>
     </div>`;
-  if(r===0) h += `<div class="zwei"><div><h4>Deine Abwägung</h4>${matrix(key, true)}</div>
-      <div><h4>Beobachtungsauftrag</h4><ul>${D.beobachtung.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>`;
+  if(r===0) h += `${matrix(key, true)}<p class="hinweis"><b>Beobachtungsauftrag:</b> ${D.beobachtung.map(esc).join(" · ")}</p>`;
   h += `<details class="vertiefung" ${r===0?"open":""}><summary>Argumentkarten der drei Gruppen</summary><div class="argkarten">${["A","B","C"].map(karte).join("")}</div>
       <p class="hinweis">Alles hier war im ${esc(E.datum)} bekannt oder wurde befürchtet. Was damals geheim war, kommt erst in der Auswertung.</p></details>`;
-  if(r===1) h += `<div class="auswert"><h4>Impulsfragen</h4><ol>${D.impulse.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>`;
-  if(r===2) h += `<div class="auswert"><h4>Beobachter*innen berichten</h4><ul>${D.beobachtung.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
+  h += `<details class="vertiefung"><summary>Impulsfragen (freiwillig, wenn Zeit bleibt)</summary><ol>${D.impulse.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></details>`;
   return h;
 }
 
 /* Timer je Entscheidung: läuft nur nach Tippen, kein Ton. Die Ziffern werden
    direkt aktualisiert, die Seite wird nicht neu gezeichnet. */
 const UHR = {};
-function timer(key, sek){
-  const u = UHR[key] || { rest: sek, lauf: false, ges: sek };
-  if(u.ges !== sek){ u.rest = sek; u.ges = sek; u.lauf = false; clearInterval(u.iv); }
+function timer(key, sek, r){
+  const u = UHR[key] || { rest: sek, lauf: false, ges: sek, r };
+  if(u.ges !== sek || u.r !== r){ u.rest = sek; u.ges = sek; u.r = r; u.lauf = false; clearInterval(u.iv); }
   UHR[key] = u;
   return `<div class="timer" role="timer" aria-label="Zeit für diese Runde"><span class="ziff" id="uhr-${key}">${mmss(u.rest)}</span>
     <button class="btn" data-uhr="${key}:${u.lauf?"stop":"start"}" aria-label="${u.lauf?"Anhalten":"Starten"}">${u.lauf?"Anhalten":"Start"}</button><button class="btn" data-uhr="${key}:reset" aria-label="Zurücksetzen">↺</button></div>`;
@@ -1026,9 +1026,8 @@ function tafel(){
     <div class="t-kopf">Entscheidung ${E.nr} · ${esc(E.datum)} · Runde ${r+1} von ${RUNDEN.length}</div>
     <h2>${esc(E.frage)}</h2>
     <div class="t-runde">${esc(R.tafel)}</div>
-    ${R.sek?`<div class="t-uhr" id="tafel-uhr-${key}">${mmss(u?u.rest:R.sek)}</div><div class="t-knoepfe"><button class="btn" data-uhr="${key}:${u&&u.lauf?"stop":"start"}">${u&&u.lauf?"Anhalten":"Start"}</button><button class="btn" data-uhr="${key}:reset">↺</button></div>`:""}
-    ${r===1?`<ol class="t-liste">${D.impulse.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`:""}
-    ${r===2?`<ul class="t-liste">${D.beobachtung.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}
+    <div class="t-uhr" id="tafel-uhr-${key}">${mmss(u?u.rest:RUNDE_SEK[key])}</div><div class="t-knoepfe"><button class="btn" data-uhr="${key}:${u&&u.lauf?"stop":"start"}">${u&&u.lauf?"Anhalten":"Start"}</button><button class="btn" data-uhr="${key}:reset">↺</button></div>
+    ${r===1?`<ul class="t-liste">${D.beobachtung.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}
     ${r===0?`<div class="t-opt">${["A","B","C"].map(k=>`<div><b>${k}</b>${esc(E.opt[k].t)}</div>`).join("")}</div>`:""}
     <div class="t-fuss">${r>0?`<button class="btn" data-runde="${key}:${r-1}">Zurück</button>`:"<span></span>"}${r<RUNDEN.length-1?`<button class="btn primary" data-runde="${key}:${r+1}">Nächste Runde</button>`:`<span class="t-runde" style="font-size:1.4rem">Jetzt abstimmen – jede*r für sich</span>`}</div></div>`;
 }
@@ -1187,25 +1186,24 @@ function seite(){
     const da = alleGelesen("d1", L);
     return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span class="nr">Dilemma 1</span><span>London, 26. Mai 1940</span></div>${zeitleiste(id)}
       <h1>Weiterkämpfen oder Frieden suchen?</h1>
-      <p class="hinweis"><b>Schritt 1 von 8 · Lage</b> – lies die Meldungen nacheinander.</p>
+      <p class="hinweis"><b>Schritt 1 von 7 · Lage</b> – lies die Meldungen nacheinander.</p>
       ${meldungen("d1", L)}
       ${da ? `${bild("duenkirchen")}${karte("europa1940")}${quelle("churchill13mai")}
         ${TYP.darst}<p>Das Kriegskabinett berät seit dem 26. Mai im Geheimen. Was dort gesagt wird, erfährt das Unterhaus nicht.</p>
         ${quelle("kabinett26mai", {schwarz:{frei:S.stufe>=1, de:["Gespräche wären denkbar, „wenn er [Churchill] davon überzeugt wäre, dass Dinge, die für die Unabhängigkeit dieses Landes lebenswichtig sind, unberührt blieben“","„Das Einzige, was zu tun sei, sei ihm [Hitler] zu zeigen, dass er dieses Land nicht erobern könne.“"], en:["If he was satisfied that matters vital to the independence of this country were unaffected","The only thing to do was to show him that he could not conquer this country"]}})}${entscheidungsweg("e1")}` : ""}
-      ${S.stufe>=1 ? `${E_NACHHER("e1")}<h2 class="abschnitt">Rückblick: der „Blitz“</h2>${bild("london")}${bild("aldwych")}${bild("coventry")}${bild("film")}${weiter("d2","Weiter zu Dilemma 2")}` : ""}</section>`;
+      ${S.stufe>=1 ? `${E_NACHHER("e1")}<h2 class="abschnitt">Rückblick: der „Blitz“</h2>${bild("london")}${bild("aldwych",{frage:false})}${bild("coventry",{frage:false})}${bild("film",{frage:false})}${weiter("d2","Weiter zu Dilemma 2")}` : ""}</section>`;
   }
 
   if(id==="d2"){
     const L = [
       "Seit Juni 1940 kämpft Großbritannien ohne Verbündete auf dem Kontinent. Bei deutschen Luftangriffen von September 1940 bis Mai 1941 („Blitz“) sterben in britischen Städten Zehntausende Menschen.",
-      "Seit März 1941 liefern die USA nach dem Leih- und Pachtgesetz (Lend-Lease) Waffen und Material. Selbst kämpfen sie nicht.",
       "Am 22. Juni 1941 greift Deutschland mit über drei Millionen Soldaten die Sowjetunion an. Am selben Abend spricht Churchill im Rundfunk.",
       "Die Sowjetunion hat 1939 einen Pakt mit Hitler geschlossen und den Osten Polens besetzt. Sie hat Finnland angegriffen und 1940 die baltischen Staaten besetzt. Viele britische Militärs glauben, dass sie nur wenige Wochen standhält."
     ];
     const da = alleGelesen("d2", L);
     return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span class="nr">Dilemma 2</span><span>London, Anfang Juli 1941</span></div>${zeitleiste(id)}
       <h1>Ein Bündnis mit Stalin?</h1>
-      <p class="hinweis"><b>Schritt 1 von 8 · Lage</b> – lies die Meldungen nacheinander.</p>
+      <p class="hinweis"><b>Schritt 1 von 7 · Lage</b> – lies die Meldungen nacheinander.</p>
       ${meldungen("d2", L)}
       ${da ? `${karte("europa1941")}${bild("pakt")}${bild("jonava")}${quelle("churchill22juni41")}${quelle("stalin3juli41")}${entscheidungsweg("e2")}` : ""}
       ${S.stufe>=2 ? `${E_NACHHER("e2")}${weiter("d3","Weiter zu Dilemma 3")}` : ""}</section>`;
@@ -1221,7 +1219,7 @@ function seite(){
     const da = alleGelesen("d3", L);
     return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span class="nr">Dilemma 3</span><span>London, Februar 1944</span></div>${zeitleiste(id)}
       <h1>Bomben auf Städte?</h1>
-      <p class="hinweis"><b>Schritt 1 von 8 · Lage</b> – lies die Meldungen nacheinander.</p>
+      <p class="hinweis"><b>Schritt 1 von 7 · Lage</b> – lies die Meldungen nacheinander.</p>
       ${meldungen("d3", L)}
       ${da ? `${bild("schuetze")}${karte("luftkrieg1944")}${bild("hamburg43")}${quelle("weisung42", {schwarz:{frei:S.stufe>=3, de:["die Moral der feindlichen Zivilbevölkerung","insbesondere der Industriearbeiter","die bebauten Gebiete, und nicht etwa die Werften oder Flugzeugfabriken"], en:["the morale of the enemy civil population and in particular the industrial workers","the built up areas, and not, for instance, the dockyards or aircraft factories"]}})}${quelle("harris42")}
         <h2 class="abschnitt">Debatte im Oberhaus, 9. Februar 1944</h2>${quelle("bell44")}
@@ -1265,7 +1263,7 @@ function seite(){
 /* Nach der Abstimmung: Quellen, die zeigen, was danach gesagt und beschlossen wurde. */
 function E_NACHHER(key){
   const E = ENT[key];
-  return `<h2 class="abschnitt">Was danach gesagt und beschlossen wurde</h2>${E.quellenNachher.map(quelle).join("")}`;
+  return `<details class="vertiefung"><summary>Was danach gesagt und beschlossen wurde (Quellen, freiwillig)</summary>${E.quellenNachher.map(quelle).join("")}</details>`;
 }
 
 function klasse(key){ const p = S.prot[key]||{}; const a=+p.A||0,b=+p.B||0,c=+p.C||0; return (a+b+c) ? `${a+b} : ${c}` : "–"; }
@@ -1386,7 +1384,7 @@ function verdrahten(){
   $$("[data-tafel]").forEach(b=>b.onclick=()=>{ const k=b.dataset.tafel; fokusZiel = k ? ".tafel .zu" : (S.tafel ? `[data-tafel="${S.tafel}"]` : null); setze(x=>{ x.tafel=k||null; }); });
   $$("[data-fx]").forEach(b=>b.onclick=()=>{ const [k,i]=b.dataset.fx.split(":"); if(b.classList.contains("f-karte") && +i===(S.fx[k]||0)) return; fokusZiel=`.faecher[data-fx-key="${k}"]`; setze(x=>{ x.fx[k]=Math.max(0, Math.min(NACHHER[k].length-1, +i)); }); });
   $$(".faecher").forEach(f=>{ let x0=null; f.onpointerdown=e=>{ x0=e.clientX; }; f.onpointerup=e=>{ if(x0===null) return; const dx=e.clientX-x0; x0=null; if(Math.abs(dx)<40) return; const k=f.dataset.fxKey; fokusZiel=`.faecher[data-fx-key="${k}"]`; setze(s=>{ s.fx[k]=Math.max(0, Math.min(NACHHER[k].length-1, (s.fx[k]||0)+(dx<0?1:-1))); }); }; });
-  $$("[data-abgabe]").forEach(b=>b.onclick=()=>{ const k=b.dataset.abgabe; fokusZiel=".stimmkarte .zu"; setze(x=>{ x.e[k]=true; x.ph[k]=7; x.pv[k]=7; x.karte=k; }); });
+  $$("[data-abgabe]").forEach(b=>b.onclick=()=>{ const k=b.dataset.abgabe; fokusZiel=".stimmkarte .zu"; setze(x=>{ x.e[k]=true; x.ph[k]=6; x.pv[k]=6; x.karte=k; }); });
   $$("[data-karte]").forEach(b=>b.onclick=()=>{ const k=b.dataset.karte; fokusZiel = k ? ".stimmkarte .zu" : (S.karte ? `#ph-${S.karte} .ph-titel` : null); setze(x=>{ x.karte=k||null; }); });
   $$("[data-skala]").forEach(b=>b.onclick=()=>setze(x=>{ x.skala=+b.dataset.skala; }));
   $$("[data-erf]").forEach(b=>b.onclick=()=>setze(x=>{ x.erf=b.dataset.erf; }));
