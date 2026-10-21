@@ -396,6 +396,69 @@ details .auswert{border:0;padding:0;margin:.4rem 0;background:none}
 .tafel .t-opt b{font-family:var(--display);font-size:2.2rem;line-height:1}
 .tafel .t-fuss{display:flex;justify-content:space-between;margin-top:auto;padding-top:1rem}
 @media (max-width:700px){.tafel{padding:3.5rem 1.2rem 1.2rem}.tafel .t-opt{grid-template-columns:1fr}}
+/* Navigation: Zurück zum Labor, Eingaben löschen (Rückfrage auf der Seite) */
+a.protokoll-btn{display:inline-flex;align-items:center;color:var(--ink);text-decoration:none}
+.kopf-in .labor{margin-left:auto}
+.loesch-frage{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;width:100%;font-size:.95rem;color:var(--ink)}
+.loesch-frage .btn{min-height:44px}
+.seitenfuss .btn-leise{border:1px solid var(--border);background:var(--surface2);border-radius:999px;padding:.4rem .9rem;min-height:44px;font-weight:700;color:var(--ink)}
+
+/* V · Halbrund der Klasse (und Unterhaus in der Eröffnung) */
+.halbrund{display:block;width:100%;height:auto;max-width:100%}
+.halbrund circle{transition:opacity 260ms var(--ease-out,cubic-bezier(.23,1,.32,1)),transform 300ms var(--ease-out,cubic-bezier(.23,1,.32,1)),fill 320ms var(--ease-out,cubic-bezier(.23,1,.32,1));transform-box:fill-box;transform-origin:center}
+.halbrund.vor circle{opacity:0;transform:scale(.3)}
+.hr-legende{display:flex;flex-wrap:wrap;gap:.3rem 1rem;font-size:.95rem;margin-top:.4rem}
+.hr-legende span{display:inline-flex;align-items:center;gap:.35rem}
+.hr-legende i{display:inline-block;width:.85rem;height:.85rem;border-radius:50%}
+.hr-legende b{font-variant-numeric:tabular-nums}
+.klasse{margin:1rem 0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:.8rem 1rem;display:grid;gap:.3rem}
+.klasse .halbrund{max-width:26rem}
+.drei-hr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem;margin:1rem 0}
+.drei-hr figure{margin:0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:.6rem .7rem;display:grid;gap:.3rem;align-content:start}
+.drei-hr figcaption{font-size:.9rem;margin:0;padding:0}
+@media (max-width:640px){.drei-hr{grid-template-columns:1fr}}
+.tafel.ergebnis .erg-eingabe{display:flex;flex-wrap:wrap;gap:1rem}
+.tafel.ergebnis label{display:grid;gap:.2rem;font-size:1.1rem;font-weight:700}
+.tafel.ergebnis input{width:6rem;min-height:52px;font:700 1.6rem var(--body);border-radius:var(--r);border:1px solid rgba(255,250,242,.5);background:transparent;color:var(--inverse);padding:.2rem .6rem}
+.tafel.ergebnis #erg-bild{max-width:30rem}
+.tafel.ergebnis .hr-legende{font-size:1.2rem}
+
+/* W · Eröffnung „Akte und Abstimmung“: einmal je Sitzung, 9,6 s, überspringbar.
+   Nur transform und opacity (Punkte zusätzlich fill). Bei „Weniger Bewegung“ entfällt sie. */
+body.eroeff-laeuft{overflow:hidden}
+.eroeff{position:fixed;inset:0;z-index:80;background:var(--bg);display:grid;place-items:center;overflow:hidden;cursor:pointer;transition:opacity 250ms var(--ease-out,ease-out)}
+.eroeff.weg{opacity:0}
+.eroeff .e-skip{position:absolute;top:max(1rem,env(safe-area-inset-top,0px));right:max(1rem,env(safe-area-inset-right,0px));z-index:6}
+.e-buehne{position:relative;width:min(100%,980px);height:min(100dvh,640px)}
+.e-t1,.e-zahl,.e-frage,.e-foto,.e-akte{position:absolute;left:50%;transform:translateX(-50%);text-align:center}
+.e-t1{top:8%;width:92%;font-family:var(--display);font-weight:600;font-size:clamp(1.3rem,1rem + 1.8vw,2.3rem);opacity:0;transition:opacity 500ms ease-out}
+.e-hr{position:absolute;left:50%;top:22%;transform:translateX(-50%);width:min(86%,640px);transition:opacity 500ms ease-out}
+.e-zahl{top:72%;width:92%;font-weight:700;font-size:clamp(1rem,.85rem + .8vw,1.4rem);font-variant-numeric:tabular-nums;opacity:0;transition:opacity 420ms ease-out}
+.e-foto{top:16%;width:min(78%,440px);margin:0;display:grid;gap:.5rem;opacity:0;transform:translate(-50%,14px);transition:opacity 500ms ease-out,transform 600ms cubic-bezier(.23,1,.32,1)}
+.e-foto img{width:100%;max-height:min(46vh,340px);object-fit:cover;object-position:62% 30%;border-radius:.5rem;border:1px solid var(--border);filter:grayscale(1)}
+.e-foto.ohne img{display:none}
+.e-foto b{font-family:var(--display);font-weight:600;font-size:clamp(1.1rem,.9rem + 1vw,1.7rem);line-height:1.2}
+.e-foto small{font-size:.8rem;color:var(--muted)}
+.e-akte{top:22%;width:min(84%,560px);background:var(--surface2);border:1px solid var(--border);border-radius:.4rem;padding:clamp(.9rem,2.5vw,1.5rem);display:grid;gap:.7rem;text-align:left;font-size:clamp(.95rem,.85rem + .4vw,1.15rem);opacity:0;transform:translate(-50%,40px);transition:opacity 500ms ease-out,transform 700ms cubic-bezier(.77,0,.175,1)}
+.e-akte .e-kopf{display:flex;justify-content:space-between;gap:1rem;font-weight:700;border-bottom:2px solid var(--ink);padding-bottom:.4rem}
+.e-akte .e-kopf small{font-weight:400;color:var(--muted)}
+.e-akte .e-schluss{opacity:0;transition:opacity 420ms ease-out;font-weight:700}
+.e-frage{top:34%;width:92%;display:grid;gap:.6rem;opacity:0;transform:translate(-50%,10px);transition:opacity 500ms ease-out,transform 500ms cubic-bezier(.23,1,.32,1)}
+.e-frage b{font-family:var(--display);font-weight:600;font-size:clamp(1.7rem,1.1rem + 3.2vw,3.4rem);line-height:1.08;text-wrap:balance}
+.e-frage span{font-size:clamp(1rem,.9rem + .5vw,1.3rem);color:var(--muted)}
+.eroeff.p1 .e-t1{opacity:1}
+.eroeff.p2 .e-zahl{opacity:1}
+.eroeff.p3 .e-t1,.eroeff.p3 .e-zahl{opacity:0}
+.eroeff.p3 .e-hr{opacity:.12}
+.eroeff.p3 .e-foto{opacity:1;transform:translate(-50%,0)}
+.eroeff.p4 .e-foto{opacity:.15}
+.eroeff.p4 .e-akte{opacity:1;transform:translate(-50%,0)}
+.eroeff.p5 .e-akte .e-schluss{opacity:1}
+.eroeff.p6 .e-akte{opacity:0}
+.eroeff.p6 .e-foto{opacity:0}
+.eroeff.p6 .e-frage{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){.eroeff{display:none}}
+
 
 /* Fächer (Muster P): Gestaltung; Bewegung in assets/motion.css */
 .faecher{margin:.8rem 0 .4rem;outline-offset:4px}
@@ -810,7 +873,7 @@ const SEITEN = [
   {id:"ende", nr:"", kurz:"Beurteilung", stufe:3}
 ];
 
-let S = Object.assign({ seite:"start", stufe:0, ein:1, pers:"sie", m:{}, ph:{}, pv:{}, abw:{}, tab:{}, ges:{}, ueb:{}, pt:{}, v:{}, sich:{}, e:{}, prog:null, prot:{e1:{},e2:{},e3:{}}, karte:null, extern:{}, fx:{}, runde:{}, tafel:null }, lade());
+let S = Object.assign({ seite:"start", stufe:0, ein:1, pers:"sie", m:{}, ph:{}, pv:{}, abw:{}, tab:{}, ges:{}, ueb:{}, pt:{}, v:{}, sich:{}, e:{}, prog:null, prot:{e1:{},e2:{},e3:{}}, karte:null, extern:{}, fx:{}, erg:null, runde:{}, tafel:null }, lade());
 const setze = f => { f(S); speichere(); zeichne(); };
 
 
@@ -819,7 +882,7 @@ const setze = f => { f(S); speichere(); zeichne(); };
 function kopf(){
   const i = SEITEN.findIndex(x=>x.id===S.seite);
   return `<header class="kopf"><div class="kopf-in">${MARK}<div class="titel">Großbritannien im Krieg<small>M20 · drei Dilemmata 1940–1944</small></div>
-    <button class="protokoll-btn" data-geh="protokoll">Protokoll</button></div>
+    <a class="protokoll-btn labor" href="${LABOR}">← GGK-Labor</a><button class="protokoll-btn" data-geh="protokoll">Protokoll</button></div>
     <nav class="weg" aria-label="Abschnitte">${SEITEN.map((x,k)=>{ const zu = x.stufe > S.stufe;
       return `<button class="${x.id===S.seite?"akt":(i>=0&&k<i)?"da":""} ${zu?"zu":""}" data-geh="${x.id}" ${zu?'aria-disabled="true"':""} ${x.id===S.seite?'aria-current="step"':""}><b>${x.nr?"Dilemma "+x.nr:"&nbsp;"}</b>${x.kurz}</button>`; }).join("")}</nav></header>`;
 }
@@ -935,7 +998,7 @@ function entscheidungsweg(key){
       <div class="seg" role="group" aria-labelledby="sich-l-${key}">${["sicher","eher sicher","unsicher"].map(x=>`<button data-sich="${key}:${x}" aria-pressed="${S.sich[key]===x}" ${fertig?"disabled":""}>${x}</button>`).join("")}</div>
       <p class="hinweis" style="margin-top:.5rem">Dies ist eine Abstimmung in unserer Klasse. Sie zeigt deine Haltung – damals entschied die Regierung. Eine Option „unentschieden“ gibt es nicht, weil auch Abwarten eine Politik ist. Deine Unsicherheit zeigst du oben.</p>`;
     if(!fertig) h += `<div class="fuss"><button class="btn" data-pv="${key}:5">Zurück</button><span class="hinweis" data-status="${key}" aria-live="polite">${bereit(key)?"Bereit zur Abstimmung.":"Option wählen, einen Satz schreiben, Sicherheit angeben."}</span><button class="btn green" data-abgabe="${key}" ${bereit(key)?"":"disabled"}>Entscheidung abgeben</button></div>`;
-    else h += `<div class="fuss"><span class="hinweis">Deine Entscheidung: <b>${v}</b> (${esc(S.sich[key]||"")}).</span><span class="stempel" data-mk="F:${key}">ABGEGEBEN</span><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button><button class="btn primary" data-pv="${key}:7">Weiter: Was geschah?</button></div>`;
+    else h += `<div class="fuss"><span class="hinweis">Deine Entscheidung: <b>${v}</b> (${esc(S.sich[key]||"")}).</span><span class="stempel" data-mk="F:${key}">ABGEGEBEN</span><button class="btn green" data-karte="${key}">Stimmkarte zeigen</button><button class="btn" data-erg="${key}">Ergebnis der Klasse (Beamer)</button><button class="btn primary" data-pv="${key}:7">Weiter: Was geschah?</button></div>`;
   }
 
   if(pv===7){
@@ -943,6 +1006,7 @@ function entscheidungsweg(key){
     if(S.stufe >= E.stufe){
       h += `<div class="wechsel" role="note"><b>Perspektivwechsel</b> Bis hierher hast du mit dem Wissen von ${esc(E.datum)} entschieden. Ab hier blicken wir zurück.</div>
         <div class="aufl"><div class="kopfzeile">Was dann geschah <span class="marke-h">im Rückblick aufgedeckt</span></div>${aufdecken(E.aufl, key)}</div>
+        ${klasseHR(key)}
         <div class="vergleich"><div><span class="hinweis">Deine Entscheidung <span class="stempel" data-mk="F:${key}">ABGEGEBEN</span></span><b>${S.v[key]||"–"}</b><span>${esc(E.opt[S.v[key]]?.t||"")}${S.sich[key]?` · ${esc(S.sich[key])}`:""}</span></div>
           <div><span class="hinweis">Was London tat</span><span>${esc(E.tat)}</span></div></div>
         ${faecher(key)}
@@ -1238,6 +1302,8 @@ function seite(){
       <table class="weg-tab"><thead><tr><th>Zeitpunkt</th><th>Du</th><th>Was geschah</th></tr></thead><tbody>
       ${["e1","e2","e3"].map(k=>row(`${ENT[k].datum} · ${esc(ENT[k].frage)}`, w(k), esc(ENT[k].tat))).join("")}
       </tbody></table>
+      <h2 class="abschnitt">Unsere drei Abstimmungen</h2>
+      <div class="drei-hr">${["e1","e2","e3"].map(k=>{ const z=stimmen(k), n=z.A+z.B+z.C; return `<figure><b>${esc(ENT[k].datum)}</b>${n?halbrundSVG(n,gruppenABC(k,false),{label:`Klasse ${ENT[k].datum}: A ${z.A}, B ${z.B}, C ${z.C}`}):`<p class="hinweis">Noch kein Ergebnis eingetragen (Protokoll).</p>`}<figcaption>${n?`A ${z.A} · B ${z.B} · C ${z.C}<br>`:""}London: ${esc(ENT[k].tat)}</figcaption></figure>`; }).join("")}</div>
       <div class="spaeter">${TYP.rueck}<ul style="padding-left:1.2rem;display:grid;gap:.35rem">
         <li>Am 8. Mai 1945 endet der Krieg in Europa, im August 1945 auch in Asien.</li>
         <li>Im Zweiten Weltkrieg starben weltweit zwischen 55 und 70 Millionen Menschen, darunter rund sechs Millionen ermordete Jüdinnen und Juden.</li>
@@ -1281,7 +1347,7 @@ function protokoll(){
     <p class="lead">Trag nach jeder Abstimmung das Ergebnis und die zentralen Argumente aus dem Tafelbild ein.</p>
     <div class="prot">${block("e1")}${block("e2")}${block("e3")}</div>
     <div class="fuss nodruck"><button class="btn" data-geh="${S.zurueck||"start"}">Zurück</button><button class="btn" data-geh="zusammenfassung">Zusammenfassung (2 Seiten)</button><button class="btn primary" onclick="print()">Drucken oder als PDF sichern</button></div>
-    <div class="fuss nodruck"><span class="hinweis">Am Ende der Stunde: Antworten auf diesem iPad löschen, damit die nächste Person sie nicht sieht.</span><button class="btn" data-loeschen="1">Alles löschen</button></div></section>`;
+    <div class="fuss nodruck"><span class="hinweis">Am Ende der Stunde: Antworten auf diesem iPad löschen, damit die nächste Person sie nicht sieht.</span><button class="btn" data-loeschfrage="1">Alles löschen</button></div></section>`;
 }
 
 /* Zusammenfassung der Stunde: höchstens zwei Seiten A4 (Standard „Merkseiten“).
@@ -1331,13 +1397,104 @@ function zusammenfassung(){
     <div class="fuss nodruck"><button class="btn" data-geh="${S.zurueck||"ende"}">Zurück</button><span class="hinweis">Druckt auf zwei Seiten A4. In GoodNotes: „Drucken“ → „Als PDF sichern“.</span><button class="btn primary" onclick="print()">Drucken oder als PDF sichern</button></div></section>`;
 }
 
+/* ---------------------- V · Halbrund der Klasse ----------------------
+   Punkte auf Halbkreisen, links beginnend; Gruppen der Reihe nach gefärbt.
+   Farbe nie allein: Legende mit Buchstabe, Text und Zahl. */
+const HR_FARBEN = { hell:{A:"#2E5A47",B:"#8C6717",C:"#9B402D",leer:"#D5CEC3",ja:"#24221F",nein:"#9B402D"}, dunkel:{A:"#8CC2A6",B:"#E0BC62",C:"#E99A84",leer:"#4A4743"} };
+function halbrundSVG(n, gruppen, o = {}){
+  const cx=360, cy=350, aussen=330, reihen=n>300?8:n>80?5:n>25?3:2, innen=aussen*(n>300?.42:.5);
+  const radien=[]; let summe=0; for(let r=0;r<reihen;r++){ const rad=innen+(aussen-innen)*(reihen===1?1:r/(reihen-1)); radien.push(rad); summe+=rad; }
+  const pkt=[]; let rest=n, abstand=1e9;
+  radien.forEach((rad,i)=>{ const k=i===reihen-1?rest:Math.round(n*rad/summe); rest-=k; if(k) abstand=Math.min(abstand,Math.PI*rad/k);
+    for(let j=0;j<k;j++){ const a=Math.PI-Math.PI*(j+.5)/k; pkt.push({x:cx+rad*Math.cos(a), y:cy-rad*Math.sin(a), a}); } });
+  pkt.sort((u,v)=>v.a-u.a);
+  const reihenAbstand=reihen>1?(aussen-innen)/(reihen-1):40, g=Math.max(2.6,Math.min(16,reihenAbstand*.38,abstand*.42));
+  const farben=[]; gruppen.forEach(([zahl,farbe])=>{ for(let k=0;k<zahl;k++) farben.push(farbe); });
+  const leer = o.leer || HR_FARBEN.hell.leer;
+  return `<svg class="halbrund${o.vor?" vor":""}" viewBox="0 0 720 370" ${o.label?`role="img" aria-label="${esc(o.label)}"`:'aria-hidden="true"'}>${pkt.map((p,i)=>`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${g.toFixed(1)}" fill="${farben[i]||leer}" style="transition-delay:${o.staffel?Math.round(i/n*o.staffel):0}ms"></circle>`).join("")}</svg>`;
+}
+const stimmen = k => { const p=S.prot[k]||{}, z=v=>Math.max(0,Math.min(60,parseInt(v,10)||0)); return {A:z(p.A),B:z(p.B),C:z(p.C)}; };
+function gruppenABC(k, dunkel){ const F=dunkel?HR_FARBEN.dunkel:HR_FARBEN.hell, z=stimmen(k), E=ENT[k]; return ["A","B","C"].map(o=>[z[o],F[o],`${o} · ${E.opt[o].t}`]); }
+const legendeHR = gr => `<div class="hr-legende">${gr.map(([z,f,t])=>`<span><i style="background:${f}"></i>${esc(t)} <b>${z}</b></span>`).join("")}</div>`;
+function klasseHR(k){
+  const z=stimmen(k), n=z.A+z.B+z.C;
+  if(!n) return `<div class="klasse"><b>Unsere Klasse</b><p class="hinweis">Noch kein Ergebnis eingetragen. Die Lehrkraft trägt es in der Beamer-Ansicht „Ergebnis der Klasse“ ein, du im <a href="#" data-geh="protokoll">Protokoll</a>.</p></div>`;
+  const gr=gruppenABC(k,false);
+  return `<figure class="klasse"><b>Unsere Klasse</b>${halbrundSVG(n,gr,{label:`Abstimmung der Klasse: A ${z.A}, B ${z.B}, C ${z.C}`})}${legendeHR(gr)}</figure>`;
+}
+function ergebnisAnsicht(){
+  const k=S.erg, E=ENT[k], p=S.prot[k]||{};
+  return `<div class="tafel ergebnis" role="dialog" aria-label="Ergebnis der Klasse"><button class="zu" data-erg-zu="1">Schließen</button>
+    <div class="t-kopf">Entscheidung ${E.nr} · ${esc(E.datum)} · Ergebnis der Klasse</div>
+    <h2>${esc(E.frage)}</h2>
+    <div class="erg-eingabe">${["A","B","C"].map(o=>`<label for="erg-${o}">${o} · ${esc(E.opt[o].t)}<input id="erg-${o}" type="number" min="0" max="60" inputmode="numeric" data-erg-feld="${k}:${o}" value="${esc(p[o]??"")}"></label>`).join("")}</div>
+    <div class="t-knoepfe"><button class="btn primary" data-auszaehlen="${k}">Auszählen</button></div>
+    <div id="erg-bild"></div>
+    <p style="opacity:.8">Die Zahlen stehen danach auch im Protokoll dieses Geräts. Was London tat, zeigt erst das Codewort.</p></div>`;
+}
+function ergBild(k, bewegt){
+  const ziel=$("#erg-bild"); if(!ziel) return;
+  const z=stimmen(k), n=z.A+z.B+z.C, gr=gruppenABC(k,true), ruhig=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(!n){ ziel.innerHTML=`<p style="opacity:.8">Trag die Stimmen für A, B und C ein.</p>`; return; }
+  const an = bewegt && !ruhig;
+  ziel.innerHTML = halbrundSVG(n,gr,{leer:HR_FARBEN.dunkel.leer, vor:an, staffel:an?900:0, label:`Abstimmung der Klasse: A ${z.A}, B ${z.B}, C ${z.C}`}) + legendeHR(gr);
+  if(an) requestAnimationFrame(()=>requestAnimationFrame(()=>{ const s=ziel.querySelector("svg"); if(s) s.classList.remove("vor"); }));
+}
+
+/* ------------------ W · Eröffnung „Akte und Abstimmung“ ------------------
+   8. Mai 1940: Abstimmung im Unterhaus (Hansard, Division No. 61: 281 zu 200).
+   10. Mai: Churchill wird Premierminister (Foto IWM, nur im Moodle-Paket).
+   26. Mai: Das Kriegskabinett berät geheim. Dann die Leitfrage. Gesamt 9,6 s. */
+function eroeffnung(){
+  let gesehen=false; try{ gesehen = sessionStorage.getItem(EROEFF_KEY)==="1"; }catch(x){}
+  if(gesehen || S.seite!=="start" || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
+  try{ sessionStorage.setItem(EROEFF_KEY,"1"); }catch(x){}
+  const F=HR_FARBEN.hell, el=document.createElement("div");
+  el.className="eroeff"; el.setAttribute("role","dialog"); el.setAttribute("aria-label","Eröffnung: 8. bis 26. Mai 1940");
+  el.innerHTML = `<button class="btn e-skip" type="button">Überspringen</button><div class="e-buehne">
+    <p class="e-t1">8. Mai 1940 · Abstimmung im Unterhaus</p>
+    <div class="e-hr">${halbrundSVG(615,[[281,F.ja],[200,F.nein]],{vor:true,staffel:1800})}</div>
+    <p class="e-zahl">281 dafür · 200 dagegen · 39 aus dem Regierungslager stimmen dagegen</p>
+    <figure class="e-foto"><img src="media/m20-iwm-mh26392-churchill-1940.jpg" alt="Schwarzweißfoto: Winston Churchill sitzt 1940 im Kabinettsraum von Downing Street 10." onerror="this.closest('figure').classList.add('ohne')"><b>10. Mai 1940: Winston Churchill wird Premierminister.</b><small>Churchill im Kabinettsraum, Downing Street 10, 1940 · Foto: Cecil Beaton · Image: IWM (MH 26392)</small></figure>
+    <div class="e-akte" aria-hidden="true"><div class="e-kopf"><span>Kriegskabinett · 26. Mai 1940 · geheim</span><small>nachgestellt</small></div>
+      <p>Halifax: Gespräche wären denkbar, <span class="geschwaerzt" style="width:9em"></span></p>
+      <p>Churchill: <span class="geschwaerzt" style="width:12em;max-width:60%"></span></p>
+      <p class="e-schluss">Was hier beraten wird, erfährt das Unterhaus nicht.</p></div>
+    <div class="e-frage"><b>Weiterkämpfen oder Frieden suchen?</b><span>Du bist Abgeordnete im Unterhaus. Dreimal stimmst du ab.</span></div></div>`;
+  document.body.appendChild(el); document.body.classList.add("eroeff-laeuft");
+  const svg=el.querySelector(".e-hr svg"), farbe=(i,n)=>i<281?F.ja:i<481?F.nein:F.leer;
+  // Punkte erst grau formen, dann färben
+  const kreise=[...svg.querySelectorAll("circle")]; kreise.forEach(c=>c.setAttribute("fill",F.leer));
+  const schritte = [
+    [150, ()=>{ el.classList.add("p1"); svg.classList.remove("vor"); }],
+    [2300, ()=>kreise.forEach((c,i)=>{ c.style.transitionDelay=Math.round(i/615*900)+"ms"; c.setAttribute("fill",farbe(i)); })],
+    [3400, ()=>el.classList.add("p2")],
+    [4700, ()=>el.classList.add("p3")],
+    [6500, ()=>el.classList.add("p4")],
+    [7500, ()=>el.classList.add("p5")],
+    [8500, ()=>el.classList.add("p6")]
+  ];
+  const timer = schritte.map(([t,f])=>setTimeout(f,t));
+  const ende = setTimeout(schluss, 9600);
+  function schluss(){ timer.forEach(clearTimeout); clearTimeout(ende); document.removeEventListener("keydown",taste,true);
+    el.classList.add("weg"); setTimeout(()=>{ el.remove(); document.body.classList.remove("eroeff-laeuft"); const h=$("main h1"); if(h){ h.setAttribute("tabindex","-1"); h.focus({preventScroll:true}); } }, 260); }
+  function taste(e){ if(e.key==="Escape"||e.key===" "||e.key==="Enter"){ e.preventDefault(); e.stopPropagation(); schluss(); } }
+  el.addEventListener("click", schluss); document.addEventListener("keydown", taste, true);
+  el.querySelector(".e-skip").focus({preventScroll:true});
+}
+
 function stimmkarte(){
   const key = S.karte, k = S.v[key] || "?", E = ENT[key];
   return `<div class="stimmkarte" role="dialog" aria-label="Stimmkarte"><button class="zu" data-karte="">Schließen</button>
     <div class="gross">${k}</div><p>${esc(E && E.opt[k] ? E.opt[k].t : "")}</p><p style="font-size:1rem;opacity:.8">Hochhalten, wenn die Lehrkraft das Zeichen gibt.</p></div>`;
 }
 
-const FUSS = `<footer class="seitenfuss nodruck"><span>GGK-Labor · keine Namen, keine Übertragung: Antworten bleiben auf diesem Gerät.</span>${IN_MOODLE ? "" : `<a href="?ansicht=lehrkraft">Hinweise für die Lehrkraft</a>`}</footer>`;
+/* Zurück zum Labor: auf GitHub Pages die Startseite daneben, sonst (Moodle, Datei) die Online-Adresse */
+const LABOR = /github\.io$/.test(location.hostname) ? "index.html" : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
+const EROEFF_KEY = "ggk-m20:eroeffnung";
+const FUSS = `<footer class="seitenfuss nodruck"><span>GGK-Labor · keine Namen, keine Übertragung: Antworten bleiben auf diesem Gerät.</span>${IN_MOODLE ? "" : `<a href="?ansicht=lehrkraft">Hinweise für die Lehrkraft</a>`}<button class="btn-leise" data-loeschfrage="1">Eingaben löschen</button>
+  <div class="loesch-frage" id="loesch-frage" hidden><span>Alle Antworten auf diesem Gerät löschen? Das lässt sich nicht rückgängig machen.</span><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></footer>`;
+function loescheAlles(){ try{ localStorage.removeItem(KEY); }catch(x){} try{ sessionStorage.removeItem(EROEFF_KEY); }catch(x){} location.href = location.pathname + (IN_MOODLE ? location.search : ""); }
 
 let fokusZiel = null;
 function zeichne(){
@@ -1345,8 +1502,9 @@ function zeichne(){
   const a = document.activeElement; let sel = null;
   if(a && a !== document.body && a.attributes){ for(const at of a.attributes){ if(at.name.startsWith("data-") || at.name==="id"){ sel = at.name==="id" ? "#"+CSS.escape(at.value) : `[${at.name}="${String(at.value).replace(/"/g,'\\"')}"]`; break; } } }
   document.body.classList.toggle("zf-seite", S.seite==="zusammenfassung");
-  $("#app").innerHTML = kopf() + `<main>${seite()}</main>` + FUSS + (S.karte ? stimmkarte() : "") + (S.tafel ? tafel() : "");
+  $("#app").innerHTML = kopf() + `<main>${seite()}</main>` + FUSS + (S.karte ? stimmkarte() : "") + (S.tafel ? tafel() : "") + (S.erg ? ergebnisAnsicht() : "");
   verdrahten();
+  if(S.erg) ergBild(S.erg, false);
   $$(".faecher").forEach(f=>{ const a=f.querySelector(".f-karte.akt"); if(a) f.style.setProperty("--h", a.offsetHeight+"px"); });
   if(window.Bewegung) Bewegung.spiele($("#app"));
   const ziel = fokusZiel ? $(fokusZiel) : (sel ? $(sel) : null); const war = fokusZiel; fokusZiel = null;
@@ -1354,6 +1512,7 @@ function zeichne(){
 }
 document.addEventListener("keydown", e => {
   if(e.key==="Escape" && S.karte){ const k=S.karte; fokusZiel=`#ph-${k} .ph-titel`; setze(x=>{ x.karte=null; }); return; }
+  if(e.key==="Escape" && S.erg){ const k=S.erg; fokusZiel=`[data-erg="${k}"]`; setze(x=>{ x.erg=null; }); return; }
   if(e.key==="Escape" && S.tafel){ const k=S.tafel; fokusZiel=`[data-tafel="${k}"]`; setze(x=>{ x.tafel=null; }); return; }
   const f = e.target.closest && e.target.closest(".faecher"); if(f && (e.key==="ArrowLeft" || e.key==="ArrowRight")){ e.preventDefault(); const k=f.dataset.fxKey, n=NACHHER[k].length; fokusZiel=`.faecher[data-fx-key="${k}"]`; setze(x=>{ x.fx[k]=Math.max(0, Math.min(n-1, (x.fx[k]||0)+(e.key==="ArrowRight"?1:-1))); }); }
 });
@@ -1394,7 +1553,12 @@ function verdrahten(){
       if(h===CODE_HASH[k]) setze(x=>{ x.stufe=Math.max(x.stufe,+stufe); }); else $("#f-"+k).textContent="Das Codewort passt nicht. Schau an die Tafel."; };
     b.onclick=pr; inp.onkeydown=e=>{ if(e.key==="Enter") pr(); }; });
   $$("[data-prot]").forEach(i=>i.oninput=()=>{ const [k,f]=i.dataset.prot.split(":"); S.prot[k]=S.prot[k]||{}; S.prot[k][f]=i.value; speichere(); });
-  $$("[data-loeschen]").forEach(b=>b.onclick=()=>{ if(confirm("Alle Antworten auf diesem iPad löschen?")){ try{ localStorage.removeItem(KEY); }catch(x){} location.href=location.pathname; } });
+  $$("[data-loeschfrage]").forEach(b=>b.onclick=()=>{ const f=$("#loesch-frage"); f.hidden=false; f.scrollIntoView({block:"nearest"}); f.querySelector('[data-loeschen="nein"]').focus(); });
+  $$("[data-loeschen]").forEach(b=>b.onclick=()=>{ if(b.dataset.loeschen==="ja") loescheAlles(); else { $("#loesch-frage").hidden=true; const z=$("[data-loeschfrage]"); if(z) z.focus(); } });
+  $$("[data-erg]").forEach(b=>b.onclick=()=>{ fokusZiel="#erg-A"; setze(x=>{ x.erg=b.dataset.erg; }); });
+  $$("[data-erg-zu]").forEach(b=>b.onclick=()=>{ const k=S.erg; fokusZiel=`[data-erg="${k}"]`; setze(x=>{ x.erg=null; }); });
+  $$("[data-erg-feld]").forEach(i=>i.oninput=()=>{ const [k,f]=i.dataset.ergFeld.split(":"); S.prot[k]=S.prot[k]||{}; S.prot[k][f]=i.value; speichere(); ergBild(k,false); });
+  $$("[data-auszaehlen]").forEach(b=>b.onclick=e=>ergBild(b.dataset.auszaehlen, e.detail!==0));
 }
 
 /* ---------------------------- Lehrkraft -----------------------------
@@ -1423,7 +1587,7 @@ function lehrkraft(){
   };
 }
 
-if(new URLSearchParams(location.search).get("ansicht")==="lehrkraft") lehrkraft(); else zeichne();
+if(new URLSearchParams(location.search).get("ansicht")==="lehrkraft") lehrkraft(); else { zeichne(); eroeffnung(); }
 </script>
 
 </body>
