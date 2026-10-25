@@ -76,6 +76,13 @@
     datei: "m20-dilemmata.html"
   };
 
+  B.m22 = {
+    nr: "M22",
+    titel: "„Große Verbrechen brauchen keine Monster!“ – Wie war das möglich?",
+    thema: "Täterforschung · Faktencheck, der Fall Józefów 1942, sechs Akten, Marktplatz",
+    datei: "m22-wie-war-das-moeglich.html"
+  };
+
   B.geplant = [];
   window.BAUSTEINE = B;
 })();
