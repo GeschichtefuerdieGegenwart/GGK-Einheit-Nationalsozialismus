@@ -393,7 +393,7 @@ const FEHLT = new Set();
 const bildFehlt = (img) => { const f = img.closest("figure"); const id = img.dataset.bild; FEHLT.add(id); if (f) { const b = f.closest(".band"); if (b) { b.classList.remove("mit"); } f.remove(); } };
 function bildFig(id, o = {}){
   const b = BILDER[id]; if (!b || FEHLT.has(id)) return "";
-  return `<figure class="${o.klasse || ""}">${b.taeter ? `<span class="taeter">Täterfoto · Gericht 1961</span>` : ""}<img src="${b.datei}" alt="${esc(b.alt)}" loading="lazy" data-bild="${id}" onerror="bildFehlt(this)"><figcaption><b>${esc(b.unter)}</b>${o.kurz ? "" : ` · ${esc(b.quelle)}`}</figcaption></figure>`;
+  return `<figure class="${o.klasse || ""}">${b.taeter ? `<span class="taeter">Täterfoto · Gericht 1961</span>` : ""}<img src="${b.datei}" alt="${esc(b.alt)}"${o.klasse ? ' loading="lazy"' : ''} data-bild="${id}" onerror="bildFehlt(this)"><figcaption><b>${esc(b.unter)}</b>${o.kurz ? "" : ` · ${esc(b.quelle)}`}</figcaption></figure>`;
 }
 function band(id, ob, titel, text){
   const mit = id && BILDER[id] && !FEHLT.has(id);
