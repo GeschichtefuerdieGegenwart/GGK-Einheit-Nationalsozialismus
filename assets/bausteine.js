@@ -76,6 +76,13 @@
     datei: "m20-dilemmata.html"
   };
 
+  B.m21 = {
+    nr: "M21",
+    titel: "Es geht um Menschen – Shoa oder Holocaust?",
+    thema: "Der letzte Brief, das Wort, vier Lebenswege in fünf Stationen, die Zahl und das System",
+    datei: "m21-es-geht-um-menschen.html"
+  };
+
   B.m22 = {
     nr: "M22",
     titel: "„Große Verbrechen brauchen keine Monster!“ – Wie war das möglich?",

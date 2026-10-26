@@ -1,0 +1,908 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>M21 Es geht um Menschen</title>
+<meta name="description" content="GGK M21: Shoa oder Holocaust? Es geht um Menschen. Der letzte Brief, die Wahl des Wortes, vier Lebenswege in fünf Stationen, die Matrix, die Zahl und das System, Plenum mit Tafel, Rückblick und Zusammenfassung.">
+<style>
+/* Schriften lokal im Repository (SIL Open Font License) – keine Verbindung zu Google */
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBoldItalic.woff) format("woff");font-weight:600;font-style:italic;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+/* Bewusst nur hell (Beamer, Druck), wie M18–M22. Farben und Formen aus dem Designsystem GGK-Labor. */
+:root{
+  color-scheme:light;
+  --bg:#F3EFE7; --surface:#FAF8F3; --surface2:#FFFDF8; --offset:#E9E2D7; --line:#D5CEC3; --border:rgba(36,34,31,.14);
+  --ink:#24221F; --muted:#5F5C56; --faint:#6A655E; --inverse:#FFFAF2; --dunkel:#1B1A17;
+  --red:#9B402D; --red-hi:#EAD7CF; --green:#2E5A47; --green-hi:#D6E4DC; --gold:#7D5C12; --gold-hi:#EEE2BF;
+  --kuli:#1E4FB5; --kuli-hi:#DCE5F7; --slate:#4B4F57; --slate-hi:#DFE1E5; --marker:#F3D54E;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:.75rem; --r-lg:1rem; --ease:cubic-bezier(.23,1,.32,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:none;text-size-adjust:none;overflow-x:clip}
+body{min-height:100dvh;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:clamp(1rem,.95rem + .25vw,1.125rem);line-height:1.58;-webkit-font-smoothing:antialiased;overflow-x:clip}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.14;text-wrap:balance}
+p,li{text-wrap:pretty}
+a{color:var(--red)}
+:focus-visible{outline:3px solid var(--kuli);outline-offset:3px;border-radius:.35rem}
+/* Weniger Bewegung: Systemeinstellung oder Schalter auf der Seite (html.ruhig) */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}}
+html.ruhig *,html.ruhig *::before,html.ruhig *::after{animation:none!important;transition-duration:1ms!important}
+@keyframes auf{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+
+/* Kopf mit Lernweg */
+.kopf{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--border);padding-top:env(safe-area-inset-top,0px)}
+.kopf-in{max-width:1100px;margin:auto;padding:.55rem max(1.25rem,env(safe-area-inset-right,0px)) .55rem max(1.25rem,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:.6rem .9rem;flex-wrap:wrap}
+.mark{width:32px;height:32px;flex:0 0 auto}
+.titel{font-weight:700;line-height:1.2;margin-right:auto}.titel small{display:block;color:var(--muted);font-weight:400;font-size:.82rem}
+.pill{border:1px solid var(--border);background:var(--surface2);border-radius:999px;padding:.45rem 1rem;font-weight:700;min-height:44px;display:inline-flex;align-items:center;text-decoration:none;color:var(--ink)}
+.weg{max-width:1100px;margin:auto;padding:0 1.25rem .6rem;display:flex;gap:.35rem;overflow-x:auto;scrollbar-width:none}
+.weg button{flex:1 0 auto;min-width:7.4rem;border:0;border-top:3px solid var(--line);background:transparent;text-align:left;padding:.45rem .5rem .2rem;color:var(--faint);font-size:.85rem;line-height:1.25;min-height:48px}
+.weg button b{display:block;color:inherit;font-size:.78rem}
+.weg button.da{color:var(--muted);border-top-color:var(--muted)}
+.weg button.akt{color:var(--ink);border-top-color:var(--red)}
+
+main{max-width:46rem;margin:auto;padding:clamp(1.5rem,4vw,3rem) max(1.25rem,env(safe-area-inset-right,0px)) 5rem max(1.25rem,env(safe-area-inset-left,0px))}
+main.breit{max-width:62rem}
+.zeit{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;color:var(--red);font-weight:700;font-size:.95rem}
+.zeit .nr{font-family:var(--display);font-size:1.1rem}
+h1{font-size:clamp(2rem,1.4rem + 2.4vw,3.1rem);margin:.5rem 0 .7rem}
+.leitfrage{font-family:var(--display);font-style:italic;font-weight:600;font-size:clamp(1.35rem,1.1rem + .9vw,1.8rem);color:var(--muted);margin-bottom:1.4rem}
+.lead{font-size:clamp(1.1rem,1rem + .5vw,1.28rem);color:var(--muted);margin-bottom:1.4rem}
+h2.abschnitt{font-size:1.45rem;margin:2.2rem 0 .7rem}
+h3.klein{font-size:1.15rem;margin:1.4rem 0 .4rem}
+p+p{margin-top:.7rem}
+.auftrag{background:var(--ink);color:var(--inverse);border-radius:var(--r-lg);padding:1.2rem 1.4rem;margin:1.5rem 0 1.1rem}
+.auftrag h3{font-size:1.2rem;margin-bottom:.35rem}
+.auftrag p{color:#DCD5CA}
+.auftrag .form{display:inline-block;font-weight:700;color:var(--marker);font-size:.9rem;margin-bottom:.2rem}
+.hinweis{font-size:.9rem;color:var(--muted)}
+.belastend{border-left:6px solid var(--gold);background:var(--gold-hi);padding:.75rem 1rem;border-radius:0 .5rem .5rem 0;margin:1rem 0}
+.merksatz{font-family:var(--display);font-weight:600;font-size:1.25rem;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);padding:.7rem 0;margin:1.4rem 0;text-align:center}
+.btn{min-height:48px;border:1px solid var(--border);border-radius:var(--r);padding:.6rem 1.2rem;background:var(--surface2);font-weight:700;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.4rem}
+.btn:hover{background:var(--offset)}
+.btn.primary{background:var(--red);color:var(--inverse);border-color:transparent}
+.btn.primary:hover{background:#86361f}
+.btn.dunkel{background:var(--ink);color:var(--inverse);border-color:transparent}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn:active{transform:scale(.97)}
+.btn[aria-pressed=true]{background:var(--kuli-hi);border-color:var(--kuli)}
+.reihe{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-top:.8rem}
+.fuss{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-top:1px solid var(--line);margin-top:2.2rem;padding-top:1.3rem;flex-wrap:wrap}
+label{font-weight:700;display:block}
+textarea{width:100%;min-height:5rem;border:1.5px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;background:var(--surface2);resize:vertical;margin-top:.35rem}
+input[type=text]{width:100%;min-height:48px;border:1.5px solid var(--border);border-radius:.6rem;padding:.5rem .8rem;background:var(--surface2);margin-top:.35rem}
+input[type=range]{width:100%;min-height:44px;accent-color:var(--ink)}
+.feldgruppe{display:grid;gap:1rem;margin-top:1rem}
+.karte{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
+.karte+.karte{margin-top:1rem}
+.kennung{font-weight:700;color:var(--red);font-size:.88rem;margin-bottom:.3rem}
+.quelle{font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.4}
+.quelle a{color:var(--muted)}
+blockquote{margin:.8rem 0;padding:.7rem 1rem;border-left:5px solid var(--kuli);background:var(--kuli-hi);border-radius:0 .5rem .5rem 0;font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.35}
+blockquote .wer{display:block;font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--muted);margin-top:.35rem}
+details.hilfe{margin-top:.8rem;border:1.5px dashed var(--line);border-radius:.6rem;padding:.4rem .8rem}
+details.hilfe summary{cursor:pointer;font-weight:700;min-height:40px;display:flex;align-items:center}
+details.hilfe p{margin:.3rem 0 .4rem}
+.status{display:inline-block;font-size:.78rem;font-weight:700;padding:.1rem .5rem;border-radius:.35rem;background:var(--slate-hi);color:var(--slate);margin-right:.3rem}
+.status.beleg{background:var(--green-hi);color:var(--green)}
+.status.modell{background:var(--gold-hi);color:var(--gold)}
+.status.offen{background:var(--red-hi);color:var(--red)}
+
+/* AJ · Bildband: kündigt einen Abschnitt an. Fehlt die Datei, bleibt ein stiller Textband. */
+.band{position:relative;background:var(--dunkel);color:var(--inverse);border-radius:var(--r-lg);overflow:hidden;margin:0 0 1.6rem;min-height:9rem;display:grid;grid-template-columns:minmax(0,1fr)}
+.band.mit{grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:15rem}
+@media (max-width:640px){.band.mit{grid-template-columns:1fr}}
+.band .bt{padding:1.3rem 1.4rem;display:flex;flex-direction:column;justify-content:center;gap:.4rem}
+.band .bt .ob{font-size:.85rem;font-weight:700;color:#C9BFAE;letter-spacing:.02em}
+.band .bt h2{font-size:clamp(1.5rem,1.2rem + 1.4vw,2.2rem);color:var(--inverse)}
+.band .bt p{color:#DCD5CA}
+.band figure{margin:0;position:relative;min-height:12rem;background:#2A2824}
+.band figure img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:.92}
+.band.neu figure img{animation:band-ein 650ms var(--ease) both}
+@keyframes band-ein{from{opacity:0;transform:translateX(4%) scale(1.03)}to{opacity:.92;transform:none}}
+.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:.45rem .8rem;font-size:.75rem;line-height:1.35;color:#E6DFD2;background:linear-gradient(transparent,rgba(27,26,23,.85))}
+.band figcaption b{color:var(--inverse)}
+
+/* Brief (Einstieg) */
+.brief{background:var(--surface2);border:1px solid var(--border);border-radius:.4rem;padding:1.3rem 1.5rem;margin-top:1rem;font-family:var(--display);font-size:1.08rem;line-height:1.5;box-shadow:4px 4px 0 var(--offset)}
+.brief p+p{margin-top:.5rem}
+.brief .von{font-family:var(--body);font-size:.82rem;color:var(--muted);margin-bottom:.6rem;font-weight:700}
+.aufdeck{margin-top:1rem;background:var(--offset);border-radius:var(--r-lg);padding:1rem 1.2rem}
+.aufdeck.neu{animation:auf 360ms var(--ease) both}
+.zwei{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+@media (max-width:640px){.zwei{grid-template-columns:1fr}}
+.zwei .alt{background:var(--offset);border-radius:.6rem;padding:.8rem 1rem;min-width:0}
+.zwei .alt p{overflow-wrap:anywhere;margin-top:.3rem}
+
+/* Optionen mit Erklärung je Wahl (Muster 2) */
+.optionen{display:grid;gap:.45rem;margin-top:.8rem}
+.optionen button{min-height:48px;text-align:left;padding:.55rem .9rem;border-radius:.6rem;border:1.5px solid var(--border);background:var(--surface2);font-weight:700}
+.optionen button[aria-pressed=true]{border-color:var(--kuli);background:var(--kuli-hi)}
+.optionen button.zentral{border-color:var(--green);background:var(--green-hi)}
+.optionen button.teils{border-color:var(--gold);background:var(--gold-hi)}
+.optionen button.kaum{border-color:var(--red)}
+.optionen button.ruhig{border-color:var(--kuli);background:var(--kuli-hi)}
+.optionen button[disabled]{cursor:default;opacity:.85}
+.optionen button[disabled][aria-pressed=true]{opacity:1}
+.optionen .fb{display:block;font-weight:400;font-size:.9rem;color:var(--ink);margin-top:.3rem}
+.optionen .stufe{display:inline-block;font-size:.78rem;font-weight:700;padding:0 .4rem;border-radius:.3rem;margin-right:.3rem;background:var(--offset)}
+.rm{margin-top:.6rem;padding:.6rem .9rem;border-radius:.5rem;font-size:.95rem;line-height:1.45;animation:auf 220ms var(--ease) both}
+.rm.zentral{background:var(--green-hi);border-left:4px solid var(--green)}
+.rm.teils{background:var(--gold-hi);border-left:4px solid var(--gold)}
+.rm.kaum{background:var(--red-hi);border-left:4px solid var(--red)}
+.rm.ruhig{background:var(--kuli-hi);border-left:4px solid var(--kuli)}
+
+/* Begriff: zwei Erklärkarten */
+.begriffe{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+@media (max-width:640px){.begriffe{grid-template-columns:1fr}}
+.begriffe .karte h3{font-family:var(--display);font-style:italic;font-size:1.5rem}
+.begriffe .karte .herk{font-size:.85rem;color:var(--muted);margin-bottom:.4rem}
+
+/* Vier Menschen: Auswahl, Kartenstapel (AI), Stationen */
+.menschen{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}
+@media (max-width:520px){.menschen{grid-template-columns:1fr}}
+.mensch{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;text-align:left;padding:0;min-height:44px}
+.mensch[aria-pressed=true]{border-color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.mensch .foto{aspect-ratio:4/3;background:var(--offset);display:grid;place-items:center;color:var(--muted);font-size:.85rem;text-align:center;padding:.6rem;overflow:hidden}
+.mensch .foto img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
+.mensch .foto .leer{font-family:var(--display);font-style:italic}
+.mensch .mt{padding:.8rem .9rem 1rem;display:grid;gap:.25rem}
+.mensch h3{font-size:1.1rem}
+.mensch .ort{font-size:.85rem;color:var(--muted)}
+.mensch p{font-size:.95rem}
+.mensch .fertig{font-size:.8rem;font-weight:700;color:var(--green)}
+.input-kopf{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-top:1rem}
+.spur{display:flex;align-items:flex-start;gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:.6rem 1.25rem 1rem;margin:0 -1.25rem;scrollbar-width:thin;outline-offset:-3px}
+.spur>.ikarte{flex:0 0 calc(100% - 3.2rem);scroll-snap-align:start;scroll-snap-stop:always;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.2rem 1.3rem;display:grid;gap:.6rem;align-content:start}
+.ikarte .kn{font-weight:700;color:var(--red);font-size:.88rem}
+.ikarte h3{font-size:1.4rem}
+.ikarte .jahr{font-family:var(--display);font-style:italic;color:var(--muted)}
+.ikarte figure{margin:.2rem 0;border-radius:.6rem;overflow:hidden;background:var(--offset)}
+.ikarte figure img{display:block;width:100%;max-height:16rem;object-fit:cover}
+.ikarte figcaption{font-size:.78rem;color:var(--muted);padding:.4rem .6rem;line-height:1.3}
+.ikarte .notiz{border-top:1px solid var(--line);padding-top:.6rem;margin-top:.2rem}
+.ikarte .notiz textarea{min-height:3.6rem}
+@supports (animation-timeline: view()){@media (prefers-reduced-motion:no-preference){
+  html:not(.ruhig) .spur>.ikarte{animation:tiefe linear both;animation-timeline:view(inline);animation-range:cover}}}
+@keyframes tiefe{0%{transform:scale(.93) rotate(1.5deg);opacity:.55}38%,62%{transform:none;opacity:1}100%{transform:scale(.93) rotate(-1.5deg);opacity:.55}}
+.steuer{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap}
+.dots{display:flex}
+.dots button{width:44px;height:44px;border:0;background:transparent;display:grid;place-items:center;position:relative}
+.dots button::before{content:"";width:.75rem;height:.75rem;border-radius:50%;background:var(--line)}
+.dots button[aria-current=true]::before{background:var(--ink)}
+.dots button.voll::after{content:"";position:absolute;bottom:4px;width:1rem;height:3px;border-radius:2px;background:var(--green)}
+.fortschritt{margin-top:1rem;padding:.7rem 1rem;border-radius:.6rem;background:var(--offset);font-weight:700}
+.fortschritt.ok{background:var(--green-hi);color:var(--green)}
+.portraet{float:right;width:7rem;margin:0 0 .6rem 1rem;border-radius:.6rem;overflow:hidden;background:var(--offset)}
+.portraet img{display:block;width:100%;aspect-ratio:1;object-fit:cover;object-position:center 15%}
+.portraet figcaption{font-size:.7rem;color:var(--muted);padding:.25rem .3rem;line-height:1.25}
+@media (max-width:520px){.portraet{width:5.5rem}}
+
+/* Matrix */
+.matrix-wrap{overflow-x:auto;margin-top:1rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%}
+th,td{padding:.55rem .7rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.92rem}
+th{background:var(--offset)}
+tr:last-child td{border-bottom:0}
+td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
+.matrix td.eigen{background:var(--kuli-hi)}
+.matrix td.eigen::before{content:"● du: ";font-weight:700;color:var(--kuli)}
+.matrix .lk{font-size:.85rem;color:var(--muted)}
+.matrix th.p{min-width:8rem}
+
+/* Schätzen (Vorhersage → Auflösung) */
+.schaetz{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1rem 1.2rem;margin-top:1rem}
+.schaetz .wert{font-family:var(--display);font-size:2rem;font-variant-numeric:tabular-nums}
+.schaetz .skala{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted)}
+.balken{height:1.1rem;background:var(--offset);border-radius:.3rem;overflow:hidden}
+.balken b{display:block;height:100%;width:100%;transform-origin:left center;transform:scaleX(var(--w,0));transition:transform 240ms var(--ease);border-radius:.3rem;background:var(--ink)}
+.balken.kuli b{background:var(--kuli)}
+.vergl{display:grid;grid-template-columns:7rem minmax(0,1fr) 5rem;gap:.3rem .8rem;align-items:center;margin-top:.6rem;font-size:.95rem}
+@media (max-width:480px){.vergl{grid-template-columns:5rem minmax(0,1fr) 4.5rem}}
+
+/* Schaubild */
+.schaubild{margin:1rem 0;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:.8rem 1rem}
+.schaubild svg{display:block;width:100%;height:auto}
+.schaubild figcaption{font-size:.82rem;color:var(--muted);margin-top:.4rem;line-height:1.4}
+
+/* Tafel (Beamer) und Stimmkarte */
+.stand,.tafel{position:fixed;inset:0;z-index:60;background:var(--bg);overflow:auto;padding:max(1.2rem,env(safe-area-inset-top,0px)) max(1.5rem,env(safe-area-inset-right,0px)) 2rem max(1.5rem,env(safe-area-inset-left,0px))}
+.stand{background:var(--surface2);display:grid;place-items:center;text-align:center}
+.stand .gross{font-family:var(--display);font-size:clamp(2.6rem,2rem + 5vw,7rem);line-height:1.05}
+.stand .unter{font-size:clamp(1.2rem,1rem + 1.5vw,2.2rem);color:var(--muted);margin-top:.6rem}
+.stand .nrgross{font-family:var(--display);font-size:clamp(5rem,4rem + 10vw,14rem);line-height:1;color:var(--red)}
+.tafel-in{max-width:72rem;margin:auto}
+.tafel h2{font-size:clamp(1.6rem,1.2rem + 1.6vw,2.4rem)}
+.tally{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;margin-top:1.2rem}
+@media (max-width:760px){.tally{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tally div{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1rem;display:grid;gap:.5rem;text-align:center}
+.tally .z{font-family:var(--display);font-size:clamp(2.5rem,2rem + 3vw,5rem);line-height:1;font-variant-numeric:tabular-nums}
+.tally .t{font-weight:700;font-size:1.1rem}
+.tally .balken{height:1.6rem}
+.tally .reihe{justify-content:center;margin-top:.2rem}
+.tafel .fragen{columns:2;column-gap:1.5rem;font-size:1.15rem;margin-top:1rem}
+@media (max-width:760px){.tafel .fragen{columns:1}}
+.tafel .fragen li{break-inside:avoid;margin-bottom:.5rem}
+.regeln{columns:2;column-gap:1.5rem;font-size:.95rem;margin-top:.6rem}
+@media (max-width:640px){.regeln{columns:1}}
+.regeln li{break-inside:avoid;margin-bottom:.3rem}
+
+/* Produkt */
+.raster3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.6rem;font-size:.88rem}
+@media (max-width:640px){.raster3{grid-template-columns:1fr}}
+.raster3 div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .7rem}
+.raster3 b{display:block;margin-bottom:.2rem}
+.satzanfaenge{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem}
+.satzanfaenge button{min-height:40px;border:1.5px solid var(--border);background:var(--surface2);border-radius:.5rem;padding:.3rem .7rem;font-size:.9rem}
+
+/* Löschen, Bewegung */
+.loesch{margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.92rem;color:var(--muted);display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.loesch-frage{margin-top:.6rem;border:2px solid var(--red);border-radius:.7rem;padding:.8rem 1rem;background:var(--red-hi);color:var(--ink);flex:1 0 100%}
+
+/* Zusammenfassung */
+.zf h2{font-size:1.25rem;margin:1.2rem 0 .4rem}
+.zf .begriffe6{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.6rem}
+@media (max-width:640px){.zf .begriffe6{grid-template-columns:1fr}}
+.zf .bg{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .8rem;font-size:.92rem;line-height:1.4}
+.zf .bg b{font-family:var(--display);font-size:1.05rem;display:block}
+.zf .zw{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+@media (max-width:640px){.zf .zw{grid-template-columns:1fr}}
+.abruf .optionen{margin-top:.5rem}
+@media print{
+  @page{size:A4;margin:12mm 13mm}
+  body{background:#fff;font-size:10pt;line-height:1.35}
+  .kopf,.fuss,.loesch,.nodruck,.reihe{display:none!important}
+  main{max-width:none;padding:0}
+  .zf h1{font-size:18pt;margin:0 0 .15rem}
+  .zf .leitfrage{font-size:12pt;margin-bottom:.3rem}
+  .zf h2{font-size:12pt;margin:.5rem 0 .2rem;break-after:avoid}
+  .zf .begriffe6{grid-template-columns:repeat(3,minmax(0,1fr));gap:.4rem}
+  .zf .bg{padding:.35rem .5rem;font-size:8.6pt;line-height:1.3;border-color:#bbb}
+  .zf th,.zf td{padding:.2rem .4rem;font-size:8.5pt}
+  .zf .karte{padding:.4rem .6rem}
+  .zf .seitenumbruch{break-before:page}
+  .schaubild{padding:.4rem .6rem;margin:.4rem 0}
+  .merksatz{margin:.5rem 0;padding:.4rem 0;font-size:11pt}
+  .balken b{transition:none}
+  textarea{border:1px solid #bbb;min-height:9rem}
+}
+</style>
+</head>
+<body>
+<header class="kopf"><div class="kopf-in" id="kopf"></div><nav class="weg" id="weg" aria-label="Lernweg"></nav></header>
+<main id="main" tabindex="-1"></main>
+<div id="ueber"></div>
+<noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft (M21).</p></noscript>
+<script>
+"use strict";
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const KEY = "ggk-m21-menschen:v1";
+const lade = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { return {}; } };
+let S = Object.assign({ seite:"start", brief:{ text:"", auf:false }, abruf:{}, begriff:{ wahl:"", grund:"", zu:false }, begriff2:{ wahl:"", grund:"" }, person:"", ai:{}, st:{}, ernst:{}, vergleich:{}, schaetz:{ juden:null, tote:null, zu:false }, lager:{}, tafel:[0,0,0,0], erz:"", abrufz:{}, ruhig:false }, lade());
+const speichere = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
+const ruhig = () => { try { return S.ruhig || matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e) { return !!S.ruhig; } };
+const neu = (el, k) => { if (!el) return; el.classList.remove(k); void el.offsetWidth; if (!ruhig()) el.classList.add(k); };
+const LABOR = /github\.io$/.test(location.hostname) ? "index.html" : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
+/* Zeichen der Stunde: ein Brief (Karte mit Zeilen) – 34 × 34, aus abgerundeten Balken wie Akte und Weichen */
+const MARK = `<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="3" y="7" width="28" height="20" rx="3" fill="none" stroke="#24221F" stroke-width="2.4"/><path d="M5 9l12 9 12-9" fill="none" stroke="#9B402D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><rect x="9" y="21" width="10" height="2.6" rx="1.3" fill="#24221F"/></svg>`;
+
+/* ---------- Bilder (media/). Fehlt eine Datei, verschwindet die Abbildung ohne Lücke. ---------- */
+const BILDER = {
+  levinson:   { datei:"media/m22-yv-levinson-1939.jpg", alt:"Zalman Levinson, ein Junge von etwa sieben Jahren, Porträt", unter:"Zalman Levinson, Riga, 1939", quelle:"Yad Vashem, Ausstellung „Last Letters from the Holocaust: 1941“ (Familie Levinson)", url:"https://www.yadvashem.org/yv/en/exhibitions/last-letters/1941/levinson.asp" },
+  emanuel:    { datei:"media/m22-yv-ashkenazi-emanuel-1939.jpg", alt:"Emanuel Aschkenasi, junger Mann im hellen Hemd vor Blättern", unter:"Emanuel Aschkenasi in einem Ferienort bei Kiew, 1939", quelle:"Yad Vashem, Ausstellung „The Onset of Mass Murder – The Fate of Jewish Families in 1941“", url:"https://www.yadvashem.org/yv/en/exhibitions/jewish-families-1941/kiev.asp" },
+  familie:    { datei:"media/m22-yv-ashkenazi-1914.jpg", alt:"Große Familienaufnahme mit drei Generationen", unter:"Sonya und Solomon Aschkenasi mit ihrer Tochter Rosalia (im Familienkreis), Browary bei Kiew, 1914", quelle:"Yad Vashem, „The Fate of Jewish Families in 1941“", url:"https://www.yadvashem.org/yv/en/exhibitions/jewish-families-1941/kiev.asp" },
+  korczak:    { datei:"media/m22-wc-korczak-1933.jpg", alt:"Janusz Korczak, Porträt mit Brille und Bart, Postkarte", unter:"Janusz Korczak (Henryk Goldszmit), Postkarte, Warschau 1933", quelle:"Polona.pl, über Wikimedia Commons, gemeinfrei", url:"https://commons.wikimedia.org/wiki/File:Janusz_Korczak.jpg" },
+  willner:    { datei:"media/m22-heft-willner-1923.jpg", alt:"Familie Willner, sechs Personen in Festkleidung, Betty und Friedrich in der Mitte", unter:"Familie Willner, 1923 (von links): Bertha, Rudolf, Betty, Friedrich, Frieda und Johanne", quelle:"Privat / Buchveröffentlichung Dieter Meiners, nach dem Unterrichtsheft M21", url:"https://www.joodsmonument.nl/en/page/211028/friedrich-willner" },
+  aufbau:     { datei:"media/m22-jm-willner-aufbau-1946.jpg", alt:"Todesanzeige in Frakturschrift: Friedrich Willner und Betty Willner, Sobibor, 9. April 1943", unter:"Todesanzeige der Angehörigen in der Emigrantenzeitung „Aufbau“, New York, 1. November 1946", quelle:"Joods Monument, Beitrag vom 25.9.2011", url:"https://www.joodsmonument.nl/en/page/211028/friedrich-willner" },
+  umschlag:   { datei:"media/m21-wc-umschlagplatz-2012.jpg", alt:"Steinernes Tor mit einem Relief aus zerbrochenen Bäumen vor Baumkronen", unter:"Tor des Umschlagplatz-Denkmals, Warschau (errichtet 1988), 2012", quelle:"Foto: Adrian Grycuk, Wikimedia Commons, CC BY-SA 3.0 pl", url:"https://commons.wikimedia.org/wiki/File:Umschlagplatz_Warsaw_1.JPG" },
+  babynjar:   { datei:"media/m21-wc-babyn-jar-menora-2016.jpg", alt:"Großer Bronze-Leuchter mit sieben Armen zwischen Bäumen, davor Blumen", unter:"Menora-Denkmal in Babyn Jar, Kyjiw (errichtet 1991), 2016", quelle:"Foto: Adam Jones, Wikimedia Commons, CC BY-SA 2.0", url:"https://commons.wikimedia.org/wiki/File:Menorah_Memorial_-_Babi_Yar_-_Kiev_-_Ukraine_-_02_(26963331801).jpg" },
+  rumbula:    { datei:"media/m21-wc-rumbula-2013.jpg", alt:"Gedenkstätte im Kiefernwald: ein Leuchter aus Metall, davor viele kantige Steine mit Namen", unter:"Gedenkstätte Rumbula bei Riga für die ermordeten Jüdinnen und Juden des Rigaer Ghettos, 2013", quelle:"Foto: Avi1111 (Avishai Teicher), Wikimedia Commons, CC BY-SA 3.0", url:"https://commons.wikimedia.org/wiki/File:Rumbula_forest_memorial_near_Riga.JPG" },
+  westerbork: { datei:"media/m21-wc-westerbork-2018.jpg", alt:"Bahngleise im Kies, die am Ende nach oben gebogen sind", unter:"Nationales Denkmal Westerbork: die Gleise enden gebogen, 2018", quelle:"Foto: Steven Lek, Wikimedia Commons, CC BY-SA 4.0", url:"https://commons.wikimedia.org/wiki/File:Westerbork_national_memorial_2018_1.jpg" },
+  birkenau:   { datei:"media/m21-wc-birkenau-rampe-2007.jpg", alt:"Bahngleise im Lager Birkenau mit einem Blumengebinde auf den Schienen, im Hintergrund Baracken", unter:"Gleise an der Rampe von Auschwitz-Birkenau, Blumen zum Gedenken, 2007", quelle:"Foto: Dnalor 01, Wikimedia Commons, CC BY-SA 3.0 at", url:"https://commons.wikimedia.org/wiki/File:KZ_Auschwitz-Birkenau,_Bahngleise_der_Entladerampe,_Blumen_zum_Gedenken.jpg" },
+};
+const FEHLT = new Set();
+const bildFehlt = (img) => { const f = img.closest("figure"); const id = img.dataset.bild; FEHLT.add(id); if (f) { const b = f.closest(".band"); if (b) b.classList.remove("mit"); f.remove(); } };
+function bildFig(id, o = {}){
+  const b = BILDER[id]; if (!b || FEHLT.has(id)) return "";
+  return `<figure class="${o.klasse || ""}"><img src="${b.datei}" alt="${esc(b.alt)}"${o.klasse ? ' loading="lazy"' : ''} data-bild="${id}" onerror="bildFehlt(this)"><figcaption><b>${esc(b.unter)}</b>${o.kurz ? "" : ` · ${esc(b.quelle)}`}</figcaption></figure>`;
+}
+function band(id, ob, titel, text){
+  const mit = id && BILDER[id] && !FEHLT.has(id);
+  return `<section class="band${mit ? " mit" : ""}" id="band" aria-label="${esc(titel)}"><div class="bt"><span class="ob">${esc(ob)}</span><h2>${esc(titel)}</h2>${text ? `<p>${text}</p>` : ""}</div>${mit ? bildFig(id) : ""}</section>`;
+}
+
+/* ---------- Lernweg ---------- */
+const SEITEN = [
+  ["start","Start","",""],
+  ["brief","1 · Der Brief","0–8 Min.","Der letzte Brief"],
+  ["begriff","2 · Das Wort","8–16 Min.","Shoa oder Holocaust?"],
+  ["menschen","3 · Vier Menschen","16–44 Min.","Ein Lebensweg in fünf Stationen"],
+  ["matrix","4 · Die Matrix","44–58 Min.","Vier Wege nebeneinander"],
+  ["zahl","5 · Die Zahl","58–72 Min.","Die Zahl und das System"],
+  ["plenum","6 · Plenum","72–84 Min.","Wann wird es ernst?"],
+  ["rueckblick","7 · Rückblick","84–90 Min.","Was denkst du jetzt?"],
+  ["zusammenfassung","Zusammenfassung","",""],
+];
+const idx = id => SEITEN.findIndex(s => s[0] === id);
+
+/* ---------- Abruf (P2): drei Fragen zu M18 und M20, mit Erklärung je Option ---------- */
+const ABRUF = [
+  { id:"a1", f:"M18: Was legten die Nürnberger Gesetze vom 15. September 1935 fest?", o:[
+    ["Juden verloren die vollen Bürgerrechte; Ehen zwischen Juden und Nichtjuden wurden verboten.","zentral","Reichsbürgergesetz und „Blutschutzgesetz“: Juden waren nur noch Staatsangehörige ohne politische Rechte. Das ist die Säule Rassismus im Gesetz."],
+    ["Alle Juden mussten Deutschland bis 1936 verlassen.","kaum","Eine Ausreisepflicht gab es nicht. 1935 ging es um Ausgrenzung durch Recht, nicht um Vertreibung oder Mord."],
+    ["Jüdische Geschäfte wurden enteignet.","teils","Die Enteignung („Arisierung“) kam vor allem 1938. 1935 ging es um Bürgerrecht und Ehe."] ] },
+  { id:"a2", f:"M18: Welche Säule der NS-Ideologie steckt im Satz „Juden sind eine Rasse, keine Religion“?", o:[
+    ["Rassismus und Antisemitismus zusammen","zentral","Der Antisemitismus der Nationalsozialisten war „rassisch“ begründet: Wer jüdische Großeltern hatte, galt als Jude – egal, was er glaubte."],
+    ["Führerprinzip","kaum","Das Führerprinzip regelt, wer befiehlt. Der Satz handelt davon, wer zur „Volksgemeinschaft“ gehört."],
+    ["Lebensraum im Osten","kaum","Lebensraum meint Eroberung. Der Satz ordnet Menschen ein, er handelt nicht von Gebieten."] ] },
+  { id:"a3", f:"M20: Was begann am 22. Juni 1941?", o:[
+    ["Der deutsche Angriff auf die Sowjetunion","zentral","Mit dem Krieg im Osten begannen die Massenerschießungen durch Einsatzgruppen. Heute siehst du, was das für eine Familie in Kiew bedeutete."],
+    ["Der Angriff auf Polen","kaum","Das war der 1. September 1939. 1941 kam der Krieg gegen die Sowjetunion dazu."],
+    ["Die Bombardierung Londons","teils","Der „Blitz“ begann im September 1940. Der 22. Juni 1941 ist der Überfall auf die Sowjetunion."] ] },
+];
+
+/* ---------- Begriffe ---------- */
+const WORTE = [
+  ["shoa","Shoa"], ["holocaust","Holocaust"], ["anders","ein anderes Wort"]
+];
+const BEGRIFF_RM = {
+  shoa: "Shoa ist Hebräisch und heißt „Katastrophe“. Das Wort kommt aus der Sprache der Opfer und meint die Ermordung der Jüdinnen und Juden. Gut begründbar – und du musst sagen können, warum du dann für Roma und Sinti ein eigenes Wort brauchst.",
+  holocaust: "Holocaust kommt aus dem Griechischen („ganz verbrannt“) und wurde über die USA zum weltweit bekannten Wort. Gut begründbar – und du musst wissen, dass es ursprünglich ein Wort für ein Brandopfer war; manche lehnen es deshalb ab.",
+  anders: "Es gibt weitere Wörter: „Churban“ (Zerstörung, jiddisch/hebräisch), „Judenmord“, oder für Roma und Sinti „Porajmos“ (das Verschlingen) und „Samudaripen“ (Massenmord). Welches du gewählt hast, sagst du im Plenum.",
+};
+
+/* ---------- Vier Menschen: Lebenswege in fünf Stationen ---------- */
+const PH = ["Leben davor", "Ausgrenzung", "Trennung", "Ermordung", "Heute"];
+const MENSCHEN = [
+  { id:"korczak", name:"Janusz Korczak", unter:"Arzt und Pädagoge, Warschau", bild:"korczak", bildHeute:"umschlag", alter:"64 Jahre (1942)",
+    kurz:"Leitete ein Waisenhaus. Ging im August 1942 mit fast 200 Kindern zum Umschlagplatz.",
+    q:"USHMM Holocaust Encyclopedia: Janusz Korczak · Muzeum Treblinka",
+    st:[
+      { jahr:"bis 1939", text:"Henryk Goldszmit wurde 1878 oder 1879 in Warschau geboren. Als Schriftsteller nannte er sich Janusz Korczak. Er war Kinderarzt. Ab 1912 leitete er mit Stefania Wilczyńska das jüdische Waisenhaus „Dom Sierot“ in der Krochmalna-Straße. Die Kinder hatten ein eigenes Parlament, ein Gericht und eine Zeitung. Im Radio sprach er als „Alter Doktor“ mit Kindern. Seine Bücher über Kinderrechte wurden in viele Sprachen übersetzt.", mehr:"Korczak war polnischer Staatsbürger, Offizier der Reserve, bekannt in ganz Polen. Niemand hätte ihn 1938 „Außenseiter“ genannt." },
+      { jahr:"1939–1940", text:"Am 1. September 1939 griff Deutschland Polen an. Ende September fiel Warschau. Die Besatzer ordneten an: Juden müssen eine weiße Armbinde mit blauem Stern tragen, ihr Vermögen melden, viele Geschäfte wurden ihnen weggenommen. Zeitzeugen berichten, Korczak habe die Armbinde nicht getragen. Das Waisenhaus arbeitete weiter – aber unter Aufsicht und mit immer weniger Geld.", mehr:"In Polen dauerte die Phase der Ausgrenzung nur Monate, in Deutschland hatte sie sechs Jahre gedauert." },
+      { jahr:"1940–1942", text:"Im Herbst 1940 sperrten die Deutschen das Ghetto ab: über 400.000 Menschen hinter einer Mauer auf etwa 3,4 Quadratkilometern. Das Waisenhaus musste umziehen. Hunger und Fleckfieber töteten im Ghetto jeden Monat Tausende. Korczak bettelte bei reichen Familien um Lebensmittel und schrieb nachts Tagebuch. Freunde außerhalb der Mauer boten ihm falsche Papiere und ein Versteck an. Er blieb bei den Kindern.", mehr:"Ghetto heißt: Die Menschen lebten noch, aber getrennt, eingesperrt und ohne Schutz. Wer das Ghetto ohne Erlaubnis verließ, wurde erschossen." },
+      { jahr:"August 1942", text:"Am 22. Juli 1942 begannen die Deportationen aus dem Ghetto nach Treblinka – täglich Tausende. Am 5. oder 6. August holte die SS das Waisenhaus. Fast 200 Kinder, Korczak, Stefania Wilczyńska und die Mitarbeiter gingen in Reihen zum Umschlagplatz, dem Sammelplatz am Bahnhof. Der Zug fuhr nach Treblinka, etwa 100 Kilometer nordöstlich. Dort wurden alle nach der Ankunft in den Gaskammern ermordet.", mehr:"Treblinka war kein Lager zum Leben: Es gab nur die Rampe, den Weg und die Gaskammern. In 15 Monaten wurden dort etwa 925.000 Menschen ermordet." },
+      { jahr:"heute", text:"Am Ort des Umschlagplatzes steht seit 1988 ein Denkmal: eine weiße Mauer wie ein offener Waggon, darüber ein Tor mit zerbrochenen Bäumen. In der Gedenkstätte Treblinka trägt unter 17.000 Steinen nur ein einziger einen Namen: „Janusz Korczak (Henryk Goldszmit) und die Kinder“." } ],
+    ernst:[
+      "Viele sagen hier: Spätestens mit der Armbinde war klar, dass es ernst wird. Damals aber hofften die meisten, die Besatzung gehe vorbei wie der Erste Weltkrieg. Dass ein Staat alle Juden ermorden würde, konnte sich 1939 kaum jemand vorstellen.",
+      "Mit dem Ghetto war die Gefahr sichtbar: eingesperrt, hungernd, ohne Rechte. Trotzdem glaubten viele im Ghetto an ein Überleben bis Kriegsende. Korczak selbst plante weiter Theater und Unterricht – nicht aus Naivität, sondern weil Pläne die Kinder am Leben hielten.",
+      "Erst die Deportationen im Juli 1942 ließen keinen Zweifel. Da war Flucht für 200 Kinder unmöglich. Das ist der Kern des Problems: Als es eindeutig war, war es zu spät.",
+      "Ein Rückblick-Urteil: Du weißt, wie es ausging. Die Menschen im Ghetto wussten es nicht. Frag im Plenum: Was konnte man 1940 wissen – und was nicht?" ] },
+  { id:"london", name:"Familie Aschkenasi und London", unter:"Näherin, Sekretärin, Soldat – Kiew", bild:"emanuel", bildHeute:"babynjar", alter:"Emanuel 23, Berta 25, Rosalia 28 Jahre (1941)",
+    kurz:"Sonya, Solomon, Berta und Emanuel wurden in Babyn Jar erschossen. Rosalia und ihr Sohn Feliks überlebten.",
+    q:"Yad Vashem, Ausstellung „The Onset of Mass Murder – The Fate of Jewish Families in 1941“ (Kiew) · USHMM: Babi Yar",
+    st:[
+      { jahr:"bis Juni 1941", text:"Sonya Aschkenasi war Näherin in Kiew und zog ihre drei Kinder groß: Rosalia (geboren 1913), Berta (1916) und Emanuel (1918). Von ihrem Mann Solomon lebte sie getrennt. Rosalia heiratete Piotr London; 1933 kam ihr Sohn Feliks zur Welt. Rosalia arbeitete als Sekretärin. Die Fotos der Familie zeigen Ausflüge, ein Kind auf dem Arm, Emanuel 1939 in einem Ferienort bei Kiew.", mehr:"In der Sowjetunion gab es Antisemitismus im Alltag, aber keine Gesetze gegen Juden wie in Deutschland. Die Familie lebte wie ihre Nachbarn." },
+      { jahr:"Sommer 1941", text:"Am 22. Juni 1941 griff Deutschland die Sowjetunion an. Piotr wurde Soldat der Roten Armee. Rosalia und Feliks wurden mit dem Zug nach Kasachstan evakuiert, einen Monat lang unterwegs. Sonya, Solomon, Berta und Emanuel blieben in Kiew. Am 9. September 1941 schrieb Sonya: „Wir leben. Uns geht es gut, wir sind in denselben Wohnungen geblieben.“ Es war ihre letzte Karte.", mehr:"Für die Juden in Kiew gab es keine Jahre der Entrechtung. Die Gefahr kam mit der Wehrmacht – innerhalb von Wochen." },
+      { jahr:"19.–28. September 1941", text:"Am 19. September besetzten deutsche Truppen Kiew. Am 28. September hingen Plakate in der Stadt: Alle Juden sollten sich am nächsten Morgen mit Papieren, Geld und warmer Kleidung an einer Straßenkreuzung einfinden. Wer nicht komme, werde erschossen. Viele glaubten, es gehe um eine Umsiedlung, und kamen mit Koffern.", mehr:"Die „Trennung“ dauerte hier nur einen Tag: der Weg vom Sammelpunkt zur Schlucht am Stadtrand." },
+      { jahr:"29./30. September 1941", text:"In zwei Tagen erschossen Männer der Einsatzgruppe C mit Polizeibataillonen und ukrainischen Hilfskräften 33.771 jüdische Männer, Frauen und Kinder in der Schlucht Babyn Jar. Sonya, Solomon und Berta waren unter ihnen. Emanuel versteckte sich; Monate später zeigten Nachbarn ihn an, und auch er wurde in Babyn Jar ermordet. Rosalia erfuhr davon erst im Januar 1944 durch die Postkarte einer Nachbarin. Sie, Feliks und Piotr überlebten.", mehr:"Etwa zwei Millionen Jüdinnen und Juden wurden in der besetzten Sowjetunion und in Osteuropa erschossen – ein Drittel aller Opfer der Shoa (USHMM)." },
+      { jahr:"heute", text:"In Babyn Jar steht seit 1991 ein Leuchter aus Bronze, die Menora. Jahrzehntelang hatte die Sowjetunion nicht gesagt, wer dort ermordet wurde. Feliks London übergab 2017 die Fotos, Briefe und Sonyas letzte Karte an Yad Vashem." } ],
+    ernst:[
+      "Vor dem 22. Juni 1941 gab es für diese Familie kein Zeichen. Wer hier „ernst“ ankreuzt, urteilt mit heutigem Wissen – damals war Kiew eine sowjetische Großstadt, weit weg von Berlin.",
+      "Mit dem Krieg war die Gefahr da. Aber: Sonya schrieb am 9. September noch „Uns geht es gut“. Viele ältere Menschen wollten nicht fliehen, Züge waren knapp, und niemand kannte die Einsatzgruppen.",
+      "Die Plakate vom 28. September waren eindeutig bedrohlich – und trotzdem kamen Zehntausende. Sie konnten sich einen Massenmord an einer ganzen Stadtbevölkerung nicht vorstellen. Das ist kein Vorwurf, das ist der Befund.",
+      "Ein Rückblick-Urteil: Für diese Familie lagen „Das wird ernst“ und der Tod zehn Tage auseinander. Frag im Plenum: Was heißt das für die Frage, ob man „hätte merken können“?" ] },
+  { id:"marie", name:"Marie Nedvědová", unter:"Romni aus Böhmen", bild:null, bildHeute:"birkenau", alter:"19 oder 20 Jahre (1943)",
+    kurz:"1943 mit der ganzen Familie nach Auschwitz-Birkenau deportiert. Mutter und zwei Geschwister ermordet. Sie überlebte.",
+    q:"Datenbank „Testimonies of Roma and Sinti“ (Prag), Zeugnis vom 9.10.1987 · holocaust.cz: Deportationen nach Auschwitz · USHMM: Genozid an den Roma",
+    st:[
+      { jahr:"bis 1939", text:"Marie Kovářová wurde 1923 in Bedlno geboren, einem Dorf in Böhmen, heute Teil von Jesenice bei Rakovník. Ihre Eltern Václav und Božena hatten acht Kinder. Die Familie waren Roma, sprach Tschechisch und lebte vom Land und von Gelegenheitsarbeit. Vorurteile gegen „Zigeuner“ und Polizeikontrollen gab es schon in der Tschechoslowakei vor dem Krieg.", mehr:"Von Marie gibt es in der Datenbank kein Foto, nur ihre Worte. Deshalb steht hier kein Bild." },
+      { jahr:"1939–1942", text:"Im März 1939 besetzte Deutschland den Rest der Tschechoslowakei und richtete das „Protektorat Böhmen und Mähren“ ein. Roma mussten sich melden, durften nicht mehr umherziehen und wurden zur Arbeit gezwungen. 1942 wurden die Lager Lety und Hodonín zu „Zigeunerlagern“. Im Dezember 1942 ordnete Himmler an, Roma und Sinti nach Auschwitz zu deportieren. Marie erlebte, wie Bekannte „abgeholt“ wurden – und hoffte wie viele, dass es ihre Familie nicht treffe.", mehr:"Die Verfolgung der Roma folgte derselben Säule wie die der Juden: Rassismus. Sie galten als „rassisch minderwertig“ und „asozial“." },
+      { jahr:"1943", text:"1943 mussten alle Roma der Region zum Bahnhof Příbram. Marie schrieb später: Erst im letzten Moment erfuhren sie, dass sie auf der Transportliste standen. Der Zug hielt unterwegs nicht, es gab kein Essen und kein Wasser. Abends kam er in Auschwitz an. Die Menschen wurden aus den Wagen getrieben „wie Vieh“, gingen eine halbe Stunde zu Fuß, bekamen die Haare geschoren, kalte Duschen und eine Nummer auf den Arm. Im „Zigeunerfamilienlager“ (Abschnitt BIIe von Birkenau) blieben Familien zusammen. Die Häftlinge mussten Steine schleppen.", mehr:"Aus dem Protektorat wurden 1943 rund 4.500 Roma und Sinti in Sammeltransporten nach Auschwitz deportiert (holocaust.cz)." },
+      { jahr:"1943–1945", text:"Hunger, Fleckfieber und Typhus töteten im Familienlager Tausende. Maries Mutter und zwei ihrer Geschwister wurden in der Gaskammer ermordet. Marie erkrankte an Typhus und kam ins Krankenrevier. Später wurde sie nach Ravensbrück verlegt. Am 2. August 1944 löste die SS das Familienlager auf und ermordete die letzten rund 4.300 Menschen in den Gaskammern. Von etwa 23.000 Roma und Sinti in Auschwitz starben rund 21.000. Marie wurde am 5. Mai 1945 bei Hamburg befreit.", mehr:"Für Roma und Sinti nennt die Forschung mindestens 250.000, vielleicht bis zu 500.000 Ermordete in Europa (USHMM). Die genaue Zahl ist unbekannt." },
+      { jahr:"heute", text:"An der Rampe von Birkenau legen Besucher Blumen auf die Gleise. Marie schrieb 1987 ihre Erinnerungen auf; sie stehen heute in der Datenbank „Testimonies of Roma and Sinti“. Seit 2015 ist der 2. August der europäische Gedenktag für den Völkermord an den Roma und Sinti." } ],
+    ernst:[
+      "Diskriminierung gab es schon vor 1939. Aber Diskriminierung ist noch kein Mord – das ist genau der Unterschied, um den es in dieser Stunde geht.",
+      "Meldepflicht, Lager, „Abholen“ von Bekannten: Die Zeichen häuften sich. Marie schreibt trotzdem von Hoffnung. Hoffnung war keine Dummheit – sie war das Einzige, was man hatte, wenn Flucht keine Möglichkeit war.",
+      "Der Transport ohne Wasser, die Nummer auf dem Arm: Spätestens hier war es jedem klar. Und hier gab es keinen Ausweg mehr.",
+      "Ein Rückblick-Urteil: Marie konnte als junge Romni im Protektorat weder auswandern noch sich verstecken. Frag im Plenum: Für wen war „merken“ überhaupt eine Hilfe?" ] },
+  { id:"willner", name:"Friedrich und Betty Willner", unter:"Metzgerfamilie aus dem Oldenburger Land", bild:"willner", bildHeute:"westerbork", alter:"72 und 69 Jahre (1943)",
+    kurz:"Flohen nach Amsterdam zu ihrer Tochter. 1943 nach Westerbork, am 9. April 1943 in Sobibor ermordet.",
+    q:"Joods Monument (Geburts- und Sterbedaten) · Unterrichtsheft M21 nach Dieter Meiners · USHMM: Westerbork, Sobibor",
+    st:[
+      { jahr:"bis 1933", text:"Friedrich Willner wurde am 23. Oktober 1870 geboren, Betty am 9. Mai 1873, beide in Cloppenburg. Friedrich war Metzger; nach dem Heft diente er im Ersten Weltkrieg als deutscher Soldat. Die Familie lebte im Oldenburger Land. Die Kinder Walter (geboren 1904) und Johanne (1906) wuchsen dort auf. Ein Foto von 1923 zeigt die Familie in Festkleidung: Deutsche Juden, seit Generationen in ihrer Stadt verwurzelt.", mehr:"Rund 500.000 Juden lebten 1933 in Deutschland, weniger als ein Prozent der Bevölkerung. Die meisten sahen sich als Deutsche." },
+      { jahr:"1933–1938", text:"Im April 1933 standen SA-Männer vor jüdischen Geschäften: Boykott. 1935 nahmen die Nürnberger Gesetze den Willners das Bürgerrecht. In der Nacht vom 9. auf den 10. November 1938 brannten die Synagogen; Tage später verbot eine Verordnung Juden, Geschäfte zu führen. Die Willners verloren ihre Existenz. Sie gingen zu ihrer Tochter Johanne nach Amsterdam, die dort mit dem Tabakhändler Salomon Muller verheiratet war.", mehr:"Flucht ins Ausland war ab 1938 fast unmöglich: Die meisten Länder nahmen keine Juden mehr auf. Die Niederlande waren eine der letzten Türen." },
+      { jahr:"1940–1943", text:"Im Mai 1940 besetzte die Wehrmacht die Niederlande. Nun kam auch dort Schritt für Schritt, was die Willners aus Deutschland kannten: Registrierung aller Juden, „J“ im Ausweis, ab 1942 der gelbe Stern. Die Familie wohnte in der Blasiusstraat 52 in Amsterdam. Im Juli 1942 wurde Westerbork zum Durchgangslager: Jeden Dienstag fuhr ein Zug nach Osten. Im April 1943 wurden Friedrich und Betty festgenommen und nach Westerbork gebracht.", mehr:"Aus den Niederlanden wurden etwa 107.000 Juden deportiert; nur rund 5.000 überlebten. Die Opferrate war die höchste in Westeuropa (M23)." },
+      { jahr:"April–Mai 1943", text:"Am 6. April 1943 fuhr ihr Zug von Westerbork nach Sobibor im besetzten Polen. Sobibor war ein reines Vernichtungslager: Wer ankam, wurde fast immer am selben Tag ermordet. Am 9. April 1943 wurden Friedrich (72) und Betty (69) dort in der Gaskammer getötet. Am 21. Mai 1943 folgten ihre Tochter Johanne, Schwiegersohn Salomon und die Enkel Fanny (2 Jahre) und Abraham. Ihr Sohn Walter starb 1944.", mehr:"In Sobibor wurden mindestens 167.000 Menschen ermordet, fast alle Juden – darunter rund 34.000 aus den Niederlanden (USHMM)." },
+      { jahr:"heute", text:"In Westerbork enden die Gleise im Nationaldenkmal nach oben gebogen: Von hier fuhr kein Zug weiter. Am 1. November 1946 erschien in der Emigrantenzeitung „Aufbau“ in New York die Todesanzeige der Angehörigen für Friedrich und Betty. Im Digitalen Joods Monument haben alle sechs Namen eine Seite." } ],
+    ernst:[
+      "Der Boykott 1933 und die Gesetze 1935 waren ernst – und doch dachten viele deutsche Juden: Wir sind Deutsche, wir haben im Krieg gekämpft, das geht vorbei. Die Willners blieben fünf Jahre.",
+      "Nach dem Pogrom 1938 handelten die Willners: Sie flohen. Das war die richtige Lesart – und doch zu spät für eine sichere Zuflucht, denn fast kein Land nahm noch Juden auf.",
+      "Mit Besatzung, Registrierung und Stern war die Gefahr in Amsterdam jeden Tag sichtbar. Aber wohin? Untertauchen brauchte Geld, Helfer und Glück – für ein Paar über 70 kaum zu haben.",
+      "Ein Rückblick-Urteil: Die Willners haben „gemerkt“ und sind geflohen. Es hat sie nicht gerettet. Frag im Plenum: Woran liegt das – an den Menschen oder am System?" ] },
+];
+const MENSCH = id => MENSCHEN.find(m => m.id === id);
+const stFertig = id => { const s = S.st[id] || {}; return [0,1,2,3].every(i => (s[i] || "").trim().length >= 6); };
+const personFertig = id => stFertig(id) && !!(S.ernst[id] && S.ernst[id].wahl !== undefined);
+const fertigePersonen = () => MENSCHEN.filter(m => personFertig(m.id));
+
+/* ---------- Matrix: Kurzfassung der Lehrkraft (erscheint erst nach den eigenen Einträgen) ---------- */
+const MATRIX = {
+  korczak: ["Kinderarzt, Leiter eines Waisenhauses in Warschau; bekannt aus Radio und Büchern", "ab Herbst 1939: Armbinde, Vermögen gemeldet, Aufsicht (Monate)", "Herbst 1940: Ghetto; Hunger und Seuchen; Fluchtangebote abgelehnt", "5./6. August 1942: mit fast 200 Kindern nach Treblinka, Gaskammer"],
+  london:  ["Näherin, Sekretärin, Soldat; drei Generationen in Kiew", "keine Entrechtung; 22. Juni 1941 Krieg, Teil der Familie evakuiert", "28. September 1941: Plakat, Sammelpunkt am nächsten Morgen (ein Tag)", "29./30. September 1941: Erschießung in Babyn Jar; Emanuel Monate später"],
+  marie:   ["Roma-Familie mit acht Kindern auf dem Land in Böhmen", "ab 1939 Protektorat: Meldepflicht, Arbeitszwang, Lager Lety und Hodonín", "1943: Transport ab Příbram nach Auschwitz-Birkenau, Familienlager BIIe", "Mutter und zwei Geschwister in der Gaskammer; Marie überlebt über Ravensbrück"],
+  willner: ["Metzgerfamilie in Cloppenburg/Friesoythe, seit Generationen deutsch", "1933 Boykott, 1935 Bürgerrecht weg, 1938 Pogrom und Berufsverbot; Flucht nach Amsterdam", "1940 Besatzung, Registrierung, Stern; April 1943 Westerbork", "9. April 1943: Sobibor, Gaskammer; Tochter, Schwiegersohn, Enkel am 21. Mai 1943"],
+};
+
+/* ---------- Vergleichsfragen (Muster 2, gestuft) ---------- */
+const VERGLEICH = [
+  { id:"v1", f:"Schau auf die Station „Ermordung“. Was unterscheidet die vier Wege?", o:[
+    ["Drei Formen eines Systems: Erschießung vor Ort (Kiew), Gaskammer nach dem Transport (Treblinka, Sobibor), Sterben durch Hunger und Krankheit und Gas im Lager (Birkenau).","zentral","Das ist der Befund der Forschung: nicht ein Ort und eine Methode, sondern verschiedene Wege zum selben Ziel. Rund 2,7 Millionen Jüdinnen und Juden starben in Vernichtungslagern, etwa 2 Millionen durch Erschießungen, fast eine Million in Ghettos und Lagern (USHMM)."],
+    ["Alle vier wurden in Vernichtungslagern mit Gas ermordet.","kaum","Die Familie Aschkenasi wurde erschossen, ohne Lager. Marie überlebte; ihre Mutter starb in Birkenau, das zugleich Arbeits- und Vernichtungslager war. Schau noch einmal in die Spalte."],
+    ["Es gab keinen Plan; jeder Ort machte etwas anderes.","kaum","Die Unterschiede kamen aus Ort und Zeit, nicht aus Beliebigkeit: Die Einsatzgruppen hatten Befehle, die Vernichtungslager wurden 1941/42 eigens gebaut. Verschiedene Mittel, ein Ziel."] ] },
+  { id:"v2", f:"Schau auf die Station „Leben davor“. Was hatten die vier gemeinsam?", o:[
+    ["Beruf, Familie, Nachbarn, Alltag – sie gehörten dazu.","zentral","Arzt, Näherin, Metzger, Bäuerin: Keiner war „fremd“. Das ist wichtig gegen die Vorstellung, die Opfer hätten irgendwie am Rand gestanden. Sie wurden an den Rand gedrängt."],
+    ["Sie lebten als Außenseiter am Rand der Gesellschaft.","teils","Für Maries Familie stimmt das zum Teil: Roma wurden schon vor 1939 diskriminiert. Für Korczak, die Londons und die Willners stimmt es nicht. Die Ausgrenzung war das Werk des Staates, nicht ein Zustand davor."],
+    ["Sie waren reich und einflussreich.","kaum","Eine Näherin, ein Metzger, eine Landfamilie, ein Arzt, der um Spenden bettelte. Die Behauptung vom „reichen Juden“ war ein Teil der Propaganda – keine Beschreibung."] ] },
+  { id:"v3", f:"Schau auf die Stationen 2 und 3. Wie schnell ging die Verfolgung?", o:[
+    ["Je nach Ort verschieden: in Deutschland und den Niederlanden in Schritten über Jahre, in der besetzten Sowjetunion innerhalb von Tagen.","zentral","In Deutschland lagen zwischen Boykott und Deportation fast zehn Jahre, in Kiew zwischen Besatzung und Massaker zehn Tage. Das System war dasselbe, das Tempo nicht."],
+    ["Überall gleich schnell: erst Gesetze, dann Ghetto, dann Lager.","teils","Dieses Schema stimmt für Deutschland, Polen und die Niederlande. Für Kiew stimmt es nicht: Dort gab es weder Gesetze noch Ghetto, nur das Plakat und die Schlucht."],
+    ["Überall langsam, über viele Jahre.","kaum","Für die Familie in Kiew vergingen vom Einmarsch bis zur Erschießung zehn Tage. Langsam war es nur dort, wo das Regime Zeit hatte."] ] },
+];
+
+/* ---------- Zahlen (USHMM, Documenting Numbers of Victims) ---------- */
+const ZAHLEN = {
+  juden1933: 9.5, ermordet: 6,
+  gruppen: [
+    ["Jüdinnen und Juden", "etwa 6 Millionen", "davon ca. 2,7 Mio. in Vernichtungslagern, ca. 2 Mio. durch Erschießungen, 0,8–1 Mio. in Ghettos und Lagern"],
+    ["Sowjetische Kriegsgefangene", "etwa 3,3 Millionen", "verhungert, erschossen, in Lagern gestorben"],
+    ["Nichtjüdische Polinnen und Polen", "etwa 1,8 Millionen", "Zivilbevölkerung; Eliten gezielt ermordet"],
+    ["Serbische Zivilbevölkerung", "über 310.000", "ermordet durch die kroatische Ustascha"],
+    ["Menschen mit Behinderungen", "250.000–300.000", "„Euthanasie“-Morde, darunter mindestens 10.000 Kinder"],
+    ["Roma und Sinti", "mindestens 250.000, vielleicht bis 500.000", "genaue Zahl unbekannt"],
+    ["Politische Gegner, „Asoziale“, „Berufsverbrecher“", "Zehntausende", "aus Deutschland, in Konzentrationslagern"],
+    ["Zeugen Jehovas", "etwa 1.700", "wegen ihres Glaubens"],
+    ["Homosexuelle Männer", "Hunderte, möglicherweise Tausende", "in Konzentrationslagern"],
+  ],
+  lager: [["Chełmno","mindestens 152.000"],["Bełżec","etwa 435.000"],["Sobibor","mindestens 167.000"],["Treblinka","etwa 925.000"],["Auschwitz (gesamt)","etwa 1.000.000 Jüdinnen und Juden"]],
+  quelle: `USHMM Holocaust Encyclopedia: <a href="https://encyclopedia.ushmm.org/content/en/article/documenting-numbers-of-victims-of-the-holocaust-and-nazi-persecution" target="_blank" rel="noopener">Documenting Numbers of Victims of the Holocaust and Nazi Persecution</a> (Zugriff 26.10.2026). Die Zahlen sind Schätzungen aus Täterakten, Volkszählungen und Transportlisten; eine Gesamtsumme „11 Millionen“ nennt die Forschung nicht.`
+};
+
+/* ---------- Lagertypen (Muster 2) ---------- */
+const LAGER = [
+  { id:"l1", name:"Dachau", jahr:"ab 1933", o:[
+    ["Konzentrationslager","zentral","Dachau war das erste KZ, zuerst für politische Gegner: Haft, Zwangsarbeit, Terror. Viele starben – aber es war nicht zum Massenmord an Ankommenden gebaut."],
+    ["Vernichtungslager","kaum","Vernichtungslager gab es erst ab 1941/42 im besetzten Polen. Dachau lag bei München und bestand zwölf Jahre."],
+    ["Durchgangslager","kaum","Ein Durchgangslager sammelt Menschen für den Weitertransport. Dachau war ein Ziel, kein Zwischenhalt."] ] },
+  { id:"l2", name:"Treblinka", jahr:"1942–1943", o:[
+    ["Konzentrationslager","kaum","In Treblinka gab es keine Baracken für Hunderttausende. Es gab die Rampe, den Weg und die Gaskammern."],
+    ["Vernichtungslager","zentral","Treblinka hatte einen einzigen Zweck: töten. Etwa 925.000 Menschen in 15 Monaten, fast alle am Tag ihrer Ankunft – auch Korczak und die Kinder."],
+    ["Durchgangslager","kaum","Die Täter nannten es so („Durchgangslager“), um die Opfer zu täuschen. Niemand ging von dort weiter."] ] },
+  { id:"l3", name:"Westerbork", jahr:"1942–1944", o:[
+    ["Konzentrationslager","teils","Es war ein Lager mit Baracken und Zwang, aber sein Zweck war ein anderer: Jeden Dienstag fuhr ein Zug nach Auschwitz oder Sobibor."],
+    ["Vernichtungslager","kaum","In Westerbork wurde niemand vergast. Die Willners wurden dort gesammelt – ermordet wurden sie drei Tage später in Sobibor."],
+    ["Durchgangslager","zentral","Westerbork war die Drehscheibe der Deportationen aus den Niederlanden: 93 Züge mit etwa 100.000 Menschen."] ] },
+  { id:"l4", name:"Auschwitz-Birkenau", jahr:"1940–1945", o:[
+    ["Konzentrationslager","teils","Ja – und zugleich mehr. Auschwitz war KZ, Zwangsarbeitslager und ab 1942 Vernichtungslager mit Gaskammern. Deshalb konnte Marie dort Monate überleben, während andere sofort ermordet wurden."],
+    ["Vernichtungslager","teils","Ja – und zugleich mehr. In Birkenau wurden etwa eine Million Jüdinnen und Juden ermordet; daneben bestand ein riesiges Lager mit Zwangsarbeit."],
+    ["Beides: KZ und Vernichtungslager","zentral","Auschwitz war ein Komplex aus mehreren Lagern. Wer „arbeitsfähig“ war, kam ins Lager; die anderen in die Gaskammer. Das erklärt, warum es sowohl Überlebende als auch eine Million Ermordete gibt."] ] },
+];
+
+/* ---------- Plenum: Fragen am Beamer ---------- */
+const PLENUM_FRAGEN = [
+  "An welcher Station habt ihr „Das wird ernst“ gesetzt – und warum liegt die Klasse so, wie die Tafel es zeigt?",
+  "Was konnte man an dieser Station damals wissen – und was wissen nur wir?",
+  "Für wen war „merken“ überhaupt eine Hilfe? Wer konnte fliehen, wer nicht?",
+  "Warum sehen die vier Wege in der Mitte so verschieden aus und am Ende so ähnlich?",
+  "Welches Wort passt zu dem, was ihr heute gesehen habt – Shoa, Holocaust, ein anderes?",
+];
+const REGELN = ["Wir sprechen über Menschen mit Namen, nicht über „die Juden“ oder „die Zigeuner“.","Wer etwas behauptet, zeigt auf eine Station oder eine Zahl.","Wir trennen, was belegt ist und was wir deuten.","Niemand muss sagen, was er oder sie selbst getan hätte.","Wir lassen ausreden und beziehen uns auf das, was gesagt wurde.","Die Würde der Opfer steht nicht zur Debatte."];
+
+/* ---------- Rückblick: Satzanfänge, Raster, Abruf ---------- */
+const ANFAENGE = ["Vor dem Krieg lebte …","Der erste Schritt war …","Dann …","Am Ende …","Heute erinnert …","Ich nenne das … , weil …"];
+const ABRUFZ = [
+  { id:"z1", f:"Wie viele Jüdinnen und Juden wurden in der Shoa ermordet?", o:[["etwa 6 Millionen – rund zwei von drei, die 1933 in Europa lebten","zentral","So die Forschung (USHMM); genaue Zahlen gibt es nicht, weil die Täter nicht alles aufschrieben."],["etwa 1 Million","kaum","Das ist die Zahl allein für Auschwitz. Insgesamt sind es etwa sechs Millionen."],["etwa 11 Millionen","kaum","Die Zahl 11 Millionen wird oft genannt, aber die Forschung belegt sie nicht. Sie vermischt Opfergruppen, deren Zahlen unterschiedlich sicher sind."]] },
+  { id:"z2", f:"Was ist der Unterschied zwischen Ghetto und Vernichtungslager?", o:[["Im Ghetto lebten Menschen eingesperrt und hungernd; das Vernichtungslager war zum sofortigen Töten gebaut.","zentral","Ghetto: Trennung. Vernichtungslager: Ermordung. Das Warschauer Ghetto war die Station vor Treblinka."],["Das Ghetto war im Westen, das Vernichtungslager im Osten.","kaum","Beide lagen im besetzten Polen. Der Unterschied ist der Zweck, nicht der Ort."],["Es gibt keinen Unterschied.","kaum","Im Ghetto starben Tausende an Hunger – aber Menschen lebten dort Monate oder Jahre. In Treblinka lebte fast niemand länger als einen Tag."]] },
+  { id:"z3", f:"Wer erschoss die Familie Aschkenasi in Babyn Jar?", o:[["Eine Einsatzgruppe der SS mit Polizei und ukrainischen Hilfskräften","zentral","Einsatzgruppen folgten der Wehrmacht in die Sowjetunion und erschossen Juden an Ort und Stelle – etwa zwei Millionen Menschen insgesamt."],["Das Personal eines Vernichtungslagers","kaum","In Kiew gab es kein Lager. Die Schlucht Babyn Jar lag am Stadtrand."],["Die Wehrmacht allein","teils","Die Wehrmacht besetzte Kiew und half bei der Absperrung. Die Erschießungen führte die Einsatzgruppe C mit Polizeibataillonen durch."]] },
+  { id:"z4", f:"Warum steht Marie Nedvědová in dieser Stunde?", o:[["Weil die Shoa nicht nur Jüdinnen und Juden traf: Roma und Sinti wurden aus denselben rassistischen Gründen verfolgt und ermordet.","zentral","Mindestens 250.000 Roma und Sinti wurden ermordet. Ihr Völkermord wurde lange nicht anerkannt."],["Weil sie als Einzige überlebte.","teils","Sie überlebte – wie Rosalia London. Aber ihr Platz hier hat einen anderen Grund: Die Verfolgung der Roma gehört zur selben Geschichte."],["Weil sie aus Deutschland kam.","kaum","Sie kam aus Böhmen, dem besetzten „Protektorat“. Die Verfolgung ging von Deutschland aus, traf aber ganz Europa."]] },
+  { id:"z5", f:"Was zeigt der Vergleich der vier Wege über das „System“?", o:[["Verschiedene Mittel, Tempo und Orte – aber ein Ziel: Entrechtung, Trennung, Ermordung.","zentral","Das ist der Kernsatz der Stunde. Die Shoa war kein Ausbruch, sondern ein System mit Phasen."],["Jeder Ort entschied selbst, was mit den Juden geschah.","kaum","Die Befehle kamen aus Berlin; vor Ort gab es Spielräume im Tempo, nicht im Ziel."],["Nur in Vernichtungslagern wurde gemordet.","kaum","Ein Drittel der Opfer wurde erschossen, fast eine Million starb in Ghettos und Lagern."]] },
+];
+/* ---------- Bausteine ---------- */
+const mio = (v, lang) => String(v).replace(".", ",") + (lang ? " Millionen" : " Mio.");
+const zeitKopf = id => { const s = SEITEN[idx(id)]; return `<p class="zeit"><span class="nr">${esc(s[1])}</span><span>${esc(s[2])}</span></p>`; };
+const weiter = (nach, text, o = {}) => `<div class="fuss"><span class="hinweis">${o.hinweis || "Dein Stand wird nur auf diesem Gerät gespeichert."}</span><button class="btn primary" data-geh="${nach}" ${o.aus ? "disabled" : ""}>${esc(text)} ›</button></div>`;
+function auftrag(form, titel, text){ return `<div class="auftrag"><span class="form">${esc(form)}</span><h3>${esc(titel)}</h3><p>${text}</p></div>`; }
+const STUFENWORT = { zentral:"trifft", teils:"auch begründbar", kaum:"passt kaum" };
+/* Muster 2: Einfachwahl mit Erklärung je Option. Erst festlegen, dann erscheint die Erklärung zur gewählten Option; die anderen bleiben ohne Wertung. */
+function wahl(art, id, frage, optionen, gewaehlt, o = {}){
+  const zu = gewaehlt !== undefined && gewaehlt !== null;
+  return `<div class="karte${o.klasse ? " " + o.klasse : ""}" id="w-${id}">${o.kennung ? `<p class="kennung">${esc(o.kennung)}</p>` : ""}<p><b>${frage}</b></p><div class="optionen" role="group" aria-label="${esc(frage.replace(/<[^>]+>/g, ""))}">${optionen.map((op, i) => {
+    const ist = zu && +gewaehlt === i, cls = ist ? op[1] : "";
+    return `<button type="button" class="${cls}" data-${art}="${id}" data-o="${i}" aria-pressed="${ist}" ${zu ? "disabled" : ""}>${esc(op[0])}${ist ? `<span class="fb"><span class="stufe">${STUFENWORT[op[1]]}</span>${esc(op[2])}</span>` : ""}</button>`;
+  }).join("")}</div>${zu ? `<div class="reihe nodruck"><button class="btn" data-${art}neu="${id}">Noch einmal wählen</button></div>` : ""}</div>`;
+}
+
+function kopf(){
+  document.getElementById("kopf").innerHTML = `${MARK}<div class="titel">M21 · Es geht um Menschen<small>Shoa oder Holocaust?</small></div><a class="pill" href="${LABOR}">← GGK-Labor</a><button class="pill" data-geh="lehrkraft">Für Lehrkräfte</button>`;
+  const a = idx(S.seite);
+  document.getElementById("weg").innerHTML = SEITEN.slice(1).map((s, i) => {
+    const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : "");
+    return `<button class="${cls}" data-geh="${s[0]}"${k===a?' aria-current="step"':""}><b>${esc(s[2] || "Zum Abheften")}</b>${esc(s[1])}</button>`;
+  }).join("");
+}
+
+/* ---------- Seiten ---------- */
+function start(){
+  return `<p class="zeit"><span class="nr">GGK · M21</span><span>Doppelstunde, 90 Minuten</span></p>
+  <h1>Es geht um Menschen</h1>
+  <p class="leitfrage">Wie wurde aus Nachbarn Opfer – und welches Wort passt zu dem, was geschah?</p>
+  ${band("levinson", "Der letzte Brief", "Zalman Levinson, 9 Jahre", "Riga, 3. April 1941. Seine Mutter schreibt eine Postkarte an die Tante in Palästina. Es ist das letzte Lebenszeichen der Familie.")}
+  <p class="lead">Sechs Millionen ist eine Zahl, die niemand sich vorstellen kann. Darum beginnt diese Stunde mit einem Brief, einem Wort und vier Lebenswegen. Erst danach kommt die Zahl – und das System dahinter.</p>
+  <div class="belastend"><b>Hinweis:</b> In dieser Stunde geht es um Verfolgung und Massenmord. Die Texte beschreiben ihn knapp und ohne Einzelheiten der Gewalt. Es gibt keine Bilder von Gewalt, nur Porträts und Gedenkorte. Wenn dich etwas belastet, sprich mit deiner Lehrkraft.</div>
+  <div class="karte"><h3>So läuft die Stunde</h3><ol style="padding-left:1.3rem;margin-top:.4rem;display:grid;gap:.25rem">
+  <li>Der letzte Brief: Du liest die Postkarte und deckst auf, was aus der Familie wurde.</li>
+  <li>Shoa oder Holocaust? Du wählst ein Wort – und am Ende noch einmal.</li>
+  <li>Vier Menschen: Du gehst einen Lebensweg in fünf Stationen und schreibst zu jeder deine Stichworte.</li>
+  <li>Die Matrix: Alle vier Wege nebeneinander, drei Vergleichsfragen.</li>
+  <li>Die Zahl und das System: erst schätzen, dann die Forschung.</li>
+  <li>Plenum: Wann wird es ernst? Tafel am Beamer, iPad zu.</li>
+  <li>Rückblick: fünf Sätze, dein Wort.</li></ol></div>
+  <p class="merksatz">Hinter jeder Zahl steht ein Mensch mit Namen.</p>
+  ${weiter("brief","Los geht’s")}`;
+}
+
+function brief(){
+  const b = S.brief;
+  return `${zeitKopf("brief")}<h1>Der letzte Brief</h1>
+  ${band("levinson", "Riga, 3. April 1941", "Eine Postkarte an die Tante", "Frieda Levinson schreibt auf Russisch an ihre Schwester Agnes, die 1936 nach Palästina ausgewandert ist. Ihr Sohn Zalman, genannt Zyama, ist neun.")}
+  ${auftrag("Einzelarbeit · 5 Minuten", "Lies die Karte. Was erfährst du über diese Familie?", "Schreib einen Satz: Wie lebt diese Familie im April 1941? Erst danach kannst du aufdecken, was aus ihr wurde.")}
+  <div class="brief" lang="de"><p class="von">Postkarte, Riga, 3. April 1941 · Übersetzung nach der englischen Fassung von Yad Vashem</p>
+  <p>Liebe Agnes,</p>
+  <p>wie geht es dir? Wie ist deine Gesundheit? Wir sind alle gesund und arbeiten. Ich habe dir schon geschrieben, aber noch keine Antwort bekommen. Zyama hat von Beka ein Geburtstagsgeschenk bekommen. Grüß Sonya von Beka, es geht ihnen allen gut – sag es ihr bitte gleich, sie macht sich bestimmt Sorgen. Ich muss Schluss machen, Beka läuft gerade zur Post.</p>
+  <p>Sei gesund, ich wünsche dir nur Gutes. Frieda</p>
+  <p>Mutter schreibt dir selbst. Grüße von Zyama und Zelik</p></div>
+  <p class="quelle"><span class="status beleg">belegte Quelle</span> Yad Vashem, Online-Ausstellung „Last Letters from the Holocaust: 1941“, Familie Levinson, <a href="https://www.yadvashem.org/yv/en/exhibitions/last-letters/1941/levinson.asp" target="_blank" rel="noopener">yadvashem.org</a>. Zalman schickte seiner Tante auch Zeichnungen und einen Zettel auf Hebräisch: „Danke für das Geschenk.“</p>
+  <div class="feldgruppe"><label for="brieftext">Wie lebt diese Familie im April 1941? (ein Satz)</label><textarea id="brieftext" data-feld="brief" rows="3" ${b.auf ? "disabled" : ""}>${esc(b.text)}</textarea>
+  <div class="reihe"><button class="btn primary" data-aufdecken ${b.auf || b.text.trim().length < 10 ? "disabled" : ""}>Aufdecken: Was wurde aus der Familie?</button><span class="hinweis" id="briefhinweis">${b.auf ? "" : "Schreib mindestens einen Satz."}</span></div></div>
+  ${b.auf ? `<div class="aufdeck" id="aufdeck"><p class="kennung">Was Yad Vashem herausfand</p><p>Die Karte war das letzte Lebenszeichen. Am 22. Juni 1941 griff Deutschland die Sowjetunion an, am 1. Juli besetzte die Wehrmacht Riga. Die Namen von Sara Lohak (Friedas Mutter), Frieda, Zelik und Zalman Levinson stehen auf den Listen des Rigaer Ghettos. Nach dem Krieg erfuhr Agnes: Alle vier wurden ermordet. Ihr Bruder Misha überlebte.</p>
+  ${bildFig("rumbula", { klasse:"klein" })}
+  <p style="margin-top:.8rem"><b>Deine Beobachtung:</b> ${esc(b.text)}</p>
+  <p class="hinweis" style="margin-top:.5rem">Merk dir diesen Abstand: Zwischen „alle gesund, Zyama hat ein Geschenk bekommen“ und dem Tod lagen wenige Monate. In dieser Stunde gehst du vier solcher Wege Schritt für Schritt.</p></div>` : ""}
+  ${weiter("begriff","Weiter: Das Wort", { aus:!b.auf, hinweis: b.auf ? undefined : "Erst aufdecken, dann weiter." })}`;
+}
+
+function begriff(){
+  const g = S.begriff;
+  return `${zeitKopf("begriff")}<h1>Shoa oder Holocaust?</h1>
+  <p class="lead">Für das, was mit der Familie Levinson geschah, gibt es mehrere Wörter. Welches du benutzt, sagt etwas darüber, aus wessen Sicht du erzählst.</p>
+  ${auftrag("Einzelarbeit · 4 Minuten", "Wähle zuerst dein Wort – dann erst die Erklärkarten.", "Welches Wort würdest du heute benutzen, wenn du jemandem von Zalman erzählst? Begründe in einem Satz. Am Ende der Stunde wählst du noch einmal.")}
+  <div class="karte"><div class="optionen" role="group" aria-label="Welches Wort?">${WORTE.map(([k, w]) => `<button type="button" data-wort="${k}" aria-pressed="${g.wahl === k}" ${g.zu ? "disabled" : ""}>${esc(w)}</button>`).join("")}</div>
+  <label for="begriffgrund" style="margin-top:.8rem">Weil … (ein Satz)</label><textarea id="begriffgrund" data-feld="begriffgrund" rows="2" ${g.zu ? "disabled" : ""}>${esc(g.grund)}</textarea>
+  <div class="reihe"><button class="btn primary" data-wortfest ${g.zu || !g.wahl || g.grund.trim().length < 8 ? "disabled" : ""}>Festlegen und Erklärkarten zeigen</button></div></div>
+  ${g.zu ? `<div class="rm ruhig" id="wortrm"><b>Dein Wort: ${esc((WORTE.find(w => w[0] === g.wahl) || [])[1])}.</b> ${esc(BEGRIFF_RM[g.wahl])}</div>
+  <div class="begriffe">
+    <div class="karte"><h3>Shoa</h3><p class="herk">Hebräisch שואה, „Katastrophe“, „großes Unglück“</p><p>Der Begriff aus der Sprache der Opfer. In Israel ist er seit den 1940er Jahren üblich; der Gedenktag heißt Jom haShoa. Er meint die Ermordung der europäischen Jüdinnen und Juden – und sagt damit auch, dass andere Opfergruppen ein eigenes Wort brauchen.</p></div>
+    <div class="karte"><h3>Holocaust</h3><p class="herk">Griechisch holókaustos, „ganz verbrannt“ – ein Brandopfer</p><p>Über die USA wurde das Wort weltweit bekannt. Es wird oft weiter gefasst und schließt Roma und Sinti, Menschen mit Behinderungen und andere Opfergruppen ein. Manche lehnen es ab, weil ein „Opfer“ etwas Religiöses ist – der Mord war keins.</p></div>
+  </div>
+  <div class="karte" style="margin-top:1rem"><p class="kennung">Public History · Wie ein Wort zu uns kam</p><p>Im Januar 1979 zeigte das deutsche Fernsehen die US-Serie „Holocaust“ über eine jüdische Familie aus Berlin. Rund 20 Millionen Menschen sahen zu; danach wurde in Familien, Schulen und im Bundestag so über die Verbrechen gesprochen wie nie zuvor. „Holocaust“ wurde zum Wort des Jahres. Das Wort kam also nicht aus der Forschung, sondern aus einer Fernsehserie – ein Beispiel dafür, wie Geschichte in der Öffentlichkeit gemacht wird (Landkarte 3.1.2).</p><p class="quelle"><span class="status modell">vor dem Kopieren prüfen</span> Zuschauerzahl und Wort des Jahres: aus dem Gedächtnis, in der Lehrkraft-Ansicht als prüfbedürftig markiert.</p></div>
+  <h2 class="abschnitt">Was weißt du noch? Drei Fragen aus M18 und M20</h2>
+  <p class="hinweis">Ohne Heft. Lege dich fest, dann siehst du die Erklärung.</p>
+  ${ABRUF.map(a => wahl("abruf", a.id, esc(a.f), a.o, S.abruf[a.id])).join("")}` : ""}
+  ${weiter("menschen","Weiter: Vier Menschen", { aus:!g.zu, hinweis: g.zu ? undefined : "Erst dein Wort festlegen, dann weiter." })}`;
+}
+
+function menschen(){
+  const p = S.person, m = p ? MENSCH(p) : null;
+  const n = fertigePersonen().length;
+  return `${zeitKopf("menschen")}<h1>Vier Menschen – ein Lebensweg in fünf Stationen</h1>
+  <p class="lead">Jeder der vier Wege hat dieselben fünf Stationen: Leben davor · Ausgrenzung · Trennung · Ermordung · Heute. Du gehst einen Weg gründlich. Die anderen drei siehst du danach in der Matrix.</p>
+  ${auftrag("Einzelarbeit oder zu zweit · 25 Minuten", "Wähle einen Menschen. Blättere die fünf Karten und schreib zu den ersten vier je zwei bis drei Stichworte in deinen Worten.", "Am Ende entscheidest du: An welcher Station hättest du gemerkt – <i>das wird ernst</i>? Wer schneller ist, nimmt einen zweiten Menschen.")}
+  <div class="menschen" role="group" aria-label="Einen Menschen wählen">${MENSCHEN.map(x => `<button type="button" class="mensch" data-person="${x.id}" aria-pressed="${x.id === p}">${x.bild && BILDER[x.bild] && !FEHLT.has(x.bild) ? `<span class="foto"><img src="${BILDER[x.bild].datei}" alt="${esc(BILDER[x.bild].alt)}" loading="lazy" data-bild="${x.bild}" onerror="bildFehlt(this)"></span>` : `<span class="foto"><span class="leer">kein gesichertes Foto</span></span>`}<span class="mt"><h3>${esc(x.name)}</h3><span class="ort">${esc(x.unter)} · ${esc(x.alter)}</span><p>${esc(x.kurz)}</p>${personFertig(x.id) ? `<span class="fertig">✓ Weg gegangen</span>` : ""}</span></button>`).join("")}</div>
+  <div id="weg-bereich">${m ? lebensweg(m) : ""}</div>
+  <div class="fortschritt${n >= 1 ? " ok" : ""}" id="fortschritt">${n >= 1 ? `✓ ${n} Weg${n > 1 ? "e" : ""} gegangen. Die Matrix ist frei.` : "Noch kein Weg vollständig. Ein Weg gilt als gegangen, wenn zu den Stationen 1–4 Stichworte stehen und „Das wird ernst“ gesetzt ist."}</div>
+  ${weiter("matrix","Weiter: Die Matrix", { aus:n < 1, hinweis: n >= 1 ? undefined : "Erst einen Weg gehen, dann weiter." })}`;
+}
+
+function lebensweg(m){
+  const st = S.st[m.id] || {}, e = S.ernst[m.id] || {};
+  const karten = m.st.map((s, i) => {
+    const heute = i === 4;
+    return `<article class="ikarte" aria-label="Station ${i+1}: ${esc(PH[i])}"><span class="kn">Station ${i+1} von 5 · ${esc(PH[i])}</span><h3>${esc(m.name)}</h3><p class="jahr">${esc(s.jahr)}</p>
+    ${i === 0 && m.bild ? bildFig(m.bild, { klasse:"klein", kurz:true }) : ""}${heute ? bildFig(m.bildHeute, { klasse:"klein" }) : ""}
+    <p>${esc(s.text)}</p>${s.mehr ? `<details class="hilfe"><summary>Mehr dazu</summary><p>${esc(s.mehr)}</p></details>` : ""}
+    ${heute ? `<p class="quelle">${esc(m.q)}</p>` : `<div class="notiz"><label for="st-${m.id}-${i}">Deine Stichworte zu „${esc(PH[i])}“</label><textarea id="st-${m.id}-${i}" data-st="${i}" rows="2" placeholder="zwei bis drei Stichworte in deinen Worten">${esc(st[i] || "")}</textarea></div>`}
+    </article>`;
+  }).join("");
+  const ernstOpt = [0,1,2,3].map(i => [`Station ${i+1}: ${PH[i]} (${m.st[i].jahr})`, "ruhig", m.ernst[i]]);
+  return `<div class="input-kopf"><h2 class="abschnitt" style="margin:1rem 0 0">${esc(m.name)} · fünf Stationen</h2><div class="steuer"><button class="btn" data-blatt="-1" aria-label="vorige Karte">‹</button><div class="dots" id="dots">${m.st.map((_, i) => `<button type="button" data-karte="${i}" aria-label="Karte ${i+1}" aria-current="false"></button>`).join("")}</div><button class="btn" data-blatt="1" aria-label="nächste Karte">›</button></div></div>
+  <p class="hinweis">Wischen oder die Pfeile tippen. Mit der Tastatur: Pfeiltasten, wenn der Stapel den Fokus hat.</p>
+  <div class="spur" id="spur" tabindex="0" aria-label="Kartenstapel: ${esc(m.name)}">${karten}</div>
+  <div class="karte" id="ernst"><p class="kennung">Deine Entscheidung</p><p><b>An welcher Station hättest du gemerkt: <i>Das wird ernst</i>?</b> Lege dich fest und begründe mit einem Satz. Danach liest du, was man an dieser Station damals wissen konnte.</p>
+  <div class="optionen" role="group" aria-label="Das wird ernst – an welcher Station?">${ernstOpt.map((op, i) => `<button type="button" data-ernst="${i}" aria-pressed="${e.wahl === i}" ${e.wahl !== undefined ? "disabled" : ""} class="${e.wahl === i ? "ruhig" : ""}">${esc(op[0])}${e.wahl === i ? `<span class="fb">${esc(op[2])}</span>` : ""}</button>`).join("")}</div>
+  <label for="ernstgrund" style="margin-top:.8rem">Weil … (ein Satz)</label><textarea id="ernstgrund" data-feld="ernstgrund" rows="2" ${e.wahl !== undefined ? "disabled" : ""}>${esc(e.grund || "")}</textarea>
+  <div class="reihe">${e.wahl === undefined ? `<button class="btn primary" data-ernstfest ${e.vor === undefined || (e.grund || "").trim().length < 8 ? "disabled" : ""}>Festlegen</button><span class="hinweis" id="ernsthinweis">Station antippen und einen Satz schreiben.</span>` : `<button class="btn" data-ernstneu>Noch einmal entscheiden</button>`}</div></div>`;
+}
+
+function matrix(){
+  const fertig = fertigePersonen().map(m => m.id);
+  return `${zeitKopf("matrix")}<h1>Vier Wege nebeneinander</h1>
+  <p class="lead">Deine Stichworte stehen blau in der Tabelle. Die anderen Zeilen hat die Lehrkraft kurz gefasst. Lies quer und senkrecht.</p>
+  ${auftrag("Einzelarbeit · 10 Minuten, dann zu zweit · 4 Minuten", "Vergleiche die vier Wege mit drei Fragen.", "Lege dich bei jeder Frage fest. Danach: Sucht euch zu zweit eine Zeile, die ihr nicht selbst bearbeitet habt, und erklärt sie euch gegenseitig.")}
+  <div class="matrix-wrap matrix"><table><thead><tr><th class="p">Mensch</th>${PH.slice(0,4).map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${MENSCHEN.map(m => {
+    const eigen = fertig.includes(m.id), st = S.st[m.id] || {};
+    return `<tr><th scope="row">${esc(m.name)}<br><span class="lk">${esc(m.unter)}</span></th>${[0,1,2,3].map(i => eigen ? `<td class="eigen">${esc(st[i])}</td>` : `<td>${esc(MATRIX[m.id][i])}<br><span class="lk">${esc(m.st[i].jahr)}</span></td>`).join("")}</tr>`;
+  }).join("")}</tbody></table></div>
+  <p class="quelle">Spalte 5 „Heute“ fehlt in der Tabelle absichtlich: Gedenkorte vergleicht man nicht. Status der Zeilen: belegt nach Yad Vashem, Joods Monument, Testimonies of Roma and Sinti, USHMM, Muzeum Treblinka.</p>
+  ${VERGLEICH.map(v => wahl("vergleich", v.id, esc(v.f), v.o, S.vergleich[v.id])).join("")}
+  ${weiter("zahl","Weiter: Die Zahl")}`;
+}
+
+function zahl(){
+  const z = S.schaetz;
+  const regler = (id, label, max, wert) => `<div class="schaetz"><label for="${id}">${label}</label><div class="wert" id="${id}-w">${wert === null ? "?" : mio(wert, true)}</div><input type="range" id="${id}" min="0" max="${max}" step="0.5" value="${wert === null ? max/2 : wert}" ${z.zu ? "disabled" : ""} aria-valuetext="${wert === null ? "noch nicht gewählt" : mio(wert, true)}"><div class="skala"><span>0</span><span>${max} Millionen</span></div></div>`;
+  return `${zeitKopf("zahl")}<h1>Die Zahl und das System</h1>
+  <p class="lead">Vier Wege hast du gesehen. Jetzt die Frage, wie viele es waren – und warum die Forschung von einem System spricht.</p>
+  ${auftrag("Einzelarbeit · 12 Minuten", "Erst schätzen, dann die Zahlen der Forschung.", "Schieb die Regler, lege dich fest. Danach erscheinen die Zahlen des US Holocaust Memorial Museum – als Spannen, denn genaue Zahlen gibt es nicht.")}
+  ${regler("sj", "Wie viele Jüdinnen und Juden lebten 1933 in Europa?", 15, z.juden)}
+  ${regler("st", "Wie viele von ihnen wurden bis 1945 ermordet?", 15, z.tote)}
+  <div class="reihe">${z.zu ? `<button class="btn" data-schaetzneu>Noch einmal schätzen</button>` : `<button class="btn primary" data-schaetzfest>Festlegen und vergleichen</button>`}</div>
+  ${z.zu ? `<div class="aufdeck" id="aufdeck"><p class="kennung">Deine Schätzung neben der Forschung</p>
+    <div class="vergl"><span>1933 lebten</span><div class="balken kuli"><b style="--w:${z.juden/15}"></b></div><span>du: ${mio(z.juden)}</span><span></span><div class="balken"><b style="--w:${ZAHLEN.juden1933/15}"></b></div><span>${mio(ZAHLEN.juden1933)}</span>
+    <span>ermordet</span><div class="balken kuli"><b style="--w:${z.tote/15}"></b></div><span>du: ${mio(z.tote)}</span><span></span><div class="balken"><b style="--w:${ZAHLEN.ermordet/15}"></b></div><span>etwa ${ZAHLEN.ermordet} Mio.</span></div>
+    <p style="margin-top:.8rem">Etwa 9,5 Millionen Jüdinnen und Juden lebten 1933 in Europa. Rund sechs Millionen wurden ermordet – zwei von drei. In Polen, dem Zentrum der Vernichtung, waren es neun von zehn. ${Math.abs(z.tote - 6) <= 1 ? "Deine Schätzung lag nah an der Forschung." : z.tote < 5 ? "Du hast zu niedrig geschätzt – die meisten tun das. Die Zahl übersteigt, was man sich vorstellen kann." : "Du hast höher geschätzt als die Forschung. Zahlen über sechs Millionen vermischen meist Opfergruppen."}</p>
+    <h3 class="klein">Wen das NS-Regime außerdem ermordete</h3>
+    <div class="matrix-wrap"><table><thead><tr><th>Gruppe</th><th>Ermordete (Schätzung)</th><th>Woran</th></tr></thead><tbody>${ZAHLEN.gruppen.map(g => `<tr><td>${esc(g[0])}</td><td class="n">${esc(g[1])}</td><td>${esc(g[2])}</td></tr>`).join("")}</tbody></table></div>
+    <p class="quelle"><span class="status beleg">belegte Zahlen</span> ${ZAHLEN.quelle}</p></div>` : ""}
+  <h2 class="abschnitt">Das System: vier Phasen</h2>
+  ${schaubild()}
+  <p>Die vier Wege, die du gesehen hast, liegen auf diesem Modell – nur verschieden schnell. Für die Willners dauerte Phase 1 fünf Jahre, für die Familie in Kiew gab es sie gar nicht. Das Modell ordnet, es erklärt nicht alles: Die Erschießungen gingen auch 1943 und 1944 weiter, und in Birkenau liefen Zwangsarbeit und Gaskammern nebeneinander.</p>
+  <h2 class="abschnitt">Konzentrationslager, Vernichtungslager, Durchgangslager?</h2>
+  <p class="hinweis">Vier Orte aus den Lebenswegen. Lege dich fest, dann siehst du die Erklärung.</p>
+  ${LAGER.map(l => wahl("lager", l.id, `${esc(l.name)} <span class="hinweis">(${esc(l.jahr)})</span>`, l.o, S.lager[l.id], { kennung:"Welche Art von Lager?" })).join("")}
+  ${weiter("plenum","Weiter: Plenum", { hinweis:"Jetzt iPad zu – es geht am Beamer weiter." })}`;
+}
+
+function schaubild(){
+  const ph = [["1",["Entrechtung und","Ausgrenzung"],"1933–1939","Boykott, Gesetze, Pogrom","Willner 1933–38"],["2",["Ghetto und","Zwangsarbeit"],"1939–1941","Mauern, Hunger, Listen","Korczak 1940"],["3",["Massen-","erschießungen"],"1941–1944","Einsatzgruppen im Osten","Aschkenasi 1941"],["4",["Vernichtungs-","lager"],"1942–1945","Gaskammern, Transporte","Willner, Korczak, Marie"]];
+  const w = 760, bw = 178, g = 12, x0 = 8;
+  const boxes = ph.map((p, i) => { const x = x0 + i*(bw+g); return `<g><rect x="${x}" y="22" width="${bw}" height="118" rx="10" fill="#FAF8F3" stroke="#24221F" stroke-width="1.5"/><text x="${x+14}" y="56" font-family="Fraunces,Georgia,serif" font-size="26" font-weight="600" fill="#9B402D">${p[0]}</text><text x="${x+40}" y="44" font-family="Atkinson Hyperlegible,Arial,sans-serif" font-size="13" font-weight="700" fill="#24221F">${esc(p[1][0])}</text><text x="${x+40}" y="60" font-family="Atkinson Hyperlegible,Arial,sans-serif" font-size="13" font-weight="700" fill="#24221F">${esc(p[1][1])}</text><text x="${x+14}" y="82" font-family="Atkinson Hyperlegible,Arial,sans-serif" font-size="13" fill="#5F5C56">${p[2]}</text><text x="${x+14}" y="102" font-family="Atkinson Hyperlegible,Arial,sans-serif" font-size="12.5" fill="#24221F">${esc(p[3])}</text><text x="${x+14}" y="126" font-family="Atkinson Hyperlegible,Arial,sans-serif" font-size="12" fill="#1E4FB5">● ${esc(p[4])}</text></g>${i < 3 ? `<path d="M${x+bw+1} 81 l${g-2} 0" stroke="#24221F" stroke-width="2"/><path d="M${x+bw+g-5} 76 l5 5 -5 5" fill="none" stroke="#24221F" stroke-width="2"/>` : ""}`; }).join("");
+  return `<figure class="schaubild"><svg viewBox="0 0 ${w} 182" role="img" aria-labelledby="sb-t sb-d"><title id="sb-t">Vier Phasen der Verfolgung – ein Modell</title><desc id="sb-d">Vier Kästen in einer Reihe, durch Pfeile verbunden: 1 Entrechtung und Ausgrenzung 1933 bis 1939 (Boykott, Gesetze, Pogrom; Beispiel Willner), 2 Ghetto und Zwangsarbeit 1939 bis 1941 (Mauern, Hunger, Listen; Beispiel Korczak), 3 Massenerschießungen 1941 bis 1944 (Einsatzgruppen im Osten; Beispiel Aschkenasi), 4 Vernichtungslager 1942 bis 1945 (Gaskammern, Transporte; Beispiele Willner, Korczak, Marie). Unten der Satz: Jede Phase bereitete die nächste vor – die Phasen überlappen sich.</desc><text x="8" y="12" font-family="Atkinson Hyperlegible,Arial,sans-serif" font-size="12" font-weight="700" fill="#7D5C12">MODELL · vereinfacht, Phasen überlappen sich</text>${boxes}<text x="8" y="170" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="15" fill="#24221F">Jede Phase bereitete die nächste vor. Verschiedene Mittel, verschiedene Orte – ein Ziel.</text></svg><figcaption><span class="status modell">Modell</span> Einteilung nach dem Unterrichtsheft M21; Jahreszahlen nach USHMM. Die Phasen sind eine Ordnung für den Unterricht, keine Einteilung, die die Täter so geplant hätten. Blau: wo die vier Lebenswege liegen.</figcaption></figure>`;
+}
+
+function plenum(){
+  const p = S.person, m = p ? MENSCH(p) : null, e = m ? S.ernst[p] : null;
+  return `${zeitKopf("plenum")}<h1>Wann wird es ernst?</h1>
+  <p class="lead">Jetzt spricht die Klasse. Dein iPad brauchst du nur noch für die Stimmkarte – dann zu.</p>
+  ${auftrag("Plenum · 12 Minuten", "Stimmkarte hochhalten, dann iPad zu.", "Die Lehrkraft zählt, wer welche Station gesetzt hat, und trägt es an der Tafel ein. Danach vier Fragen – geführt am Beamer.")}
+  <div class="reihe">${e && e.wahl !== undefined ? `<button class="btn primary" data-stimmkarte>Meine Stimmkarte groß zeigen</button>` : `<span class="hinweis">Du hast noch keine Station „Das wird ernst“ gesetzt – geh zurück zu „Vier Menschen“.</span>`}<button class="btn dunkel" data-tafel>Tafel am Beamer (Lehrkraft)</button></div>
+  <h2 class="abschnitt">Gesprächsregeln</h2><ol class="regeln" style="padding-left:1.2rem">${REGELN.map(r => `<li>${esc(r)}</li>`).join("")}</ol>
+  <h2 class="abschnitt">Die Fragen</h2><ol style="padding-left:1.3rem;display:grid;gap:.4rem">${PLENUM_FRAGEN.map(f => `<li>${esc(f)}</li>`).join("")}</ol>
+  ${weiter("rueckblick","Weiter: Rückblick")}`;
+}
+
+function stimmkarte(){
+  const m = MENSCH(S.person), e = S.ernst[S.person];
+  document.getElementById("ueber").innerHTML = `<div class="stand" role="dialog" aria-modal="true" aria-label="Stimmkarte"><div><p class="unter">${esc(m.name)} · Das wird ernst bei</p><p class="nrgross">${e.wahl + 1}</p><p class="gross">${esc(PH[e.wahl])}</p><p class="unter">${esc(m.st[e.wahl].jahr)}</p><div class="reihe" style="justify-content:center;margin-top:1.5rem"><button class="btn" data-zu>Schließen (Esc)</button></div></div></div>`;
+  document.querySelector("#ueber [data-zu]").focus();
+}
+function tafelAnsicht(){
+  const t = S.tafel, max = Math.max(1, ...t);
+  document.getElementById("ueber").innerHTML = `<div class="tafel" role="dialog" aria-modal="true" aria-label="Tafel am Beamer"><div class="tafel-in"><div class="reihe" style="justify-content:space-between;margin:0"><h2>Wann wird es ernst? – Stand der Klasse</h2><button class="btn" data-zu>Schließen (Esc)</button></div>
+  <p class="hinweis">Je Station: Handzeichen oder Stimmkarten zählen, mit + eintragen. Die Zahlen bleiben nur auf diesem Gerät.</p>
+  <div class="tally">${PH.slice(0,4).map((h, i) => `<div><span class="t">Station ${i+1}<br>${esc(h)}</span><span class="z" aria-live="polite">${t[i]}</span><div class="balken"><b style="--w:${t[i]/max}"></b></div><div class="reihe"><button class="btn" data-tally="${i}" data-d="-1" aria-label="Station ${i+1} minus eins">−</button><button class="btn primary" data-tally="${i}" data-d="1" aria-label="Station ${i+1} plus eins">+</button></div></div>`).join("")}</div>
+  <h2 class="abschnitt" style="font-size:1.5rem">Fragen</h2><ol class="fragen" style="padding-left:1.3rem">${PLENUM_FRAGEN.map(f => `<li>${esc(f)}</li>`).join("")}</ol>
+  <div class="reihe"><button class="btn" data-tallynull>Tafel leeren</button></div></div></div>`;
+  document.querySelector("#ueber [data-zu]").focus();
+}
+const schliesse = () => { document.getElementById("ueber").innerHTML = ""; };
+
+function rueckblick(){
+  const g = S.begriff, g2 = S.begriff2, m = S.person ? MENSCH(S.person) : null;
+  const wortName = k => (WORTE.find(w => w[0] === k) || ["",""])[1];
+  const woerter = Math.max(0, S.erz.trim().split(/\s+/).filter(Boolean).length);
+  return `${zeitKopf("rueckblick")}<h1>Was denkst du jetzt?</h1>
+  ${auftrag("Einzelarbeit · 6 Minuten", "Wähle dein Wort noch einmal – und schreib fünf Sätze.", "Erst die Sätze, dann das Raster. Die Sätze wandern in deine Zusammenfassung.")}
+  <div class="karte"><p class="kennung">Dein Wort – am Anfang und jetzt</p><div class="zwei"><div class="alt"><b>Am Anfang: ${esc(wortName(g.wahl)) || "–"}</b><p>${esc(g.grund)}</p></div><div class="alt"><b>Jetzt</b><div class="optionen">${WORTE.map(([k, w]) => `<button type="button" data-wort2="${k}" aria-pressed="${g2.wahl === k}">${esc(w)}</button>`).join("")}</div><label for="grund2" style="margin-top:.6rem">Weil …</label><textarea id="grund2" data-feld="grund2" rows="2">${esc(g2.grund)}</textarea></div></div>
+  ${g2.wahl ? `<p class="hinweis" style="margin-top:.6rem">${g2.wahl === g.wahl ? "Du bleibst bei deinem Wort. Sag im Plenum, was es nach dieser Stunde für dich bedeutet." : "Du hast dein Wort gewechselt. Was hat dich überzeugt – eine Station, eine Zahl, ein Begriff?"}</p>` : ""}</div>
+  <h2 class="abschnitt">Fünf Sätze: Wie wurde aus Nachbarn Opfer?</h2>
+  <p>Schreib über ${m ? esc(m.name) : "den Menschen, dessen Weg du gegangen bist"}. Ein Satz je Station, dann dein Wort. Die Satzanfänge helfen, du musst sie nicht nehmen.</p>
+  <div class="satzanfaenge nodruck">${ANFAENGE.map(a => `<button type="button" data-anfang="${esc(a)}">${esc(a)}</button>`).join("")}</div>
+  <textarea id="erz" data-feld="erz" rows="8" placeholder="Vor dem Krieg lebte …">${esc(S.erz)}</textarea>
+  <p class="hinweis">${woerter} Wörter. Ab 40 Wörtern erscheint das Raster.</p>
+  ${woerter >= 40 ? `<div class="raster3" id="raster"><div><b>Grundlegend</b>Name und Ort stehen da; zwei Stationen sind erkennbar; ein Wort ist gewählt.</div><div><b>Sicher</b>Alle vier Stationen in der richtigen Reihenfolge, mit mindestens zwei Jahreszahlen; das Wort ist begründet.</div><div><b>Souverän</b>Dazu ein Fachbegriff je Phase (Entrechtung, Ghetto, Erschießung, Vernichtungslager) und ein Vergleich mit einem zweiten Weg: schneller, langsamer, anders.</div></div><p class="hinweis">Wo stehst du? Markiere es dir in der Zusammenfassung.</p>` : ""}
+  <p class="merksatz">Nächste Stunde (M22): Wer tat das – und wie war das möglich?</p>
+  ${weiter("zusammenfassung","Zur Zusammenfassung")}`;
+}
+
+function zusammenfassung(){
+  const m = S.person ? MENSCH(S.person) : null;
+  const wortName = k => (WORTE.find(w => w[0] === k) || ["",""])[1];
+  return `<div class="zf"><p class="zeit nodruck"><span class="nr">Zusammenfassung</span><span>zwei Seiten A4</span></p>
+  <div class="reihe nodruck"><button class="btn primary" data-drucken>Drucken oder als PDF sichern</button><span class="hinweis">Deine Einträge sind enthalten.</span></div>
+  <h1 style="font-size:1.8rem;margin-top:.8rem">M21 · Es geht um Menschen</h1>
+  <p class="leitfrage">Wie wurde aus Nachbarn Opfer – und welches Wort passt zu dem, was geschah?</p>
+  <p class="merksatz">Die Shoa war kein Ausbruch, sondern ein System: Entrechtung, Trennung, Ermordung – mit verschiedenen Mitteln, an verschiedenen Orten, in verschiedenem Tempo.</p>
+  <h2>Sechs Begriffe</h2>
+  <div class="begriffe6">
+    <div class="bg"><b>Shoa · Holocaust</b>Shoa (hebr. „Katastrophe“): das Wort der Opfer für den Mord an den europäischen Juden. Holocaust (griech. „ganz verbrannt“): das internationale Wort, oft weiter gefasst. Für Roma und Sinti: Porajmos oder Samudaripen.</div>
+    <div class="bg"><b>Entrechtung</b>Gesetze und Verordnungen, die Menschen Rechte nehmen: Boykott 1933, Nürnberger Gesetze 1935, Berufsverbot nach dem Pogrom vom 9./10. November 1938. Beispiel: die Willners verlieren Bürgerrecht und Geschäft.</div>
+    <div class="bg"><b>Ghetto</b>Abgesperrter Stadtteil, in den Juden gezwungen wurden. Warschau ab Herbst 1940: über 400.000 Menschen, Hunger und Seuchen. Beispiel: Korczaks Waisenhaus hinter der Mauer.</div>
+    <div class="bg"><b>Einsatzgruppen</b>Mordkommandos der SS, die ab Juni 1941 hinter der Front Juden erschossen – etwa zwei Millionen Opfer. Beispiel: Babyn Jar, 29./30. September 1941, 33.771 Ermordete.</div>
+    <div class="bg"><b>Vernichtungslager</b>Lager, die nur zum Töten gebaut wurden: Chełmno, Bełżec, Sobibor, Treblinka, dazu Auschwitz-Birkenau. Ankommende wurden meist am selben Tag ermordet. Beispiel: Sobibor, 9. April 1943.</div>
+    <div class="bg"><b>Durchgangslager · KZ</b>Durchgangslager sammeln für den Transport (Westerbork). Konzentrationslager sperren ein, zwingen zur Arbeit, töten durch Bedingungen (Dachau ab 1933). Auschwitz war beides.</div>
+  </div>
+  <h2>Vier Wege – eine Ordnung</h2>
+  ${schaubild()}
+  <div class="matrix-wrap matrix"><table><thead><tr><th>Mensch</th>${PH.slice(0,4).map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${MENSCHEN.map(x => `<tr><th scope="row">${esc(x.name)}</th>${[0,1,2,3].map(i => `<td>${esc(MATRIX[x.id][i])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+  <div class="seitenumbruch"></div>
+  <h2>Die Zahlen (US Holocaust Memorial Museum)</h2>
+  <div class="zw"><div class="matrix-wrap"><table><thead><tr><th>Gruppe</th><th>Ermordete</th></tr></thead><tbody>${ZAHLEN.gruppen.map(g => `<tr><td>${esc(g[0])}</td><td class="n">${esc(g[1])}</td></tr>`).join("")}</tbody></table></div>
+  <div class="matrix-wrap"><table><thead><tr><th>Vernichtungslager</th><th>Ermordete</th></tr></thead><tbody>${ZAHLEN.lager.map(l => `<tr><td>${esc(l[0])}</td><td class="n">${esc(l[1])}</td></tr>`).join("")}</tbody></table><p class="quelle" style="padding:.4rem .7rem">1933 lebten etwa 9,5 Millionen Jüdinnen und Juden in Europa; etwa sechs Millionen wurden ermordet. Zahlen sind Schätzungen aus Täterakten und Volkszählungen.</p></div></div>
+  <h2>Denkwerkzeug: Wer erzählt?</h2>
+  <div class="karte"><p><b>Quelle</b> (Postkarte, Foto, Zeugnis): Wer hat sie wann für wen gemacht? Was wusste die Person damals nicht? · <b>Darstellung</b> (Heft, Film, Datenbank, diese Seite): Wer wählt aus, was erzählt wird? Welches Wort wird benutzt – und warum? · <b>Rückschau:</b> Was konnte man damals wissen, was wissen nur wir?</p></div>
+  <h2>Mein Ergebnis</h2>
+  <div class="karte"><p><b>Mein Wort am Anfang:</b> ${esc(wortName(S.begriff.wahl)) || "–"} · <b>jetzt:</b> ${esc(wortName(S.begriff2.wahl)) || "–"}${S.begriff2.grund ? ` – ${esc(S.begriff2.grund)}` : ""}</p>
+  ${m ? `<p style="margin-top:.4rem"><b>Mein Weg:</b> ${esc(m.name)} · <b>Das wird ernst bei Station</b> ${S.ernst[m.id] && S.ernst[m.id].wahl !== undefined ? (S.ernst[m.id].wahl + 1) + " (" + esc(PH[S.ernst[m.id].wahl]) + ")" : "–"}${S.ernst[m.id] && S.ernst[m.id].grund ? ` – ${esc(S.ernst[m.id].grund)}` : ""}</p>` : ""}
+  <p style="margin-top:.4rem"><b>Meine fünf Sätze:</b></p><p style="white-space:pre-wrap">${esc(S.erz) || "(noch leer)"}</p></div>
+  <h2 class="nodruck">Abrufübung – nach ein paar Tagen</h2>
+  <div class="abruf nodruck">${ABRUFZ.map(a => wahl("abrufz", a.id, esc(a.f), a.o, S.abrufz[a.id])).join("")}</div>
+  <p class="quelle">Quellen: Yad Vashem (Levinson; London/Aschkenasi) · Joods Monument (Willner) · Testimonies of Roma and Sinti, Prag (Nedvědová) · USHMM Holocaust Encyclopedia (Korczak, Babi Yar, Numbers of Victims, Sobibor, Westerbork) · Muzeum Treblinka · holocaust.cz. Fotos: siehe Bildliste in der Lehrkraft-Ansicht.</p>
+  </div>`;
+}
+
+function lehrkraft(){
+  const zeile = (a, b) => `<tr><td class="n">${a}</td><td>${b}</td></tr>`;
+  return `<p class="zeit"><span class="nr">Für Lehrkräfte</span><span>nicht geschützt – nur Hinweise, keine Codewörter</span></p>
+  <h1>M21 · Es geht um Menschen</h1>
+  <p class="lead">Durchgängige Lernseite (Variante B) für die Doppelstunde. Zwei Plenumsphasen mit iPad zu. Mindestens ein Lebensweg je Person; wer schneller ist, geht einen zweiten.</p>
+  <h2 class="abschnitt">Ablauf</h2>
+  <div class="matrix-wrap"><table><thead><tr><th>Min.</th><th>Phase</th></tr></thead><tbody>
+  ${zeile("0–8","<b>Der letzte Brief</b> (allein): Postkarte lesen, einen Satz schreiben, aufdecken. Muster „Festlegung → Auflösung“. Am Beamer: Bildband Zalman.")}
+  ${zeile("8–16","<b>Das Wort</b> (allein, 2 Min. Plenum): Shoa / Holocaust / anderes wählen und begründen, dann Erklärkarten und Public-History-Kasten. Drei Abruffragen zu M18/M20.")}
+  ${zeile("16–44","<b>Vier Menschen</b> (allein oder zu zweit): ein Weg in fünf Karten, Stichworte je Station, „Das wird ernst“ mit Begründung; Rückmeldung je Station beschreibt, was damals wissbar war. Zweiter Weg für Schnelle. Empfehlung: Vier Gruppen im Raum, je eine Person – dann hat jede Tischgruppe alle vier Wege.")}
+  ${zeile("44–58","<b>Die Matrix</b> (allein, dann zu zweit): eigene Zeile blau, drei Zeilen der Lehrkraft; drei Vergleichsfragen mit Erklärung je Option (zentral · auch begründbar · passt kaum). Zu zweit eine fremde Zeile erklären.")}
+  ${zeile("58–72","<b>Die Zahl</b> (allein): zwei Schätzungen vor der Auflösung (9,5 Mio. / 6 Mio.), Tabelle der Opfergruppen (USHMM), Schaubild „Vier Phasen“ als Modell, vier Lager zuordnen.")}
+  ${zeile("72–84","<b>Plenum</b>: Stimmkarte „Das wird ernst bei Station x“ hochhalten, Lehrkraft zählt an der Tafel (Beamer-Ansicht auf dieser Seite, Knopf „Tafel am Beamer“), fünf Fragen. iPad zu.")}
+  ${zeile("84–90","<b>Rückblick</b> (allein): Wort erneut, fünf Sätze mit Satzanfängen; Raster erscheint ab 40 Wörtern. Hausaufgabe: Zusammenfassung drucken, Abrufübung nach ein paar Tagen.")}
+  </tbody></table></div>
+  <h2 class="abschnitt">Erwartungen</h2>
+  <div class="karte"><p><b>Das wird ernst:</b> Es gibt keine richtige Station. Die Rückmeldung je Station nennt, was damals wissbar war (Rückschaufehler, Landkarte 2.1). Erwartbar: Die Klasse streut – und für die Familie in Kiew liegt zwischen „ernst“ und Tod nur ein Tag. Das ist der Gesprächsanlass: <i>Für wen war Merken überhaupt eine Hilfe?</i></p>
+  <p><b>Vergleich:</b> V1 drei Formen eines Systems · V2 alle gehörten dazu (bei Marie: „auch begründbar“, Diskriminierung schon vor 1939) · V3 Tempo verschieden, Ziel gleich.</p>
+  <p><b>Lager:</b> Dachau KZ · Treblinka Vernichtungslager · Westerbork Durchgangslager · Auschwitz beides.</p>
+  <p><b>Wort:</b> Beide Wörter sind begründbar; das Ziel ist die Begründung, nicht die Wahl. Wer „ein anderes Wort“ wählt, nennt es im Plenum (Churban, Judenmord, Porajmos, Samudaripen).</p></div>
+  <h2 class="abschnitt">Was gegenüber dem Heft korrigiert ist</h2>
+  <div class="karte"><ul style="padding-left:1.2rem;display:grid;gap:.3rem">
+  <li><b>Marie Nedvědová überlebte.</b> Das Heft lässt sie 1944 in der Gaskammer sterben; ihr Zeugnis sagt: Typhus, Verlegung nach Ravensbrück, Befreiung am 5. Mai 1945 bei Hamburg. Mutter und zwei Geschwister wurden ermordet. Das Foto „Jezová, 1967“ im Heft passt nicht zu ihrem Geburtsjahr und ist weggelassen.</li>
+  <li><b>Willner:</b> geboren in Cloppenburg (23.10.1870 / 9.5.1873), nicht „aus Amsterdam“; Tochter heißt Johanne (nicht Joanna); Familie Muller wurde am 21. Mai 1943 in Sobibor ermordet (Heft: 18. Mai, das ist das Transportdatum nach dem Heft, hier nicht belegt). Quelle: Joods Monument.</li>
+  <li><b>Familie Aschkenasi:</b> Piotr London war nicht „Buchhalter“ (im Heft) – Yad Vashem nennt keinen Beruf; Rosalia war Sekretärin. Für sowjetische Juden gab es keine Phase der Entrechtung – das Heft presst sie in das Vier-Phasen-Schema.</li>
+  <li><b>Korczak:</b> Deportation am 5. oder 6. August 1942 (USHMM), „fast 200“ Kinder.</li>
+  <li><b>Zahlen:</b> „11 Millionen“ ist in der Forschung nicht belegt; USHMM nennt sechs Millionen Juden und für die anderen Gruppen Spannen (Roma mindestens 250.000, Zeugen Jehovas etwa 1.700, homosexuelle Männer Hunderte bis Tausende – das Heft nennt 2.500 und 15.000). Vernichtungslager: Bełżec etwa 435.000 (Heft 600.000), Sobibor mindestens 167.000 (Heft 250.000), Chełmno mindestens 152.000. Majdanek ist nach neuerer Forschung mit etwa 78.000 Toten anzusetzen und fehlt hier bewusst. Warschauer Ghetto: über 400.000 Menschen auf etwa 3,4 km² (Heft: 500.000 auf 2 km²).</li>
+  <li><b>Public History:</b> Der Kasten im Heft hat keine Quelle; hier auf die Serie 1979 reduziert.</li>
+  <li>Die 103 „Quellen“ des Heft-Teils stammen aus einer KI-Recherche; die Lernseite nutzt nur die hier genannten.</li></ul></div>
+  <h2 class="abschnitt">Vor dem Kopieren prüfen (aus dem Gedächtnis)</h2>
+  <div class="karte"><ul style="padding-left:1.2rem;display:grid;gap:.3rem">
+  <li>Serie „Holocaust“: Ausstrahlung Januar 1979 in der ARD (Dritte Programme), rund 20 Millionen Zuschauer; „Holocaust“ Wort des Jahres 1979 (GfdS).</li>
+  <li>9,5 Millionen Juden in Europa 1933 (USHMM, Artikel „Jewish Population of Europe in 1933“).</li>
+  <li>Treblinka: etwa 925.000 Opfer in rund 15 Monaten (Juli 1942 – Herbst 1943); Gedenkstätte mit etwa 17.000 Steinen, einer mit Namen Korczak.</li>
+  <li>Umschlagplatz-Denkmal Warschau 1988; Menora Babyn Jar 1991; Nationaldenkmal Westerbork 1970 (Ralph Prins).</li>
+  <li>Niederlande: etwa 107.000 Deportierte, rund 5.000 Überlebende; Westerbork 93 Züge, etwa 100.000 Menschen; rund 34.000 nach Sobibor.</li>
+  <li>Verordnung vom 12. November 1938 (Ausschaltung aus dem Wirtschaftsleben); Judenstern in den Niederlanden ab Mai 1942; Westerbork Durchgangslager ab Juli 1942; Himmlers Auschwitz-Erlass vom 16. Dezember 1942; Lety und Hodonín ab August 1942 „Zigeunerlager“.</li>
+  <li>Korczak: Reserveoffizier, Armbinde verweigert (Überlieferung); Dom Sierot ab 1912 in der Krochmalna-Straße 92.</li>
+  <li>2. August als Europäischer Gedenktag: Entschließung des Europäischen Parlaments vom 15. April 2015.</li>
+  <li>Friedrich Willner „Metzger“ und „Soldat im Ersten Weltkrieg“: nur nach dem Heft (Meiners), nicht bei Joods Monument.</li></ul></div>
+  <h2 class="abschnitt">Nur du kannst das</h2>
+  <div class="karte"><ul style="padding-left:1.2rem;display:grid;gap:.3rem"><li>Safari auf dem echten iPad hoch und quer, VoiceOver, Zoom 200 %.</li><li>Moodle-Upload (Zip entpacken, <code>index.html</code> als Hauptdatei) und Größenlimit.</li><li>Bildrechte: Yad-Vashem-Fotos und das private Willner-Foto liegen auf deinen Wunsch im öffentlichen Repository; die Commons-Fotos sind frei lizenziert (Bildliste unten).</li><li>Beamer im echten Raum: Tafel-Ansicht bei 1280 × 720.</li><li>Klassenraum: vier Gruppen, je eine Person – oder freie Wahl.</li></ul></div>
+  <h2 class="abschnitt">Nach der Stunde: Beobachtungsbogen</h2>
+  <div class="karte"><ol style="padding-left:1.2rem;display:grid;gap:.3rem"><li>Lernhandlung: Haben die Lernenden das Entscheidende selbst getan (Stichworte, „Das wird ernst“, Sätze)? ja · teilweise · nein</li><li>Mehrwert: Was ging mit dem iPad besser als auf Papier? Ein Satz oder „nichts Wesentliches“.</li><li>Ablauf: Zeit für Technik? kaum · spürbar · zu viel</li><li>Aufmerksamkeit: bei der Sache oder abgelenkt? Eine Beobachtung.</li><li>Entscheidung: so lassen · nachschärfen (was?) · zurück zu Papier.</li></ol></div>
+  <h2 class="abschnitt">Bildliste</h2>
+  <div class="matrix-wrap"><table><thead><tr><th>Datei</th><th>Was</th><th>Nachweis</th></tr></thead><tbody>${Object.values(BILDER).map(b => `<tr><td class="n"><code>${esc(b.datei.replace("media/",""))}</code></td><td>${esc(b.unter)}</td><td><a href="${b.url}" target="_blank" rel="noopener">${esc(b.quelle)}</a></td></tr>`).join("")}</tbody></table></div>
+  <p class="hinweis" style="margin-top:1rem">Speicherschlüssel <code>${KEY}</code>. Eingaben bleiben im Browser des Geräts. Die Tafel-Zahlen sind Zählungen der Lehrkraft, keine Daten einzelner Lernender.</p>
+  ${weiter("start","Zur Startseite")}`;
+}
+
+/* ---------- Zeichnen ---------- */
+const SEITE_FN = { start, brief, begriff, menschen, matrix, zahl, plenum, rueckblick, zusammenfassung, lehrkraft };
+function loeschBereich(){
+  return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button><button class="btn" data-bewegung aria-pressed="${!!S.ruhig}">Weniger Bewegung: ${S.ruhig ? "an" : "aus"}</button><span>Alles bleibt auf diesem Gerät.</span>
+  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> Brief, Wort, Stichworte, Entscheidungen, Schätzungen, Sätze und die Tafel werden auf diesem Gerät entfernt.</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div></div>`;
+}
+let LETZTE_SEITE = null;
+function zeichne(fokus){
+  if (!SEITE_FN[S.seite]) S.seite = "start";
+  document.documentElement.classList.toggle("ruhig", !!S.ruhig);
+  kopf();
+  const m = document.getElementById("main");
+  m.classList.toggle("breit", S.seite === "lehrkraft" || S.seite === "zusammenfassung" || S.seite === "matrix");
+  m.innerHTML = SEITE_FN[S.seite]() + loeschBereich();
+  if (S.seite === "menschen") stapelStart();
+  if (LETZTE_SEITE !== S.seite) { const b = document.getElementById("band"); if (b && b.classList.contains("mit")) neu(b, "neu"); }
+  LETZTE_SEITE = S.seite;
+  if (fokus) { m.focus({ preventScroll:true }); window.scrollTo(0, 0); }
+}
+const geh = id => { S.seite = id; speichere(); zeichne(true); };
+
+/* ---------- Kartenstapel (AI) ---------- */
+function stapelStart(){
+  const sp = document.getElementById("spur"); if (!sp) return;
+  const k = sp.children[S.ai[S.person] || 0]; if (k) sp.scrollLeft = k.offsetLeft - sp.offsetLeft - 20;
+  markiere();
+  sp.addEventListener("scroll", () => requestAnimationFrame(markiere), { passive:true });
+}
+const aktKarte = () => { const sp = document.getElementById("spur"); if (!sp) return 0; let best = 0, d = 1e9; [...sp.children].forEach((k, i) => { const dd = Math.abs(k.offsetLeft - sp.offsetLeft - 20 - sp.scrollLeft); if (dd < d) { d = dd; best = i; } }); return best; };
+function markiere(){
+  const a = aktKarte(); if ((S.ai[S.person] || 0) !== a) { S.ai[S.person] = a; speichere(); }
+  const st = S.st[S.person] || {};
+  document.querySelectorAll("#dots button").forEach((b, i) => { b.setAttribute("aria-current", i === a ? "true" : "false"); b.classList.toggle("voll", i < 4 && (st[i] || "").trim().length >= 6); });
+}
+function blaettern(i, tastatur){
+  const sp = document.getElementById("spur"); if (!sp) return;
+  i = Math.max(0, Math.min(sp.children.length - 1, i));
+  sp.scrollTo({ left: sp.children[i].offsetLeft - sp.offsetLeft - 20, behavior: (ruhig() || tastatur) ? "auto" : "smooth" });
+}
+function wegStand(){
+  const n = fertigePersonen().length, f = document.getElementById("fortschritt"), w = document.querySelector("[data-geh='matrix'].primary");
+  if (f) { f.classList.toggle("ok", n >= 1); f.textContent = n >= 1 ? `✓ ${n} Weg${n > 1 ? "e" : ""} gegangen. Die Matrix ist frei.` : "Noch kein Weg vollständig. Ein Weg gilt als gegangen, wenn zu den Stationen 1–4 Stichworte stehen und „Das wird ernst“ gesetzt ist."; }
+  if (w) { w.disabled = n < 1; w.previousElementSibling.textContent = n < 1 ? "Erst einen Weg gehen, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert."; }
+  document.querySelectorAll(".mensch").forEach(b => { const id = b.dataset.person, ok = personFertig(id), mt = b.querySelector(".mt"), alt = mt.querySelector(".fertig"); if (ok && !alt) mt.insertAdjacentHTML("beforeend", `<span class="fertig">✓ Weg gegangen</span>`); if (!ok && alt) alt.remove(); });
+}
+const halteScroll = fn => { const sy = window.scrollY; fn(); window.scrollTo(0, sy); };
+const einfach = (feld, id, o) => { S[feld][id] = +o; speichere(); halteScroll(zeichne); };
+const einfachNeu = (feld, id) => { delete S[feld][id]; speichere(); halteScroll(zeichne); };
+
+/* ---------- Ereignisse ---------- */
+document.addEventListener("click", ev => {
+  const t = ev.target.closest("button, [data-geh]"); if (!t) return;
+  const d = t.dataset, tast = ev.detail === 0;
+  if (d.geh) { ev.preventDefault(); geh(d.geh); return; }
+  if ("loeschfrage" in d) { const f = document.getElementById("loesch-frage"); f.hidden = false; f.querySelector("button").focus(); return; }
+  if (d.loeschen === "nein") { document.getElementById("loesch-frage").hidden = true; return; }
+  if (d.loeschen === "ja") { try { localStorage.removeItem(KEY); } catch(e) {} location.reload(); return; }
+  if ("bewegung" in d) { S.ruhig = !S.ruhig; speichere(); halteScroll(zeichne); return; }
+  if ("aufdecken" in d) { S.brief.auf = true; speichere(); zeichne(); const a = document.getElementById("aufdeck"); if (!tast) neu(a, "neu"); a.scrollIntoView({ block:"start", behavior: ruhig() || tast ? "auto" : "smooth" }); a.querySelector("p").setAttribute("tabindex", "-1"); return; }
+  if (d.wort) { S.begriff.wahl = d.wort; speichere(); t.parentNode.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b === t)); document.querySelector("[data-wortfest]").disabled = !(S.begriff.grund.trim().length >= 8); return; }
+  if ("wortfest" in d) { S.begriff.zu = true; speichere(); zeichne(); const r = document.getElementById("wortrm"); if (!tast) neu(r, "rm"); r.scrollIntoView({ block:"start", behavior: ruhig() || tast ? "auto" : "smooth" }); return; }
+  if (d.wort2) { S.begriff2.wahl = d.wort2; speichere(); halteScroll(zeichne); return; }
+  if (d.abruf) { einfach("abruf", d.abruf, d.o); return; }
+  if (d.abrufneu) { einfachNeu("abruf", d.abrufneu); return; }
+  if (d.person) { S.person = d.person; speichere(); document.querySelectorAll(".mensch").forEach(b => b.setAttribute("aria-pressed", b === t)); const w = document.getElementById("weg-bereich"); w.innerHTML = lebensweg(MENSCH(d.person)); stapelStart(); if (!tast) neu(w.querySelector(".spur"), "neu"); w.scrollIntoView({ block:"start", behavior: ruhig() || tast ? "auto" : "smooth" }); return; }
+  if (d.blatt) { blaettern(aktKarte() + (+d.blatt), tast); return; }
+  if (d.karte !== undefined && t.closest("#dots")) { blaettern(+d.karte, tast); return; }
+  if (d.ernst !== undefined) { S.ernst[S.person] = S.ernst[S.person] || {}; S.ernst[S.person].vor = +d.ernst; speichere(); t.parentNode.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b === t)); const g = (S.ernst[S.person].grund || "").trim().length >= 8; const f = document.querySelector("[data-ernstfest]"); if (f) { f.disabled = !g; document.getElementById("ernsthinweis").textContent = g ? "" : "Jetzt noch einen Satz schreiben."; } return; }
+  if ("ernstfest" in d) { const e = S.ernst[S.person]; e.wahl = e.vor; speichere(); const sl = document.getElementById("spur").scrollLeft; zeichne(); document.getElementById("spur").scrollLeft = sl; wegStand(); const k = document.getElementById("ernst"); const fb = k.querySelector(".fb"); if (fb && !tast) neu(fb, "rm"); k.scrollIntoView({ block:"start", behavior: ruhig() || tast ? "auto" : "smooth" }); return; }
+  if ("ernstneu" in d) { const e = S.ernst[S.person]; delete e.wahl; speichere(); const sl = document.getElementById("spur").scrollLeft; zeichne(); document.getElementById("spur").scrollLeft = sl; wegStand(); document.getElementById("ernst").scrollIntoView({ block:"start" }); return; }
+  if (d.vergleich) { einfach("vergleich", d.vergleich, d.o); return; }
+  if (d.vergleichneu) { einfachNeu("vergleich", d.vergleichneu); return; }
+  if ("schaetzfest" in d) { S.schaetz.juden = +document.getElementById("sj").value; S.schaetz.tote = +document.getElementById("st").value; S.schaetz.zu = true; speichere(); halteScroll(zeichne); const a = document.getElementById("aufdeck"); if (!tast) neu(a, "neu"); a.scrollIntoView({ block:"start", behavior: ruhig() || tast ? "auto" : "smooth" }); return; }
+  if ("schaetzneu" in d) { S.schaetz.zu = false; speichere(); halteScroll(zeichne); return; }
+  if (d.lager) { einfach("lager", d.lager, d.o); return; }
+  if (d.lagerneu) { einfachNeu("lager", d.lagerneu); return; }
+  if ("stimmkarte" in d) { stimmkarte(); return; }
+  if ("tafel" in d) { tafelAnsicht(); return; }
+  if (d.tally !== undefined) { const i = +d.tally; S.tafel[i] = Math.max(0, S.tafel[i] + (+d.d)); speichere(); tafelAnsicht(); document.querySelector(`[data-tally="${i}"][data-d="${d.d}"]`).focus(); return; }
+  if ("tallynull" in d) { S.tafel = [0,0,0,0]; speichere(); tafelAnsicht(); return; }
+  if ("zu" in d) { schliesse(); return; }
+  if (d.anfang) { const ta = document.getElementById("erz"); const v = ta.value; ta.value = (v && !v.endsWith("\n") && v.trim() ? v + "\n" : v) + d.anfang + " "; S.erz = ta.value; speichere(); ta.focus(); return; }
+  if (d.abrufz) { einfach("abrufz", d.abrufz, d.o); return; }
+  if (d.abrufzneu) { einfachNeu("abrufz", d.abrufzneu); return; }
+  if ("drucken" in d) { window.print(); return; }
+});
+document.addEventListener("input", ev => {
+  const t = ev.target, d = t.dataset;
+  if (d.feld === "brief") { S.brief.text = t.value; speichere(); const ok = t.value.trim().length >= 10; document.querySelector("[data-aufdecken]").disabled = !ok; document.getElementById("briefhinweis").textContent = ok ? "" : "Schreib mindestens einen Satz."; return; }
+  if (d.feld === "begriffgrund") { S.begriff.grund = t.value; speichere(); document.querySelector("[data-wortfest]").disabled = !(S.begriff.wahl && t.value.trim().length >= 8); return; }
+  if (d.feld === "grund2") { S.begriff2.grund = t.value; speichere(); return; }
+  if (d.st !== undefined) { S.st[S.person] = S.st[S.person] || {}; S.st[S.person][d.st] = t.value; speichere(); markiere(); wegStand(); return; }
+  if (d.feld === "ernstgrund") { S.ernst[S.person] = S.ernst[S.person] || {}; S.ernst[S.person].grund = t.value; speichere(); const g = t.value.trim().length >= 8, f = document.querySelector("[data-ernstfest]"); if (f) { f.disabled = !(g && S.ernst[S.person].vor !== undefined); document.getElementById("ernsthinweis").textContent = f.disabled ? (S.ernst[S.person].vor === undefined ? "Station antippen und einen Satz schreiben." : "Schreib mindestens einen Satz.") : ""; } return; }
+  if (d.feld === "erz") { S.erz = t.value; speichere(); const n = t.value.trim().split(/\s+/).filter(Boolean).length; const h = t.nextElementSibling; if (h) h.textContent = `${n} Wörter. Ab 40 Wörtern erscheint das Raster.`; if (n >= 40 && !document.getElementById("raster")) halteScroll(zeichne); return; }
+  if (t.id === "sj" || t.id === "st") { const v = +t.value; document.getElementById(t.id + "-w").textContent = mio(v, true); t.setAttribute("aria-valuetext", mio(v, true)); return; }
+});
+document.addEventListener("keydown", ev => {
+  if (ev.key === "Escape" && document.getElementById("ueber").innerHTML) { schliesse(); return; }
+  if (ev.target.id === "spur" && (ev.key === "ArrowRight" || ev.key === "ArrowLeft")) { ev.preventDefault(); blaettern(aktKarte() + (ev.key === "ArrowRight" ? 1 : -1), true); }
+});
+
+zeichne();
+</script>
+</body>
+</html>
