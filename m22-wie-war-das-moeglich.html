@@ -387,6 +387,8 @@ const BILDER = {
   goldhagen:  { datei:"media/m22-wc-goldhagen-2011.jpg", alt:"Daniel Goldhagen bei einem Podiumsgespräch", unter:"Daniel J. Goldhagen, Frankfurter Buchmesse 2011", quelle:"Das blaue Sofa / Club Bertelsmann, Wikimedia Commons, CC BY 2.0", url:"https://commons.wikimedia.org/wiki/File:Daniel_Goldhagen_im_Gespr%C3%A4ch_mit_Wolfgang_Herles.jpg" },
   milgram:    { datei:"media/m22-wc-milgram-1954.jpg", alt:"Stanley Milgram, Porträt als junger Mann", unter:"Stanley Milgram, 1954", quelle:"Queens College Jahrbuch, Wikimedia Commons, gemeinfrei", url:"https://commons.wikimedia.org/wiki/File:Stanley_Milgram_1954.jpg" },
   bauman:     { datei:"media/m22-wc-bauman-2005.jpg", alt:"Zygmunt Bauman, Porträt", unter:"Zygmunt Bauman, Warschau 2005", quelle:"Foto: Mariusz Kubik, Wikimedia Commons, CC BY 2.5", url:"https://commons.wikimedia.org/wiki/File:Zygmunt_Bauman_by_Kubik.JPG" },
+  willner:    { datei:"media/m22-heft-willner-1923.jpg", alt:"Familie Willner, sechs Personen in Festkleidung, Ausschnitt mit Betty und Friedrich in der Mitte", unter:"Familie Willner, 1923 (von links): Bertha, Rudolf, Betty, Friedrich, Frieda und Johanne", quelle:"Privat / Buchveröffentlichung Dieter Meiners, nach dem Unterrichtsheft M21", url:"https://www.joodsmonument.nl/en/page/211028/friedrich-willner" },
+  aufbau:     { datei:"media/m22-jm-willner-aufbau-1946.jpg", alt:"Todesanzeige in Frakturschrift: Friedrich Willner und Betty Willner, Sobibor, 9. April 1943", unter:"Todesanzeige der Angehörigen in der Emigrantenzeitung „Aufbau“, New York, 1. November 1946", quelle:"Joods Monument, Beitrag vom 25.9.2011", url:"https://www.joodsmonument.nl/en/page/211028/friedrich-willner" },
   welzer:     { datei:"media/m22-wc-welzer-2013.jpg", alt:"Harald Welzer am Rednerpult", unter:"Harald Welzer, 2013", quelle:"Foto: Hydro, Wikimedia Commons, CC BY-SA 3.0", url:"https://commons.wikimedia.org/wiki/File:Harald_Welzer_2013.jpg" },
 };
 const FEHLT = new Set();
@@ -430,8 +432,8 @@ const MENSCHEN = [
   { bild:"levinson", name:"Zalman Levinson", ort:"Riga, 9 Jahre", text:"Schickte seiner Tante Briefe und Zeichnungen. Im April 1941 kam die letzte Postkarte. Zalman, seine Eltern und seine Großmutter wurden im Ghetto Riga ermordet.", q:"Yad Vashem, Last Letters 1941" },
   { bild:"emanuel", name:"Emanuel Aschkenasi", ort:"Kiew, 23 Jahre", text:"Bruder von Rosalia London. Seine Eltern Sonya und Solomon und seine Schwester Berta wurden am 29./30. September 1941 in Babyn Jar erschossen, er selbst wenige Monate später.", q:"Yad Vashem, Jewish Families 1941" },
   { bild:"korczak", name:"Janusz Korczak", ort:"Warschau, 64 Jahre", text:"Arzt und Leiter eines Waisenhauses. Am 5./6. August 1942 ging er mit etwa 200 Kindern zum Umschlagplatz. Alle wurden in Treblinka ermordet.", q:"USHMM Holocaust Encyclopedia; Muzeum Treblinka" },
-  { bild:null, name:"Marie Nedvědová", ort:"Bedlno, Böhmen, 19 Jahre", text:"Romni. 1943 mit der ganzen Familie nach Auschwitz-Birkenau deportiert. Sie überlebte und legte später Zeugnis ab.", q:"Datenbank „Testimonies of Roma and Sinti“, Prag" },
-  { bild:null, name:"Friedrich und Betty Willner", ort:"Amsterdam, zuvor Deutschland", text:"Metzger und Geschäftsfrau. 1938 geflohen, 1943 in Amsterdam verhaftet und am 9. April 1943 in Sobibor ermordet. Auch Tochter, Schwiegersohn und zwei Enkel.", q:"Gedenkstätte Sobibor; Joods Monument" },
+  { bild:null, name:"Marie Nedvědová", ort:"Bedlno, Böhmen, 19 Jahre", text:"Romni. 1943 mit der ganzen Familie nach Auschwitz-Birkenau deportiert. Sie überlebte und legte später Zeugnis ab. Ein gesichertes Foto von ihr gibt es in der Datenbank nicht; ihre Worte stehen dort.", q:"Datenbank „Testimonies of Roma and Sinti“, Prag" },
+  { bild:"willner", name:"Friedrich und Betty Willner", ort:"Amsterdam, zuvor Friesoythe", text:"Metzger und Geschäftsfrau, 72 und 69 Jahre. 1938 geflohen, 1943 in Amsterdam verhaftet und am 9. April 1943 in Sobibor ermordet. Auch Tochter Johanne, Schwiegersohn Salomon und die Enkel Fanny und Abraham.", q:"Joods Monument (Geburtsdaten 1870 und 1873)" },
 ];
 
 /* ---------- Phasen aus M21 (AF) ---------- */
@@ -609,7 +611,7 @@ function einstieg(){
   return `${zeitKopf("einstieg")}<h1>Es geht um Menschen</h1>
   <p class="lead">Fünf Menschen aus M21. Jede Zahl der Shoah steht für Menschen wie sie.</p>
   <div class="menschen">${MENSCHEN.map(m => { const b = m.bild && BILDER[m.bild] && !FEHLT.has(m.bild);
-    return `<article class="mensch"><div class="foto">${b ? `<img src="${BILDER[m.bild].datei}" alt="${esc(BILDER[m.bild].alt)}" loading="lazy" data-bild="${m.bild}" onerror="this.closest('.foto').innerHTML='<span class=leer>kein Foto</span>'">` : `<span class="leer">Foto: noch offen</span>`}</div>
+    return `<article class="mensch"><div class="foto">${b ? `<img src="${BILDER[m.bild].datei}" alt="${esc(BILDER[m.bild].alt)}" loading="lazy" data-bild="${m.bild}" onerror="this.closest('.foto').innerHTML='<span class=leer>kein Foto</span>'">` : `<span class="leer">kein gesichertes Foto</span>`}</div>
     <div class="mt"><h3>${esc(m.name)}</h3><span class="ort">${esc(m.ort)}</span><p>${esc(m.text)}</p><span class="q">${b ? esc(BILDER[m.bild].unter) + " · " : ""}${esc(m.q)}</span></div></article>`; }).join("")}</div>
   <p class="wer-tat">Wer tat das?</p>
   <p class="lead" style="text-align:center">Ab Phase 2 waren an jeder Phase der Verfolgung Menschen beteiligt, die sie ausführten.</p>
