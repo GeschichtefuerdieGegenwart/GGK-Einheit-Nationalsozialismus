@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>M23 Die Gesellschaft, in der ich lebe</title>
+<meta name="description" content="GGK M23: Die Gesellschaft, in der ich leb(t)e? Ländervergleich der Shoa: Opferraten schätzen, Dänemark 1943 als Verlauf, sechs Merkmale einer Gesellschaft, Vergleich mit Niederlanden, Bulgarien und Ungarn, Position zwischen Umwelt und Ich.">
+<link rel="stylesheet" href="assets/gegenwart/bundle.css">
+<style>
+/* Schriften lokal im Repository (SIL Open Font License) */
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBoldItalic.woff) format("woff");font-weight:600;font-style:italic;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+/* Bewusst nur hell (Beamer, Druck), wie M18–M22. Farben und Formen aus dem Designsystem GGK-Labor.
+   Die Bausteine von »Gegenwart« (assets/gegenwart/) laufen über Tokens – hier auf die Farben des GGK-Labors gesetzt. */
+:root{
+  color-scheme:light;
+  --bg:#F3EFE7; --surface:#FAF8F3; --surface2:#FFFDF8; --offset:#E9E2D7; --line:#D5CEC3; --border:rgba(36,34,31,.14);
+  --ink:#24221F; --muted:#5F5C56; --faint:#6A655E; --inverse:#FFFAF2; --dunkel:#1B1A17;
+  --red:#9B402D; --red-hi:#EAD7CF; --green:#2E5A47; --green-hi:#D6E4DC; --gold:#7D5C12; --gold-hi:#EEE2BF;
+  --kuli:#1E4FB5; --kuli-hi:#DCE5F7; --slate:#4B4F57; --slate-hi:#DFE1E5; --marker:#F3D54E;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:.75rem; --r-lg:1rem; --ease:cubic-bezier(.23,1,.32,1);
+  /* Gegenwart-Tokens → GGK-Labor */
+  --grund:var(--bg); --flaeche:var(--surface); --karton:var(--offset); --text:var(--ink); --leise:var(--muted); --stahl:#8F887D; --linie:var(--line);
+  --petrol:var(--green); --petrol-hi:var(--green-hi); --auf-petrol:var(--inverse);
+  --honig:var(--gold); --honig-hi:var(--gold-hi); --honigplatte:var(--gold-hi); --auf-honig:var(--ink);
+  --ueberdruck:var(--slate); --auf-ueberdruck:var(--inverse);
+  --oxid:var(--red); --oxid-hi:var(--red-hi);
+  --erfolg:var(--green); --erfolg-hi:var(--green-hi); --warnung:var(--gold); --warnung-hi:var(--gold-hi); --fehler:var(--red); --fehler-hi:var(--red-hi);
+  --font-display:var(--display); --font-stimme:var(--display); --font-text:var(--body);
+  --radius-sm:.6rem; --radius-md:.75rem; --radius-pill:999px; --radius-none:0;
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:20px; --space-6:28px;
+  --knopf-hoehe:48px; --tablet-ziel:56px; --platte:6px 6px 0 0 var(--karton); --platte-knopf:4px 4px 0 0 var(--karton); --fokus-innen:inset 0 0 0 2px var(--grund);
+  --dauer-druck:100ms; --dauer-schnell:140ms; --dauer-mittel:220ms; --dauer-langsam:300ms; --dauer-staffel:30ms; --dauer-wende:460ms; --dauer-aufdecken:420ms; --dauer-reihe:440ms; --dauer-aus:150ms;
+  --kurve-aus:cubic-bezier(.23,1,.32,1); --kurve-beidseits:cubic-bezier(.77,0,.175,1); --kurve-feder:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:none;text-size-adjust:none;overflow-x:clip}
+body{min-height:100dvh;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:clamp(1rem,.95rem + .25vw,1.125rem);line-height:1.58;-webkit-font-smoothing:antialiased;overflow-x:clip}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.14;text-wrap:balance}
+p,li{text-wrap:pretty}
+a{color:var(--red)}
+:focus-visible{outline:3px solid var(--kuli);outline-offset:3px;border-radius:.35rem}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}}
+html[data-bewegung=weniger] *,html[data-bewegung=weniger] *::before,html[data-bewegung=weniger] *::after{animation:none!important;transition-duration:1ms!important}
+@keyframes auf{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+.g{background:transparent;font-size:inherit;line-height:inherit}
+.g .g-frage{font-size:clamp(1.2rem,1.05rem + .7vw,1.5rem)}
+.g .g-knopf{min-height:48px}
+.g-wahl legend{font-weight:700;font-family:var(--body);font-style:normal;font-size:1.05rem}
+.g .g-option span{font-weight:700}
+.g .g-option__urteil{font-weight:400;font-style:normal;font-size:.95rem}
+.g .g-balken__zeile{grid-template-columns:minmax(6.5rem,10rem) 1fr 4.2rem}
+.g .g-schieber{max-width:none}
+.g .g-schieber>label{display:grid;gap:.2rem}.g .g-schieber input[type=range]{width:100%;accent-color:var(--kuli);height:32px}
+.g .g-schieber__buehne{aspect-ratio:auto;min-height:14rem}
+.g .g-schieber__vor,.g .g-schieber__nach{padding:2.6rem 1.2rem 1.2rem}
+.g .g-schieber__vor p,.g .g-schieber__nach p{font-size:.98rem}
+.g .g-schieber__vor .zahl,.g .g-schieber__nach .zahl{font:600 2.2rem/1 var(--display)}
+.g .g-zeit{padding-top:34px}
+@media (max-width:640px){.g .g-zeit{grid-auto-flow:row;grid-auto-columns:auto;gap:var(--space-3)}.g .g-zeit::before{display:none}}
+.g .g-schalter input{margin:0}
+
+/* Kopf mit Lernweg */
+.kopf{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--border);padding-top:env(safe-area-inset-top,0px)}
+.kopf-in{max-width:1100px;margin:auto;padding:.55rem max(1.25rem,env(safe-area-inset-right,0px)) .55rem max(1.25rem,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:.6rem .9rem;flex-wrap:wrap}
+.mark{width:32px;height:32px;flex:0 0 auto}
+.titel{font-weight:700;line-height:1.2;margin-right:auto}.titel small{display:block;color:var(--muted);font-weight:400;font-size:.82rem}
+.pill{border:1px solid var(--border);background:var(--surface2);border-radius:999px;padding:.45rem 1rem;font-weight:700;min-height:44px;display:inline-flex;align-items:center;text-decoration:none;color:var(--ink)}
+.weg{max-width:1100px;margin:auto;padding:0 1.25rem .6rem;display:flex;gap:.35rem;overflow-x:auto;scrollbar-width:none}
+.weg button{flex:1 0 auto;min-width:7.4rem;border:0;border-top:3px solid var(--line);background:transparent;text-align:left;padding:.45rem .5rem .2rem;color:var(--faint);font-size:.85rem;line-height:1.25;min-height:48px}
+.weg button b{display:block;color:inherit;font-size:.78rem}
+.weg button.da{color:var(--muted);border-top-color:var(--muted)}
+.weg button.akt{color:var(--ink);border-top-color:var(--red)}
+
+main{max-width:46rem;margin:auto;padding:clamp(1.5rem,4vw,3rem) max(1.25rem,env(safe-area-inset-right,0px)) 5rem max(1.25rem,env(safe-area-inset-left,0px))}
+main.breit{max-width:62rem}
+.zeit{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;color:var(--red);font-weight:700;font-size:.95rem}
+.zeit .nr{font-family:var(--display);font-size:1.1rem}
+h1{font-size:clamp(2rem,1.4rem + 2.4vw,3.1rem);margin:.5rem 0 .7rem}
+.leitfrage{font-family:var(--display);font-style:italic;font-weight:600;font-size:clamp(1.35rem,1.1rem + .9vw,1.8rem);color:var(--muted);margin-bottom:1.4rem}
+.lead{font-size:clamp(1.1rem,1rem + .5vw,1.28rem);color:var(--muted);margin-bottom:1.4rem}
+h2.abschnitt{font-size:1.45rem;margin:2.2rem 0 .7rem}
+h3.klein{font-size:1.15rem;margin:1.4rem 0 .4rem}
+p+p{margin-top:.7rem}
+.auftrag{background:var(--ink);color:var(--inverse);border-radius:var(--r-lg);padding:1.2rem 1.4rem;margin:1.5rem 0 1.1rem}
+.auftrag h3{font-size:1.2rem;margin-bottom:.35rem}
+.auftrag p{color:#DCD5CA}
+.auftrag .form{display:inline-block;font-weight:700;color:var(--marker);font-size:.9rem;margin-bottom:.2rem}
+.hinweis{font-size:.9rem;color:var(--muted)}
+.belastend{border-left:6px solid var(--gold);background:var(--gold-hi);padding:.75rem 1rem;border-radius:0 .5rem .5rem 0;margin:1rem 0}
+.merksatz{font-family:var(--display);font-weight:600;font-size:1.25rem;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);padding:.7rem 0;margin:1.4rem 0;text-align:center}
+.btn{min-height:48px;border:1px solid var(--border);border-radius:var(--r);padding:.6rem 1.2rem;background:var(--surface2);font-weight:700;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.4rem}
+.btn:hover{background:var(--offset)}
+.btn.primary{background:var(--red);color:var(--inverse);border-color:transparent}
+.btn.primary:hover{background:#86361f}
+.btn.dunkel{background:var(--ink);color:var(--inverse);border-color:transparent}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn:active{transform:scale(.97)}
+.reihe{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-top:.8rem}
+.fuss{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-top:1px solid var(--line);margin-top:2.2rem;padding-top:1.3rem;flex-wrap:wrap}
+label{font-weight:700;display:block}
+textarea{width:100%;min-height:5rem;border:1.5px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;background:var(--surface2);resize:vertical;margin-top:.35rem}
+.feldgruppe{display:grid;gap:1rem;margin-top:1rem}
+.karte{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
+.karte+.karte{margin-top:1rem}
+.kennung{font-weight:700;color:var(--red);font-size:.88rem;margin-bottom:.3rem}
+.quelle{font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.4}
+.quelle a{color:var(--muted)}
+blockquote{margin:.8rem 0;padding:.7rem 1rem;border-left:5px solid var(--kuli);background:var(--kuli-hi);border-radius:0 .5rem .5rem 0;font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.35}
+blockquote .wer{display:block;font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--muted);margin-top:.35rem}
+details.hilfe{margin-top:.8rem;border:1.5px dashed var(--line);border-radius:.6rem;padding:.4rem .8rem}
+details.hilfe summary{cursor:pointer;font-weight:700;min-height:40px;display:flex;align-items:center}
+details.hilfe p{margin:.3rem 0 .4rem}
+.status{display:inline-block;font-size:.78rem;font-weight:700;padding:.1rem .5rem;border-radius:.35rem;background:var(--slate-hi);color:var(--slate);margin-right:.3rem}
+.status.beleg{background:var(--green-hi);color:var(--green)}
+.status.modell{background:var(--gold-hi);color:var(--gold)}
+.aufdeck{margin-top:1rem;background:var(--offset);border-radius:var(--r-lg);padding:1rem 1.2rem}
+.aufdeck.neu{animation:auf 360ms var(--ease) both}
+.zwei{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+@media (max-width:640px){.zwei{grid-template-columns:1fr}}
+.zwei .alt{background:var(--offset);border-radius:.6rem;padding:.8rem 1rem;min-width:0}
+
+/* AJ · Bildband */
+.band{position:relative;background:var(--dunkel);color:var(--inverse);border-radius:var(--r-lg);overflow:hidden;margin:0 0 1.6rem;min-height:9rem;display:grid;grid-template-columns:minmax(0,1fr)}
+.band.mit{grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:15rem}
+@media (max-width:640px){.band.mit{grid-template-columns:1fr}}
+.band .bt{padding:1.3rem 1.4rem;display:flex;flex-direction:column;justify-content:center;gap:.4rem}
+.band .bt .ob{font-size:.85rem;font-weight:700;color:#C9BFAE;letter-spacing:.02em}
+.band .bt h2{font-size:clamp(1.5rem,1.2rem + 1.4vw,2.2rem);color:var(--inverse)}
+.band .bt p{color:#DCD5CA}
+.band figure{margin:0;position:relative;min-height:12rem;background:#2A2824}
+.band figure img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:.92}
+.band.neu figure img{animation:band-ein 650ms var(--ease) both}
+@keyframes band-ein{from{opacity:0;transform:translateX(4%) scale(1.03)}to{opacity:.92;transform:none}}
+.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:.45rem .8rem;font-size:.75rem;line-height:1.35;color:#E6DFD2;background:linear-gradient(transparent,rgba(27,26,23,.85))}
+.band figcaption b{color:var(--inverse)}
+
+/* Säulen (Modell) */
+.saeulen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin-top:1rem}
+@media (max-width:700px){.saeulen{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.saeulen{grid-template-columns:1fr}}
+.saeule{background:var(--surface);border:1px solid var(--border);border-radius:.7rem;padding:.7rem .8rem;display:grid;gap:.2rem;font-size:.92rem;line-height:1.4}
+.saeule b{font-family:var(--display);font-size:1.08rem}
+.saeule .kf{font-style:italic;color:var(--muted)}
+.laender{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1rem}
+@media (max-width:760px){.laender{grid-template-columns:1fr}}
+.land{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1rem 1.1rem;display:grid;gap:.4rem;align-content:start}
+.land .rate{font-family:var(--display);font-size:2rem;line-height:1}
+.land .rate small{display:block;font-family:var(--body);font-size:.85rem;color:var(--muted)}
+.land ul{padding-left:1.1rem;font-size:.95rem;display:grid;gap:.2rem}
+
+/* Tabellen */
+.matrix-wrap{overflow-x:auto;margin-top:1rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%}
+th,td{padding:.55rem .7rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.92rem}
+th{background:var(--offset)}
+tr:last-child td{border-bottom:0}
+td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* Produkt */
+.raster3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.6rem;font-size:.88rem}
+@media (max-width:640px){.raster3{grid-template-columns:1fr}}
+.raster3 div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .7rem}
+.raster3 b{display:block;margin-bottom:.2rem}
+.satzanfaenge{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem}
+.satzanfaenge button{min-height:40px;border:1.5px solid var(--border);background:var(--surface2);border-radius:.5rem;padding:.3rem .7rem;font-size:.9rem}
+.pole{display:flex;justify-content:space-between;gap:1rem;font-weight:700;font-size:.95rem;margin-top:.6rem}
+.pole span{max-width:46%}
+
+/* Löschen */
+.loesch{margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.92rem;color:var(--muted);display:flex;gap:.9rem;flex-wrap:wrap;align-items:center}
+.loesch-frage{margin-top:.6rem;border:2px solid var(--red);border-radius:.7rem;padding:.8rem 1rem;background:var(--red-hi);color:var(--ink);flex:1 0 100%}
+
+/* Zusammenfassung */
+.zf h2{font-size:1.25rem;margin:1.2rem 0 .4rem}
+.zf .zw{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+@media (max-width:640px){.zf .zw{grid-template-columns:1fr}}
+@media print{
+  @page{size:A4;margin:12mm 13mm}
+  body{background:#fff;font-size:10pt;line-height:1.35}
+  .kopf,.fuss,.loesch,.nodruck,.reihe{display:none!important}
+  main{max-width:none;padding:0}
+  .zf h1{font-size:18pt;margin:0 0 .15rem}
+  .zf .leitfrage{font-size:12pt;margin-bottom:.3rem}
+  .zf h2{font-size:12pt;margin:.5rem 0 .2rem;break-after:avoid}
+  .saeulen{grid-template-columns:repeat(3,minmax(0,1fr));gap:.4rem}
+  .saeule{padding:.35rem .5rem;font-size:8.6pt;line-height:1.3;border-color:#bbb}
+  .zf th,.zf td{padding:.2rem .4rem;font-size:8.5pt}
+  .zf .karte{padding:.4rem .6rem}
+  .zf .seitenumbruch{break-before:page}
+  .zf .g-wahl{gap:.3rem}.zf .g-wahl fieldset{gap:.2rem}.zf .g-wahl legend{margin-bottom:.2rem;font-size:9.5pt}.zf .g-option span{min-height:0;padding:.25rem .5rem .25rem 1.7rem;font-size:8.5pt;border-width:1px}.zf .g-option span::before{width:12px;height:12px;left:.5rem;top:.35rem}.zf .g-option__urteil{font-size:8pt}.zf .g-stempel,.zf .g-wahl__fuss{display:none}.zf .matrix-wrap{break-inside:avoid}
+  .merksatz{margin:.5rem 0;padding:.4rem 0;font-size:11pt}
+  .g .g-balken__wert{transform:none!important}
+  textarea{border:1px solid #bbb;min-height:9rem}
+}
+</style>
+</head>
+<body>
+<header class="kopf"><div class="kopf-in" id="kopf"></div><nav class="weg" id="weg" aria-label="Lernweg"></nav></header>
+<main id="main" tabindex="-1"></main>
+<div id="ueber"></div>
+<noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft (M23).</p></noscript>
+<script src="assets/gegenwart/bundle.js"></script>
+<script>
+"use strict";
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const KEY = "ggk-m23-gesellschaft:v1";
+const lade = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { return {}; } };
+let S = Object.assign({ seite:"start", karte:{ wahl:null, grund:"", zu:false, frage:"" }, zeit:0, ablauf:{ idee:"" }, saeulen:{}, laender:{}, nied:"", hoch:"", pos:{ wert:50, ref:false }, urteil:"", abrufz:{}, ruhig:false }, lade());
+const speichere = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
+const ruhig = () => { try { return S.ruhig || matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e) { return !!S.ruhig; } };
+const neu = (el, k) => { if (!el) return; el.classList.remove(k); void el.offsetWidth; if (!ruhig()) el.classList.add(k); };
+const LABOR = /github\.io$/.test(location.hostname) ? "index.html" : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
+/* Zeichen der Stunde: ein Boot auf Wellen – 34 × 34, aus abgerundeten Balken wie Akte, Weichen und Brief */
+const MARK = `<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M5 20h24l-4 7H9z" fill="none" stroke="#24221F" stroke-width="2.4" stroke-linejoin="round"/><path d="M17 20V7l8 9h-8" fill="none" stroke="#9B402D" stroke-width="2.4" stroke-linejoin="round"/><path d="M3 30c3-2 5-2 8 0s5 2 8 0 5-2 8 0 4 2 5 1" fill="none" stroke="#24221F" stroke-width="2.2" stroke-linecap="round"/></svg>`;
+
+/* ---------- Bezug zu M22 (gleiches Gerät): Position Person ↔ Umstände ---------- */
+function m22Position(){
+  try { const m = JSON.parse(localStorage.getItem("ggk-m22-taeter:v2") || "null"); if (m && typeof m.pos === "number") return Math.round(m.pos); } catch(e) {}
+  return null;
+}
+
+/* ---------- Bilder (media/). Fehlt eine Datei, verschwindet die Abbildung ohne Lücke. ---------- */
+const BILDER = {
+  boot: { datei:"media/m23-wc-elisabeth-dragoer-2026.jpg", alt:"Weißes hölzernes Fischerboot mit kleinem Steuerhaus an einem Steg im Hafen, dahinter Lagerhallen", unter:"Das Fischerboot „Elisabeth“ im Hafen von Dragør: Mit ihm wurden 1943 Menschen nach Schweden gebracht; über Dragør flohen rund 700 Jüdinnen und Juden", quelle:"Foto: Jens Cederskjold, 2026, Wikimedia Commons, CC BY 4.0", url:"https://commons.wikimedia.org/wiki/File:The_fishing_boat_%22Elisabeth%22_took_part_in_the_rescue_of_Danish_Jews_in_1943._Around_700_Jews_fled_trough_Drag%C3%B8r_harbour_to_neutral_Sweden._-_Flickr_-_Cederskjold_Photo.jpg" },
+};
+const FEHLT = new Set();
+const bildFehlt = (img) => { const f = img.closest("figure"); const id = img.dataset.bild; FEHLT.add(id); if (f) { const b = f.closest(".band"); if (b) b.classList.remove("mit"); f.remove(); } };
+function bildFig(id, o = {}){
+  const b = BILDER[id]; if (!b || FEHLT.has(id)) return "";
+  return `<figure class="${o.klasse || ""}"><img src="${b.datei}" alt="${esc(b.alt)}" data-bild="${id}" onerror="bildFehlt(this)"><figcaption><b>${esc(b.unter)}</b>${o.kurz ? "" : ` · ${esc(b.quelle)}`}</figcaption></figure>`;
+}
+function band(bild, ob, titel, text){
+  const fig = bild ? bildFig(bild) : "";
+  return `<div class="band${fig ? " mit" : ""}" id="band"><div class="bt"><span class="ob">${esc(ob)}</span><h2>${esc(titel)}</h2><p>${text}</p></div>${fig}</div>`;
+}
+
+/* ---------- Seiten ---------- */
+const SEITEN = [
+  ["start", "", ""],
+  ["karte", "0–10 Min.", "Die Karte"],
+  ["daenemark", "10–32 Min.", "Dänemark 1943"],
+  ["saeulen", "32–50 Min.", "Sechs Säulen"],
+  ["vergleich", "50–68 Min.", "Drei Länder"],
+  ["position", "68–80 Min.", "Deine Position"],
+  ["plenum", "80–90 Min.", "Plenum"],
+  ["zusammenfassung", "Zum Abheften", ""],
+];
+const idx = id => Math.max(0, SEITEN.findIndex(s => s[0] === id));
+
+/* ---------- Daten: Opferraten (USHMM, „Jewish Losses by Country“; Raten hier gerundet aus Bestand und Toten) ---------- */
+/* rate = gerundeter Anteil der Ermordeten an der jüdischen Bevölkerung vor der Verfolgung (Spannen bei unsicheren Zahlen) */
+const RATEN = [
+  { land:"Dänemark",        rate:2,  text:"unter 2 %",  n:"7.500 · 52–116 Tote", farbe:"green" },
+  { land:"Italien",         rate:13, text:"13 %",       n:"58.400 · 7.900" },
+  { land:"Frankreich",      rate:23, text:"etwa 23 %",  n:"300–330.000 · 73–74.000" },
+  { land:"Belgien",         rate:27, text:"27 %",       n:"90.000 · 24.400" },
+  { land:"Österreich",      rate:35, text:"35 %",       n:"185.000 · 65.500" },
+  { land:"Norwegen",        rate:42, text:"etwa 42 %",  n:"1.800 · 758" },
+  { land:"Böhmen/Mähren",   rate:66, text:"66 %",       n:"117.600 · 77.300" },
+  { land:"Ungarn (1941)",   rate:68, text:"68 %",       n:"825.000 · 564.500" },
+  { land:"Niederlande",     rate:73, text:"73 %",       n:"140.200 · 102.000", farbe:"red" },
+  { land:"Litauen",         rate:85, text:"85 %",       n:"153.000 · 130.000" },
+  { land:"Polen",           rate:88, text:"83–90 %",    n:"3,35 Mio. · 2,77–3,0 Mio.", farbe:"red" },
+];
+const KARTE_OPTIONEN = ["Dänemark", "Niederlande", "Frankreich", "Ungarn"];
+
+/* ---------- Dänemark 1943: Zeitleiste (USHMM „Rescue in Denmark“) ---------- */
+const DK_ZEIT = [
+  { jahr:"April 1940", text:"Besatzung", mehr:"Deutschland besetzt Dänemark. Regierung, König, Polizei und Gerichte bleiben im Amt. Bedingung der Regierung: keine Sondergesetze gegen die etwa 7.500 dänischen Jüdinnen und Juden." },
+  { jahr:"29. Aug. 1943", text:"Regierung tritt zurück", mehr:"Nach Streiks und Sabotage verhängt die Besatzungsmacht den Ausnahmezustand. Die dänische Regierung tritt zurück. Der Schutz, den sie ausgehandelt hatte, fällt weg." },
+  { jahr:"28. Sept. 1943", text:"Die Warnung", mehr:"Georg Ferdinand Duckwitz, deutscher Diplomat in Kopenhagen, warnt dänische Sozialdemokraten vor der geplanten Razzia. Die Nachricht erreicht die jüdische Gemeinde – auch über den Gottesdienst am nächsten Morgen." },
+  { jahr:"1./2. Okt. 1943", text:"Die Razzia", mehr:"Deutsche Polizei durchsucht Wohnungen. Die meisten sind leer: Nachbarn, Kolleginnen, Pfarrer, Ärzte haben Menschen aufgenommen. 470 werden gefasst und nach Theresienstadt deportiert." },
+  { jahr:"Oktober 1943", text:"Über den Sund", mehr:"In etwa drei Wochen bringen Fischer rund 7.200 Jüdinnen und Juden und etwa 700 nichtjüdische Angehörige nach Schweden – nachts, in Booten für höchstens zwölf Personen, oft gegen Bezahlung. Schweden hatte öffentlich erklärt, alle aufzunehmen." },
+  { jahr:"1945", text:"Rückkehr", mehr:"Von den 470 Deportierten überleben alle bis auf 51. Dänische Behörden hatten Pakete nach Theresienstadt geschickt und auf Besuche gedrängt. Die Geflüchteten kehren zurück, viele finden Wohnung und Geschäft unversehrt." },
+];
+/* Bent Melchior (14 Jahre, Sohn des Rabbiners) – nach dem animierten Kurzfilm „Voices in the Void“ (Humanity in Action, 2021), wie im Heft M23 zusammengefasst */
+const MELCHIOR = [
+  { t:"Die Warnung", s:"Am Morgen vor Rosch ha-Schana unterbricht sein Vater, der Rabbiner, den Gottesdienst: Alle sollen sofort nach Hause, packen, untertauchen – und es weitersagen. Über Nacht sind Tausende weg." },
+  { t:"Fremde Hilfe", s:"Die Familie kommt bei einem Pastor unter, später bei einem Bischof. Sie kennen diese Menschen nicht. Die Helfer riskieren ihre Freiheit." },
+  { t:"Der Fehlschlag", s:"Der erste Versuch, im Fischraum eines Bootes, scheitert: Sturm, über sieben Stunden auf See, der Fischer verirrt sich und landet fast wieder am Ausgangspunkt." },
+  { t:"Schweden", s:"Der zweite Versuch gelingt, mit fast leerem Tank. Am 9. Oktober 1943 erreicht die Familie Schweden; ein Junge am Strand entdeckt sie, seine Familie nimmt sie auf." },
+  { t:"Rückkehr", s:"Nach der Befreiung am 5. Mai 1945 kehrt die Familie zurück. Haus und Besitz sind unversehrt – eine Seltenheit in der Geschichte der Shoa." },
+];
+
+/* ---------- Sechs Säulen (Modell der Lehrkraft, nach dem Heft M23) ---------- */
+const SAEULEN = [
+  { id:"inst", name:"Institutionell", kern:"Schützt der Staat seine Bürger – oder verrät er sie?", was:"Verwaltung, Gesetze, Gerichte, König und Regierung: Arbeiten sie noch unabhängig? Beziehen sie Stellung?" },
+  { id:"kult", name:"Kulturell", kern:"Wie tief sind Demokratie und Gleichheit verankert?", was:"Demokratische Tradition, Stärke des Antisemitismus, religiöse und politische Werte, Blick auf „die Anderen“." },
+  { id:"sozi", name:"Sozial", kern:"Sind Juden Mitbürger – oder Außenseiter?", was:"Nachbarschaft, Freundschaft, Arbeit, Netzwerke, gegenseitige Hilfe. Sagt man „unsere Mitbürger“ oder „die anderen“?" },
+  { id:"geo",  name:"Geografisch/praktisch", kern:"Ermöglichen Grenzen, Nähe und Größe die Rettung?", was:"Fluchtland in der Nähe? Wie groß ist die jüdische Bevölkerung, wie konzentriert? Gibt es Verstecke?" },
+  { id:"pol",  name:"Politisch", kern:"Kann die Regierung noch selbst entscheiden?", was:"Art der Besatzung: Militär, SS-Zivilverwaltung, Verbündeter mit eigener Regierung. Wann wird Deutschland härter?" },
+  { id:"takt", name:"Taktisch", kern:"Wer warnt? Wer organisiert?", was:"Wer erfährt zuerst von der Deportation? Wer organisiert Flucht und Verstecke – Staat, Widerstand, private Netzwerke?" },
+];
+const SAEULE = id => SAEULEN.find(s => s.id === id);
+/* Muster 3: Zuordnen mit Begründung. Jeder Fakt hat drei angebotene Säulen; je Säule eine Erklärung, keine ist „falsch“ – die Stufen heißen zentral · auch begründbar · passt kaum. */
+const DK_FAKTEN = [
+  { id:"f1", fakt:"Die Regierung hatte 1940 die Zusammenarbeit an die Bedingung geknüpft, dass es keine Sondergesetze gegen Juden gibt. Bis August 1943 hielt das.",
+    optionen:[["inst","zentral","Die Zusage kommt vom Staat selbst: Regierung und Verwaltung stellen sich vor ihre Bürger."],["pol","begruendbar","Die Zusage war nur möglich, weil Dänemark unter der Besatzung politischen Spielraum behielt."],["takt","kaum","Hier wird nichts organisiert oder gewarnt – es ist eine Haltung des Staates."]] },
+  { id:"f2", fakt:"Schweden liegt in Sichtweite: Über den Öresund sind es an der engsten Stelle wenige Kilometer, etwa 50 Minuten mit dem Boot.",
+    optionen:[["geo","zentral","Fluchtland, Küste, kurze Strecke: eine räumliche Bedingung, die andere Länder nicht hatten."],["takt","begruendbar","Die Nähe wurde erst zur Rettung, weil jemand Boote und Fischer organisierte."],["kult","kaum","Werte und Traditionen sagen nichts darüber, wie weit das Meer ist."]] },
+  { id:"f3", fakt:"Ein deutscher Diplomat, Georg Ferdinand Duckwitz, verriet am 28. September 1943 den Termin der Razzia an dänische Politiker.",
+    optionen:[["takt","zentral","Wer wann gewarnt wird, entscheidet, ob Flucht überhaupt möglich ist – eine taktische Bedingung."],["pol","begruendbar","Dass ein deutscher Beamter warnt, zeigt Risse in der Besatzungsmacht selbst."],["sozi","kaum","Duckwitz war kein Nachbar und kein Netzwerk – er war Teil der Macht, die er unterlief."]] },
+  { id:"f4", fakt:"Pfarrer, Ärztinnen, Studenten, Nachbarn nahmen Menschen auf, die sie oft nicht kannten; Krankenhäuser versteckten Hunderte unter falschen Namen.",
+    optionen:[["sozi","zentral","Hilfe über Nachbarschaft, Beruf und Gemeinde: das soziale Gewebe trägt."],["kult","begruendbar","Dass so viele helfen, setzt voraus, dass Juden als Dänen gelten – eine kulturelle Haltung."],["inst","kaum","Es waren nicht Behörden, die hier handelten, sondern Einzelne und Gruppen."]] },
+  { id:"f5", fakt:"Die dänische Kirche ließ am 3. Oktober 1943 in allen Gottesdiensten einen Protestbrief verlesen: Verfolgung von Juden widerspreche dem christlichen Glauben.",
+    optionen:[["kult","zentral","Eine Institution spricht aus, was gilt: Gleichheit als Wert – nicht nur als Gesetz."],["inst","begruendbar","Die Kirche ist eine nationale Einrichtung, die öffentlich Stellung bezieht."],["geo","kaum","Mit Lage und Größe des Landes hat der Protest nichts zu tun."]] },
+  { id:"f6", fakt:"Viele Fischer verlangten Geld für die Überfahrt, teils hohe Summen. Ein Teil wurde aus Sammlungen und Fonds bezahlt.",
+    optionen:[["takt","zentral","Die Rettung musste praktisch organisiert und finanziert werden – auch das gehört zur Taktik."],["sozi","begruendbar","Dass Geld gesammelt wurde, zeigt Netzwerke, die für andere einstehen."],["kult","kaum","Bezahlung spricht eher gegen ein reines Wertemotiv – das Modell „moralische Überlegenheit“ wird hier brüchig."]] },
+];
+
+/* ---------- Drei weitere Länder (USHMM Holocaust Encyclopedia) ---------- */
+const LAENDER = [
+  { id:"nl", land:"Niederlande", rate:"73 %", unter:"102.000 von 140.000", besatzung:"SS-Zivilverwaltung (Seyss-Inquart) ab Mai 1940",
+    fakten:["Januar 1941: Registrierung aller Juden – 159.806 Namen, darunter 25.000 Geflüchtete aus Deutschland.","Februar 1941: Generalstreik in Amsterdam gegen die ersten Razzien – niedergeschlagen.","Sommer 1942 bis September 1944: Deportationen über Westerbork; niederländische Polizei und Verwaltung wirken mit.","25–30.000 tauchen unter, zwei Drittel überleben. Flaches, dichtes Land, keine neutrale Grenze."],
+    frage:"Welche Säule erklärt die hohe Opferrate am stärksten?",
+    optionen:[["pol","zentral","Eine SS-Zivilverwaltung statt Militär oder eigener Regierung: Berlin kontrolliert direkt, es gibt keinen Verhandlungsspielraum."],["inst","begruendbar","Register, Polizei und Verwaltung arbeiteten weiter – aber für die Besatzung, nicht gegen sie."],["kult","kaum","Der Februarstreik zeigt Solidarität; die Opferrate erklärt sich nicht aus Haltung, sondern aus Kontrolle und Lage."]] },
+  { id:"bg", land:"Bulgarien", rate:"Kernland: 0", unter:"aber 11.343 aus den besetzten Gebieten deportiert", besatzung:"Verbündeter Deutschlands mit eigener Regierung und König",
+    fakten:["Ab 1940 antijüdische Gesetze nach deutschem Muster.","März 1943: 11.343 Jüdinnen und Juden aus den bulgarisch besetzten Gebieten Thrakien, Makedonien und Pirot werden nach Treblinka deportiert.","Geplant waren 20.000, darunter 8.000 aus Sofia. Der Vizepräsident des Parlaments, Dimitar Peschew, und 42 Abgeordnete protestieren, die Kirche auch. König Boris stoppt die Deportation im Mai 1943.","Stattdessen: Vertreibung aus Sofia in die Provinz, Männer in Arbeitslager. 1945 leben etwa 50.000 Juden im Land."],
+    frage:"Was unterscheidet Bulgarien von Dänemark?",
+    optionen:[["pol","zentral","Bulgarien war Verbündeter, nicht besetzt: Die Regierung konnte selbst entscheiden – und tat es in beide Richtungen."],["inst","begruendbar","Parlament und Kirche protestierten – aber derselbe Staat hatte die Gesetze gemacht und die 11.343 ausgeliefert."],["geo","kaum","Lage und Größe erklären nicht, warum dieselbe Regierung die einen auslieferte und die anderen behielt."]] },
+  { id:"hu", land:"Ungarn", rate:"68 %", unter:"etwa 564.000 von 825.000 (Grenzen von 1941)", besatzung:"Verbündeter; deutsche Besatzung ab 19. März 1944",
+    fakten:["Bis März 1944: antijüdische Gesetze, Zwangsarbeit, etwa 63.000 Tote – aber keine Deportation in Vernichtungslager.","Nach der Besatzung: Ghettos ab April; vom 15. Mai bis 9. Juli 1944 werden fast 440.000 Menschen in über 145 Zügen deportiert, die meisten nach Auschwitz – in acht Wochen.","Ungarische Gendarmerie und Verwaltung führen die Deportationen durch; Eichmanns Stab zählt nur wenige Hundert Männer.","7. Juli 1944: Reichsverweser Horthy stoppt die Deportationen; nach dem Putsch der Pfeilkreuzler im Oktober folgen Todesmärsche."],
+    frage:"Welche Säule erklärt das Tempo von 1944 am stärksten?",
+    optionen:[["inst","zentral","Die eigene Verwaltung lieferte aus: Ohne ungarische Gendarmerie wäre das Tempo unmöglich gewesen."],["pol","begruendbar","Der Wechsel vom Verbündeten zum besetzten Land im März 1944 ist der Auslöser."],["takt","kaum","Warnungen gab es (etwa den Auschwitz-Bericht), aber sie erreichten die Betroffenen nicht rechtzeitig – das erklärt nicht die Rate, sondern das Ausmaß der Ausweglosigkeit."]] },
+];
+const LAND = id => LAENDER.find(l => l.id === id);
+
+/* ---------- Position A / B (Heft) ---------- */
+const POSITIONEN = {
+  A:{ titel:"Wir sind Produkte unserer Umgebung", unter:"kultureller Determinismus", these:"Ob ich helfe oder wegschaue, entscheide nicht ich, sondern meine Kultur. Mein Handeln ist vorbestimmt durch das, was „man“ in meiner Gesellschaft tut.",
+      arg:["Wir saugen die Werte unserer Umgebung auf: Schule, Eltern, Freunde, Staat.","In Dänemark halfen Menschen, weil es Norm war – und weil alle mitmachten, war es leicht.","In Deutschland machten Menschen mit, weil Gehorsam und Wegsehen Norm waren.","Folgerung: Heldenmut ist eine Illusion. Ist das System gut, bin ich gut."] },
+  B:{ titel:"Wir sind Architekten unserer Entscheidungen", unter:"radikaler Individualismus", these:"Egal, was um mich herum passiert: Ich allein entscheide über mein Handeln. Mein Gewissen ist stärker als jeder gesellschaftliche Druck.",
+      arg:["Jeder Mensch kann „Nein“ sagen, auch wenn es gefährlich ist.","In Dänemark gab es Kollaborateure, in Polen Retter – also ist es eine Charakterfrage.","Bent Melchior: „Überlasst es nicht anderen, tut es selbst.“","Folgerung: Kultur ist nur eine Ausrede. Ich bin für mein Tun verantwortlich."] },
+};
+const SATZANFAENGE = ["Ich stehe näher bei Position … , weil", "Dänemark zeigt mir, dass", "Die Niederlande oder Ungarn zeigen dagegen, dass", "Für mich heute heißt das"];
+
+/* ---------- Abrufübung (Muster 2) ---------- */
+const ABRUFZ = [
+  { id:"a1", frage:"Warum überlebten in Dänemark fast alle Jüdinnen und Juden?", optionen:[["Weil mehrere Bedingungen zusammenkamen: Staat, Warnung, Nähe zu Schweden, Nachbarn","zentral","Kein Faktor allein reicht – das Zusammenspiel ist die Erklärung."],["Weil die Dänen bessere Menschen waren","kaum","Das ist das Moral-Ranking, das der Vergleich gerade vermeiden will. Fischer nahmen Geld; auch in Dänemark gab es Kollaborateure."],["Weil die deutsche Besatzung dort milder war","begruendbar","Bis August 1943 stimmt das – aber die Razzia im Oktober war ernst gemeint."]] },
+  { id:"a2", frage:"Was unterscheidet die Niederlande von Dänemark am stärksten?", optionen:[["SS-Zivilverwaltung statt eigener Regierung, und keine neutrale Grenze","zentral","Direkte Kontrolle und Lage – politisch und geografisch."],["Es gab dort keine Hilfe aus der Bevölkerung","kaum","25–30.000 tauchten unter, es gab den Februarstreik. Hilfe gab es – sie reichte unter diesen Bedingungen nicht."],["Die Deportationen begannen früher","begruendbar","Ja, ab Sommer 1942 – aber der Zeitpunkt folgt aus der Art der Besatzung."]] },
+];
+/* ---------- Bausteine ---------- */
+const zeitKopf = id => { const s = SEITEN[idx(id)]; return `<p class="zeit"><span class="nr">${esc(s[1])}</span><span>${esc(s[2])}</span></p>`; };
+const weiter = (nach, text, o = {}) => `<div class="fuss"><span class="hinweis">${o.hinweis || "Dein Stand wird nur auf diesem Gerät gespeichert."}</span><button class="btn primary" data-geh="${nach}" ${o.aus ? "disabled" : ""}>${esc(text)} ›</button></div>`;
+function auftrag(form, titel, text){ return `<div class="auftrag"><span class="form">${esc(form)}</span><h3>${esc(titel)}</h3><p>${text}</p></div>`; }
+const STUFENWORT = { zentral:"zentral", begruendbar:"auch begründbar", kaum:"passt kaum" };
+
+/* Gegenwart-Baustein »Wahl« (Muster 2/3): Optionen als Radio, Begründung, Festlegen → Erklärung je Säule.
+   Der Stand liegt in S[feld][id] = { o: Index, grund: Text, zu: true }. Beim Neuzeichnen wird data-zu gesetzt, damit die Rückmeldung ohne erneutes Festlegen steht. */
+function gWahl(feld, id, frage, optionen, o = {}){
+  const st = S[feld][id] || {}, zu = !!st.zu;
+  const name = (i) => o.saeulen ? SAEULE(optionen[i][0]).name : optionen[i][0];
+  return `<div class="g"><div class="g-wahl${o.klasse ? " " + o.klasse : ""}" data-g="wahl" data-mind="${o.mind ?? 8}" data-feld="${feld}" data-id="${id}" ${zu ? 'data-zu=""' : ""}>
+  <fieldset><legend>${frage}</legend>${optionen.map((op, i) => `<label class="g-option" data-urteil="${op[1]}" data-grund="${esc(op[2])}"><input type="radio" name="${feld}-${id}" value="${i}" ${st.o === i ? "checked" : ""} ${zu ? "disabled" : ""}><span>${esc(name(i))}<span class="g-option__urteil">${STUFENWORT[op[1]]} – ${esc(op[2])}</span></span></label>`).join("")}</fieldset>
+  ${o.ohneGrund ? "" : `<label>Begründung in einem Satz<textarea data-grund-feld rows="2" ${zu ? "readonly" : ""} placeholder="${esc(o.platz || "Ich ordne das so zu, weil …")}">${esc(st.grund || "")}</textarea></label>`}
+  <div class="g-wahl__fuss"><button type="button" class="g-knopf g-knopf--primaer" data-g-festlegen ${zu ? "disabled" : ""}>Festlegen</button><span class="g-stempel" ${zu ? "" : "hidden"}>Festgelegt</span>${zu ? `<button type="button" class="btn nodruck" data-neu-wahl>Noch einmal</button>` : ""}<span class="sr" aria-live="polite"></span></div>
+  </div></div>`;
+}
+
+function kopf(){
+  document.getElementById("kopf").innerHTML = `${MARK}<div class="titel">M23 · Die Gesellschaft, in der ich leb(t)e?<small>Ländervergleich</small></div><a class="pill" href="${LABOR}">← GGK-Labor</a><button class="pill" data-geh="lehrkraft">Für Lehrkräfte</button>`;
+  const a = idx(S.seite);
+  document.getElementById("weg").innerHTML = SEITEN.slice(1).map((s, i) => {
+    const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : "");
+    return `<button class="${cls}" data-geh="${s[0]}"${k===a?' aria-current="step"':""}><b>${esc(s[2] || "Zum Abheften")}</b>${esc(s[1])}</button>`;
+  }).join("");
+}
+
+/* ---------- Seiten ---------- */
+function start(){
+  return `<p class="zeit"><span class="nr">GGK · M23</span><span>Doppelstunde, 90 Minuten</span></p>
+  <h1>Die Gesellschaft, in der ich leb(t)e?</h1>
+  <p class="leitfrage">Wenn es keine Monster brauchte – was brauchte es dann? Und was hat eine Gesellschaft davor geschützt?</p>
+  ${band("boot", "Oktober 1943", "Über den Sund", "In drei Wochen bringen dänische Fischer rund 7.200 Jüdinnen und Juden nach Schweden. In den Niederlanden stirbt im selben Krieg fast drei Viertel der jüdischen Bevölkerung. Warum?")}
+  <p class="lead">In M22 hast du gesehen: Die Suche nach dem „Tätertyp“ ist gescheitert. Diese Stunde dreht die Frage um. Sie vergleicht Länder – nicht, um „gute“ und „schlechte“ Völker zu finden, sondern um die Bedingungen zu sehen, unter denen Menschen halfen, wegsahen oder mitmachten.</p>
+  <div class="belastend"><b>Hinweis:</b> Es geht um Verfolgung und Massenmord. Die Texte nennen Zahlen und Abläufe, keine Einzelheiten der Gewalt. Es gibt keine Bilder von Gewalt. Wenn dich etwas belastet, sprich mit deiner Lehrkraft.</div>
+  <div class="karte"><h3>So läuft die Stunde</h3><ol style="padding-left:1.3rem;margin-top:.4rem;display:grid;gap:.25rem">
+  <li>Die Karte: Du sagst voraus, wo die meisten überlebten – dann siehst du die Zahlen.</li>
+  <li>Dänemark 1943: Du ziehst durch sechs Wochen, in denen sich alles änderte.</li>
+  <li>Sechs Säulen: Du ordnest Fakten den Merkmalen einer Gesellschaft zu und begründest.</li>
+  <li>Drei Länder: Niederlande, Bulgarien, Ungarn – welche Säule erklärt am meisten?</li>
+  <li>Deine Position: Umwelt oder Ich? Mit deiner Marke aus M22.</li>
+  <li>Plenum: iPad zu, Gespräch.</li></ol></div>
+  <p class="merksatz">Nicht die besseren Menschen – die besseren Bedingungen. Oder doch nicht?</p>
+  ${weiter("karte","Los geht’s")}`;
+}
+
+function karte(){
+  const k = S.karte, zu = k.zu;
+  const balken = RATEN.map(r => `<div class="g-balken__zeile"><span>${esc(r.land)}</span><span class="g-balken__spur"><span class="g-balken__wert" style="--w:${r.rate};--farbe:var(--${r.farbe || "slate"})"></span></span><span class="g-balken__zahl">${esc(r.text)}</span></div>`).join("");
+  return `${zeitKopf("karte")}<h1>Die Karte</h1>
+  <p class="lead">Sechs Millionen – aber nicht überall gleich. In manchen Ländern wurden fast alle Jüdinnen und Juden ermordet, in anderen fast niemand. Bevor du die Zahlen siehst: Leg dich fest.</p>
+  ${auftrag("Muster 1 · Vorhersage", "In welchem dieser vier Länder überlebte der größte Teil der jüdischen Bevölkerung?", "Wähle und schreib in einem Satz, warum du das vermutest. Erst dann erscheinen die Zahlen.")}
+  <div class="karte" id="vorhersage"><div class="g"><div class="g-wahl" ${zu ? 'data-zu=""' : ""}><fieldset><legend>Meine Vorhersage</legend>${KARTE_OPTIONEN.map((l, i) => `<label class="g-option"><input type="radio" name="karte" value="${i}" data-karte ${k.wahl === i ? "checked" : ""} ${zu ? "disabled" : ""}><span>${esc(l)}</span></label>`).join("")}</fieldset>
+  <label>Warum vermutest du das?<textarea data-feld="kartegrund" rows="2" ${zu ? "readonly" : ""} placeholder="Ich vermute … , weil …">${esc(k.grund)}</textarea></label>
+  <div class="g-wahl__fuss">${zu ? `<span class="g-stempel">Festgelegt</span>` : `<button class="g-knopf g-knopf--primaer" data-kartefest ${k.wahl === null || k.grund.trim().length < 8 ? "disabled" : ""}>Zahlen zeigen</button><span class="hinweis" id="kartehinweis">${k.wahl === null ? "Land wählen und einen Satz schreiben." : (k.grund.trim().length < 8 ? "Jetzt noch einen Satz schreiben." : "")}</span>`}</div></div></div></div>
+  ${zu ? `<div class="aufdeck" id="aufdeck"><p class="kennung"><span class="status beleg">Beleg</span>Anteil der Ermordeten an der jüdischen Bevölkerung vor der Verfolgung</p>
+  <p>Deine Vorhersage: <b>${esc(KARTE_OPTIONEN[k.wahl])}</b>. ${k.wahl === 0 ? "Das trifft: In Dänemark überlebten über 98 Prozent." : "Die niedrigste Rate der vier hat Dänemark – unter 2 Prozent. Die höchste Rate hat die Niederlande."}</p>
+  <div class="g" style="margin-top:.8rem"><div class="g-balken" id="balken" role="img" aria-label="Balken: Anteil der Ermordeten je Land, von Dänemark unter 2 Prozent bis Polen 83 bis 90 Prozent">${balken}</div></div>
+  <p class="quelle">Zahlen: United States Holocaust Memorial Museum, Holocaust Encyclopedia, „Jewish Losses by Country“ (Bestand vor der Verfolgung · Ermordete). Die Prozente sind hier gerundet berechnet; bei Spannen steht die Spanne. Ungarn in den Grenzen von 1941. Bulgarien fehlt in der Reihe: Im Kernland wurde niemand deportiert, aus den von Bulgarien besetzten Gebieten 11.343 Menschen – dazu später mehr.</p>
+  <div class="feldgruppe"><label>Was fällt dir auf – und welche Frage ergibt sich daraus?<textarea data-feld="kartefrage" rows="3" placeholder="Mir fällt auf, dass … Daraus ergibt sich die Frage: …">${esc(k.frage)}</textarea></label></div>
+  <details class="hilfe"><summary>Hilfe: Woran könnte es liegen?</summary><p>Alle diese Länder waren besetzt oder mit Deutschland verbündet. Trotzdem unterscheiden sich die Raten um das Vierzigfache. Die Frage dieser Stunde: Welche Merkmale einer Gesellschaft haben geschützt – und welche nicht?</p></details></div>` : ""}
+  ${weiter("daenemark", "Weiter: Dänemark 1943", { aus: !zu, hinweis: zu ? undefined : "Erst festlegen, dann weiter." })}`;
+}
+
+function daenemark(){
+  const li = DK_ZEIT.map((z, i) => `<li ${i === (S.zeit || 0) ? "data-hier" : ""} data-mehr="${esc(z.mehr)}"><button type="button" data-zeit="${i}"><span class="g-zeit__jahr">${esc(z.jahr)}</span><span class="g-zeit__text">${esc(z.text)}</span></button></li>`).join("");
+  const z = DK_ZEIT[S.zeit || 0];
+  return `${zeitKopf("daenemark")}<h1>Dänemark 1943</h1>
+  <p class="lead">Im August 1943 leben etwa 7.500 Jüdinnen und Juden in Dänemark, fast alle in Kopenhagen. Sie tragen keinen Stern, ihre Geschäfte sind offen, ihre Kinder gehen zur Schule. Sechs Wochen später sind fast alle in Schweden. Wie ging das so schnell?</p>
+  ${auftrag("Bewegung · Zeit ziehen", "Wie wurde aus Sicherheit Flucht?", "Tipp die Stationen an oder geh mit der Tastatur durch. Lies zu jeder, was sich geändert hat. Danach schiebst du den Vorher-nachher-Vergleich hin und her.")}
+  <div class="karte"><p class="kennung"><span class="status beleg">Beleg</span>Zeitleiste nach USHMM, „Rescue in Denmark“</p>
+  <div class="g"><ol class="g-zeit" data-g="zeit" id="dkzeit">${li}<span class="g-zeit__hier">Du bist hier</span></ol><p class="sr" aria-live="polite"></p></div>
+  <div class="aufdeck" id="zeittext" style="margin-top:1.2rem"><p class="kennung">${esc(z.jahr)} · ${esc(z.text)}</p><p>${esc(z.mehr)}</p></div></div>
+
+  <h2 class="abschnitt">Vorher – nachher</h2>
+  <p>Zieh den Griff nach links: Der Oktober schiebt sich über den August. Die Zahlen bleiben daneben stehen; die Bewegung zeigt nur, wie wenig Zeit dazwischen lag.</p>
+  <div class="karte"><div class="g"><div class="g-schieber" data-g="schieber" data-vorher="August 1943" data-nachher="Oktober 1943" data-autoplay data-dauer="4">
+    <div class="g-schieber__buehne" role="img" aria-label="Vorher-nachher-Vergleich: August 1943, etwa 7.500 Jüdinnen und Juden leben in Dänemark ohne Sondergesetze. Oktober 1943: rund 7.200 sind in Schweden, etwa 470 nach Theresienstadt deportiert.">
+      <div class="g-schieber__vor"><span class="g-schieber__marke">August 1943</span><span class="zahl">≈ 7.500</span><p>leben in Dänemark – ohne Stern, ohne Register, mit Regierung, König und Polizei, die sich an die Zusage von 1940 halten.</p></div>
+      <div class="g-schieber__nach"><span class="g-schieber__marke">Oktober 1943</span><span class="zahl">≈ 7.200</span><p>sind in Schweden, etwa 700 nichtjüdische Angehörige dazu. Etwa 470 Menschen wurden gefasst und nach Theresienstadt deportiert.</p></div>
+      <div class="g-schieber__griff"></div>
+    </div>
+    <label>Vergleich ziehen<input type="range" min="0" max="100" step="any" value="100" aria-label="Vorher–nachher: ganz rechts August 1943, ganz links Oktober 1943"></label>
+    <div class="reihe"><button type="button" class="g-knopf g-knopf--sekundaer" data-g-abspielen aria-pressed="false">Hin und her</button><span class="g-schieber__stand"></span></div>
+    <span class="sr" aria-live="polite"></span>
+  </div></div><p class="quelle">Zahlen: USHMM, „Rescue in Denmark“ (etwa 7.200 Jüdinnen und Juden und rund 700 Angehörige nach Schweden; 470 Deportierte, von denen alle bis auf 51 überlebten).</p></div>
+
+  <h2 class="abschnitt">Einer von ihnen: Bent Melchior, 14</h2>
+  <p>Sein Vater ist Rabbiner in Kopenhagen. Was er erlebte, erzählt er als alter Mann im Kurzfilm „Voices in the Void“ (2021). Fünf Stationen, nach seiner Erzählung:</p>
+  ${MELCHIOR.map((m, i) => `<div class="karte"><p class="kennung">${i + 1} · ${esc(m.t)}</p><p>${esc(m.s)}</p></div>`).join("")}
+  <blockquote>„Überlasst es nicht anderen – tut es selbst.“<span class="wer">Bent Melchior (1929–2021), später Oberrabbiner Dänemarks, zitiert im Heft M23</span></blockquote>
+  <div class="feldgruppe"><label>Was war an Dänemark anders? Notiere drei Stichworte – du brauchst sie gleich.<textarea data-feld="idee" rows="3" placeholder="1. … 2. … 3. …">${esc(S.ablauf.idee)}</textarea></label></div>
+  ${weiter("saeulen", "Weiter: Sechs Säulen")}`;
+}
+
+function saeulen(){
+  const n = DK_FAKTEN.filter(f => (S.saeulen[f.id] || {}).zu).length;
+  return `${zeitKopf("saeulen")}<h1>Sechs Säulen</h1>
+  <p class="lead">Dein Heft bietet ein Modell an: sechs Merkmale, an denen man eine Gesellschaft unter Besatzung vergleichen kann. Es ist ein Werkzeug deiner Lehrkraft, keine Theorie aus der Forschung – also prüfe es.</p>
+  <p class="kennung"><span class="status modell">Modell</span>Sechs Säulen – Was schützt eine Gesellschaft?</p>
+  <div class="saeulen" id="saeulen-modell">${SAEULEN.map((s, i) => `<div class="saeule"><b>${i + 1} · ${esc(s.name)}</b><span class="kf">${esc(s.kern)}</span><span>${esc(s.was)}</span></div>`).join("")}</div>
+  ${auftrag("Muster 3 · Zuordnen mit Begründung", "Sechs Fakten aus Dänemark – welche Säule trägt sie?", "Zu jedem Fakt werden dir drei Säulen angeboten. Wähle die, die den Fakt am besten erklärt, begründe in einem Satz, leg fest. Dann siehst du zu jeder der drei Säulen, wie gut sie passt. Es gibt keine „falsche“ Zuordnung – aber eine, die am meisten erklärt.")}
+  ${DK_FAKTEN.map((f, i) => `<div class="karte" id="w-${f.id}"><p class="kennung">Fakt ${i + 1}</p><p><b>${esc(f.fakt)}</b></p>${gWahl("saeulen", f.id, "Welche Säule erklärt diesen Fakt am stärksten?", f.optionen, { saeulen:true })}</div>`).join("")}
+  <p class="hinweis" id="saeulenstand">${n} von 6 festgelegt.${n >= 4 ? " Weiter ist frei." : " Ab vier geht es weiter."}</p>
+  <details class="hilfe"><summary>Was lässt dieses Modell weg?</summary><p>Das Modell sortiert Bedingungen. Es sagt nichts über den Einzelnen: Ein Fischer, der Geld nimmt, und einer, der umsonst fährt, stehen in derselben Säule. Es erklärt auch nicht, warum ausgerechnet <em>diese</em> Nachbarn halfen und andere nicht. Dafür brauchst du den Blick aus M22 – und die Position am Ende der Stunde.</p></details>
+  ${weiter("vergleich", "Weiter: Drei Länder", { aus: n < 4, hinweis: n < 4 ? "Mindestens vier Fakten zuordnen, dann weiter." : undefined })}`;
+}
+
+function vergleich(){
+  const n = LAENDER.filter(l => (S.laender[l.id] || {}).zu).length;
+  return `${zeitKopf("vergleich")}<h1>Drei Länder</h1>
+  <p class="lead">Dänemark ist der Ausnahmefall. Drei andere Länder zeigen, was passiert, wenn eine oder mehrere Säulen fehlen – oder wenn ein Staat in beide Richtungen handelt.</p>
+  ${auftrag("Muster 3 · Zuordnen mit Begründung", "Welche Säule erklärt am stärksten?", "Lies die vier Fakten je Land. Wähle die Säule, begründe, leg fest. Dann siehst du die Erklärung zu allen drei Angeboten.")}
+  <div class="laender">${LAENDER.map(l => `<div class="land"><p class="kennung">${esc(l.land)}</p><p class="rate">${esc(l.rate)}<small>${esc(l.unter)}</small></p><p class="hinweis"><b>Besatzung:</b> ${esc(l.besatzung)}</p><ul>${l.fakten.map(f => `<li>${esc(f)}</li>`).join("")}</ul></div>`).join("")}</div>
+  <p class="quelle">Zahlen und Abläufe: USHMM Holocaust Encyclopedia, Artikel „The Netherlands“, „Bulgaria“, „Hungary after the German Occupation“ und „Jewish Losses by Country“.</p>
+  ${LAENDER.map(l => `<div class="karte" id="w-${l.id}"><p class="kennung">${esc(l.land)}</p>${gWahl("laender", l.id, esc(l.frage), l.optionen, { saeulen:true })}</div>`).join("")}
+
+  <h2 class="abschnitt">Dein Vergleich</h2>
+  ${auftrag("Eigene Sätze", "Wo waren die Opferraten am niedrigsten, wo am höchsten?", "Zwei Sätze, mit Säulen aus dem Modell. Danach kannst du sie mit der Fassung deiner Lehrkraft vergleichen.")}
+  <div class="feldgruppe"><label>Die Opferraten waren dort am niedrigsten, wo …<textarea data-feld="nied" rows="2">${esc(S.nied)}</textarea></label>
+  <label>Die Opferraten waren dort am höchsten, wo …<textarea data-feld="hoch" rows="2">${esc(S.hoch)}</textarea></label></div>
+  ${(S.nied.trim().length >= 15 && S.hoch.trim().length >= 15) ? `<div class="aufdeck"><p class="kennung"><span class="status modell">Fassung der Lehrkraft</span>Aus dem Erwartungshorizont M23</p><div class="zwei"><div class="alt"><b>Am niedrigsten, wo …</b><ul style="padding-left:1.1rem;margin-top:.3rem"><li>staatliche Strukturen intakt blieben und sich schützend vor ihre Bürger stellten,</li><li>Gleichheit und demokratische Tradition fest verankert waren,</li><li>Juden als Mitbürger galten, nicht als „Andere“,</li><li>Staat und Zivilgesellschaft zusammen handelten – „von oben“ und „von unten“.</li></ul></div><div class="alt"><b>Am höchsten, wo …</b><ul style="padding-left:1.1rem;margin-top:.3rem"><li>lokale Behörden aktiv mitarbeiteten oder selbst verfolgten,</li><li>Deutschland direkt kontrollierte, besonders durch SS-Zivilverwaltung,</li><li>Antisemitismus tief verwurzelt und staatlich gefördert war,</li><li>Vernichtungslager auf eigenem Boden standen (Polen).</li></ul></div></div><p class="hinweis" style="margin-top:.6rem">Was steht bei dir, das hier fehlt? Was hier, das du nicht hast? Markiere es für das Plenum.</p></div>` : `<p class="hinweis">Sobald beide Sätze stehen, erscheint die Fassung deiner Lehrkraft zum Vergleich.</p>`}
+  ${weiter("position", "Weiter: Deine Position", { aus: n < 2, hinweis: n < 2 ? "Mindestens zwei Länder festlegen, dann weiter." : undefined })}`;
+}
+
+function position(){
+  const m22 = m22Position(), p = S.pos;
+  const n = S.urteil.trim().split(/\s+/).filter(Boolean).length;
+  return `${zeitKopf("position")}<h1>Deine Position</h1>
+  <p class="lead">Dänemark zeigt: Bedingungen entscheiden mit. Bent Melchior sagt: Entscheide selbst. Beides steht nebeneinander. Wo stehst du?</p>
+  <div class="zwei">${["A","B"].map(k => { const P = POSITIONEN[k]; return `<div class="karte" style="margin:0"><p class="kennung">Position ${k} · ${esc(P.unter)}</p><h3 class="klein" style="margin-top:0">${esc(P.titel)}</h3><p><em>${esc(P.these)}</em></p><ul style="padding-left:1.1rem;margin-top:.5rem;display:grid;gap:.25rem;font-size:.95rem">${P.arg.map(a => `<li>${esc(a)}</li>`).join("")}</ul></div>`; }).join("")}</div>
+  ${auftrag("Skala mit Bezugsmarke", "Umwelt oder Ich?", "Setz den Regler. Danach kannst du deine Marke aus M22 einblenden: Dort hast du dich zwischen „Person“ und „Umstände“ positioniert – für die Täter. Jetzt geht es um alle, auch um dich.")}
+  <div class="karte"><div class="g"><div class="g-skala" data-g="skala" data-referenz="${m22 ?? 50}" id="skala">
+    <div class="g-skala__spur"><input type="range" min="0" max="100" value="${p.wert}" step="1" data-pos aria-label="Position zwischen Umwelt (0) und Ich (100)"><span class="g-skala__ref" ${p.ref && m22 !== null ? `style="left:${m22}%"` : "hidden"}></span></div>
+    <div class="g-skala__enden"><span>A · Die Umgebung entscheidet</span><span>B · Ich entscheide</span></div>
+    <p>Dein Wert: <span class="g-skala__wert"></span></p>
+    <div class="reihe">${m22 !== null ? `<button type="button" class="g-knopf g-knopf--sekundaer" data-g-vergleichen ${p.ref ? "disabled" : ""}>Marke aus M22 zeigen</button><span class="g-skala__ref-text" ${p.ref ? "" : "hidden"}>M22, Täter: ${m22 < 35 ? "eher Person" : (m22 > 65 ? "eher Umstände" : "dazwischen")} (${m22})</span>` : `<span class="hinweis">Keine Marke aus M22 auf diesem Gerät gefunden. Du kannst die Position aus deinem Heft nehmen.</span>`}</div>
+  </div></div></div>
+  <p class="hinweis">Die Skala in M22 lief von „Person“ (links) nach „Umstände“ (rechts). Hier ist es umgekehrt: Umgebung links, Ich rechts. Die Marke wird nicht gespiegelt – vergleiche also die Richtung, nicht die Zahl.</p>
+
+  <h2 class="abschnitt">Dein Urteil</h2>
+  ${auftrag("Muster 10 · Satzanfänge → Raster", "Vier Sätze", "Nimm die Satzanfänge oder deine eigenen. Nenne mindestens ein Land und eine Säule. Ab 40 Wörtern erscheint das Raster.")}
+  <div class="satzanfaenge nodruck">${SATZANFAENGE.map(a => `<button type="button" data-anfang="${esc(a)}">${esc(a)} …</button>`).join("")}</div>
+  <textarea id="urteil" data-feld="urteil" rows="7" aria-label="Dein Urteil">${esc(S.urteil)}</textarea><p class="hinweis">${n} Wörter. Ab 40 Wörtern erscheint das Raster.</p>
+  ${n >= 40 ? `<div class="raster3" id="raster"><div><b>Grundlegend</b>Du nennst eine Position und ein Land.</div><div><b>Sicher</b>Du begründest mit einer Säule und einem Fakt aus der Stunde.</div><div><b>Souverän</b>Du zeigst, was die andere Position richtig sieht – und was dein Vergleich (Länder) über das Einzelne (Melchior) hinaus zeigt.</div></div>` : ""}
+  ${weiter("plenum", "Weiter: Plenum")}`;
+}
+
+function plenum(){
+  return `${zeitKopf("plenum")}<h1>Plenum</h1>
+  <p class="lead">iPad zu. Drei Fragen für das Gespräch – deine Lehrkraft wählt aus.</p>
+  <div class="karte"><ol style="padding-left:1.3rem;display:grid;gap:.6rem">
+  <li><b>Die Säule, die am meisten erklärt:</b> Welche habt ihr bei Dänemark am häufigsten gewählt – und welche bei den Niederlanden? Ist es dieselbe?</li>
+  <li><b>Bulgarien:</b> Derselbe Staat liefert 11.343 Menschen aus und schützt 50.000. Was heißt das für das Modell?</li>
+  <li><b>Umwelt oder Ich:</b> Wer hat die Marke aus M22 gesehen und sich bewegt? In welche Richtung – und warum?</li></ol></div>
+  <p class="merksatz">Dänemark war kein Land besserer Menschen. Es war ein Land, in dem Helfen leichter war – und in dem trotzdem jemand anfangen musste.</p>
+  ${weiter("zusammenfassung", "Zur Zusammenfassung")}`;
+}
+
+function zusammenfassung(){
+  return `<div class="zf"><div class="reihe nodruck"><button class="btn" data-drucken>Drucken (2 Seiten A4)</button><span class="hinweis">Zum Abheften im Ordner. Deine Eingaben sind als Felder dabei.</span></div>
+  <p class="zeit"><span class="nr">GGK · M23</span><span>Zusammenfassung</span></p>
+  <h1>Die Gesellschaft, in der ich leb(t)e?</h1>
+  <p class="leitfrage">Wenn es keine Monster brauchte – was brauchte es dann?</p>
+  <h2>Opferraten (Auswahl)</h2>
+  <div class="matrix-wrap"><table><thead><tr><th>Land</th><th>Anteil Ermordete</th><th>Bevölkerung · Tote</th></tr></thead><tbody>${RATEN.filter(r => ["Dänemark","Frankreich","Belgien","Norwegen","Ungarn (1941)","Niederlande","Polen"].includes(r.land)).map(r => `<tr><td>${esc(r.land)}</td><td class="n">${esc(r.text)}</td><td class="n">${esc(r.n)}</td></tr>`).join("")}<tr><td>Bulgarien</td><td class="n">Kernland 0</td><td class="n">11.343 aus besetzten Gebieten deportiert</td></tr></tbody></table></div>
+  <p class="quelle">USHMM, „Jewish Losses by Country“; Raten gerundet berechnet.</p>
+  <h2>Dänemark 1943 in sechs Stationen</h2>
+  <div class="matrix-wrap"><table><tbody>${DK_ZEIT.map(z => `<tr><td class="n"><b>${esc(z.jahr)}</b></td><td>${esc(z.mehr)}</td></tr>`).join("")}</tbody></table></div>
+  <h2>Sechs Säulen (Modell)</h2>
+  <div class="saeulen">${SAEULEN.map((s, i) => `<div class="saeule"><b>${i + 1} · ${esc(s.name)}</b><span class="kf">${esc(s.kern)}</span></div>`).join("")}</div>
+  <div class="seitenumbruch"></div>
+  <h2>Meine Zuordnungen</h2>
+  <div class="matrix-wrap"><table><thead><tr><th>Fakt / Land</th><th>Meine Säule</th><th>Begründung</th></tr></thead><tbody>
+  ${DK_FAKTEN.map((f, i) => { const st = S.saeulen[f.id] || {}; return `<tr><td>Dänemark, Fakt ${i + 1}</td><td>${st.zu ? esc(SAEULE(f.optionen[st.o][0]).name) : "–"}</td><td>${esc(st.grund || "")}</td></tr>`; }).join("")}
+  ${LAENDER.map(l => { const st = S.laender[l.id] || {}; return `<tr><td>${esc(l.land)}</td><td>${st.zu ? esc(SAEULE(l.optionen[st.o][0]).name) : "–"}</td><td>${esc(st.grund || "")}</td></tr>`; }).join("")}</tbody></table></div>
+  <h2>Mein Vergleich</h2>
+  <div class="zw"><div class="karte"><b>Am niedrigsten, wo …</b><p>${esc(S.nied) || "–"}</p></div><div class="karte"><b>Am höchsten, wo …</b><p>${esc(S.hoch) || "–"}</p></div></div>
+  <h2>Meine Position: ${S.pos.wert} (0 = Umgebung, 100 = Ich)</h2>
+  <div class="karte"><p>${esc(S.urteil) || "–"}</p></div>
+  <h2>Abrufübung (für die nächste Stunde)</h2>
+  ${ABRUFZ.map(a => gWahl("abrufz", a.id, esc(a.frage), a.optionen, { ohneGrund:true, mind:0 })).join("")}
+  <p class="merksatz">Nicht die besseren Menschen – die besseren Bedingungen. Und jemand, der anfängt.</p>
+  </div>${weiter("start", "Zur Startseite")}`;
+}
+
+function lehrkraft(){
+  return `<p class="zeit"><span class="nr">Für Lehrkräfte</span><span>M23 · Die Gesellschaft, in der ich leb(t)e?</span></p>
+  <h1>Lehrkraft-Ansicht</h1>
+  <p class="lead">Was die Seite anders macht als das Heft, was du vor dem Kopieren prüfen solltest, und was nur du kannst.</p>
+  <h2 class="abschnitt">Ablauf (90 Minuten, Variante B)</h2>
+  <div class="matrix-wrap"><table><thead><tr><th>Min.</th><th>Phase</th><th>Muster / Bewegung</th><th>Papierprobe</th></tr></thead><tbody>
+  <tr><td class="n">0–10</td><td>Die Karte</td><td>1 Vorhersage → Auflösung; Balken (Gegenwart)</td><td>Zahlen erst nach der Festlegung → Lernmehrwert</td></tr>
+  <tr><td class="n">10–32</td><td>Dänemark 1943</td><td>Zeitleiste „Du bist hier“; Vorher–nachher-Schieber mit Autoplay (Bewegung ist Lerngegenstand)</td><td>Verlauf und Tempo sind der Gegenstand → Lernmehrwert; Melchior-Stationen gingen auch auf Papier</td></tr>
+  <tr><td class="n">32–50</td><td>Sechs Säulen</td><td>3 Zuordnen mit Begründung (6 Fakten × 3 Säulen)</td><td>Erklärung je Säule erst nach Festlegung → Lernmehrwert</td></tr>
+  <tr><td class="n">50–68</td><td>Drei Länder</td><td>3 Zuordnen; eigene Sätze vor der Lehrkraft-Fassung</td><td>Vergleich erst nach eigenem Text → Lernmehrwert</td></tr>
+  <tr><td class="n">68–80</td><td>Position</td><td>Skala mit Bezugsmarke aus M22; 10 Satzanfänge → Raster</td><td>Marke aus M22 kann nur das Gerät → Lernmehrwert</td></tr>
+  <tr><td class="n">80–90</td><td>Plenum</td><td>analog</td><td>Gespräch</td></tr></tbody></table></div>
+  <h2 class="abschnitt">Vor dem Kopieren prüfen</h2>
+  <ul style="padding-left:1.2rem;display:grid;gap:.4rem">
+  <li><b>Opferraten:</b> Die Seite rechnet aus den USHMM-Zahlen („Jewish Losses by Country“). Der Erwartungshorizont im Heft nennt Belgien 40 % und Norwegen 35 %; nach USHMM sind es etwa 27 % (24.400 von 90.000) und etwa 42 % (758 von 1.800). Frankreich 25 % im Heft, hier „etwa 23 %“. Rumänien („variabel“) ist weggelassen, weil die USHMM-Tabelle dafür keine belastbare Gesamtzahl gibt.</li>
+  <li><b>„11 Millionen“</b> aus der Wannsee-Konferenz steht nicht auf der Seite; die Zahl ist die Planungsgröße des Protokolls, nicht die Zahl der Bedrohten (siehe M21).</li>
+  <li><b>Dänemark:</b> 470 Deportierte (USHMM) statt 472 (Heft); „rund 7.200“ statt 7.056; Dauer und Bezahlung der Überfahrten nach USHMM. Der Protestbrief der Bischöfe vom 3. Oktober 1943 ist belegt.</li>
+  <li><b>Bulgarien:</b> Die Seite nennt beides – Rettung im Kernland und Auslieferung von 11.343 Menschen aus Thrakien, Makedonien und Pirot. Das Heft hat Bulgarien nicht in der Tabelle; so wird aus der „Rettung“ keine Heldengeschichte.</li>
+  <li><b>Ungarn:</b> Raten in den Grenzen von 1941 (825.000), nicht in denen von 1938. Das macht einen Unterschied von mehreren Hunderttausend.</li>
+  <li><b>Das Video</b> „Voices in the Void“ (18 Min., YouTube) ist nicht verlinkt: keine externen Links in der Arbeitsphase. Wenn du es zeigen willst: am Beamer, vor der Zeitleiste (dann 10–32 Min. auf 10–40 strecken und das Melchior-Kapitel auf der Seite überspringen).</li>
+  <li><b>Die Säulen</b> sind als Modell gekennzeichnet (dein Werkzeug), nicht als Forschungsstand. Die Hilfe „Was lässt dieses Modell weg?“ ist die Brücke zu M22.</li>
+  <li><b>Position A / B</b> sind aus dem Heft übernommen. Die Skala ist bewusst gegenläufig zu M22 beschriftet (dort Person ↔ Umstände, hier Umgebung ↔ Ich); ein Hinweis auf der Seite sagt das. Wenn dich das stört: In der Datei <code>data-referenz</code> auf <code>100 − pos</code> setzen.</li>
+  <li><b>KI-Quellen:</b> Die 67 Quellen des Hefts (Perplexity, darunter Reddit und Wikipedia) sind nicht übernommen. Alle Zahlen auf der Seite stammen aus der USHMM Holocaust Encyclopedia.</li></ul>
+  <h2 class="abschnitt">Gegenwart-Probe</h2>
+  <p>Diese Stunde nutzt zum ersten Mal die Bausteine des Design-Systems „Gegenwart“ (Wahl, Balken, Zeitleiste, Schieber, Skala) in den Farben des GGK-Labors. Farben, Wortmarke und Metapher bleiben die des Projekts; die Bausteine laufen über Tokens (<code>assets/gegenwart/</code>). Schalter „Weniger Bewegung“ unten setzt beide Systeme um.</p>
+  <h2 class="abschnitt">Nur du kannst das</h2>
+  <ul style="padding-left:1.2rem;display:grid;gap:.4rem"><li>Das Moral-Ranking abfangen: Wenn „die Dänen waren halt besser“ fällt, Fakt 6 (Bezahlung) und Bulgarien aufrufen.</li><li>Die Brücke zu M22: Die Marke aus M22 ist nur auf demselben Gerät sichtbar. Frag im Plenum, wer sich bewegt hat.</li><li>Lernende, die bei der Karte „Dänemark“ vorhersagen, weil sie es schon wissen: Die Begründung zählt, nicht der Treffer.</li></ul>
+  <h2 class="abschnitt">Beobachtungsbogen (nach dem ersten Einsatz)</h2>
+  <div class="matrix-wrap"><table><thead><tr><th>Beobachtung</th><th>Ja / Nein</th><th>Notiz</th></tr></thead><tbody>
+  <tr><td>Haben Lernende beim Schieber angehalten oder nur zugeschaut?</td><td></td><td></td></tr>
+  <tr><td>Welche Säule wurde bei Fakt 3 (Duckwitz) am häufigsten gewählt?</td><td></td><td></td></tr>
+  <tr><td>Sind die eigenen Sätze (niedrigste/höchste) vor der Lehrkraft-Fassung entstanden?</td><td></td><td></td></tr>
+  <tr><td>Hat die Marke aus M22 ein Gespräch ausgelöst?</td><td></td><td></td></tr>
+  <tr><td>Zeit: Wo wurde es eng?</td><td></td><td></td></tr></tbody></table></div>
+  <p class="hinweis" style="margin-top:1rem">Speicherschlüssel <code>${KEY}</code>; M22-Marke aus <code>ggk-m22-taeter:v2</code>. Eingaben bleiben im Browser des Geräts.</p>
+  ${weiter("start","Zur Startseite")}`;
+}
+
+/* ---------- Zeichnen ---------- */
+const SEITE_FN = { start, karte, daenemark, saeulen, vergleich, position, plenum, zusammenfassung, lehrkraft };
+function loeschBereich(){
+  return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button><label class="g-schalter" style="font-family:var(--body)"><input type="checkbox" role="switch" data-bewegung ${S.ruhig ? "checked" : ""}> Weniger Bewegung</label><span>Alles bleibt auf diesem Gerät.</span>
+  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> Vorhersage, Zuordnungen, Sätze, Position und Urteil werden auf diesem Gerät entfernt.</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div></div>`;
+}
+let LETZTE_SEITE = null;
+function zeichne(fokus){
+  if (!SEITE_FN[S.seite]) S.seite = "start";
+  document.documentElement.classList.toggle("ruhig", !!S.ruhig);
+  if (S.ruhig) document.documentElement.setAttribute("data-bewegung", "weniger"); else document.documentElement.removeAttribute("data-bewegung");
+  kopf();
+  const m = document.getElementById("main");
+  m.classList.toggle("breit", ["lehrkraft", "zusammenfassung", "vergleich", "saeulen", "position"].includes(S.seite));
+  m.innerHTML = SEITE_FN[S.seite]() + loeschBereich();
+  window.Gegenwart && Gegenwart.init(m);
+  nachInit();
+  if (LETZTE_SEITE !== S.seite) { const b = document.getElementById("band"); if (b && b.classList.contains("mit")) neu(b, "neu"); }
+  LETZTE_SEITE = S.seite;
+  if (fokus) { m.focus({ preventScroll:true }); window.scrollTo(0, 0); }
+}
+/* Festlegen erst mit Wahl und Begründung (der Baustein allein ließe eine leere Begründung durch) */
+function pruefeWahl(w){
+  if (w.hasAttribute("data-zu")) return;
+  const gew = w.querySelector("input:checked"), ta = w.querySelector("textarea"), f = w.querySelector("[data-g-festlegen]");
+  if (f) f.disabled = !gew || (ta && ta.value.trim().length < 8);
+}
+/* Nach Gegenwart.init: Zustände aus S wiederherstellen, die der Baustein nicht selbst speichert */
+function nachInit(){
+  document.querySelectorAll(".g-wahl[data-feld]").forEach(pruefeWahl);
+  schieberEinmal();
+  document.querySelectorAll(".g-wahl[data-feld]").forEach(w => {
+    const st = S[w.dataset.feld][w.dataset.id] || {};
+    if (st.zu) { w.querySelectorAll("input").forEach(i => { i.disabled = true; }); const f = w.querySelector("[data-g-festlegen]"); if (f) f.disabled = true; }
+  });
+  const sk = document.getElementById("skala"); if (sk && S.pos.ref) { const k = sk.querySelector("[data-g-vergleichen]"); if (k) k.disabled = true; }
+  const u = document.getElementById("urteil"); if (u) u.nextElementSibling.textContent = `${S.urteil.trim().split(/\s+/).filter(Boolean).length} Wörter. Ab 40 Wörtern erscheint das Raster.`;
+}
+/* Der Schieber des Bundles pendelt endlos; nach den Regeln aus »bewegung-als-lernmittel« pendelt er höchstens einmal (hin und zurück) und steht dann. */
+function schieberEinmal(){
+  const el = document.querySelector(".g-schieber[data-g]"); if (!el) return;
+  const r = el.querySelector("input[type=range]"), k = el.querySelector("[data-g-abspielen]"), aus = el.querySelector(".g-schieber__stand"); let oben = false;
+  /* Der Griff ist die Grenze: links davon der Oktober, rechts der August – der Stand sagt es so, wie es zu sehen ist */
+  const stand = () => { const p = Math.round(+r.value); if (aus) aus.textContent = `${100 - p} % Oktober 1943 · ${p} % August 1943`; };
+  r.addEventListener("input", stand); r.addEventListener("scrub", stand); stand();
+  r.addEventListener("scrub", () => { const v = +r.value; if (v >= +r.max) oben = true; if (oben && v <= 0 && k && k.getAttribute("aria-pressed") === "true") { k.click(); oben = false; } });
+  if (k) k.addEventListener("click", () => { oben = false; });
+}
+const geh = id => { S.seite = id; speichere(); zeichne(true); };
+const halteScroll = fn => { const sy = window.scrollY; fn(); window.scrollTo(0, sy); };
+const SEITENSTAND = { saeulen: () => { const n = DK_FAKTEN.filter(f => (S.saeulen[f.id] || {}).zu).length; const h = document.getElementById("saeulenstand"); if (h) h.textContent = `${n} von 6 festgelegt.${n >= 4 ? " Weiter ist frei." : " Ab vier geht es weiter."}`; const w = document.querySelector("[data-geh='vergleich'].primary"); if (w) { w.disabled = n < 4; w.previousElementSibling.textContent = n < 4 ? "Mindestens vier Fakten zuordnen, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert."; } },
+  laender: () => { const n = LAENDER.filter(l => (S.laender[l.id] || {}).zu).length; const w = document.querySelector("[data-geh='position'].primary"); if (w) { w.disabled = n < 2; w.previousElementSibling.textContent = n < 2 ? "Mindestens zwei Länder festlegen, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert."; } } };
+
+/* ---------- Ereignisse ---------- */
+document.addEventListener("click", ev => {
+  const t = ev.target.closest("button, [data-geh]"); if (!t) return;
+  const d = t.dataset, tast = ev.detail === 0;
+  if (d.geh) { ev.preventDefault(); geh(d.geh); return; }
+  if ("loeschfrage" in d) { const f = document.getElementById("loesch-frage"); f.hidden = false; f.querySelector("button").focus(); return; }
+  if (d.loeschen === "nein") { document.getElementById("loesch-frage").hidden = true; return; }
+  if (d.loeschen === "ja") { try { localStorage.removeItem(KEY); } catch(e) {} location.reload(); return; }
+  if ("kartefest" in d) { S.karte.zu = true; speichere(); halteScroll(zeichne); const a = document.getElementById("aufdeck"); if (!tast) neu(a, "neu"); a.scrollIntoView({ block:"start", behavior: ruhig() || tast ? "auto" : "smooth" }); if (!tast) balkenWachsen(); return; }
+  if (d.zeit !== undefined) { S.zeit = +d.zeit; speichere(); const z = DK_ZEIT[S.zeit]; const box = document.getElementById("zeittext"); box.innerHTML = `<p class="kennung">${esc(z.jahr)} · ${esc(z.text)}</p><p>${esc(z.mehr)}</p>`; if (!tast) neu(box, "neu"); return; }
+  if ("gFestlegen" in d || t.hasAttribute("data-g-festlegen")) { const w = t.closest(".g-wahl[data-feld]"); if (!w) return; const gew = w.querySelector("input:checked"); if (!gew) return; const feld = w.dataset.feld, id = w.dataset.id; S[feld][id] = { o: +gew.value, grund: (w.querySelector("textarea") || {}).value || "", zu: true }; speichere(); w.querySelector(".g-wahl__fuss").insertAdjacentHTML("beforeend", `<button type="button" class="btn nodruck" data-neu-wahl>Noch einmal</button>`); if (SEITENSTAND[feld]) SEITENSTAND[feld](); return; }
+  if ("neuWahl" in d) { const w = t.closest(".g-wahl[data-feld]"); delete S[w.dataset.feld][w.dataset.id]; speichere(); halteScroll(zeichne); return; }
+  if (t.hasAttribute("data-g-vergleichen")) { S.pos.ref = true; speichere(); return; }
+  if (d.anfang) { const ta = document.getElementById("urteil"); const v = ta.value; ta.value = (v && !v.endsWith("\n") && v.trim() ? v + "\n" : v) + d.anfang + " "; S.urteil = ta.value; speichere(); ta.focus(); return; }
+  if ("drucken" in d) { window.print(); return; }
+});
+document.addEventListener("change", ev => {
+  const t = ev.target, d = t.dataset;
+  if ("bewegung" in d) { S.ruhig = t.checked; speichere(); halteScroll(zeichne); return; }
+  if ("karte" in d) { S.karte.wahl = +t.value; speichere(); karteKnopf(); return; }
+  if (t.type === "radio" && t.closest(".g-wahl[data-feld]")) { const w = t.closest(".g-wahl"); const st = S[w.dataset.feld][w.dataset.id] || {}; S[w.dataset.feld][w.dataset.id] = Object.assign(st, { o: +t.value }); speichere(); pruefeWahl(w); return; }
+});
+function balkenWachsen(){ if (!window.Gegenwart) return; document.querySelectorAll("#balken .g-balken__wert").forEach((b, i) => Gegenwart.bewegen(b, [{ transform:"scaleX(0)" }, { transform:"scaleX(1)" }], { dauer:440, verzug:i * 30 })); document.querySelectorAll("#balken .g-balken__zahl").forEach((b, i) => Gegenwart.bewegen(b, [{ opacity:0 }, { opacity:1 }], { dauer:440, verzug:120 + i * 30, fade:true })); }
+function karteKnopf(){ const b = document.querySelector("[data-kartefest]"); if (!b) return; const ok = S.karte.wahl !== null && S.karte.grund.trim().length >= 8; b.disabled = !ok; document.getElementById("kartehinweis").textContent = ok ? "" : (S.karte.wahl === null ? "Land wählen und einen Satz schreiben." : "Jetzt noch einen Satz schreiben."); }
+document.addEventListener("input", ev => {
+  const t = ev.target, d = t.dataset;
+  if (d.feld === "kartegrund") { S.karte.grund = t.value; speichere(); karteKnopf(); return; }
+  if (d.feld === "kartefrage") { S.karte.frage = t.value; speichere(); return; }
+  if (d.feld === "idee") { S.ablauf.idee = t.value; speichere(); return; }
+  if ("grundFeld" in d) { const w = t.closest(".g-wahl[data-feld]"); const st = S[w.dataset.feld][w.dataset.id] || {}; S[w.dataset.feld][w.dataset.id] = Object.assign(st, { grund: t.value }); speichere(); pruefeWahl(w); return; }
+  if (d.feld === "nied" || d.feld === "hoch") { S[d.feld] = t.value; speichere(); if (S.nied.trim().length >= 15 && S.hoch.trim().length >= 15 && !document.querySelector(".zwei .alt")) halteScroll(zeichne); return; }
+  if ("pos" in d) { S.pos.wert = +t.value; speichere(); return; }
+  if (d.feld === "urteil") { S.urteil = t.value; speichere(); const n = t.value.trim().split(/\s+/).filter(Boolean).length; t.nextElementSibling.textContent = `${n} Wörter. Ab 40 Wörtern erscheint das Raster.`; if (n >= 40 && !document.getElementById("raster")) halteScroll(zeichne); return; }
+});
+
+zeichne();
+</script>
+</body>
+</html>
