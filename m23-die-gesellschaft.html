@@ -198,7 +198,7 @@ td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
   .zf th,.zf td{padding:.2rem .4rem;font-size:8.5pt}
   .zf .karte{padding:.4rem .6rem}
   .zf .seitenumbruch{break-before:page}
-  .zf .g-wahl{gap:.3rem}.zf .g-wahl fieldset{gap:.2rem}.zf .g-wahl legend{margin-bottom:.2rem;font-size:9.5pt}.zf .g-option span{min-height:0;padding:.25rem .5rem .25rem 1.7rem;font-size:8.5pt;border-width:1px}.zf .g-option span::before{width:12px;height:12px;left:.5rem;top:.35rem}.zf .g-option__urteil{font-size:8pt}.zf .g-stempel,.zf .g-wahl__fuss{display:none}.zf .matrix-wrap{break-inside:avoid}
+  .zf .g-wahl{gap:.3rem}.zf .g-wahl fieldset{gap:.2rem}.zf .g-wahl legend{margin-bottom:.2rem;font-size:9.5pt}.zf .g-option span{min-height:0;padding:.25rem .5rem .25rem 1.7rem;font-size:8.5pt;border-width:1px}.zf .g-option span::before{width:12px;height:12px;left:.5rem;top:.35rem}.zf .g-option__urteil{font-size:8pt}.zf .g-stempel,.zf .g-wahl__fuss{display:none}.zf h2{margin:.35rem 0 .15rem}.zf .matrix-wrap,.zf .feldgruppe{margin-top:.25rem}.zf .karte{overflow-wrap:anywhere}.zf .zw{gap:.4rem}.zf .merksatz{margin:.4rem 0 0;padding:.3rem 0;font-size:10.5pt}.zf .g-option span{padding:.1rem .5rem .1rem 1.5rem;font-size:8pt;gap:1px}.zf .g-option__urteil{line-height:1.2;font-size:7.5pt}.zf .g-wahl fieldset{gap:.1rem}.zf .g-wahl legend{margin-bottom:.1rem}.zf .g-wahl{gap:.15rem}.zf .quelle{margin-top:.2rem}.zf table td,.zf table th{line-height:1.25}.zf .matrix-wrap{break-inside:avoid}
   .merksatz{margin:.5rem 0;padding:.4rem 0;font-size:11pt}
   .g .g-balken__wert{transform:none!important}
   textarea{border:1px solid #bbb;min-height:9rem}
@@ -214,9 +214,9 @@ td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
 <script>
 "use strict";
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const KEY = "ggk-m23-gesellschaft:v1";
+const KEY = "ggk-m23-gesellschaft:v2";
 const lade = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { return {}; } };
-let S = Object.assign({ seite:"start", karte:{ wahl:null, grund:"", zu:false, frage:"" }, zeit:0, ablauf:{ idee:"" }, saeulen:{}, laender:{}, nied:"", hoch:"", pos:{ wert:50, ref:false }, urteil:"", abrufz:{}, ruhig:false }, lade());
+let S = Object.assign({ seite:"start", karte:{ wahl:null, grund:"", zu:false, frage:"" }, zeit:0, faktoren:["","","","","",""], zuordnung:{}, these:"", saeulen:{}, laender:{}, nied:"", hoch:"", test:"", pos:{ wert:50, ref:false }, urteil:"", abrufz:{}, ruhig:false }, lade());
 const speichere = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
 const ruhig = () => { try { return S.ruhig || matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e) { return !!S.ruhig; } };
 const neu = (el, k) => { if (!el) return; el.classList.remove(k); void el.offsetWidth; if (!ruhig()) el.classList.add(k); };
@@ -248,12 +248,12 @@ function band(bild, ob, titel, text){
 /* ---------- Seiten ---------- */
 const SEITEN = [
   ["start", "", ""],
-  ["karte", "0–10 Min.", "Die Karte"],
-  ["daenemark", "10–32 Min.", "Dänemark 1943"],
-  ["saeulen", "32–50 Min.", "Sechs Säulen"],
-  ["vergleich", "50–68 Min.", "Drei Länder"],
-  ["position", "68–80 Min.", "Deine Position"],
-  ["plenum", "80–90 Min.", "Plenum"],
+  ["karte", "0–8 Min.", "Die Karte"],
+  ["daenemark", "8–38 Min.", "Der Film"],
+  ["saeulen", "38–55 Min.", "Sechs Säulen"],
+  ["vergleich", "55–72 Min.", "Thesen testen"],
+  ["position", "72–84 Min.", "Deine Position"],
+  ["plenum", "84–90 Min.", "Plenum"],
   ["zusammenfassung", "Zum Abheften", ""],
 ];
 const idx = id => Math.max(0, SEITEN.findIndex(s => s[0] === id));
@@ -284,7 +284,10 @@ const DK_ZEIT = [
   { jahr:"Oktober 1943", text:"Über den Sund", mehr:"In etwa drei Wochen bringen Fischer rund 7.200 Jüdinnen und Juden und etwa 700 nichtjüdische Angehörige nach Schweden – nachts, in Booten für höchstens zwölf Personen, oft gegen Bezahlung. Schweden hatte öffentlich erklärt, alle aufzunehmen." },
   { jahr:"1945", text:"Rückkehr", mehr:"Von den 470 Deportierten überleben alle bis auf 51. Dänische Behörden hatten Pakete nach Theresienstadt geschickt und auf Besuche gedrängt. Die Geflüchteten kehren zurück, viele finden Wohnung und Geschäft unversehrt." },
 ];
-/* Bent Melchior (14 Jahre, Sohn des Rabbiners) – nach dem animierten Kurzfilm „Voices in the Void“ (Humanity in Action, 2021), wie im Heft M23 zusammengefasst */
+/* Film: „Voices in the Void“ (Humanity in Action, 2021, 18 Min.). Lokale Kopie nur im Moodle-Paket (Rechte); fehlt sie, bietet die Seite YouTube an (erst nach Klick, youtube-nocookie). */
+const FILM = { datei:"media/m23-voices-in-the-void-2021.mp4", yt:"hZy1U2zvbec", url:"https://www.youtube.com/watch?v=hZy1U2zvbec" };
+const BEOBACHTUNG = ["Wer warnt – und woher weiß er es?", "Wer hilft – Fremde, Nachbarn, Behörden, Kirche?", "Was macht die Flucht praktisch möglich (Weg, Boote, Geld, Ziel)?", "Was hatte der Staat vorher getan – und was fiel im August 1943 weg?", "Was sagt Melchior über das Danach – und über Verantwortung?"];
+/* Bent Melchior (14 Jahre, Sohn des Rabbiners) – nach dem Film, wie im Heft M23 zusammengefasst (Reserve, wenn der Film nicht gezeigt wird) */
 const MELCHIOR = [
   { t:"Die Warnung", s:"Am Morgen vor Rosch ha-Schana unterbricht sein Vater, der Rabbiner, den Gottesdienst: Alle sollen sofort nach Hause, packen, untertauchen – und es weitersagen. Über Nacht sind Tausende weg." },
   { t:"Fremde Hilfe", s:"Die Familie kommt bei einem Pastor unter, später bei einem Bischof. Sie kennen diese Menschen nicht. Die Helfer riskieren ihre Freiheit." },
@@ -387,9 +390,9 @@ function start(){
   <div class="belastend"><b>Hinweis:</b> Es geht um Verfolgung und Massenmord. Die Texte nennen Zahlen und Abläufe, keine Einzelheiten der Gewalt. Es gibt keine Bilder von Gewalt. Wenn dich etwas belastet, sprich mit deiner Lehrkraft.</div>
   <div class="karte"><h3>So läuft die Stunde</h3><ol style="padding-left:1.3rem;margin-top:.4rem;display:grid;gap:.25rem">
   <li>Die Karte: Du sagst voraus, wo die meisten überlebten – dann siehst du die Zahlen.</li>
-  <li>Dänemark 1943: Du ziehst durch sechs Wochen, in denen sich alles änderte.</li>
-  <li>Sechs Säulen: Du ordnest Fakten den Merkmalen einer Gesellschaft zu und begründest.</li>
-  <li>Drei Länder: Niederlande, Bulgarien, Ungarn – welche Säule erklärt am meisten?</li>
+  <li>Der Film: Bent Melchior erzählt die Rettung 1943. Du sammelst daraus, was sie möglich machte – deine Faktoren.</li>
+  <li>Sechs Säulen: Du hältst deine Faktoren an das Modell deiner Lehrkraft, ordnest belegte Fakten zu und bildest eine These.</li>
+  <li>Thesen testen: Niederlande, Bulgarien, Ungarn – hält deine These?</li>
   <li>Deine Position: Umwelt oder Ich? Mit deiner Marke aus M22.</li>
   <li>Plenum: iPad zu, Gespräch.</li></ol></div>
   <p class="merksatz">Nicht die besseren Menschen – die besseren Bedingungen. Oder doch nicht?</p>
@@ -414,12 +417,27 @@ function karte(){
   ${weiter("daenemark", "Weiter: Dänemark 1943", { aus: !zu, hinweis: zu ? undefined : "Erst festlegen, dann weiter." })}`;
 }
 
+let FILM_FEHLT = false; /* nur für diese Sitzung, nicht gespeichert: ein anderer Browser kann den Film abspielen */
+function filmFehlt(){ FILM_FEHLT = true; const f = document.getElementById("film"); if (f) f.innerHTML = filmErsatz(); }
+function filmErsatz(){ return `<div class="aufdeck" style="margin:0"><p><b>Der Film liegt nicht auf diesem Gerät.</b> Er lässt sich von YouTube laden – erst nach Klick, ohne Cookies von Google bis dahin.</p><div class="reihe"><button class="btn primary" data-ytladen>Video von YouTube laden (18 Min.)</button><a class="btn" href="${FILM.url}" target="_blank" rel="noopener">Auf YouTube öffnen</a></div></div>`; }
 function daenemark(){
   const li = DK_ZEIT.map((z, i) => `<li ${i === (S.zeit || 0) ? "data-hier" : ""} data-mehr="${esc(z.mehr)}"><button type="button" data-zeit="${i}"><span class="g-zeit__jahr">${esc(z.jahr)}</span><span class="g-zeit__text">${esc(z.text)}</span></button></li>`).join("");
   const z = DK_ZEIT[S.zeit || 0];
-  return `${zeitKopf("daenemark")}<h1>Dänemark 1943</h1>
-  <p class="lead">Im August 1943 leben etwa 7.500 Jüdinnen und Juden in Dänemark, fast alle in Kopenhagen. Sie tragen keinen Stern, ihre Geschäfte sind offen, ihre Kinder gehen zur Schule. Sechs Wochen später sind fast alle in Schweden. Wie ging das so schnell?</p>
-  ${auftrag("Bewegung · Zeit ziehen", "Wie wurde aus Sicherheit Flucht?", "Tipp die Stationen an oder geh mit der Tastatur durch. Lies zu jeder, was sich geändert hat. Danach schiebst du den Vorher-nachher-Vergleich hin und her.")}
+  const nF = S.faktoren.filter(f => f.trim().length >= 3).length;
+  return `${zeitKopf("daenemark")}<h1>Der Film: Dänemark 1943</h1>
+  <p class="lead">Im August 1943 leben etwa 7.500 Jüdinnen und Juden in Dänemark, fast alle in Kopenhagen. Sie tragen keinen Stern, ihre Geschäfte sind offen. Sechs Wochen später sind fast alle in Schweden. Bent Melchior war 14 und dabei. Sein Film erzählt, wie das ging – und du sammelst daraus, was die Rettung möglich machte.</p>
+  ${auftrag("Beobachtungsauftrag", "Was machte die Rettung möglich?", "Der Film läuft am Beamer (18 Minuten). Achte auf diese fünf Fragen; nach dem Film trägst du deine Faktoren ein – in deinen Worten, ohne Modell.")}
+  <div class="karte"><ol style="padding-left:1.3rem;display:grid;gap:.3rem">${BEOBACHTUNG.map(b => `<li>${esc(b)}</li>`).join("")}</ol></div>
+  <div class="karte" id="film">${FILM_FEHLT ? filmErsatz() : `<video controls preload="metadata" playsinline style="width:100%;max-height:60vh;background:#000;border-radius:.6rem" aria-label="Voices in the Void, Kurzfilm, 18 Minuten"><source src="${FILM.datei}" type="video/mp4" onerror="filmFehlt()">Dein Browser spielt das Video nicht ab.</video>`}
+  <p class="quelle" style="margin-top:.6rem">„Voices in the Void“, animierter Dokumentarfilm, Humanity in Action, 2021, 18 Min. Bent Melchior (1929–2021), später Oberrabbiner Dänemarks, erzählt selbst. Rechte beim Herausgeber; die lokale Kopie liegt nur im Unterrichtspaket.</p></div>
+
+  <h2 class="abschnitt">Deine Faktoren</h2>
+  ${auftrag("Induktiv · Faktoren sammeln", "Was hat dazu geführt, dass so viele gerettet wurden?", "Trag bis zu sechs Faktoren ein, je ein Stichwort oder ein kurzer Satz. Mindestens drei, dann geht es weiter. Diese Liste ist deine Schablone – sie wird gleich am Modell geprüft, nicht umgekehrt.")}
+  <div class="karte"><div class="feldgruppe" style="margin-top:0">${S.faktoren.map((f, i) => `<label>Faktor ${i + 1}<input type="text" data-faktor="${i}" value="${esc(f)}" placeholder="${i === 0 ? "z. B. Jemand hat rechtzeitig gewarnt" : ""}" style="width:100%;border:1.5px solid var(--border);border-radius:var(--r);padding:.6rem .9rem;background:var(--surface2);margin-top:.3rem;min-height:48px"></label>`).join("")}</div>
+  <p class="hinweis" id="faktorenstand">${nF} von 6 eingetragen.</p></div>
+
+  <h2 class="abschnitt">Der Verlauf, verdichtet</h2>
+  <p>Der Film erzählt sechs Wochen. Hier liegen sie auf einer Linie – mit dem, was die Forschung dazu belegt. Prüfe: Kommt alles, was du notiert hast, in der Zeitleiste vor?</p>
   <div class="karte"><p class="kennung"><span class="status beleg">Beleg</span>Zeitleiste nach USHMM, „Rescue in Denmark“</p>
   <div class="g"><ol class="g-zeit" data-g="zeit" id="dkzeit">${li}<span class="g-zeit__hier">Du bist hier</span></ol><p class="sr" aria-live="polite"></p></div>
   <div class="aufdeck" id="zeittext" style="margin-top:1.2rem"><p class="kennung">${esc(z.jahr)} · ${esc(z.text)}</p><p>${esc(z.mehr)}</p></div></div>
@@ -437,39 +455,48 @@ function daenemark(){
     <span class="sr" aria-live="polite"></span>
   </div></div><p class="quelle">Zahlen: USHMM, „Rescue in Denmark“ (etwa 7.200 Jüdinnen und Juden und rund 700 Angehörige nach Schweden; 470 Deportierte, von denen alle bis auf 51 überlebten).</p></div>
 
-  <h2 class="abschnitt">Einer von ihnen: Bent Melchior, 14</h2>
-  <p>Sein Vater ist Rabbiner in Kopenhagen. Was er erlebte, erzählt er als alter Mann im Kurzfilm „Voices in the Void“ (2021). Fünf Stationen, nach seiner Erzählung:</p>
-  ${MELCHIOR.map((m, i) => `<div class="karte"><p class="kennung">${i + 1} · ${esc(m.t)}</p><p>${esc(m.s)}</p></div>`).join("")}
-  <blockquote>„Überlasst es nicht anderen – tut es selbst.“<span class="wer">Bent Melchior (1929–2021), später Oberrabbiner Dänemarks, zitiert im Heft M23</span></blockquote>
-  <div class="feldgruppe"><label>Was war an Dänemark anders? Notiere drei Stichworte – du brauchst sie gleich.<textarea data-feld="idee" rows="3" placeholder="1. … 2. … 3. …">${esc(S.ablauf.idee)}</textarea></label></div>
-  ${weiter("saeulen", "Weiter: Sechs Säulen")}`;
+  <blockquote>„Überlasst es nicht anderen – tut es selbst.“<span class="wer">Bent Melchior, zitiert im Heft M23</span></blockquote>
+  ${weiter("saeulen", "Weiter: Sechs Säulen", { aus: nF < 3, hinweis: nF < 3 ? "Mindestens drei Faktoren eintragen, dann weiter." : undefined })}`;
 }
 
 function saeulen(){
   const n = DK_FAKTEN.filter(f => (S.saeulen[f.id] || {}).zu).length;
+  const meine = S.faktoren.map((f, i) => [f, i]).filter(x => x[0].trim().length >= 3);
+  const leer = SAEULEN.filter(sa => !meine.some(x => S.zuordnung[x[1]] === sa.id)).map(sa => sa.name);
+  const zugeordnet = meine.filter(x => S.zuordnung[x[1]]).length;
   return `${zeitKopf("saeulen")}<h1>Sechs Säulen</h1>
-  <p class="lead">Dein Heft bietet ein Modell an: sechs Merkmale, an denen man eine Gesellschaft unter Besatzung vergleichen kann. Es ist ein Werkzeug deiner Lehrkraft, keine Theorie aus der Forschung – also prüfe es.</p>
+  <p class="lead">Du hast aus dem Film Faktoren gesammelt. Dein Heft bietet dafür ein Modell an: sechs Merkmale, an denen man eine Gesellschaft unter Besatzung vergleichen kann. Es ist ein Werkzeug deiner Lehrkraft, keine Theorie aus der Forschung – also prüfe es an deiner Liste.</p>
   <p class="kennung"><span class="status modell">Modell</span>Sechs Säulen – Was schützt eine Gesellschaft?</p>
   <div class="saeulen" id="saeulen-modell">${SAEULEN.map((s, i) => `<div class="saeule"><b>${i + 1} · ${esc(s.name)}</b><span class="kf">${esc(s.kern)}</span><span>${esc(s.was)}</span></div>`).join("")}</div>
-  ${auftrag("Muster 3 · Zuordnen mit Begründung", "Sechs Fakten aus Dänemark – welche Säule trägt sie?", "Zu jedem Fakt werden dir drei Säulen angeboten. Wähle die, die den Fakt am besten erklärt, begründe in einem Satz, leg fest. Dann siehst du zu jeder der drei Säulen, wie gut sie passt. Es gibt keine „falsche“ Zuordnung – aber eine, die am meisten erklärt.")}
+
+  <h2 class="abschnitt">Deine Faktoren am Modell</h2>
+  ${auftrag("Vergleich · deine Liste gegen das Modell", "Wohin gehört jeder deiner Faktoren?", "Ordne jeden Faktor einer Säule zu – oder „passt nirgends“. Dann siehst du, welche Säulen bei dir leer bleiben. Das ist keine Lücke bei dir: Vielleicht zeigt der Film sie nicht, vielleicht braucht das Modell sie nicht.")}
+  <div class="karte"><div class="feldgruppe" style="margin-top:0">${meine.map(([f, i]) => `<label>${esc(f)}<select data-zuordnung="${i}" style="width:100%;min-height:48px;border:1.5px solid var(--border);border-radius:var(--r);padding:.5rem .8rem;background:var(--surface2);margin-top:.3rem"><option value="">– Säule wählen –</option>${SAEULEN.map(sa => `<option value="${sa.id}" ${S.zuordnung[i] === sa.id ? "selected" : ""}>${esc(sa.name)}</option>`).join("")}<option value="keine" ${S.zuordnung[i] === "keine" ? "selected" : ""}>passt nirgends</option></select></label>`).join("")}</div>
+  ${zugeordnet >= meine.length && meine.length ? `<div class="aufdeck" style="margin-top:1rem"><p class="kennung">Dein Abgleich</p><p>${leer.length ? `<b>Leer bei dir:</b> ${esc(leer.join(", "))}. Fehlt das im Film – oder im Modell?` : "<b>Alle sechs Säulen</b> kommen in deiner Liste vor."}${meine.some(x => S.zuordnung[x[1]] === "keine") ? " <b>Passt nirgends:</b> " + esc(meine.filter(x => S.zuordnung[x[1]] === "keine").map(x => x[0]).join(", ")) + " – das ist ein Punkt für das Plenum: Was fehlt dem Modell?" : ""}</p></div>` : `<p class="hinweis" style="margin-top:.6rem">Sobald alle Faktoren zugeordnet sind, erscheint der Abgleich.</p>`}</div>
+  <h2 class="abschnitt">Sechs belegte Fakten</h2>
+  ${auftrag("Muster 3 · Zuordnen mit Begründung", "Sechs Fakten aus Dänemark – welche Säule trägt sie?", "Jetzt umgekehrt: sechs Fakten aus der Forschung, zu jedem drei Säulen. Wähle die, die den Fakt am besten erklärt, begründe in einem Satz, leg fest. Dann siehst du zu jeder der drei Säulen, wie gut sie passt. Es gibt keine „falsche“ Zuordnung – aber eine, die am meisten erklärt.")}
   ${DK_FAKTEN.map((f, i) => `<div class="karte" id="w-${f.id}"><p class="kennung">Fakt ${i + 1}</p><p><b>${esc(f.fakt)}</b></p>${gWahl("saeulen", f.id, "Welche Säule erklärt diesen Fakt am stärksten?", f.optionen, { saeulen:true })}</div>`).join("")}
-  <p class="hinweis" id="saeulenstand">${n} von 6 festgelegt.${n >= 4 ? " Weiter ist frei." : " Ab vier geht es weiter."}</p>
+  <p class="hinweis" id="saeulenstand">${n} von 6 festgelegt.${n >= 3 ? " Weiter ist frei." : " Ab drei geht es weiter."}</p>
+  <h2 class="abschnitt">Deine These</h2>
+  ${auftrag("These bilden", "Was schützt eine Gesellschaft?", "Ein Satz aus deinen Faktoren und den Säulen. Diese These testest du gleich an drei anderen Ländern.")}
+  <div class="feldgruppe"><label>Unsere These: Die Opferrate war dort niedrig, wo …<textarea data-feld="these" rows="3" placeholder="… der Staat …, die Nachbarn …, und …">${esc(S.these)}</textarea></label></div>
   <details class="hilfe"><summary>Was lässt dieses Modell weg?</summary><p>Das Modell sortiert Bedingungen. Es sagt nichts über den Einzelnen: Ein Fischer, der Geld nimmt, und einer, der umsonst fährt, stehen in derselben Säule. Es erklärt auch nicht, warum ausgerechnet <em>diese</em> Nachbarn halfen und andere nicht. Dafür brauchst du den Blick aus M22 – und die Position am Ende der Stunde.</p></details>
-  ${weiter("vergleich", "Weiter: Drei Länder", { aus: n < 4, hinweis: n < 4 ? "Mindestens vier Fakten zuordnen, dann weiter." : undefined })}`;
+  ${weiter("vergleich", "Weiter: Thesen testen", { aus: n < 3 || S.these.trim().length < 15, hinweis: (n < 3 || S.these.trim().length < 15) ? "Mindestens drei Fakten zuordnen und die These schreiben, dann weiter." : undefined })}`;
 }
 
 function vergleich(){
   const n = LAENDER.filter(l => (S.laender[l.id] || {}).zu).length;
-  return `${zeitKopf("vergleich")}<h1>Drei Länder</h1>
-  <p class="lead">Dänemark ist der Ausnahmefall. Drei andere Länder zeigen, was passiert, wenn eine oder mehrere Säulen fehlen – oder wenn ein Staat in beide Richtungen handelt.</p>
-  ${auftrag("Muster 3 · Zuordnen mit Begründung", "Welche Säule erklärt am stärksten?", "Lies die vier Fakten je Land. Wähle die Säule, begründe, leg fest. Dann siehst du die Erklärung zu allen drei Angeboten.")}
+  return `${zeitKopf("vergleich")}<h1>Thesen testen</h1>
+  <p class="lead">Dänemark ist der Ausnahmefall. Drei andere Länder sind der Test: Hält deine These, wenn Säulen fehlen – oder wenn ein Staat in beide Richtungen handelt?</p>
+  <div class="karte" style="border-left:6px solid var(--kuli)"><p class="kennung">Unsere These</p><p><b>Die Opferrate war dort niedrig, wo …</b> ${esc(S.these)}</p></div>
+  ${auftrag("Muster 3 · Zuordnen mit Begründung", "Welche Säule erklärt am stärksten?", "Lies die vier Fakten je Land. Wähle die Säule, begründe, leg fest. Dann siehst du die Erklärung zu allen drei Angeboten – und prüfst, ob deine These das Land erklärt.")}
   <div class="laender">${LAENDER.map(l => `<div class="land"><p class="kennung">${esc(l.land)}</p><p class="rate">${esc(l.rate)}<small>${esc(l.unter)}</small></p><p class="hinweis"><b>Besatzung:</b> ${esc(l.besatzung)}</p><ul>${l.fakten.map(f => `<li>${esc(f)}</li>`).join("")}</ul></div>`).join("")}</div>
   <p class="quelle">Zahlen und Abläufe: USHMM Holocaust Encyclopedia, Artikel „The Netherlands“, „Bulgaria“, „Hungary after the German Occupation“ und „Jewish Losses by Country“.</p>
   ${LAENDER.map(l => `<div class="karte" id="w-${l.id}"><p class="kennung">${esc(l.land)}</p>${gWahl("laender", l.id, esc(l.frage), l.optionen, { saeulen:true })}</div>`).join("")}
 
-  <h2 class="abschnitt">Dein Vergleich</h2>
-  ${auftrag("Eigene Sätze", "Wo waren die Opferraten am niedrigsten, wo am höchsten?", "Zwei Sätze, mit Säulen aus dem Modell. Danach kannst du sie mit der Fassung deiner Lehrkraft vergleichen.")}
-  <div class="feldgruppe"><label>Die Opferraten waren dort am niedrigsten, wo …<textarea data-feld="nied" rows="2">${esc(S.nied)}</textarea></label>
+  <h2 class="abschnitt">Hält die These?</h2>
+  ${auftrag("Eigene Sätze", "Was bleibt von der These – und was fehlt ihr?", "Erst der Test, dann zwei Sätze zum Vergleich. Danach kannst du sie mit der Fassung deiner Lehrkraft vergleichen.")}
+  <div class="feldgruppe"><label>Die These hält bei … / Sie muss ergänzt werden um …<textarea data-feld="test" rows="3" placeholder="Bei den Niederlanden hält sie, weil … Bulgarien zeigt aber, dass …">${esc(S.test)}</textarea></label><label>Die Opferraten waren dort am niedrigsten, wo …<textarea data-feld="nied" rows="2">${esc(S.nied)}</textarea></label>
   <label>Die Opferraten waren dort am höchsten, wo …<textarea data-feld="hoch" rows="2">${esc(S.hoch)}</textarea></label></div>
   ${(S.nied.trim().length >= 15 && S.hoch.trim().length >= 15) ? `<div class="aufdeck"><p class="kennung"><span class="status modell">Fassung der Lehrkraft</span>Aus dem Erwartungshorizont M23</p><div class="zwei"><div class="alt"><b>Am niedrigsten, wo …</b><ul style="padding-left:1.1rem;margin-top:.3rem"><li>staatliche Strukturen intakt blieben und sich schützend vor ihre Bürger stellten,</li><li>Gleichheit und demokratische Tradition fest verankert waren,</li><li>Juden als Mitbürger galten, nicht als „Andere“,</li><li>Staat und Zivilgesellschaft zusammen handelten – „von oben“ und „von unten“.</li></ul></div><div class="alt"><b>Am höchsten, wo …</b><ul style="padding-left:1.1rem;margin-top:.3rem"><li>lokale Behörden aktiv mitarbeiteten oder selbst verfolgten,</li><li>Deutschland direkt kontrollierte, besonders durch SS-Zivilverwaltung,</li><li>Antisemitismus tief verwurzelt und staatlich gefördert war,</li><li>Vernichtungslager auf eigenem Boden standen (Polen).</li></ul></div></div><p class="hinweis" style="margin-top:.6rem">Was steht bei dir, das hier fehlt? Was hier, das du nicht hast? Markiere es für das Plenum.</p></div>` : `<p class="hinweis">Sobald beide Sätze stehen, erscheint die Fassung deiner Lehrkraft zum Vergleich.</p>`}
   ${weiter("position", "Weiter: Deine Position", { aus: n < 2, hinweis: n < 2 ? "Mindestens zwei Länder festlegen, dann weiter." : undefined })}`;
@@ -502,8 +529,8 @@ function plenum(){
   return `${zeitKopf("plenum")}<h1>Plenum</h1>
   <p class="lead">iPad zu. Drei Fragen für das Gespräch – deine Lehrkraft wählt aus.</p>
   <div class="karte"><ol style="padding-left:1.3rem;display:grid;gap:.6rem">
-  <li><b>Die Säule, die am meisten erklärt:</b> Welche habt ihr bei Dänemark am häufigsten gewählt – und welche bei den Niederlanden? Ist es dieselbe?</li>
-  <li><b>Bulgarien:</b> Derselbe Staat liefert 11.343 Menschen aus und schützt 50.000. Was heißt das für das Modell?</li>
+  <li><b>Vom Film zum Modell:</b> Welche Faktoren habt ihr gesammelt, die in keine Säule passen? Welche Säule blieb bei den meisten leer – fehlt sie im Film oder im Modell?</li>
+  <li><b>Die These im Test:</b> Welche These hat alle drei Länder überstanden? Welche musste ergänzt werden – und um was?</li>
   <li><b>Umwelt oder Ich:</b> Wer hat die Marke aus M22 gesehen und sich bewegt? In welche Richtung – und warum?</li></ol></div>
   <p class="merksatz">Dänemark war kein Land besserer Menschen. Es war ein Land, in dem Helfen leichter war – und in dem trotzdem jemand anfangen musste.</p>
   ${weiter("zusammenfassung", "Zur Zusammenfassung")}`;
@@ -522,6 +549,10 @@ function zusammenfassung(){
   <h2>Sechs Säulen (Modell)</h2>
   <div class="saeulen">${SAEULEN.map((s, i) => `<div class="saeule"><b>${i + 1} · ${esc(s.name)}</b><span class="kf">${esc(s.kern)}</span></div>`).join("")}</div>
   <div class="seitenumbruch"></div>
+  <h2>Meine Faktoren aus dem Film</h2>
+  <div class="karte"><p>${esc(S.faktoren.filter(f => f.trim()).map((f, i) => `${i + 1}. ${f}${S.zuordnung[S.faktoren.indexOf(f)] ? " (" + (S.zuordnung[S.faktoren.indexOf(f)] === "keine" ? "passt nirgends" : SAEULE(S.zuordnung[S.faktoren.indexOf(f)]).name) + ")" : ""}`).join(" · ")) || "–"}</p></div>
+  <h2>Unsere These</h2>
+  <div class="karte"><p>Die Opferrate war dort niedrig, wo … ${esc(S.these) || "–"}</p><p><b>Test:</b> ${esc(S.test) || "–"}</p></div>
   <h2>Meine Zuordnungen</h2>
   <div class="matrix-wrap"><table><thead><tr><th>Fakt / Land</th><th>Meine Säule</th><th>Begründung</th></tr></thead><tbody>
   ${DK_FAKTEN.map((f, i) => { const st = S.saeulen[f.id] || {}; return `<tr><td>Dänemark, Fakt ${i + 1}</td><td>${st.zu ? esc(SAEULE(f.optionen[st.o][0]).name) : "–"}</td><td>${esc(st.grund || "")}</td></tr>`; }).join("")}
@@ -530,9 +561,9 @@ function zusammenfassung(){
   <div class="zw"><div class="karte"><b>Am niedrigsten, wo …</b><p>${esc(S.nied) || "–"}</p></div><div class="karte"><b>Am höchsten, wo …</b><p>${esc(S.hoch) || "–"}</p></div></div>
   <h2>Meine Position: ${S.pos.wert} (0 = Umgebung, 100 = Ich)</h2>
   <div class="karte"><p>${esc(S.urteil) || "–"}</p></div>
+  <p class="merksatz">Nicht die besseren Menschen – die besseren Bedingungen. Und jemand, der anfängt.</p>
   <h2>Abrufübung (für die nächste Stunde)</h2>
   ${ABRUFZ.map(a => gWahl("abrufz", a.id, esc(a.frage), a.optionen, { ohneGrund:true, mind:0 })).join("")}
-  <p class="merksatz">Nicht die besseren Menschen – die besseren Bedingungen. Und jemand, der anfängt.</p>
   </div>${weiter("start", "Zur Startseite")}`;
 }
 
@@ -542,12 +573,13 @@ function lehrkraft(){
   <p class="lead">Was die Seite anders macht als das Heft, was du vor dem Kopieren prüfen solltest, und was nur du kannst.</p>
   <h2 class="abschnitt">Ablauf (90 Minuten, Variante B)</h2>
   <div class="matrix-wrap"><table><thead><tr><th>Min.</th><th>Phase</th><th>Muster / Bewegung</th><th>Papierprobe</th></tr></thead><tbody>
-  <tr><td class="n">0–10</td><td>Die Karte</td><td>1 Vorhersage → Auflösung; Balken (Gegenwart)</td><td>Zahlen erst nach der Festlegung → Lernmehrwert</td></tr>
-  <tr><td class="n">10–32</td><td>Dänemark 1943</td><td>Zeitleiste „Du bist hier“; Vorher–nachher-Schieber mit Autoplay (Bewegung ist Lerngegenstand)</td><td>Verlauf und Tempo sind der Gegenstand → Lernmehrwert; Melchior-Stationen gingen auch auf Papier</td></tr>
-  <tr><td class="n">32–50</td><td>Sechs Säulen</td><td>3 Zuordnen mit Begründung (6 Fakten × 3 Säulen)</td><td>Erklärung je Säule erst nach Festlegung → Lernmehrwert</td></tr>
-  <tr><td class="n">50–68</td><td>Drei Länder</td><td>3 Zuordnen; eigene Sätze vor der Lehrkraft-Fassung</td><td>Vergleich erst nach eigenem Text → Lernmehrwert</td></tr>
-  <tr><td class="n">68–80</td><td>Position</td><td>Skala mit Bezugsmarke aus M22; 10 Satzanfänge → Raster</td><td>Marke aus M22 kann nur das Gerät → Lernmehrwert</td></tr>
-  <tr><td class="n">80–90</td><td>Plenum</td><td>analog</td><td>Gespräch</td></tr></tbody></table></div>
+  <tr><td class="n">0–8</td><td>Die Karte</td><td>1 Vorhersage → Auflösung; Balken (Gegenwart)</td><td>Zahlen erst nach der Festlegung → Lernmehrwert</td></tr>
+  <tr><td class="n">8–38</td><td>Der Film</td><td>Beobachtungsauftrag, Film am Beamer (18 Min.), sechs Faktoren induktiv; Zeitleiste „Du bist hier“; Vorher–nachher-Schieber mit Autoplay (Bewegung ist Lerngegenstand)</td><td>Film: Beamer, gemeinsam. Faktoren gingen auf Papier – die Liste wird aber digital weitergereicht und am Modell geprüft → hybrid</td></tr>
+  <tr><td class="n">38–55</td><td>Sechs Säulen</td><td>Eigene Faktoren den Säulen zuordnen (Abgleich: leere Säulen, „passt nirgends“); 3 Zuordnen mit Begründung (6 Fakten × 3 Säulen); These</td><td>Abgleich und Erklärung je Säule erst nach Festlegung → Lernmehrwert</td></tr>
+  <tr><td class="n">55–72</td><td>Thesen testen</td><td>These steht über den drei Ländern; 3 Zuordnen; Test-Satz; eigene Sätze vor der Lehrkraft-Fassung</td><td>Vergleich erst nach eigenem Text → Lernmehrwert</td></tr>
+  <tr><td class="n">72–84</td><td>Position</td><td>Skala mit Bezugsmarke aus M22; 10 Satzanfänge → Raster</td><td>Marke aus M22 kann nur das Gerät → Lernmehrwert</td></tr>
+  <tr><td class="n">84–90</td><td>Plenum</td><td>analog</td><td>Gespräch</td></tr></tbody></table></div>
+  <p class="hinweis">Induktiver Weg, wie gewünscht: Film → eigene Faktoren → Modell als Vergleichsfolie → These → Test an drei Ländern. Die 90 Minuten sind mit dem Film eng; wenn es knapp wird: nur drei der sechs belegten Fakten (K1) oder Bulgarien weglassen (K2).</p>
   <h2 class="abschnitt">Vor dem Kopieren prüfen</h2>
   <ul style="padding-left:1.2rem;display:grid;gap:.4rem">
   <li><b>Opferraten:</b> Die Seite rechnet aus den USHMM-Zahlen („Jewish Losses by Country“). Der Erwartungshorizont im Heft nennt Belgien 40 % und Norwegen 35 %; nach USHMM sind es etwa 27 % (24.400 von 90.000) und etwa 42 % (758 von 1.800). Frankreich 25 % im Heft, hier „etwa 23 %“. Rumänien („variabel“) ist weggelassen, weil die USHMM-Tabelle dafür keine belastbare Gesamtzahl gibt.</li>
@@ -555,7 +587,7 @@ function lehrkraft(){
   <li><b>Dänemark:</b> 470 Deportierte (USHMM) statt 472 (Heft); „rund 7.200“ statt 7.056; Dauer und Bezahlung der Überfahrten nach USHMM. Der Protestbrief der Bischöfe vom 3. Oktober 1943 ist belegt.</li>
   <li><b>Bulgarien:</b> Die Seite nennt beides – Rettung im Kernland und Auslieferung von 11.343 Menschen aus Thrakien, Makedonien und Pirot. Das Heft hat Bulgarien nicht in der Tabelle; so wird aus der „Rettung“ keine Heldengeschichte.</li>
   <li><b>Ungarn:</b> Raten in den Grenzen von 1941 (825.000), nicht in denen von 1938. Das macht einen Unterschied von mehreren Hunderttausend.</li>
-  <li><b>Das Video</b> „Voices in the Void“ (18 Min., YouTube) ist nicht verlinkt: keine externen Links in der Arbeitsphase. Wenn du es zeigen willst: am Beamer, vor der Zeitleiste (dann 10–32 Min. auf 10–40 strecken und das Melchior-Kapitel auf der Seite überspringen).</li>
+  <li><b>Der Film</b> „Voices in the Void“ (18 Min.) liegt als lokale Kopie <em>nur im Unterrichtspaket</em> (Moodle-Zip, Ordner <code>media/</code>); im öffentlichen Repository fehlt er (Rechte: Humanity in Action). Fehlt die Datei, bietet die Seite YouTube an – erst nach Klick (youtube-nocookie), damit vorher nichts an Google geht. Am Beamer zeigen, nicht einzeln am iPad.</li>
   <li><b>Die Säulen</b> sind als Modell gekennzeichnet (dein Werkzeug), nicht als Forschungsstand. Die Hilfe „Was lässt dieses Modell weg?“ ist die Brücke zu M22.</li>
   <li><b>Position A / B</b> sind aus dem Heft übernommen. Die Skala ist bewusst gegenläufig zu M22 beschriftet (dort Person ↔ Umstände, hier Umgebung ↔ Ich); ein Hinweis auf der Seite sagt das. Wenn dich das stört: In der Datei <code>data-referenz</code> auf <code>100 − pos</code> setzen.</li>
   <li><b>KI-Quellen:</b> Die 67 Quellen des Hefts (Perplexity, darunter Reddit und Wikipedia) sind nicht übernommen. Alle Zahlen auf der Seite stammen aus der USHMM Holocaust Encyclopedia.</li></ul>
@@ -578,7 +610,7 @@ function lehrkraft(){
 const SEITE_FN = { start, karte, daenemark, saeulen, vergleich, position, plenum, zusammenfassung, lehrkraft };
 function loeschBereich(){
   return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button><label class="g-schalter" style="font-family:var(--body)"><input type="checkbox" role="switch" data-bewegung ${S.ruhig ? "checked" : ""}> Weniger Bewegung</label><span>Alles bleibt auf diesem Gerät.</span>
-  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> Vorhersage, Zuordnungen, Sätze, Position und Urteil werden auf diesem Gerät entfernt.</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div></div>`;
+  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> Vorhersage, Faktoren, These, Zuordnungen, Sätze, Position und Urteil werden auf diesem Gerät entfernt.</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div></div>`;
 }
 let LETZTE_SEITE = null;
 function zeichne(fokus){
@@ -624,7 +656,7 @@ function schieberEinmal(){
 }
 const geh = id => { S.seite = id; speichere(); zeichne(true); };
 const halteScroll = fn => { const sy = window.scrollY; fn(); window.scrollTo(0, sy); };
-const SEITENSTAND = { saeulen: () => { const n = DK_FAKTEN.filter(f => (S.saeulen[f.id] || {}).zu).length; const h = document.getElementById("saeulenstand"); if (h) h.textContent = `${n} von 6 festgelegt.${n >= 4 ? " Weiter ist frei." : " Ab vier geht es weiter."}`; const w = document.querySelector("[data-geh='vergleich'].primary"); if (w) { w.disabled = n < 4; w.previousElementSibling.textContent = n < 4 ? "Mindestens vier Fakten zuordnen, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert."; } },
+const SEITENSTAND = { saeulen: () => { const n = DK_FAKTEN.filter(f => (S.saeulen[f.id] || {}).zu).length; const h = document.getElementById("saeulenstand"); if (h) h.textContent = `${n} von 6 festgelegt.${n >= 3 ? " Weiter ist frei." : " Ab drei geht es weiter."}`; const w = document.querySelector("[data-geh='vergleich'].primary"); const aus = n < 3 || S.these.trim().length < 15; if (w) { w.disabled = aus; w.previousElementSibling.textContent = aus ? "Mindestens drei Fakten zuordnen und die These schreiben, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert."; } },
   laender: () => { const n = LAENDER.filter(l => (S.laender[l.id] || {}).zu).length; const w = document.querySelector("[data-geh='position'].primary"); if (w) { w.disabled = n < 2; w.previousElementSibling.textContent = n < 2 ? "Mindestens zwei Länder festlegen, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert."; } } };
 
 /* ---------- Ereignisse ---------- */
@@ -641,11 +673,13 @@ document.addEventListener("click", ev => {
   if ("neuWahl" in d) { const w = t.closest(".g-wahl[data-feld]"); delete S[w.dataset.feld][w.dataset.id]; speichere(); halteScroll(zeichne); return; }
   if (t.hasAttribute("data-g-vergleichen")) { S.pos.ref = true; speichere(); return; }
   if (d.anfang) { const ta = document.getElementById("urteil"); const v = ta.value; ta.value = (v && !v.endsWith("\n") && v.trim() ? v + "\n" : v) + d.anfang + " "; S.urteil = ta.value; speichere(); ta.focus(); return; }
+  if ("ytladen" in d) { const f = document.getElementById("film"); f.innerHTML = `<div style="aspect-ratio:16/9;background:#000;border-radius:.6rem;overflow:hidden"><iframe width="100%" height="100%" style="border:0;display:block" src="https://www.youtube-nocookie.com/embed/${FILM.yt}" title="Voices in the Void (YouTube)" allow="fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><p class="quelle" style="margin-top:.6rem">Eingebettet von YouTube (youtube-nocookie.com), Humanity in Action, 2021.</p>`; return; }
   if ("drucken" in d) { window.print(); return; }
 });
 document.addEventListener("change", ev => {
   const t = ev.target, d = t.dataset;
   if ("bewegung" in d) { S.ruhig = t.checked; speichere(); halteScroll(zeichne); return; }
+  if (d.zuordnung !== undefined) { S.zuordnung[d.zuordnung] = t.value; speichere(); halteScroll(zeichne); return; }
   if ("karte" in d) { S.karte.wahl = +t.value; speichere(); karteKnopf(); return; }
   if (t.type === "radio" && t.closest(".g-wahl[data-feld]")) { const w = t.closest(".g-wahl"); const st = S[w.dataset.feld][w.dataset.id] || {}; S[w.dataset.feld][w.dataset.id] = Object.assign(st, { o: +t.value }); speichere(); pruefeWahl(w); return; }
 });
@@ -655,7 +689,9 @@ document.addEventListener("input", ev => {
   const t = ev.target, d = t.dataset;
   if (d.feld === "kartegrund") { S.karte.grund = t.value; speichere(); karteKnopf(); return; }
   if (d.feld === "kartefrage") { S.karte.frage = t.value; speichere(); return; }
-  if (d.feld === "idee") { S.ablauf.idee = t.value; speichere(); return; }
+  if (d.faktor !== undefined) { S.faktoren[+d.faktor] = t.value; speichere(); const n = S.faktoren.filter(f => f.trim().length >= 3).length; document.getElementById("faktorenstand").textContent = `${n} von 6 eingetragen.`; const w = document.querySelector("[data-geh='saeulen'].primary"); if (w) { w.disabled = n < 3; w.previousElementSibling.textContent = n < 3 ? "Mindestens drei Faktoren eintragen, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert."; } return; }
+  if (d.feld === "these") { S.these = t.value; speichere(); SEITENSTAND.saeulen(); return; }
+  if (d.feld === "test") { S.test = t.value; speichere(); return; }
   if ("grundFeld" in d) { const w = t.closest(".g-wahl[data-feld]"); const st = S[w.dataset.feld][w.dataset.id] || {}; S[w.dataset.feld][w.dataset.id] = Object.assign(st, { grund: t.value }); speichere(); pruefeWahl(w); return; }
   if (d.feld === "nied" || d.feld === "hoch") { S[d.feld] = t.value; speichere(); if (S.nied.trim().length >= 15 && S.hoch.trim().length >= 15 && !document.querySelector(".zwei .alt")) halteScroll(zeichne); return; }
   if ("pos" in d) { S.pos.wert = +t.value; speichere(); return; }

@@ -1,13 +1,13 @@
-# M23 · Die Gesellschaft, in der ich leb(t)e? – Bericht zur Fassung 1.0
+# M23 · Die Gesellschaft, in der ich leb(t)e? – Bericht zur Fassung 1.1
 
-Stand: 26.10.2026 · Datei `m23-die-gesellschaft.html` · Branch `m23-gesellschaft` · Skill-Kette: unterricht-digitalisieren → lernseite-bauen → bewegung-als-lernmittel → (signatur-design: nicht nötig, Projekt-System vorhanden) → schaubild-design (nur Säulen-Raster als statisches Modell) → website-design-workflow → digital-check.
+Stand: 27.10.2026 (1.1: Film und induktiver Weg) · Datei `m23-die-gesellschaft.html` · Branch `m23-gesellschaft` · Skill-Kette: unterricht-digitalisieren → lernseite-bauen → bewegung-als-lernmittel → (signatur-design: nicht nötig, Projekt-System vorhanden) → schaubild-design (nur Säulen-Raster als statisches Modell) → website-design-workflow → digital-check.
 
 ## Grundlage
 
 Unterrichtsheft „Geschichte aktuell 1“, M23: Karte „Ermordete Juden nach Land“, M23.1 Ländervergleich, Video „Voices in the Void“ (Bent Melchior), sechs Säulen mit Kernfragen, Ländertabelle, „niedrigste/höchste Opferraten“, Position A (kultureller Determinismus) / B (radikaler Individualismus), Erwartungshorizont.
 
 1. **Lernproblem:** Die Täterforschung (M22) endet ohne Tätertyp. Der Ländervergleich liefert die Gegenprobe – mit der Gefahr, dass Lernende Opferraten als Moral-Ranking lesen („gute Dänen“).
-2. **Denkhandlung:** vorhersagen (Karte), einen Verlauf erkennen (Dänemark August–Oktober 1943), Fakten einem Modell zuordnen und begründen (Säulen), vergleichen (drei Länder), sich positionieren mit Bezug zur eigenen M22-Position.
+2. **Denkhandlung:** vorhersagen (Karte), aus dem Film **induktiv Faktoren gewinnen**, einen Verlauf erkennen (Dänemark August–Oktober 1943), die eigene Liste mit dem Modell abgleichen und belegte Fakten zuordnen (Säulen), eine **These bilden und an drei Ländern testen**, sich positionieren mit Bezug zur eigenen M22-Position.
 3. **Mehrwert in einem Satz:** Die Seite deckt die Zahlen erst nach der Vorhersage auf, lässt die Person selbst durch die sechs Wochen ziehen, erklärt zu jeder angebotenen Säule, wie gut sie passt, und legt die eigene M22-Marke neben die neue Position – Papier kann das nicht.
 4. **Erfolg:** vier Sätze zur Position mit einem Land und einer Säule als Beleg.
 
@@ -17,17 +17,19 @@ Durchgängig (Variante B). Plenum bei 80–90 analog.
 
 | Min. | Phase | Papierprobe |
 | --- | --- | --- |
-| 0–10 | Die Karte | Zahlen erst nach Festlegung; Balken wachsen → Lernmehrwert |
-| 10–32 | Dänemark 1943 | Zeitleiste und Schieber: Verlauf und Tempo sind der Gegenstand → Lernmehrwert; Melchior-Stationen gingen auch auf Papier |
-| 32–50 | Sechs Säulen | Erklärung je Säule erst nach Festlegung → Lernmehrwert |
-| 50–68 | Drei Länder | Lehrkraft-Fassung erst nach eigenen Sätzen → Lernmehrwert |
-| 68–80 | Position | Marke aus M22 nur am Gerät → Lernmehrwert |
-| 80–90 | Plenum | analog |
+| 0–8 | Die Karte | Zahlen erst nach Festlegung; Balken wachsen → Lernmehrwert |
+| 8–38 | Der Film | Film am Beamer (18 Min.), Beobachtungsauftrag, sechs eigene Faktoren; Zeitleiste und Schieber: Verlauf und Tempo → hybrid (Faktoren gingen auf Papier, werden aber digital am Modell geprüft) |
+| 38–55 | Sechs Säulen | eigene Faktoren am Modell (leere Säulen, „passt nirgends“), Erklärung je Säule erst nach Festlegung, These → Lernmehrwert |
+| 55–72 | Thesen testen | These über den Ländern, Test-Satz, Lehrkraft-Fassung erst nach eigenen Sätzen → Lernmehrwert |
+| 72–84 | Position | Marke aus M22 nur am Gerät → Lernmehrwert |
+| 84–90 | Plenum | analog |
+
+**Fassung 1.1 (27.10.2026):** Auf Wunsch der Lehrkraft induktiv: Film „Voices in the Void“ zuerst (lokale Kopie `media/m23-voices-in-the-void-2021.mp4`, 720p, 82 MB, **nur im Unterrichtspaket** – Rechte Humanity in Action; im Repository fehlt sie, die Seite bietet dann YouTube erst nach Klick über youtube-nocookie an), Beobachtungsauftrag mit fünf Fragen, bis zu sechs eigene Faktoren (mindestens drei), Abgleich am Modell per Auswahl je Faktor (Säule oder „passt nirgends“), These als Satz, Test an Niederlande/Bulgarien/Ungarn mit Test-Satz. Melchior-Textkarten entfallen (bleiben als Reserve im Code). Speicherschlüssel jetzt `ggk-m23-gesellschaft:v2`.
 
 ## Interaktionsmuster (Katalog `lernseite-bauen`)
 
 - **1 Vorhersage → Auflösung:** vier Länder, Begründung (≥ 8 Zeichen), dann Balken (USHMM) und Frage-Feld.
-- **3 Zuordnen mit Begründung:** sechs Dänemark-Fakten, drei Länder; je Fakt drei Säulen mit Erklärung zentral · auch begründbar · passt kaum. Keine Zuordnung ist „falsch“; die Stufe sagt, wie viel sie erklärt. Weiter ab 4 von 6 bzw. 2 von 3.
+- **3 Zuordnen mit Begründung:** sechs Dänemark-Fakten, drei Länder; je Fakt drei Säulen mit Erklärung zentral · auch begründbar · passt kaum. Keine Zuordnung ist „falsch“; die Stufe sagt, wie viel sie erklärt. Weiter ab 3 von 6 (plus These) bzw. 2 von 3. Davor die offene Variante: eigene Faktoren einer Säule zuordnen, ohne Wertung – der Abgleich zeigt leere Säulen.
 - **10 Satzanfänge → Kriterienraster:** Urteil, Raster ab 40 Wörtern (Grundlegend · Sicher · Souverän).
 - **Skala mit Bezugsmarke** (Gegenwart): Umwelt ↔ Ich; Marke = `pos` aus `ggk-m22-taeter:v2`, wenn auf dem Gerät vorhanden. Richtung bewusst gegenläufig zu M22 (dort Person ↔ Umstände); Hinweis auf der Seite.
 - Abrufübung (2 Fragen, Muster 2) in der Zusammenfassung.
@@ -61,7 +63,7 @@ Erfahrungen: Der Baustein `wahl` lässt eine leere Begründung durch (`data-mind
 
 ## Zeitdiagnose (150 Wörter pro Minute)
 
-Start 267 Wörter (1,8 Min.) · Karte 229 (1,5) · Dänemark 484 (3,2) · Säulen 775 (5,2) · Länder 620 (4,1) · Position 363 (2,4) · Plenum 117. Lesen gesamt rund 19 Minuten, dazu 1 Vorhersage, 2 Textfelder, 9 Zuordnungen mit Begründung, 2 Sätze, Regler, 4 Sätze. **Straff:** etwa 80 Minuten. **Mit Puffer:** 90; das Urteil kann Hausaufgabe werden. Kürzung K1: nur vier Fakten bei den Säulen (3 Min.). K2: Bulgarien weglassen (4 Min.).
+Karte 229 Wörter (1,5 Min.) · Film-Seite rund 450 (3) + 18 Min. Film · Säulen rund 850 (5,7) · Länder rund 680 (4,5) · Position 363 (2,4) · Plenum 120. Lesen gesamt rund 18 Minuten, Film 18, dazu 1 Vorhersage, 6 Faktoren, 6 Auswahlen, 9 Zuordnungen mit Begründung, These, Test, 2 Sätze, Regler, 4 Sätze. **Straff:** 90 Minuten – mit dem Film ist die Stunde voll. Kürzung K1: nur drei der sechs belegten Fakten (4 Min.). K2: Bulgarien weglassen (4 Min.). K3: Urteil als Hausaufgabe (6 Min.).
 
 ## Was gegenüber dem Heft korrigiert ist
 
@@ -76,7 +78,7 @@ Siehe Lehrkraft-Ansicht: Opferraten aus USHMM-Zahlen (Belgien ≈ 27 % statt 40 
 - Bildschirmfotos angesehen (Start, Karte, Dänemark, Säulen, Länder, Position, Plenum, Zusammenfassung, Lehrkraft; 390 px; Beamer 1280 × 720).
 - Quellen geprüft: USHMM (Rescue in Denmark, Netherlands, Bulgaria, Hungary, Jewish Losses by Country), Bischofsbrief 3.10.1943 (Wikipedia/Fuglsang-Damgaard), Commons-Lizenz des Fotos.
 
-**Nicht gelaufen:** axe-core (npm nicht erreichbar), echtes iPad/Safari, VoiceOver, Moodle-Upload, Beamer im Raum.
+**Nicht gelaufen:** axe-core (npm nicht erreichbar), echtes iPad/Safari, VoiceOver, Moodle-Upload, Beamer im Raum. Die lokale Videowiedergabe ließ sich im Cloud-Chromium nicht prüfen (kein H.264); die Datei ist mit ffprobe geprüft (H.264/AAC, faststart), der Ersatzweg (YouTube nach Klick) ist getestet.
 
 ## Offen
 
