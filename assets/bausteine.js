@@ -90,6 +90,13 @@
     datei: "m22-wie-war-das-moeglich.html"
   };
 
+  B.m23 = {
+    nr: "M23",
+    titel: "Die Gesellschaft, in der ich leb(t)e? – Ländervergleich",
+    thema: "Opferraten vorhersagen, Dänemark 1943 als Verlauf, sechs Säulen, Niederlande · Bulgarien · Ungarn, Position Umwelt ↔ Ich",
+    datei: "m23-die-gesellschaft.html"
+  };
+
   B.geplant = [];
   window.BAUSTEINE = B;
 })();
