@@ -22,6 +22,8 @@
   --ink:#24221F; --muted:#5F5C56; --faint:#6A655E; --inverse:#FFFAF2; --dunkel:#1B1A17;
   --red:#9B402D; --red-hi:#EAD7CF; --green:#2E5A47; --green-hi:#D6E4DC; --gold:#7D5C12; --gold-hi:#EEE2BF;
   --kuli:#1E4FB5; --kuli-hi:#DCE5F7; --slate:#4B4F57; --slate-hi:#DFE1E5; --marker:#F3D54E;
+  /* Säulenfarben (sechs, aus der GGK-Palette abgeleitet) */
+  --s-inst:#2E5A47; --s-kult:#7D5C12; --s-sozi:#1E4FB5; --s-geo:#4B6F8F; --s-pol:#9B402D; --s-takt:#4B4F57;
   --display:"Fraunces",Georgia,"Times New Roman",serif;
   --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --r:.75rem; --r-lg:1rem; --ease:cubic-bezier(.23,1,.32,1);
@@ -40,6 +42,7 @@
   --kurve-aus:cubic-bezier(.23,1,.32,1); --kurve-beidseits:cubic-bezier(.77,0,.175,1); --kurve-feder:cubic-bezier(.34,1.56,.64,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+button,input,select,textarea,[tabindex]{scroll-margin-top:140px}
 html{-webkit-text-size-adjust:none;text-size-adjust:none;overflow-x:clip}
 body{min-height:100dvh;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:clamp(1rem,.95rem + .25vw,1.125rem);line-height:1.58;-webkit-font-smoothing:antialiased;overflow-x:clip}
 button,input,select,textarea{font:inherit;color:inherit}
@@ -58,7 +61,8 @@ html[data-bewegung=weniger] *,html[data-bewegung=weniger] *::before,html[data-be
 .g .g-knopf{min-height:48px}
 .g-wahl legend{font-weight:700;font-family:var(--body);font-style:normal;font-size:1.05rem}
 .g .g-option span{font-weight:700}
-.g .g-option__urteil{font-weight:400;font-style:normal;font-size:.95rem}
+.g .g-option__urteil{font-weight:400;font-style:normal;font-size:.95rem;padding:0;border:0;min-height:0;background:transparent;box-shadow:none}
+.g .g-option span span::before,.g .g-option span span::after{display:none!important}
 .g .g-balken__zeile{grid-template-columns:minmax(6.5rem,10rem) 1fr 4.2rem}
 .g .g-schieber{max-width:none}
 .g .g-schieber>label{display:grid;gap:.2rem}.g .g-schieber input[type=range]{width:100%;accent-color:var(--kuli);height:32px}
@@ -159,6 +163,73 @@ details.hilfe p{margin:.3rem 0 .4rem}
 .land .rate small{display:block;font-family:var(--body);font-size:.85rem;color:var(--muted)}
 .land ul{padding-left:1.1rem;font-size:.95rem;display:grid;gap:.2rem}
 
+/* B · Säulentafel */
+.tafel{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.5rem}
+.tafel.nirgends{grid-template-columns:1fr;margin-top:.5rem}
+@media (max-width:760px){.tafel{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:420px){.tafel{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.spalte{border:0;border-top:6px solid var(--s);background:var(--surface2);border-radius:.6rem;padding:.5rem .55rem;min-height:150px;display:grid;align-content:start;gap:.35rem;text-align:left;font:inherit;color:inherit;cursor:pointer;transition:background var(--dauer-mittel) var(--ease)}
+.tafel.nirgends .spalte{min-height:0;grid-template-columns:auto auto 1fr;align-items:center;column-gap:.6rem}
+.spalte b{font-size:.85rem;line-height:1.2}
+.spalte i{font-size:.78rem;color:var(--muted);line-height:1.25}
+.spalte.ziel{background:color-mix(in srgb,var(--s) 12%,var(--surface2));outline:2px solid var(--s)}
+.spalte.leer::after{content:"leer";font-size:.75rem;color:var(--muted);border:1px dashed var(--line);border-radius:.4rem;padding:.15rem .4rem;justify-self:start}
+.chip{border-radius:.5rem;background:var(--offset);padding:.35rem .5rem;font-size:.85rem;line-height:1.25;text-align:left;border-left:4px solid var(--s,var(--line));min-height:44px;display:grid;align-content:center;font:inherit;color:inherit}
+.chip.im{animation:auf var(--dauer-langsam) var(--ease) both}
+.ablage-b{margin-top:.8rem;border:1.5px dashed var(--line);border-radius:.7rem;padding:.6rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.ablage-b .chip{flex:1 1 200px;cursor:pointer;background:var(--surface2);border:1px solid var(--border);border-left:4px solid var(--line);font-size:.92rem}
+.ablage-b .chip[aria-pressed=true]{outline:3px solid var(--kuli);background:var(--kuli-hi)}
+/* A · Fächer */
+.a-ablagen{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.45rem}
+@media (max-width:760px){.a-ablagen{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.ablage{min-height:84px;border:2px dashed var(--line);border-radius:.7rem;padding:.3rem .4rem;display:grid;align-content:start;gap:.3rem;text-align:left;background:var(--surface2);transition:border-color var(--dauer-mittel) var(--ease),background var(--dauer-mittel) var(--ease),opacity var(--dauer-mittel)}
+.ablage b{font-size:.8rem;line-height:1.2;color:var(--s);overflow-wrap:anywhere;hyphens:auto}
+.ablage i{font-size:.72rem;color:var(--muted)}
+.ablage.dim{opacity:.45}
+.ablage.ziel{border-color:var(--s);border-style:solid;background:color-mix(in srgb,var(--s) 12%,var(--surface2));cursor:pointer}
+.ablage .ab-btn{text-align:left;padding:.15rem .1rem;min-height:40px;display:grid;gap:.1rem;border:0;border-radius:.4rem;background:transparent;color:inherit;width:100%}
+.ablage .ab-btn[disabled]{cursor:not-allowed}
+.ablage.ziel .ab-btn{cursor:pointer}
+.ablage .minis{display:flex;gap:.25rem;flex-wrap:wrap}
+.ablage .mini{display:inline-grid;place-items:center;width:32px;height:32px;border:0;border-radius:.4rem;background:var(--s);color:var(--inverse);font-weight:700;font-size:.85rem;cursor:pointer}
+.hand{position:relative;height:270px;margin-top:.6rem;overflow:hidden}
+.fkarte{position:absolute;left:50%;bottom:0;width:min(320px,80vw);min-height:180px;background:var(--surface2);border:1px solid var(--border);border-radius:.9rem;padding:.8rem 1rem .7rem;box-shadow:0 6px 18px rgba(0,0,0,.08);transform-origin:50% 130%;transform:translateX(-50%) rotate(var(--rot)) translateY(var(--ty));transition:transform var(--dauer-wende) var(--ease),opacity var(--dauer-langsam) var(--ease);text-align:left;font:inherit;color:inherit;font-size:.95rem;line-height:1.35}
+.fkarte .nr{display:block;font-weight:700;color:var(--red);font-size:.8rem;margin-bottom:.3rem}
+.fkarte.vorn{z-index:9;--ty:-24px!important;--rot:0deg!important;box-shadow:0 14px 30px rgba(0,0,0,.16);cursor:default}
+.fkarte.weg{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(-280px) scale(.6)}
+.fkarte:not(.vorn){cursor:pointer}
+.fgrund{margin-top:.8rem}
+.fdots{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem}
+.fdots button{min-width:40px;min-height:40px;border-radius:999px;border:2px solid var(--s);background:var(--surface2);font-weight:700;color:var(--ink)}
+.fdots button[aria-pressed=true]{background:var(--ink);color:var(--inverse);border-color:var(--ink)}
+.fdots button[disabled]{background:var(--s);color:var(--inverse);opacity:.7}
+.urt{font-size:.95rem}.urt+.urt{margin-top:.3rem}
+.urt.zentral b{color:var(--green)}.urt.begruendbar b{color:var(--gold)}.urt.kaum b{color:var(--red)}
+html.ruhig .fkarte,html[data-bewegung=weniger] .fkarte{transition:none}
+/* D · Rad */
+.rad{width:min(100%,360px);aspect-ratio:1;display:block;margin:auto}
+.rad.klein{width:min(100%,200px)}
+.rad path[data-rad]{cursor:pointer;transition:transform var(--dauer-langsam) var(--ease);transform-origin:200px 200px}
+.rad path[data-rad]:hover,.rad path[data-rad]:focus-visible{transform:scale(1.04)}
+.rad path.stark{stroke:var(--ink);stroke-width:5}
+.rad text{font-family:var(--body);font-weight:700;font-size:14px;fill:var(--inverse);pointer-events:none}
+.rad .mitte{fill:var(--surface2);stroke:var(--border)}
+.rad .mt{fill:var(--ink);font-family:var(--display);font-size:32px;font-weight:600}
+.rad .punkt{fill:var(--ink);stroke:var(--surface2);stroke-width:2}
+.rad-wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:1rem;align-items:center;margin:.6rem 0 1rem}
+@media (max-width:700px){.rad-wrap{grid-template-columns:1fr}}
+.d-seite{display:grid;gap:.5rem;min-width:0}
+.radfakten{list-style:none;padding:0;display:grid;gap:.4rem;font-size:.95rem}
+.radfakten li{display:grid;grid-template-columns:auto 1fr;gap:.5rem;align-items:start;border-radius:.5rem;padding:.3rem .4rem}
+.radfakten li.akt{background:var(--offset)}
+.radfakten li.da{cursor:pointer}
+.radfakten .rp{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:999px;background:var(--s);color:var(--inverse);font-weight:700;font-size:.85rem}
+.landblock .g-wahl{margin-top:.4rem}
+.profile{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem;margin-top:.8rem}
+@media (max-width:760px){.profile{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.profil{margin:0;text-align:center;font-size:.9rem}
+.profil figcaption{margin-top:.3rem}
+
 /* Tabellen */
 .matrix-wrap{overflow-x:auto;margin-top:1rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface)}
 table{border-collapse:collapse;width:100%}
@@ -198,6 +269,7 @@ td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
   .zf th,.zf td{padding:.2rem .4rem;font-size:8.5pt}
   .zf .karte{padding:.4rem .6rem}
   .zf .seitenumbruch{break-before:page}
+  .profile.druck{grid-template-columns:repeat(4,minmax(0,1fr));gap:.3rem;margin-top:.2rem}.profile.druck .rad.klein{width:76px}.profil figcaption{font-size:8pt;margin-top:0}.zf .karte p{line-height:1.3}
   .zf .g-wahl{gap:.3rem}.zf .g-wahl fieldset{gap:.2rem}.zf .g-wahl legend{margin-bottom:.2rem;font-size:9.5pt}.zf .g-option span{min-height:0;padding:.25rem .5rem .25rem 1.7rem;font-size:8.5pt;border-width:1px}.zf .g-option span::before{width:12px;height:12px;left:.5rem;top:.35rem}.zf .g-option__urteil{font-size:8pt}.zf .g-stempel,.zf .g-wahl__fuss{display:none}.zf h2{margin:.35rem 0 .15rem}.zf .matrix-wrap,.zf .feldgruppe{margin-top:.25rem}.zf .karte{overflow-wrap:anywhere}.zf .zw{gap:.4rem}.zf .merksatz{margin:.4rem 0 0;padding:.3rem 0;font-size:10.5pt}.zf .g-option span{padding:.1rem .5rem .1rem 1.5rem;font-size:8pt;gap:1px}.zf .g-option__urteil{line-height:1.2;font-size:7.5pt}.zf .g-wahl fieldset{gap:.1rem}.zf .g-wahl legend{margin-bottom:.1rem}.zf .g-wahl{gap:.15rem}.zf .quelle{margin-top:.2rem}.zf table td,.zf table th{line-height:1.25}.zf .matrix-wrap{break-inside:avoid}
   .merksatz{margin:.5rem 0;padding:.4rem 0;font-size:11pt}
   .g .g-balken__wert{transform:none!important}
@@ -214,9 +286,9 @@ td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
 <script>
 "use strict";
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const KEY = "ggk-m23-gesellschaft:v2";
+const KEY = "ggk-m23-gesellschaft:v3";
 const lade = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { return {}; } };
-let S = Object.assign({ seite:"start", karte:{ wahl:null, grund:"", zu:false, frage:"" }, zeit:0, faktoren:["","","","","",""], zuordnung:{}, these:"", saeulen:{}, laender:{}, nied:"", hoch:"", test:"", pos:{ wert:50, ref:false }, urteil:"", abrufz:{}, ruhig:false }, lade());
+let S = Object.assign({ seite:"start", karte:{ wahl:null, grund:"", zu:false, frage:"" }, zeit:0, faktoren:["","","","","",""], zuordnung:{}, these:"", saeulen:{}, faecher:{ reihe:[0,1,2,3,4,5], grund:"" }, laender:{}, rad:{ nl:{}, bg:{}, hu:{} }, nied:"", hoch:"", test:"", pos:{ wert:50, ref:false }, urteil:"", abrufz:{}, ruhig:false }, lade());
 const speichere = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
 const ruhig = () => { try { return S.ruhig || matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e) { return !!S.ruhig; } };
 const neu = (el, k) => { if (!el) return; el.classList.remove(k); void el.offsetWidth; if (!ruhig()) el.classList.add(k); };
@@ -298,12 +370,12 @@ const MELCHIOR = [
 
 /* ---------- Sechs Säulen (Modell der Lehrkraft, nach dem Heft M23) ---------- */
 const SAEULEN = [
-  { id:"inst", name:"Institutionell", kern:"Schützt der Staat seine Bürger – oder verrät er sie?", was:"Verwaltung, Gesetze, Gerichte, König und Regierung: Arbeiten sie noch unabhängig? Beziehen sie Stellung?" },
-  { id:"kult", name:"Kulturell", kern:"Wie tief sind Demokratie und Gleichheit verankert?", was:"Demokratische Tradition, Stärke des Antisemitismus, religiöse und politische Werte, Blick auf „die Anderen“." },
-  { id:"sozi", name:"Sozial", kern:"Sind Juden Mitbürger – oder Außenseiter?", was:"Nachbarschaft, Freundschaft, Arbeit, Netzwerke, gegenseitige Hilfe. Sagt man „unsere Mitbürger“ oder „die anderen“?" },
-  { id:"geo",  name:"Geografisch/praktisch", kern:"Ermöglichen Grenzen, Nähe und Größe die Rettung?", was:"Fluchtland in der Nähe? Wie groß ist die jüdische Bevölkerung, wie konzentriert? Gibt es Verstecke?" },
-  { id:"pol",  name:"Politisch", kern:"Kann die Regierung noch selbst entscheiden?", was:"Art der Besatzung: Militär, SS-Zivilverwaltung, Verbündeter mit eigener Regierung. Wann wird Deutschland härter?" },
-  { id:"takt", name:"Taktisch", kern:"Wer warnt? Wer organisiert?", was:"Wer erfährt zuerst von der Deportation? Wer organisiert Flucht und Verstecke – Staat, Widerstand, private Netzwerke?" },
+  { id:"inst", name:"Institutionell", kurz:"Inst.", farbe:"var(--s-inst)", kern:"Schützt der Staat seine Bürger – oder verrät er sie?", was:"Verwaltung, Gesetze, Gerichte, König und Regierung: Arbeiten sie noch unabhängig? Beziehen sie Stellung?" },
+  { id:"kult", name:"Kulturell", kurz:"Kult.", farbe:"var(--s-kult)", kern:"Wie tief sind Demokratie und Gleichheit verankert?", was:"Demokratische Tradition, Stärke des Antisemitismus, religiöse und politische Werte, Blick auf „die Anderen“." },
+  { id:"sozi", name:"Sozial", kurz:"Soz.", farbe:"var(--s-sozi)", kern:"Sind Juden Mitbürger – oder Außenseiter?", was:"Nachbarschaft, Freundschaft, Arbeit, Netzwerke, gegenseitige Hilfe. Sagt man „unsere Mitbürger“ oder „die anderen“?" },
+  { id:"geo",  name:"Geografisch/praktisch", kurz:"Geo.", farbe:"var(--s-geo)", kern:"Ermöglichen Grenzen, Nähe und Größe die Rettung?", was:"Fluchtland in der Nähe? Wie groß ist die jüdische Bevölkerung, wie konzentriert? Gibt es Verstecke?" },
+  { id:"pol",  name:"Politisch", kurz:"Pol.", farbe:"var(--s-pol)", kern:"Kann die Regierung noch selbst entscheiden?", was:"Art der Besatzung: Militär, SS-Zivilverwaltung, Verbündeter mit eigener Regierung. Wann wird Deutschland härter?" },
+  { id:"takt", name:"Taktisch", kurz:"Takt.", farbe:"var(--s-takt)", kern:"Wer warnt? Wer organisiert?", was:"Wer erfährt zuerst von der Deportation? Wer organisiert Flucht und Verstecke – Staat, Widerstand, private Netzwerke?" },
 ];
 const SAEULE = id => SAEULEN.find(s => s.id === id);
 /* Muster 3: Zuordnen mit Begründung. Jeder Fakt hat drei angebotene Säulen; je Säule eine Erklärung, keine ist „falsch“ – die Stufen heißen zentral · auch begründbar · passt kaum. */
@@ -459,40 +531,119 @@ function daenemark(){
   ${weiter("saeulen", "Weiter: Sechs Säulen", { aus: nF < 3, hinweis: nF < 3 ? "Mindestens drei Faktoren eintragen, dann weiter." : undefined })}`;
 }
 
+/* ---------- Bausteine für Tafel (B), Fächer (A) und Rad (D) ---------- */
+const FARBE = id => (SAEULE(id) || {}).farbe || "var(--line)";
+/* B · Säulentafel: eigene Faktoren als Chips in sechs Spalten plus „passt nirgends“ (offen, ohne Wertung) */
+let TAFEL_CHIP = null; /* gewählter Chip, nur für diese Sitzung */
+function tafel(){
+  const meine = S.faktoren.map((f, i) => [f, i]).filter(x => x[0].trim().length >= 3);
+  const frei = meine.filter(x => !S.zuordnung[x[1]]);
+  const spalte = (id, name, kern) => { const drin = meine.filter(x => S.zuordnung[x[1]] === id); return `<button type="button" class="spalte${drin.length ? "" : " leer"}${TAFEL_CHIP !== null ? " ziel" : ""}" style="--s:${id === "keine" ? "var(--line)" : FARBE(id)}" data-spalte="${id}" aria-label="${esc(name)}${drin.length ? ", " + drin.length + " Faktoren" : ", leer"}"><b>${esc(name)}</b>${kern ? `<i>${esc(kern)}</i>` : ""}${drin.map(([f]) => `<span class="chip im">${esc(f)}</span>`).join("")}</button>`; };
+  return `<div class="tafel">${SAEULEN.map(sa => spalte(sa.id, sa.name, sa.kern)).join("")}</div>
+  <div class="tafel nirgends">${spalte("keine", "Passt nirgends", "Was das Modell nicht fasst – ein Punkt für das Plenum")}</div>
+  <div class="ablage-b" aria-label="Deine Faktoren">${frei.length ? frei.map(([f, i]) => `<button type="button" class="chip" data-chip="${i}" aria-pressed="${TAFEL_CHIP === i}">${esc(f)}</button>`).join("") : `<span class="hinweis">Alle Faktoren liegen in der Tafel. Spalte antippen holt den letzten Chip zurück.</span>`}</div>
+  <p class="hinweis" id="tafelhinweis">${TAFEL_CHIP !== null ? "Jetzt eine Spalte antippen." : (frei.length ? "Faktor antippen, dann Spalte." : "")}</p>`;
+}
+function abgleich(){
+  const meine = S.faktoren.map((f, i) => [f, i]).filter(x => x[0].trim().length >= 3);
+  if (!meine.length || meine.some(x => !S.zuordnung[x[1]])) return `<p class="hinweis" style="margin-top:.6rem">Sobald alle Faktoren liegen, erscheint der Abgleich.</p>`;
+  const leer = SAEULEN.filter(sa => !meine.some(x => S.zuordnung[x[1]] === sa.id)).map(sa => sa.name);
+  const nirgends = meine.filter(x => S.zuordnung[x[1]] === "keine").map(x => x[0]);
+  return `<div class="aufdeck" style="margin-top:1rem"><p class="kennung">Dein Abgleich</p><p>${leer.length ? `<b>Leer bei dir:</b> ${esc(leer.join(", "))}. Fehlt das im Film – oder im Modell?` : "<b>Alle sechs Säulen</b> kommen in deiner Liste vor."}${nirgends.length ? ` <b>Passt nirgends:</b> ${esc(nirgends.join(", "))} – ein Punkt für das Plenum: Was fehlt dem Modell?` : ""}</p></div>`;
+}
+
+/* A · Fächer: sechs belegte Fakten als Kartenhand; die vordere Karte wird mit Begründung auf eine der drei angebotenen Ablagen gelegt (Muster 3 mit Rückmeldung) */
+function faecher(){
+  const F = S.faecher, offen = F.reihe.filter(i => !(S.saeulen[DK_FAKTEN[i].id] || {}).zu);
+  const vorn = offen.length ? DK_FAKTEN[offen[0]] : null;
+  const angeboten = vorn ? vorn.optionen.map(o => o[0]) : [];
+  const ok = vorn && F.grund.trim().length >= 8;
+  const ablagen = SAEULEN.map(sa => {
+    const drin = DK_FAKTEN.map((f, i) => [f, i]).filter(([f]) => { const st = S.saeulen[f.id]; return st && st.zu && f.optionen[st.o][0] === sa.id; });
+    const an = angeboten.includes(sa.id);
+    return `<div class="ablage${an && ok ? " ziel" : ""}${vorn && !an ? " dim" : ""}" style="--s:${sa.farbe}"><button type="button" class="ab-btn" data-ablage="${sa.id}" ${!vorn || !an || !ok ? "disabled" : ""} aria-label="${esc(sa.name)}${vorn && !an ? ", nicht angeboten" : ""}"><b>${esc(sa.name)}</b>${vorn && !an ? `<i>nicht angeboten</i>` : ""}</button><span class="minis">${drin.map(([f, i]) => `<button type="button" class="mini" data-mini="${f.id}" aria-label="Fakt ${i + 1} zurücknehmen">${i + 1}</button>`).join("")}</span></div>`;
+  }).join("");
+  const hand = DK_FAKTEN.map((f, i) => {
+    const pos = offen.indexOf(i), n = offen.length, ist = pos === 0;
+    const rot = (pos - (n - 1) / 2) * 13, ty = Math.abs(pos - (n - 1) / 2) * 4;
+    return `<button type="button" class="fkarte${ist ? " vorn" : ""}${pos < 0 ? " weg" : ""}" style="--rot:${rot}deg;--ty:${ty}px;z-index:${10 - Math.max(pos, 0)}" data-vorn="${i}" ${pos < 0 ? 'tabindex="-1" aria-hidden="true"' : ""}><span class="nr">Fakt ${i + 1}</span>${esc(f.fakt)}</button>`;
+  }).join("");
+  const letzt = F.letzt && S.saeulen[F.letzt.id] && S.saeulen[F.letzt.id].zu ? F.letzt : null;
+  const n = DK_FAKTEN.filter(f => (S.saeulen[f.id] || {}).zu).length;
+  return `<div class="faecher"><div class="a-ablagen">${ablagen}</div>
+  <div class="hand" id="hand">${hand}</div>
+  <div class="fdots" role="group" aria-label="Karte nach vorn holen">${DK_FAKTEN.map((f, i) => { const st = S.saeulen[f.id] || {}; return `<button type="button" data-vorn="${i}" data-dot aria-pressed="${vorn && vorn.id === f.id}" ${st.zu ? 'disabled title="liegt schon"' : ""} style="--s:${st.zu ? FARBE(f.optionen[st.o][0]) : "var(--line)"}">${i + 1}</button>`; }).join("")}</div>
+  ${vorn ? `<label class="fgrund">Begründung für Fakt ${DK_FAKTEN.indexOf(vorn) + 1} in einem Satz<textarea data-feld="faechergrund" rows="2" placeholder="Ich lege ihn auf …, weil …">${esc(F.grund)}</textarea></label>
+  <p class="hinweis" id="faecherhinweis">${ok ? "Jetzt oben auf eine der drei hellen Ablagen tippen." : "Erst einen Satz schreiben, dann wird die Ablage frei. Eine andere Karte antippen holt sie nach vorn."}</p>` : `<p class="hinweis">Alle sechs Karten liegen. Eine Zahl in einer Ablage antippen nimmt die Karte zurück.</p>`}
+  ${letzt ? `<div class="aufdeck neu" id="faecherfb"><p class="kennung">Fakt ${DK_FAKTEN.findIndex(f => f.id === letzt.id) + 1} liegt auf ${esc(SAEULE(letzt.sid).name)}</p>${DK_FAKTEN.find(f => f.id === letzt.id).optionen.map(o => `<p class="urt ${o[1]}"><b>${esc(SAEULE(o[0]).name)}: ${STUFENWORT[o[1]]}</b> – ${esc(o[2])}</p>`).join("")}</div>` : ""}
+  <p class="hinweis" id="saeulenstand">${n} von 6 abgelegt.${n >= 3 ? " Weiter ist frei." : " Ab drei geht es weiter."}</p></div>`;
+}
+
+/* D · Rad: sechs Säulen als Segmente, Punkte je zugeordnetem Fakt – ein Profil je Land */
+function segPfad(i, n, r0, r1){ const a0 = (i / n) * Math.PI * 2 - Math.PI / 2, a1 = ((i + 1) / n) * Math.PI * 2 - Math.PI / 2, g = .03; const P = (a, r) => `${(200 + Math.cos(a) * r).toFixed(1)},${(200 + Math.sin(a) * r).toFixed(1)}`; return `M${P(a0 + g, r1)} A${r1},${r1} 0 0 1 ${P(a1 - g, r1)} L${P(a1 - g, r0)} A${r0},${r0} 0 0 0 ${P(a0 + g, r0)} Z`; }
+/* zu: { key: saeulenId } · mitte: Text in der Mitte · aktiv: Segmente antippbar (data-rad=land) · stark: hervorgehobene Säule */
+function rad(zu, o = {}){
+  const n = SAEULEN.length, werte = Object.values(zu);
+  const segs = SAEULEN.map((sa, i) => {
+    const am = ((i + .5) / n) * Math.PI * 2 - Math.PI / 2, punkte = Object.entries(zu).filter(([k, v]) => v === sa.id);
+    const dots = punkte.map(([k], j) => { const r = 96 + j * 15; return `<circle class="punkt" cx="${(200 + Math.cos(am) * r).toFixed(1)}" cy="${(200 + Math.sin(am) * r).toFixed(1)}" r="7"><title>${esc(o.titel ? o.titel(k) : k)}</title></circle>`; }).join("");
+    const t = `<text x="${(200 + Math.cos(am) * 150).toFixed(1)}" y="${(200 + Math.sin(am) * 150 + 5).toFixed(1)}" text-anchor="middle">${esc(sa.kurz)}</text>`;
+    const stark = o.stark === sa.id ? ' class="stark"' : "";
+    return `<path d="${segPfad(i, n, 78, 190)}" fill="${sa.farbe}" opacity="${punkte.length || o.stark === sa.id ? 1 : .42}"${stark} ${o.aktiv ? `data-rad="${o.aktiv}" data-sid="${sa.id}" tabindex="0" role="button" aria-label="${esc(sa.name)}"` : ""}></path>${t}${dots}`;
+  }).join("");
+  return `<svg class="rad${o.klein ? " klein" : ""}" viewBox="0 0 400 400" role="img" aria-label="${esc(o.label || "Profil")}: ${werte.length ? SAEULEN.filter(sa => werte.includes(sa.id)).map(sa => sa.name + " " + werte.filter(v => v === sa.id).length).join(", ") : "noch leer"}">${segs}<circle class="mitte" cx="200" cy="200" r="60"/><text class="mt" x="200" y="${o.mitteKlein ? 207 : 212}" text-anchor="middle" style="${o.mitteKlein ? "font-size:22px" : ""}">${esc(o.mitte || "")}</text></svg>`;
+}
+const DK_PROFIL = () => { const z = {}; DK_FAKTEN.forEach((f, i) => { const st = S.saeulen[f.id]; if (st && st.zu) z[i + 1] = f.optionen[st.o][0]; }); return z; };
+
 function saeulen(){
   const n = DK_FAKTEN.filter(f => (S.saeulen[f.id] || {}).zu).length;
-  const meine = S.faktoren.map((f, i) => [f, i]).filter(x => x[0].trim().length >= 3);
-  const leer = SAEULEN.filter(sa => !meine.some(x => S.zuordnung[x[1]] === sa.id)).map(sa => sa.name);
-  const zugeordnet = meine.filter(x => S.zuordnung[x[1]]).length;
   return `${zeitKopf("saeulen")}<h1>Sechs Säulen</h1>
   <p class="lead">Du hast aus dem Film Faktoren gesammelt. Dein Heft bietet dafür ein Modell an: sechs Merkmale, an denen man eine Gesellschaft unter Besatzung vergleichen kann. Es ist ein Werkzeug deiner Lehrkraft, keine Theorie aus der Forschung – also prüfe es an deiner Liste.</p>
   <p class="kennung"><span class="status modell">Modell</span>Sechs Säulen – Was schützt eine Gesellschaft?</p>
-  <div class="saeulen" id="saeulen-modell">${SAEULEN.map((s, i) => `<div class="saeule"><b>${i + 1} · ${esc(s.name)}</b><span class="kf">${esc(s.kern)}</span><span>${esc(s.was)}</span></div>`).join("")}</div>
+  <div class="saeulen" id="saeulen-modell">${SAEULEN.map((s, i) => `<div class="saeule" style="border-top:5px solid ${s.farbe}"><b>${i + 1} · ${esc(s.name)}</b><span class="kf">${esc(s.kern)}</span><span>${esc(s.was)}</span></div>`).join("")}</div>
 
-  <h2 class="abschnitt">Deine Faktoren am Modell</h2>
-  ${auftrag("Vergleich · deine Liste gegen das Modell", "Wohin gehört jeder deiner Faktoren?", "Ordne jeden Faktor einer Säule zu – oder „passt nirgends“. Dann siehst du, welche Säulen bei dir leer bleiben. Das ist keine Lücke bei dir: Vielleicht zeigt der Film sie nicht, vielleicht braucht das Modell sie nicht.")}
-  <div class="karte"><div class="feldgruppe" style="margin-top:0">${meine.map(([f, i]) => `<label>${esc(f)}<select data-zuordnung="${i}" style="width:100%;min-height:48px;border:1.5px solid var(--border);border-radius:var(--r);padding:.5rem .8rem;background:var(--surface2);margin-top:.3rem"><option value="">– Säule wählen –</option>${SAEULEN.map(sa => `<option value="${sa.id}" ${S.zuordnung[i] === sa.id ? "selected" : ""}>${esc(sa.name)}</option>`).join("")}<option value="keine" ${S.zuordnung[i] === "keine" ? "selected" : ""}>passt nirgends</option></select></label>`).join("")}</div>
-  ${zugeordnet >= meine.length && meine.length ? `<div class="aufdeck" style="margin-top:1rem"><p class="kennung">Dein Abgleich</p><p>${leer.length ? `<b>Leer bei dir:</b> ${esc(leer.join(", "))}. Fehlt das im Film – oder im Modell?` : "<b>Alle sechs Säulen</b> kommen in deiner Liste vor."}${meine.some(x => S.zuordnung[x[1]] === "keine") ? " <b>Passt nirgends:</b> " + esc(meine.filter(x => S.zuordnung[x[1]] === "keine").map(x => x[0]).join(", ")) + " – das ist ein Punkt für das Plenum: Was fehlt dem Modell?" : ""}</p></div>` : `<p class="hinweis" style="margin-top:.6rem">Sobald alle Faktoren zugeordnet sind, erscheint der Abgleich.</p>`}</div>
+  <h2 class="abschnitt">Deine Faktoren an der Tafel</h2>
+  ${auftrag("Abgleich · deine Liste gegen das Modell", "Wohin gehört jeder deiner Faktoren?", "Faktor antippen, dann Spalte antippen. Was in keine Säule passt, kommt nach „Passt nirgends“. Dann siehst du, welche Säulen bei dir leer bleiben. Das ist keine Lücke bei dir: Vielleicht zeigt der Film sie nicht, vielleicht braucht das Modell sie nicht.")}
+  <div class="karte" id="tafelkarte">${tafel()}${abgleich()}</div>
+
   <h2 class="abschnitt">Sechs belegte Fakten</h2>
-  ${auftrag("Muster 3 · Zuordnen mit Begründung", "Sechs Fakten aus Dänemark – welche Säule trägt sie?", "Jetzt umgekehrt: sechs Fakten aus der Forschung, zu jedem drei Säulen. Wähle die, die den Fakt am besten erklärt, begründe in einem Satz, leg fest. Dann siehst du zu jeder der drei Säulen, wie gut sie passt. Es gibt keine „falsche“ Zuordnung – aber eine, die am meisten erklärt.")}
-  ${DK_FAKTEN.map((f, i) => `<div class="karte" id="w-${f.id}"><p class="kennung">Fakt ${i + 1}</p><p><b>${esc(f.fakt)}</b></p>${gWahl("saeulen", f.id, "Welche Säule erklärt diesen Fakt am stärksten?", f.optionen, { saeulen:true })}</div>`).join("")}
-  <p class="hinweis" id="saeulenstand">${n} von 6 festgelegt.${n >= 3 ? " Weiter ist frei." : " Ab drei geht es weiter."}</p>
+  ${auftrag("Konsolidieren · Fächer", "Sechs Fakten aus der Forschung – welche Säule trägt sie?", "Jetzt umgekehrt: Die Fakten liegen als Kartenfächer. Die vordere Karte ist dran; drei Ablagen sind angeboten. Schreib deine Begründung, dann leg die Karte ab. Du siehst zu jeder der drei Säulen, wie gut sie passt. Es gibt keine „falsche“ Ablage – aber eine, die am meisten erklärt.")}
+  <div class="karte" id="faecherkarte">${faecher()}</div>
+
   <h2 class="abschnitt">Deine These</h2>
   ${auftrag("These bilden", "Was schützt eine Gesellschaft?", "Ein Satz aus deinen Faktoren und den Säulen. Diese These testest du gleich an drei anderen Ländern.")}
   <div class="feldgruppe"><label>Unsere These: Die Opferrate war dort niedrig, wo …<textarea data-feld="these" rows="3" placeholder="… der Staat …, die Nachbarn …, und …">${esc(S.these)}</textarea></label></div>
   <details class="hilfe"><summary>Was lässt dieses Modell weg?</summary><p>Das Modell sortiert Bedingungen. Es sagt nichts über den Einzelnen: Ein Fischer, der Geld nimmt, und einer, der umsonst fährt, stehen in derselben Säule. Es erklärt auch nicht, warum ausgerechnet <em>diese</em> Nachbarn halfen und andere nicht. Dafür brauchst du den Blick aus M22 – und die Position am Ende der Stunde.</p></details>
-  ${weiter("vergleich", "Weiter: Thesen testen", { aus: n < 3 || S.these.trim().length < 15, hinweis: (n < 3 || S.these.trim().length < 15) ? "Mindestens drei Fakten zuordnen und die These schreiben, dann weiter." : undefined })}`;
+  ${weiter("vergleich", "Weiter: Thesen testen", { aus: n < 3 || S.these.trim().length < 15, hinweis: (n < 3 || S.these.trim().length < 15) ? "Mindestens drei Fakten ablegen und die These schreiben, dann weiter." : undefined })}`;
+}
+
+/* Land: Rad als Eingabe (jeder der vier Fakten bekommt eine Säule), darunter die festgelegte Wahl mit Rückmeldung */
+function landBlock(l){
+  const z = S.rad[l.id] || {}, st = S.laender[l.id] || {};
+  const offen = l.fakten.map((f, i) => i).filter(i => !z[i]);
+  const akt = offen.length ? offen[0] : null;
+  return `<div class="karte landblock" id="w-${l.id}"><p class="kennung">${esc(l.land)} · ${esc(l.rate)}</p>
+  <div class="rad-wrap"><div>${rad(z, { aktiv: l.id, mitte: akt !== null ? String(akt + 1) : "✓", label: "Profil " + l.land, titel: k => l.fakten[k], stark: st.zu ? l.optionen[st.o][0] : undefined })}</div>
+  <div class="d-seite"><p class="hinweis"><b>Besatzung:</b> ${esc(l.besatzung)}</p>
+  <ol class="radfakten">${l.fakten.map((f, i) => `<li class="${z[i] ? "da" : ""}${i === akt ? " akt" : ""}"><span class="rp" style="--s:${z[i] ? FARBE(z[i]) : "var(--line)"}">${i + 1}</span><span>${esc(f)}${z[i] ? ` <b style="color:${FARBE(z[i])}">→ ${esc(SAEULE(z[i]).name)}</b>` : ""}</span></li>`).join("")}</ol>
+  <p class="hinweis">${akt !== null ? `Fakt ${akt + 1} ist dran: Segment antippen. Eine erledigte Zeile antippen nimmt die Zuordnung zurück.` : "Alle vier Fakten liegen im Rad. Eine Zeile antippen nimmt die Zuordnung zurück."}</p></div></div>
+  ${gWahl("laender", l.id, esc(l.frage), l.optionen, { saeulen:true })}</div>`;
 }
 
 function vergleich(){
   const n = LAENDER.filter(l => (S.laender[l.id] || {}).zu).length;
+  const dk = DK_PROFIL();
   return `${zeitKopf("vergleich")}<h1>Thesen testen</h1>
   <p class="lead">Dänemark ist der Ausnahmefall. Drei andere Länder sind der Test: Hält deine These, wenn Säulen fehlen – oder wenn ein Staat in beide Richtungen handelt?</p>
   <div class="karte" style="border-left:6px solid var(--kuli)"><p class="kennung">Unsere These</p><p><b>Die Opferrate war dort niedrig, wo …</b> ${esc(S.these)}</p></div>
-  ${auftrag("Muster 3 · Zuordnen mit Begründung", "Welche Säule erklärt am stärksten?", "Lies die vier Fakten je Land. Wähle die Säule, begründe, leg fest. Dann siehst du die Erklärung zu allen drei Angeboten – und prüfst, ob deine These das Land erklärt.")}
-  <div class="laender">${LAENDER.map(l => `<div class="land"><p class="kennung">${esc(l.land)}</p><p class="rate">${esc(l.rate)}<small>${esc(l.unter)}</small></p><p class="hinweis"><b>Besatzung:</b> ${esc(l.besatzung)}</p><ul>${l.fakten.map(f => `<li>${esc(f)}</li>`).join("")}</ul></div>`).join("")}</div>
+  ${auftrag("Profil · Rad", "Welche Säulen tragen das Land – und welche erklärt am stärksten?", "Je Land vier belegte Fakten. Leg jeden Fakt auf eine Säule im Rad – so entsteht ein Profil wie bei Dänemark. Dann wähle die Säule, die die Opferrate am stärksten erklärt, begründe und leg fest: Du siehst die Erklärung zu allen drei Angeboten.")}
   <p class="quelle">Zahlen und Abläufe: USHMM Holocaust Encyclopedia, Artikel „The Netherlands“, „Bulgaria“, „Hungary after the German Occupation“ und „Jewish Losses by Country“.</p>
-  ${LAENDER.map(l => `<div class="karte" id="w-${l.id}"><p class="kennung">${esc(l.land)}</p>${gWahl("laender", l.id, esc(l.frage), l.optionen, { saeulen:true })}</div>`).join("")}
+  ${LAENDER.map(landBlock).join("")}
+
+  <h2 class="abschnitt">Vier Profile</h2>
+  <p>Deine Zuordnungen als Bild: Dänemark aus dem Fächer, die drei Länder aus den Rädern. Die hervorgehobene Säule ist die, die du als stärkste festgelegt hast.</p>
+  <div class="profile">${[["Dänemark", dk, (S.saeulen && Object.keys(dk).length) ? undefined : undefined, "unter 2 %"]].concat(LAENDER.map(l => [l.land, S.rad[l.id] || {}, (S.laender[l.id] || {}).zu ? l.optionen[S.laender[l.id].o][0] : undefined, l.rate])).map(([name, z, stark, rate]) => `<figure class="profil">${rad(z, { klein:true, mitte: rate, mitteKlein:true, label: "Profil " + name, stark })}<figcaption><b>${esc(name)}</b> ${esc(rate)}</figcaption></figure>`).join("")}</div>
+  <p class="hinweis">Lies die Räder wie Fingerabdrücke: Wo häufen sich Punkte, wo bleibt ein Segment leer? Dänemark hat sechs Punkte, die anderen vier – vergleiche die Form, nicht die Zahl.</p>
 
   <h2 class="abschnitt">Hält die These?</h2>
   ${auftrag("Eigene Sätze", "Was bleibt von der These – und was fehlt ihr?", "Erst der Test, dann zwei Sätze zum Vergleich. Danach kannst du sie mit der Fassung deiner Lehrkraft vergleichen.")}
@@ -548,11 +699,14 @@ function zusammenfassung(){
   <div class="matrix-wrap"><table><tbody>${DK_ZEIT.map(z => `<tr><td class="n"><b>${esc(z.jahr)}</b></td><td>${esc(z.mehr)}</td></tr>`).join("")}</tbody></table></div>
   <h2>Sechs Säulen (Modell)</h2>
   <div class="saeulen">${SAEULEN.map((s, i) => `<div class="saeule"><b>${i + 1} · ${esc(s.name)}</b><span class="kf">${esc(s.kern)}</span></div>`).join("")}</div>
+  <p class="merksatz">Nicht die besseren Menschen – die besseren Bedingungen. Und jemand, der anfängt.</p>
   <div class="seitenumbruch"></div>
   <h2>Meine Faktoren aus dem Film</h2>
   <div class="karte"><p>${esc(S.faktoren.filter(f => f.trim()).map((f, i) => `${i + 1}. ${f}${S.zuordnung[S.faktoren.indexOf(f)] ? " (" + (S.zuordnung[S.faktoren.indexOf(f)] === "keine" ? "passt nirgends" : SAEULE(S.zuordnung[S.faktoren.indexOf(f)]).name) + ")" : ""}`).join(" · ")) || "–"}</p></div>
   <h2>Unsere These</h2>
   <div class="karte"><p>Die Opferrate war dort niedrig, wo … ${esc(S.these) || "–"}</p><p><b>Test:</b> ${esc(S.test) || "–"}</p></div>
+  <h2>Vier Profile</h2>
+  <div class="profile druck">${[["Dänemark", DK_PROFIL(), undefined, "unter 2 %"]].concat(LAENDER.map(l => [l.land, S.rad[l.id] || {}, (S.laender[l.id] || {}).zu ? l.optionen[S.laender[l.id].o][0] : undefined, l.rate])).map(([name, z, stark, rate]) => `<figure class="profil">${rad(z, { klein:true, mitte: rate, mitteKlein:true, label: "Profil " + name, stark })}<figcaption><b>${esc(name)}</b></figcaption></figure>`).join("")}</div>
   <h2>Meine Zuordnungen</h2>
   <div class="matrix-wrap"><table><thead><tr><th>Fakt / Land</th><th>Meine Säule</th><th>Begründung</th></tr></thead><tbody>
   ${DK_FAKTEN.map((f, i) => { const st = S.saeulen[f.id] || {}; return `<tr><td>Dänemark, Fakt ${i + 1}</td><td>${st.zu ? esc(SAEULE(f.optionen[st.o][0]).name) : "–"}</td><td>${esc(st.grund || "")}</td></tr>`; }).join("")}
@@ -561,7 +715,6 @@ function zusammenfassung(){
   <div class="zw"><div class="karte"><b>Am niedrigsten, wo …</b><p>${esc(S.nied) || "–"}</p></div><div class="karte"><b>Am höchsten, wo …</b><p>${esc(S.hoch) || "–"}</p></div></div>
   <h2>Meine Position: ${S.pos.wert} (0 = Umgebung, 100 = Ich)</h2>
   <div class="karte"><p>${esc(S.urteil) || "–"}</p></div>
-  <p class="merksatz">Nicht die besseren Menschen – die besseren Bedingungen. Und jemand, der anfängt.</p>
   <h2>Abrufübung (für die nächste Stunde)</h2>
   ${ABRUFZ.map(a => gWahl("abrufz", a.id, esc(a.frage), a.optionen, { ohneGrund:true, mind:0 })).join("")}
   </div>${weiter("start", "Zur Startseite")}`;
@@ -575,8 +728,8 @@ function lehrkraft(){
   <div class="matrix-wrap"><table><thead><tr><th>Min.</th><th>Phase</th><th>Muster / Bewegung</th><th>Papierprobe</th></tr></thead><tbody>
   <tr><td class="n">0–8</td><td>Die Karte</td><td>1 Vorhersage → Auflösung; Balken (Gegenwart)</td><td>Zahlen erst nach der Festlegung → Lernmehrwert</td></tr>
   <tr><td class="n">8–38</td><td>Der Film</td><td>Beobachtungsauftrag, Film am Beamer (18 Min.), sechs Faktoren induktiv; Zeitleiste „Du bist hier“; Vorher–nachher-Schieber mit Autoplay (Bewegung ist Lerngegenstand)</td><td>Film: Beamer, gemeinsam. Faktoren gingen auf Papier – die Liste wird aber digital weitergereicht und am Modell geprüft → hybrid</td></tr>
-  <tr><td class="n">38–55</td><td>Sechs Säulen</td><td>Eigene Faktoren den Säulen zuordnen (Abgleich: leere Säulen, „passt nirgends“); 3 Zuordnen mit Begründung (6 Fakten × 3 Säulen); These</td><td>Abgleich und Erklärung je Säule erst nach Festlegung → Lernmehrwert</td></tr>
-  <tr><td class="n">55–72</td><td>Thesen testen</td><td>These steht über den drei Ländern; 3 Zuordnen; Test-Satz; eigene Sätze vor der Lehrkraft-Fassung</td><td>Vergleich erst nach eigenem Text → Lernmehrwert</td></tr>
+  <tr><td class="n">38–55</td><td>Sechs Säulen</td><td>Säulentafel: eigene Faktoren als Chips in sechs Spalten plus „passt nirgends“ (Abgleich zeigt leere Säulen); Fächer: sechs belegte Fakten als Kartenhand, je drei Ablagen mit Begründung und Rückmeldung (Muster 3); These</td><td>Abgleich und Erklärung je Säule erst nach Festlegung → Lernmehrwert</td></tr>
+  <tr><td class="n">55–72</td><td>Thesen testen</td><td>These steht über den Ländern; je Land ein Rad (vier Fakten auf Säulen = Profil) und die festgelegte Wahl mit Rückmeldung; „Vier Profile“ als Bild; Test-Satz; eigene Sätze vor der Lehrkraft-Fassung</td><td>Vergleich erst nach eigenem Text → Lernmehrwert</td></tr>
   <tr><td class="n">72–84</td><td>Position</td><td>Skala mit Bezugsmarke aus M22; 10 Satzanfänge → Raster</td><td>Marke aus M22 kann nur das Gerät → Lernmehrwert</td></tr>
   <tr><td class="n">84–90</td><td>Plenum</td><td>analog</td><td>Gespräch</td></tr></tbody></table></div>
   <p class="hinweis">Induktiver Weg, wie gewünscht: Film → eigene Faktoren → Modell als Vergleichsfolie → These → Test an drei Ländern. Die 90 Minuten sind mit dem Film eng; wenn es knapp wird: nur drei der sechs belegten Fakten (K1) oder Bulgarien weglassen (K2).</p>
@@ -610,7 +763,7 @@ function lehrkraft(){
 const SEITE_FN = { start, karte, daenemark, saeulen, vergleich, position, plenum, zusammenfassung, lehrkraft };
 function loeschBereich(){
   return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button><label class="g-schalter" style="font-family:var(--body)"><input type="checkbox" role="switch" data-bewegung ${S.ruhig ? "checked" : ""}> Weniger Bewegung</label><span>Alles bleibt auf diesem Gerät.</span>
-  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> Vorhersage, Faktoren, These, Zuordnungen, Sätze, Position und Urteil werden auf diesem Gerät entfernt.</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div></div>`;
+  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> Vorhersage, Faktoren, Tafel, Fächer, Räder, These, Sätze, Position und Urteil werden auf diesem Gerät entfernt.</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div></div>`;
 }
 let LETZTE_SEITE = null;
 function zeichne(fokus){
@@ -656,12 +809,16 @@ function schieberEinmal(){
 }
 const geh = id => { S.seite = id; speichere(); zeichne(true); };
 const halteScroll = fn => { const sy = window.scrollY; fn(); window.scrollTo(0, sy); };
-const SEITENSTAND = { saeulen: () => { const n = DK_FAKTEN.filter(f => (S.saeulen[f.id] || {}).zu).length; const h = document.getElementById("saeulenstand"); if (h) h.textContent = `${n} von 6 festgelegt.${n >= 3 ? " Weiter ist frei." : " Ab drei geht es weiter."}`; const w = document.querySelector("[data-geh='vergleich'].primary"); const aus = n < 3 || S.these.trim().length < 15; if (w) { w.disabled = aus; w.previousElementSibling.textContent = aus ? "Mindestens drei Fakten zuordnen und die These schreiben, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert."; } },
+function tafelNeu(){ const k = document.getElementById("tafelkarte"); if (k) k.innerHTML = tafel() + abgleich(); }
+function faecherNeu(){ const k = document.getElementById("faecherkarte"); if (k) { const sy = window.scrollY; k.innerHTML = faecher(); window.scrollTo(0, sy); const ta = k.querySelector("[data-feld=faechergrund]"); } SEITENSTAND.saeulen(); }
+const SEITENSTAND = { saeulen: () => { const n = DK_FAKTEN.filter(f => (S.saeulen[f.id] || {}).zu).length; const h = document.getElementById("saeulenstand"); if (h) h.textContent = `${n} von 6 abgelegt.${n >= 3 ? " Weiter ist frei." : " Ab drei geht es weiter."}`; const w = document.querySelector("[data-geh='vergleich'].primary"); const aus = n < 3 || S.these.trim().length < 15; if (w) { w.disabled = aus; w.previousElementSibling.textContent = aus ? "Mindestens drei Fakten ablegen und die These schreiben, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert."; } },
   laender: () => { const n = LAENDER.filter(l => (S.laender[l.id] || {}).zu).length; const w = document.querySelector("[data-geh='position'].primary"); if (w) { w.disabled = n < 2; w.previousElementSibling.textContent = n < 2 ? "Mindestens zwei Länder festlegen, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert."; } } };
 
 /* ---------- Ereignisse ---------- */
 document.addEventListener("click", ev => {
-  const t = ev.target.closest("button, [data-geh]"); if (!t) return;
+  const mini = ev.target.closest("[data-mini]"); if (mini) { const id = mini.dataset.mini, st = S.saeulen[id]; if (st) { st.zu = false; S.faecher.grund = st.grund || ""; S.faecher.letzt = null; S.faecher.reihe = [DK_FAKTEN.findIndex(f => f.id === id), ...S.faecher.reihe.filter(i => DK_FAKTEN[i].id !== id)]; speichere(); faecherNeu(); } return; }
+  const rp = ev.target.closest(".radfakten li.da"); if (rp) { const block = rp.closest(".landblock"); const id = block.id.slice(2); const i = [...rp.parentNode.children].indexOf(rp); delete S.rad[id][i]; speichere(); halteScroll(zeichne); return; }
+  const t = ev.target.closest("button, [data-geh], [data-rad]"); if (!t) return;
   const d = t.dataset, tast = ev.detail === 0;
   if (d.geh) { ev.preventDefault(); geh(d.geh); return; }
   if ("loeschfrage" in d) { const f = document.getElementById("loesch-frage"); f.hidden = false; f.querySelector("button").focus(); return; }
@@ -670,6 +827,14 @@ document.addEventListener("click", ev => {
   if ("kartefest" in d) { S.karte.zu = true; speichere(); halteScroll(zeichne); const a = document.getElementById("aufdeck"); if (!tast) neu(a, "neu"); a.scrollIntoView({ block:"start", behavior: ruhig() || tast ? "auto" : "smooth" }); if (!tast) balkenWachsen(); return; }
   if (d.zeit !== undefined) { S.zeit = +d.zeit; speichere(); const z = DK_ZEIT[S.zeit]; const box = document.getElementById("zeittext"); box.innerHTML = `<p class="kennung">${esc(z.jahr)} · ${esc(z.text)}</p><p>${esc(z.mehr)}</p>`; if (!tast) neu(box, "neu"); return; }
   if ("gFestlegen" in d || t.hasAttribute("data-g-festlegen")) { const w = t.closest(".g-wahl[data-feld]"); if (!w) return; const gew = w.querySelector("input:checked"); if (!gew) return; const feld = w.dataset.feld, id = w.dataset.id; S[feld][id] = { o: +gew.value, grund: (w.querySelector("textarea") || {}).value || "", zu: true }; speichere(); w.querySelector(".g-wahl__fuss").insertAdjacentHTML("beforeend", `<button type="button" class="btn nodruck" data-neu-wahl>Noch einmal</button>`); if (SEITENSTAND[feld]) SEITENSTAND[feld](); return; }
+  /* B · Tafel */
+  if (d.chip !== undefined) { TAFEL_CHIP = TAFEL_CHIP === +d.chip ? null : +d.chip; tafelNeu(); return; }
+  if (d.spalte) { if (TAFEL_CHIP !== null) { S.zuordnung[TAFEL_CHIP] = d.spalte; TAFEL_CHIP = null; speichere(); tafelNeu(); } else { const drin = Object.entries(S.zuordnung).filter(([i, v]) => v === d.spalte); if (drin.length) { delete S.zuordnung[drin[drin.length - 1][0]]; speichere(); tafelNeu(); } } return; }
+  /* A · Fächer */
+  if (d.ablage) { if (t.disabled) return; const offen = S.faecher.reihe.filter(i => !(S.saeulen[DK_FAKTEN[i].id] || {}).zu); if (!offen.length) return; const f = DK_FAKTEN[offen[0]], o = f.optionen.findIndex(x => x[0] === d.ablage); if (o < 0) return; S.saeulen[f.id] = { o, grund: S.faecher.grund, zu: true }; S.faecher.grund = ""; S.faecher.letzt = { id: f.id, sid: d.ablage }; speichere(); faecherNeu(); return; }
+  if (d.vorn !== undefined && !t.classList.contains("vorn") && !t.disabled) { const i = +d.vorn; S.faecher.reihe = [i, ...S.faecher.reihe.filter(x => x !== i)]; speichere(); faecherNeu(); return; }
+  /* D · Rad */
+  if (d.rad && d.sid) { const z = S.rad[d.rad] = S.rad[d.rad] || {}; const l = LAND(d.rad); const offen = l.fakten.map((f, i) => i).filter(i => !z[i]); if (!offen.length) return; z[offen[0]] = d.sid; speichere(); halteScroll(zeichne); return; }
   if ("neuWahl" in d) { const w = t.closest(".g-wahl[data-feld]"); delete S[w.dataset.feld][w.dataset.id]; speichere(); halteScroll(zeichne); return; }
   if (t.hasAttribute("data-g-vergleichen")) { S.pos.ref = true; speichere(); return; }
   if (d.anfang) { const ta = document.getElementById("urteil"); const v = ta.value; ta.value = (v && !v.endsWith("\n") && v.trim() ? v + "\n" : v) + d.anfang + " "; S.urteil = ta.value; speichere(); ta.focus(); return; }
@@ -679,7 +844,6 @@ document.addEventListener("click", ev => {
 document.addEventListener("change", ev => {
   const t = ev.target, d = t.dataset;
   if ("bewegung" in d) { S.ruhig = t.checked; speichere(); halteScroll(zeichne); return; }
-  if (d.zuordnung !== undefined) { S.zuordnung[d.zuordnung] = t.value; speichere(); halteScroll(zeichne); return; }
   if ("karte" in d) { S.karte.wahl = +t.value; speichere(); karteKnopf(); return; }
   if (t.type === "radio" && t.closest(".g-wahl[data-feld]")) { const w = t.closest(".g-wahl"); const st = S[w.dataset.feld][w.dataset.id] || {}; S[w.dataset.feld][w.dataset.id] = Object.assign(st, { o: +t.value }); speichere(); pruefeWahl(w); return; }
 });
@@ -690,6 +854,7 @@ document.addEventListener("input", ev => {
   if (d.feld === "kartegrund") { S.karte.grund = t.value; speichere(); karteKnopf(); return; }
   if (d.feld === "kartefrage") { S.karte.frage = t.value; speichere(); return; }
   if (d.faktor !== undefined) { S.faktoren[+d.faktor] = t.value; speichere(); const n = S.faktoren.filter(f => f.trim().length >= 3).length; document.getElementById("faktorenstand").textContent = `${n} von 6 eingetragen.`; const w = document.querySelector("[data-geh='saeulen'].primary"); if (w) { w.disabled = n < 3; w.previousElementSibling.textContent = n < 3 ? "Mindestens drei Faktoren eintragen, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert."; } return; }
+  if (d.feld === "faechergrund") { S.faecher.grund = t.value; speichere(); const ok = t.value.trim().length >= 8; document.querySelectorAll("[data-ablage]").forEach(b => { const a = b.parentNode, dim = a.classList.contains("dim"); a.classList.toggle("ziel", ok && !dim); b.disabled = !(ok && !dim); }); document.getElementById("faecherhinweis").textContent = ok ? "Jetzt oben auf eine der drei hellen Ablagen tippen." : "Erst einen Satz schreiben, dann wird die Ablage frei. Eine andere Karte antippen holt sie nach vorn."; return; }
   if (d.feld === "these") { S.these = t.value; speichere(); SEITENSTAND.saeulen(); return; }
   if (d.feld === "test") { S.test = t.value; speichere(); return; }
   if ("grundFeld" in d) { const w = t.closest(".g-wahl[data-feld]"); const st = S[w.dataset.feld][w.dataset.id] || {}; S[w.dataset.feld][w.dataset.id] = Object.assign(st, { grund: t.value }); speichere(); pruefeWahl(w); return; }
@@ -698,6 +863,7 @@ document.addEventListener("input", ev => {
   if (d.feld === "urteil") { S.urteil = t.value; speichere(); const n = t.value.trim().split(/\s+/).filter(Boolean).length; t.nextElementSibling.textContent = `${n} Wörter. Ab 40 Wörtern erscheint das Raster.`; if (n >= 40 && !document.getElementById("raster")) halteScroll(zeichne); return; }
 });
 
+document.addEventListener("keydown", ev => { if (ev.target.matches && ev.target.matches("[data-rad]") && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); ev.target.click(); } });
 zeichne();
 </script>
 </body>
