@@ -1,6 +1,6 @@
-# M23 · Die Gesellschaft, in der ich leb(t)e? – Bericht zur Fassung 1.1
+# M23 · Die Gesellschaft, in der ich leb(t)e? – Bericht zur Fassung 1.2
 
-Stand: 27.10.2026 (1.1: Film und induktiver Weg) · Datei `m23-die-gesellschaft.html` · Branch `m23-gesellschaft` · Skill-Kette: unterricht-digitalisieren → lernseite-bauen → bewegung-als-lernmittel → (signatur-design: nicht nötig, Projekt-System vorhanden) → schaubild-design (nur Säulen-Raster als statisches Modell) → website-design-workflow → digital-check.
+Stand: 27.10.2026 (1.1: Film und induktiver Weg · 1.2: Tafel, Fächer, Rad statt Scrollen) · Datei `m23-die-gesellschaft.html` · Branch `m23-gesellschaft` · Skill-Kette: unterricht-digitalisieren → lernseite-bauen → bewegung-als-lernmittel → (signatur-design: nicht nötig, Projekt-System vorhanden) → schaubild-design (nur Säulen-Raster als statisches Modell) → website-design-workflow → digital-check.
 
 ## Grundlage
 
@@ -26,10 +26,16 @@ Durchgängig (Variante B). Plenum bei 80–90 analog.
 
 **Fassung 1.1 (27.10.2026):** Auf Wunsch der Lehrkraft induktiv: Film „Voices in the Void“ zuerst (lokale Kopie `media/m23-voices-in-the-void-2021.mp4`, 720p, 82 MB, **nur im Unterrichtspaket** – Rechte Humanity in Action; im Repository fehlt sie, die Seite bietet dann YouTube erst nach Klick über youtube-nocookie an), Beobachtungsauftrag mit fünf Fragen, bis zu sechs eigene Faktoren (mindestens drei), Abgleich am Modell per Auswahl je Faktor (Säule oder „passt nirgends“), These als Satz, Test an Niederlande/Bulgarien/Ungarn mit Test-Satz. Melchior-Textkarten entfallen (bleiben als Reserve im Code). Speicherschlüssel jetzt `ggk-m23-gesellschaft:v2`.
 
+**Fassung 1.2 (27.10.2026):** Die sechs Fakten standen untereinander (Papierlogik). Drei Formen ersetzen das Scrollen, entschieden nach dem Prototyp „M23 Säulen Optionen“ (vier klickbare Varianten A–D):
+- **B · Säulentafel** für den Abgleich der eigenen Faktoren: sechs Spalten plus „Passt nirgends“, Faktoren als Chips (antippen, Spalte antippen); leere Spalten sind sofort sichtbar – die Schablone als ein Bild.
+- **A · Fächer** zum Konsolidieren der belegten Fakten: Kartenhand, vordere Karte ist dran, drei Ablagen angeboten (die anderen „nicht angeboten“), Begründung (≥ 8 Zeichen) schaltet die Ablagen frei, Ablegen zeigt die Rückmeldung zu allen drei Säulen; Zahlen in den Ablagen nehmen zurück; Punktreihe 1–6 holt Karten nach vorn (Tastaturweg).
+- **D · Rad** für die drei Länder: vier Fakten je Land auf Segmente legen (Profil), darunter die festgelegte Wahl mit Rückmeldung; „Vier Profile“ (Dänemark aus dem Fächer, drei Länder aus den Rädern) als Bild vor dem Test der These – auch in der Zusammenfassung.
+Speicherschlüssel `ggk-m23-gesellschaft:v3` (`faecher.reihe/grund`, `rad[land]`). Sechs Säulenfarben als Tokens `--s-inst … --s-takt`.
+
 ## Interaktionsmuster (Katalog `lernseite-bauen`)
 
 - **1 Vorhersage → Auflösung:** vier Länder, Begründung (≥ 8 Zeichen), dann Balken (USHMM) und Frage-Feld.
-- **3 Zuordnen mit Begründung:** sechs Dänemark-Fakten, drei Länder; je Fakt drei Säulen mit Erklärung zentral · auch begründbar · passt kaum. Keine Zuordnung ist „falsch“; die Stufe sagt, wie viel sie erklärt. Weiter ab 3 von 6 (plus These) bzw. 2 von 3. Davor die offene Variante: eigene Faktoren einer Säule zuordnen, ohne Wertung – der Abgleich zeigt leere Säulen.
+- **3 Zuordnen mit Begründung:** sechs Dänemark-Fakten im Fächer, drei Länder als Wahl; je Fakt drei Säulen mit Erklärung zentral · auch begründbar · passt kaum. Keine Zuordnung ist „falsch“; die Stufe sagt, wie viel sie erklärt. Weiter ab 3 von 6 (plus These) bzw. 2 von 3. Ohne Wertung: eigene Faktoren an der Tafel, vier Länderfakten im Rad.
 - **10 Satzanfänge → Kriterienraster:** Urteil, Raster ab 40 Wörtern (Grundlegend · Sicher · Souverän).
 - **Skala mit Bezugsmarke** (Gegenwart): Umwelt ↔ Ich; Marke = `pos` aus `ggk-m22-taeter:v2`, wenn auf dem Gerät vorhanden. Richtung bewusst gegenläufig zu M22 (dort Person ↔ Umstände); Hinweis auf der Seite.
 - Abrufübung (2 Fragen, Muster 2) in der Zusammenfassung.
@@ -51,7 +57,13 @@ Nicht gebaut: Zeitstrahl Ungarn 1944 (keine belegten Tageszahlen), Simulation, G
 
 **Schieber:** Ruhe (Griff rechts, August sichtbar, Knopf „Hin und her“) · Autoplay läuft (Knopf „Anhalten“, `aria-pressed=true`) · gezogen (Finger/Regler, Autoplay aus) · Ende (Griff links, Oktober sichtbar, Knopf „Hin und her“) · weniger Bewegung (kein Autoplay, Ziehen und Tastatur unverändert).
 
-**Wahl (Säule):** offen (keine Option, Festlegen gesperrt) · gewählt ohne Begründung (gesperrt) · gewählt mit Begründung (Festlegen frei) · festgelegt (`data-zu`, Optionen gesperrt, Urteile je Säule sichtbar, Stempel, „Noch einmal“) · nach Neuladen (festgelegt ohne Bewegung).
+**Wahl (Länder):** offen (keine Option, Festlegen gesperrt) · gewählt ohne Begründung (gesperrt) · gewählt mit Begründung (Festlegen frei) · festgelegt (`data-zu`, Optionen gesperrt, Urteile je Säule sichtbar, Stempel, „Noch einmal“) · nach Neuladen (festgelegt ohne Bewegung).
+
+**Fächer:** Hand (vordere Karte groß, übrige gefächert ±13°) · ohne Begründung (angebotene Ablagen gestrichelt, Knöpfe gesperrt; nicht angebotene gedimmt) · mit Begründung (drei Ablagen farbig umrandet, antippbar) · abgelegt (Karte fliegt nach oben, Zahl in der Ablage, Rückmeldung zu drei Säulen, nächste Karte vorn) · alle abgelegt (Hand leer, Hinweis) · zurückgenommen (Karte wieder vorn, Begründung zurück im Feld).
+
+**Tafel:** kein Chip gewählt · Chip gewählt (blau umrandet, alle Spalten als Ziel umrandet) · Chip in Spalte (Chip erscheint 300 ms, Spalte nicht mehr „leer“) · alle gelegt (Ablage leer, Abgleich sichtbar) · Spalte ohne gewählten Chip antippen (letzter Chip zurück).
+
+**Rad:** Fakt n dran (Zahl in der Mitte, Zeile hervorgehoben) · Segment angetippt (Punkt im Segment, Segment voll gefärbt, Zeile mit Pfeil) · alle vier gelegt (✓ in der Mitte) · Wahl festgelegt (stärkste Säule mit dunklem Rand) · klein in „Vier Profile“ (nur lesbar, Rate in der Mitte).
 
 **Skala:** Regler frei · Marke eingeblendet (Knopf gesperrt, Text „M22, Täter: eher …“) · ohne M22 (Hinweis statt Knopf).
 
@@ -72,7 +84,7 @@ Siehe Lehrkraft-Ansicht: Opferraten aus USHMM-Zahlen (Belgien ≈ 27 % statt 40 
 ## Prüfung
 
 **Gelaufen (Cloud, Chromium):**
-- Playwright-Durchlauf (`scratchpad/m23/t23.py`): Vorhersage gesperrt bis Wahl + Satz, Balken, Zeitleiste per Klick (Text und „Du bist hier“), Autoplay startet im Blick und steht nach einem Durchlauf, Tastatur am Regler (End → 0 % Oktober), neun Wahlen mit gesperrtem Festlegen ohne Begründung, Urteile sichtbar, Stand nach Neuladen, „Noch einmal“, Weiter-Sperren (4/6, 2/3), Lehrkraft-Fassung erst nach zwei Sätzen, Skala ohne/mit M22-Marke (72 → „eher Umstände“), Raster ab 40 Wörtern, Abrufübung, „weniger Bewegung“ ohne Autoplay, „Eingaben löschen“. 0 Skriptfehler, 0 Konsolenfehler, 0 fehlende Dateien.
+- Playwright-Durchlauf (`scratchpad/m23/t23.py`), 1.2 ergänzt um Tafel (Chip → Spalte, zurückholen, Abgleich), Fächer (Ablage gesperrt ohne Begründung, nicht angebotene gedimmt, Ablegen, Rückmeldung, Karte nach vorn über Punktreihe, Zurücknehmen über Zahl, Stand nach Neuladen) und Rad (vier Segmente, Zeile zurück, Profile mit Punkten): Vorhersage gesperrt bis Wahl + Satz, Balken, Zeitleiste per Klick (Text und „Du bist hier“), Autoplay startet im Blick und steht nach einem Durchlauf, Tastatur am Regler (End → 0 % Oktober), neun Wahlen mit gesperrtem Festlegen ohne Begründung, Urteile sichtbar, Stand nach Neuladen, „Noch einmal“, Weiter-Sperren (4/6, 2/3), Lehrkraft-Fassung erst nach zwei Sätzen, Skala ohne/mit M22-Marke (72 → „eher Umstände“), Raster ab 40 Wörtern, Abrufübung, „weniger Bewegung“ ohne Autoplay, „Eingaben löschen“. 0 Skriptfehler, 0 Konsolenfehler, 0 fehlende Dateien.
 - Mindestprüfung `pruef_seiten.py`: 5 Breiten × mit/ohne „weniger Bewegung“: 0 Probleme, kein waagerechtes Scrollen.
 - Druck: Zusammenfassung = 2 Seiten A4 (auch mit langen Eingaben).
 - Bildschirmfotos angesehen (Start, Karte, Dänemark, Säulen, Länder, Position, Plenum, Zusammenfassung, Lehrkraft; 390 px; Beamer 1280 × 720).
