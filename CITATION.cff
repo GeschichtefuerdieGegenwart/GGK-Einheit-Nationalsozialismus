@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "Wenn du dieses Material verwendest oder darüber schreibst, zitiere es bitte so."
+title: "GGK-Labor · Quellen-Labore zum Nationalsozialismus"
+abstract: "Interaktive Quellen-Labore für Geschichte mit Gemeinschaftskunde am Beruflichen Gymnasium (M18–M23): NS-Ideologie, Appeasement, Dilemmata 1940–1944, Shoa, Täterforschung, Ländervergleich."
+authors:
+  - family-names: Walter
+    given-names: Mario
+type: software
+version: "Stand 2026-11-03"
+date-released: "2026-11-03"
+repository-code: "https://github.com/GeschichtefuerdieGegenwart/GGK-Einheit-Nationalsozialismus"
+license: MIT
+keywords:
+  - Unterricht
+  - Lernumgebung
+  - Berufliches Gymnasium
+  - Baden-Württemberg
+notes: "Code: MIT. Texte, Aufgaben, Daten und Grafiken: CC BY-NC-SA 4.0 (siehe LICENSE-INHALTE.md). Entwickelt mit KI-Unterstützung; Konzept, Auswahl und Überarbeitung durch den Urheber."

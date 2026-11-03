@@ -1051,7 +1051,8 @@ function stimmkarte(){
     <div class="gross">${k}</div><p>${esc(E && E.opt[k] ? E.opt[k].t : "")}</p><p style="font-size:1rem;opacity:.8">Hochhalten, wenn die Lehrkraft das Zeichen gibt.</p></div>`;
 }
 
-const FUSS = `<footer class="seitenfuss nodruck"><span>GGK-Labor · keine Namen, keine Übertragung: Antworten bleiben auf diesem Gerät.</span>${IN_MOODLE ? "" : `<a href="?ansicht=lehrkraft">Hinweise für die Lehrkraft</a>`}</footer>`;
+const FUSS = `<footer class="seitenfuss nodruck"><span>GGK-Labor · keine Namen, keine Übertragung: Antworten bleiben auf diesem Gerät.</span>${IN_MOODLE ? "" : `<a href="?ansicht=lehrkraft">Hinweise für die Lehrkraft</a>`}
+    <p class="urheberzeile" style="font-size:1rem;opacity:.72;margin-top:1.5rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p></footer>`;
 
 let fokusZiel = null;
 function zeichne(){

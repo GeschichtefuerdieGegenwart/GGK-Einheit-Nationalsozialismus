@@ -1493,7 +1493,8 @@ function stimmkarte(){
 const LABOR = /github\.io$/.test(location.hostname) ? "index.html" : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
 const EROEFF_KEY = "ggk-m20:eroeffnung";
 const FUSS = `<footer class="seitenfuss nodruck"><span>GGK-Labor · keine Namen, keine Übertragung: Antworten bleiben auf diesem Gerät.</span>${IN_MOODLE ? "" : `<a href="?ansicht=lehrkraft">Hinweise für die Lehrkraft</a>`}<button class="btn-leise" data-loeschfrage="1">Eingaben löschen</button>
-  <div class="loesch-frage" id="loesch-frage" hidden><span>Alle Antworten auf diesem Gerät löschen? Das lässt sich nicht rückgängig machen.</span><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></footer>`;
+  <div class="loesch-frage" id="loesch-frage" hidden><span>Alle Antworten auf diesem Gerät löschen? Das lässt sich nicht rückgängig machen.</span><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div>
+    <p class="urheberzeile" style="font-size:1rem;opacity:.72;margin-top:1.5rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p></footer>`;
 function loescheAlles(){ try{ localStorage.removeItem(KEY); }catch(x){} try{ sessionStorage.removeItem(EROEFF_KEY); }catch(x){} location.href = location.pathname + (IN_MOODLE ? location.search : ""); }
 
 let fokusZiel = null;
