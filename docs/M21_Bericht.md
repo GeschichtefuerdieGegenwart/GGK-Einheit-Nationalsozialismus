@@ -1,6 +1,6 @@
-# M21 · Es geht um Menschen – Bericht zur Fassung 1.0
+# M21 · Es geht um Menschen – Bericht zur Fassung 1.1
 
-Stand: 26.10.2026 · Datei `m21-es-geht-um-menschen.html` · Branch `m21-es-geht-um-menschen`
+Stand: 05.11.2026 (1.1) · Datei `m21-es-geht-um-menschen.html` · Branch `m21-public-history-matrix`
 
 ## Grundlage
 
@@ -11,6 +11,14 @@ Unterrichtsheft „Geschichte aktuell 1“, M21 (Public History, letzter Brief Z
 3. **Mehrwert in einem Satz:** Die Seite deckt erst nach der eigenen Festlegung auf, legt die eigene Zeile neben die der Lehrkraft und zählt die Klasse an der Tafel – Papier kann das nicht.
 4. **Erfolg:** fünf Sätze über einen Lebensweg mit Begriff je Phase und begründetem Wort.
 
+## Fassung 1.1 (05.11.2026)
+
+Auftrag der Lehrkraft: Public-History-Auftrag mit der Landkarte, Matrix gemeinsam entwickeln, Stand von M22/M23.
+
+1. **Public History (Wort-Seite):** Der Kasten bleibt als Brücke (Serie „Holocaust“ 1979, ohne die unbelegten Zahlen); darunter der Auftrag mit Link in die kognitive Landkarte 3.1.2 (Anker `#s-3-1-2`, nicht `#literatur` wie im Heft), Aufgabe 2 „Fallbeispiele analysieren“ (fünf Fälle, je empirisch · narrativ · normativ). Zurück auf der Seite: Einfluss populärer Filme auf vier Stufen (sehr groß · groß · gering · kaum, jede mit Erklärung – keine richtige), Begründung mit Fallbeispiel, Kritik. Alles in der Zusammenfassung. Zeit +6 Min.; Abruffragen werden Kürzung K1.
+2. **Matrix leer (Festlegung → Auflösung):** Die eigene Zeile wird beim ersten Öffnen aus den Stichworten übernommen (editierbar), die drei anderen Zeilen sind leer und entstehen gemeinsam – analog mit **Metaplan-Karten** (Druckvorlage in der Lehrkraft-Ansicht: 16 Karten Person × Station, vier je A4) oder digital. **„Am Beamer zeigen“** öffnet die Tabelle groß (Vollbild, AirPlay vom iPad), **„Als Text kopieren“** legt sie in die Zwischenablage (Rückfall: Prompt). Die **Fassung der Lehrkraft** erscheint erst auf Knopfdruck ab zwei gefüllten Zeilen. Die Zusammenfassung druckt die eigene Tabelle (Rückfall: Lehrkraft-Fassung, wenn leer).
+3. **Stand:** „Weniger Bewegung“ setzt auch `data-bewegung=weniger`; `scroll-margin-top` unter dem klebenden Kopf; Urheberzeile; Ablauf neu (Wort 8–22, Menschen 22–46, Matrix 46–62, Zahl 62–74, Plenum 74–84); Kürzungen K1–K4 auf der Lehrkraft-Seite; Speicherschlüssel `ggk-m21-menschen:v2` (`ph`, `mx`, `mxLk`).
+
 ## Umfang und Papierprobe
 
 Durchgängig (Variante B), weil Festlegung → Auflösung, eigene Zeile neben Lehrkraft-Zeile, Schätzen vor der Zahl und Erklärung je Option den Kern tragen. Zwei Plenumsphasen mit iPad zu.
@@ -18,11 +26,11 @@ Durchgängig (Variante B), weil Festlegung → Auflösung, eigene Zeile neben Le
 | Min. | Phase | Papierprobe |
 | --- | --- | --- |
 | 0–8 | Der Brief | aufdecken erst nach Festlegung → Lernmehrwert |
-| 8–16 | Das Wort | Erklärkarten erst nach eigener Wahl; Abruf mit Erklärung → Lernmehrwert |
-| 16–44 | Vier Menschen | Kartenstapel mit Stichworten je Station, Rückmeldung je Station → Lernmehrwert (auf Papier nur Verteilen) |
-| 44–58 | Die Matrix | eigene Zeile blau neben drei fremden; gestufte Erklärung → Lernmehrwert |
-| 58–72 | Die Zahl | Schätzen vor der Auflösung, Zuordnung mit Erklärung → Lernmehrwert |
-| 72–84 | Plenum | Gespräch bleibt analog; Tafel am Beamer nur als Zählhilfe → hybrid |
+| 8–22 | Das Wort | Erklärkarten erst nach eigener Wahl; Landkarte-Aufgabe mit gestufter Rückmeldung; Abruf mit Erklärung → Lernmehrwert |
+| 22–46 | Vier Menschen | Kartenstapel mit Stichworten je Station, Rückmeldung je Station → Lernmehrwert (auf Papier nur Verteilen) |
+| 46–62 | Die Matrix | leer bis auf die eigene Zeile; gemeinsam füllen (Metaplan oder Beamer), Lehrkraft-Fassung erst danach → hybrid, Lernmehrwert beim Vergleich |
+| 62–74 | Die Zahl | Schätzen vor der Auflösung, Zuordnung mit Erklärung → Lernmehrwert |
+| 74–84 | Plenum | Gespräch bleibt analog; Tafel am Beamer nur als Zählhilfe → hybrid |
 | 84–90 | Rückblick | Vergleich mit dem Anfang, Raster erst nach dem Text → Lernmehrwert |
 
 ## Interaktionsmuster (Katalog `lernseite-bauen`)
@@ -44,7 +52,9 @@ Siehe Lehrkraft-Ansicht auf der Seite (Marie Nedvědová überlebte; Willner-Dat
 
 ## Prüfung
 
-**Gelaufen (Cloud, Chromium):**
+**Gelaufen (Cloud, Chromium), 1.1:** Playwright-Durchlauf erweitert (Landkarte-Link `_blank`, Stufe mit Erklärung, Matrix: eigene Zeile übernommen, Lehrkraft-Fassung gesperrt bis zwei Zeilen, Beamer-Ansicht, Neuladen, Metaplan 16 Karten als PDF 4 Seiten), Mindestprüfung 0 Probleme, Zusammenfassung 2 Seiten A4 mit eigener Tabelle. Clipboard nur über Rückfall geprüft.
+
+**Gelaufen (Cloud, Chromium), 1.0:**
 - Playwright-Durchlauf aller Seiten mit Eingaben (`scratchpad/m21/t21.py`): Aufdecken erst nach Satz, Wort erst nach Begründung, Matrix erst nach einem Weg, Pfeiltasten im Stapel, Vergleich mit „Noch einmal wählen“, Schätzen, Lager, Stimmkarte, Tafel zählt, Raster ab 40 Wörtern, Zusammenfassung, Lehrkraft. Stand bleibt nach Neuladen, „Eingaben löschen“ setzt zurück. 0 Skriptfehler, 0 Konsolenfehler, 0 fehlende Dateien.
 - Mindestprüfung `pruef_seiten.py`: 5 Breiten (1440, 1280, 768, 390, 375) × mit/ohne „weniger Bewegung“, hell: 0 Probleme, kein waagerechtes Scrollen.
 - Druck: Zusammenfassung = genau 2 Seiten A4 (Chromium-PDF, 12/13 mm Rand).
