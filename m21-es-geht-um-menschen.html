@@ -25,6 +25,7 @@
   --r:.75rem; --r-lg:1rem; --ease:cubic-bezier(.23,1,.32,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+button,input,select,textarea,[tabindex]{scroll-margin-top:140px}
 html{-webkit-text-size-adjust:none;text-size-adjust:none;overflow-x:clip}
 body{min-height:100dvh;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:clamp(1rem,.95rem + .25vw,1.125rem);line-height:1.58;-webkit-font-smoothing:antialiased;overflow-x:clip}
 button,input,select,textarea{font:inherit;color:inherit}
@@ -197,7 +198,16 @@ th{background:var(--offset)}
 tr:last-child td{border-bottom:0}
 td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
 .matrix td.eigen{background:var(--kuli-hi)}
-.matrix td.eigen::before{content:"● du: ";font-weight:700;color:var(--kuli)}
+.matrix .lk.du{color:var(--kuli);font-weight:700}
+.matrix td textarea{min-height:4.6rem;font-size:.9rem;padding:.4rem .5rem;margin:0;line-height:1.35;resize:vertical}
+.matrix td.eigen textarea{border-color:var(--kuli)}
+.matrix.beamer{font-size:1.2rem}.matrix.beamer td,.matrix.beamer th{font-size:1.15rem;padding:.7rem .8rem;line-height:1.35}.matrix.beamer td.eigen{background:var(--kuli-hi)}
+.urheberzeile{max-width:1100px;margin:0 auto;padding:0 1.25rem 2rem;color:var(--muted)}
+/* Metaplan-Karten: A4 quer, vier je Blatt */
+.mp-blatt{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.mp-karte{border:2px solid var(--ink);border-radius:.6rem;min-height:10rem;padding:.8rem 1rem;display:grid;align-content:start;gap:.2rem;background:#fff;color:#000;break-inside:avoid}
+.mp-ob{font-weight:700;font-size:1.05rem}.mp-st{font-family:var(--display);font-size:1.6rem}.mp-jahr{color:#444;font-size:.95rem}
+@media print{html.metaplan body>*:not(#ueber){display:none!important}html.metaplan #ueber .tafel{position:static;padding:0;background:#fff}html.metaplan .mp-blatt{grid-template-columns:1fr 1fr;gap:8mm}html.metaplan .mp-karte{min-height:85mm;border-color:#000}html.metaplan .mp-karte:nth-child(4n){break-after:page}}
 .matrix .lk{font-size:.85rem;color:var(--muted)}
 .matrix th.p{min-width:8rem}
 
@@ -287,9 +297,9 @@ td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
 <script>
 "use strict";
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const KEY = "ggk-m21-menschen:v1";
+const KEY = "ggk-m21-menschen:v2";
 const lade = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { return {}; } };
-let S = Object.assign({ seite:"start", brief:{ text:"", auf:false }, abruf:{}, begriff:{ wahl:"", grund:"", zu:false }, begriff2:{ wahl:"", grund:"" }, person:"", ai:{}, st:{}, ernst:{}, vergleich:{}, schaetz:{ juden:null, tote:null, zu:false }, lager:{}, tafel:[0,0,0,0], erz:"", abrufz:{}, ruhig:false }, lade());
+let S = Object.assign({ seite:"start", brief:{ text:"", auf:false }, abruf:{}, begriff:{ wahl:"", grund:"", zu:false }, begriff2:{ wahl:"", grund:"" }, ph:{ stufe:null, grund:"", kritik:"" }, mx:{}, mxLk:false, person:"", ai:{}, st:{}, ernst:{}, vergleich:{}, schaetz:{ juden:null, tote:null, zu:false }, lager:{}, tafel:[0,0,0,0], erz:"", abrufz:{}, ruhig:false }, lade());
 const speichere = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
 const ruhig = () => { try { return S.ruhig || matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e) { return !!S.ruhig; } };
 const neu = (el, k) => { if (!el) return; el.classList.remove(k); void el.offsetWidth; if (!ruhig()) el.classList.add(k); };
@@ -326,11 +336,11 @@ function band(id, ob, titel, text){
 const SEITEN = [
   ["start","Start","",""],
   ["brief","1 · Der Brief","0–8 Min.","Der letzte Brief"],
-  ["begriff","2 · Das Wort","8–16 Min.","Shoa oder Holocaust?"],
-  ["menschen","3 · Vier Menschen","16–44 Min.","Ein Lebensweg in fünf Stationen"],
-  ["matrix","4 · Die Matrix","44–58 Min.","Vier Wege nebeneinander"],
-  ["zahl","5 · Die Zahl","58–72 Min.","Die Zahl und das System"],
-  ["plenum","6 · Plenum","72–84 Min.","Wann wird es ernst?"],
+  ["begriff","2 · Das Wort","8–22 Min.","Shoa oder Holocaust?"],
+  ["menschen","3 · Vier Menschen","22–46 Min.","Ein Lebensweg in fünf Stationen"],
+  ["matrix","4 · Die Matrix","46–62 Min.","Vier Wege nebeneinander"],
+  ["zahl","5 · Die Zahl","62–74 Min.","Die Zahl und das System"],
+  ["plenum","6 · Plenum","74–84 Min.","Wann wird es ernst?"],
   ["rueckblick","7 · Rückblick","84–90 Min.","Was denkst du jetzt?"],
   ["zusammenfassung","Zusammenfassung","",""],
 ];
@@ -434,6 +444,15 @@ const MATRIX = {
   marie:   ["Roma-Familie mit acht Kindern auf dem Land in Böhmen", "ab 1939 Protektorat: Meldepflicht, Arbeitszwang, Lager Lety und Hodonín", "1943: Transport ab Příbram nach Auschwitz-Birkenau, Familienlager BIIe", "Mutter und zwei Geschwister in der Gaskammer; Marie überlebt über Ravensbrück"],
   willner: ["Metzgerfamilie in Cloppenburg/Friesoythe, seit Generationen deutsch", "1933 Boykott, 1935 Bürgerrecht weg, 1938 Pogrom und Berufsverbot; Flucht nach Amsterdam", "1940 Besatzung, Registrierung, Stern; April 1943 Westerbork", "9. April 1943: Sobibor, Gaskammer; Tochter, Schwiegersohn, Enkel am 21. Mai 1943"],
 };
+
+/* ---------- Public History: Landkarte 3.1.2, Aufgabe 2 ---------- */
+const LANDKARTE = "https://geschichtefuerdiegegenwart.github.io/kognitive-Landkarte-des-Geschichtsunterrichts/#s-3-1-2";
+const PH_STUFEN = [["sehr groß", "Filme und Serien prägen das Geschichtsbild stärker als Unterricht und Forschung."], ["groß", "Sie setzen Themen und Bilder, aber Schule und Gespräche ordnen sie ein."], ["gering", "Sie unterhalten; was bleibt, kommt von anderswo."], ["kaum", "Wer sich für Geschichte interessiert, sucht sich andere Quellen."]];
+/* Eigene Matrix: Zeile der eigenen Person wird beim ersten Öffnen aus den Stichworten übernommen; alle Zellen bleiben editierbar */
+const mxWert = (id, i) => (S.mx[id] && S.mx[id][i] !== undefined) ? S.mx[id][i] : "";
+const mxZeilen = () => MENSCHEN.filter(m => [0,1,2,3].some(i => mxWert(m.id, i).trim().length >= 3)).length;
+function mxUebernehmen(){ MENSCHEN.forEach(m => { if (!personFertig(m.id)) return; S.mx[m.id] = S.mx[m.id] || {}; const st = S.st[m.id] || {}; [0,1,2,3].forEach(i => { if (S.mx[m.id][i] === undefined && (st[i] || "").trim()) S.mx[m.id][i] = st[i]; }); }); }
+const mxText = () => MENSCHEN.map(m => `${m.name}: ` + [0,1,2,3].map(i => `${PH[i]} – ${mxWert(m.id, i).trim() || "…"}`).join(" · ")).join("\n");
 
 /* ---------- Vergleichsfragen (Muster 2, gestuft) ---------- */
 const VERGLEICH = [
@@ -585,7 +604,14 @@ function begriff(){
     <div class="karte"><h3>Shoa</h3><p class="herk">Hebräisch שואה, „Katastrophe“, „großes Unglück“</p><p>Der Begriff aus der Sprache der Opfer. In Israel ist er seit den 1940er Jahren üblich; der Gedenktag heißt Jom haShoa. Er meint die Ermordung der europäischen Jüdinnen und Juden – und sagt damit auch, dass andere Opfergruppen ein eigenes Wort brauchen.</p></div>
     <div class="karte"><h3>Holocaust</h3><p class="herk">Griechisch holókaustos, „ganz verbrannt“ – ein Brandopfer</p><p>Über die USA wurde das Wort weltweit bekannt. Es wird oft weiter gefasst und schließt Roma und Sinti, Menschen mit Behinderungen und andere Opfergruppen ein. Manche lehnen es ab, weil ein „Opfer“ etwas Religiöses ist – der Mord war keins.</p></div>
   </div>
-  <div class="karte" style="margin-top:1rem"><p class="kennung">Public History · Wie ein Wort zu uns kam</p><p>Im Januar 1979 zeigte das deutsche Fernsehen die US-Serie „Holocaust“ über eine jüdische Familie aus Berlin. Rund 20 Millionen Menschen sahen zu; danach wurde in Familien, Schulen und im Bundestag so über die Verbrechen gesprochen wie nie zuvor. „Holocaust“ wurde zum Wort des Jahres. Das Wort kam also nicht aus der Forschung, sondern aus einer Fernsehserie – ein Beispiel dafür, wie Geschichte in der Öffentlichkeit gemacht wird (Landkarte 3.1.2).</p><p class="quelle"><span class="status modell">vor dem Kopieren prüfen</span> Zuschauerzahl und Wort des Jahres: aus dem Gedächtnis, in der Lehrkraft-Ansicht als prüfbedürftig markiert.</p></div>
+  <div class="karte" style="margin-top:1rem"><p class="kennung">Public History · Wie ein Wort zu uns kam</p><p>Im Januar 1979 zeigte das deutsche Fernsehen die US-Serie „Holocaust“ über eine jüdische Familie aus Berlin. Millionen sahen zu; danach wurde in Familien, Schulen und im Bundestag so über die Verbrechen gesprochen wie nie zuvor. Das Wort kam also nicht aus der Forschung, sondern aus einer Fernsehserie – ein Beispiel dafür, wie Geschichte in der Öffentlichkeit gemacht wird.</p></div>
+  ${auftrag("Landkarte · 6 Minuten", "Public History: Fallbeispiele analysieren", `Geh in unserer kognitiven Landkarte zu <b>3.1.2 Public History</b> (Bereich „Auswirkungen der Geschichte“) und bearbeite dort <b>Aufgabe 2: Fallbeispiele analysieren</b> – mindestens zwei Fälle, jeden mit empirisch · narrativ · normativ prüfen. Dann komm zurück und leg dich hier fest.`)}
+  <div class="reihe"><a class="btn dunkel" href="${LANDKARTE}" target="_blank" rel="noopener">Zur Landkarte: 3.1.2 Public History ↗</a><span class="hinweis">Öffnet in einem neuen Tab. Hier geht es danach weiter.</span></div>
+  <div class="karte" id="ph"><p><b>Für wie bedeutsam schätzt du den Einfluss populärer Filme und Serien auf unser Geschichtsbild ein?</b></p>
+  <div class="optionen" role="group" aria-label="Einfluss populärer Filme">${PH_STUFEN.map((st, i) => `<button type="button" data-ph="${i}" aria-pressed="${S.ph.stufe === i}">${esc(st[0])}${S.ph.stufe === i ? `<span class="fb">${esc(st[1])}</span>` : ""}</button>`).join("")}</div>
+  <label for="phgrund" style="margin-top:.8rem">Weil … (ein Satz, mit einem Fallbeispiel aus der Landkarte)</label><textarea id="phgrund" data-feld="phgrund" rows="2" placeholder="Zum Beispiel: Bei „The Crown“ halten viele erfundene Szenen für Tatsachen, weil …">${esc(S.ph.grund)}</textarea>
+  <label for="phkritik" style="margin-top:.8rem">Was könnte man daran kritisieren? (empirisch, narrativ oder normativ)</label><textarea id="phkritik" data-feld="phkritik" rows="3" placeholder="Man könnte kritisieren, dass …">${esc(S.ph.kritik)}</textarea>
+  <p class="hinweis" style="margin-top:.5rem">Die Stufen sind keine Noten: Jede ist begründbar. Im Plenum vergleicht ihr die Begründungen.</p></div>
   <h2 class="abschnitt">Was weißt du noch? Drei Fragen aus M18 und M20</h2>
   <p class="hinweis">Ohne Heft. Lege dich fest, dann siehst du die Erklärung.</p>
   ${ABRUF.map(a => wahl("abruf", a.id, esc(a.f), a.o, S.abruf[a.id])).join("")}` : ""}
@@ -624,18 +650,30 @@ function lebensweg(m){
   <div class="reihe">${e.wahl === undefined ? `<button class="btn primary" data-ernstfest ${e.vor === undefined || (e.grund || "").trim().length < 8 ? "disabled" : ""}>Festlegen</button><span class="hinweis" id="ernsthinweis">Station antippen und einen Satz schreiben.</span>` : `<button class="btn" data-ernstneu>Noch einmal entscheiden</button>`}</div></div>`;
 }
 
-function matrix(){
+function matrixTabelle(o = {}){
   const fertig = fertigePersonen().map(m => m.id);
+  return `<div class="matrix-wrap matrix${o.beamer ? " beamer" : ""}"><table><thead><tr><th class="p">Mensch</th>${PH.slice(0,4).map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${MENSCHEN.map(m => `<tr><th scope="row">${esc(m.name)}<br><span class="lk">${esc(m.unter)}</span>${fertig.includes(m.id) ? `<br><span class="lk du">● dein Weg</span>` : ""}</th>${[0,1,2,3].map(i => o.lesen ? `<td class="${fertig.includes(m.id) ? "eigen" : ""}">${esc(mxWert(m.id, i)) || "<span class='lk'>–</span>"}</td>` : `<td class="${fertig.includes(m.id) ? "eigen" : ""}"><textarea data-mx="${m.id}" data-i="${i}" rows="3" aria-label="${esc(m.name)}, ${esc(PH[i])}" placeholder="${fertig.includes(m.id) ? "" : "aus dem Plenum / von der Karte"}">${esc(mxWert(m.id, i))}</textarea></td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+}
+function matrix(){
+  mxUebernehmen();
+  const n = mxZeilen(), frei = n >= 2;
   return `${zeitKopf("matrix")}<h1>Vier Wege nebeneinander</h1>
-  <p class="lead">Deine Stichworte stehen blau in der Tabelle. Die anderen Zeilen hat die Lehrkraft kurz gefasst. Lies quer und senkrecht.</p>
-  ${auftrag("Einzelarbeit · 10 Minuten, dann zu zweit · 4 Minuten", "Vergleiche die vier Wege mit drei Fragen.", "Lege dich bei jeder Frage fest. Danach: Sucht euch zu zweit eine Zeile, die ihr nicht selbst bearbeitet habt, und erklärt sie euch gegenseitig.")}
-  <div class="matrix-wrap matrix"><table><thead><tr><th class="p">Mensch</th>${PH.slice(0,4).map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${MENSCHEN.map(m => {
-    const eigen = fertig.includes(m.id), st = S.st[m.id] || {};
-    return `<tr><th scope="row">${esc(m.name)}<br><span class="lk">${esc(m.unter)}</span></th>${[0,1,2,3].map(i => eigen ? `<td class="eigen">${esc(st[i])}</td>` : `<td>${esc(MATRIX[m.id][i])}<br><span class="lk">${esc(m.st[i].jahr)}</span></td>`).join("")}</tr>`;
-  }).join("")}</tbody></table></div>
-  <p class="quelle">Spalte 5 „Heute“ fehlt in der Tabelle absichtlich: Gedenkorte vergleicht man nicht. Status der Zeilen: belegt nach Yad Vashem, Joods Monument, Testimonies of Roma and Sinti, USHMM, Muzeum Treblinka.</p>
+  <p class="lead">Die Tabelle ist leer – bis auf deine Zeile, die aus deinen Stichworten kommt. Die anderen drei Zeilen entstehen jetzt gemeinsam: Wer welchen Weg gegangen ist, bringt seine Stichworte ein – auf Metaplan-Karten an der Wand oder hier direkt. Erst wenn die Klasse ihre Tabelle hat, zeigt die Seite die Fassung der Lehrkraft.</p>
+  ${auftrag("Gemeinsam · 10 Minuten, dann allein · 6 Minuten", "Füllt die Tabelle – Zeile für Zeile, Weg für Weg.", "Deine Zeile prüfst du; die anderen trägst du aus dem Plenum ein, in Stichworten. Zum Projizieren: „Am Beamer zeigen“. Danach die drei Vergleichsfragen.")}
+  ${matrixTabelle()}
+  <div class="reihe nodruck"><button class="btn" data-mxbeamer>Am Beamer zeigen</button><button class="btn" data-mxkopie>Als Text kopieren</button><span class="hinweis" id="mxstand">${n} von 4 Zeilen haben Einträge.</span></div>
+  <p class="quelle">Spalte 5 „Heute“ fehlt in der Tabelle absichtlich: Gedenkorte vergleicht man nicht.</p>
+  <div class="karte" id="mxlk"><p class="kennung"><span class="status beleg">Beleg</span>Fassung der Lehrkraft</p>
+  ${S.mxLk ? `<p class="hinweis">Kurz gefasst nach Yad Vashem, Joods Monument, Testimonies of Roma and Sinti, USHMM, Muzeum Treblinka. Vergleiche: Was fehlt bei euch, was fehlt hier?</p><div class="matrix-wrap matrix"><table><thead><tr><th class="p">Mensch</th>${PH.slice(0,4).map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${MENSCHEN.map(m => `<tr><th scope="row">${esc(m.name)}</th>${[0,1,2,3].map(i => `<td>${esc(MATRIX[m.id][i])}<br><span class="lk">${esc(m.st[i].jahr)}</span></td>`).join("")}</tr>`).join("")}</tbody></table></div>` : `<p>${frei ? "Eure Tabelle steht. Jetzt kannst du sie neben die Fassung der Lehrkraft legen." : "Erscheint, sobald mindestens zwei Zeilen Einträge haben."}</p><div class="reihe"><button class="btn primary" data-mxlk ${frei ? "" : "disabled"}>Fassung der Lehrkraft einblenden</button></div>`}</div>
+  <h2 class="abschnitt">Drei Vergleichsfragen</h2>
   ${VERGLEICH.map(v => wahl("vergleich", v.id, esc(v.f), v.o, S.vergleich[v.id])).join("")}
   ${weiter("zahl","Weiter: Die Zahl")}`;
+}
+function matrixBeamer(){
+  document.getElementById("ueber").innerHTML = `<div class="tafel" role="dialog" aria-modal="true" aria-label="Matrix am Beamer"><div class="tafel-in"><div class="reihe" style="justify-content:space-between;margin:0"><h2>Vier Wege nebeneinander – unsere Tabelle</h2><button class="btn" data-zu>Schließen (Esc)</button></div>
+  ${matrixTabelle({ lesen:true, beamer:true })}
+  <p class="hinweis" style="margin-top:.8rem">Blau: die Zeile, die auf diesem Gerät selbst erarbeitet wurde. Zum Ändern schließen und in der Tabelle tippen.</p></div></div>`;
+  document.querySelector("#ueber [data-zu]").focus();
 }
 
 function zahl(){
@@ -695,7 +733,13 @@ function tafelAnsicht(){
   <div class="reihe"><button class="btn" data-tallynull>Tafel leeren</button></div></div></div>`;
   document.querySelector("#ueber [data-zu]").focus();
 }
-const schliesse = () => { document.getElementById("ueber").innerHTML = ""; };
+const schliesse = () => { document.getElementById("ueber").innerHTML = ""; document.documentElement.classList.remove("metaplan"); };
+function metaplanDruck(){
+  document.getElementById("ueber").innerHTML = `<div class="tafel metaplan-ansicht" role="dialog" aria-modal="true" aria-label="Metaplan-Karten"><div class="tafel-in"><div class="reihe nodruck" style="justify-content:space-between;margin:0 0 1rem"><h2>Metaplan-Karten · 16 Stück, A4 quer</h2><div class="reihe" style="margin:0"><button class="btn primary" data-drucken>Drucken</button><button class="btn" data-zu>Schließen (Esc)</button></div></div>
+  <div class="mp-blatt">${MENSCHEN.map(m => [0,1,2,3].map(i => `<div class="mp-karte"><span class="mp-ob">${esc(m.name)} · ${esc(m.unter)}</span><span class="mp-st">${i + 1} · ${esc(PH[i])}</span><span class="mp-jahr">${esc(m.st[i].jahr)}</span></div>`).join("")).join("")}</div></div></div>`;
+  document.documentElement.classList.add("metaplan");
+  document.querySelector("#ueber [data-zu]").focus();
+}
 
 function rueckblick(){
   const g = S.begriff, g2 = S.begriff2, m = S.person ? MENSCH(S.person) : null;
@@ -716,6 +760,7 @@ function rueckblick(){
 }
 
 function zusammenfassung(){
+  mxUebernehmen();
   const m = S.person ? MENSCH(S.person) : null;
   const wortName = k => (WORTE.find(w => w[0] === k) || ["",""])[1];
   return `<div class="zf"><p class="zeit nodruck"><span class="nr">Zusammenfassung</span><span>zwei Seiten A4</span></p>
@@ -734,7 +779,7 @@ function zusammenfassung(){
   </div>
   <h2>Vier Wege – eine Ordnung</h2>
   ${schaubild()}
-  <div class="matrix-wrap matrix"><table><thead><tr><th>Mensch</th>${PH.slice(0,4).map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${MENSCHEN.map(x => `<tr><th scope="row">${esc(x.name)}</th>${[0,1,2,3].map(i => `<td>${esc(MATRIX[x.id][i])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+  ${mxZeilen() ? `<p class="hinweis">Unsere Tabelle aus der Stunde (blau: meine Zeile).</p>${matrixTabelle({ lesen:true })}` : `<div class="matrix-wrap matrix"><table><thead><tr><th>Mensch</th>${PH.slice(0,4).map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${MENSCHEN.map(x => `<tr><th scope="row">${esc(x.name)}</th>${[0,1,2,3].map(i => `<td>${esc(MATRIX[x.id][i])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`}
   <div class="seitenumbruch"></div>
   <h2>Die Zahlen (US Holocaust Memorial Museum)</h2>
   <div class="zw"><div class="matrix-wrap"><table><thead><tr><th>Gruppe</th><th>Ermordete</th></tr></thead><tbody>${ZAHLEN.gruppen.map(g => `<tr><td>${esc(g[0])}</td><td class="n">${esc(g[1])}</td></tr>`).join("")}</tbody></table></div>
@@ -743,6 +788,7 @@ function zusammenfassung(){
   <div class="karte"><p><b>Quelle</b> (Postkarte, Foto, Zeugnis): Wer hat sie wann für wen gemacht? Was wusste die Person damals nicht? · <b>Darstellung</b> (Heft, Film, Datenbank, diese Seite): Wer wählt aus, was erzählt wird? Welches Wort wird benutzt – und warum? · <b>Rückschau:</b> Was konnte man damals wissen, was wissen nur wir?</p></div>
   <h2>Mein Ergebnis</h2>
   <div class="karte"><p><b>Mein Wort am Anfang:</b> ${esc(wortName(S.begriff.wahl)) || "–"} · <b>jetzt:</b> ${esc(wortName(S.begriff2.wahl)) || "–"}${S.begriff2.grund ? ` – ${esc(S.begriff2.grund)}` : ""}</p>
+  <p style="margin-top:.4rem"><b>Einfluss populärer Filme:</b> ${S.ph.stufe !== null ? esc(PH_STUFEN[S.ph.stufe][0]) : "–"}${S.ph.grund ? ` – ${esc(S.ph.grund)}` : ""}${S.ph.kritik ? ` · <b>Kritik:</b> ${esc(S.ph.kritik)}` : ""}</p>
   ${m ? `<p style="margin-top:.4rem"><b>Mein Weg:</b> ${esc(m.name)} · <b>Das wird ernst bei Station</b> ${S.ernst[m.id] && S.ernst[m.id].wahl !== undefined ? (S.ernst[m.id].wahl + 1) + " (" + esc(PH[S.ernst[m.id].wahl]) + ")" : "–"}${S.ernst[m.id] && S.ernst[m.id].grund ? ` – ${esc(S.ernst[m.id].grund)}` : ""}</p>` : ""}
   <p style="margin-top:.4rem"><b>Meine fünf Sätze:</b></p><p style="white-space:pre-wrap">${esc(S.erz) || "(noch leer)"}</p></div>
   <h2 class="nodruck">Abrufübung – nach ein paar Tagen</h2>
@@ -759,17 +805,22 @@ function lehrkraft(){
   <h2 class="abschnitt">Ablauf</h2>
   <div class="matrix-wrap"><table><thead><tr><th>Min.</th><th>Phase</th></tr></thead><tbody>
   ${zeile("0–8","<b>Der letzte Brief</b> (allein): Postkarte lesen, einen Satz schreiben, aufdecken. Muster „Festlegung → Auflösung“. Am Beamer: Bildband Zalman.")}
-  ${zeile("8–16","<b>Das Wort</b> (allein, 2 Min. Plenum): Shoa / Holocaust / anderes wählen und begründen, dann Erklärkarten und Public-History-Kasten. Drei Abruffragen zu M18/M20.")}
-  ${zeile("16–44","<b>Vier Menschen</b> (allein oder zu zweit): ein Weg in fünf Karten, Stichworte je Station, „Das wird ernst“ mit Begründung; Rückmeldung je Station beschreibt, was damals wissbar war. Zweiter Weg für Schnelle. Empfehlung: Vier Gruppen im Raum, je eine Person – dann hat jede Tischgruppe alle vier Wege.")}
-  ${zeile("44–58","<b>Die Matrix</b> (allein, dann zu zweit): eigene Zeile blau, drei Zeilen der Lehrkraft; drei Vergleichsfragen mit Erklärung je Option (zentral · auch begründbar · passt kaum). Zu zweit eine fremde Zeile erklären.")}
-  ${zeile("58–72","<b>Die Zahl</b> (allein): zwei Schätzungen vor der Auflösung (9,5 Mio. / 6 Mio.), Tabelle der Opfergruppen (USHMM), Schaubild „Vier Phasen“ als Modell, vier Lager zuordnen.")}
-  ${zeile("72–84","<b>Plenum</b>: Stimmkarte „Das wird ernst bei Station x“ hochhalten, Lehrkraft zählt an der Tafel (Beamer-Ansicht auf dieser Seite, Knopf „Tafel am Beamer“), fünf Fragen. iPad zu.")}
+  ${zeile("8–22","<b>Das Wort</b> (allein, 2 Min. Plenum): Shoa / Holocaust / anderes wählen und begründen, dann Erklärkarten. <b>Public History (6 Min.):</b> Link in die Landkarte 3.1.2, Aufgabe 2 „Fallbeispiele analysieren“ (fünf Fälle: The Crown, Assassin’s Creed Valhalla, DDR-Museum, @ichbinsophiescholl, TikTok-Kanal; je empirisch · narrativ · normativ), zurück auf die Seite: Einfluss einschätzen (vier Stufen, alle begründbar) und Kritik formulieren. Drei Abruffragen zu M18/M20 – Kürzung K1, wenn es eng wird.")}
+  ${zeile("22–46","<b>Vier Menschen</b> (allein oder zu zweit): ein Weg in fünf Karten, Stichworte je Station, „Das wird ernst“ mit Begründung; Rückmeldung je Station beschreibt, was damals wissbar war. Zweiter Weg für Schnelle. Empfehlung: Vier Gruppen im Raum, je eine Person – dann hat jede Tischgruppe alle vier Wege.")}
+  ${zeile("46–62","<b>Die Matrix</b> (gemeinsam, dann allein): Die Tabelle ist leer bis auf die eigene Zeile (aus den Stichworten übernommen, editierbar). Drei Wege zum Füllen: (a) analog mit <b>Metaplan-Karten</b> – Druckvorlage unten, je Weg vier Karten an die Wand, dann übertragen alle in ihre Tabelle; (b) digital: eine Person je Weg zeigt ihre Tabelle „Am Beamer“ (AirPlay) und diktiert; (c) „Als Text kopieren“ und in den Kursraum einfügen. Erst ab zwei gefüllten Zeilen lässt sich die <b>Fassung der Lehrkraft</b> einblenden (Festlegung → Auflösung). Danach drei Vergleichsfragen mit Erklärung je Option.")}
+  ${zeile("62–74","<b>Die Zahl</b> (allein): zwei Schätzungen vor der Auflösung (9,5 Mio. / 6 Mio.), Tabelle der Opfergruppen (USHMM), Schaubild „Vier Phasen“ als Modell, vier Lager zuordnen.")}
+  ${zeile("74–84","<b>Plenum</b>: Stimmkarte „Das wird ernst bei Station x“ hochhalten, Lehrkraft zählt an der Tafel (Beamer-Ansicht auf dieser Seite, Knopf „Tafel am Beamer“), fünf Fragen. iPad zu.")}
   ${zeile("84–90","<b>Rückblick</b> (allein): Wort erneut, fünf Sätze mit Satzanfängen; Raster erscheint ab 40 Wörtern. Hausaufgabe: Zusammenfassung drucken, Abrufübung nach ein paar Tagen.")}
   </tbody></table></div>
+  <h2 class="abschnitt">Metaplan-Karten (Druckvorlage)</h2>
+  <div class="karte"><p>16 Karten, vier je Weg (Leben davor · Ausgrenzung · Trennung · Ermordung), A4 quer mit vier Karten je Blatt. Die Lernenden schreiben ihre Stichworte groß darauf, die Karten kommen an die Wand – Zeile für Zeile. Danach überträgt jede Person die fremden Zeilen in die eigene Tabelle.</p><div class="reihe"><button class="btn primary" data-metaplan>Metaplan-Karten drucken</button></div></div>
+  <h2 class="abschnitt">Kürzungen</h2>
+  <div class="karte"><p><b>K1</b> Abruffragen M18/M20 weglassen (3 Min.) · <b>K2</b> Landkarte: nur ein Fallbeispiel (3 Min.) · <b>K3</b> Matrix nur analog, Vergleichsfragen als Hausaufgabe (6 Min.) · <b>K4</b> Lagertypen nur zwei (2 Min.). Mit Landkarte und gemeinsamer Matrix ist die Doppelstunde voll; K1 und K2 sind die ersten Kandidaten.</p></div>
   <h2 class="abschnitt">Erwartungen</h2>
   <div class="karte"><p><b>Das wird ernst:</b> Es gibt keine richtige Station. Die Rückmeldung je Station nennt, was damals wissbar war (Rückschaufehler, Landkarte 2.1). Erwartbar: Die Klasse streut – und für die Familie in Kiew liegt zwischen „ernst“ und Tod nur ein Tag. Das ist der Gesprächsanlass: <i>Für wen war Merken überhaupt eine Hilfe?</i></p>
   <p><b>Vergleich:</b> V1 drei Formen eines Systems · V2 alle gehörten dazu (bei Marie: „auch begründbar“, Diskriminierung schon vor 1939) · V3 Tempo verschieden, Ziel gleich.</p>
   <p><b>Lager:</b> Dachau KZ · Treblinka Vernichtungslager · Westerbork Durchgangslager · Auschwitz beides.</p>
+  <p><b>Public History:</b> Keine Stufe ist richtig. Erwartbar: „groß“ oder „sehr groß“ mit Verweis auf Serien; die Kritik sollte eine der drei Triftigkeiten nennen (erfundene Szenen = empirisch; Verdichtung auf Gefühle = narrativ; wessen Perspektive fehlt = normativ). Brücke: Das Wort „Holocaust“ selbst ist ein Public-History-Produkt.</p>
   <p><b>Wort:</b> Beide Wörter sind begründbar; das Ziel ist die Begründung, nicht die Wahl. Wer „ein anderes Wort“ wählt, nennt es im Plenum (Churban, Judenmord, Porajmos, Samudaripen).</p></div>
   <h2 class="abschnitt">Was gegenüber dem Heft korrigiert ist</h2>
   <div class="karte"><ul style="padding-left:1.2rem;display:grid;gap:.3rem">
@@ -778,11 +829,11 @@ function lehrkraft(){
   <li><b>Familie Aschkenasi:</b> Piotr London war nicht „Buchhalter“ (im Heft) – Yad Vashem nennt keinen Beruf; Rosalia war Sekretärin. Für sowjetische Juden gab es keine Phase der Entrechtung – das Heft presst sie in das Vier-Phasen-Schema.</li>
   <li><b>Korczak:</b> Deportation am 5. oder 6. August 1942 (USHMM), „fast 200“ Kinder.</li>
   <li><b>Zahlen:</b> „11 Millionen“ ist in der Forschung nicht belegt; USHMM nennt sechs Millionen Juden und für die anderen Gruppen Spannen (Roma mindestens 250.000, Zeugen Jehovas etwa 1.700, homosexuelle Männer Hunderte bis Tausende – das Heft nennt 2.500 und 15.000). Vernichtungslager: Bełżec etwa 435.000 (Heft 600.000), Sobibor mindestens 167.000 (Heft 250.000), Chełmno mindestens 152.000. Majdanek ist nach neuerer Forschung mit etwa 78.000 Toten anzusetzen und fehlt hier bewusst. Warschauer Ghetto: über 400.000 Menschen auf etwa 3,4 km² (Heft: 500.000 auf 2 km²).</li>
-  <li><b>Public History:</b> Der Kasten im Heft hat keine Quelle; hier auf die Serie 1979 reduziert.</li>
+  <li><b>Public History:</b> Der Kasten im Heft hat keine Quelle; hier auf die Serie 1979 reduziert. Der Auftrag im Heft verlinkt die Landkarte mit <code>#literatur</code> – der Anker für Public History ist <code>#s-3-1-2</code>; so verlinkt die Seite.</li>
   <li>Die 103 „Quellen“ des Heft-Teils stammen aus einer KI-Recherche; die Lernseite nutzt nur die hier genannten.</li></ul></div>
   <h2 class="abschnitt">Vor dem Kopieren prüfen (aus dem Gedächtnis)</h2>
   <div class="karte"><ul style="padding-left:1.2rem;display:grid;gap:.3rem">
-  <li>Serie „Holocaust“: Ausstrahlung Januar 1979 in der ARD (Dritte Programme), rund 20 Millionen Zuschauer; „Holocaust“ Wort des Jahres 1979 (GfdS).</li>
+  <li>Serie „Holocaust“: Ausstrahlung Januar 1979 in der ARD (Dritte Programme); „rund 20 Millionen Zuschauer“ und „Wort des Jahres 1979“ stehen nicht mehr auf der Seite (nicht belegt) – nur noch „Millionen sahen zu“.</li>
   <li>9,5 Millionen Juden in Europa 1933 (USHMM, Artikel „Jewish Population of Europe in 1933“).</li>
   <li>Treblinka: etwa 925.000 Opfer in rund 15 Monaten (Juli 1942 – Herbst 1943); Gedenkstätte mit etwa 17.000 Steinen, einer mit Namen Korczak.</li>
   <li>Umschlagplatz-Denkmal Warschau 1988; Menora Babyn Jar 1991; Nationaldenkmal Westerbork 1970 (Ralph Prins).</li>
@@ -805,12 +856,13 @@ function lehrkraft(){
 const SEITE_FN = { start, brief, begriff, menschen, matrix, zahl, plenum, rueckblick, zusammenfassung, lehrkraft };
 function loeschBereich(){
   return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button><button class="btn" data-bewegung aria-pressed="${!!S.ruhig}">Weniger Bewegung: ${S.ruhig ? "an" : "aus"}</button><span>Alles bleibt auf diesem Gerät.</span>
-  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> Brief, Wort, Stichworte, Entscheidungen, Schätzungen, Sätze und die Tafel werden auf diesem Gerät entfernt.</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div></div>`;
+  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> Brief, Wort, Public History, Stichworte, Matrix, Entscheidungen, Schätzungen, Sätze und die Tafel werden auf diesem Gerät entfernt.</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div></div>`;
 }
 let LETZTE_SEITE = null;
 function zeichne(fokus){
   if (!SEITE_FN[S.seite]) S.seite = "start";
   document.documentElement.classList.toggle("ruhig", !!S.ruhig);
+  if (S.ruhig) document.documentElement.setAttribute("data-bewegung", "weniger"); else document.documentElement.removeAttribute("data-bewegung");
   kopf();
   const m = document.getElementById("main");
   m.classList.toggle("breit", S.seite === "lehrkraft" || S.seite === "zusammenfassung" || S.seite === "matrix");
@@ -879,6 +931,11 @@ document.addEventListener("click", ev => {
   if (d.lagerneu) { einfachNeu("lager", d.lagerneu); return; }
   if ("stimmkarte" in d) { stimmkarte(); return; }
   if ("tafel" in d) { tafelAnsicht(); return; }
+  if ("mxbeamer" in d) { matrixBeamer(); return; }
+  if ("mxkopie" in d) { const txt = mxText(); const ok = () => { document.getElementById("mxstand").textContent = "Kopiert – zum Einfügen in Moodle, Notizen oder E-Mail."; }; if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, () => { window.prompt("Zum Kopieren markieren:", txt); }); else window.prompt("Zum Kopieren markieren:", txt); return; }
+  if ("mxlk" in d) { S.mxLk = true; speichere(); halteScroll(zeichne); const k = document.getElementById("mxlk"); if (!tast) neu(k, "neu"); k.scrollIntoView({ block:"start", behavior: ruhig() || tast ? "auto" : "smooth" }); return; }
+  if ("metaplan" in d) { metaplanDruck(); return; }
+  if (d.ph !== undefined) { S.ph.stufe = +d.ph; speichere(); halteScroll(zeichne); return; }
   if (d.tally !== undefined) { const i = +d.tally; S.tafel[i] = Math.max(0, S.tafel[i] + (+d.d)); speichere(); tafelAnsicht(); document.querySelector(`[data-tally="${i}"][data-d="${d.d}"]`).focus(); return; }
   if ("tallynull" in d) { S.tafel = [0,0,0,0]; speichere(); tafelAnsicht(); return; }
   if ("zu" in d) { schliesse(); return; }
@@ -892,6 +949,9 @@ document.addEventListener("input", ev => {
   if (d.feld === "brief") { S.brief.text = t.value; speichere(); const ok = t.value.trim().length >= 10; document.querySelector("[data-aufdecken]").disabled = !ok; document.getElementById("briefhinweis").textContent = ok ? "" : "Schreib mindestens einen Satz."; return; }
   if (d.feld === "begriffgrund") { S.begriff.grund = t.value; speichere(); document.querySelector("[data-wortfest]").disabled = !(S.begriff.wahl && t.value.trim().length >= 8); return; }
   if (d.feld === "grund2") { S.begriff2.grund = t.value; speichere(); return; }
+  if (d.feld === "phgrund") { S.ph.grund = t.value; speichere(); return; }
+  if (d.feld === "phkritik") { S.ph.kritik = t.value; speichere(); return; }
+  if (d.mx) { S.mx[d.mx] = S.mx[d.mx] || {}; S.mx[d.mx][d.i] = t.value; speichere(); const n = mxZeilen(); const st = document.getElementById("mxstand"); if (st) st.textContent = `${n} von 4 Zeilen haben Einträge.`; const b = document.querySelector("[data-mxlk]"); if (b) { b.disabled = n < 2; b.parentNode.previousElementSibling.textContent = n >= 2 ? "Eure Tabelle steht. Jetzt kannst du sie neben die Fassung der Lehrkraft legen." : "Erscheint, sobald mindestens zwei Zeilen Einträge haben."; } return; }
   if (d.st !== undefined) { S.st[S.person] = S.st[S.person] || {}; S.st[S.person][d.st] = t.value; speichere(); markiere(); wegStand(); return; }
   if (d.feld === "ernstgrund") { S.ernst[S.person] = S.ernst[S.person] || {}; S.ernst[S.person].grund = t.value; speichere(); const g = t.value.trim().length >= 8, f = document.querySelector("[data-ernstfest]"); if (f) { f.disabled = !(g && S.ernst[S.person].vor !== undefined); document.getElementById("ernsthinweis").textContent = f.disabled ? (S.ernst[S.person].vor === undefined ? "Station antippen und einen Satz schreiben." : "Schreib mindestens einen Satz.") : ""; } return; }
   if (d.feld === "erz") { S.erz = t.value; speichere(); const n = t.value.trim().split(/\s+/).filter(Boolean).length; const h = t.nextElementSibling; if (h) h.textContent = `${n} Wörter. Ab 40 Wörtern erscheint das Raster.`; if (n >= 40 && !document.getElementById("raster")) halteScroll(zeichne); return; }
