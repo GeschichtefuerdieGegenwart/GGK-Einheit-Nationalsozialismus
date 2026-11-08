@@ -335,6 +335,141 @@ td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
 .satzanfaenge{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem}
 .satzanfaenge button{min-height:40px;border:1.5px solid var(--border);background:var(--surface2);border-radius:.5rem;padding:.3rem .7rem;font-size:.9rem}
 .abruf .optionen{margin-top:.5rem}
+
+/* AM 2 · Dashboard (Frage im Zentrum, Rad der fünf Ebenen, sechs Erklärungen) · Dauern: Panel 320 ms (übergang), schließt 150 ms (exit); Linien 360 ms (reveal), Staffel 30 ms; Marken und Stand 150 ms (fast) */
+:root{--e-person:var(--kuli);--e-situation:var(--green);--e-weltbild:var(--red);--e-apparat:var(--slate);--e-vorteil:var(--gold);--uebergang:320ms;--exit:150ms;--reveal:360ms;--fast:150ms}
+main.dashboard{max-width:min(76rem,100vw - 2.5rem);padding-top:.8rem;padding-bottom:3rem}
+.dash-kopf{display:flex;gap:.5rem 1rem;align-items:center;flex-wrap:wrap;margin:0 0 .6rem}
+.dash-kopf .zeit{margin-right:.5rem}
+.umschalter{display:flex;gap:.35rem;flex-wrap:wrap}
+.umschalter [role=tab]{min-height:44px;border:1.5px solid var(--border);border-radius:999px;background:var(--surface2);padding:.35rem .95rem;font-weight:700}
+.umschalter [role=tab][aria-selected=true]{background:var(--ink);color:var(--inverse);border-color:var(--ink)}
+.dash-kopf .hinweis{margin:0}
+.buehne{position:relative;height:min(calc((100vw - 2.5rem) * 9 / 16),calc(100vh - 205px));min-height:430px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.buehne .dash{position:relative;height:100%;aspect-ratio:16/9;max-width:100%;margin:0 auto;container-type:inline-size;transition:transform var(--uebergang) var(--ease)}
+.buehne.offen.rechts .dash{transform:translateX(-3%)}
+.buehne.offen.links .dash{transform:translateX(3%)}
+.ring-text{position:absolute;left:50%;top:1.6%;transform:translateX(-50%);font-size:clamp(.55rem,1cqi,.85rem);color:var(--faint);white-space:nowrap;letter-spacing:.04em;text-transform:uppercase;font-weight:700;margin:0}
+.spalte{position:absolute;top:3%;bottom:3%;width:21%;display:grid;grid-template-rows:1fr 1fr 1fr;gap:2.5%}
+.spalte.l{left:2.5%}.spalte.r{right:2.5%}
+.akte{position:relative;min-width:0;background:var(--surface2);border:1.5px solid var(--border);border-radius:.7rem;padding:.55em .7em .5em;text-align:left;display:grid;grid-template-columns:2.4em minmax(0,1fr);gap:.15em .5em;align-items:start;align-content:start;font-size:clamp(.7rem,1.3cqi,1rem);transition:border-color var(--fast) var(--ease),opacity 210ms var(--ease);color:var(--ink)}
+.akte .nr{grid-column:1/-1;grid-row:1;font-size:.75em;color:var(--red);font-weight:700;letter-spacing:.03em;text-transform:uppercase;display:flex;gap:.5em;align-items:center}
+.akte .nr .emp{background:var(--gold-hi);color:var(--gold);border-radius:.3em;padding:0 .4em;text-transform:none;letter-spacing:0}
+.akte .pf{grid-row:2/4;width:2.4em;height:2.4em;border-radius:.4em;background:var(--offset);display:grid;place-items:center;font-family:var(--display);font-size:1.2em;color:var(--muted);overflow:hidden}
+.akte .pf img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block}
+.akte b{display:block;line-height:1.15;font-size:1.05em}
+.akte .j{display:block;color:var(--muted);font-size:.85em}
+.akte .fr{grid-column:1/-1;font-size:.88em;line-height:1.3;margin-top:.1em}
+.akte .fs{grid-column:1/-1;display:flex;gap:.35em;flex-wrap:wrap;margin-top:.25em}
+.akte .fs span{font-size:.72em;border:1px solid var(--line);border-radius:.3em;padding:0 .35em;color:var(--faint);transition:background var(--fast) var(--ease)}
+.akte .fs span.ok{border-color:var(--green);color:var(--green);background:var(--green-hi)}
+.akte[aria-pressed=true]{border-color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.akte.empfohlen{border-color:var(--gold)}
+.akte.gedimmt{opacity:.35}
+@media (hover:hover) and (pointer:fine){.akte:hover{border-color:var(--ink)}}
+svg.rad,svg.linien{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+svg.rad .seg{pointer-events:auto;fill:var(--eb);fill-opacity:.16;stroke:var(--surface);stroke-width:4;cursor:pointer;transition:fill var(--fast) var(--ease)}
+svg.rad .seg.e-person{--eb:var(--e-person)} svg.rad .seg.e-situation{--eb:var(--e-situation)} svg.rad .seg.e-weltbild{--eb:var(--e-weltbild)} svg.rad .seg.e-apparat{--eb:var(--e-apparat)} svg.rad .seg.e-vorteil{--eb:var(--e-vorteil)}
+svg.rad .seg.betont{fill-opacity:.38}
+svg.rad .seg.aktiv{fill-opacity:.55}
+@supports (color: color-mix(in srgb, red, blue)){
+  svg.rad .seg{fill:color-mix(in srgb,var(--eb) 16%,var(--surface2));fill-opacity:1}
+  svg.rad .seg.betont{fill:color-mix(in srgb,var(--eb) 38%,var(--surface2))}
+  svg.rad .seg.aktiv{fill:color-mix(in srgb,var(--eb) 55%,var(--surface2))}
+  @media (hover:hover) and (pointer:fine){svg.rad .seg:hover{fill:color-mix(in srgb,var(--eb) 30%,var(--surface2))}}
+}
+svg.rad .kern{fill:var(--dunkel)}
+svg.linien .lin{fill:none;stroke:var(--red);stroke-opacity:.9;stroke-linecap:round}
+svg.linien .zieh{animation:zieh var(--reveal) var(--ease) both}
+@keyframes zieh{from{stroke-dashoffset:var(--len)}to{stroke-dashoffset:0}}
+.frage-kern{position:absolute;left:50%;top:50%;width:15%;height:26.7%;transform:translate(-50%,-50%);display:grid;place-items:center;text-align:center;padding:1em;color:var(--inverse);pointer-events:none;font-size:clamp(.6rem,1.2cqi,.95rem)}
+.frage-kern b{font-family:var(--display);font-style:italic;font-size:1.5em;line-height:1.05;display:block}
+.frage-kern span{display:block;margin-top:.45em;font-size:.8em;opacity:.85;line-height:1.25}
+.ebfeld{position:absolute;width:14.5%;transform:translate(-50%,-50%);background:transparent;border:0;padding:.2em .3em;text-align:center;border-radius:.5em;font-size:clamp(.62rem,1.15cqi,.9rem);color:var(--ink)}
+.ebfeld b{display:block;font-size:1.1em}
+.ebfeld small{display:block;line-height:1.22;font-size:.86em;opacity:.85}
+.ebfeld .marken{display:flex;gap:.3em;flex-wrap:wrap;justify-content:center;margin-top:.35em;min-height:1.5em}
+.ebfeld .marke{display:inline-grid;place-items:center;width:1.5em;height:1.5em;border-radius:.3em;background:var(--ink);color:var(--inverse);font-weight:700;font-size:.85em;animation:auf var(--fast) var(--ease) both}
+.ebfeld .marke.m3{opacity:.75}.ebfeld .marke.m2{opacity:.5}
+.rad-satz{position:absolute;left:25%;right:25%;top:88.5%;text-align:center;font-size:clamp(.6rem,1.15cqi,.95rem);color:var(--muted);margin:0;min-height:2.4em}
+.rad-satz b{color:var(--ink)}
+.ansicht{position:absolute;inset:7% 3% 3%;overflow:auto;font-size:clamp(.65rem,1.2cqi,.95rem)}
+.ansicht.tab-wrap{margin:0}
+.ansicht table{font-size:inherit;background:var(--surface2)}
+.ansicht th,.ansicht td{font-size:inherit;padding:.45em .6em;vertical-align:top}
+.akte.zeile{display:inline-grid;grid-template-columns:1.7em 1fr;align-items:center;padding:.3em .5em;gap:.4em}
+.akte.zeile .pf{grid-row:auto;width:1.7em;height:1.7em;font-size:1em}
+.ansicht.zeitachse{overflow:hidden}
+.zeitachse .achse{position:absolute;left:4%;right:4%;top:52%;height:3px;background:var(--ink);border-radius:2px}
+.zeitachse .jahr{position:absolute;top:55%;transform:translateX(-50%);font-size:.9em;color:var(--muted);font-variant-numeric:tabular-nums}
+.zeitachse .jahr::before{content:"";position:absolute;left:50%;top:-.95em;width:2px;height:.75em;background:var(--ink);transform:translateX(-50%)}
+.zeitachse .dekade{position:absolute;top:46%;font-size:.8em;color:var(--faint);transform:translateX(-50%)}
+.zeitachse .akte{position:absolute;width:15%;transform:translateX(-50%);padding:.45em .6em}
+.zeitachse .akte .fr{display:none}
+.zeitachse-fuss{position:absolute;left:4%;right:30%;top:5%;font-size:.85em;color:var(--muted);margin:0}
+.panel{position:absolute;top:0;right:0;bottom:0;width:40%;min-width:min(100%,22rem);background:var(--surface2);border-left:2px solid var(--ink);overflow:auto;padding:1rem 1.1rem 1.4rem;transform:translateX(104%);transition:transform var(--uebergang) var(--ease);z-index:2}
+.buehne.links .panel{right:auto;left:0;border-left:0;border-right:2px solid var(--ink);transform:translateX(-104%)}
+.buehne.offen .panel{transform:none}
+.panel.schliesst{transition-duration:var(--exit);transition-timing-function:cubic-bezier(.77,0,.175,1)}
+.panel .pk{display:flex;justify-content:space-between;gap:.6rem;align-items:center;flex-wrap:wrap}
+.panel .ebenen-z{margin-top:.2rem}
+.ebene.verdeckt{background:var(--offset);color:var(--faint);font-style:italic;font-weight:400}
+.panel .portraet{width:5.5rem}
+.panel .fak{grid-template-columns:7.5rem minmax(0,1fr)}
+.btn.klein{min-height:36px;padding:.25rem .7rem;font-size:.9rem}
+.dash-fuss{margin-top:.7rem;display:grid;gap:.3rem}
+.dash-fuss .fortschritt{margin:0}
+::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation-duration:320ms;animation-timing-function:var(--ease)}
+@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
+@media (max-width:820px){ /* iPad hoch und Telefon: Liste statt Bühne, Panel von unten */
+  main.dashboard{max-width:46rem}
+  .buehne{height:auto;min-height:0}
+  .buehne .dash{aspect-ratio:auto;transform:none!important;padding:.8rem;display:grid;gap:.6rem}
+  .ring-text{position:static;transform:none;white-space:normal;text-align:center}
+  .spalte{position:static;width:auto;display:grid;grid-template-rows:none;gap:.5rem}
+  .akte{font-size:1rem}
+  svg.rad,svg.linien{display:none}
+  .frage-kern{position:static;transform:none;width:auto;height:auto;background:var(--dunkel);border-radius:.8rem;padding:1rem;font-size:1rem;pointer-events:auto}
+  .ebfelder{display:grid;gap:.5rem}
+  .ebfeld{position:static;transform:none;width:auto;background:var(--surface2);border:1.5px solid var(--border);border-left:.5rem solid var(--eb,var(--line));text-align:left;font-size:.95rem;padding:.5rem .7rem}
+  .ebfeld[data-ebene=person]{--eb:var(--e-person)} .ebfeld[data-ebene=situation]{--eb:var(--e-situation)} .ebfeld[data-ebene=weltbild]{--eb:var(--e-weltbild)} .ebfeld[data-ebene=apparat]{--eb:var(--e-apparat)} .ebfeld[data-ebene=vorteil]{--eb:var(--e-vorteil)}
+  .ebfeld[aria-pressed=true]{background:var(--ink);color:var(--inverse)}
+  .ebfeld[aria-pressed=true] .marke{background:var(--inverse);color:var(--ink)}
+  .ebfeld .marken{justify-content:flex-start}
+  .rad-satz{position:static;font-size:.95rem}
+  .ansicht{position:static;font-size:.95rem}
+  .ansicht.zeitachse{min-height:24rem;position:relative;overflow:visible}
+  .zeitachse .akte{position:absolute;width:30%;font-size:.8rem}
+  .zeitachse-fuss{position:static}
+  .panel,.buehne.links .panel{position:fixed;left:0;right:0;bottom:0;top:auto;width:auto;min-width:0;max-height:82vh;border:0;border-top:2px solid var(--ink);border-radius:1rem 1rem 0 0;transform:translateY(104%);padding-bottom:calc(1.4rem + env(safe-area-inset-bottom,0px));z-index:30}
+  .buehne.offen .panel,.buehne.offen.links .panel{transform:none}
+}
+@media (min-width:821px){.ebfeld:not([aria-pressed=true]) b{color:var(--ink)} .ebfeld[aria-pressed=true] b,.ebfeld[aria-pressed=true] small{color:var(--ink)}}
+
+/* AT · Landkarten-Moment */
+.frage-gross .f1{font-size:clamp(1.4rem,1.1rem + 1.6vw,2.2rem)}
+#lk-teil2.gesperrt{opacity:.55}
+#lk-teil2.gesperrt a.btn{pointer-events:none}
+.prinzipien{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.5rem;margin-top:.6rem}
+.prinzipien+label{margin-top:1rem}
+.prinzipien button{text-align:left;border:1.5px solid var(--border);border-radius:.6rem;background:var(--surface2);padding:.6rem .8rem;min-height:48px;transition:border-color var(--fast) var(--ease);color:var(--ink)}
+.prinzipien button b{display:block}
+.prinzipien button small{color:var(--muted);font-size:.85rem;line-height:1.3;display:block}
+.prinzipien button[aria-pressed=true]{border-color:var(--red);background:var(--red-hi)}
+.prinzipien button.zentral{border-color:var(--green);background:var(--green-hi)}
+.prinzipien button.teils{border-color:var(--gold);background:var(--gold-hi)}
+.prinzipien button.kaum{border-color:var(--line);background:var(--surface);color:var(--muted)}
+.prinzipien button[disabled]{cursor:default}
+.trift{margin-top:1.2rem;border:1.5px solid var(--gold);border-radius:.6rem;padding:.8rem 1rem;background:var(--gold-hi)}
+.trift b{font-family:var(--display)}
+
+/* Zusammenfassung: Rad als Schaubild, Kasten Landkarte */
+.zf .schau{display:grid;grid-template-columns:11rem minmax(0,1fr);gap:.8rem;align-items:center;margin-top:.5rem}
+@media (max-width:560px){.zf .schau{grid-template-columns:1fr}}
+.zf .schau svg{width:100%;height:auto;display:block}
+.zf .lk-kasten{background:var(--surface);border:1.5px solid var(--kuli);border-radius:.7rem;padding:.6rem .8rem;font-size:.9rem;line-height:1.4}
+.zf .lk-kasten b{font-family:var(--display)}
+
 @media print{
   @page{size:A4;margin:12mm 13mm}
   body{background:#fff;font-size:10pt;line-height:1.35}
@@ -352,6 +487,11 @@ td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
   .merksatz{margin:.5rem 0;padding:.4rem 0;font-size:11pt}
   .balken b{transition:none}
   textarea{border:1px solid #bbb;min-height:9rem}
+  #lk-auf{min-height:4.5rem}
+  .zf .schau{grid-template-columns:36mm minmax(0,1fr);gap:.4rem}
+  .zf .lk-kasten{font-size:8.4pt;padding:.35rem .55rem;border-color:#888}
+  .zf .raster3{font-size:8pt}
+  .zf .raster3 div{padding:.35rem .5rem}
 }
 </style>
 </head>
@@ -363,9 +503,10 @@ td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
 <script>
 "use strict";
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const KEY = "ggk-m22-taeter:v2";
-const lade = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { return {}; } };
-let S = Object.assign({ seite:"start", x:{text:"", zu:false, zeit:""}, neu:"", af:{}, afo:{}, z:{}, zum:{}, y:null, ai:0, hier:-1, akte:"", stufe:{}, karte:{}, gew:{}, gewok:{}, treffer:0, versuche:0, paare:{}, notiz:{}, modell:{person:1,situation:1,weltbild:1,apparat:1,vorteil:1}, grund:"", pos:50, klasse:[], beamer:false, moder:0, erz:"", abruf:{} }, lade());
+const KEY = "ggk-m22-taeter:v3"; // v3 seit 08.11.2026: Dashboard (ansicht, filter, gelesen) und Landkarten-Moment (lk, lkauf); alte Stände aus v2 werden übernommen
+const lade = () => { try { return JSON.parse(localStorage.getItem(KEY)) || JSON.parse(localStorage.getItem("ggk-m22-taeter:v2")) || {}; } catch(e) { return {}; } };
+let S = Object.assign({ seite:"start", x:{text:"", zu:false, zeit:""}, neu:"", af:{}, afo:{}, z:{}, zum:{}, y:null, ai:0, hier:-1, akte:"", stufe:{}, karte:{}, gew:{}, gewok:{}, treffer:0, versuche:0, paare:{}, notiz:{}, modell:{person:1,situation:1,weltbild:1,apparat:1,vorteil:1}, grund:"", pos:50, klasse:[], beamer:false, moder:0, erz:"", abruf:{}, ansicht:"frage", filter:null, gelesen:{}, lk:{vermutung:"", prinzip:null, grund:"", ok:false}, lkauf:"" }, lade());
+if (!S.lk) S.lk = {vermutung:"", prinzip:null, grund:"", ok:false}; if (!S.gelesen) S.gelesen = {}; if (!S.ansicht) S.ansicht = "frage"; if (S.lkauf === undefined) S.lkauf = "";
 const speichere = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
 const ruhig = () => { try { return matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e) { return false; } };
 const neu = (el, k) => { if (!el) return; el.classList.remove(k); void el.offsetWidth; if (!ruhig()) el.classList.add(k); };
@@ -406,12 +547,13 @@ function band(id, ob, titel, text){
 const SEITEN = [
   ["start","Start","",""],
   ["einstieg","1 · Einstieg","0–10 Min.","Es geht um Menschen"],
-  ["fakten","2 · Faktencheck","10–20 Min.","Drei Sätze im Faktencheck"],
-  ["jozefow","3 · Józefów","20–32 Min.","Józefów, 13. Juli 1942"],
-  ["akte","4 · Akten","32–55 Min.","Sechs Versuche, das zu erklären"],
-  ["markt","5 · Marktplatz","55–70 Min.","Marktplatz der Erklärungen"],
-  ["diskussion","6 · Diskussion","70–82 Min.","Welche Erklärungen ergänzen sich?"],
-  ["rueckblick","7 · Rückblick","82–90 Min.","Was denkst du jetzt?"],
+  ["fakten","2 · Faktencheck","10–19 Min.","Drei Sätze im Faktencheck"],
+  ["jozefow","3 · Józefów","19–28 Min.","Józefów, 13. Juli 1942"],
+  ["akte","4 · Erklärungen","28–50 Min.","Sechs Versuche, das zu erklären"],
+  ["landkarte","5 · Landkarte","50–58 Min.","Woher kommen die Unterschiede?"],
+  ["markt","6 · Marktplatz","58–75 Min.","Marktplatz der Erklärungen"],
+  ["diskussion","7 · Diskussion","75–85 Min.","Welche Erklärungen ergänzen sich?"],
+  ["rueckblick","8 · Rückblick","85–90 Min.","Was denkst du jetzt?"],
   ["zusammenfassung","Zusammenfassung","",""],
 ];
 const idx = id => SEITEN.findIndex(s => s[0] === id);
@@ -598,7 +740,8 @@ function start(){
   <li>Es geht um Menschen. Du schreibst deine erste Antwort und versiegelst sie.</li>
   <li>Drei bekannte Sätze kommen in den Faktencheck.</li>
   <li>Ein Fall für alle: Józefów, 13. Juli 1942.</li>
-  <li>Sechs Versuche, das zu erklären. Du bearbeitest mindestens zwei.</li>
+  <li>Sechs Versuche, das zu erklären, auf einer Übersicht. Du bearbeitest mindestens zwei.</li>
+  <li>Ein Blick auf die kognitive Landkarte: Woher kommen die Unterschiede?</li>
   <li>Auf dem Marktplatz tauschst du dich aus und baust ein Erklärungsmodell.</li>
   <li>Die Klasse diskutiert, geführt am Beamer.</li>
   <li>Du öffnest dein Siegel: Was denkst du jetzt?</li></ol></div>
@@ -625,7 +768,7 @@ function einstieg(){
   <div class="umschlag${x.zu ? " zu" : ""}" id="umschlag">
     <div class="brief"><label for="xtext">Meine erste Antwort</label><textarea id="xtext" data-feld="xtext" rows="4">${esc(x.text)}</textarea>
       <div class="reihe"><button class="btn dunkel" data-siegeln ${x.text.trim().length < 10 ? "disabled" : ""}>Versiegeln</button><span class="hinweis" id="xhinweis">${x.text.trim().length < 10 ? "Schreib mindestens einen Satz." : ""}</span></div></div>
-    <div class="siegel"><span class="stempel">ver&shy;siegelt<br>${esc(x.zeit)}</span><p>Deine Antwort ist versiegelt. Du öffnest sie in Schritt 7.</p></div>
+    <div class="siegel"><span class="stempel">ver&shy;siegelt<br>${esc(x.zeit)}</span><p>Deine Antwort ist versiegelt. Du öffnest sie in Schritt 8.</p></div>
   </div>
   ${weiter("fakten","Zum Faktencheck")}`;
 }
@@ -670,28 +813,101 @@ function yFeld(){
   <p class="satz" id="ysatz" aria-live="polite">${ab ? `Deine Schätzung: ${S.y}. Belegt ist: <span class="schw auf">rund ein Dutzend</span> trat heraus.` : `Belegt ist: <span class="schw">rund ein Dutzend</span>. Das siehst du nach deiner Schätzung.`}</p>`;
 }
 
+/* ---------- AM 2 · Dashboard: Frage im Zentrum, Rad der fünf Ebenen, sechs Erklärungen (Haltepunkt 2, 08.11.2026) ---------- */
+const CX = 640, CY = 360, RA = 232, RI = 104, RL = 170, RO = RA + 30; // Rad: außen, innen (Frage), Beschriftung, Umweg der Linien
+const WINKEL = EBENEN.map((e, i) => -Math.PI/2 + i * 2 * Math.PI / 5);
+const FELD_POS = WINKEL.map(a => [CX + Math.cos(a) * RL, CY + Math.sin(a) * RL]);
+const SPALTE_L = ["A","B","C"], SPALTE_R = ["D","E","F"];
+const ankerKarte = s => { const l = SPALTE_L.indexOf(s), r = SPALTE_R.indexOf(s); const y = [134, 360, 586][l >= 0 ? l : r]; return l >= 0 ? [300, y] : [980, y]; };
+const segment = i => { const a0 = WINKEL[i] - Math.PI/5, a1 = WINKEL[i] + Math.PI/5; const P = (r, a) => `${(CX + Math.cos(a) * r).toFixed(1)} ${(CY + Math.sin(a) * r).toFixed(1)}`; return `M${P(RI,a0)} L${P(RA,a0)} A${RA} ${RA} 0 0 1 ${P(RA,a1)} L${P(RI,a1)} A${RI} ${RI} 0 0 0 ${P(RI,a0)} Z`; };
+const geprueft = s => !!S.gewok[s];
+const passtFilter = a => !S.filter || (geprueft(a.s) && a.gew[S.filter] >= 2);
+const betontEbenen = a => EBENEN.filter(([k]) => a.gew[k] >= 2).map(([k]) => k); // ab »wichtig«, nur nach dem Check sichtbar
+const ebenenNachCheck = a => geprueft(a.s) ? a.e.map(e => EB[e]).join(", ") : "";
+
+function karteHTML(a, extra = ""){
+  const b = BILDER[a.bild] && !FEHLT.has(a.bild), ok = geprueft(a.s), gesch = karteFertig(a.s), gel = !!S.gelesen[a.s];
+  const emp = EMPF() === a.s;
+  return `<button class="akte${passtFilter(a) ? "" : " gedimmt"}${emp ? " empfohlen" : ""}" data-akte="${a.s}" aria-pressed="${S.akte === a.s}" style="${extra}" data-vt="akte-${a.s}" aria-label="Erklärung ${a.s}: ${esc(a.name)}${emp ? ", Empfehlung" : ""}">
+    <span class="nr">Erklärung ${a.s}${emp ? ` <span class="emp">Empfehlung</span>` : ""}</span>
+    <span class="pf" aria-hidden="true">${b ? `<img src="${BILDER[a.bild].datei}" alt="" data-bild="${a.bild}" onerror="this.parentNode.textContent='${a.s}'">` : a.s}</span>
+    <b>${esc(a.name)}</b><span class="j">${esc(a.jahr)}${ok ? " · " + ebenenNachCheck(a) : ""}</span>
+    <span class="fr">${esc(a.frage)}</span>
+    <span class="fs" aria-label="Stand"><span class="${gel ? "ok" : ""}">${gel ? "✓ " : ""}gelesen</span><span class="${gesch ? "ok" : ""}">${gesch ? "✓ " : ""}Karte</span><span class="${ok ? "ok" : ""}">${ok ? "✓ " : ""}geprüft</span></span></button>`;
+}
+/* Empfehlung: nach der ersten fertigen Karte eine Akte aus einer anderen Ebene; zeigt auf die Karte statt auf eine neue Seite */
+function EMPF(){
+  const f = fertigeAkten(); if (!f.length || f.length >= 2) return null;
+  const e = fehlendeEbene(); if (!e) return null;
+  const kand = e.akten.filter(a => !S.gewok[a.s]); return (kand[0] || e.akten[0] || {}).s || null;
+}
+function linienSVG(){
+  let s = "";
+  const zeichneLinie = (a, eb, neu, j) => {
+    const g = a.gew[eb]; if (g < 2) return; const ei = EBENEN.findIndex(e => e[0] === eb);
+    const [kx, ky] = ankerKarte(a.s), ak = Math.atan2(ky - CY, kx - CX);
+    let dlt = ak - WINKEL[ei]; while (dlt > Math.PI) dlt -= 2*Math.PI; while (dlt < -Math.PI) dlt += 2*Math.PI;
+    const aE = WINKEL[ei] + Math.max(-Math.PI/5*.8, Math.min(Math.PI/5*.8, dlt)); // Rand des Ziel-Segments, der Karte am nächsten
+    const ex = CX + Math.cos(aE) * (RA + 6), ey = CY + Math.sin(aE) * (RA + 6);
+    let d, plen;
+    if (Math.abs(dlt) <= Math.PI/5) { d = `M${kx} ${ky} L${ex.toFixed(1)} ${ey.toFixed(1)}`; plen = Math.hypot(ex - kx, ey - ky); }
+    else { // außen um die Kugel herum, nie durch ein fremdes Feld
+      const ox = CX + Math.cos(ak) * RO, oy = CY + Math.sin(ak) * RO; let dA = aE - ak; while (dA > Math.PI) dA -= 2*Math.PI; while (dA < -Math.PI) dA += 2*Math.PI;
+      const zx = CX + Math.cos(aE) * RO, zy = CY + Math.sin(aE) * RO;
+      d = `M${kx} ${ky} L${ox.toFixed(1)} ${oy.toFixed(1)} A${RO} ${RO} 0 0 ${dA > 0 ? 1 : 0} ${zx.toFixed(1)} ${zy.toFixed(1)} L${ex.toFixed(1)} ${ey.toFixed(1)}`;
+      plen = Math.hypot(ox - kx, oy - ky) + Math.abs(dA) * RO + (RO - RA - 6);
+    }
+    s += `<path d="${d}" stroke-width="${[0,1.5,3,4.5,6][g]}" class="lin${neu ? " zieh" : ""}" style="stroke-dasharray:${plen.toFixed(0)};--len:${plen.toFixed(0)};animation-delay:${neu ? j*30 : 0}ms"><title>${esc(a.name)} → ${EB[eb]}: ${STUFE[g]}</title></path>`;
+  };
+  if (S.filter) AKTEN.filter(a => geprueft(a.s)).forEach((a, j) => zeichneLinie(a, S.filter, FRISCH === a.s, j));
+  else if (S.akte && geprueft(S.akte)) { const a = AKTE(S.akte); EBENEN.forEach((e, j) => zeichneLinie(a, e[0], FRISCH === a.s, j)); }
+  FRISCH = null; return s;
+}
+let FRISCH = null; // Akte, deren Linien gerade frisch erscheinen (der eine große Moment)
+
+function dashFrage(){
+  const sel = S.akte && geprueft(S.akte) ? AKTE(S.akte) : null;
+  return `<p class="ring-text">Sechs Erklärungen der Forschung · fünf Ebenen, auf denen sie ansetzen · eine Frage</p>
+  <div class="spalte l">${SPALTE_L.map(s => karteHTML(AKTE(s))).join("")}</div>
+  <svg class="rad" viewBox="0 0 1280 720" aria-hidden="true">${EBENEN.map((e, i) => `<path d="${segment(i)}" class="seg e-${e[0]}${S.filter === e[0] ? " aktiv" : ""}${sel && sel.gew[e[0]] >= 2 ? " betont" : ""}" data-ebene="${e[0]}"></path>`).join("")}<circle cx="${CX}" cy="${CY}" r="${RI-4}" class="kern"></circle></svg>
+  <svg class="linien" viewBox="0 0 1280 720" aria-hidden="true">${linienSVG()}</svg>
+  <div class="frage-kern" role="heading" aria-level="2"><div><b>Wie war das möglich?</b><span>Sechs Antworten, fünf Ebenen</span></div></div>
+  <div class="ebfelder" role="group" aria-label="Fünf Ebenen, Modell der Lehrkraft">${EBENEN.map((e, i) => { const [x, y] = FELD_POS[i];
+    const marken = AKTEN.filter(a => geprueft(a.s) && a.gew[e[0]] >= 2).map(a => `<span class="marke m${a.gew[e[0]]}" title="${esc(a.name)}: ${STUFE[a.gew[e[0]]]}">${a.s}</span>`).join("");
+    return `<button class="ebfeld" data-ebene="${e[0]}" aria-pressed="${S.filter === e[0]}" style="left:${(x/12.8).toFixed(2)}%;top:${(y/7.2).toFixed(2)}%"><b>${e[1]}</b><small>${esc(e[2])}</small><span class="marken" aria-label="geprüfte Erklärungen, die hier ansetzen">${marken}</span></button>`; }).join("")}</div>
+  <div class="spalte r">${SPALTE_R.map(s => karteHTML(AKTE(s))).join("")}</div>
+  <p class="rad-satz" aria-live="polite">${S.filter ? `<b>${EB[S.filter]}:</b> ${AKTEN.filter(a => geprueft(a.s) && a.gew[S.filter] >= 2).length} geprüfte Erklärung${AKTEN.filter(a => geprueft(a.s) && a.gew[S.filter] >= 2).length === 1 ? "" : "en"} setzen hier an. ${AKTEN.some(a => geprueft(a.s)) ? "" : "Prüfe zuerst eine Erklärung."}` : sel ? `<b>${esc(sel.name)}</b> setzt vor allem bei <b>${EB[EBENEN.reduce((m, [k]) => sel.gew[k] > sel.gew[m] ? k : m, "person")]}</b> an.` : "Tippe auf eine Erklärung: Du liest sie im Panel und prüfst, wo sie ansetzt. Tippe auf ein Feld: Welche geprüften Erklärungen setzen dort an?"}</p>`;
+}
+function dashVergleich(){
+  return `<p class="ring-text">Vergleich · die Ebene erscheint nach deinem Gewichtungs-Check</p><div class="ansicht tab-wrap"><table class="vgl"><thead><tr><th>Erklärung</th><th>Jahr</th><th>These</th><th>Ebene</th><th>Grenze</th></tr></thead><tbody>${AKTEN.map(a => `<tr><td><button class="akte zeile${passtFilter(a) ? "" : " gedimmt"}" data-akte="${a.s}" data-vt="akte-${a.s}" aria-pressed="${S.akte === a.s}"><span class="pf" aria-hidden="true">${a.s}</span><b>${esc(a.name)}</b></button></td><td>${esc(a.jahr)}</td><td>${esc(a.kurz.these)}</td><td class="eb-z">${geprueft(a.s) ? a.e.map(e => `<span class="ebene e-${e}">${EB[e]}</span>`).join("") : "<i>nach dem Check</i>"}</td><td>${esc(a.kurz.grenze)}</td></tr>`).join("")}</tbody></table></div>`;
+}
+function dashZeit(){
+  const min = 1948, max = 2008, x = j => 4 + (j - min) / (max - min) * 92;
+  return `<p class="ring-text">Zeitachse · nur Erscheinungsjahre aus den Belegen</p><div class="ansicht zeitachse"><div class="achse" aria-hidden="true"></div>${[1950,1960,1970,1980,1990,2000].map(j => `<span class="dekade" style="left:${x(j)}%">${j}</span>`).join("")}
+  ${(() => { const sortiert = [...AKTEN].sort((p, q) => JZ[p.s] - JZ[q.s]); const letzte = { oben:-99, unten:-99 }; let h = "";
+    sortiert.forEach((a, i) => { const xx = x(JZ[a.s]); let reihe = i % 2 === 0 ? "oben" : "unten", top = reihe === "oben" ? "14%" : "58%";
+      if (xx - letzte[reihe] < 12.5) { top = reihe === "oben" ? "36%" : "78%"; } else letzte[reihe] = xx;
+      h += `<span class="jahr" style="left:${xx}%">${JZ[a.s]}</span>` + karteHTML(a, `left:${xx}%;top:${top}`); });
+    return h; })()}
+  <p class="zeitachse-fuss">Adorno 1950 (zweites Werk 1966), Bauman 1989 (Welzer 2005). Von 1950 bis 2005: ein zeitlicher Kontext – im Landkarten-Moment geht es weiter.</p></div>`;
+}
 function akte(){
-  const a = S.akte ? AKTE(S.akte) : null, st = a ? (S.stufe[a.s] || 1) : 1, k = a ? (S.karte[a.s] || {}) : {};
-  const f = fertigeAkten(), n = f.length;
-  return `${zeitKopf("akte")}<h1>Sechs Versuche, das zu erklären</h1>
-  <div class="frage-gross"><p class="f1">Wie war das möglich?</p><p class="f2">Wer wurde zum Täter, wer zur Täterin? Seit 1945 sucht die Forschung nach Antworten. Sie fand keinen „Tätertyp“, aber fünf Ebenen, auf denen Erklärungen ansetzen.</p></div>
-  <div class="ebenen" role="list">${EBENEN.map(([k2, n2, u]) => `<div class="eb-${k2}" role="listitem"><b>${n2}</b><span>${esc(u)}</span></div>`).join("")}</div>
-  <p class="modellhinweis">Modell der Lehrkraft zum Ordnen der Erklärungen. Keine Forschungseinteilung, keine Messwerte.</p>
-  ${auftrag("Allein oder zu zweit · 23 Minuten","Mindestens zwei Akten","Wähle eine Akte und lies sie in deiner Stufe: Einstieg, Vertiefung oder Kontroverse. Schreib die Erklärungskarte in eigenen Worten und prüfe die Gewichtung. Dann die zweite Akte, am besten aus einer anderen Ebene. Erst mit zwei Karten geht es zum Marktplatz.")}
-  <div class="versuche" id="versuche">${AKTEN.map(x => { const b = BILDER[x.bild] && !FEHLT.has(x.bild);
-    return `<button class="versuch" data-akte="${x.s}" aria-pressed="${S.akte === x.s}"><span class="pf">${b ? `<img src="${BILDER[x.bild].datei}" alt="" data-bild="${x.bild}" onerror="this.parentNode.textContent='${x.s}'">` : x.s}</span><span class="vt"><b>${x.s} · ${esc(x.name)}</b><span class="j">${esc(x.jahr)} · ${x.e.map(e => EB[e]).join(", ")}</span><span class="fr">${esc(x.frage)}</span>${karteFertig(x.s) ? `<span class="fertig">✓ Erklärungskarte geschrieben</span>` : ""}</span></button>`; }).join("")}</div>
-  <div class="fortschritt${n >= 2 ? " ok" : ""}" id="fortschritt" aria-live="polite">${n >= 2 ? `✓ ${n} Akten bearbeitet. Der Marktplatz ist frei.` : `${n} von 2 Akten bearbeitet. Eine Akte gilt als bearbeitet, wenn These und Erklärung auf der Karte stehen.`}</div>
-  <div id="deckel">${a ? deckel(a, st, k) : ""}</div>
-  ${weiter("markt","Zum Marktplatz", { aus: n < 2, hinweis: n < 2 ? "Erst zwei Erklärungskarten, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert." })}`;
+  const n = fertigeAkten().length, a = S.akte ? AKTE(S.akte) : null;
+  return `<h1 class="sr">Sechs Versuche, das zu erklären</h1>
+  <div class="dash-kopf">${zeitKopf("akte")}<div class="umschalter" role="tablist" aria-label="Ansicht der Übersicht">${[["frage","Frage und Ebenen"],["vergleich","Vergleich"],["zeit","Zeitachse"]].map(([k, t]) => `<button role="tab" data-ansicht="${k}" aria-selected="${(S.ansicht || "frage") === k}">${t}</button>`).join("")}</div><span class="hinweis">Tippe auf eine Ansicht; deine Eingaben bleiben.</span></div>
+  <div class="buehne${a ? " offen " + (SPALTE_R.includes(a.s) && (S.ansicht || "frage") === "frage" ? "links" : "rechts") : ""}" id="buehne"><div class="dash" id="dash">${(S.ansicht || "frage") === "vergleich" ? dashVergleich() : (S.ansicht || "frage") === "zeit" ? dashZeit() : dashFrage()}</div>
+  <aside class="panel" id="panel" role="region" aria-label="Erklärung" ${a ? "" : "hidden"}>${a ? deckel(a, S.stufe[a.s] || 1, S.karte[a.s] || {}) : ""}</aside></div>
+  <div class="dash-fuss"><p class="fortschritt${n >= 2 ? " ok" : ""}" id="fortschritt" aria-live="polite">${n >= 2 ? `✓ ${n} Erklärungskarten. Der Marktplatz ist frei.` : `${n} von 2 Erklärungskarten. Mindestens zwei Erklärungen, eine aus einer anderen Ebene; eine Karte zählt, wenn These und Erklärung stehen.`}</p><p class="modellhinweis">Fünf Ebenen und Gewichtungen sind ein Modell der Lehrkraft zum Ordnen der Erklärungen, keine Forschungseinteilung und keine Messwerte.</p></div>
+  ${weiter("landkarte","Zum Landkarten-Moment", { aus: n < 2, hinweis: n < 2 ? "Erst zwei Erklärungskarten, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert." })}`;
 }
 function deckel(a, st, k){
   const g = S.gew[a.s] || Object.fromEntries(EBENEN.map(e => [e[0], 2])), ok = !!S.gewok[a.s];
-  return `<div class="deckel" id="deckel-in"><p class="sig">Akte ${a.s} · ${esc(a.jahr)}</p>
+  return `<div class="deckel-in" id="deckel-in"><div class="pk"><p class="sig">Erklärung ${a.s} · ${esc(a.jahr)}</p><button class="btn klein" data-zu-akte aria-label="Panel schließen">Schließen</button></div>
   ${bildFig(a.bild, {klasse:"portraet", kurz:true})}
-  <h2 style="font-size:1.5rem;margin:.2rem 0 .4rem">${esc(a.titel)}</h2>
-  <p>${a.e.map(e => `<span class="ebene e-${e}">Ebene ${EB[e]}</span>`).join("")}</p>
+  <h2 style="font-size:1.35rem;margin:.2rem 0 .4rem">${esc(a.titel)}</h2>
+  <p class="ebenen-z">${ok ? a.e.map(e => `<span class="ebene e-${e}">Ebene ${EB[e]}</span>`).join("") : `<span class="ebene verdeckt">Ebene: nach deinem Gewichtungs-Check</span>`}</p>
   <p style="margin-top:.5rem"><b>Leitfrage:</b> ${esc(a.frage)}</p>
-  <p><b>Was diese Akte am Fall Józefów leistet:</b> ${esc(a.leistet)}</p><p class="hinweis">Passt zu dir, ${esc(a.passt)}.</p>
+  <p><b>Antwort auf „Wie war das möglich?“ am Fall Józefów:</b> ${esc(a.leistet)}</p><p class="hinweis">Passt zu dir, ${esc(a.passt)}.</p>
   <div class="stufen" role="group" aria-label="Lesestufe">${["Einstieg","Vertiefung","Kontroverse"].map((n, i) => `<button data-stufe="${i+1}" aria-pressed="${st === i+1}">${n}</button>`).join("")}</div>
   <div class="stext" id="stext">
     <div data-st="1"><p class="stufenkopf">Einstieg</p>${a.s1}</div>
@@ -709,12 +925,14 @@ function deckel(a, st, k){
   <details class="hilfe"><summary>Hilfe 1: Satzanfang</summary><p>„Laut ${esc(a.name.split(" ")[0])} wurden Menschen zu Tätern, weil … Das passt zu Józefów, weil … Es erklärt aber nicht, warum …“</p></details>
   <details class="hilfe"><summary>Hilfe 2: Ein Denkanstoß</summary><p>${esc(a.hilfe)}</p></details>
   <h3 style="margin-top:1.6rem">Gewichtungs-Check: Wo setzt diese Erklärung an?</h3>
-  <p class="hinweis">Stell ein, wie stark ${esc(a.name)} jede Ebene gewichtet. Dann prüfst du gegen das Modell der Lehrkraft. Es gibt kein Messen, nur ein Vergleichen.</p>
+  <p class="hinweis">Stell ein, wie stark ${esc(a.name)} jede Ebene gewichtet. Dann prüfst du gegen das Modell der Lehrkraft. Es gibt kein Messen, nur ein Vergleichen. Danach erscheinen die Linien in der Übersicht.</p>
   <div class="modell" id="gewmodell">${EBENEN.map(([kk, n, u]) => `<div class="fak"><label for="g-${kk}">${n}<span class="u">${u.split(":")[0]}</span></label><div><input type="range" id="g-${kk}" data-gew="${kk}" min="0" max="4" value="${g[kk]}" aria-valuetext="${STUFE[g[kk]]}" ${ok ? "disabled" : ""}>${balken(kk, g[kk])}<span class="wert" id="gw-${kk}">${STUFE[g[kk]]}</span><div id="gr-${kk}">${ok ? rueckmeldung(a, kk, g[kk]) : ""}</div></div></div>`).join("")}</div>
   <div class="reihe"><button class="btn dunkel" data-gewpruef ${ok ? "disabled" : ""}>Prüfen</button>${ok ? `<button class="btn" data-gewneu>Noch einmal</button>` : ""}<span class="zaehler" id="zaehler">Richtig gelegen: ${S.treffer} von ${S.versuche}</span></div>
   ${ok ? `<p class="satz" id="gewsatz">${gewSatz(a)}</p>` : ""}
   </div>`;
 }
+
+const JZ = {A:1950, B:1963, C:1992, D:1996, E:1963, F:1989}; // Erscheinungsjahr des ersten genannten Werks (Belege)
 function rueckmeldung(a, k, v){
   const d = v - a.gew[k], art = d === 0 ? "trifft" : (Math.abs(d) === 1 ? "teils" : "nicht");
   const t = art === "trifft" ? "Trifft." : art === "teils" ? (d > 0 ? "Etwas zu hoch." : "Etwas zu niedrig.") : (d > 0 ? "Zu hoch." : "Zu niedrig.");
@@ -734,10 +952,45 @@ function fehlendeEbene(){
   return { e, akten };
 }
 
+/* ---------- AT · Landkarten-Moment. Namen, Erklärungen und Anker wörtlich aus der kognitiven Landkarte (Repository kognitive-Landkarte-des-Geschichtsunterrichts, Abschnitt 2.1 und 2.2) ---------- */
+const LK = "https://geschichtefuerdiegegenwart.github.io/kognitive-Landkarte-des-Geschichtsunterrichts/#s-";
+const PERSPEKTIVITAET = "Jede Betrachtung erfolgt aus einer bestimmten Sichtweise, geprägt von Überzeugungen, Interessen und Erfahrungen."; // Landkarte 2.1.2, erster Satz – steht wörtlich auch in der Zusammenfassung
+const PRINZIPIEN = [
+ { id:"2-1-1", n:"Retrospektivität", k:"Wir betrachten die Vergangenheit immer im Nachhinein (ex post), also aus der Gegenwart heraus.", stufe:"kaum", fb:"Alle sechs blicken zurück. Das haben sie gemeinsam, es erklärt die Unterschiede nicht. Die Landkarte ordnet „Von wann aus?“ der Retrospektivität zu; dass die Bücher zwischen 1950 und 2005 erschienen, gehört zum zeitlichen Kontext, also zur Standortgebundenheit (2.1.8.3)." },
+ { id:"2-1-2", n:"Perspektivität", k:PERSPEKTIVITAET, stufe:"zentral", fb:"Die Landkarte nennt Perspektivität auch „bei den Darstellungen (wer erzählt?)“ und fragt: „Wer erzählt, und mit welcher Weltanschauung und welchen Interessen?“ Ein Psychologe im Labor (Milgram), eine Philosophin im Gerichtssaal (Arendt), ein Historiker über Verhörakten (Browning), ein Politologe über dieselben Akten (Goldhagen), ein Soziologe und ein Sozialpsychologe über die Moderne (Bauman, Welzer): Jede Erklärung erzählt aus ihrer Sichtweise." },
+ { id:"2-1-3", n:"Partikularität", k:"Historische Erkenntnisse sind immer nur Ausschnitte der gesamten Vergangenheit.", stufe:"kaum", fb:"Dass jede Erklärung ein Ausschnitt bleibt, stimmt. Aber die Frage war, warum die Ausschnitte so verschieden sind. Dafür braucht es ein Prinzip, das auf die Erzählenden schaut." },
+ { id:"2-1-4", n:"Selektivität", k:"Wer Geschichte erzählt, wählt aus: Welche Quellen, Ereignisse und Personen sind für die eigene Frage wichtig?", stufe:"teils", fb:"Milgram wählte das Labor, Arendt den Prozess, Browning die Verhöre von 210 Männern, Adorno einen Fragebogen: Die Auswahl folgt der Frage, und die Frage prägt die Antwort. Zentral bleibt aber, wessen Frage das ist: Perspektivität." },
+ { id:"2-1-5", n:"Partialität", k:"Quellen zeigen immer nur einen Teil der Vergangenheit, und nur ein Teil der Quellen ist überhaupt erhalten.", stufe:"kaum", fb:"Partialität meint Lücken der Überlieferung, die niemand bewusst gemacht hat. Browning und Goldhagen hatten dieselben Akten und kamen trotzdem zu Gegenteiligem." },
+ { id:"2-1-6", n:"Narrativität", k:"Geschichte gibt es nur als Erzählung.", stufe:"kaum", fb:"Dass „Ganz normale Männer“ eine Erzählform ist, stimmt. Aber die sechs Ansätze unterscheiden sich zuerst in der Ursache, die sie setzen, nicht in der Erzählform." },
+ { id:"2-1-7", n:"Konstruktivität", k:"Geschichte wird nicht „gefunden“, sondern aktiv zusammengesetzt. Deshalb können aus denselben Fakten unterschiedliche Geschichten entstehen.", stufe:"teils", fb:"Am Fall Browning gegen Goldhagen sogar sehr gut: dieselben Akten, zwei Geschichten. Die Landkarte sagt dazu: „Konstruiert heißt nicht beliebig.“ Welche Konstruktion besser begründet ist, prüfst du mit den Triftigkeiten." },
+ { id:"2-1-8", n:"Standortgebundenheit", k:"Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Gesamtkontext geprägt, oft unbewusst.", stufe:"teils", fb:"Zeitlicher Kontext (2.1.8.3): Adorno schrieb 1950 unter dem frischen Eindruck, Welzer 2005 mit fünfzig Jahren Forschung dahinter. Fachkultur als Umfeld: Labor, Gericht, Archiv. Die Landkarte unterscheidet davon die Perspektivität als Weltanschauung und Interessen." },
+ { id:"2-1-9", n:"Kontroversität (Folgerung)", k:"Unterschiedliche Deutungen von Historiker*innen werden gegenübergestellt.", stufe:"zentral", fb:"Genau das tut diese Stunde: Sie stellt Deutungen gegenüber. Achtung: „Multiperspektivität“ meint in der Landkarte Quellen verschiedener Beteiligter (Täter*innen, Opfer, Zuschauende). Das war M21. Und „Pluralität“ heißt: Du darfst zu einem eigenen, begründeten Urteil kommen." },
+];
+const STUFENWORT = { zentral:"Zentral.", teils:"Auch begründbar.", kaum:"Passt kaum." };
+function landkarte(){
+  const l = S.lk, frei = l.vermutung.trim().length >= 10, p = PRINZIPIEN.find(x => x.id === l.prinzip);
+  return `${zeitKopf("landkarte")}<h1>Woher kommen die Unterschiede?</h1>
+  <p class="frage-gross"><span class="f1">Sechs Erklärungen für dieselbe Tat. Woher kommen die Unterschiede?</span></p>
+  ${auftrag("Allein · 2 Minuten","Erst vermuten","Schreib einen Satz: Warum kommen die Forscher*innen zu verschiedenen Antworten auf dieselbe Frage?")}
+  <label for="lk-vermutung">Meine Vermutung</label><textarea id="lk-vermutung" data-lk="vermutung" rows="2" placeholder="Die Forscher*innen kommen zu verschiedenen Antworten, weil …">${esc(l.vermutung)}</textarea>
+  <p class="hinweis" id="lk-hinweis">${frei ? "Gut. Jetzt die Landkarte öffnen, dann unten ein Prinzip wählen." : "Schreib mindestens einen Satz. Danach öffnet sich die Landkarte."}</p>
+  <div id="lk-teil2" class="${frei ? "" : "gesperrt"}">
+  ${auftrag("Allein · 4 Minuten","Dann die Landkarte","Öffne „Was ist Geschichte?“ in der kognitiven Landkarte. Sie öffnet sich in einem neuen Tab, deine Eingaben hier bleiben. Lies die acht Merkmale. Wähle das Prinzip, das die Unterschiede am besten erklärt, und begründe in einem Satz.")}
+  <p><a class="btn dunkel" id="lk-link" href="${LK}2-1" target="_blank" rel="noopener" ${frei ? "" : 'aria-disabled="true" tabindex="-1"'}>Landkarte öffnen: 2.1 Die Gemeinsamkeiten einer jeden Geschichte ↗</a></p>
+  <div class="prinzipien" role="group" aria-label="Prinzip wählen">${PRINZIPIEN.map(x => `<button data-prinzip="${x.id}" aria-pressed="${l.prinzip === x.id}" class="${l.ok && l.prinzip === x.id ? x.stufe : ""}" ${(!frei || l.ok) ? "disabled" : ""}><b>${esc(x.n)}</b><small>${esc(x.k)}</small></button>`).join("")}</div>
+  <label for="lk-grund">Meine Begründung</label><textarea id="lk-grund" data-lk="grund" rows="2" placeholder="Dieses Prinzip erklärt die Unterschiede, weil …" ${(!frei || !l.prinzip || l.ok) ? "disabled" : ""}>${esc(l.grund)}</textarea>
+  <div class="reihe"><button class="btn dunkel" data-lkpruef ${(!frei || !l.prinzip || l.grund.trim().length < 10 || l.ok) ? "disabled" : ""}>Prüfen</button>${l.ok ? `<button class="btn" data-lkneu>Noch einmal</button>` : ""}<span class="hinweis">Rückmeldung in drei Stufen: zentral · auch begründbar · passt kaum.</span></div>
+  <div id="lk-fb" aria-live="polite">${l.ok && p ? `<div class="rm ${p.stufe === "zentral" ? "trifft" : p.stufe === "teils" ? "teils" : "nicht"}"><b>${STUFENWORT[p.stufe]}</b> ${esc(p.fb)} <a href="${LK}${p.id}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a></div>` : ""}</div>
+  </div>
+  <div class="trift"><b>Brücke zur Triftigkeit.</b> Mehrere Perspektiven heißt nicht, dass jede Erklärung gleich gut ist. Die Landkarte prüft Geschichten dreifach: <i>empirisch</i> (Stimmen die Tatsachen?), <i>narrativ</i> (Ist der Zusammenhang schlüssig?), <i>normativ</i> (Sind die Wertungen begründet?). Beispiel Goldhagen: Die Kritik trifft vor allem die empirische Triftigkeit – eine einzige Ursache (Mommsen: „notwendig, aber keineswegs hinreichend“) und keine Vergleiche mit dem Antisemitismus in anderen Ländern. <a href="${LK}2-2" target="_blank" rel="noopener">Landkarte 2.2 Triftigkeit ↗</a></div>
+  <p class="hinweis" style="margin-top:.9rem"><b>Perspektivität</b> (Landkarte 2.1.2): ${esc(PERSPEKTIVITAET)} Leitfrage: Wer erzählt, und mit welcher Weltanschauung und welchen Interessen?</p>
+  ${weiter("markt","Zum Marktplatz")}`;
+}
+
 function markt(){
   const meine = fertigeAkten(), emp = fehlendeEbene();
   return `${zeitKopf("markt")}<h1>Marktplatz der Erklärungen</h1>
-  ${band(null, "Austausch", "Die Thesen ins Gespräch bringen", "Zuerst prüfst du drei Streitpaare. Dann erklärst du deine Akte an einem Stand und besuchst andere. Zuletzt baut eure Tischgruppe ein Modell.")}
+  ${band(null, "Austausch", "Die Thesen ins Gespräch bringen", "Zuerst prüfst du drei Streitpaare. Dann erklärst du deine Erklärung an einem Stand und besuchst andere. Zuletzt baut eure Tischgruppe ein Modell.")}
   <h2 class="abschnitt">Drei Streitpaare</h2>
   <p class="hinweis">Forschung ist ein Streit. Entscheide bei jedem Paar, was der Fall Józefów eher stützt. Die Rückmeldung ist gestuft: zentral · auch begründbar · passt kaum.</p>
   ${PAARE.map(p => { const w = S.paare[p.id];
@@ -747,9 +1000,9 @@ function markt(){
     ${w !== undefined ? `<div class="reihe"><button class="btn" data-paarneu="${p.id}">Noch einmal</button></div>` : ""}</div>`; }).join("")}
   ${emp ? `<div class="empfehlung"><b>Empfehlung für deinen Besuch:</b> In deinen Akten fehlt die Ebene <b>${EB[emp.e]}</b>. Besuche einen Stand von ${emp.akten.map(a => `Akte ${a.s} (${esc(a.name)})`).join(" oder ")}.</div>` : `<div class="empfehlung"><b>Deine Akten decken alle fünf Ebenen ab.</b> Besuche den Stand, der dir am meisten widerspricht.</div>`}
   <h2 class="abschnitt">Zwei Runden am Stand</h2>
-  ${auftrag("Marktplatz · 2 Runden à 6 Minuten","Erklären und besuchen","<b>Am Stand:</b> Öffne „Meinen Stand zeigen“ und erkläre deine Akte in einer Minute: These, was sie an Józefów erklärt, was nicht. <b>Beim Besuch:</b> Zwei Stände. Frag nach: „Was erklärt ihr nicht?“ Notiere These und Grenze.")}
+  ${auftrag("Marktplatz · 2 Runden à 5 Minuten","Erklären und besuchen","<b>Am Stand:</b> Öffne „Meinen Stand zeigen“ und erkläre deine Akte in einer Minute: These, was sie an Józefów erklärt, was nicht. <b>Beim Besuch:</b> Zwei Stände. Frag nach: „Was erklärt ihr nicht?“ Notiere These und Grenze.")}
   <div class="runden"><div><b>Runde 1</b><br>Akten A, C, E stehen am Stand.<br>B, D, F besuchen.</div><div><b>Runde 2</b><br>Akten B, D, F stehen am Stand.<br>A, C, E besuchen.</div></div>
-  <div class="reihe"><button class="btn" data-uhr>Uhr: 6 Minuten</button><span class="uhr" id="uhr" aria-live="off">6:00</span></div>
+  <div class="reihe"><button class="btn" data-uhr>Uhr: 5 Minuten</button><span class="uhr" id="uhr" aria-live="off">5:00</span></div>
   <div class="reihe">${meine.length ? meine.map(a => `<button class="btn dunkel" data-stand="${a.s}">Meinen Stand zeigen (Akte ${a.s})</button>`).join("") : `<span class="hinweis">Erst in Schritt 4 eine Erklärungskarte schreiben, dann kannst du deinen Stand zeigen.</span>`}</div>
   <h2 class="abschnitt">Meine Notizen vom Marktplatz</h2>
   ${AKTEN.filter(x => !karteFertig(x.s)).map(x => { const n = S.notiz[x.s] || {};
@@ -773,14 +1026,14 @@ function modellSatz(m){
 const MODER = [
   { h:"Die Modelle der Tische", t:"Jede Gruppe nennt in einem Satz ihre stärkste Gewichtung und die Begründung.", f:"Begründet eure Gewichtungen.", min:3 },
   { h:"Der Streitpunkt", t:"Die Seite zeigt, wo die Tische am weitesten auseinanderliegen. Die beiden Tische an den Enden beginnen.", f:"Warum gewichtet ihr diese Ebene so verschieden?", min:3 },
-  { h:"Ergänzen oder widersprechen?", t:"Nehmt zwei Akten aus eurer Gruppe und prüft sie am Fall Józefów.", f:"Welche Erklärungen ergänzen sich, welche widersprechen sich?", min:3 },
-  { h:"Ganz normale Männer", t:"Brownings Titel ist das Ergebnis der Forschung. Was folgt daraus?", f:"Entlastet „ganz normal“ die Täter, oder belastet es uns alle?", min:3 },
+  { h:"Ergänzen oder widersprechen?", t:"Nehmt zwei Akten aus eurer Gruppe und prüft sie am Fall Józefów.", f:"Welche Erklärungen ergänzen sich, welche widersprechen sich?", min:2 },
+  { h:"Ganz normale Männer", t:"Brownings Titel ist das Ergebnis der Forschung. Was folgt daraus?", f:"Entlastet „ganz normal“ die Täter, oder belastet es uns alle?", min:2 },
 ];
 const REGELN = ["Wir kritisieren Argumente, nicht Personen.","Wer etwas behauptet, begründet es mit einer Akte oder dem Fall.","Wir trennen, was belegt ist und was wir deuten.","Niemand muss sagen, was er oder sie selbst getan hätte.","Wir lassen ausreden und beziehen uns auf das, was gesagt wurde.","Die Würde der Opfer steht nicht zur Debatte."];
 function diskussion(){
   return `${zeitKopf("diskussion")}<h1>Welche Erklärungen ergänzen sich, welche widersprechen sich?</h1>
-  ${band(null, "Plenum · geführt am Beamer", "Vier Schritte, zwölf Minuten", "Die Lehrkraft führt am Beamer durch die Schritte. Die iPads bleiben zu.")}
-  ${auftrag("Plenum · 12 Minuten · iPad zu","Diskutieren","Begründet eure Gewichtungen mit euren Akten und dem Fall. Hört zu, fragt nach, widersprecht mit Argumenten.")}
+  ${band(null, "Plenum · geführt am Beamer", "Vier Schritte, zehn Minuten", "Die Lehrkraft führt am Beamer durch die Schritte. Die iPads bleiben zu.")}
+  ${auftrag("Plenum · 10 Minuten · iPad zu","Diskutieren","Begründet eure Gewichtungen mit euren Akten und dem Fall. Hört zu, fragt nach, widersprecht mit Argumenten.")}
   <div class="moder">${MODER.map((m, i) => `<div class="schritt${S.moder === i ? " akt" : ""}"><span class="n">${i+1}</span><div><h3>${esc(m.h)}</h3><p>${esc(m.t)}</p><p class="frage-m"><i>${esc(m.f)}</i></p></div></div>`).join("")}</div>
   <div class="reihe nodruck"><button class="btn dunkel" data-moderation>Moderation am Beamer</button><button class="btn" data-klasse>Modelle der Klasse</button></div>
   <h2 class="abschnitt">Gesprächsregeln</h2><ol class="regeln" style="padding-left:1.2rem">${REGELN.map(r => `<li>${esc(r)}</li>`).join("")}</ol>
@@ -802,13 +1055,13 @@ function moderAnsicht(){
 function rueckblick(){
   const x = S.x, pos = +S.pos;
   return `${zeitKopf("rueckblick")}<h1>Was denkst du jetzt?</h1>
-  ${auftrag("Allein · 4 Minuten","Siegel öffnen","Öffne deine erste Antwort. Schreib daneben, wie du die Frage jetzt beantwortest. Was ist geblieben, was hat sich geändert?")}
+  ${auftrag("Allein · 3 Minuten","Siegel öffnen","Öffne deine erste Antwort. Schreib daneben, wie du die Frage jetzt beantwortest. Was ist geblieben, was hat sich geändert?")}
   ${x.text.trim() ? (x.zu ? `<div class="umschlag zu"><div class="siegel"><span class="stempel">ver&shy;siegelt<br>${esc(x.zeit)}</span><p>Deine erste Antwort wartet hier.</p><button class="btn dunkel" data-oeffnen>Siegel öffnen</button></div></div>` : "") : `<p class="hinweis">In Schritt 1 hast du keine erste Antwort geschrieben. Schreib trotzdem auf, was du jetzt denkst.</p>`}
   <div class="vergleich2" id="vergleich"${x.zu && x.text.trim() ? " hidden" : ""}>
     <div class="alt"><b>Meine erste Antwort</b><p>${esc(x.text) || "–"}</p></div>
     <div><label for="xneu">Meine Antwort jetzt</label><textarea id="xneu" data-feld="neu" rows="4">${esc(S.neu)}</textarea></div>
   </div>
-  ${auftrag("Allein, dann Plenum · 3 Minuten","Person oder Umstände?","Woran liegt es vor allem, ob ein Mensch zum Täter wird? Setz den Regler und begründe in einem Satz.")}
+  ${auftrag("Allein, dann Plenum · 2 Minuten","Person oder Umstände?","Woran liegt es vor allem, ob ein Mensch zum Täter wird? Setz den Regler und begründe in einem Satz.")}
   <div class="pole"><span>Vor allem an der Person</span><span style="text-align:right">Vor allem an den Umständen</span></div>
   <label for="pos" class="sr">Deine Position zwischen Person und Umständen</label>
   <input type="range" id="pos" data-pos min="0" max="100" step="5" value="${pos}">
@@ -828,6 +1081,12 @@ const ABRUF = [
   { f:"Was sagt Mommsen über den Antisemitismus als Erklärung?", o:[["Er reicht allein aus.","Das ist Goldhagens Position, nicht Mommsens."],["Notwendig, aber nicht hinreichend.","Richtig. Ohne ihn ging es nicht, aber er allein erklärt den Mord nicht."],["Er spielte keine Rolle.","Nein. Kaum ein Forscher sagt das."]], r:1 },
   { f:"Welche Ebene betont Bauman?", o:[["Apparat: Bürokratie, Arbeitsteilung, Distanz","Richtig. Viele tun je ein kleines Stück."],["Person: der autoritäre Charakter","Das ist Adorno."],["Situation: der Versuchsleiter im Kittel","Das ist Milgram."]], r:0 },
 ];
+function radSchaubild(){
+  const seg = EBENEN.map((e, i) => `<path d="${segment(i)}" class="seg e-${e[0]}"></path>`).join("");
+  const lab = EBENEN.map((e, i) => { const [x, y] = FELD_POS[i]; const m = AKTEN.filter(a => a.gew[e[0]] >= 2).map(a => a.s).join(" ");
+    return `<text x="${x}" y="${y - 10}" text-anchor="middle" font-size="30" font-weight="700" fill="#24221F">${e[1]}</text><text x="${x}" y="${y + 26}" text-anchor="middle" font-size="26" fill="#24221F">${m}</text>`; }).join("");
+  return `<svg class="rad" viewBox="${CX - RA - 8} ${CY - RA - 8} ${2*RA + 16} ${2*RA + 16}" role="img" aria-label="Rad der fünf Ebenen mit den Buchstaben der Erklärungen, Modell der Lehrkraft" style="position:static;pointer-events:none">${seg}<circle cx="${CX}" cy="${CY}" r="${RI-4}" class="kern"></circle><text x="${CX}" y="${CY - 4}" text-anchor="middle" font-size="26" font-style="italic" font-family="Fraunces,Georgia,serif" fill="#FFFAF2">Wie war das</text><text x="${CX}" y="${CY + 26}" text-anchor="middle" font-size="26" font-style="italic" font-family="Fraunces,Georgia,serif" fill="#FFFAF2">möglich?</text>${lab}</svg>`;
+}
 function zusammenfassung(){
   const f = fertigeAkten();
   return `<div class="zf"><p class="zeit"><span class="nr">M22 · Zusammenfassung</span><span>zwei Seiten A4</span></p>
@@ -840,7 +1099,8 @@ function zusammenfassung(){
   <tr><td><b>„Hitler und die SS.“</b></td><td>Polizei, Verwaltung, Justiz, Bahn, Ärzte, Ingenieure wirkten mit, etwa der Bauhaus-Architekt Fritz Ertl.</td></tr></tbody></table></div>
   <h2>2 · Der Fall Józefów, 13. Juli 1942</h2>
   <p>Reserve-Polizeibataillon 101 aus Hamburg: etwa 500 Männer, im Schnitt 39 Jahre. Major Trapp bot an, beiseitezutreten. Rund ein Dutzend trat heraus. Mindestens 1.500 jüdische Menschen wurden ermordet. Später entzogen sich 10 bis 20 Prozent, bestraft wurde keiner. Bis Ende 1943: mindestens 38.000 Erschossene, mindestens 45.000 nach Treblinka Deportierte.</p>
-  <h2>3 · Sechs Erklärungen der Forschung</h2>
+  <h2>3 · Sechs Erklärungen der Forschung, fünf Ebenen</h2>
+  <div class="schau"><div>${radSchaubild()}</div><div class="lk-kasten"><b>Landkarte: Perspektivität.</b> ${esc(PERSPEKTIVITAET)} Leitfrage: Wer erzählt, und mit welcher Weltanschauung und welchen Interessen? Darum gibt die Forschung sechs verschiedene Antworten auf dieselbe Frage. Trotzdem ist nicht jede Antwort gleich gut: Die Landkarte prüft sie empirisch, narrativ und normativ (Triftigkeit). <span class="hinweis">Schaubild: Modell der Lehrkraft, Buchstaben ab „wichtig“.</span></div></div>
   <div class="ansaetze">${AKTEN.map(a => { const b = BILDER[a.bild] && !FEHLT.has(a.bild);
     return `<div class="ans"><div class="ak"><span class="pf">${b ? `<img src="${BILDER[a.bild].datei}" alt="" data-bild="${a.bild}" onerror="this.remove()">` : ""}</span><span><b>${esc(a.name)}</b><small>${esc(a.jahr)} · ${esc(a.kurz.werk)}</small></span></div>
     <span>${a.e.map(e => `<span class="ebene e-${e}">${EB[e]}</span>`).join("")}</span><span class="th">${esc(a.kurz.these)}</span><span class="gr"><b>Grenze:</b> ${esc(a.kurz.grenze)}</span></div>`; }).join("")}</div>
@@ -851,8 +1111,12 @@ function zusammenfassung(){
   <div class="satzanfaenge nodruck" aria-label="Satzanfänge">${ANFAENGE.map(s => `<button data-anfang="${esc(s)}">${esc(s)}</button>`).join("")}</div>
   <label for="erz" class="sr">Deine Erklärung</label><textarea id="erz" data-feld="erz" rows="9" placeholder="Am Morgen des 13. Juli 1942 …">${esc(S.erz)}</textarea>
   <div class="raster3"><div><b>Grundlegend</b>Nennt den Fall richtig und zwei Ansätze mit je einer These.</div><div><b>Sicher</b>Verbindet drei Ansätze mit dem Fall und zeigt eine Grenze.</div><div><b>Souverän</b>Zeigt, wo Ansätze sich widersprechen, wägt ab und zieht eine Folgerung für heute.</div></div>
+  <h2>4b · Mit der Landkarte</h2>
+  <p>Geh auf die kognitive Landkarte und schau dir die epistemologischen Prinzipien an (<a href="${LK}2-1" target="_blank" rel="noopener">Landkarte 2.1</a>). Welches Prinzip zeigt sich in dieser Stunde besonders? Erkläre damit, warum die Forschung sechs verschiedene Antworten auf die Frage „Wie war das möglich?“ gibt – und warum trotzdem nicht jede Antwort gleich gut ist.</p>
+  <label for="lk-auf" class="sr">Deine Antwort mit der Landkarte</label><textarea id="lk-auf" data-feld="lkauf" rows="4" placeholder="In dieser Stunde zeigt sich besonders das Prinzip …">${esc(S.lkauf)}</textarea>
+  <div class="raster3"><div><b>Grundlegend</b>Prinzip benannt.</div><div><b>Sicher</b>Auf die Ansätze angewendet.</div><div><b>Souverän</b>Mit Triftigkeit verbunden: nicht jede Antwort ist gleich gut.</div></div>
   <h2>5 · Mein Weg in dieser Stunde</h2>
-  <div class="zw"><div class="karte"><b>Meine Akten:</b> ${f.length ? f.map(a => `${a.s} ${esc(a.name)}`).join(", ") : "–"}<br><b>Gewichtungs-Check:</b> ${S.treffer} von ${S.versuche} richtig<br><b>Person oder Umstände?</b> ${posSatz(+S.pos)}</div>
+  <div class="zw"><div class="karte"><b>Meine Akten:</b> ${f.length ? f.map(a => `${a.s} ${esc(a.name)}`).join(", ") : "–"}<br><b>Gewichtungs-Check:</b> ${S.treffer} von ${S.versuche} richtig<br><b>Landkarte:</b> ${S.lk.ok && S.lk.prinzip ? esc((PRINZIPIEN.find(p => p.id === S.lk.prinzip) || {}).n) + (S.lk.grund.trim() ? " – " + esc(S.lk.grund) : "") : "–"}<br><b>Person oder Umstände?</b> ${posSatz(+S.pos)}</div>
   <div class="karte"><b>Vorher:</b> ${esc(S.x.text) || "–"}<br><b>Jetzt:</b> ${esc(S.neu) || "–"}</div></div>
   <div class="abruf nodruck"><h2>6 · Abrufübung für die Klassenarbeit</h2>
   <p class="hinweis">Beantworte ohne Nachlesen. Jede Antwort erklärt, warum sie stimmt oder nicht. Wiederhole die Übung in ein paar Tagen noch einmal.</p>
@@ -871,20 +1135,27 @@ function lehrkraft(){
   <h2 class="abschnitt">Ablauf, 90 Minuten</h2>
   <div class="tab-wrap"><table><thead><tr><th>Min.</th><th>Phase</th><th>Form</th><th>iPad</th></tr></thead><tbody>
   <tr><td class="n">0–10</td><td>Einstieg: fünf Menschen, Phasen aus M21, erste Antwort versiegeln</td><td>Plenum, allein</td><td>auf</td></tr>
-  <tr><td class="n">10–20</td><td>Input 1: Faktencheck, drei Karten</td><td>Lehrkraft und alle</td><td>auf</td></tr>
-  <tr><td class="n">20–32</td><td>Input 2: Józefów, sechs Karten; Plenum 3 Min.</td><td>Lehrkraft, Plenum</td><td>auf, dann zu</td></tr>
-  <tr><td class="n">32–55</td><td>Zwei Akten mit Erklärungskarte und Gewichtungs-Check</td><td>allein oder zu zweit</td><td>auf</td></tr>
-  <tr><td class="n">55–70</td><td>Streitpaare 4 Min., Marktplatz 2 × 6 Min., Modell am Tisch 4 Min.</td><td>Marktplatz, Tischgruppe</td><td>auf</td></tr>
-  <tr><td class="n">70–82</td><td>Diskussion in vier Schritten am Beamer</td><td>Plenum</td><td>zu</td></tr>
-  <tr><td class="n">82–90</td><td>Rückblick: Siegel öffnen, Person oder Umstände</td><td>allein, Plenum</td><td>auf</td></tr>
-  <tr><td class="n">danach</td><td>Zusammenfassung (2 Seiten), Erklärung in zehn Sätzen, Abrufübung als Hausaufgabe</td><td></td><td></td></tr></tbody></table></div>
+  <tr><td class="n">10–19</td><td>Input 1: Faktencheck, drei Karten</td><td>Lehrkraft und alle</td><td>auf</td></tr>
+  <tr><td class="n">19–28</td><td>Input 2: Józefów, sechs Karten; Plenum 3 Min.</td><td>Lehrkraft, Plenum</td><td>auf, dann zu</td></tr>
+  <tr><td class="n">28–50</td><td>Dashboard: zwei Erklärungen mit Erklärungskarte und Gewichtungs-Check, eine aus einer anderen Ebene</td><td>allein oder zu zweit</td><td>auf</td></tr>
+  <tr><td class="n">50–58</td><td>Landkarten-Moment: vermuten, Landkarte lesen, Prinzip wählen und begründen, Triftigkeit</td><td>allein</td><td>auf</td></tr>
+  <tr><td class="n">58–75</td><td>Streitpaare 3 Min., Marktplatz 2 × 5 Min., Modell am Tisch 4 Min.</td><td>Marktplatz, Tischgruppe</td><td>auf</td></tr>
+  <tr><td class="n">75–85</td><td>Diskussion in vier Schritten am Beamer (3 + 3 + 2 + 2)</td><td>Plenum</td><td>zu</td></tr>
+  <tr><td class="n">85–90</td><td>Rückblick: Siegel öffnen, Person oder Umstände</td><td>allein, Plenum</td><td>auf</td></tr>
+  <tr><td class="n">danach</td><td>Zusammenfassung (2 Seiten), Erklärung in zehn Sätzen, Auftrag mit der Landkarte, Abrufübung als Hausaufgabe</td><td></td><td></td></tr></tbody></table></div>
+  <p class="hinweis">Gemessen am 08.11.2026 (150 Wörter pro Minute, Eingaben, Wechsel): Die Fassung vor dem Dashboard brauchte 90 bis 98 Minuten, der Marktplatz allein rund 22. Der Landkarten-Moment kostet 7 bis 8 Minuten. Deshalb: Faktencheck und Józefów nach Messung (9 + 9), Marktplatz-Runden à 5 Minuten, Diskussion 10, Rückblick 5. Das Dashboard spart vor allem Wege: kein Seitenwechsel in Phase 4, die zweite Erklärung liegt sichtbar auf der Fläche, die Empfehlung zeigt auf die Karte.</p>
   <h2 class="abschnitt">Wenn die Zeit knapp wird</h2>
   <div class="tab-wrap"><table><thead><tr><th>Stelle</th><th>Kürzen</th><th>Gewinn</th></tr></thead><tbody>
-  <tr><td>Einstieg</td><td>Phasen nur mündlich, ohne Vermutungen eintippen</td><td class="n">3 Min.</td></tr>
-  <tr><td>Faktencheck</td><td>Karte 3 (Ertl) nur zeigen</td><td class="n">3 Min.</td></tr>
-  <tr><td>Akten</td><td>Zweite Akte nur Einstieg und These; Gewichtungs-Check nur bei der ersten</td><td class="n">5 Min.</td></tr>
-  <tr><td>Marktplatz</td><td>Streitpaare als Hausaufgabe; eine Runde à 6 Min.</td><td class="n">8 Min.</td></tr>
-  <tr><td>Diskussion</td><td>Schritte 3 und 4 zusammenlegen</td><td class="n">3 Min.</td></tr></tbody></table></div>
+  <tr><td>K1 Einstieg</td><td>Phasen nur mündlich, ohne Vermutungen eintippen</td><td class="n">3 Min.</td></tr>
+  <tr><td>K2 Faktencheck</td><td>Karte 3 (Ertl) nur zeigen</td><td class="n">2 Min.</td></tr>
+  <tr><td>K3 Erklärungen</td><td>Zweite Erklärung nur Einstieg und These; Gewichtungs-Check nur bei der ersten</td><td class="n">5 Min.</td></tr>
+  <tr><td>K4 Landkarte</td><td>Nur Prinzip wählen, Begründungssatz entfällt; Rückmeldung lesen</td><td class="n">2 Min.</td></tr>
+  <tr><td>K5 Landkarte</td><td>Landkarten-Moment als Hausaufgabe zusammen mit Aufgabe 4b der Zusammenfassung</td><td class="n">8 Min.</td></tr>
+  <tr><td>K6 Marktplatz</td><td>Streitpaare als Hausaufgabe; eine Runde à 5 Min.</td><td class="n">8 Min.</td></tr>
+  <tr><td>K7 Diskussion</td><td>Schritte 3 und 4 zusammenlegen</td><td class="n">2 Min.</td></tr></tbody></table></div>
+  <h2 class="abschnitt">Dashboard und Landkarten-Moment (seit 08.11.2026)</h2>
+  <p>Phase 4 ist eine Übersicht statt sechs Akten nacheinander: in der Mitte die Frage, darum das Rad der fünf Ebenen, außen die sechs Erklärungen. Antippen öffnet ein Panel am selben Ort (Lesestufen, Erklärungskarte, Gewichtungs-Check). Die Ebene einer Erklärung und die Linien ins Rad erscheinen erst nach dem eigenen Gewichtungs-Check: erst versuchen, dann aufdecken. Ein Feld des Rads antippen hebt die geprüften Erklärungen hervor, die dort ansetzen. Drei Ansichten: Frage und Ebenen, Vergleich (Tabelle), Zeitachse (Erscheinungsjahre). Am Beamer 1280 × 720 passt die Übersicht ohne Scrollen; auf dem iPad hochkant und am Telefon wird sie zur Liste, das Panel kommt von unten.</p>
+  <p>Der Landkarten-Moment (Phase 5) verbindet die Stunde mit der kognitiven Landkarte: Erwartet als zentral sind Perspektivität (2.1.2) und die Folgerung Kontroversität (2.1.9); Konstruktivität, Standortgebundenheit und Selektivität sind „auch begründbar“. „Multiperspektivität“ meint in der Landkarte Quellen verschiedener Beteiligter und ist deshalb hier nicht zentral. Die Brücke zur Triftigkeit nutzt die belegte Kritik an Goldhagen (Mommsen; keine Ländervergleiche). Alle Namen, Erklärungen und Anker stammen wörtlich aus der Landkarte.</p>
   <h2 class="abschnitt">Moderation der Diskussion</h2>
   <p>Vier Schritte à drei Minuten, am Beamer über „Moderation am Beamer“ (auch auf der Seite „Diskussion“). Schritt 1 und 2 zeigen die Tischmodelle und den errechneten Streitpunkt. Formulierung: „Begründet eure Gewichtungen.“ Die Frage „Gibt es die eine Antwort?“ ist bewusst nicht gestellt; sie nähme die Pointe vorweg.</p>
   <div class="reihe"><button class="btn dunkel" data-moderation>Moderation am Beamer</button></div>
@@ -951,10 +1222,10 @@ function standAnsicht(s){
 const schliesse = () => { clearInterval(UHR); document.getElementById("ueber").innerHTML = ""; };
 
 /* ---------- Zeichnen ---------- */
-const SEITE_FN = { start, einstieg, fakten, jozefow, akte, markt, diskussion, rueckblick, zusammenfassung, lehrkraft };
+const SEITE_FN = { start, einstieg, fakten, jozefow, akte, landkarte, markt, diskussion, rueckblick, zusammenfassung, lehrkraft };
 function loeschBereich(){
   return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button>
-  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> Antworten, Siegel, Akten, Gewichtungen, Notizen, Modell und Position werden auf diesem Gerät entfernt.</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div></div>`;
+  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> Antworten, Siegel, Erklärungskarten, Gewichtungen, Landkarte, Notizen, Modell und Position werden auf diesem Gerät entfernt.</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div></div>`;
 }
 let LETZTE_SEITE = null;
 function zeichne(fokus){
@@ -962,7 +1233,9 @@ function zeichne(fokus){
   kopf();
   const m = document.getElementById("main");
   m.classList.toggle("breit", S.seite === "lehrkraft" || S.seite === "zusammenfassung");
+  m.classList.toggle("dashboard", S.seite === "akte");
   m.innerHTML = SEITE_FN[S.seite]() + loeschBereich();
+  m.querySelectorAll("[data-vt]").forEach(b => b.style.viewTransitionName = b.dataset.vt);
   if (S.seite === "jozefow") stapelStart();
   if (LETZTE_SEITE !== S.seite) { const b = document.getElementById("band"); if (b && b.classList.contains("mit")) neu(b, "neu"); }
   LETZTE_SEITE = S.seite;
@@ -1018,16 +1291,22 @@ document.addEventListener("click", ev => {
     const ps = [...document.querySelectorAll("#yfeld i")].slice(0, 12); if (!ruhig() && !tast) { ps.forEach(p => p.classList.remove("raus")); ps.forEach((p, i) => setTimeout(() => p.classList.add("raus"), i * 40)); }
     const nb = document.querySelector("[data-yneu]"); if (nb) nb.focus({ preventScroll:true }); return; }
   if ("yneu" in d) { S.y = null; speichere(); const sl = document.getElementById("spur").scrollLeft; zeichne(); document.getElementById("spur").scrollLeft = sl; document.getElementById("yregler").focus({ preventScroll:true }); return; }
-  if (d.akte) { S.akte = d.akte; speichere(); document.querySelectorAll(".versuch").forEach(r => r.setAttribute("aria-pressed", r === t)); const a = AKTE(d.akte); const dk = document.getElementById("deckel"); dk.innerHTML = deckel(a, S.stufe[a.s] || 1, S.karte[a.s] || {}); if (!tast) neu(document.getElementById("deckel-in"), "neu"); dk.scrollIntoView({ block:"start", behavior: ruhig() || tast ? "auto" : "smooth" }); return; }
+  if (d.akte && !t.closest("#dots")) { if (S.akte === d.akte) { schliessePanel(); return; } S.akte = d.akte; S.gelesen[d.akte] = true; speichere(); zeichne(); const z = document.querySelector("#panel [data-zu-akte]"); if (z) z.focus({ preventScroll:true }); return; }
+  if ("zuAkte" in d) { schliessePanel(); return; }
+  if (d.ansicht) { S.ansicht = d.ansicht; speichere(); wechsel(() => zeichne()); const b = document.querySelector(`[data-ansicht="${d.ansicht}"]`); if (b) b.focus({ preventScroll:true }); return; }
+  if (d.ebene !== undefined && t.closest("#dash")) { S.filter = S.filter === d.ebene ? null : d.ebene; speichere(); wechsel(() => zeichne()); const b = document.querySelector(`#dash button[data-ebene="${d.ebene}"]`); if (b) b.focus({ preventScroll:true }); return; }
+  if (d.prinzip) { S.lk.prinzip = d.prinzip; speichere(); const sy = window.scrollY; zeichne(); window.scrollTo(0, sy); const g = document.getElementById("lk-grund"); if (g) g.focus({ preventScroll:true }); return; }
+  if ("lkpruef" in d) { S.lk.ok = true; speichere(); const sy = window.scrollY; zeichne(); window.scrollTo(0, sy); const f = document.querySelector("#lk-fb a"); if (f) f.focus({ preventScroll:true }); return; }
+  if ("lkneu" in d) { S.lk.ok = false; S.lk.prinzip = null; speichere(); const sy = window.scrollY; zeichne(); window.scrollTo(0, sy); const b = document.querySelector("[data-prinzip]"); if (b) b.focus({ preventScroll:true }); return; }
   if (d.stufe) { const a = AKTE(S.akte), s = +d.stufe; S.stufe[a.s] = s; speichere(); document.querySelectorAll("[data-stufe]").forEach(b => b.setAttribute("aria-pressed", b === t)); document.querySelectorAll("#stext [data-st]").forEach(el => { const war = el.hidden; el.hidden = +el.dataset.st > s; if (war && !el.hidden && !tast) neu(el, "neu"); }); return; }
-  if ("gewpruef" in d) { const a = AKTE(S.akte); S.gew[a.s] = S.gew[a.s] || Object.fromEntries(EBENEN.map(e => [e[0], 2])); S.gewok[a.s] = true; S.versuche += 5; S.treffer += EBENEN.filter(([k]) => S.gew[a.s][k] === a.gew[k]).length; speichere(); const sy = window.scrollY; zeichne(); window.scrollTo(0, sy); const z = document.getElementById("gewsatz"); if (z) z.scrollIntoView({ block:"center", behavior: ruhig() || tast ? "auto" : "smooth" }); return; }
-  if ("gewneu" in d) { const a = AKTE(S.akte); S.gewok[a.s] = false; speichere(); const sy = window.scrollY; zeichne(); window.scrollTo(0, sy); return; }
+  if ("gewpruef" in d) { const a = AKTE(S.akte); S.gew[a.s] = S.gew[a.s] || Object.fromEntries(EBENEN.map(e => [e[0], 2])); S.gewok[a.s] = true; S.versuche += 5; S.treffer += EBENEN.filter(([k]) => S.gew[a.s][k] === a.gew[k]).length; speichere(); if (!tast && !ruhig()) FRISCH = a.s; const p = document.getElementById("panel"), ps = p ? p.scrollTop : 0; zeichne(); const p2 = document.getElementById("panel"); if (p2) p2.scrollTop = ps; const z = document.getElementById("gewsatz"); if (z && p2) p2.scrollTo({ top: Math.max(0, z.offsetTop - p2.clientHeight * .6), behavior: ruhig() || tast ? "auto" : "smooth" }); return; }
+  if ("gewneu" in d) { const a = AKTE(S.akte); S.gewok[a.s] = false; speichere(); const p = document.getElementById("panel"), ps = p ? p.scrollTop : 0; zeichne(); const p2 = document.getElementById("panel"); if (p2) p2.scrollTop = ps; const b = document.querySelector("[data-gewpruef]"); if (b) b.focus({ preventScroll:true }); return; }
   if (d.paar) { S.paare[d.paar] = +d.o; speichere(); const sy = window.scrollY; zeichne(); window.scrollTo(0, sy); return; }
   if (d.paarneu) { delete S.paare[d.paarneu]; speichere(); const sy = window.scrollY; zeichne(); window.scrollTo(0, sy); return; }
   if (d.abruf) { S.abruf[d.abruf] = +d.o; speichere(); const sy = window.scrollY; zeichne(); window.scrollTo(0, sy); return; }
   if (d.abrufneu) { delete S.abruf[d.abrufneu]; speichere(); const sy = window.scrollY; zeichne(); window.scrollTo(0, sy); return; }
   if (d.anfang) { const ta = document.getElementById("erz"); const v = ta.value; ta.value = (v && !v.endsWith("\n") && v.trim() ? v + "\n" : v) + d.anfang + " "; S.erz = ta.value; speichere(); ta.focus(); return; }
-  if (d.uhr !== undefined) { uhrStart(d.uhr === "" ? 6 : +d.uhr); return; }
+  if (d.uhr !== undefined) { uhrStart(d.uhr === "" ? 5 : +d.uhr); return; }
   if (d.stand) { standAnsicht(d.stand); return; }
   if ("klasse" in d) { klasseAnsicht(); return; }
   if ("moderation" in d) { moderAnsicht(); return; }
@@ -1042,6 +1321,8 @@ document.addEventListener("input", ev => {
   if (d.feld === "neu") { S.neu = t.value; speichere(); return; }
   if (d.feld === "grund") { S.grund = t.value; speichere(); return; }
   if (d.feld === "erz") { S.erz = t.value; speichere(); return; }
+  if (d.feld === "lkauf") { S.lkauf = t.value; speichere(); return; }
+  if (d.lk) { S.lk[d.lk] = t.value; speichere(); lkStand(); return; }
   if (d.karteFeld) { const a = S.akte; S.karte[a] = S.karte[a] || {}; S.karte[a][d.karteFeld] = t.value; speichere(); aktenStand(); return; }
   if (d.notiz) { S.notiz[d.notiz] = S.notiz[d.notiz] || {}; S.notiz[d.notiz][d.n] = t.value; speichere(); return; }
   if (d.gew) { const a = S.akte, k = d.gew, v = +t.value; S.gew[a] = S.gew[a] || Object.fromEntries(EBENEN.map(e => [e[0], 2])); S.gew[a][k] = v; speichere(); t.setAttribute("aria-valuetext", STUFE[v]); t.parentNode.querySelector("b").style.setProperty("--w", (v+1)/5); document.getElementById("gw-" + k).textContent = STUFE[v]; return; }
@@ -1050,17 +1331,28 @@ document.addEventListener("input", ev => {
   if (t.id === "yregler") { const v = +t.value; document.getElementById("ywert").textContent = v; document.querySelectorAll("#yfeld i").forEach((p, i) => p.classList.toggle("schaetz", i < v)); return; }
 });
 function aktenStand(){
-  const n = fertigeAkten().length, f = document.getElementById("fortschritt"), w = document.querySelector("[data-geh='markt'].primary");
-  if (f) { f.classList.toggle("ok", n >= 2); f.textContent = n >= 2 ? `✓ ${n} Akten bearbeitet. Der Marktplatz ist frei.` : `${n} von 2 Akten bearbeitet. Eine Akte gilt als bearbeitet, wenn These und Erklärung auf der Karte stehen.`; }
+  const n = fertigeAkten().length, f = document.getElementById("fortschritt"), w = document.querySelector("[data-geh='landkarte'].primary");
+  if (f) { f.classList.toggle("ok", n >= 2); f.textContent = n >= 2 ? `✓ ${n} Erklärungskarten. Der Marktplatz ist frei.` : `${n} von 2 Erklärungskarten. Mindestens zwei Erklärungen, eine aus einer anderen Ebene; eine Karte zählt, wenn These und Erklärung stehen.`; }
   if (w) { w.disabled = n < 2; w.previousElementSibling.textContent = n < 2 ? "Erst zwei Erklärungskarten, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert."; }
-  document.querySelectorAll(".versuch").forEach(b => { const s = b.dataset.akte, ok = karteFertig(s), vt = b.querySelector(".vt"), alt = vt.querySelector(".fertig"); if (ok && !alt) vt.insertAdjacentHTML("beforeend", `<span class="fertig">✓ Erklärungskarte geschrieben</span>`); if (!ok && alt) alt.remove(); });
+  document.querySelectorAll("#dash .akte").forEach(b => { const s = b.dataset.akte, ok = karteFertig(s), sp = b.querySelector(".fs span:nth-child(2)"); if (sp) { sp.classList.toggle("ok", ok); sp.textContent = (ok ? "✓ " : "") + "Karte"; } });
 }
+function lkStand(){ // Landkarten-Moment: Felder freigeben, ohne neu zu zeichnen (Fokus bleibt im Feld)
+  const l = S.lk, frei = l.vermutung.trim().length >= 10, t2 = document.getElementById("lk-teil2"); if (!t2) return;
+  t2.classList.toggle("gesperrt", !frei); const a = document.getElementById("lk-link"); if (a) { if (frei) { a.removeAttribute("aria-disabled"); a.removeAttribute("tabindex"); } else { a.setAttribute("aria-disabled", "true"); a.setAttribute("tabindex", "-1"); } }
+  document.querySelectorAll("[data-prinzip]").forEach(b => b.disabled = !frei || l.ok);
+  const g = document.getElementById("lk-grund"); if (g) g.disabled = !frei || !l.prinzip || l.ok;
+  const p = document.querySelector("[data-lkpruef]"); if (p) p.disabled = !frei || !l.prinzip || l.grund.trim().length < 10 || l.ok;
+  const h = document.getElementById("lk-hinweis"); if (h) h.textContent = frei ? "Gut. Jetzt die Landkarte öffnen, dann unten ein Prinzip wählen." : "Schreib mindestens einen Satz. Danach öffnet sich die Landkarte.";
+}
+const wechsel = fn => { if (document.startViewTransition && !ruhig()) document.startViewTransition(fn); else fn(); }; // View Transitions mit Rückfall (signatur-design v7)
+function schliessePanel(){ const s = S.akte; S.akte = null; speichere(); const p = document.getElementById("panel"); if (p) p.classList.add("schliesst"); zeichne(); const k = document.querySelector(`#dash [data-akte="${s}"]`); if (k) k.focus({ preventScroll:true }); }
 document.addEventListener("change", ev => {
   const t = ev.target, d = t.dataset;
   if (d.kl !== undefined) { const g = +d.kl; S.klasse[g] = S.klasse[g] || {}; if (t.value === "") delete S.klasse[g][d.k]; else S.klasse[g][d.k] = +t.value; speichere(); }
 });
 document.addEventListener("keydown", ev => {
   if (ev.key === "Escape" && document.getElementById("ueber").innerHTML) { schliesse(); return; }
+  if (ev.key === "Escape" && S.seite === "akte" && S.akte) { schliessePanel(); return; }
   if (ev.target.id === "spur" && (ev.key === "ArrowRight" || ev.key === "ArrowLeft")) { ev.preventDefault(); blaettern(aktKarte() + (ev.key === "ArrowRight" ? 1 : -1), true); }
 });
 
