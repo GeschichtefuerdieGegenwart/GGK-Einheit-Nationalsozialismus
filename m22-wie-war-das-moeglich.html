@@ -345,6 +345,7 @@ main.dashboard{max-width:min(76rem,100vw - 2.5rem);padding-top:.8rem;padding-bot
 .umschalter [role=tab]{min-height:44px;border:1.5px solid var(--border);border-radius:999px;background:var(--surface2);padding:.35rem .95rem;font-weight:700}
 .umschalter [role=tab][aria-selected=true]{background:var(--ink);color:var(--inverse);border-color:var(--ink)}
 .dash-kopf .hinweis{margin:0}
+.filmrahmen{display:block;width:100%;height:calc(100dvh - 6.5rem);min-height:22rem;border:0;margin-top:.5rem;background:var(--bg)}
 .buehne{position:relative;height:min(calc((100vw - 2.5rem) * 9 / 16),calc(100vh - 205px));min-height:430px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
 .buehne .dash{position:relative;height:100%;aspect-ratio:16/9;max-width:100%;margin:0 auto;container-type:inline-size;transition:transform var(--uebergang) var(--ease)}
 .buehne.offen.rechts .dash{transform:translateX(-3%)}
@@ -894,7 +895,7 @@ function dashZeit(){
 function akte(){
   const n = fertigeAkten().length, a = S.akte ? AKTE(S.akte) : null;
   return `<h1 class="sr">Sechs Versuche, das zu erklären</h1>
-  <div class="dash-kopf">${zeitKopf("akte")}<div class="umschalter" role="tablist" aria-label="Ansicht der Übersicht">${[["frage","Frage und Ebenen"],["vergleich","Vergleich"],["zeit","Zeitachse"]].map(([k, t]) => `<button role="tab" data-ansicht="${k}" aria-selected="${(S.ansicht || "frage") === k}">${t}</button>`).join("")}</div><span class="hinweis">Tippe auf eine Ansicht; deine Eingaben bleiben.</span></div>
+  <div class="dash-kopf">${zeitKopf("akte")}<div class="umschalter" role="tablist" aria-label="Ansicht der Übersicht">${[["frage","Frage und Ebenen"],["vergleich","Vergleich"],["zeit","Zeitachse"]].map(([k, t]) => `<button role="tab" data-ansicht="${k}" aria-selected="${(S.ansicht || "frage") === k}">${t}</button>`).join("")}</div><span class="hinweis">Tippe auf eine Ansicht; deine Eingaben bleiben.</span><button class="btn klein" type="button" data-film><span aria-hidden="true">▶</span> Film: So geht’s</button></div>
   <div class="buehne${a ? " offen " + (SPALTE_R.includes(a.s) && (S.ansicht || "frage") === "frage" ? "links" : "rechts") : ""}" id="buehne"><div class="dash" id="dash">${(S.ansicht || "frage") === "vergleich" ? dashVergleich() : (S.ansicht || "frage") === "zeit" ? dashZeit() : dashFrage()}</div>
   <aside class="panel" id="panel" role="region" aria-label="Erklärung" ${a ? "" : "hidden"}>${a ? deckel(a, S.stufe[a.s] || 1, S.karte[a.s] || {}) : ""}</aside></div>
   <div class="dash-fuss"><p class="fortschritt${n >= 2 ? " ok" : ""}" id="fortschritt" aria-live="polite">${n >= 2 ? `✓ ${n} Erklärungskarten. Der Marktplatz ist frei.` : `${n} von 2 Erklärungskarten. Mindestens zwei Erklärungen, eine aus einer anderen Ebene; eine Karte zählt, wenn These und Erklärung stehen.`}</p><p class="modellhinweis">Fünf Ebenen und Gewichtungen sind ein Modell der Lehrkraft zum Ordnen der Erklärungen, keine Forschungseinteilung und keine Messwerte.</p></div>
@@ -1155,6 +1156,7 @@ function lehrkraft(){
   <tr><td>K7 Diskussion</td><td>Schritte 3 und 4 zusammenlegen</td><td class="n">2 Min.</td></tr></tbody></table></div>
   <h2 class="abschnitt">Dashboard und Landkarten-Moment (seit 08.11.2026)</h2>
   <p>Phase 4 ist eine Übersicht statt sechs Akten nacheinander: in der Mitte die Frage, darum das Rad der fünf Ebenen, außen die sechs Erklärungen. Antippen öffnet ein Panel am selben Ort (Lesestufen, Erklärungskarte, Gewichtungs-Check). Die Ebene einer Erklärung und die Linien ins Rad erscheinen erst nach dem eigenen Gewichtungs-Check: erst versuchen, dann aufdecken. Ein Feld des Rads antippen hebt die geprüften Erklärungen hervor, die dort ansetzen. Drei Ansichten: Frage und Ebenen, Vergleich (Tabelle), Zeitachse (Erscheinungsjahre). Am Beamer 1280 × 720 passt die Übersicht ohne Scrollen; auf dem iPad hochkant und am Telefon wird sie zur Liste, das Panel kommt von unten.</p>
+  <p><b>Erklärfilm zu Phase 4</b> (seit 08.11.2026): Der Knopf „Film: So geht’s“ oben in der Übersicht öffnet einen Film ohne Ton, 2 Minuten, in sieben Kapiteln (Datei <code>m22-film-erklaerungen.html</code>, auch einzeln aufrufbar). Er greift den Grundplot auf (Józefów, Punktefeld, „Wie war das möglich?“), zeigt die Übersicht mit sechs Erklärungen und fünf Ebenen, den Weg durch das Panel am Beispiel Browning (Lesen · Erklärungskarte · Gewichtungs-Check), die zweite Erklärung von einer anderen Ebene (Adorno) und den Weg über die Landkarte zum Marktplatz mit beiden Runden und dem Tischmodell. Vorschlag: am Beamer zeigen, bevor die iPads aufgehen; jederzeit anhalten, ziehen, Kapitel wählen. Bei „weniger Bewegung“ zeigt er sieben Standbilder. Der Text zum Film steht darunter. Gewichtungen im Film sind als Beispiel gekennzeichnet.</p>
   <p>Der Landkarten-Moment (Phase 5) verbindet die Stunde mit der kognitiven Landkarte: Erwartet als zentral sind Perspektivität (2.1.2) und die Folgerung Kontroversität (2.1.9); Konstruktivität, Standortgebundenheit und Selektivität sind „auch begründbar“. „Multiperspektivität“ meint in der Landkarte Quellen verschiedener Beteiligter und ist deshalb hier nicht zentral. Die Brücke zur Triftigkeit nutzt die belegte Kritik an Goldhagen (Mommsen; keine Ländervergleiche). Alle Namen, Erklärungen und Anker stammen wörtlich aus der Landkarte.</p>
   <h2 class="abschnitt">Moderation der Diskussion</h2>
   <p>Vier Schritte à drei Minuten, am Beamer über „Moderation am Beamer“ (auch auf der Seite „Diskussion“). Schritt 1 und 2 zeigen die Tischmodelle und den errechneten Streitpunkt. Formulierung: „Begründet eure Gewichtungen.“ Die Frage „Gibt es die eine Antwort?“ ist bewusst nicht gestellt; sie nähme die Pointe vorweg.</p>
@@ -1219,7 +1221,17 @@ function standAnsicht(s){
   <dl><div><dt>Die These</dt><dd>${esc(k.these) || "<i>noch nicht geschrieben</i>"}</dd></div><div><dt>Das erklärt sie am Fall Józefów</dt><dd>${esc(k.erkl) || "–"}</dd></div><div><dt>Das erklärt sie nicht</dt><dd>${esc(k.nicht) || "–"}</dd></div></dl></div></div>`;
   document.querySelector("#ueber [data-zu]").focus();
 }
-const schliesse = () => { clearInterval(UHR); document.getElementById("ueber").innerHTML = ""; };
+/* ---------- Erklärfilm zu Phase 4 (AV, 08.11.2026): eigene Datei, startet nur auf Knopfdruck ---------- */
+let FILM_VON = null;
+function filmAnsicht(von){
+  FILM_VON = von || null;
+  document.getElementById("ueber").innerHTML = `<div class="tafel" role="dialog" aria-modal="true" aria-labelledby="film-h"><div class="tafel-in">
+    <div style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center"><h2 id="film-h" style="font-size:1.4rem">Phase 4 im Film: Was du jetzt tust und wohin die Reise geht</h2><button class="btn" data-zu>Schließen</button></div>
+    <iframe class="filmrahmen" src="m22-film-erklaerungen.html?eingebettet" title="Erklärfilm zu Phase 4, ohne Ton, zwei Minuten"></iframe></div></div>`;
+  document.querySelector("#ueber [data-zu]").focus();
+}
+window.addEventListener("message", e => { if (e.data === "m22-film-zu" && document.querySelector("#ueber .filmrahmen")) schliesse(); });
+const schliesse = () => { clearInterval(UHR); document.getElementById("ueber").innerHTML = ""; if (FILM_VON && document.contains(FILM_VON)) FILM_VON.focus({ preventScroll:true }); FILM_VON = null; };
 
 /* ---------- Zeichnen ---------- */
 const SEITE_FN = { start, einstieg, fakten, jozefow, akte, landkarte, markt, diskussion, rueckblick, zusammenfassung, lehrkraft };
@@ -1308,6 +1320,7 @@ document.addEventListener("click", ev => {
   if (d.anfang) { const ta = document.getElementById("erz"); const v = ta.value; ta.value = (v && !v.endsWith("\n") && v.trim() ? v + "\n" : v) + d.anfang + " "; S.erz = ta.value; speichere(); ta.focus(); return; }
   if (d.uhr !== undefined) { uhrStart(d.uhr === "" ? 5 : +d.uhr); return; }
   if (d.stand) { standAnsicht(d.stand); return; }
+  if ("film" in d) { filmAnsicht(t); return; }
   if ("klasse" in d) { klasseAnsicht(); return; }
   if ("moderation" in d) { moderAnsicht(); return; }
   if (d.modvor) { S.moder = Math.max(0, Math.min(MODER.length - 1, S.moder + (+d.modvor))); speichere(); clearInterval(UHR); moderAnsicht(); return; }
