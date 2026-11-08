@@ -52,3 +52,17 @@ Impeccable audit/polish und Taste lint/inspect (Plugins fehlen) · axe-core (nic
 - Grow-in-Place als Alternative zum Gleiten (AP): nicht gebaut.
 - Marken-Schwelle „wichtig“ oder „sehr wichtig“: jetzt „wichtig“.
 - Rückblick nach zwei bis drei Wochen: Status der Muster AM 2, AP, AQ, AR b, AT, AU von „Vorschlag“ auf „erprobt“ oder zurück.
+
+## Nachtrag 08.11.2026 · Fassung 3.1 – Erklärfilm zu Phase 4 (Muster AV)
+
+Anlass: Lernende sehen die Übersicht in Phase 4 zum ersten Mal. Ein kurzer Film am Beamer soll vorher zeigen, was sie dort tun und wohin die Stunde führt (Marktplatz).
+
+- Neue Datei `m22-film-erklaerungen.html` (kein Netz, läuft über `file://`, Moodle und GitHub Pages; Schriften wie M22 aus `assets/fonts/`: Fraunces und Atkinson Hyperlegible). Bühne 1280 × 720, skaliert; Farben, Abstände und Bewegung aus dem Design-System „Gegenwart“ (Theme Hell), Ebenenfarben, dunkler Kern und Karten wie im Dashboard von M22, damit die Lernenden die Übersicht wiedererkennen. Die Vorschau-Fassung als Claude-Artefakt bettet die Gegenwart-Schriften (Bricolage Grotesque, Atkinson Hyperlegible Next) ein.
+- Sieben Kapitel, 2:02 Min.: 1 Bis hierher (Józefów, Punktefeld 500, rund ein Dutzend tritt heraus, mindestens 1.500 Ermordete, „Wie war das möglich?“) · 2 Sechs Erklärungen · 3 Fünf Ebenen (Modell der Lehrkraft) · 4 Dein Auftrag (Panel Browning: Lesestufen, Erklärungskarte, Gewichtungs-Check mit Beispielschätzung und den echten Rückmeldewörtern; danach Marken am Rad; zweite Erklärung Adorno von einer anderen Ebene; „Der Marktplatz ist frei“) · 5 Wohin die Reise geht (Lernweg 4 → 5 → 6, zwei Runden am Stand wie im Marktplatz: A, C, E zuerst) · 6 Euer Modell (Tischgruppe, Balken als Beispiel) · 7 Jetzt du (Merksatz, Auftrag).
+- In M22: Knopf „Film: So geht’s“ im Kopf der Übersicht (passt in die Zeile, Beamer-Fit bleibt), Film als Vollbild-Tafel im iframe, Schließen und Escape (auch aus dem Film heraus), Fokus kehrt auf den Knopf zurück. Absatz im Lehrkraftbereich.
+- Bewegung: startet nur auf Knopfdruck, kein Autoplay, hält bei verdecktem Tab; Regler zum Ziehen, Kapitel, ‹ ›, Leertaste und Pfeiltasten. „Weniger Bewegung“ (Schalter oder Systemeinstellung): sieben Standbilder, Wechsel mit 150 ms Einblenden. Frage und Merksatz bauen sich wortweise auf (≤ 1 s); Text zum Film steht vollständig unter dem Film, Kapitelwechsel werden über `aria-live` angesagt.
+- Abweichung vom Dashboard: Im Film zeigen nur Marken am Rad, wo eine Erklärung ansetzt (keine Linien), damit das Bild ruhig bleibt.
+
+Geprüft (Chromium, gelaufen): keine Konsolenfehler im Film und in M22; Standbilder aller Kapitel; 1280 × 720 und 390 × 844 ohne waagerechtes Scrollen; „weniger Bewegung“ blättert Kapitel; Tafel öffnen, Film starten, Escape schließt, Fokus zurück.
+
+Nicht gelaufen: echtes iPad, Beamer im Raum, VoiceOver. Kleinste Schrift im Film ist 16 px bei 1280 px Breite; auf dem iPad hochkant wird sie entsprechend kleiner (Film ist für den Beamer gedacht).
