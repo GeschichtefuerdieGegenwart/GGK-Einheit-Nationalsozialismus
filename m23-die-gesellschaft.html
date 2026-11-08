@@ -298,7 +298,7 @@ const MARK = `<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="
 
 /* ---------- Bezug zu M22 (gleiches Gerät): Position Person ↔ Umstände ---------- */
 function m22Position(){
-  try { const m = JSON.parse(localStorage.getItem("ggk-m22-taeter:v2") || "null"); if (m && typeof m.pos === "number") return Math.round(m.pos); } catch(e) {}
+  try { const m = JSON.parse(localStorage.getItem("ggk-m22-taeter:v3") || localStorage.getItem("ggk-m22-taeter:v2") || "null"); if (m && typeof m.pos === "number") return Math.round(m.pos); } catch(e) {}
   return null;
 }
 
@@ -755,7 +755,7 @@ function lehrkraft(){
   <tr><td>Sind die eigenen Sätze (niedrigste/höchste) vor der Lehrkraft-Fassung entstanden?</td><td></td><td></td></tr>
   <tr><td>Hat die Marke aus M22 ein Gespräch ausgelöst?</td><td></td><td></td></tr>
   <tr><td>Zeit: Wo wurde es eng?</td><td></td><td></td></tr></tbody></table></div>
-  <p class="hinweis" style="margin-top:1rem">Speicherschlüssel <code>${KEY}</code>; M22-Marke aus <code>ggk-m22-taeter:v2</code>. Eingaben bleiben im Browser des Geräts.</p>
+  <p class="hinweis" style="margin-top:1rem">Speicherschlüssel <code>${KEY}</code>; M22-Marke aus <code>ggk-m22-taeter:v3</code> (ersatzweise v2). Eingaben bleiben im Browser des Geräts.</p>
   ${weiter("start","Zur Startseite")}`;
 }
 
