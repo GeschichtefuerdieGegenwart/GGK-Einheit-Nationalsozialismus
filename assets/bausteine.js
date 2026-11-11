@@ -118,6 +118,13 @@
     datei: "m27-die-vergessenen.html"
   };
 
+  B.owk = {
+    nr: "M28–M44",
+    titel: "Der Ost-West-Konflikt",
+    thema: "Einheit in neun Stunden · Zeitraster mit 16 Ereigniskarten, Ordnen, Vernetzen, roter Faden",
+    datei: "ost-west/index.html"
+  };
+
   B.geplant = [];
   window.BAUSTEINE = B;
 })();

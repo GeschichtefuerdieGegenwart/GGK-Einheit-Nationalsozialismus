@@ -1,0 +1,1211 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Der Ost-West-Konflikt – Einheit</title>
+<meta name="description" content="GGK Jahrgangsstufe 2: Der Ost-West-Konflikt 1945–1991. Zeitraster mit 16 Ereigniskarten, Ordnen, Vernetzen, Glossar und roter Faden.">
+<link rel="stylesheet" href="../assets/gegenwart/bundle.css">
+<style>
+
+/* Schriften lokal im Repository (SIL Open Font License) */
+@font-face{font-family:"Fraunces";src:url(../assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
+@font-face{font-family:"Fraunces";src:url(../assets/fonts/Fraunces72pt-SemiBoldItalic.woff) format("woff");font-weight:600;font-style:italic;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(../assets/fonts/AtkinsonHyperlegible-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(../assets/fonts/AtkinsonHyperlegible-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(../assets/fonts/AtkinsonHyperlegible-Italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+/* Bewusst nur hell (Beamer, Druck), wie M18–M22. Farben und Formen aus dem Designsystem GGK-Labor.
+   Die Bausteine von »Gegenwart« (assets/gegenwart/) laufen über Tokens – hier auf die Farben des GGK-Labors gesetzt. */
+:root{
+  color-scheme:light;
+  --bg:#F3EFE7; --surface:#FAF8F3; --surface2:#FFFDF8; --offset:#E9E2D7; --line:#D5CEC3; --border:rgba(36,34,31,.14);
+  --ink:#24221F; --muted:#5F5C56; --faint:#6A655E; --inverse:#FFFAF2; --dunkel:#1B1A17;
+  --red:#9B402D; --red-hi:#EAD7CF; --green:#2E5A47; --green-hi:#D6E4DC; --gold:#7D5C12; --gold-hi:#EEE2BF;
+  --kuli:#1E4FB5; --kuli-hi:#DCE5F7; --slate:#4B4F57; --slate-hi:#DFE1E5; --marker:#F3D54E;
+  /* Säulenfarben (sechs, aus der GGK-Palette abgeleitet) */
+  --s-inst:#2E5A47; --s-kult:#7D5C12; --s-sozi:#1E4FB5; --s-geo:#4B6F8F; --s-pol:#9B402D; --s-takt:#4B4F57;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:.75rem; --r-lg:1rem; --ease:cubic-bezier(.23,1,.32,1);
+  /* Gegenwart-Tokens → GGK-Labor */
+  --grund:var(--bg); --flaeche:var(--surface); --karton:var(--offset); --text:var(--ink); --leise:var(--muted); --stahl:#8F887D; --linie:var(--line);
+  --petrol:var(--green); --petrol-hi:var(--green-hi); --auf-petrol:var(--inverse);
+  --honig:var(--gold); --honig-hi:var(--gold-hi); --honigplatte:var(--gold-hi); --auf-honig:var(--ink);
+  --ueberdruck:var(--slate); --auf-ueberdruck:var(--inverse);
+  --oxid:var(--red); --oxid-hi:var(--red-hi);
+  --erfolg:var(--green); --erfolg-hi:var(--green-hi); --warnung:var(--gold); --warnung-hi:var(--gold-hi); --fehler:var(--red); --fehler-hi:var(--red-hi);
+  --font-display:var(--display); --font-stimme:var(--display); --font-text:var(--body);
+  --radius-sm:.6rem; --radius-md:.75rem; --radius-pill:999px; --radius-none:0;
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:20px; --space-6:28px;
+  --knopf-hoehe:48px; --tablet-ziel:56px; --platte:6px 6px 0 0 var(--karton); --platte-knopf:4px 4px 0 0 var(--karton); --fokus-innen:inset 0 0 0 2px var(--grund);
+  --dauer-druck:100ms; --dauer-schnell:140ms; --dauer-mittel:220ms; --dauer-langsam:300ms; --dauer-staffel:30ms; --dauer-wende:460ms; --dauer-aufdecken:420ms; --dauer-reihe:440ms; --dauer-aus:150ms;
+  --kurve-aus:cubic-bezier(.23,1,.32,1); --kurve-beidseits:cubic-bezier(.77,0,.175,1); --kurve-feder:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+button,input,select,textarea,[tabindex]{scroll-margin-top:140px}
+html{-webkit-text-size-adjust:none;text-size-adjust:none;overflow-x:clip}
+body{min-height:100dvh;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:clamp(1rem,.95rem + .25vw,1.125rem);line-height:1.58;-webkit-font-smoothing:antialiased;overflow-x:clip}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.14;text-wrap:balance}
+p,li{text-wrap:pretty}
+a{color:var(--red)}
+:focus-visible{outline:3px solid var(--kuli);outline-offset:3px;border-radius:.35rem}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}}
+html[data-bewegung=weniger] *,html[data-bewegung=weniger] *::before,html[data-bewegung=weniger] *::after{animation:none!important;transition-duration:1ms!important}
+@keyframes auf{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+.g{background:transparent;font-size:inherit;line-height:inherit}
+.g .g-frage{font-size:clamp(1.2rem,1.05rem + .7vw,1.5rem)}
+.g .g-knopf{min-height:48px}
+.g-wahl legend{font-weight:700;font-family:var(--body);font-style:normal;font-size:1.05rem}
+.g .g-option span{font-weight:700}
+.g .g-option__urteil{font-weight:400;font-style:normal;font-size:.95rem;padding:0;border:0;min-height:0;background:transparent;box-shadow:none}
+.g .g-option span span::before,.g .g-option span span::after{display:none!important}
+.g .g-balken__zeile{grid-template-columns:minmax(6.5rem,10rem) 1fr 4.2rem}
+.g .g-schieber{max-width:none}
+.g .g-schieber>label{display:grid;gap:.2rem}.g .g-schieber input[type=range]{width:100%;accent-color:var(--kuli);height:32px}
+.g .g-schieber__buehne{aspect-ratio:auto;min-height:14rem}
+.g .g-schieber__vor,.g .g-schieber__nach{padding:2.6rem 1.2rem 1.2rem}
+.g .g-schieber__vor p,.g .g-schieber__nach p{font-size:.98rem}
+.g .g-schieber__vor .zahl,.g .g-schieber__nach .zahl{font:600 2.2rem/1 var(--display)}
+.g .g-zeit{padding-top:34px}
+@media (max-width:640px){.g .g-zeit{grid-auto-flow:row;grid-auto-columns:auto;gap:var(--space-3)}.g .g-zeit::before{display:none}}
+.g .g-schalter input{margin:0}
+
+/* Kopf mit Lernweg */
+.kopf{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--border);padding-top:env(safe-area-inset-top,0px)}
+.kopf-in{max-width:1100px;margin:auto;padding:.55rem max(1.25rem,env(safe-area-inset-right,0px)) .55rem max(1.25rem,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:.6rem .9rem;flex-wrap:wrap}
+.mark{width:32px;height:32px;flex:0 0 auto}
+.titel{font-weight:700;line-height:1.2;margin-right:auto}.titel small{display:block;color:var(--muted);font-weight:400;font-size:.82rem}
+.pill{border:1px solid var(--border);background:var(--surface2);border-radius:999px;padding:.45rem 1rem;font-weight:700;min-height:44px;display:inline-flex;align-items:center;text-decoration:none;color:var(--ink)}
+.weg{max-width:1100px;margin:auto;padding:0 1.25rem .6rem;display:flex;gap:.35rem;overflow-x:auto;scrollbar-width:none}
+.weg button{flex:1 0 auto;min-width:7.4rem;border:0;border-top:3px solid var(--line);background:transparent;text-align:left;padding:.45rem .5rem .2rem;color:var(--faint);font-size:.85rem;line-height:1.25;min-height:48px}
+.weg button b{display:block;color:inherit;font-size:.78rem}
+.weg button.da{color:var(--muted);border-top-color:var(--muted)}
+.weg button.akt{color:var(--ink);border-top-color:var(--red)}
+
+main{max-width:46rem;margin:auto;padding:clamp(1.5rem,4vw,3rem) max(1.25rem,env(safe-area-inset-right,0px)) 5rem max(1.25rem,env(safe-area-inset-left,0px))}
+main.breit{max-width:62rem}
+.zeit{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;color:var(--red);font-weight:700;font-size:.95rem}
+.zeit .nr{font-family:var(--display);font-size:1.1rem}
+h1{font-size:clamp(2rem,1.4rem + 2.4vw,3.1rem);margin:.5rem 0 .7rem}
+.leitfrage{font-family:var(--display);font-style:italic;font-weight:600;font-size:clamp(1.35rem,1.1rem + .9vw,1.8rem);color:var(--muted);margin-bottom:1.4rem}
+.lead{font-size:clamp(1.1rem,1rem + .5vw,1.28rem);color:var(--muted);margin-bottom:1.4rem}
+h2.abschnitt{font-size:1.45rem;margin:2.2rem 0 .7rem}
+h3.klein{font-size:1.15rem;margin:1.4rem 0 .4rem}
+p+p{margin-top:.7rem}
+.auftrag{background:var(--ink);color:var(--inverse);border-radius:var(--r-lg);padding:1.2rem 1.4rem;margin:1.5rem 0 1.1rem}
+.auftrag h3{font-size:1.2rem;margin-bottom:.35rem}
+.auftrag p{color:#DCD5CA}
+.auftrag .form{display:inline-block;font-weight:700;color:var(--marker);font-size:.9rem;margin-bottom:.2rem}
+.hinweis{font-size:.9rem;color:var(--muted)}
+.belastend{border-left:6px solid var(--gold);background:var(--gold-hi);padding:.75rem 1rem;border-radius:0 .5rem .5rem 0;margin:1rem 0}
+.merksatz{font-family:var(--display);font-weight:600;font-size:1.25rem;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);padding:.7rem 0;margin:1.4rem 0;text-align:center}
+.btn{min-height:48px;border:1px solid var(--border);border-radius:var(--r);padding:.6rem 1.2rem;background:var(--surface2);font-weight:700;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.4rem}
+.btn:hover{background:var(--offset)}
+.btn.primary{background:var(--red);color:var(--inverse);border-color:transparent}
+.btn.primary:hover{background:#86361f}
+.btn.dunkel{background:var(--ink);color:var(--inverse);border-color:transparent}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn:active{transform:scale(.97)}
+.reihe{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-top:.8rem}
+.fuss{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-top:1px solid var(--line);margin-top:2.2rem;padding-top:1.3rem;flex-wrap:wrap}
+label{font-weight:700;display:block}
+textarea{width:100%;min-height:5rem;border:1.5px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;background:var(--surface2);resize:vertical;margin-top:.35rem}
+.feldgruppe{display:grid;gap:1rem;margin-top:1rem}
+.karte{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
+.karte+.karte{margin-top:1rem}
+.kennung{font-weight:700;color:var(--red);font-size:.88rem;margin-bottom:.3rem}
+.quelle{font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.4}
+.quelle a{color:var(--muted)}
+blockquote{margin:.8rem 0;padding:.7rem 1rem;border-left:5px solid var(--kuli);background:var(--kuli-hi);border-radius:0 .5rem .5rem 0;font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.35}
+blockquote .wer{display:block;font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--muted);margin-top:.35rem}
+details.hilfe{margin-top:.8rem;border:1.5px dashed var(--line);border-radius:.6rem;padding:.4rem .8rem}
+details.hilfe summary{cursor:pointer;font-weight:700;min-height:40px;display:flex;align-items:center}
+details.hilfe p{margin:.3rem 0 .4rem}
+.status{display:inline-block;font-size:.78rem;font-weight:700;padding:.1rem .5rem;border-radius:.35rem;background:var(--slate-hi);color:var(--slate);margin-right:.3rem}
+.status.beleg{background:var(--green-hi);color:var(--green)}
+.status.modell{background:var(--gold-hi);color:var(--gold)}
+.aufdeck{margin-top:1rem;background:var(--offset);border-radius:var(--r-lg);padding:1rem 1.2rem}
+.aufdeck.neu{animation:auf 360ms var(--ease) both}
+.zwei{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+@media (max-width:640px){.zwei{grid-template-columns:1fr}}
+.zwei .alt{background:var(--offset);border-radius:.6rem;padding:.8rem 1rem;min-width:0}
+
+.band{position:relative;background:var(--dunkel);color:var(--inverse);border-radius:var(--r-lg);overflow:hidden;margin:0 0 1.6rem;min-height:9rem;display:grid;grid-template-columns:minmax(0,1fr)}
+.band.mit{grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:15rem}
+@media (max-width:640px){.band.mit{grid-template-columns:1fr}}
+.band .bt{padding:1.3rem 1.4rem;display:flex;flex-direction:column;justify-content:center;gap:.4rem}
+.band .bt .ob{font-size:.85rem;font-weight:700;color:#C9BFAE;letter-spacing:.02em}
+.band .bt h2{font-size:clamp(1.5rem,1.2rem + 1.4vw,2.2rem);color:var(--inverse)}
+.band .bt p{color:#DCD5CA}
+.band figure{margin:0;position:relative;min-height:12rem;background:#2A2824}
+.band figure img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:.92}
+.band.neu figure img{animation:band-ein 650ms var(--ease) both}
+@keyframes band-ein{from{opacity:0;transform:translateX(4%) scale(1.03)}to{opacity:.92;transform:none}}
+.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:.45rem .8rem;font-size:.75rem;line-height:1.35;color:#E6DFD2;background:linear-gradient(transparent,rgba(27,26,23,.85))}
+.band figcaption b{color:var(--inverse)}
+.urt{font-size:.95rem}.urt+.urt{margin-top:.3rem}
+.urt.zentral b{color:var(--green)}.urt.begruendbar b{color:var(--gold)}.urt.kaum b{color:var(--red)}
+.matrix-wrap{overflow-x:auto;margin-top:1rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%}
+th,td{padding:.55rem .7rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.92rem}
+th{background:var(--offset)}
+tr:last-child td{border-bottom:0}
+td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* Produkt */
+.raster3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.6rem;font-size:.88rem}
+@media (max-width:640px){.raster3{grid-template-columns:1fr}}
+.raster3 div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .7rem}
+.raster3 b{display:block;margin-bottom:.2rem}
+.satzanfaenge{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem}
+.satzanfaenge button{min-height:40px;border:1.5px solid var(--border);background:var(--surface2);border-radius:.5rem;padding:.3rem .7rem;font-size:.9rem}
+.pole{display:flex;justify-content:space-between;gap:1rem;font-weight:700;font-size:.95rem;margin-top:.6rem}
+.pole span{max-width:46%}
+
+/* Löschen */
+.loesch{margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.92rem;color:var(--muted);display:flex;gap:.9rem;flex-wrap:wrap;align-items:center}
+.loesch-frage{margin-top:.6rem;border:2px solid var(--red);border-radius:.7rem;padding:.8rem 1rem;background:var(--red-hi);color:var(--ink);flex:1 0 100%}
+/* ===== Gemeinsamer Kern M25–M27 (Ergänzungen zum Stand von M23) ===== */
+.band{margin-top:.2rem}
+.ziele{padding-left:1.2rem;display:grid;gap:.3rem;margin:.6rem 0}
+.ablauf{list-style:none;display:grid;gap:.35rem;margin:.8rem 0 0}
+.ablauf li{display:grid;grid-template-columns:5.6rem 1fr;gap:.8rem;border-top:1px solid var(--line);padding-top:.35rem}
+.ablauf li b{color:var(--red);font-variant-numeric:tabular-nums}
+.auflage{border-left:6px solid var(--green);background:var(--green-hi);padding:.8rem 1rem;border-radius:0 .6rem .6rem 0;margin:1rem 0}
+.auflage.neu,.rm.neu{animation:auf 360ms var(--ease) both}
+.rm{border-left:6px solid var(--stahl);background:var(--surface);padding:.7rem 1rem;border-radius:0 .6rem .6rem 0;margin:.7rem 0;font-size:.97rem}
+.rm.zentral{border-left-color:var(--green)}.rm.teils{border-left-color:var(--gold)}.rm.kaum{border-left-color:var(--red)}
+.rm b.sw{display:block}
+.gesperrt{opacity:.45}
+.zaehl{font-size:.88rem;color:var(--muted);margin-top:.25rem;font-variant-numeric:tabular-nums}
+textarea,input[type=text],select{color:var(--kuli)}
+input[type=text],select{width:100%;min-height:48px;border:1.5px solid var(--border);border-radius:var(--r);padding:.5rem .8rem;background:var(--surface2);margin-top:.3rem}
+textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
+.felder2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:700px){.felder2{grid-template-columns:1fr}}
+
+/* Quelle zum Markieren (Gegenwart: Markierung) – Sätze sind die Einheiten */
+.qwerk{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:1.2rem;align-items:start;margin-top:1rem}
+@media (max-width:860px){.qwerk{grid-template-columns:1fr}}
+.qblatt{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
+.qblatt h3{font-size:1.12rem;margin-bottom:.15rem}
+.qblatt .qkopf{font-size:.92rem;color:var(--muted);margin-bottom:.7rem}
+.qblatt .qtext p{margin:.55rem 0;line-height:1.75;font-size:1.06rem}
+.qblatt .qtag{font-weight:700;color:var(--red);font-size:.9rem;margin-right:.3rem}
+.qblatt .g-wort{padding:.08em 0;-webkit-tap-highlight-color:transparent}
+.qblatt .g-wort:focus-visible{outline:3px solid var(--kuli);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){.qblatt .g-wort:hover{background:var(--offset)}}
+.qblatt .g-stifte{margin:.2rem 0 .8rem;position:sticky;top:112px;background:var(--surface2);padding:.35rem 0;z-index:2}
+.g-stift .z{font-size:.8em;margin-right:.25rem}
+.qreiter{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1rem}
+.qreiter button{min-height:44px;border:1.5px solid var(--border);border-bottom-width:3px;background:var(--surface);border-radius:.6rem .6rem 0 0;padding:.4rem .9rem;font-weight:700}
+.qreiter button[aria-selected=true]{background:var(--surface2);border-bottom-color:var(--red)}
+.belege{display:grid;gap:.8rem}
+.belege .sp{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;min-height:5.5rem}
+.belege .sp h4{font-family:var(--body);font-size:.95rem;margin-bottom:.3rem}
+.belege .sp ul{list-style:none;display:grid;gap:.3rem;font-size:.92rem}
+.belege .sp li{border-left:4px solid var(--marker);padding-left:.5rem;line-height:1.35}
+.belege .sp.b li{border-left:4px dotted var(--kuli)}
+.belege .leer{color:var(--faint);font-size:.9rem}
+
+/* Wörter wählen */
+.woerter{display:flex;gap:.45rem;flex-wrap:wrap;margin:.8rem 0}
+.woerter button{min-height:44px;padding:.35rem .9rem;border-radius:.6rem;border:2px solid var(--stahl);background:var(--surface2);font-weight:700}
+.woerter button[aria-pressed=true]{border-color:var(--kuli);background:var(--kuli-hi);color:var(--ink)}
+.woerter button[disabled]{opacity:.5}
+.wgrp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin-top:.6rem}
+@media (max-width:760px){.wgrp{grid-template-columns:1fr}}
+.wgrp div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .8rem;font-size:.93rem}
+.wgrp b{display:block;margin-bottom:.2rem}
+.wgrp .dein{font-weight:700;color:var(--kuli)}
+
+/* Landkarten-Moment */
+.prinzipien{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;margin:.9rem 0}
+@media (max-width:860px){.prinzipien{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.prinzipien{grid-template-columns:1fr}}
+.prinzipien button{text-align:left;border:2px solid var(--stahl);background:var(--surface2);border-radius:.7rem;padding:.55rem .7rem;min-height:56px;display:grid;gap:.15rem;align-content:start}
+.prinzipien button small{font-size:.82rem;color:var(--muted);line-height:1.3}
+.prinzipien button[aria-pressed=true]{border-color:var(--kuli);box-shadow:inset 0 0 0 1px var(--kuli)}
+.prinzipien button.zentral{border-left:6px solid var(--green)}.prinzipien button.teils{border-left:6px solid var(--gold)}.prinzipien button.kaum{border-left:6px solid var(--red)}
+.prinzipien button[disabled]{opacity:.6}.prinzipien button[disabled][aria-pressed=true]{opacity:1}
+.trift{margin-top:1.2rem;border:1.5px dashed var(--stahl);border-radius:.7rem;padding:.8rem 1rem;font-size:.96rem}
+
+/* Stimmkarte und Beamer-Tafel */
+#ueber:empty{display:none}
+.tafel-voll{position:fixed;inset:0;z-index:60;background:var(--dunkel);color:var(--inverse);display:grid;grid-template-rows:auto 1fr;padding:max(1rem,env(safe-area-inset-top,0px)) 1.4rem 1.4rem;overflow:auto}
+.tafel-voll .tk{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.tafel-voll .tk .btn{background:transparent;color:var(--inverse);border-color:#6b665d}
+.tafel-voll .mitte{display:grid;place-content:center;text-align:center;gap:1rem}
+.tafel-voll .buchstabe{font:600 clamp(8rem,34vw,20rem)/.9 var(--display)}
+.tafel-voll .wort{font:600 clamp(1.6rem,5vw,3.4rem)/1.15 var(--display)}
+.tafel-voll.hell{background:var(--bg);color:var(--ink)}
+.tafel-voll.hell .tk .btn{color:var(--ink);border-color:var(--stahl)}
+.folie{width:min(100%,calc((100vh - 6.5rem)*16/9));aspect-ratio:16/9;margin:auto;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:clamp(1rem,2.6vw,2.4rem);display:grid;grid-template-rows:auto 1fr auto;gap:.8rem;text-align:left;overflow:hidden}
+.folie h2{font-size:clamp(1.4rem,3vw,2.5rem)}
+.folie .vier{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 1.4rem;align-content:start;font-size:clamp(.85rem,1.45vw,1.25rem);line-height:1.35}
+.folie .vier b{display:block;color:var(--red);font-size:.85em}
+.folie .vier p{color:var(--kuli);white-space:pre-wrap;overflow-wrap:anywhere}
+.folie .fq{font-size:clamp(.75rem,1.1vw,1rem);color:var(--muted)}
+@media (max-width:700px){.folie{aspect-ratio:auto}.folie .vier{grid-template-columns:1fr}}
+.stimmwahl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.8rem}
+@media (max-width:640px){.stimmwahl{grid-template-columns:1fr}}
+.stimmwahl button{min-height:64px;border:2px solid var(--stahl);border-radius:.8rem;background:var(--surface2);font-weight:700;padding:.5rem .8rem;display:grid;gap:.1rem;text-align:left}
+.stimmwahl button b{font:600 1.5rem/1 var(--display)}
+.stimmwahl button[aria-pressed=true]{border-color:var(--green);box-shadow:inset 0 0 0 2px var(--green);background:var(--green-hi)}
+
+/* Zeitleiste klein (Zusammenfassung) */
+.zl{list-style:none;display:grid;gap:.25rem;margin-top:.4rem}
+.zl li{display:grid;grid-template-columns:7.2rem 1fr;gap:.7rem;font-size:.95rem;border-top:1px solid var(--line);padding-top:.25rem}
+.zl li b{font-variant-numeric:tabular-nums}
+.begriffe{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem;margin-top:.4rem}
+.begriffe div{font-size:.95rem;border-left:4px solid var(--line);padding-left:.6rem}
+@media (max-width:640px){.begriffe{grid-template-columns:1fr}}
+.mein{color:var(--kuli);white-space:pre-wrap;overflow-wrap:anywhere}
+.mein.leer{color:var(--faint);font-style:italic}
+.zf .werk{background:var(--gold-hi);border-radius:.6rem;padding:.6rem .9rem;margin-top:.5rem;font-size:.95rem}
+.zf h1{margin-top:0}
+.zf .seitenumbruch{margin-top:2rem;border-top:3px solid var(--ink);padding-top:1rem}
+.lk table{font-size:.92rem}
+.lk ul{padding-left:1.2rem;display:grid;gap:.4rem;margin-top:.4rem}
+
+@media print{
+  @page{size:A4;margin:12mm 13mm}
+  body{background:#fff;font-size:10pt;line-height:1.36}
+  .kopf,.fuss,.loesch,.nodruck,.reihe,#ueber{display:none!important}
+  main{max-width:none;padding:0}
+  .zf h1{font-size:18pt;margin:0 0 .15rem}
+  .zf .leitfrage{font-size:12pt;margin-bottom:.3rem}
+  .zf h2{font-size:12pt;margin:.55rem 0 .2rem;break-after:avoid}
+  .zf .merksatz{margin:.45rem 0;padding:.35rem 0;font-size:11pt}
+  .zf .begriffe div,.zf .zl li,.zf .werk{font-size:9pt}
+  .zf .karte{padding:.4rem .6rem;break-inside:avoid}
+  .zf .seitenumbruch{break-before:page;border-top:0;margin-top:0;padding-top:0}
+  .zf .mein{font-size:9.5pt}
+  .zf th,.zf td{padding:.2rem .4rem;font-size:8.6pt}
+  .auflage{background:#fff;border:1px solid #bbb;border-left:4px solid #555}
+  a{color:inherit;text-decoration:none}
+}
+
+/* Bilder */
+.bilder{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem;margin:1rem 0;align-items:start}
+.bild{margin:0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:.5rem}
+.bild img{display:block;width:100%;height:auto;border-radius:.5rem;filter:grayscale(1)}
+.bild figcaption{font-size:.9rem;line-height:1.4;margin:.45rem .2rem .1rem}
+.bild .nachweis{display:block;font-size:.8rem;color:var(--muted);margin-top:.2rem}
+.bild.klein{max-width:34rem}
+@media print{.bild,.bilder{display:none}}
+
+/* Lesepult: Text links, Arbeitsspalte rechts (bleibt beim Lesen stehen) */
+.lesepult{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:1.4rem;align-items:start;margin-top:1rem}
+.lesepult>aside{position:sticky;top:122px;padding-bottom:.4rem}
+.lesepult>aside.fragenspalte{position:static}
+@media (min-height:820px){.lesepult>aside.fragenspalte{position:sticky}}
+@media (max-width:900px){.lesepult{grid-template-columns:1fr}.lesepult>aside{position:static;max-height:none}}
+
+/* Rückmeldung je Option erst nach dem Festlegen (die Regel der Bausteine „.g-option span{display:grid}“ ist stärker als deren „display:none“) */
+.g .g-wahl:not([data-zu]) .g-option .g-option__urteil{display:none}
+/* ===== Ost-West-Einheit: Zeitraster, Ereigniskarten, Ordnen, Netz, Glossar ===== */
+:root{--sp-w:var(--kuli);--sp-w-hi:var(--kuli-hi);--sp-e:var(--gold);--sp-e-hi:var(--gold-hi);--sp-d:var(--green);--sp-d-hi:var(--green-hi)}
+.spur-w{--sp:var(--sp-w);--sp-hi:var(--sp-w-hi)}.spur-e{--sp:var(--sp-e);--sp-hi:var(--sp-e-hi)}.spur-d{--sp:var(--sp-d);--sp-hi:var(--sp-d-hi)}
+main.breit:has(.zraster.gross){max-width:78rem}
+.nurdruck{display:none}
+.regeln{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+.regeln>div{background:var(--surface);border:1px solid var(--border);border-top:4px solid var(--ink);border-radius:0 0 var(--r) var(--r);padding:.8rem 1rem;font-size:.97rem}
+.regeln b{display:block;font-family:var(--display);font-size:1.08rem;margin-bottom:.2rem}
+.standzeile{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem;margin-bottom:.6rem}
+.standzeile button{min-height:64px;text-align:left;border:1px solid var(--border);border-left:6px solid var(--red);background:var(--surface2);border-radius:0 var(--r) var(--r) 0;padding:.6rem .9rem;color:var(--muted);font-size:.92rem}
+.standzeile b{display:block;font:600 1.5rem/1.1 var(--display);color:var(--ink)}
+.stunden{list-style:none;padding:0;margin:0;display:grid;gap:.5rem}
+.stunden li>a,.stunden li>.nochnicht{display:grid;grid-template-columns:2.6rem minmax(0,1fr) auto;gap:.3rem .9rem;align-items:center;min-height:64px;padding:.6rem 1rem;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);color:var(--ink);text-decoration:none}
+.stunden li>.nochnicht{background:transparent;border-style:dashed;color:var(--muted)}
+.stunden .snr{font:600 1.7rem/1 var(--display);color:var(--red)}
+.stunden .nochnicht .snr{color:var(--faint)}
+.stunden .st b{display:block;font-size:1.05rem}
+.stunden .st small{color:var(--muted);font-size:.85rem}
+.stunden .sstat{font-weight:700;font-size:.88rem;color:var(--muted);white-space:nowrap}
+.stunden li.fertig>a{border-left:6px solid var(--green)}
+.stunden li.fertig .sstat{color:var(--green)}
+@media (hover:hover) and (pointer:fine){.stunden li>a:hover{background:var(--surface)}.chip:hover{background:var(--sp-hi)}}
+@media (max-width:640px){.regeln,.standzeile{grid-template-columns:1fr}.stunden li>a,.stunden li>.nochnicht{grid-template-columns:2.2rem minmax(0,1fr)}.stunden .sstat{grid-column:2}}
+
+/* Chips: ein Ereignis */
+.chip{display:block;width:100%;text-align:left;position:relative;border:1px solid var(--border);border-left:5px solid var(--sp,var(--stahl));background:var(--surface2);border-radius:0 .5rem .5rem 0;padding:.4rem .5rem;min-height:48px;color:var(--ink);font-size:.84rem;line-height:1.2;hyphens:auto;overflow-wrap:anywhere}
+.chip b{display:block}.chip small{display:block;color:var(--muted);font-size:.76rem;margin-top:.1rem}
+.chip.da{background:var(--sp-hi)}
+.chip i{position:absolute;right:.3rem;top:.15rem;font-style:normal;font-weight:700;color:var(--sp)}
+.chip em{position:absolute;right:.3rem;bottom:.2rem;font-style:normal;font-size:.72rem;font-weight:700;background:var(--ink);color:var(--inverse);border-radius:999px;min-width:1.2rem;text-align:center;padding:0 .25rem}
+
+/* Zeitraster: neun Phasen nebeneinander, drei Ebenen untereinander */
+.zraster{display:grid;gap:.7rem;margin-top:1rem}
+.zspur{display:none}
+.zphase{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.6rem .7rem;display:grid;gap:.4rem}
+.zphase h3{margin:0;font-size:1rem;line-height:1.15;border-bottom:3px solid var(--ink);padding-bottom:.3rem}
+.zphase h3 b{display:block;font-family:var(--display);font-size:1.15rem}
+.zphase h3 small{display:block;font:400 .78rem/1.2 var(--body);color:var(--muted);hyphens:auto}
+.zz{display:grid;gap:.35rem;align-content:start}
+.zz.leer{display:none}
+.zlab{font-size:.74rem;font-weight:700;color:var(--muted)}
+@supports (grid-template-rows:subgrid){@media (min-width:1000px){
+  .zraster{grid-template-columns:4.2rem repeat(9,minmax(0,1fr));grid-template-rows:auto auto auto auto;gap:0 .3rem}
+  .zspur,.zphase{display:grid;grid-row:1/5;grid-template-rows:subgrid;gap:0}
+  .zphase{padding:0;border:0;background:transparent;border-radius:0}
+  .zphase h3{padding:.2rem .3rem .4rem;align-self:end}
+  .zphase h3 b{font-size:1rem}
+  .zz,.zz.leer{display:grid;padding:.4rem .2rem;border-bottom:1px solid var(--line);min-height:4.2rem}
+  .zz:nth-of-type(odd){background:rgba(36,34,31,.03)}
+  .zlab{display:none}
+  .ze{font-weight:700;font-size:.82rem;padding:.5rem .2rem;border-bottom:1px solid var(--line);border-left:5px solid var(--sp);padding-left:.4rem;hyphens:auto}
+  .chip{font-size:.78rem;padding:.35rem .35rem}
+  .chip small{font-size:.7rem}
+}}
+
+/* Ereigniskarte */
+.ekarte{background:var(--surface2);border:1px solid var(--border);border-top:8px solid var(--sp);border-radius:0 0 var(--r-lg) var(--r-lg);padding:1rem 1.2rem 1.1rem;text-align:left;max-width:44rem}
+.ekarte header{margin-bottom:.6rem}
+.ekarte .espur{font-size:.8rem;font-weight:700;color:var(--sp)}
+.ekarte h3{font-size:1.5rem;margin:.1rem 0}
+.ekarte .edatum{font-weight:700;margin:0}
+.ekarte h4{font:700 .95rem var(--body);margin:.8rem 0 .2rem;color:var(--muted)}
+.ekarte p,.ekarte li{font-size:.98rem}
+.ekarte ul{margin:0;padding-left:1.1rem}
+.ekarte .ekasten{margin:.9rem 0 .5rem;background:var(--sp-hi);border-left:5px solid var(--sp);padding:.6rem .8rem;border-radius:0 .5rem .5rem 0}
+.ekarte .efuss{font-size:.86rem;color:var(--muted);margin:.4rem 0 0}
+.ekarte .ebild{margin:.9rem 0 0}
+.ekarte .ebild img{max-height:16rem;width:auto;max-width:100%}
+.tafel-voll.hell .mitte{place-content:start center;text-align:left;padding-top:1rem}
+.kdialog{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:1.4rem;max-width:68rem;align-items:start}
+.kdneben h4{font:600 1.1rem var(--display);margin:0 0 .4rem}
+.kdneben h4+ul,.kdneben ul{padding-left:1.1rem;margin:.2rem 0 .8rem;font-size:.95rem}
+.kdneben .reihe{margin:.4rem 0 1.2rem}
+@media (max-width:860px){.kdialog{grid-template-columns:1fr}}
+
+/* Ordnen */
+.ordwerk{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:1.2rem;align-items:start}
+.ordpool{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem}
+.ordfolge{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:column;grid-template-rows:repeat(8,auto);gap:.35rem .6rem}
+.ordfolge li button{display:grid;grid-template-columns:1.8rem minmax(0,1fr);gap:.1rem .4rem;width:100%;text-align:left;min-height:48px;align-items:center;border:1px solid var(--border);border-left:5px solid var(--stahl);background:var(--surface2);border-radius:0 .5rem .5rem 0;padding:.35rem .5rem;font-size:.88rem;color:var(--ink)}
+.ordfolge li button span{font:600 1.1rem var(--display);color:var(--muted)}
+.ordfolge li button small{grid-column:2;color:var(--muted);font-size:.78rem}
+.ordfolge li.ok button{border-left-color:var(--green);background:var(--green-hi)}
+.ordfolge li.nein button{border-left-color:var(--gold);background:var(--gold-hi)}
+.ordfolge li.leer{grid-column:1/-1;color:var(--muted);font-style:italic;border:1.5px dashed var(--stahl);border-radius:.5rem;padding:.8rem}
+@media (max-width:760px){.ordwerk{grid-template-columns:1fr}.ordfolge{grid-auto-flow:row;grid-template-rows:none;grid-template-columns:1fr}}
+
+/* Vernetzen */
+.netzzeile{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:.5rem;margin-bottom:.6rem}
+.netzzeile select{min-height:48px;width:100%;border:1.5px solid var(--stahl);border-radius:.5rem;background:var(--surface2);padding:.3rem .5rem;font:inherit;color:var(--ink)}
+@media (max-width:700px){.netzzeile{grid-template-columns:1fr}}
+.netzliste{list-style:none;padding:0;margin:0;display:grid;gap:.5rem}
+.netzliste li{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.6rem .9rem}
+.netzliste .nk{display:inline-block;border-left:5px solid var(--sp);background:var(--sp-hi);padding:.1rem .5rem;border-radius:0 .4rem .4rem 0;font-weight:700;font-size:.92rem}
+.netzliste .nart{margin:0 .45rem;color:var(--muted);font-style:italic;font-size:.92rem}
+.netzliste p{margin:.35rem 0 .2rem}
+.netzliste .btn.klein,.btn.klein{min-height:44px;padding:.3rem .8rem;font-size:.85rem}
+.netzliste.klein li{padding:.3rem .6rem;font-size:.92rem}
+
+/* Glossar */
+.glkopf{display:grid;gap:.6rem;margin-bottom:.8rem}
+.glkopf input{min-height:48px;border:1.5px solid var(--stahl);border-radius:.5rem;background:var(--surface2);padding:.3rem .7rem;font:inherit;max-width:24rem}
+.gl{border-bottom:1px solid var(--line)}
+.gl summary{min-height:48px;display:flex;align-items:center;font-weight:700;cursor:pointer;padding:.2rem 0}
+.gl p{margin:0 0 .8rem;max-width:44rem}
+.fadenliste{padding-left:1.3rem;display:grid;gap:.45rem}
+.fadenliste li b{font-size:.95rem}
+
+/* Verorten und vernetzen (Schluss jeder Stunde) */
+.verorten{display:grid;gap:1rem}
+.vjahr{display:grid;grid-template-columns:minmax(0,1fr) 7rem;gap:.6rem;align-items:center;border:1px solid var(--border);border-left:5px solid var(--sp);background:var(--surface2);border-radius:0 var(--r) var(--r) 0;padding:.5rem .8rem}
+.vjahr input{min-height:48px;border:1.5px solid var(--stahl);border-radius:.5rem;padding:.2rem .5rem;font:inherit;width:100%}
+.vjahr .rm{grid-column:1/-1;margin:0}
+
+@media print{
+  .nurdruck{display:block}
+  .zraster.druck{grid-template-columns:repeat(9,minmax(0,1fr));gap:0 1.2mm;margin-top:1mm}
+  .zraster.druck .zspur{display:none}
+  .zraster.druck .zphase{display:block;padding:0;border:0;background:transparent}
+  .zraster.druck .zphase h3{font-size:7.5pt;border-bottom:1.5pt solid #000;padding-bottom:.6mm;min-height:11mm}
+  .zraster.druck .zphase h3 b{font-size:8.5pt}.zraster.druck .zphase h3 small{font-size:6.3pt}
+  .zraster.druck .zz{display:block;padding:0}.zraster.druck .zz.leer{display:none}
+  .zraster.druck .zlab{display:block;font-size:6pt;margin-top:1mm}
+  .zraster.druck .chip{font-size:7pt;min-height:0;padding:.6mm 1mm;margin-top:.6mm;border-left-width:2.5pt;background:#fff}
+  .zraster.druck .chip small{font-size:6.2pt}
+  .zf .fadenliste{font-size:9pt;gap:.25rem}.zf .netzliste.klein li{font-size:8.5pt;padding:.15rem .4rem}
+}
+
+/* Stunden */
+.fragen7,.fakten{padding-left:1.3rem;display:grid;gap:.35rem}
+.fragen7{grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem 2rem}
+.deleg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}
+.deleg .karte+.karte{margin-top:0}
+.deleg ul{padding-left:1.1rem;margin:.4rem 0 0;font-size:.95rem;display:grid;gap:.3rem}
+@media (max-width:820px){.deleg,.fragen7{grid-template-columns:1fr}}
+.vkarte{display:grid;gap:.6rem}
+.qblatt.lese .qtext p{margin:0 0 .7rem}
+.zweispalt{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;align-items:start}
+@media (max-width:820px){.zweispalt{grid-template-columns:1fr}}
+.tab3{width:100%;border-collapse:collapse;font-size:.95rem}
+.tab3 th,.tab3 td{border:1px solid var(--line);padding:.4rem .5rem;text-align:left;vertical-align:top}
+.tab3 textarea{width:100%;min-height:3.2rem;border:1px solid var(--stahl);border-radius:.4rem;padding:.3rem;font:inherit}
+.bslot{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:.3rem .8rem;align-items:center;padding:.35rem 0;border-bottom:1px solid var(--line)}
+.bslot label{font-weight:700}
+.bslot select{min-height:48px;border:1.5px solid var(--stahl);border-radius:.5rem;background:var(--surface2);padding:.3rem .5rem;font:inherit;width:100%}
+.bslot .rm{grid-column:1/-1;margin:.2rem 0}
+@media (max-width:640px){.bslot{grid-template-columns:1fr}}
+.ordpool.eins,.ordfolge.eins{grid-template-columns:1fr;grid-auto-flow:row;grid-template-rows:none}
+.ordpool.eins .chip{font-size:.92rem;padding:.5rem .6rem}
+.tab3 th[scope=row]{width:11rem;font-size:.92rem}
+.dia{margin:1rem 0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:.8rem}
+.dia svg{width:100%;height:auto;display:block}
+.dia figcaption{font-size:.88rem;margin-top:.4rem}
+.dia .nachweis{display:block;color:var(--muted);font-size:.8rem;margin-top:.2rem}
+@media print{.dia{display:none}}
+.tabeng table{font-size:.8rem}.tabeng th,.tabeng td{padding:.25rem .3rem}
+</style>
+</head>
+<body>
+<header class="kopf"><div class="kopf-in" id="kopf"></div><nav class="weg" id="weg" aria-label="Lernweg"></nav></header>
+<main id="main" tabindex="-1"></main>
+<div id="ueber"></div>
+<noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft „Geschichte aktuell 1“ (M28–M44).</p></noscript>
+<script src="../assets/gegenwart/bundle.js"></script>
+<script>
+window.OWK_GEBAUT = ["s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9"];
+"use strict";
+/* ===== Gemeinsamer Kern M25–M27. Jede Stunde definiert danach L (Einstellungen), ihre Daten, SEITE_FN und ruft kernStart(). ===== */
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let S = {};
+const lade = () => { try { return JSON.parse(localStorage.getItem(L.key)) || {}; } catch(e) { return {}; } };
+const speichere = () => { try { localStorage.setItem(L.key, JSON.stringify(S)); } catch(e) {} };
+const hol = p => p.split(".").reduce((o, k) => (o == null ? undefined : o[k]), S);
+const setz = (p, v) => { const k = p.split("."); let o = S; for (let i = 0; i < k.length - 1; i++) { if (o[k[i]] == null || typeof o[k[i]] !== "object") o[k[i]] = {}; o = o[k[i]]; } o[k[k.length - 1]] = v; speichere(); };
+const woerter = t => String(t || "").trim().split(/\s+/).filter(Boolean).length;
+const ruhig = () => { try { return !!S.ruhig || matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e) { return !!S.ruhig; } };
+const neu = (el, k) => { if (!el) return; el.classList.remove(k); void el.offsetWidth; if (!ruhig()) el.classList.add(k); };
+const LABOR = /github\.io$/.test(location.hostname) ? "index.html" : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
+const LK = "https://geschichtefuerdiegegenwart.github.io/kognitive-Landkarte-des-Geschichtsunterrichts/#s-";
+const idx = id => Math.max(0, L.seiten.findIndex(s => s[0] === id));
+
+/* ---------- Bausteine für Seiten ---------- */
+const zeitKopf = id => { const s = L.seiten[idx(id)]; return `<p class="zeit"><span class="nr">${esc(s[1])}</span><span>${esc(s[2])}</span></p>`; };
+const weiter = (nach, text, o = {}) => `<div class="fuss"><span class="hinweis">${o.hinweis || "Dein Stand wird nur auf diesem Gerät gespeichert."}</span><button class="btn primary" data-geh="${nach}">${esc(text)} ›</button></div>`;
+const auftrag = (form, titel, text) => `<div class="auftrag"><span class="form">${esc(form)}</span><h3>${esc(titel)}</h3><p>${text}</p></div>`;
+const belastend = text => `<p class="belastend"><b>Hinweis vorab.</b> ${text}</p>`;
+const status = (art, text) => `<span class="status ${art}">${esc(text)}</span>`;
+const band = (ob, titel, text) => `<div class="band"><div class="bt"><span class="ob">${esc(ob)}</span><h2>${esc(titel)}</h2><p>${text}</p></div></div>`;
+const hilfe = (titel, html) => `<details class="hilfe"><summary>${esc(titel)}</summary>${html}</details>`;
+
+/* Textfeld mit Satzanfängen und Wortzähler (Gegenwart: Textfeld). pfad = Ort in S. */
+function textfeld(pfad, label, o = {}){
+  const v = hol(pfad) || "", id = "f-" + pfad.replace(/\W/g, "-");
+  return `<div class="tf"><label for="${id}">${label}</label>
+  <textarea id="${id}" data-f="${pfad}" rows="${o.rows || 3}" placeholder="${esc(o.platz || "")}">${esc(v)}</textarea>
+  ${o.anfaenge ? `<div class="satzanfaenge nodruck" role="group" aria-label="Satzanfänge">${o.anfaenge.map(a => `<button type="button" data-satz="${id}" data-text="${esc(a)}">${esc(a)} …</button>`).join("")}</div>` : ""}
+  ${o.zaehl === false ? "" : `<p class="zaehl" data-zaehl="${pfad}">${woerter(v)} Wörter${o.ziel ? " · " + esc(o.ziel) : ""}</p>`}</div>`;
+}
+const eingabe = (pfad, label, platz = "") => { const id = "f-" + pfad.replace(/\W/g, "-"); return `<div><label for="${id}">${label}</label><input type="text" id="${id}" data-f="${pfad}" value="${esc(hol(pfad) || "")}" placeholder="${esc(platz)}" autocomplete="off"></div>`; };
+/* Kriterienraster: erscheint, sobald das Feld pfad mindestens min Wörter hat (P6: Vergleich erst nach dem eigenen Text). */
+function raster(pfad, min, titel, zeilen){
+  const da = woerter(hol(pfad)) >= min;
+  return `<div data-raster="${pfad}" data-min="${min}" ${da ? "" : "hidden"}><h3 class="klein">${esc(titel)}</h3><div class="matrix-wrap"><table><thead><tr><th>Prüfe deinen Text</th><th>Grundlegend</th><th>Sicher</th><th>Souverän</th></tr></thead><tbody>${zeilen.map(z => `<tr><td><b>${esc(z[0])}</b></td><td>${esc(z[1])}</td><td>${esc(z[2])}</td><td>${esc(z[3])}</td></tr>`).join("")}</tbody></table></div></div>
+  <p class="hinweis" data-rasterhinweis="${pfad}" ${da ? "hidden" : ""}>Ab ${min} Wörtern erscheint ein Raster, mit dem du deinen Text selbst prüfst.</p>`;
+}
+/* Vergleich, der erst nach eigenen Antworten erscheint: bed = Liste von Pfaden, die gefüllt sein müssen. */
+function vergleich(id, bed, min, titel, html){
+  const ok = bed.every(p => String(hol(p) || "").trim().length >= min), offen = !!(S.offen || {})[id];
+  return `<div class="reihe nodruck"><button type="button" class="btn dunkel" data-vergleich="${id}" data-bed="${bed.join(",")}" data-min="${min}" data-titel="${esc(titel)}" ${ok ? "" : "disabled"}>${offen ? "Vergleich ausblenden" : esc(titel)}</button><span class="hinweis" data-vergleichhinweis="${id}">${ok ? "" : "Erst deine Antworten, dann der Vergleich."}</span></div>
+  <div class="auflage" id="vgl-${id}" ${offen && ok ? "" : "hidden"}>${html}</div>`;
+}
+
+/* ---------- Quelle zum Markieren (Muster 11; Gegenwart: Markierung, zwei Stifte) ----------
+   QUELLEN[id] = { titel, kopf, abs:[[tag|null, [Sätze…]], …], nachweis, stifte:[[ "a", Zeichen, Name ], [ "b", Zeichen, Name ]] }
+   Stand: S.mark[id] = { "0": "a", "3": "b" }, S.stift[id] = "a" */
+const STIFTKLASSE = { a:"g-mark g-mark--beleg", b:"g-mark g-mark--gedanke" };
+function quelle(id){
+  const q = QUELLEN[id], m = (S.mark || {})[id] || {}, st = (S.stift || {})[id] || "a"; let n = 0;
+  const text = q.abs.map(([tag, saetze]) => `<p>${tag ? `<span class="qtag">${esc(tag)}</span>` : ""}${saetze.map(s => { const i = n++; return `<span class="g-wort ${m[i] ? STIFTKLASSE[m[i]] : ""}" role="button" tabindex="0" aria-pressed="${!!m[i]}" data-mark="${id}:${i}">${esc(s)}</span>`; }).join(" ")}</p>`).join("");
+  return `<div class="qblatt g" data-quelle="${id}"><h3>${esc(q.titel)}</h3><p class="qkopf">${q.kopf}</p>
+  <div class="g-stifte nodruck" role="group" aria-label="Stift wählen">${q.stifte.map(s => `<button type="button" class="g-stift" data-stift="${id}:${s[0]}" aria-pressed="${st === s[0]}"><span class="z" aria-hidden="true">${s[1]}</span>${esc(s[2])}</button>`).join("")}</div>
+  <div class="qtext">${text}</div><p class="quelle">${q.nachweis}</p></div>`;
+}
+const saetze = id => QUELLEN[id].abs.flatMap(a => a[1]);
+function belegListe(ids, stift){
+  const li = ids.flatMap(id => { const m = (S.mark || {})[id] || {}, s = saetze(id); return Object.keys(m).filter(i => m[i] === stift).sort((a, b) => a - b).map(i => `<li>${esc(s[i])} <span class="hinweis">(${esc(QUELLEN[id].kurz)})</span></li>`); });
+  return li.length ? `<ul>${li.join("")}</ul>` : `<p class="leer">Noch nichts markiert.</p>`;
+}
+function belege(ids, o = {}){
+  const st = QUELLEN[ids[0]].stifte;
+  return `<div class="belege" data-belege="${ids.join(",")}">${st.map(s => `<div class="sp ${s[0]}"><h4><span aria-hidden="true">${s[1]}</span> ${esc(o["t" + s[0]] || s[2])}</h4>${belegListe(ids, s[0])}</div>`).join("")}</div>`;
+}
+const markZahl = ids => ids.reduce((n, id) => n + Object.keys((S.mark || {})[id] || {}).length, 0);
+
+/* ---------- Wahl mit Erklärung je Option (Muster 2; Gegenwart: Wahl) ---------- */
+const STUFENWORT = { zentral:"zentral", begruendbar:"auch begründbar", kaum:"passt kaum" };
+function gWahl(id, frage, optionen, o = {}){
+  const st = (S.wahl || {})[id] || {}, zu = !!st.zu;
+  return `<div class="g"><div class="g-wahl" data-g="wahl" data-mind="${o.mind ?? 8}" data-id="${id}" ${zu ? 'data-zu=""' : ""}>
+  <fieldset><legend>${frage}</legend>${optionen.map((op, i) => `<label class="g-option" data-urteil="${op[1]}" data-grund="${esc(op[2])}"><input type="radio" name="w-${id}" value="${i}" ${st.o === i ? "checked" : ""} ${zu ? "disabled" : ""}><span>${esc(op[0])}<span class="g-option__urteil">${STUFENWORT[op[1]]} – ${esc(op[2])}</span></span></label>`).join("")}</fieldset>
+  ${o.ohneGrund ? "" : `<label>Begründung in einem Satz<textarea data-grund-feld rows="2" ${zu ? "readonly" : ""} placeholder="${esc(o.platz || "Ich wähle das, weil …")}">${esc(st.grund || "")}</textarea></label>`}
+  <div class="g-wahl__fuss"><button type="button" class="g-knopf g-knopf--primaer" data-g-festlegen ${zu ? "disabled" : ""}>Festlegen</button><span class="g-stempel" ${zu ? "" : "hidden"}>Festgelegt</span>${zu ? `<button type="button" class="btn nodruck" data-neu-wahl="${id}">Noch einmal</button>` : ""}<span class="sr" aria-live="polite"></span></div>
+  </div></div>`;
+}
+function pruefeWahl(w){
+  if (w.hasAttribute("data-zu")) return;
+  const gew = w.querySelector("input:checked"), ta = w.querySelector("textarea"), f = w.querySelector("[data-g-festlegen]");
+  if (f) f.disabled = !gew || (ta && ta.value.trim().length < 8);
+}
+
+/* ---------- Landkarten-Moment (Muster AT aus M22). Namen und Kurzerklärungen wörtlich aus der kognitiven Landkarte, Abschnitt 2.1. ---------- */
+const PRINZIP = {
+  "2-1-1": ["Retrospektivität", "Wir betrachten die Vergangenheit immer im Nachhinein (ex post), also aus der Gegenwart heraus."],
+  "2-1-2": ["Perspektivität", "Jede Betrachtung erfolgt aus einer bestimmten Sichtweise, geprägt von Überzeugungen, Interessen und Erfahrungen."],
+  "2-1-3": ["Partikularität", "Historische Erkenntnisse sind immer nur Ausschnitte der gesamten Vergangenheit."],
+  "2-1-4": ["Selektivität", "Wer Geschichte erzählt, wählt aus: Welche Quellen, Ereignisse und Personen sind für die eigene Frage wichtig?"],
+  "2-1-5": ["Partialität", "Quellen zeigen immer nur einen Teil der Vergangenheit, und nur ein Teil der Quellen ist überhaupt erhalten."],
+  "2-1-6": ["Narrativität", "Geschichte gibt es nur als Erzählung."],
+  "2-1-7": ["Konstruktivität", "Geschichte wird nicht „gefunden“, sondern aktiv zusammengesetzt. Deshalb können aus denselben Fakten unterschiedliche Geschichten entstehen."],
+  "2-1-8": ["Standortgebundenheit", "Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Gesamtkontext geprägt, oft unbewusst."],
+};
+const LKSTUFE = { zentral:"Zentral.", teils:"Auch begründbar.", kaum:"Passt kaum." };
+/* cfg = { seite, frage, lead, platz, folge:[Name, Kurzerklärung] (Eintrag 2.1.9), urteil:{ id:[stufe, text] }, bruecke } */
+function landkarte(cfg){
+  const l = S.lk, frei = l.vermutung.trim().length >= 10;
+  const liste = Object.keys(PRINZIP).map(id => ({ id, n:PRINZIP[id][0], k:PRINZIP[id][1] })).concat([{ id:"2-1-9", n:cfg.folge[0], k:cfg.folge[1] }]);
+  const p = liste.find(x => x.id === l.prinzip), u = p ? cfg.urteil[p.id] : null;
+  return `${zeitKopf(cfg.seite)}<h1>${esc(cfg.titel)}</h1>
+  <p class="leitfrage">${esc(cfg.frage)}</p>
+  ${auftrag("Allein · 2 Minuten", "Erst vermuten", cfg.lead)}
+  ${textfeld("lk.vermutung", "Meine Vermutung", { rows:2, platz:cfg.platz, zaehl:false })}
+  <p class="hinweis" id="lk-hinweis">${frei ? "Gut. Jetzt die Landkarte öffnen, dann unten ein Prinzip wählen." : "Schreib mindestens einen Satz. Danach geht es weiter."}</p>
+  <div id="lk-teil2" class="${frei ? "" : "gesperrt"}">
+  ${auftrag("Allein · 4 Minuten", "Dann die Landkarte", "Öffne „Was ist Geschichte?“ in der kognitiven Landkarte. Sie öffnet sich in einem neuen Tab, deine Eingaben hier bleiben. Wähle das Prinzip, das hier am besten passt, und begründe in einem Satz.")}
+  <p><a class="btn dunkel" id="lk-link" href="${LK}2-1" target="_blank" rel="noopener" ${frei ? "" : 'aria-disabled="true" tabindex="-1"'}>Landkarte öffnen: 2.1 Die Gemeinsamkeiten einer jeden Geschichte ↗</a></p>
+  <div class="prinzipien" role="group" aria-label="Prinzip wählen">${liste.map(x => `<button type="button" data-prinzip="${x.id}" aria-pressed="${l.prinzip === x.id}" class="${l.ok && l.prinzip === x.id ? cfg.urteil[x.id][0] : ""}" ${(!frei || l.ok) ? "disabled" : ""}><b>${esc(x.n)}</b><small>${esc(x.k)}</small></button>`).join("")}</div>
+  <label for="lk-grund">Meine Begründung</label><textarea id="lk-grund" data-f="lk.grund" rows="2" placeholder="Dieses Prinzip passt hier, weil …" ${(!frei || !l.prinzip || l.ok) ? "disabled" : ""}>${esc(l.grund)}</textarea>
+  <div class="reihe"><button type="button" class="btn dunkel" data-lkpruef ${(!frei || !l.prinzip || l.grund.trim().length < 10 || l.ok) ? "disabled" : ""}>Prüfen</button>${l.ok ? `<button type="button" class="btn" data-lkneu>Noch einmal</button>` : ""}<span class="hinweis">Rückmeldung in drei Stufen: zentral · auch begründbar · passt kaum.</span></div>
+  <div id="lk-fb" aria-live="polite">${l.ok && u ? `<div class="rm ${u[0]}"><b>${LKSTUFE[u[0]]}</b> ${esc(u[1])} <a href="${LK}${p.id}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a></div>` : ""}</div>
+  </div>
+  ${cfg.bruecke ? `<div class="trift">${cfg.bruecke}</div>` : ""}
+  ${weiter(cfg.nach[0], cfg.nach[1])}`;
+}
+
+/* ---------- Stimmkarte (Muster 12; Gegenwart: Stimmkarte): groß am Gerät, hochhalten, Lehrkraft zählt ---------- */
+function stimmkarte(pfad, optionen){
+  const v = hol(pfad);
+  return `<div class="stimmwahl" role="group" aria-label="Stimme wählen">${optionen.map(o => `<button type="button" data-stimme="${pfad}" data-wert="${o[0]}" aria-pressed="${v === o[0]}"><b>${o[0]}</b>${esc(o[1])}</button>`).join("")}</div>
+  <div class="reihe nodruck"><button type="button" class="btn dunkel" data-stimmkarte="${pfad}" data-opt="${esc(JSON.stringify(optionen))}" ${v ? "" : "disabled"}>Stimmkarte groß zeigen</button><span class="hinweis">Auf Ansage: iPad hochhalten. Die Lehrkraft zählt. Es wird nichts übertragen.</span></div>`;
+}
+let TAFEL_ZURUECK = null;
+function tafel(html, o = {}){
+  TAFEL_ZURUECK = document.activeElement;
+  const u = document.getElementById("ueber");
+  u.innerHTML = `<div class="tafel-voll ${o.hell ? "hell" : ""}" role="dialog" aria-modal="true" aria-label="${esc(o.titel || "Ansicht für den Beamer")}"><div class="tk"><b>${esc(o.titel || "")}</b><button type="button" class="btn" data-tafelzu>Schließen</button></div><div class="mitte">${html}</div></div>`;
+  u.querySelector("[data-tafelzu]").focus();
+}
+function tafelZu(){ const u = document.getElementById("ueber"); if (!u.innerHTML) return; u.innerHTML = ""; if (TAFEL_ZURUECK && document.contains(TAFEL_ZURUECK)) TAFEL_ZURUECK.focus(); }
+
+/* ---------- Kopf, Löschen, Zeichnen ---------- */
+function kopf(){
+  document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div><a class="pill" href="${LABOR}">← GGK-Labor</a><button class="pill" data-geh="lehrkraft">Für Lehrkräfte</button>`;
+  const a = idx(S.seite);
+  document.getElementById("weg").innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
+}
+function loeschBereich(){
+  return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button><label class="g-schalter" style="font-family:var(--body)"><input type="checkbox" role="switch" data-bewegung ${S.ruhig ? "checked" : ""}> Weniger Bewegung</label><span>Alles bleibt auf diesem Gerät. Nichts wird übertragen.</span>
+  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> ${esc(L.loesch)}</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div>
+  <p style="flex:1 0 100%;font-size:.85rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p></div>`;
+}
+function zeichne(fokus){
+  if (!SEITE_FN[S.seite]) S.seite = "start";
+  if (S.ruhig) document.documentElement.setAttribute("data-bewegung", "weniger"); else document.documentElement.removeAttribute("data-bewegung");
+  kopf();
+  const m = document.getElementById("main");
+  m.classList.toggle("breit", (L.breit || []).includes(S.seite));
+  m.innerHTML = SEITE_FN[S.seite]() + loeschBereich();
+  window.Gegenwart && Gegenwart.init(m);
+  nachInit();
+  if (fokus) { m.focus({ preventScroll:true }); window.scrollTo(0, 0); }
+}
+function nachInit(){
+  document.querySelectorAll(".g-wahl[data-id]").forEach(w => { pruefeWahl(w); const st = (S.wahl || {})[w.dataset.id] || {}; if (st.zu) { w.querySelectorAll("input").forEach(i => { i.disabled = true; }); const f = w.querySelector("[data-g-festlegen]"); if (f) f.disabled = true; } });
+  if (typeof L.nachInit === "function") L.nachInit();
+}
+function geh(id){ S.seite = id; speichere(); tafelZu(); zeichne(true); }
+/* Nach einer Texteingabe: Zähler, Raster und Freigaben nachführen, ohne neu zu zeichnen (Fokus und Scrollstand bleiben). */
+function nachEingabe(pfad){
+  const z = document.querySelector(`[data-zaehl="${pfad}"]`); if (z) z.textContent = z.textContent.replace(/^\d+/, woerter(hol(pfad)));
+  const r = document.querySelector(`[data-raster="${pfad}"]`);
+  if (r) { const da = woerter(hol(pfad)) >= +r.dataset.min, war = !r.hidden; r.hidden = !da; const h = document.querySelector(`[data-rasterhinweis="${pfad}"]`); if (h) h.hidden = da; if (da && !war) neu(r, "neu"); }
+  document.querySelectorAll("[data-vergleich]").forEach(b => { const ok = b.dataset.bed.split(",").every(p => String(hol(p) || "").trim().length >= +b.dataset.min); b.disabled = !ok; const h = document.querySelector(`[data-vergleichhinweis="${b.dataset.vergleich}"]`); if (h) h.textContent = ok ? "" : "Erst deine Antworten, dann der Vergleich."; });
+  if (pfad === "lk.vermutung") { const frei = S.lk.vermutung.trim().length >= 10, t = document.getElementById("lk-teil2"); if (t && t.classList.contains("gesperrt") === frei) zeichneBehalte(); }
+  if (pfad === "lk.grund") { const b = document.querySelector("[data-lkpruef]"); if (b) b.disabled = !(S.lk.prinzip && S.lk.grund.trim().length >= 10 && !S.lk.ok); }
+  if (typeof L.nachEingabe === "function") L.nachEingabe(pfad);
+}
+/* Neu zeichnen, aber Scrollstand und Fokus (samt Cursor) behalten. */
+function zeichneBehalte(){
+  const y = window.scrollY, a = document.activeElement, id = a && a.id, pos = a && typeof a.selectionStart === "number" ? a.selectionStart : null;
+  zeichne(false); window.scrollTo(0, y);
+  if (id) { const e = document.getElementById(id); if (e) { e.focus({ preventScroll:true }); if (pos !== null && e.setSelectionRange) { try { e.setSelectionRange(pos, pos); } catch(err) {} } } }
+}
+
+function kernStart(){
+  const d = L.init(), g = lade();
+  S = Object.assign({ seite:"start", ruhig:false, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false } }, d);
+  Object.keys(g).forEach(k => { S[k] = (S[k] && typeof S[k] === "object" && !Array.isArray(S[k]) && g[k] && typeof g[k] === "object" && !Array.isArray(g[k])) ? Object.assign({}, S[k], g[k]) : g[k]; });
+  const h = location.hash.replace("#", ""); if (h && SEITE_FN[h]) S.seite = h;
+  zeichne(false);
+}
+
+document.addEventListener("click", ev => {
+  const t = ev.target.closest("[data-geh],[data-mark],[data-stift],[data-satz],[data-vergleich],[data-prinzip],[data-lkpruef],[data-lkneu],[data-stimme],[data-stimmkarte],[data-tafelzu],[data-loeschfrage],[data-loeschen],[data-g-festlegen],[data-neu-wahl],[data-akt],[data-drucken]");
+  if (!t) return;
+  if (t.dataset.geh) return geh(t.dataset.geh);
+  if (t.dataset.mark) return markiere(t);
+  if (t.dataset.stift) { const [id, s] = t.dataset.stift.split(":"); setz("stift." + id, s); t.parentElement.querySelectorAll(".g-stift").forEach(b => b.setAttribute("aria-pressed", String(b === t))); return; }
+  if (t.dataset.satz) { const f = document.getElementById(t.dataset.satz); if (!f) return; f.value = (f.value.trim() ? f.value.replace(/\s*$/, "") + " " : "") + t.dataset.text + " "; setz(f.dataset.f, f.value); nachEingabe(f.dataset.f); f.focus(); return; }
+  if (t.dataset.vergleich) { const id = t.dataset.vergleich; setz("offen." + id, !(S.offen || {})[id]); const v = document.getElementById("vgl-" + id); v.hidden = !S.offen[id]; t.textContent = S.offen[id] ? "Vergleich ausblenden" : (t.dataset.titel || "Vergleich zeigen"); if (S.offen[id] && ev.detail !== 0) neu(v, "neu"); return; }
+  if (t.dataset.prinzip) { S.lk.prinzip = t.dataset.prinzip; speichere(); return zeichneBehalte(); }
+  if (t.hasAttribute("data-lkpruef")) { S.lk.ok = true; speichere(); zeichneBehalte(); if (ev.detail !== 0) neu(document.querySelector("#lk-fb .rm"), "neu"); return; }
+  if (t.hasAttribute("data-lkneu")) { S.lk.ok = false; S.lk.prinzip = null; S.lk.grund = ""; speichere(); return zeichneBehalte(); }
+  if (t.dataset.stimme) { setz(t.dataset.stimme, t.dataset.wert); return zeichneBehalte(); }
+  if (t.dataset.stimmkarte) { const o = JSON.parse(t.dataset.opt).find(x => x[0] === hol(t.dataset.stimmkarte)); if (o) tafel(`<div class="buchstabe">${esc(o[0])}</div><div class="wort">${esc(o[1])}</div>`, { titel:"Meine Stimme" }); return; }
+  if (t.hasAttribute("data-tafelzu")) return tafelZu();
+  if (t.hasAttribute("data-loeschfrage")) { const f = document.getElementById("loesch-frage"); f.hidden = false; f.querySelector("button").focus(); return; }
+  if (t.dataset.loeschen) { if (t.dataset.loeschen === "ja") { try { localStorage.removeItem(L.key); } catch(e) {} const r = S.ruhig; kernStartLeer(r); } else { document.getElementById("loesch-frage").hidden = true; } return; }
+  if (t.hasAttribute("data-g-festlegen")) { const w = t.closest(".g-wahl[data-id]"); if (!w) return; const gew = w.querySelector("input:checked"), ta = w.querySelector("textarea"); if (!gew) return; setz("wahl." + w.dataset.id, { o:+gew.value, grund: ta ? ta.value : "", zu:true }); setTimeout(() => { zeichneBehalte(); if (typeof L.nachWahl === "function") L.nachWahl(w.dataset.id); }, ruhig() ? 0 : 420); return; }
+  if (t.dataset.neuWahl) { setz("wahl." + t.dataset.neuWahl, {}); return zeichneBehalte(); }
+  if (t.hasAttribute("data-drucken")) return window.print();
+  if (t.dataset.akt && AKTION[t.dataset.akt]) return AKTION[t.dataset.akt](t, ev);
+});
+function kernStartLeer(r){ S = {}; const d = L.init(); S = Object.assign({ seite:"start", ruhig:r, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false } }, d); speichere(); zeichne(true); }
+function markiere(t){
+  const [id, i] = t.dataset.mark.split(":"), st = (S.stift || {})[id] || "a";
+  if (!S.mark[id]) S.mark[id] = {};
+  const hat = S.mark[id][i] === st;
+  if (hat) delete S.mark[id][i]; else S.mark[id][i] = st;
+  speichere();
+  t.className = "g-wort " + (hat ? "" : STIFTKLASSE[st]); t.setAttribute("aria-pressed", String(!hat));
+  if (!hat && window.Gegenwart && st === "a") Gegenwart.bewegen(t, [{ backgroundSize:"0% 100%" }, { backgroundSize:"100% 100%" }], { dauer:260 });
+  document.querySelectorAll("[data-belege]").forEach(b => { const ids = b.dataset.belege.split(","); if (!ids.includes(id)) return; QUELLEN[ids[0]].stifte.forEach(s => { const sp = b.querySelector(".sp." + s[0]); const alt = sp.querySelector("ul,.leer"); if (alt) alt.outerHTML = belegListe(ids, s[0]); }); });
+  if (typeof L.nachMark === "function") L.nachMark(id);
+}
+document.addEventListener("keydown", ev => {
+  if (ev.key === "Escape") return tafelZu();
+  const t = ev.target.closest && ev.target.closest("[data-mark]");
+  if (t && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); markiere(t); }
+});
+document.addEventListener("input", ev => {
+  const t = ev.target;
+  if (t.dataset && t.dataset.f) { setz(t.dataset.f, t.type === "range" ? +t.value : t.value); nachEingabe(t.dataset.f); return; }
+  if (t.hasAttribute && t.hasAttribute("data-grund-feld")) { const w = t.closest(".g-wahl"); if (w) pruefeWahl(w); }
+});
+document.addEventListener("change", ev => {
+  const t = ev.target;
+  if (t.hasAttribute && t.hasAttribute("data-bewegung")) { S.ruhig = t.checked; speichere(); if (S.ruhig) document.documentElement.setAttribute("data-bewegung", "weniger"); else document.documentElement.removeAttribute("data-bewegung"); return; }
+  if (t.tagName === "SELECT" && t.dataset.f) { setz(t.dataset.f, t.value); nachEingabe(t.dataset.f); if (t.dataset.neu !== undefined) zeichneBehalte(); return; }
+  const w = t.closest && t.closest(".g-wahl"); if (w) pruefeWahl(w);
+});
+/* ---------- Bilder (Muster aus M21–M23): Dateien liegen nur im Moodle-Paket unter media/. Fehlt eine Datei, verschwindet die Figur ohne Lücke. ---------- */
+function foto(b, o = {}){
+  return `<figure class="bild ${o.klein ? "klein" : ""}" data-bildgruppe="${o.gruppe || ""}"><img src="media/${b.datei}" alt="${esc(b.alt)}" loading="lazy" onerror="bildFehlt(this)"><figcaption>${b.text}<span class="nachweis">${b.nachweis}</span></figcaption></figure>`;
+}
+function bildFehlt(img){
+  const f = img.closest("figure"), g = f && f.dataset.bildgruppe; if (!f) return; f.remove();
+  if (g) { const rest = document.querySelectorAll(`figure[data-bildgruppe="${g}"]`).length, h = document.querySelector(`[data-bildhinweis="${g}"]`); if (!rest && h) h.hidden = false; }
+}
+const AKTION = {
+  /* data-akt="setz" data-p="pfad" data-w="wert": Wert setzen und neu zeichnen */
+  setz(t){ let w = t.dataset.w; if (w === "true") w = true; else if (w === "false") w = false; setz(t.dataset.p, w); zeichneBehalte(); },
+};
+/* ===== Ost-West-Konflikt: Orientierungsrahmen. 16 Ereigniskarten und Glossar nach M28 „Unser Glossar: Der Ost-West-Konflikt“ (Unterrichtsheft, Karten und Texte der Lehrkraft). ===== */
+const LEITFRAGE = "Welchen Einfluss hatten Ideologien, Machtinteressen und Handlungsspielräume (Agency) der Akteure auf den Verlauf des Ost-West-Konflikts – und wie wird dieser Konflikt heute in verschiedenen Ländern erinnert?";
+const PHASEN = [
+  ["p1", "1945", "Kriegsende und erste Nachkriegsordnung", 1945, 1946],
+  ["p2", "1947", "Die ideologische und politische Spaltung beginnt", 1947, 1947],
+  ["p3", "1947–1952", "Wirtschaftliche Blockbildung", 1947, 1952],
+  ["p4", "1948/49", "Erste Zuspitzung und deutsche Teilung", 1948, 1949],
+  ["p5", "1950er", "Stellvertreterkriege und militärische Blockbildung", 1950, 1959],
+  ["p6", "1960er", "Höhepunkt der Konfrontation", 1960, 1968],
+  ["p7", "1969–1979", "Entspannungspolitik", 1969, 1979],
+  ["p8", "1979–1989", "Neue Konfrontation und Stellvertreterkriege", 1979, 1989],
+  ["p9", "1985–1991", "Ende des Ost-West-Konflikts", 1985, 1991],
+];
+/* Kasten = Bezug zur kognitiven Landkarte bzw. Deutung auf der Karte. spur: d = Deutschland, e = Europa, w = Welt. */
+const KARTEN = [
+  { id:"k01", nr:1, titel:"Potsdamer Abkommen", datum:"August 1945", jahr:1945, phase:"p1", spur:"d", stunde:"s1",
+    was:"Die drei Hauptsiegermächte USA, UdSSR und Großbritannien einigten sich auf der Konferenz von Potsdam über die Nachkriegsordnung in Deutschland.",
+    liste:["Die „fünf D’s“", [["Demilitarisierung","Auflösung der Wehrmacht"],["Denazifizierung","Entfernung von NS-Personal"],["Demokratisierung","Aufbau demokratischer Strukturen"],["Dezentralisierung","Machtverteilung auf Länder"],["Demontage","Abbau von Industrieanlagen"]]],
+    kasten:["Problematik","Das Abkommen ließ viele Fragen offen (z. B. Wirtschaftseinheit, Grenzfragen). Die unterschiedlichen Interpretationen durch West und Ost trugen später zur Teilung Deutschlands bei."],
+    fuss:["Ort: Potsdam (Schloss Cecilienhof)","Beteiligte: USA (Truman), UdSSR (Stalin), GB (Attlee)"],
+    bild:["Stalin, Truman und Churchill während der Potsdamer Konferenz, Juli 1945.","Schwarz-Weiß-Foto: Drei Staatsmänner stehen nebeneinander, einer in heller Uniformjacke, einer im Anzug mit Fliege, einer in Uniform mit Zigarre."] },
+  { id:"k02", nr:2, titel:"Truman-Doktrin", datum:"12. März 1947", jahr:1947, phase:"p2", spur:"w", stunde:"s2",
+    was:"US-Präsident Harry S. Truman verkündete in einer Grundsatzrede die Containment-Politik: Die USA werden „freien Völkern beistehen, die sich der angestrebten Unterwerfung durch bewaffnete Minderheiten oder durch äußeren Druck widersetzen.“",
+    liste:["Kernaussage", [["","Geburtsstunde der US-Eindämmungspolitik gegen kommunistische Expansion. Die USA übernehmen globale Verantwortung zur Verteidigung der „freien Welt“."]]],
+    kasten:["Perspektivität","Truman präsentiert den Konflikt als Kampf zwischen „Freiheit“ und „Unterdrückung“. Aus sowjetischer Sicht war dies jedoch reine Imperialismus-Politik zur Sicherung US-amerikanischer Einflusssphären."],
+    fuss:["Ort: Washington D.C. (US-Kongress)","Akteur: US-Präsident Harry S. Truman"],
+    bild:["US-Präsident Harry S. Truman am Schreibtisch.","Farbfoto: Ein Mann mit Brille im hellen Anzug sitzt am Schreibtisch und unterschreibt ein Papier."] },
+  { id:"k03", nr:3, titel:"Zwei-Lager-Theorie", datum:"September 1947", jahr:1947.7, phase:"p2", spur:"w", stunde:"s2",
+    was:"Der sowjetische Politiker Andrej Shdanow verkündete auf der Gründungskonferenz des Kominform die Zwei-Lager-Theorie: Die Welt spaltet sich in zwei unversöhnliche Lager.",
+    liste:["Die zwei Lager", [["Imperialistisches Lager","unter Führung der USA: kapitalistisch, expansiv, kriegstreibend"],["Antiimperialistisches Lager","unter Führung der UdSSR: demokratisch, friedliebend, fortschrittlich"]]],
+    kasten:["Gegenstück","Sowjetische Antwort auf die Truman-Doktrin – manifestiert die ideologische Spaltung der Welt in Ost und West. Der Kalte Krieg wird zur globalen Systemkonkurrenz."],
+    fuss:["Ort: Szklarska Poręba (Polen)","Akteur: Andrej Shdanow (UdSSR)"],
+    bild:["Andrej Shdanow.","Schwarz-Weiß-Porträt: Ein Mann mit Schnurrbart in Uniform mit Orden."] },
+  { id:"k04", nr:4, titel:"Marshallplan", datum:"1947–1952", jahr:1948, phase:"p3", spur:"e", stunde:"s2",
+    was:"Die USA stellten ca. 13 Milliarden Dollar (heute ca. 150 Mrd. $) für den wirtschaftlichen Wiederaufbau Westeuropas bereit – das größte Hilfsprogramm der Geschichte.",
+    liste:["Ziele des Plans", [["Wirtschaftliche Erholung","Wiederaufbau zerstörter Infrastruktur"],["Demokratie stabilisieren","Verhinderung sozialer Unruhen"],["Kommunismus eindämmen","Containment-Politik wirtschaftlich umsetzen"],["Märkte sichern","Exportmärkte für die US-Wirtschaft"]]],
+    kasten:["Reaktion der UdSSR","Ablehnung des Plans für sich und die Satellitenstaaten. Stattdessen Gründung des RGW (Rat für gegenseitige Wirtschaftshilfe) 1949 – wirtschaftliche Blockbildung!"],
+    fuss:["16 westeuropäische Staaten beteiligt","Initiator: US-Außenminister George C. Marshall"],
+    bild:["Zwei Plakate zum Marshallplan: „Der Marshallplan hilft Europa“ und „All our colours to the mast“.","Zwei farbige Plakate: links Freiheitsstatue und Schiff, rechts ein Segelschiff, dessen Segel aus europäischen Flaggen bestehen."] },
+  { id:"k05", nr:5, titel:"Berlin-Blockade und Luftbrücke", datum:"24. Juni 1948 – 12. Mai 1949", jahr:1948.5, phase:"p4", spur:"d", stunde:"s3",
+    was:"Die Sowjetunion sperrte alle Land- und Wasserwege nach West-Berlin, um die Westmächte zum Verlassen der Stadt zu zwingen. Anlass: Währungsreform in den Westzonen.",
+    liste:["Die Luftbrücke", [["277.000 Flüge","alle 90 Sekunden eine Landung"],["2,3 Mio. Tonnen Güter","Lebensmittel, Kohle, Medizin"],["2,5 Mio. Menschen","versorgt in West-Berlin"],["„Rosinenbomber“","Piloten warfen Süßigkeiten für Kinder ab"]]],
+    kasten:["Bedeutung","Erster Höhepunkt des Kalten Krieges! Zeigte die Entschlossenheit des Westens und besiegelte die Spaltung Deutschlands. Stalin gab nach – die Blockade wurde aufgehoben."],
+    fuss:["Ort: Berlin (West-Sektoren)","Akteure: UdSSR vs. USA, GB, Frankreich"],
+    bild:["Kinder in Berlin beobachten ein landendes Transportflugzeug der Luftbrücke.","Schwarz-Weiß-Foto: Eine Gruppe Kinder steht auf einem Trümmerhügel und blickt zu einem tief fliegenden Propellerflugzeug."] },
+  { id:"k06", nr:6, titel:"Doppelte Staatsgründung", datum:"Mai / Oktober 1949", jahr:1949.5, phase:"p4", spur:"d", stunde:"s4",
+    was:"Als direkte Folge der Blockbildung im Kalten Krieg entstanden zwei deutsche Staaten mit gegensätzlichen politischen Systemen.",
+    liste:["Die zwei Staaten", [["23. Mai 1949: BRD","Bundesrepublik Deutschland, Hauptstadt Bonn, Kanzler Konrad Adenauer, Marktwirtschaft und parlamentarische Demokratie"],["7. Oktober 1949: DDR","Deutsche Demokratische Republik, Hauptstadt Ost-Berlin, Ministerpräsident Otto Grotewohl, Planwirtschaft und sozialistische Diktatur"]]],
+    kasten:["Manifestation","Deutschland wird zum Symbol des Kalten Krieges – die Teilung sollte 40 Jahre bestehen bleiben. Zwei Gesellschaftssysteme stehen sich direkt gegenüber."],
+    fuss:["Orte: Bonn (BRD), Ost-Berlin (DDR)","Dauer der Teilung: 1949–1990 (41 Jahre)"],
+    bild:["Karte: Bundesrepublik Deutschland mit Bonn, Deutsche Demokratische Republik mit Ost-Berlin.","Karte Mitteleuropas: Westdeutschland blau, Ostdeutschland rot, mit den Hauptstädten Bonn und Ost-Berlin."] },
+  { id:"k07", nr:7, titel:"Korea-Krieg", datum:"1950–1953", jahr:1950.5, phase:"p5", spur:"w", stunde:"s5",
+    was:"Erster großer „heißer Krieg“ im Rahmen des Kalten Krieges: Nordkorea (unterstützt von UdSSR und China) greift Südkorea (unterstützt von UN-Truppen unter US-Führung) an.",
+    liste:["Verlauf", [["Juni 1950","Nordkoreanischer Überfall auf Südkorea"],["September 1950","UN-Truppen drängen Nordkorea zurück"],["Oktober 1950","China greift ein (300.000 Soldaten)"],["Juli 1953","Waffenstillstand, Korea bleibt geteilt"]]],
+    kasten:["Bedeutung","Zeigt, dass der Kalte Krieg jederzeit zum „heißen Krieg“ eskalieren kann. Ausweitung der Containment-Politik auf Asien. Bilanz: ca. 3–4 Millionen Tote."],
+    fuss:["Ort: Koreanische Halbinsel (38. Breitengrad)","Bis heute nur Waffenstillstand, kein Friedensvertrag"],
+    bild:["Korea-Krieg: Ein Mädchen trägt ein kleines Kind auf dem Rücken, dahinter ein Panzer.","Schwarz-Weiß-Foto: Ein Mädchen mit einem Kleinkind auf dem Rücken steht vor einem Panzer."] },
+  { id:"k08", nr:8, titel:"Warschauer Pakt", datum:"14. Mai 1955", jahr:1955, phase:"p5", spur:"e", stunde:"s5",
+    was:"Gründung eines Militärbündnisses der kommunistischen Staaten Osteuropas unter Führung der Sowjetunion – als direkte Reaktion auf den NATO-Beitritt der BRD.",
+    liste:["Mitgliedstaaten", [["UdSSR","Führungsmacht"],["DDR, Polen, Tschechoslowakei",""],["Ungarn, Rumänien, Bulgarien",""],["Albanien","bis 1968 ausgetreten"]]],
+    kasten:["Blockbildung","NATO (1949) vs. Warschauer Pakt (1955) – die militärische Spaltung Europas ist komplett! Zwei hochgerüstete Militärblöcke stehen sich gegenüber."],
+    fuss:["Gründungsort: Warschau (Polen)","Bestand: 1955–1991 (36 Jahre)"],
+    bild:["Karte: NATO-Staaten und Staaten des Warschauer Pakts (Quelle laut Karte: Bundeszentrale für politische Bildung).","Europakarte: NATO-Staaten blau, Staaten der Warschauer Vertragsorganisation rot."] },
+  { id:"k09", nr:9, titel:"Berliner Mauer", datum:"13. August 1961", jahr:1961, phase:"p6", spur:"d", stunde:"s6",
+    was:"In der Nacht vom 12. auf den 13. August 1961 begann die DDR mit dem Bau einer Sperranlage, die Ost-Berlin von West-Berlin trennte – das sichtbarste Symbol des Kalten Krieges.",
+    liste:["Fakten zur Mauer", [["155 km lang","davon 43 km durch Berlin"],["Mind. 140 Todesopfer","an der Berliner Mauer"],["2,7 Mio. Flüchtlinge","zuvor (1949–1961)"],["28 Jahre","stand die Mauer (1961–1989)"]]],
+    kasten:["Geschichtspolitik","Die DDR nannte sie „antifaschistischen Schutzwall“ – ein perfektes Beispiel für propagandistische Umdeutung der Geschichte!"],
+    fuss:["Ort: Berlin (Sektorengrenze)","DDR-Staatsratsvorsitzender: Walter Ulbricht"],
+    bild:["Bau der Berliner Mauer, August 1961.","Schwarz-Weiß-Foto: Arbeiter setzen mit einem Kran Betonteile auf eine Mauer mit Stacheldraht; auf der Straße stehen Uniformierte und Passant*innen."] },
+  { id:"k10", nr:10, titel:"Kuba-Krise", datum:"16.–28. Oktober 1962", jahr:1962.8, phase:"p6", spur:"w", stunde:"s6",
+    was:"13 Tage stand die Welt am Rande eines Atomkriegs: Die USA entdeckten sowjetische Mittelstreckenraketen auf Kuba, nur 150 km vor der US-Küste.",
+    liste:["Verlauf", [["14. Oktober","US-Aufklärungsflug entdeckt Raketen"],["22. Oktober","Kennedy verkündet Seeblockade Kubas"],["24.–27. Oktober","Höhepunkt der Krise"],["28. Oktober","Chruschtschow lenkt ein, Raketen werden abgezogen"]]],
+    kasten:["Agency","Die Welt hing von den Entscheidungen weniger Personen ab (Kennedy und Chruschtschow). Beide zeigten Kompromissbereitschaft – der Atomkrieg wurde verhindert!"],
+    fuss:["Schauplatz: Kuba, 150 km vor Florida","Kennedy (USA) vs. Chruschtschow (UdSSR)"],
+    bild:["Karte: Reichweiten der sowjetischen Raketen auf Kuba.","Karte Nord- und Mittelamerikas mit drei roten Kreisen um Kuba, die die Reichweiten der Raketen zeigen."] },
+  { id:"k11", nr:11, titel:"Ostpolitik", datum:"ab 1969", jahr:1969.5, phase:"p7", spur:"d", stunde:"s8",
+    was:"Die sozial-liberale Koalition unter Bundeskanzler Willy Brandt (SPD) verfolgte eine neue Außenpolitik gegenüber dem Ostblock: „Wandel durch Annäherung“.",
+    liste:["Wichtige Verträge", [["Moskauer Vertrag (1970)","Gewaltverzicht mit der UdSSR"],["Warschauer Vertrag (1970)","Anerkennung der Oder-Neiße-Grenze"],["Grundlagenvertrag (1972)","Regelung des Verhältnisses BRD–DDR"]]],
+    kasten:["Symbol","Kniefall Willy Brandts am Warschauer Ghetto-Mahnmal (7. Dezember 1970) – weltweites Zeichen für Anerkennung deutscher Schuld und Versöhnung."],
+    fuss:["Hauptakteur: Bundeskanzler Willy Brandt (SPD)","Friedensnobelpreis für Brandt 1971"],
+    bild:["Willy Brandt kniet am Mahnmal für die Opfer des Warschauer Ghettos, 7. Dezember 1970.","Schwarz-Weiß-Foto: Ein Mann im Mantel kniet vor einem Kranz auf nassen Stufen; hinter ihm stehen dicht gedrängt Menschen und Fotografen."] },
+  { id:"k12", nr:12, titel:"Entspannungspolitik / Détente", datum:"ca. 1969–1979", jahr:1972, phase:"p7", spur:"e", stunde:"s8",
+    was:"Phase der Konfliktentschärfung zwischen Ost und West durch diplomatische Verträge, Abrüstungsgespräche und wirtschaftliche Kooperation.",
+    liste:["Wichtige Verträge", [["Vier-Mächte-Abkommen (1971)","Berlin-Status"],["SALT I (1972)","Rüstungsbegrenzung"],["KSZE Helsinki (1975)","„Drei Körbe“: Sicherheit, Wirtschaft, Menschenrechte"]]],
+    kasten:["Aber","Der Rüstungswettlauf ging trotz Détente weiter! Beide Seiten blieben misstrauisch. Ende der Entspannung: Afghanistan-Invasion 1979."],
+    fuss:["Höhepunkt: KSZE-Schlussakte Helsinki 1975","35 Staaten unterzeichneten die KSZE-Schlussakte"],
+    bild:["Unterzeichnung der KSZE-Schlussakte in Helsinki, 1975. Auf den Tischschildern: Bundesrepublik, DDR, USA.","Schwarz-Weiß-Foto: Staatsmänner sitzen nebeneinander an einem langen Tisch und unterschreiben Dokumente; dahinter Berater und Kameras."] },
+  { id:"k13", nr:13, titel:"Afghanistan-Krieg", datum:"1979–1989", jahr:1979.9, phase:"p8", spur:"w", stunde:"s8",
+    was:"Sowjetische Invasion Afghanistans zur Stützung der kommunistischen Regierung. Die USA unterstützten islamistische Mudschaheddin mit Waffen – letzter großer Stellvertreterkrieg des Kalten Krieges.",
+    liste:["Folgen", [["Ca. 15.000 sowjetische Soldaten","gefallen"],["Ca. 1 Mio. afghanische Zivilisten","starben"],["„UdSSRs Vietnam“","massiver Imageschaden"],["Ende der Détente","neue Eiszeit"]]],
+    kasten:["Bedeutung","Der Krieg schwächte die UdSSR militärisch, wirtschaftlich und moralisch massiv und trug zum späteren Zerfall der Sowjetunion bei!"],
+    fuss:["Ort: Afghanistan","UdSSR vs. Mudschaheddin (USA-unterstützt)"],
+    bild:["Sowjetische Truppen auf Schützenpanzern mit roten Fahnen in Afghanistan.","Farbfoto: Soldaten sitzen auf einer Kolonne von Schützenpanzern mit roten Fahnen und fahren über eine Brücke."] },
+  { id:"k14", nr:14, titel:"Stellvertreterkriege weltweit", datum:"1950er–1980er", jahr:1965, phase:"p8", spur:"w", stunde:"s8",
+    was:"USA und UdSSR trugen ihre Konfrontation weltweit aus – ohne direkt gegeneinander Krieg zu führen. Schauplätze waren vor allem die „Dritte Welt“.",
+    liste:["Wichtige Konflikte", [["Vietnam-Krieg (1955–75)","2 Mio. Tote, US-Niederlage"],["Angola (1975–2002)","Bürgerkrieg, Ost-West-Einmischung"],["Mosambik, Äthiopien","weitere afrikanische Konflikte"]]],
+    kasten:["Bilanz","Für viele Länder war der „Kalte Krieg“ ein sehr „heißer Krieg“ – Millionen Tote, zerstörte Infrastruktur, jahrzehntelange Instabilität."],
+    fuss:["Schauplätze: Asien, Afrika, Lateinamerika","Opferzahlen: mehrere Millionen Tote"],
+    bild:["Vietnam-Krieg: Eine Frau flieht mit einem Kind auf dem Arm, dahinter ein Soldat.","Schwarz-Weiß-Foto: Eine Frau mit Kopftuch trägt ein kleines Kind über ein zerstörtes Gelände; im Hintergrund ein bewaffneter Soldat."], belastend:true },
+  { id:"k15", nr:15, titel:"Glasnost und Perestroika", datum:"ab 1985", jahr:1985.5, phase:"p9", spur:"w", stunde:"s9",
+    was:"Der neue sowjetische Staatschef Michail Gorbatschow startete umfassende Reformprogramme zur Rettung der UdSSR – mit unbeabsichtigten Folgen.",
+    liste:["Die Reformen", [["Glasnost (Offenheit)","Meinungsfreiheit, Ende der Zensur, Transparenz"],["Perestroika (Umgestaltung)","Wirtschaftsreformen, marktwirtschaftliche Elemente"]]],
+    kasten:["Paradoxe Folge","Die Reformen ermöglichten die friedlichen Revolutionen in Osteuropa (1989), führten aber letztlich zum Zerfall der Sowjetunion (1991)!"],
+    fuss:["Michail Gorbatschow (Generalsekretär ab 1985)","Friedensnobelpreis 1990"],
+    bild:["Michail Gorbatschow stößt bei einem Staatsbesuch mit seinem Gastgeber an.","Farbfoto: Zwei Männer in Anzügen stoßen mit Gläsern an und lächeln; im Hintergrund rote Fahnen."] },
+  { id:"k16", nr:16, titel:"Zwei-plus-Vier-Vertrag", datum:"12. September 1990", jahr:1990.7, phase:"p9", spur:"d", stunde:"s9",
+    was:"Vertrag zwischen den ZWEI deutschen Staaten (BRD, DDR) und den VIER Siegermächten (USA, UdSSR, Großbritannien, Frankreich) über die äußeren Aspekte der deutschen Einheit.",
+    liste:["Wichtigste Inhalte", [["Oder-Neiße-Grenze","endgültig anerkannt"],["Abzug alliierter Truppen","bis 1994"],["Volle Souveränität","für Deutschland"],["Bundeswehr-Begrenzung","auf max. 370.000 Soldaten"],["Verzicht","auf ABC-Waffen"]]],
+    kasten:["Ende","Der Vertrag machte die deutsche Wiedervereinigung völkerrechtlich möglich. Am 3. Oktober 1990 wurde Deutschland wiedervereinigt – das Ende des Kalten Krieges!"],
+    fuss:["Unterzeichnung: 12. September 1990 in Moskau","Inkrafttreten: 15. März 1991"],
+    bild:["Unterzeichnung des Zwei-plus-Vier-Vertrags in Moskau, 12. September 1990.","Farbfoto: Sechs Außenminister sitzen an einem langen Tisch vor sechs Flaggen und unterzeichnen."] },
+];
+/* Glossar nach M28 (Unterrichtsheft „Geschichte aktuell 1“, Texte der Lehrkraft). Erzeugt mit tools/owk_aus_heft.py. */
+const GLOSSAR = [
+ {
+  "g": "g",
+  "t": "Blockbildung",
+  "x": "Die Entstehung zweier gegnerischer Militärbündnisse (NATO und Warschauer Pakt) und Wirtschaftsblöcke (EWG/EU und RGW/COMECON) nach 1945. Die Blockbildung führte zur Spaltung Europas und Deutschlands. Historische Entwicklung: 1947: Truman-Doktrin und Containment-Politik 1949: Gründung der NATO 1955: Gründung des Warschauer Pakts als „Antwort“ auf die Aufnahme der BRD in die NATO"
+ },
+ {
+  "g": "g",
+  "t": "Blockfreiheit",
+  "x": "Bewegung von Staaten, die sich im Kalten Krieg keiner der beiden Supermächte anschließen wollten. Gründung 1961 in Belgrad durch Jugoslawien, Indien, Ägypten, Indonesien und Ghana."
+ },
+ {
+  "g": "g",
+  "t": "Containment-Politik (Eindämmungspolitik)",
+  "x": "Die von US-Diplomat George F. Kennan entwickelte Strategie, die Ausbreitung des Kommunismus durch politische, wirtschaftliche und militärische Mittel einzudämmen, ohne einen offenen Krieg zu riskieren. Grundlage der US-Außenpolitik von Truman bis zum Ende des Kalten Krieges."
+ },
+ {
+  "g": "g",
+  "t": "Demokratie vs. Diktatur",
+  "x": "Der Ost-West-Konflikt war auch ein Systemkonflikt zwischen liberaler Demokratie (mit Marktwirtschaft, Grundrechten, Gewaltenteilung) und kommunistischer Diktatur (mit Einparteienherrschaft, Planwirtschaft, fehlenden Freiheitsrechten). Verbindung zur kognitiven Landkarte: Die Bewertung dieser Systeme ist immer standortgebunden. Was im Westen als „Freiheit“ galt, wurde im Osten als „Ausbeutung“ bezeichnet – und umgekehrt. Geschichtsbücher aus Ost und West erzählten hier völlig unterschiedliche Narrative."
+ },
+ {
+  "g": "g",
+  "t": "Kommunismus",
+  "x": "Der Kommunismus (von lateinisch communis = „gemeinsam“) ist eine politische Lehre und Gesellschaftsordnung, die auf die Beseitigung des Privateigentums und die Errichtung einer klassenlosen Gesellschaft abzielt. In der marxistischen Theorie ist der Kommunismus die „höhere Phase“ nach dem Sozialismus, in der der Staat „abgestorben“ ist und das Prinzip gilt: „Jeder nach seinen Fähigkeiten, jedem nach seinen Bedürfnissen.“ Im Ost-West-Konflikt bezeichnete der Begriff die realexistierenden sozialistischen Staaten unter Führung der Sowjetunion (UdSSR, DDR, etc.) mit Einparteienherrschaft, Planwirtschaft und marxistisch-leninistischer Staatsdoktrin."
+ },
+ {
+  "g": "g",
+  "t": "Sozialismus",
+  "x": "Der Sozialismus (von lateinisch socialis = „gesellschaftlich“) ist eine politische Weltanschauung, die eine solidarische Gesellschaft durch die Überführung von Produktionsmitteln in Gemeineigentum anstrebt. In der marxistischen Theorie gilt der Sozialismus als „untere Phase“ oder Übergangsstadium auf dem Weg zum Kommunismus. Im westlichen Verständnis entwickelte sich der Sozialismus zur Sozialdemokratie, die Reformen im Rahmen der parlamentarischen Demokratie und der Marktwirtschaft anstrebt (soziale Gerechtigkeit, Wohlfahrtsstaat, Gewerkschaften). Im Ost-West-Konflikt standen sich das sowjetische Modell (realexistierender Sozialismus) und das westlich-sozialdemokratische Modell gegenüber."
+ },
+ {
+  "g": "g",
+  "t": "Westliche Ideologie (Liberale Demokratie / Kapitalismus)",
+  "x": "Die westliche Ideologie basiert auf den Prinzipien der liberalen Demokratie und der Marktwirtschaft. Ihre Kernelemente sind: Politisch: Parlamentarische Demokratie, Gewaltenteilung, Grund- und Menschenrechte, Meinungs- und Pressefreiheit, Rechtsstaatlichkeit Wirtschaftlich: Kapitalistische Marktwirtschaft mit Privateigentum an Produktionsmitteln, Wettbewerb, Gewinnstreben – in der Praxis jedoch reguliert durch soziale Sicherungssysteme (soziale Marktwirtschaft) Gesellschaftlich: Individualismus, Pluralismus, bürgerliche Freiheiten Im Ost-West-Konflikt prägte der Antikommunismus die westliche Ideologie entscheidend mit: Die USA und ihre Verbündeten verstanden sich als „freie Welt“ im Kampf gegen die „kommunistische Bedrohung“. Die Truman-Doktrin formulierte dies als Auftrag, „freien Völkern“ gegen „bewaffnete Minderheiten oder äußeren Druck“ beizustehen."
+ },
+ {
+  "g": "g",
+  "t": "Eurozentrismus",
+  "x": "Eine Denkweise, die Europa unhinterfragt in den Mittelpunkt stellt und europäische Werte, Geschichte und Entwicklungen als universelle Norm betrachtet. Bedeutung für die Geschichtswissenschaft: Der Ost-West-Konflikt wird oft als rein europäischamerikanisches Phänomen dargestellt. Eine globalgeschichtliche Perspektive zeigt dagegen, wie der Konflikt die ganze Welt erfasste – durch Stellvertreterkriege in Asien, Afrika und Lateinamerika, durch Entwicklungshilfe als Einflussnahme und durch die Blockfreiheit-Bewegung."
+ },
+ {
+  "g": "i",
+  "t": "COMECON / RGW (Rat für gegenseitige Wirtschaftshilfe)",
+  "x": "1949 auf sowjetische Initiative gegründete Wirtschaftsorganisation der kommunistischen Staaten, als Gegenstück zum Marshallplan und zur späteren EWG. Ziel war die wirtschaftliche Integration des Ostblocks."
+ },
+ {
+  "g": "i",
+  "t": "EWG / EG / EU",
+  "x": "Europäische Wirtschaftsgemeinschaft (1957), später Europäische Gemeinschaft, heute Europäische Union. Entstand aus dem Wunsch, Westeuropa wirtschaftlich und politisch zu integrieren und damit Frieden und Stabilität zu sichern – auch als Bollwerk gegen den Kommunismus."
+ },
+ {
+  "g": "i",
+  "t": "KSZE (Konferenz über Sicherheit und Zusammenarbeit in Europa)",
+  "x": "1975 in Helsinki stattfindende Konferenz, die zur KSZE-Schlussakte führte. Diese enthielt: Anerkennung der bestehenden Grenzen Vertrauensbildende Maßnahmen (z.B. Ankündigung von Militärmanövern) Zusammenarbeit in Wirtschaft, Wissenschaft und Kultur „Dritter Korb“: Menschenrechte, Familienzusammenführung, Informationsfreiheit Bedeutung: Die KSZE wurde zu einem wichtigen Instrument der Entspannung, aber auch der Opposition in Osteuropa, die sich auf die Menschenrechtsvereinbarungen berufen konnte."
+ },
+ {
+  "g": "i",
+  "t": "NATO (North Atlantic Treaty Organization)",
+  "x": "1949 gegründetes nordatlantisches Verteidigungsbündnis. Gründungsmitglieder: USA, Kanada, Großbritannien, Frankreich, Italien, Belgien, Niederlande, Luxemburg, Norwegen, Dänemark, Island, Portugal. Später traten bei: Griechenland, Türkei (1952), BRD (1955), Spanien (1982). Grundlage ist der Bündnisfall nach Artikel 5: Ein bewaffneter Angriff gegen ein Mitglied wird als Angriff gegen alle betrachtet."
+ },
+ {
+  "g": "i",
+  "t": "UNO (United Nations Organization)",
+  "x": "1945 gegründete Nachfolgeorganisation des Völkerbundes. Im Ost-West-Konflikt war die UNO oft Schauplatz der Auseinandersetzung (z.B. im Sicherheitsrat mit Vetomacht der beiden Blöcke)."
+ },
+ {
+  "g": "a",
+  "t": "Konrad Adenauer (1876–1967)",
+  "x": "Rolle: Erster Bundeskanzler der BRD (1949-1963) Politik: Setzte auf Westintegration, Aussöhnung mit Frankreich, NATO-Beitritt und Wiederbewaffnung. Sah in der Bindung an den Westen die Voraussetzung für Sicherheit und letztlich Wiedervereinigung."
+ },
+ {
+  "g": "a",
+  "t": "Willy Brandt (1913–1992)",
+  "x": "Rolle: Bundeskanzler (1969-1974), Architekt der Ostpolitik Politik: „Wandel durch Annäherung“, Aussöhnung mit Polen (Kniefall von Warschau), Verträge mit der UdSSR und der DDR."
+ },
+ {
+  "g": "a",
+  "t": "Michail Gorbatschow (1931–2022)",
+  "x": "Rolle: Letzter Staatschef der UdSSR (1985-1991) Politik: Glasnost und Perestroika, Abrüstungsinitiativen, Ende des Kalten Krieges, Akzeptanz der deutschen Einheit."
+ },
+ {
+  "g": "a",
+  "t": "Erich Honecker (1912–1994)",
+  "x": "Rolle: Staats- und Parteichef der DDR (1971-1989) Politik: Abgrenzung von der BRD, Betonung der „sozialistischen Nation“, Ablehnung von Reformen, Ausbau des Überwachungsstaates."
+ },
+ {
+  "g": "a",
+  "t": "Josef Stalin (1878–1953)",
+  "x": "Rolle: Diktator der UdSSR (ab Mitte der 1920er Jahre bis 1953) Politik: Ausdehnung des sowjetischen Machtbereichs nach Westen, Errichtung von Satellitenstaaten, Berlin-Blockade, Atomwaffenentwicklung."
+ },
+ {
+  "g": "a",
+  "t": "Harry S. Truman (1884–1972)",
+  "x": "Rolle: US-Präsident (1945-1953) Politik: Truman-Doktrin, Marshallplan, Berliner Luftbrücke, Entscheidung zum Abwurf der Atombombe."
+ },
+ {
+  "g": "a",
+  "t": "Hanna Rydh (Schweden)",
+  "x": "Als Präsidentin der International Alliance of Women (1946-1952) war sie eine der prominentesten Vertreterinnen des internationalen Feminismus. Im frühen Kalten Krieg reiste sie nach West-Berlin, um der Museumsdirektorin Gertrud Dorka ihre Unterstützung anzubieten. Sie sah es als Aufgabe der fortschrittlichen skandinavischen Frauen, die vom Krieg zerrütteten Länder zu unterstützen und so zu Frieden und Völkerverständigung beizutragen ."
+ },
+ {
+  "g": "a",
+  "t": "Gertrud Dorka (West-Berlin)",
+  "x": "Als erste Direktorin des Museums für Vor- und Frühgeschichte in Berlin (1947-1958) kämpfte sie im geteilten und zerstörten Berlin um den Wiederaufbau ihres Hauses. Die Begegnung mit Hanna Rydh zeigt, wie persönliche Netzwerke und internationale Frauenorganisationen halfen, die Isolation der Nachkriegszeit und die beginnende Blockkonfrontation zu überwinden"
+ },
+ {
+  "g": "k",
+  "t": "Erinnerungskultur",
+  "x": "Die Art und Weise, wie Gesellschaften sich an die Vergangenheit erinnern – durch Denkmäler, Gedenktage, Schulbücher, Filme, Museen. Im Ost-West-Konflikt wird besonders deutlich, wie unterschiedlich Ereignisse erinnert werden können (z.B. der 17. Juni 1953 in BRD und DDR)."
+ },
+ {
+  "g": "k",
+  "t": "Geschichtspolitik",
+  "x": "Die bewusste Nutzung von Geschichte durch politische Akteure, um bestimmte Identitäten, Werte oder politische Ziele zu fördern. Beispiele: Die Umbenennung des 17. Juni in der DDR („faschistischer Putschversuch“) Die Instrumentalisierung des Zweiten Weltkriegs in Putins Russland Der Streit um den Begriff „Völkermord“ für die Armenier-Verfolgung Verbindung zur kognitiven Landkarte: Geschichtspolitik zeigt, wie Perspektivität und Narrativität nicht nur wissenschaftliche Konzepte sind, sondern handfeste politische Bedeutung haben."
+ },
+ {
+  "g": "k",
+  "t": "Kollektives Gedächtnis (Aleida Assmann)",
+  "x": "Die gemeinsamen Erinnerungen einer Gruppe oder Gesellschaft, die durch Erzählungen, Rituale, Symbole und Traditionen weitergegeben werden. Es ist entscheidend für die Identitätsbildung und kann sich im Laufe der Zeit verändern. Bedeutung für den Ost-West-Konflikt: In Westdeutschland prägte das kollektive Gedächtnis an Nationalsozialismus und Krieg die Ablehnung des Kommunismus In Osteuropa prägte das Gedächtnis an sowjetische Unterdrückung die anti-russische Haltung nach 1989/91"
+ },
+ {
+  "g": "k",
+  "t": "Narrativität",
+  "x": "Die Art und Weise, wie historische Ereignisse in Form von Erzählungen dargestellt werden. Geschichte ist nie nur Faktenansammlung, sondern immer auch strukturierte Erzählung, die Bedeutung vermittelt. Beispiel: Der Mauerbau kann erzählt werden als: „Antifaschistischer Schutzwall“ (DDR-Narrativ) „Symbol der Unfreiheit und Teilung“ (BRD-Narrativ) „Höhepunkt der Blockkonfrontation“ (globalhistorisches Narrativ)"
+ },
+ {
+  "g": "k",
+  "t": "Perspektivität",
+  "x": "Die Erkenntnis, dass historische Betrachtung immer aus einer bestimmten Perspektive erfolgt – geprägt durch Zeit, Ort, Kultur, soziale Stellung und Werte des Betrachters. Beispiel: Die Beurteilung der Ostpolitik Brandts fiel in der BRD völlig anders aus als in der DDR oder in Polen."
+ },
+ {
+  "g": "k",
+  "t": "Public History",
+  "x": "Geschichte außerhalb akademischer Kontexte – in Museen, Gedenkstätten, Filmen, Serien, Social Media, Romanen, Podcasts. Public History prägt unser Geschichtsbild oft stärker als der Schulunterricht. Beispiel: Die Serie „Deutschland 83“ (2015) vermittelt ein Bild der DDR und des Kalten Krieges, das Millionen Menschen erreicht – mit allen Stärken und Schwächen populärer Darstellungen."
+ },
+ {
+  "g": "k",
+  "t": "Retrospektivität",
+  "x": "Die Tatsache, dass wir Geschichte immer aus der Gegenwart betrachten („ex post“). Die Vergangenheit ist nur durch historische Erzählungen präsent, die von heutigen Fragen und Interessen geprägt sind. Beispiel: Die Bewertung der Entspannungspolitik der 1970er Jahre fällt heute anders aus als damals – wir wissen, dass sie zur Überwindung des Ost-West-Konflikts beigetragen hat."
+ },
+ {
+  "g": "k",
+  "t": "Selektivität",
+  "x": "Die notwendige Auswahl von Informationen und Aspekten in jeder historischen Darstellung. Keine Geschichte kann alles erzählen – jede Auswahl prägt das Bild. Beispiel: Eine Darstellung der DDR-Geschichte kann den Schwerpunkt auf wirtschaftliche Probleme legen oder auf soziale Sicherheit – beides ist selektiv, beides sagt etwas über die Perspektive der Erzählenden aus."
+ },
+ {
+  "g": "k",
+  "t": "Standortgebundenheit",
+  "x": "Die Bindung historischer Urteile an den Standort des Betrachters – geografisch, kulturell, sozial, zeitlich. Beispiel: Ein US-amerikanischer Historiker beurteilt den Vietnamkrieg anders als ein vietnamesischer. Ein westdeutscher Historiker beurteilt die DDR anders als ein ostdeutscher Zeitzeuge."
+ }
+];
+const GLOSSAR_FRAUEN = "Die Frage, warum hier keine Frau aufgelistet ist, sagt sowohl viel über die Machtstrukturen im Kalten Krieg als auch über die heute gängige Geschichtsschreibung über den Kalten Krieg aus.";
+/* ===== Ost-West-Einheit: gemeinsame Teile für Übersicht und Stunden ===== */
+const OWK_KEY = "ggk-owk:v1";
+/* Stunden der Einheit: [id, Datei, Titel, Material im Heft, Karten, Lehrplan (BPE)] */
+const STUNDEN = [
+  ["s1", "s1-stunde-null.html", "Die Stunde Null – Was wird jetzt mit Deutschland?", "M29, M30", ["k01"], "3.1 Potsdamer Abkommen"],
+  ["s2", "s2-ideologien.html", "Kommunismus gegen Kapitalismus", "M31", ["k02","k03","k04"], "3.1 Truman-Doktrin, Zwei-Lager-Theorie, Marshallplan"],
+  ["s3", "s3-blockade.html", "Die Berlin-Blockade und die sowjetische Zone", "M32, M33", ["k05"], "3.1 Berlin-Blockade, Währungsreform"],
+  ["s4", "s4-staatsgruendung.html", "Die doppelte Staatsgründung", "M34", ["k06"], "3.1 Gründung zweier deutscher Staaten"],
+  ["s5", "s5-westintegration.html", "Die Bindung der Bundesrepublik an den Westen", "M35", ["k07","k08"], "3.1 NATO und Warschauer Pakt, Wiederbewaffnung, EWG"],
+  ["s6", "s6-flucht-und-mauer.html", "Flucht und Mauer", "M36–M39", ["k09","k10"], "3.1 Mauerbau"],
+  ["s7", "s7-geschichte-im-staatsdienst.html", "Geschichte im Staatsdienst? Der 17. Juni 1953", "M40", [], "3.1 Aufstände im Ostblock"],
+  ["s8", "s8-ostpolitik.html", "Wandel durch Annäherung", "M41", ["k11","k12","k13","k14"], "3.2 Entspannungs- und Ostpolitik, KSZE; 3.1 Stellvertreterkriege"],
+  ["s9", "s9-ende.html", "Das Ende der DDR und des Ost-West-Konflikts", "M42–M44", ["k15","k16"], "3.2 Glasnost und Perestroika, Mauerfall, Zwei-plus-Vier"],
+];
+const GEBAUT = window.OWK_GEBAUT || [];   /* Stunden, deren Seite es schon gibt */
+const karte = id => KARTEN.find(k => k.id === id);
+const owkLade = () => { try { return Object.assign({ bearbeitet:{}, links:[], faden:{}, jahr:{} }, JSON.parse(localStorage.getItem(OWK_KEY)) || {}); } catch(e) { return { bearbeitet:{}, links:[], faden:{}, jahr:{} }; } };
+const owkSchreib = fn => { const u = owkLade(); fn(u); try { localStorage.setItem(OWK_KEY, JSON.stringify(u)); } catch(e) {} return u; };
+const SPUR = { w:"Welt", e:"Europa", d:"Deutschland" };
+const ARTEN = [["folge","führt zu"],["reaktion","ist die Reaktion auf"],["gegen","ist das Gegenstück zu"],["parallel","geschieht parallel zu"],["wider","widerspricht"]];
+const artWort = a => (ARTEN.find(x => x[0] === a) || ARTEN[0])[1];
+
+/* Ereigniskarte (Entwurf der Lehrkraft aus M28, hier als Text gesetzt). o.ohneDatum: für Ordnen und Datieren. */
+function karteHtml(k, o = {}){
+  return `<article class="ekarte spur-${k.spur}" aria-label="Ereigniskarte ${esc(k.titel)}">
+    <header><span class="espur">${SPUR[k.spur]}</span><h3>${esc(k.titel)}</h3>${o.ohneDatum ? "" : `<p class="edatum">${esc(k.datum)}</p>`}</header>
+    <h4>Was geschah?</h4><p>${esc(k.was)}</p>
+    <h4>${esc(k.liste[0])}</h4><ul>${k.liste[1].map(x => `<li>${x[0] ? `<b>${esc(x[0])}</b>${x[1] ? " – " : ""}` : ""}${esc(x[1])}</li>`).join("")}</ul>
+    <p class="ekasten"><b>${esc(k.kasten[0])}:</b> ${esc(k.kasten[1])}</p>
+    ${o.ohneDatum ? "" : `<p class="efuss">${k.fuss.map(esc).join(" · ")}</p>`}
+    ${o.ohneBild ? "" : `<figure class="bild ebild"><img src="media/owk-karte-${String(k.nr).padStart(2, "0")}.jpg" alt="${esc(k.bild[1])}" loading="lazy" onerror="bildFehlt(this)"><figcaption>${esc(k.bild[0])}<span class="nachweis">Bild aus dem Unterrichtsheft, M28. Nachweis offen.</span></figcaption></figure>`}
+  </article>`;
+}
+/* Kopf mit Rückweg zur Einheit */
+function kopf(){
+  const hub = L.hub;
+  document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div>${hub ? `<a class="pill" href="../index.html">← GGK-Labor</a>` : `<a class="pill" href="index.html">← Einheit</a>`}<button class="pill" data-geh="lehrkraft">Für Lehrkräfte</button>`;
+  const a = idx(S.seite);
+  document.getElementById("weg").innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
+}
+const OWK_MARK = `<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 4v26" stroke="#24221F" stroke-width="2.4" stroke-dasharray="3 3"/><path d="M5 10h9v14H5z" fill="none" stroke="#1E4FB5" stroke-width="2.4" stroke-linejoin="round"/><path d="M20 10h9v14h-9z" fill="none" stroke="#9B402D" stroke-width="2.4" stroke-linejoin="round"/></svg>`;
+/* Zurück aus einer Stunde: den Stand der Einheit neu lesen */
+window.addEventListener("pageshow", e => { if (e.persisted) location.reload(); });
+/* ===== Ost-West-Konflikt: Übersicht der Einheit (Orientierungsrahmen) ===== */
+const L = {
+  key:OWK_KEY, hub:true, nr:"Einheit", titel:"Der Ost-West-Konflikt", unter:"Orientierungsrahmen 1945–1991", mark:OWK_MARK,
+  seiten:[["start","",""],["raster","16 Karten","Zeitraster"],["ordnen","Abruf","Ordnen"],["netz","Verbindungen","Vernetzen"],["glossar","Begriffe","Glossar"],["faden","Leitfrage","Roter Faden"]],
+  breit:["start","raster","ordnen","netz","glossar","faden","lehrkraft"],
+  loesch:"Alle Eingaben der Einheit werden auf diesem Gerät entfernt: bearbeitete Karten, deine Reihenfolge, deine Verbindungen und dein roter Faden.",
+  init:() => ({ bearbeitet:{}, links:[], faden:{}, jahr:{}, ordnen:{ folge:[], gepr:false, n:0, zeig:false }, entwurf:{ a:"k02", b:"k03", art:"reaktion", satz:"" }, gruppe:"g", suche:"", text:"" }),
+  nachEingabe(p){
+    if (p === "entwurf.satz") { const b = document.querySelector("[data-akt=linkneu]"); if (b) b.disabled = !linkBereit(); }
+    if (p === "suche") { const g = document.getElementById("gliste"); if (g) g.innerHTML = glossarListe(); }
+  },
+};
+const linkBereit = () => S.entwurf.a && S.entwurf.b && S.entwurf.a !== S.entwurf.b && S.entwurf.satz.trim().length >= 15;
+const stundeFertig = id => !!(S.faden[id] && S.faden[id].trim());
+const linksVon = id => S.links.filter(l => l.a === id || l.b === id);
+/* feste Mischung für das Ordnen (bei allen gleich, damit man am Beamer darüber sprechen kann) */
+const MISCH = ["k09","k03","k14","k06","k16","k01","k11","k07","k13","k04","k10","k15","k02","k12","k08","k05"];
+const TIPP = { k01:"Steht ganz am Anfang: Die Sieger regeln, was aus Deutschland wird.", k02:"Zwei Jahre nach Kriegsende sagen die USA dem Kommunismus den Kampf an.", k03:"Die sowjetische Antwort auf die Truman-Doktrin – also danach.", k04:"Setzt die Eindämmung wirtschaftlich um. Beginnt im Jahr der Truman-Doktrin.", k05:"Anlass war die Währungsreform im Westen – noch bevor es zwei deutsche Staaten gab.", k06:"Folgt direkt auf die Blockade.", k07:"Der erste „heiße“ Krieg – kurz nach der Gründung der beiden deutschen Staaten.", k08:"Eine Reaktion auf den NATO-Beitritt der Bundesrepublik.", k09:"Schließt die letzte offene Grenze, nach 2,7 Millionen Flüchtlingen seit 1949.", k10:"Ein gutes Jahr nach dem Mauerbau.", k11:"Beginnt mit der sozial-liberalen Koalition.", k12:"Umfasst die Ostpolitik und endet mit der Invasion in Afghanistan.", k13:"Beendet die Entspannung.", k14:"Zieht sich über Jahrzehnte. Diese Karte darf an mehreren Stellen liegen.", k15:"Ein neuer Mann kommt in Moskau an die Macht.", k16:"Macht die deutsche Einheit möglich – ganz am Ende." };
+
+function start(){
+  const nB = KARTEN.filter(k => S.bearbeitet[k.id]).length, nF = STUNDEN.filter(s => stundeFertig(s[0])).length;
+  return `${band("Jahrgangsstufe 2 · Bildungsplaneinheit 3 · neun Doppelstunden", "Der Ost-West-Konflikt", "1945 kämpfen die USA und die Sowjetunion noch gemeinsam. Zwei Jahre später stehen sie einander als Feinde gegenüber – 44 Jahre lang, mit Deutschland in der Mitte.")}
+  <p class="leitfrage">${esc(LEITFRAGE)}</p>
+  <h2 class="abschnitt">So arbeitest du in dieser Einheit</h2>
+  <div class="regeln">
+    <div><b>1 · Vernetzen</b>Zieh Verbindungen zwischen Ereignissen und Begriffen. Wie hängen Truman-Doktrin und Zwei-Lager-Theorie zusammen?</div>
+    <div><b>2 · Nach der Perspektive fragen</b>Aus wessen Sicht wird hier erzählt? Welche Erzählung wird bedient?</div>
+    <div><b>3 · Die Landkarte anwenden</b>Welches Prinzip der kognitiven Landkarte hilft hier: Retrospektivität, Perspektivität, Selektivität, Standortgebundenheit, Narrativität, Konstruktivität?</div>
+    <div><b>4 · Nach Handlungsspielraum fragen</b>Wer konnte entscheiden? Wer war Getriebener? Wo liegen die Grenzen des Handelns?</div>
+  </div>
+  <h2 class="abschnitt">Dein Überblick wächst</h2>
+  <div class="standzeile" role="group" aria-label="Dein Stand">
+    <button type="button" data-geh="raster"><b>${nB} von 16</b>Karten bearbeitet</button>
+    <button type="button" data-geh="netz"><b>${S.links.length}</b>eigene Verbindungen</button>
+    <button type="button" data-geh="faden"><b>${nF} von ${STUNDEN.length}</b>Sätze im roten Faden</button>
+  </div>
+  <p class="hinweis">Jede Stunde endet mit drei Schritten: Karten einordnen, eine Verbindung ziehen, einen Satz zur Leitfrage schreiben. Alles sammelt sich hier.</p>
+  <h2 class="abschnitt">Die neun Stunden</h2>
+  <ol class="stunden">${STUNDEN.map((s, i) => { const da = GEBAUT.includes(s[0]); return `<li class="${stundeFertig(s[0]) ? "fertig" : ""}">${da ? `<a href="${s[1]}">` : `<span class="nochnicht">`}<span class="snr">${i + 1}</span><span class="st"><b>${esc(s[2])}</b><small>Heft ${esc(s[3])}${s[4].length ? " · Karten: " + s[4].map(id => esc(karte(id).titel)).join(", ") : ""}</small></span><span class="sstat">${stundeFertig(s[0]) ? "✓ Faden geschrieben" : (da ? "öffnen ›" : "in Arbeit")}</span>${da ? "</a>" : "</span>"}</li>`; }).join("")}</ol>
+  ${weiter("raster", "Zum Zeitraster")}`;
+}
+
+/* ---------- Zeitraster: neun Phasen × drei Ebenen ---------- */
+function chip(k){
+  const n = linksVon(k.id).length;
+  return `<button type="button" class="chip spur-${k.spur} ${S.bearbeitet[k.id] ? "da" : ""}" data-akt="kzeig" data-w="${k.id}" aria-label="${esc(k.titel)}, ${esc(k.datum)}${S.bearbeitet[k.id] ? ", bearbeitet" : ""}${n ? ", " + n + " Verbindungen" : ""}"><b>${esc(k.titel)}</b><small>${esc(k.datum)}</small>${S.bearbeitet[k.id] ? `<i aria-hidden="true">✓</i>` : ""}${n ? `<em aria-hidden="true">${n}</em>` : ""}</button>`;
+}
+function rasterHtml(o = {}){
+  const zelle = (p, sp) => KARTEN.filter(k => k.phase === p[0] && k.spur === sp).map(k => o.druck ? `<span class="chip spur-${k.spur}"><b>${esc(k.titel)}</b><small>${esc(k.datum)}</small></span>` : chip(k)).join("");
+  return `<div class="zraster ${o.druck ? "druck" : "gross"}">
+    <div class="zspur" aria-hidden="true"><span></span>${["w","e","d"].map(sp => `<span class="ze spur-${sp}">${SPUR[sp]}</span>`).join("")}</div>
+    ${PHASEN.map((p, i) => `<section class="zphase" aria-label="Phase ${i + 1}: ${esc(p[1])}, ${esc(p[2])}"><h3><b>${esc(p[1])}</b><small>${esc(p[2])}</small></h3>${["w","e","d"].map(sp => { const z = zelle(p, sp); return `<div class="zz ${z ? "" : "leer"}" ${o.druck ? "" : `role="group" aria-label="${SPUR[sp]}"`}><span class="zlab">${SPUR[sp]}</span>${z}</div>`; }).join("")}</section>`).join("")}
+  </div>`;
+}
+function zeitraster(){
+  return `${zeitKopf("raster")}<h1>Das Zeitraster</h1>
+  <p class="lead">Neun Phasen von 1945 bis 1991, drei Ebenen: die Welt, Europa, Deutschland. Tippe eine Karte an, um sie zu lesen. Ein Haken zeigt, dass du sie in einer Stunde bearbeitet hast; die Zahl zeigt deine Verbindungen.</p>
+  ${rasterHtml()}
+  <p class="hinweis" style="margin-top:.6rem">${status("modell", "Modell")}Die Einteilung in Phasen stammt aus dem Glossar M28. Sie ist eine Deutung: Andere Darstellungen setzen die Grenzen anders. Was lässt dieses Raster weg? Zum Beispiel die Blockfreien und alles, was nicht in eine Spalte passt.</p>
+  ${weiter("ordnen", "Weiter: Ordnen")}`;
+}
+function karteDialog(id){
+  const k = karte(id), ls = linksVon(id);
+  tafel(`<div class="kdialog">${karteHtml(k)}
+    <div class="kdneben"><h4>Deine Verbindungen</h4>${ls.length ? `<ul>${ls.map(l => `<li><b>${esc(karte(l.a).titel)}</b> ${esc(artWort(l.art))} <b>${esc(karte(l.b).titel)}</b><br><span class="mein">${esc(l.satz)}</span></li>`).join("")}</ul>` : `<p class="hinweis">Noch keine. Verbinde diese Karte mit einer anderen.</p>`}
+    <div class="reihe"><button type="button" class="btn dunkel" data-akt="kverbind" data-w="${id}">Diese Karte verbinden</button></div>
+    <h4>Vier Fragen an die Karte</h4><ul class="vierfragen"><li>Womit hängt sie zusammen?</li><li>Aus wessen Sicht ist sie erzählt?</li><li>Welches Prinzip der Landkarte steckt im Kasten „${esc(k.kasten[0])}“?</li><li>Wer hatte hier Handlungsspielraum?</li></ul></div></div>`, { hell:true, titel:"Ereigniskarte " + k.nr + " von 16" });
+}
+
+/* ---------- Ordnen: die Aufgabe „__/16“ aus dem Heft ---------- */
+function ordnungPruefen(){
+  const f = S.ordnen.folge, ohne14 = f.filter(x => x !== "k14"), soll = KARTEN.map(k => k.id).filter(x => x !== "k14"), res = {};
+  ohne14.forEach((id, i) => { let ok = soll[i] === id; if (!ok && ((id === "k11" && soll[i] === "k12") || (id === "k12" && soll[i] === "k11"))) ok = true; res[id] = ok; });
+  const p14 = f.indexOf("k14"); res.k14 = p14 >= 6; return res;
+}
+function ordnen(){
+  const o = S.ordnen, frei = MISCH.filter(id => !o.folge.includes(id)), res = o.gepr ? ordnungPruefen() : {}, alle = o.folge.length === 16;
+  const falsch = o.gepr ? o.folge.filter(id => !res[id]) : [], erste = falsch[0];
+  return `${zeitKopf("ordnen")}<h1>Ordnen</h1>
+  ${auftrag("Allein oder zu zweit · 10 Minuten · ohne Heft", "Was kam wann?", "Bring die 16 Ereignisse in die richtige Reihenfolge. Tippe das Ereignis an, das als Nächstes kommt. Ein Tipp auf ein Ereignis in deiner Reihe nimmt es wieder heraus. Wenn alle liegen: prüfen.")}
+  <div class="ordwerk">
+    <div><h3 class="klein" style="margin-top:0">Noch offen (${frei.length})</h3><div class="ordpool" role="group" aria-label="Noch nicht eingeordnet">${frei.map(id => `<button type="button" class="chip spur-${karte(id).spur}" data-akt="ordrein" data-w="${id}"><b>${esc(karte(id).titel)}</b></button>`).join("") || `<p class="hinweis">Alles liegt.</p>`}</div></div>
+    <div><h3 class="klein" style="margin-top:0">Deine Reihenfolge</h3><ol class="ordfolge" aria-label="Deine Reihenfolge">${o.folge.map((id, i) => `<li class="${o.gepr ? (res[id] ? "ok" : "nein") : ""}"><button type="button" data-akt="ordraus" data-w="${id}" aria-label="${i + 1}. ${esc(karte(id).titel)} – herausnehmen"><span>${i + 1}</span><b>${esc(karte(id).titel)}</b>${o.gepr && o.zeig ? `<small>${esc(karte(id).datum)}</small>` : ""}</button></li>`).join("") || `<li class="leer">Tippe links das erste Ereignis an.</li>`}</ol></div>
+  </div>
+  <div class="reihe"><button type="button" class="btn dunkel" data-akt="ordpruef" ${alle && !o.gepr ? "" : "disabled"}>Prüfen</button>${o.n >= 1 ? `<button type="button" class="btn" data-akt="ordzeig" ${o.zeig ? "disabled" : ""}>Daten einblenden</button>` : ""}<button type="button" class="btn" data-akt="ordneu">Neu beginnen</button></div>
+  <div aria-live="polite">${o.gepr ? (falsch.length ? `<div class="rm teils"><b>${16 - falsch.length} von 16 liegen richtig.</b> Grüne Kante: passt. Goldene Kante: noch einmal prüfen. Ein Hinweis zu „${esc(karte(erste).titel)}“: ${esc(TIPP[erste])}</div>` : `<div class="rm zentral"><b>Alle 16 liegen richtig.</b> Jetzt die schwierigere Frage: Welche zwei Ereignisse hängen am engsten zusammen – und warum? Halte es unter „Vernetzen“ fest.</div>`) : ""}</div>
+  <p class="hinweis" style="margin-top:.6rem">Ostpolitik und Entspannungspolitik dürfen die Plätze tauschen, die „Stellvertreterkriege weltweit“ dürfen an mehreren Stellen liegen: Beide Karten beschreiben Zeiträume, keine einzelnen Tage.</p>
+  ${weiter("netz", "Weiter: Vernetzen")}`;
+}
+
+/* ---------- Vernetzen ---------- */
+function netz(){
+  const e = S.entwurf, wahl = (p, v) => `<select data-f="${p}" data-neu aria-label="Karte wählen">${KARTEN.map(k => `<option value="${k.id}" ${v === k.id ? "selected" : ""}>${k.nr} · ${esc(k.titel)}</option>`).join("")}</select>`;
+  const inseln = KARTEN.filter(k => !linksVon(k.id).length);
+  return `${zeitKopf("netz")}<h1>Vernetzen</h1>
+  ${auftrag("Allein · immer wieder", "Eine Verbindung, ein Satz", "Wähle zwei Karten und die Art der Verbindung. Schreib dann in einem Satz, wie sie zusammenhängen. So entsteht dein eigenes Netz des Ost-West-Konflikts. Es gibt keine vorgegebene Lösung – dein Satz muss die Verbindung begründen.")}
+  <div class="karte netzbau">
+    <div class="netzzeile">${wahl("entwurf.a", e.a)}<select data-f="entwurf.art" data-neu aria-label="Art der Verbindung">${ARTEN.map(a => `<option value="${a[0]}" ${e.art === a[0] ? "selected" : ""}>${esc(a[1])}</option>`).join("")}</select>${wahl("entwurf.b", e.b)}</div>
+    ${textfeld("entwurf.satz", "Wie hängen die beiden zusammen?", { rows:2, platz:"Zum Beispiel: Die Zwei-Lager-Theorie antwortet auf …, weil …", zaehl:false })}
+    <div class="reihe"><button type="button" class="btn dunkel" data-akt="linkneu" ${linkBereit() ? "" : "disabled"}>Verbindung festhalten</button>${e.a === e.b ? `<span class="hinweis">Wähle zwei verschiedene Karten.</span>` : ""}</div>
+  </div>
+  <h2 class="abschnitt">Dein Netz (${S.links.length})</h2>
+  ${S.links.length ? `<ul class="netzliste">${S.links.map((l, i) => `<li><span class="nk spur-${karte(l.a).spur}">${esc(karte(l.a).titel)}</span><span class="nart">${esc(artWort(l.art))}</span><span class="nk spur-${karte(l.b).spur}">${esc(karte(l.b).titel)}</span><p class="mein">${esc(l.satz)}</p>${l.von ? `<small class="hinweis">aus Stunde ${esc(l.von.replace("s", ""))}</small>` : ""}<button type="button" class="btn klein nodruck" data-akt="linkweg" data-w="${i}" aria-label="Verbindung entfernen">Entfernen</button></li>`).join("")}</ul>` : `<p class="hinweis">Noch keine Verbindung. Ein Anfang steht schon oben: Truman-Doktrin und Zwei-Lager-Theorie.</p>`}
+  ${S.links.length >= 3 ? `<div class="auflage"><p><b>Inseln in deinem Netz.</b> ${inseln.length ? "Diese Karten haben noch keine Verbindung: " + inseln.map(k => esc(k.titel)).join(" · ") + "." : "Jede Karte ist mit mindestens einer anderen verbunden."}</p><p>Prüffrage: Verbindest du nur Nachbarn in der Zeit – oder auch Ereignisse, die Jahrzehnte auseinanderliegen?</p></div>` : ""}
+  ${weiter("glossar", "Weiter: Glossar")}`;
+}
+
+/* ---------- Glossar ---------- */
+const GRUPPEN = [["g","Grundbegriffe und Ideologien"],["i","Institutionen"],["a","Akteur*innen"],["k","Konzepte der Geschichtswissenschaft"]];
+function glossarListe(){
+  const q = S.suche.trim().toLowerCase();
+  const l = GLOSSAR.filter(e => q ? (e.t + " " + e.x).toLowerCase().includes(q) : e.g === S.gruppe);
+  const fmt = e => e.g === "a" && /^Rolle:/.test(e.x) ? e.x.replace(/^Rolle: (.*?) Politik: (.*)$/, (m, r, p) => `<b>Rolle:</b> ${esc(r)}<br><b>Politik:</b> ${esc(p)}`) : esc(e.x);
+  return (l.map(e => `<details class="gl"><summary>${esc(e.t)}</summary><p>${fmt(e)}</p></details>`).join("") || `<p class="hinweis">Kein Eintrag gefunden.</p>`)
+    + (!q && S.gruppe === "a" ? `<div class="trift"><b>Und die Frauen?</b> ${esc(GLOSSAR_FRAUEN)}</div>` : "");
+}
+function glossar(){
+  return `${zeitKopf("glossar")}<h1>Glossar</h1>
+  <p class="lead">Dieses Glossar ist kein Lexikon zum Auswendiglernen. Es soll dir helfen, Geschichte als etwas Erzähltes zu sehen – aus einer Perspektive, mit Folgen bis heute.</p>
+  <div class="glkopf"><div class="qreiter" role="tablist" aria-label="Gruppe">${GRUPPEN.map(g => `<button type="button" role="tab" aria-selected="${!S.suche && S.gruppe === g[0]}" data-akt="setz" data-p="gruppe" data-w="${g[0]}">${esc(g[1])}</button>`).join("")}</div>
+  <label class="sr" for="f-suche">Im Glossar suchen</label><input type="text" id="f-suche" data-f="suche" value="${esc(S.suche)}" placeholder="Suchen, z. B. KSZE" autocomplete="off"></div>
+  <div id="gliste">${glossarListe()}</div>
+  <p class="quelle">Texte: Glossar M28 aus dem Unterrichtsheft. Die 16 Ereignisse stehen im Zeitraster.</p>
+  ${weiter("faden", "Weiter: Roter Faden")}`;
+}
+
+/* ---------- Roter Faden und Orientierungsblatt ---------- */
+function faden(){
+  const m = (t, leer = "noch offen") => `<span class="mein ${String(t || "").trim() ? "" : "leer"}">${esc(String(t || "").trim() || leer)}</span>`;
+  return `<div class="zf"><div class="nodruck">${zeitKopf("faden")}<h1>Der rote Faden</h1>
+  <p class="lead">Am Ende jeder Stunde schreibst du einen Satz zur Leitfrage. Hier stehen sie nebeneinander. Am Ende der Einheit wird daraus dein eigener Text.</p></div>
+  <h1 class="nurdruck">Der Ost-West-Konflikt · Orientierungsblatt</h1>
+  <p class="leitfrage">${esc(LEITFRAGE)}</p>
+  <h2>Das Zeitraster ${status("modell", "Modell")}</h2>${rasterHtml({ druck:true })}
+  <div class="seitenumbruch"><h2 style="margin-top:0">Mein roter Faden</h2>
+  <ol class="fadenliste">${STUNDEN.map(s => `<li><b>${esc(s[2])}</b><br>${m(S.faden[s[0]])}</li>`).join("")}</ol>
+  <h2>Meine Verbindungen (${S.links.length})</h2>
+  ${S.links.length ? `<ul class="netzliste klein">${S.links.map(l => `<li><b>${esc(karte(l.a).titel)}</b> ${esc(artWort(l.art))} <b>${esc(karte(l.b).titel)}</b>: ${m(l.satz)}</li>`).join("")}</ul>` : `<p class="mein leer">noch keine</p>`}
+  <h2>Meine Antwort auf die Leitfrage</h2>
+  <div class="nodruck">${auftrag("Allein · am Ende der Einheit · 20 Minuten", "Dein Orientierungstext", "Beantworte die Leitfrage in zehn bis zwölf Sätzen. Nutze deine Sätze aus den Stunden und mindestens drei deiner Verbindungen. Nenne Ideologien, Machtinteressen und Handlungsspielräume je mit einem Beispiel.")}
+  ${textfeld("text", "Mein Text", { rows:10, anfaenge:["Der Ost-West-Konflikt entstand, weil","Ideologien spielten eine Rolle, zum Beispiel","Machtinteressen zeigten sich, als","Handlungsspielraum hatten","Erinnert wird der Konflikt heute"], ziel:"Ziel: etwa 150 Wörter" })}
+  ${raster_("text")}</div>
+  <p class="mein nurdruck">${esc(S.text || "")}</p></div></div>
+  <div class="reihe nodruck"><button type="button" class="btn dunkel" data-drucken>Orientierungsblatt drucken oder als PDF sichern</button><span class="hinweis">Zwei Seiten A4.</span></div>
+  ${weiter("start", "Zur Übersicht")}`;
+}
+const raster_ = pfad => { return raster(pfad, 90, "Selbstprüfung", [["Drei Faktoren", "Ich nenne einen Faktor.", "Ich nenne Ideologien, Machtinteressen und Handlungsspielräume je mit Beispiel.", "Ich gewichte die drei Faktoren gegeneinander."],["Vernetzung", "Ich zähle Ereignisse auf.", "Ich verbinde mindestens drei Ereignisse mit „weil“ oder „deshalb“.", "Ich verbinde Ebenen: Welt, Europa, Deutschland."],["Perspektive und Erinnerung", "Ich erzähle aus einer Sicht.", "Ich nenne zwei Sichtweisen auf dasselbe Ereignis.", "Ich zeige, wie heute verschieden erinnert wird, und nenne meinen Standort."]]); };
+
+function lehrkraft(){
+  return `<div class="lk"><p class="zeit"><span class="nr">Für Lehrkräfte</span><span>nicht geschützt</span></p><h1>Ost-West-Konflikt · Die Einheit</h1>
+  <p class="lead">Grundlage sind dein Heft (M28–M44) und der Bildungsplan des Beruflichen Gymnasiums (Geschichte mit Gemeinschaftskunde, Jahrgangsstufe 2, Bildungsplaneinheit 3 „Deutschland, Europa und die Welt nach 1945“). Der Bildungsplan nennt als Ziel „strukturgeschichtliches Orientierungswissen“. Diese Seite ist dafür gebaut.</p>
+  <h2 class="abschnitt">Die Idee</h2>
+  <ul><li><b>Ein Rahmen für alles:</b> Deine 16 Ereigniskarten aus M28 stehen in einem Raster aus neun Phasen (deine Zwischenüberschriften im Glossar) und drei Ebenen (Welt, Europa, Deutschland). Jede Stunde legt ihre Karten dort ab.</li><li><b>Vernetzen als feste Handlung:</b> Jede Stunde endet mit „Verorten und vernetzen“: Karten datieren, eine Verbindung mit Begründung, ein Satz zur Leitfrage. Das ist Regel 1 deines Glossars – als Routine.</li><li><b>Ordnen:</b> Deine Aufgabe „__/16“ als Abrufübung, mit Hinweis statt Lösung.</li><li><b>Roter Faden:</b> Neun Sätze werden am Ende zum Orientierungstext; das Orientierungsblatt (zwei Seiten A4) ist die Merkseite der Einheit.</li><li><b>Handschrift:</b> Jede Stunde beginnt mit einer Festlegung, arbeitet mit einem Quellenpaar oder einer Entscheidung, benennt ein Prinzip der kognitiven Landkarte und endet mit einem Urteil.</li></ul>
+  <h2 class="abschnitt">Plan der Einheit</h2>
+  <div class="matrix-wrap"><table><thead><tr><th>Nr.</th><th>Stunde</th><th>Heft</th><th>Karten</th><th>Bildungsplan</th><th>Seite</th></tr></thead><tbody>${STUNDEN.map((s, i) => `<tr><td class="n">${i + 1}</td><td>${esc(s[2])}</td><td>${esc(s[3])}</td><td>${s[4].map(id => karte(id).nr).join(", ") || "–"}</td><td>${esc(s[5])}</td><td>${GEBAUT.includes(s[0]) ? `<a href="${s[1]}">fertig</a>` : "in Arbeit"}</td></tr>`).join("")}</tbody></table></div>
+  <h2 class="abschnitt">Abgleich mit dem Bildungsplan</h2>
+  <ul><li><b>Abgedeckt (3.1):</b> Potsdamer Abkommen, Truman-Doktrin und Zwei-Lager-Theorie, Marshallplan, Währungsreform und Blockade, Gründung zweier Staaten, NATO und Warschauer Pakt, Wiederbewaffnung, Mauerbau, Stellvertreterkriege (als Karten 7, 13, 14).</li><li><b>Abgedeckt (3.2):</b> Ostverträge, KSZE, Glasnost und Perestroika, Krise der DDR, Mauerfall, Zwei-plus-Vier-Vertrag.</li><li><b>Lücken gegenüber dem Bildungsplan:</b> UNO und frühe europäische Integration (Montanunion, EWG) nur im Glossar; Aufstände im Ostblock außer dem 17. Juni (Ungarn 1956, Prag 1968); Dekolonisation; Ordnung nach 1991 (Maastricht, Osterweiterung, uni- und multipolare Welt); Fallanalyse 3.3. Vorschlag: zwei weitere Stunden.</li></ul>
+  <h2 class="abschnitt">Abweichungen vom Heft</h2>
+  <ul><li>Die 16 Karten sind als Text gesetzt (lesbar für Screenreader, durchsuchbar), Wortlaut wie auf deinen Karten. Die Fotos stammen aus dem Heft.</li><li>Glossar: Gorbatschows Lebensdaten ergänzt (1931–2022); beim Eintrag „Sozialismus“ fehlt im Heft ein Stück Text, die Lücke ist in eckigen Klammern sinngemäß geschlossen – bitte prüfen.</li><li>Das Titelbild von M28 (My Lai) ist nicht übernommen (Gewaltbild ohne Aufgabe).</li><li>Beim Ordnen gelten Ostpolitik/Entspannung als tauschbar und die Karte „Stellvertreterkriege weltweit“ als frei, weil beide Zeiträume beschreiben.</li><li>Die Bildunterschriften der Kartenfotos sind von Claude nach dem Zusammenhang der Karte formuliert; Bildnachweise fehlen im Heft und sind offen.</li></ul>
+  <h2 class="abschnitt">Nur du kannst das</h2>
+  <ul><li>Bildnachweise der 16 Kartenfotos klären (sie liegen auf deine Verantwortung im öffentlichen Repository).</li><li>iPad in Safari hoch und quer, Beamer, VoiceOver, Moodle.</li><li>Entscheiden, ob das Raster am Anfang der Einheit leer oder gefüllt gezeigt wird (jetzt: gefüllt, als Nachschlagewerk wie das Glossar).</li></ul>
+  <p class="hinweis" style="margin-top:1rem">Speicherschlüssel <code>${OWK_KEY}</code> (Einheit) und je Stunde <code>ggk-owk-sN:v1</code>. Eingaben bleiben im Browser des Geräts.</p></div>
+  ${weiter("start", "Zur Übersicht")}`;
+}
+
+AKTION.kzeig = t => karteDialog(t.dataset.w);
+AKTION.kverbind = t => { S.entwurf.a = t.dataset.w; if (S.entwurf.b === t.dataset.w) S.entwurf.b = KARTEN.find(k => k.id !== t.dataset.w).id; S.entwurf.satz = ""; speichere(); geh("netz"); };
+AKTION.ordrein = t => { S.ordnen.folge.push(t.dataset.w); S.ordnen.gepr = false; speichere(); zeichneBehalte(); };
+AKTION.ordraus = t => { S.ordnen.folge = S.ordnen.folge.filter(x => x !== t.dataset.w); S.ordnen.gepr = false; speichere(); zeichneBehalte(); };
+AKTION.ordpruef = () => { S.ordnen.gepr = true; S.ordnen.n++; speichere(); zeichneBehalte(); };
+AKTION.ordzeig = () => { S.ordnen.zeig = true; S.ordnen.gepr = true; speichere(); zeichneBehalte(); };
+AKTION.ordneu = () => { S.ordnen = { folge:[], gepr:false, n:0, zeig:false }; speichere(); zeichneBehalte(); };
+AKTION.linkneu = () => { if (!linkBereit()) return; const e = S.entwurf; S.links.push({ a:e.a, b:e.b, art:e.art, satz:e.satz.trim() }); S.entwurf.satz = ""; speichere(); zeichneBehalte(); };
+AKTION.linkweg = t => { S.links.splice(+t.dataset.w, 1); speichere(); zeichneBehalte(); };
+const SEITE_FN = { start, raster:zeitraster, ordnen, netz, glossar, faden, lehrkraft };
+kernStart();
+</script>
+</body>
+</html>
