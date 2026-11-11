@@ -306,6 +306,9 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 .lesepult>aside.fragenspalte{position:static}
 @media (min-height:820px){.lesepult>aside.fragenspalte{position:sticky}}
 @media (max-width:900px){.lesepult{grid-template-columns:1fr}.lesepult>aside{position:static;max-height:none}}
+
+/* Rückmeldung je Option erst nach dem Festlegen (die Regel der Bausteine „.g-option span{display:grid}“ ist stärker als deren „display:none“) */
+.g .g-wahl:not([data-zu]) .g-option .g-option__urteil{display:none}
 /* ===== M26 ===== */
 .pfelder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:.8rem 0}
 @media (max-width:640px){.pfelder{grid-template-columns:1fr 1fr}}

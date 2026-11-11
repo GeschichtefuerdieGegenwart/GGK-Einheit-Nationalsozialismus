@@ -306,6 +306,9 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 .lesepult>aside.fragenspalte{position:static}
 @media (min-height:820px){.lesepult>aside.fragenspalte{position:sticky}}
 @media (max-width:900px){.lesepult{grid-template-columns:1fr}.lesepult>aside{position:static;max-height:none}}
+
+/* Rückmeldung je Option erst nach dem Festlegen (die Regel der Bausteine „.g-option span{display:grid}“ ist stärker als deren „display:none“) */
+.g .g-wahl:not([data-zu]) .g-option .g-option__urteil{display:none}
 /* ===== Ost-West-Einheit: Zeitraster, Ereigniskarten, Ordnen, Netz, Glossar ===== */
 :root{--sp-w:var(--kuli);--sp-w-hi:var(--kuli-hi);--sp-e:var(--gold);--sp-e-hi:var(--gold-hi);--sp-d:var(--green);--sp-d-hi:var(--green-hi)}
 .spur-w{--sp:var(--sp-w);--sp-hi:var(--sp-w-hi)}.spur-e{--sp:var(--sp-e);--sp-hi:var(--sp-e-hi)}.spur-d{--sp:var(--sp-d);--sp-hi:var(--sp-d-hi)}
@@ -461,6 +464,7 @@ main.breit:has(.zraster.gross){max-width:78rem}
 .dia figcaption{font-size:.88rem;margin-top:.4rem}
 .dia .nachweis{display:block;color:var(--muted);font-size:.8rem;margin-top:.2rem}
 @media print{.dia{display:none}}
+.tabeng table{font-size:.8rem}.tabeng th,.tabeng td{padding:.25rem .3rem}
 </style>
 </head>
 <body>
@@ -470,7 +474,7 @@ main.breit:has(.zraster.gross){max-width:78rem}
 <noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft „Geschichte aktuell 1“ (M28–M44).</p></noscript>
 <script src="../assets/gegenwart/bundle.js"></script>
 <script>
-window.OWK_GEBAUT = ["s1", "s2", "s3", "s4", "s5", "s6"];
+window.OWK_GEBAUT = ["s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9"];
 "use strict";
 /* ===== Gemeinsamer Kern M25–M27. Jede Stunde definiert danach L (Einstellungen), ihre Daten, SEITE_FN und ruft kernStart(). ===== */
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));

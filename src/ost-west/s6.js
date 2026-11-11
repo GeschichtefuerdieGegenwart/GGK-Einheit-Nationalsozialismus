@@ -33,7 +33,7 @@ function zahlen(){
   ${auftrag("Allein · 2 Minuten", "Erst schätzen", "In der sowjetischen Zone lebten 1949 rund 18 Millionen Menschen. Wie viele verließen die DDR von 1949 bis 1961? Trag deine Schätzung ein.")}
   ${eingabe("schaetz", "Meine Schätzung (Personen)", "zum Beispiel 500 000")}
   ${vergleich("zahlen", ["schaetz"], 3, "Zahlen zeigen", `${diagramm()}
-  <div class="matrix-wrap"><table><thead><tr><th>Jahr</th>${FL.map(z => `<th>${z[0]}</th>`).join("")}</tr></thead><tbody><tr><td>Personen</td>${FL.map(z => `<td class="n">${zahl(z[1])}</td>`).join("")}</tr><tr><td>unter 25 Jahre (%)</td>${FL.map(z => `<td class="n">${z[2] ? String(z[2]).replace(".", ",") : "–"}</td>`).join("")}</tr></tbody></table></div>
+  <div class="matrix-wrap tabeng"><table><thead><tr><th>Jahr</th>${FL.map(z => `<th>${String(z[0]).slice(2)}</th>`).join("")}</tr></thead><tbody><tr><td>Personen</td>${FL.map(z => `<td class="n">${zahl(z[1])}</td>`).join("")}</tr><tr><td>unter 25 (%)</td>${FL.map(z => `<td class="n">${z[2] ? String(z[2]).replace(".", ",") : "–"}</td>`).join("")}</tr></tbody></table></div>
   <p><b>Zusammen: ${zahl(SUMME)} Personen</b> in 13 Jahren, im Durchschnitt ${zahl(SCHNITT)} pro Jahr. ${e ? "Deine Schätzung: " + esc(S.schaetz) + "." : ""}</p>`)}
   ${auftrag("Zu zweit · 6 Minuten", "Das Diagramm lesen", "In welchem Jahr gehen die meisten? Was fällt beim Anteil der Jugendlichen auf? Was könnte 1953 geschehen sein? (Die Antwort kommt in Stunde 7.)")}
   ${textfeld("lesen", "Das fällt uns auf", { rows:3, zaehl:false })}
