@@ -75,3 +75,23 @@ Anlass: Auftrag „Füge noch die entsprechenden Bilder ein.“
 Geprüft (Chromium, gelaufen): 34 Bildtests in Repository-Fassung (ohne Dateien) und Paket-Fassung (mit Dateien), je bei 1280 und 390 px. Ergebnis: vor dem Tippen keine Fotos, danach 3 bzw. 2; ohne Dateien erscheint der Hinweis; keine fehlenden Dateien im Paket; keine Skriptfehler; keine Überbreite. Dazu erneut 35/35 Interaktionstests und der Rundgang über alle Seiten ohne Befund.
 
 Noch offen: Fotograf*in bei drei M25-Fotos; Bildquelle und Ort des Soldatenfotos (welt.de nennt die Ardennenoffensive und vermutlich „IWM“); Datum der Besichtigungsfotos.
+
+## Nachtrag 11.11.2026 · Fassung 1.2 – Texte aus dem Heft mit Visualisierung
+
+Anlass: „Ich will, dass du auch die entsprechenden Texte einbaust. Denke an eine ansprechende Visualisierung.“
+
+- **M26 · Der BND als Akte.** Die Akte folgt deinen sieben Abschnitten im Heft und zeigt sie als Karten:
+  - Die Studie: große Zahl 10–20 % mit Punktefeld.
+  - Personalakten: Schreiber und Grauer, Globke und Adenauer.
+  - Die „vier Lügen“ als vier Felder.
+  - Die Bilanz als gestrichelte Karte.
+  
+  Die vier Fragen stehen daneben; auf hohen Bildschirmen bleiben sie beim Lesen stehen. Nach den Antworten erscheint mit dem Vergleich das Schaubild „Kette des Wegsehens“ (NS-Täter → Gehlen → Kanzleramt/Globke → Adenauer). Es ist als Modell gekennzeichnet, mit „Was lässt es weg?“.
+- **M27 · Der Artikel als Lesepult.** Der Artikel steht in sieben Absätzen links, die eigene Weltkarte rechts; sie bleibt beim Lesen stehen. Die zwölf Orte im Text sind Knöpfe ◇: Antippen setzt ein Dreieck auf die Karte und zeigt die Kurzinfo „Zuletzt auf der Karte“. Am Telefon steht der Zähler unten rechts. Die „Vermessung“ (nach Hinweis) steht nach Absatz 1 (Ouédraogo), das Soldatenfoto nach Absatz 2. Ohne Bewegung (Reader-Paced): Die Karte ändert sich nur auf Tippen.
+- **Texte:** `tools/texte_aus_heft.py` liest sie aus dem Heft (PDF), mit Silbentrennung, Seitenköpfen und einheitlichen Anführungszeichen. Korrigiert ist ein fehlender Punkt in M27 („… an. Rössel …“). Die Dateien `texte/m26-bnd.js` und `texte/m27-artikel.js` liegen **nur im Moodle-Paket**, nicht im öffentlichen Repository (`.gitignore`). Fehlen sie, gilt die bisherige Fassung mit dem Verweis aufs Heft.
+
+Geprüft (Chromium, gelaufen):
+
+- 36/36 Texttests mit Dateien (Akte mit sieben Karten, Kette nach den Antworten, zwölf Ortsmarken, Tippen und Tastatur, wieder entfernen, Stand nach Neuladen, Fotos im Text), bei 1280, 768 und 390 px.
+- 18/18 ohne Dateien (Rückfall).
+- 35/35 Interaktionstests; Rundgang über alle Seiten ohne Befund.
