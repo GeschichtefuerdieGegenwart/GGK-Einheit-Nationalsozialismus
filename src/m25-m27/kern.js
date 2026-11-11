@@ -232,6 +232,14 @@ document.addEventListener("change", ev => {
   if (t.tagName === "SELECT" && t.dataset.f) { setz(t.dataset.f, t.value); nachEingabe(t.dataset.f); if (t.dataset.neu !== undefined) zeichneBehalte(); return; }
   const w = t.closest && t.closest(".g-wahl"); if (w) pruefeWahl(w);
 });
+/* ---------- Bilder (Muster aus M21–M23): Dateien liegen nur im Moodle-Paket unter media/. Fehlt eine Datei, verschwindet die Figur ohne Lücke. ---------- */
+function foto(b, o = {}){
+  return `<figure class="bild ${o.klein ? "klein" : ""}" data-bildgruppe="${o.gruppe || ""}"><img src="media/${b.datei}" alt="${esc(b.alt)}" loading="lazy" onerror="bildFehlt(this)"><figcaption>${b.text}<span class="nachweis">${b.nachweis}</span></figcaption></figure>`;
+}
+function bildFehlt(img){
+  const f = img.closest("figure"), g = f && f.dataset.bildgruppe; if (!f) return; f.remove();
+  if (g) { const rest = document.querySelectorAll(`figure[data-bildgruppe="${g}"]`).length, h = document.querySelector(`[data-bildhinweis="${g}"]`); if (!rest && h) h.hidden = false; }
+}
 const AKTION = {
   /* data-akt="setz" data-p="pfad" data-w="wert": Wert setzen und neu zeichnen */
   setz(t){ let w = t.dataset.w; if (w === "true") w = true; else if (w === "false") w = false; setz(t.dataset.p, w); zeichneBehalte(); },

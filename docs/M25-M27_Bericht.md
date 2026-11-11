@@ -59,3 +59,19 @@ Impeccable audit/polish, Taste lint/inspect (Plugins fehlen) · axe-core (nicht 
 - Rückblick nach der ersten Erprobung: Markieren → Belege (M25), Steckbrief als Präsentation (M26), drehbare Karte und Strukturbild (M27) von „Vorschlag“ auf „erprobt“ oder zurück.
 - M24 fehlt im Labor (Lücke zwischen M23 und M25).
 - Moodle-Pakete für M25–M27.
+
+## Nachtrag 11.11.2026 · Fassung 1.1 – Bilder aus dem Heft
+
+Anlass: Auftrag „Füge noch die entsprechenden Bilder ein.“
+
+- Sechs Fotos aus dem Heft eingebaut, in Graustufen, je mit Bildunterschrift, Nachweis und Alternativtext:
+  - **M25, Baustein 3:** drei Fotos der Zwangsbesichtigung (Bourke-White / Getty laut Heft; Tote im Heft retuschiert). Sie erscheinen erst nach dem Hinweis und „Fotos zeigen“ und lassen sich wieder ausblenden.
+  - **M25, Aufgabe B:** ein Foto von Frauen aus Weimar (ohne Tote).
+  - **M27, Seite „Der Artikel“:** afrikanische Soldaten 1944 (offen) und die „Vermessung“ 1940 (Stadtarchiv Münster; erst nach Hinweis und Tippen, mit der Frage nach dem Blick der Täter).
+- **Nicht übernommen:** BND-Teppich mit Bundesadler (M26; ohne Aufgabe, Hoheitszeichen) und das Poster der Upside-down-Karte (M27; Produktfoto mit Wasserzeichen, durch die drehbare Karte ersetzt).
+- **Ablage nach der Projektregel vom 21.10.2026:** Die Dateien liegen nur in den Moodle-Paketen (`media/`), nicht im Repository; `.gitignore` schützt `media/m25-*.jpg` und `media/m27-*.jpg`. Neue Funktion `foto()` im Kern: Fehlt eine Datei, verschwindet die Figur ohne Lücke; fehlen alle einer Gruppe, erscheint der Hinweis aufs Heft. Im Druck erscheinen keine Fotos (die Zusammenfassung bleibt bei 2 Seiten).
+- Bildlisten: `M25_Bildliste.html`, `M27_Bildliste.html`.
+
+Geprüft (Chromium, gelaufen): 34 Bildtests in Repository-Fassung (ohne Dateien) und Paket-Fassung (mit Dateien), je bei 1280 und 390 px. Ergebnis: vor dem Tippen keine Fotos, danach 3 bzw. 2; ohne Dateien erscheint der Hinweis; keine fehlenden Dateien im Paket; keine Skriptfehler; keine Überbreite. Dazu erneut 35/35 Interaktionstests und der Rundgang über alle Seiten ohne Befund.
+
+Noch offen: Fotograf*in bei drei M25-Fotos; Bildquelle und Ort des Soldatenfotos (welt.de nennt die Ardennenoffensive und vermutlich „IWM“); Datum der Besichtigungsfotos.

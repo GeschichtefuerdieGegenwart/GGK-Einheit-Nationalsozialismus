@@ -118,3 +118,12 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
   .auflage{background:#fff;border:1px solid #bbb;border-left:4px solid #555}
   a{color:inherit;text-decoration:none}
 }
+
+/* Bilder */
+.bilder{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem;margin:1rem 0;align-items:start}
+.bild{margin:0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:.5rem}
+.bild img{display:block;width:100%;height:auto;border-radius:.5rem;filter:grayscale(1)}
+.bild figcaption{font-size:.9rem;line-height:1.4;margin:.45rem .2rem .1rem}
+.bild .nachweis{display:block;font-size:.8rem;color:var(--muted);margin-top:.2rem}
+.bild.klein{max-width:34rem}
+@media print{.bild,.bilder{display:none}}
