@@ -290,6 +290,15 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
   .auflage{background:#fff;border:1px solid #bbb;border-left:4px solid #555}
   a{color:inherit;text-decoration:none}
 }
+
+/* Bilder */
+.bilder{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem;margin:1rem 0;align-items:start}
+.bild{margin:0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:.5rem}
+.bild img{display:block;width:100%;height:auto;border-radius:.5rem;filter:grayscale(1)}
+.bild figcaption{font-size:.9rem;line-height:1.4;margin:.45rem .2rem .1rem}
+.bild .nachweis{display:block;font-size:.8rem;color:var(--muted);margin-top:.2rem}
+.bild.klein{max-width:34rem}
+@media print{.bild,.bilder{display:none}}
 /* ===== M27 ===== */
 .orte3{display:grid;gap:.6rem;margin-top:.6rem}
 .orte3 .oz{display:grid;grid-template-columns:2rem minmax(0,1.4fr) minmax(0,1fr);gap:.6rem;align-items:center}
@@ -588,6 +597,14 @@ document.addEventListener("change", ev => {
   if (t.tagName === "SELECT" && t.dataset.f) { setz(t.dataset.f, t.value); nachEingabe(t.dataset.f); if (t.dataset.neu !== undefined) zeichneBehalte(); return; }
   const w = t.closest && t.closest(".g-wahl"); if (w) pruefeWahl(w);
 });
+/* ---------- Bilder (Muster aus M21–M23): Dateien liegen nur im Moodle-Paket unter media/. Fehlt eine Datei, verschwindet die Figur ohne Lücke. ---------- */
+function foto(b, o = {}){
+  return `<figure class="bild ${o.klein ? "klein" : ""}" data-bildgruppe="${o.gruppe || ""}"><img src="media/${b.datei}" alt="${esc(b.alt)}" loading="lazy" onerror="bildFehlt(this)"><figcaption>${b.text}<span class="nachweis">${b.nachweis}</span></figcaption></figure>`;
+}
+function bildFehlt(img){
+  const f = img.closest("figure"), g = f && f.dataset.bildgruppe; if (!f) return; f.remove();
+  if (g) { const rest = document.querySelectorAll(`figure[data-bildgruppe="${g}"]`).length, h = document.querySelector(`[data-bildhinweis="${g}"]`); if (!rest && h) h.hidden = false; }
+}
 const AKTION = {
   /* data-akt="setz" data-p="pfad" data-w="wert": Wert setzen und neu zeichnen */
   setz(t){ let w = t.dataset.w; if (w === "true") w = true; else if (w === "false") w = false; setz(t.dataset.p, w); zeichneBehalte(); },
@@ -602,7 +619,7 @@ const L = {
   seiten:[["start","",""],["bild","0–10 Min.","Dein Bild vom Krieg"],["artikel","10–30 Min.","Der Artikel"],["karte","30–48 Min.","Eurozentrismus"],["struktur","48–70 Min.","Strukturbild"],["landkarte","70–78 Min.","Landkarte"],["schluss","78–90 Min.","Was fehlt?"],["zusammenfassung","Zum Abheften","Zusammenfassung"]],
   breit:["bild","artikel","karte","struktur","zusammenfassung","lehrkraft"],
   loesch:"Deine Orte, Jahre, Erkenntnisse, Hypothese, das Strukturbild, alle Texte werden auf diesem Gerät entfernt.",
-  init:() => ({ orte:{ t1:"", r1:"", t2:"", r2:"", t3:"", r3:"" }, jahrA:"", jahrE:"", bildzu:false, art:{}, erk:{ e1:"", e2:"", e3:"" }, ueber:"", hyp:"", kartefrage:"", welt:{ sued:false, mitte:"eu" }, euro:"", sb:{ b:{}, e:{}, hand:null, n:0, gepr:false, hilfe:false }, pfeil:{ p1:"", p2:"", p3:"" }, schulbuch:"" }),
+  init:() => ({ vermessung:false, orte:{ t1:"", r1:"", t2:"", r2:"", t3:"", r3:"" }, jahrA:"", jahrE:"", bildzu:false, art:{}, erk:{ e1:"", e2:"", e3:"" }, ueber:"", hyp:"", kartefrage:"", welt:{ sued:false, mitte:"eu" }, euro:"", sb:{ b:{}, e:{}, hand:null, n:0, gepr:false, hilfe:false }, pfeil:{ p1:"", p2:"", p3:"" }, schulbuch:"" }),
   nachEingabe(p){
     if (/^orte\.|^jahr/.test(p)) { const b = document.querySelector("[data-akt=bildfest]"); if (b) b.disabled = !bildBereit(); }
     if (p === "kartefrage") { const k = document.getElementById("kartenteil"); if (k && k.classList.contains("gesperrt") === (S.kartefrage.trim().length >= 10)) zeichneBehalte(); }
@@ -624,6 +641,10 @@ const ARTORTE = [
   ["hi","Hiroshima, August 1945",132.5,34.4,"Atombombe – drei Monate nach dem 8. Mai.",false],
   ["ke","Kenia",38,0,"Im Jahr 2000 erhalten nur 330 Veteranen eine Rente.",false],
 ];
+const BILD27 = {
+  soldaten:{ datei:"m27-afrikanische-soldaten-1944.jpg", alt:"Schwarz-Weiß-Foto: Zwei Soldaten mit Helm liegen im Schnee hinter einem Maschinengewehr.", text:"Mehr als eine Million Soldaten, vor allem aus den afrikanischen Kolonien, mobilisierten Vichy-Frankreich und de Gaulles Forces françaises libres für den Krieg. Afrikanische Soldaten im Winter 1944.", nachweis:"Bildunterschrift nach welt.de (Bildergalerie zum Artikel); Bildquelle dort wohl „IWM“ (prüfen). Ort laut welt.de: Ardennenoffensive (prüfen). Wiedergabe nach dem Unterrichtsheft, M27." },
+  vermessung:{ datei:"m27-kriegsgefangenenlager-vermessung-1940.jpg", alt:"Schwarz-Weiß-Foto: Zwei Deutsche, einer davon in Uniform, halten den Kopf eines Schwarzen Kriegsgefangenen und setzen ihm ein Messinstrument ans Gesicht.", text:"Rassistisches Experiment: Ein Schwarzer französischer Soldat wird 1940 in einem deutschen Kriegsgefangenenlager bei München vermessen. Frag dich: Wer hat dieses Foto gemacht, und wozu? Es zeigt den Blick der Täter – nicht, wer der Mann war.", nachweis:"Quelle laut Heft: Stadtarchiv Münster. Wiedergabe nach dem Unterrichtsheft, M27." },
+};
 const MITTEN = { eu:[10,"Europa und Afrika"], pz:[160,"Pazifik"], am:[-90,"Amerika"] };
 const bildBereit = () => [1,2,3].every(i => S.orte["t" + i].trim().length >= 2 && S.orte["r" + i]) && S.jahrA && S.jahrE;
 const eigene = () => [1,2,3].map(i => ({ i, t:S.orte["t" + i], r:REGIONEN.find(x => x[0] === S.orte["r" + i]) })).filter(o => o.r && o.r[2] !== null);
@@ -687,6 +708,10 @@ function artikel(){
   return `${zeitKopf("artikel")}<h1>Der Artikel</h1>
   ${auftrag("Allein · 10 Minuten · mit dem Heft", "Lesen und festhalten", "Lies im Heft den Artikel von Nils Sandrisser: „Kolonien stellten Kanonenfutter und füllten Bordelle“ (2015). Halte drei zentrale Erkenntnisse fest. Welche hat dich am meisten überrascht?")}
   <div class="feldgruppe">${eingabe("erk.e1", "Erkenntnis 1")}${eingabe("erk.e2", "Erkenntnis 2")}${eingabe("erk.e3", "Erkenntnis 3")}${textfeld("ueber", "Die größte Überraschung – und warum", { rows:2, zaehl:false })}</div>
+  <h2 class="abschnitt">Zwei Fotos zum Artikel</h2>
+  <div class="bilder">${foto(BILD27.soldaten, { gruppe:"m27" })}
+  ${S.vermessung ? foto(BILD27.vermessung, { gruppe:"m27" }) : `<div class="karte" style="margin:0">${belastend("Das zweite Foto zeigt, wie ein Schwarzer Kriegsgefangener gegen seinen Willen vermessen wird. Es ist ein Bild aus rassistischer „Forschung“.")}<div class="reihe"><button type="button" class="btn dunkel" data-akt="setz" data-p="vermessung" data-w="true">Foto zeigen</button></div></div>`}</div>
+  <p class="hinweis" data-bildhinweis="m27" hidden>Die Fotos fehlen in dieser Fassung. Du findest sie im Heft, M27.</p>
   <h2 class="abschnitt">Orte aus dem Artikel</h2>
   ${auftrag("Allein · 3 Minuten", "Was steht im Text?", "Tippe die Orte an, die du im Artikel gefunden hast. Sie erscheinen als Dreiecke auf deiner Karte – neben deinen drei Punkten vom Anfang.")}
   <div class="artorte" role="group" aria-label="Orte aus dem Artikel">${ARTORTE.map(a => `<button type="button" data-akt="art" data-w="${a[0]}" aria-pressed="${!!S.art[a[0]]}"><b>${esc(a[1])}</b><small>${esc(a[4])}</small></button>`).join("")}</div>
@@ -837,7 +862,7 @@ function lehrkraft(){
   <h2 class="abschnitt">Kürzungen zur Auswahl</h2>
   <ul><li><b>K1 · Einzelstunde (45 Min.):</b> Dein Bild (6) · Artikel als Hausaufgabe vorab, im Unterricht nur Orte und Jahre (8) · Karte und Begriff (10) · Strukturbild mit Hilfe 2 (15) · Plenum (6).</li><li><b>K2</b> Landkarten-Moment gemeinsam am Beamer: 4 Minuten frei.</li><li><b>K3</b> Absatz fürs Schulbuch als Hausaufgabe: 6 Minuten frei.</li></ul>
   <h2 class="abschnitt">Abweichungen vom Heft</h2>
-  <ul><li>Anrede „du“ (Heft: „Sie“).</li><li>Der Artikel (welt.de, 22.06.2015) bleibt im Heft; die Seite fasst nur Orte in je einem Satz zusammen.</li><li>Das Foto des rassistischen „Vermessens“ (Stadtarchiv Münster) und das Poster der Upside-down-Weltkarte (interkart.de) sind nicht übernommen: Rechte, und beim Foto die Würde des Abgebildeten. Die drehbare Karte beruht auf gemeinfreien Daten (Natural Earth).</li><li>Im Strukturbild sind die Felder vorgegeben (zweite Fassung im Heft). Die freie Fassung bleibt auf Papier möglich.</li><li>Die Zuordnung „Schwarze haben nicht für Frankreich gekämpft“ → Denken ist als falsche Vorstellung gekennzeichnet.</li><li>Schreibweise „Schwarze Soldaten“ mit großem S als Selbstbezeichnung – bitte nach deiner Linie anpassen.</li><li>Ergänzt: 2. September 1945 (Kapitulation Japans) als Gegenstück zum 8. Mai.</li><li>Einstufungen im Landkarten-Moment (zentral: Perspektivität, Standortgebundenheit) sind ein Vorschlag von Claude. Wortlaut aus der Landkarte 2.1.</li></ul>
+  <ul><li>Anrede „du“ (Heft: „Sie“).</li><li>Der Artikel (welt.de, 22.06.2015) bleibt im Heft; die Seite fasst nur Orte in je einem Satz zusammen.</li><li>Zwei Fotos aus dem Heft (Soldaten 1944; „Vermessung“ 1940, Stadtarchiv Münster) im Moodle-Paket unter <code>media/</code> (§ 60a UrhG) und auf deinen Wunsch (11.11.2026) auch im öffentlichen Repository. Die „Vermessung“ erscheint erst nach Hinweis und Tippen, mit der Frage nach dem Blick der Täter. Nachweise: <code>M27_Bildliste.html</code>.</li><li>Das Poster der Upside-down-Weltkarte (interkart.de, Produktfoto mit Wasserzeichen) ist nicht übernommen; die drehbare Karte aus gemeinfreien Daten (Natural Earth) ersetzt es.</li><li>Im Strukturbild sind die Felder vorgegeben (zweite Fassung im Heft). Die freie Fassung bleibt auf Papier möglich.</li><li>Die Zuordnung „Schwarze haben nicht für Frankreich gekämpft“ → Denken ist als falsche Vorstellung gekennzeichnet.</li><li>Schreibweise „Schwarze Soldaten“ mit großem S als Selbstbezeichnung – bitte nach deiner Linie anpassen.</li><li>Ergänzt: 2. September 1945 (Kapitulation Japans) als Gegenstück zum 8. Mai.</li><li>Einstufungen im Landkarten-Moment (zentral: Perspektivität, Standortgebundenheit) sind ein Vorschlag von Claude. Wortlaut aus der Landkarte 2.1.</li></ul>
   <h2 class="abschnitt">Vor dem Einsatz prüfen</h2>
   <ul><li>Die Kurzsätze zu den zwölf Orten gegen den Artikel im Heft lesen.</li><li>Buch: Rheinisches JournalistInnenbüro (Hg.): Unsere Opfer zählen nicht. Die Dritte Welt im Zweiten Weltkrieg, bpb-Schriftenreihe Bd. 10408, Bonn 2014.</li><li>Auswahl der Jahre zum Kriegsbeginn (1931, 1935, 1937, 1939, 1941): 1931 und 1941 stehen nicht im Artikel; sie sind als weitere mögliche Antworten gedacht.</li></ul>
   <h2 class="abschnitt">Nur du kannst das</h2>

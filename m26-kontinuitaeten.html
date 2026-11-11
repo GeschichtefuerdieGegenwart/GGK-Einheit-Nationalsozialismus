@@ -290,6 +290,15 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
   .auflage{background:#fff;border:1px solid #bbb;border-left:4px solid #555}
   a{color:inherit;text-decoration:none}
 }
+
+/* Bilder */
+.bilder{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem;margin:1rem 0;align-items:start}
+.bild{margin:0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:.5rem}
+.bild img{display:block;width:100%;height:auto;border-radius:.5rem;filter:grayscale(1)}
+.bild figcaption{font-size:.9rem;line-height:1.4;margin:.45rem .2rem .1rem}
+.bild .nachweis{display:block;font-size:.8rem;color:var(--muted);margin-top:.2rem}
+.bild.klein{max-width:34rem}
+@media print{.bild,.bilder{display:none}}
 /* ===== M26 ===== */
 .pfelder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:.8rem 0}
 @media (max-width:640px){.pfelder{grid-template-columns:1fr 1fr}}
@@ -556,6 +565,14 @@ document.addEventListener("change", ev => {
   if (t.tagName === "SELECT" && t.dataset.f) { setz(t.dataset.f, t.value); nachEingabe(t.dataset.f); if (t.dataset.neu !== undefined) zeichneBehalte(); return; }
   const w = t.closest && t.closest(".g-wahl"); if (w) pruefeWahl(w);
 });
+/* ---------- Bilder (Muster aus M21–M23): Dateien liegen nur im Moodle-Paket unter media/. Fehlt eine Datei, verschwindet die Figur ohne Lücke. ---------- */
+function foto(b, o = {}){
+  return `<figure class="bild ${o.klein ? "klein" : ""}" data-bildgruppe="${o.gruppe || ""}"><img src="media/${b.datei}" alt="${esc(b.alt)}" loading="lazy" onerror="bildFehlt(this)"><figcaption>${b.text}<span class="nachweis">${b.nachweis}</span></figcaption></figure>`;
+}
+function bildFehlt(img){
+  const f = img.closest("figure"), g = f && f.dataset.bildgruppe; if (!f) return; f.remove();
+  if (g) { const rest = document.querySelectorAll(`figure[data-bildgruppe="${g}"]`).length, h = document.querySelector(`[data-bildhinweis="${g}"]`); if (!rest && h) h.hidden = false; }
+}
 const AKTION = {
   /* data-akt="setz" data-p="pfad" data-w="wert": Wert setzen und neu zeichnen */
   setz(t){ let w = t.dataset.w; if (w === "true") w = true; else if (w === "false") w = false; setz(t.dataset.p, w); zeichneBehalte(); },
@@ -759,7 +776,7 @@ function lehrkraft(){
   <h2 class="abschnitt">Kürzungen zur Auswahl</h2>
   <ul><li><b>K1</b> Präsentationen auf 4 Minuten begrenzen: 5 Minuten frei für das Plenum.</li><li><b>K2</b> Sortieraufgabe (Landkarte 2.4.3) gemeinsam am Beamer mit zwei statt fünf Sätzen: 4 Minuten frei.</li><li><b>K3</b> Urteilstext als Hausaufgabe; im Unterricht nur Skala, Abstimmung, Gespräch: 5 Minuten frei.</li><li><b>K4</b> Zwei Doppelstunden: Gruppenarbeit und Präsentationen in der ersten, Vergleich und Urteil in der zweiten.</li></ul>
   <h2 class="abschnitt">Abweichungen vom Heft</h2>
-  <ul><li>Anrede „du“/„ihr“ (Heft: gemischt mit „Sie“).</li><li>Der BND-Text bleibt im Heft; die Seite druckt ihn nicht ab (Urheberrecht tagesschau.de) und zitiert nur kurz.</li><li>„Digitale Präsentation“: Der Steckbrief ist die Präsentation. Wer lieber Folien baut, kann das weiterhin tun.</li><li>Neu: Herkunft des stärksten Belegs. Grund: Die Infoseite „NS-Kontinuitäten“ enthält prüfbedürftige Angaben (im Tresor vermerkt: Landgericht München 1951 und die Urteile gegen die Weiße Rose).</li><li>Plenumsfragen a) bis c) sind auf „Vergleich“ und „Urteil“ verteilt.</li></ul>
+  <ul><li>Anrede „du“/„ihr“ (Heft: gemischt mit „Sie“).</li><li>Der BND-Text bleibt im Heft; die Seite druckt ihn nicht ab (Urheberrecht tagesschau.de) und zitiert nur kurz.</li><li>„Digitale Präsentation“: Der Steckbrief ist die Präsentation. Wer lieber Folien baut, kann das weiterhin tun.</li><li>Neu: Herkunft des stärksten Belegs. Grund: Die Infoseite „NS-Kontinuitäten“ enthält prüfbedürftige Angaben (im Tresor vermerkt: Landgericht München 1951 und die Urteile gegen die Weiße Rose).</li><li>Plenumsfragen a) bis c) sind auf „Vergleich“ und „Urteil“ verteilt.</li><li>Das Foto im Heft (Teppich mit dem Bundesadler und dem Schriftzug des BND) ist nicht übernommen: Es hat keine Aufgabe in der Stunde und zeigt ein Hoheitszeichen.</li></ul>
   <h2 class="abschnitt">Vor dem Einsatz prüfen</h2>
   <ul><li>Die Zahlen und Zitate zum BND stammen aus dem Heft (dort nach tagesschau.de, 10.10.2022). Den Artikel konnte Claude nicht selbst abrufen. Bitte am Original prüfen: Worauf beziehen sich die „10 bis 20 Prozent“ genau (welcher Zeitraum, welche Gruppe)? Stimmen die Zitate von Sälter und Gehlen wörtlich?</li><li>Studie: Gerhard Sälter, NS-Kontinuitäten im BND. Rekrutierung, Diskurse, Vernetzungen (2022).</li><li>Infoseite: Angaben ohne belastbare Quelle (teils Wikipedia, YouTube) markieren oder ersetzen.</li><li>Der Link zur Infoseite führt in der Arbeitsphase aus der Lernseite heraus. Das ist gewollt, aber die einzige Stelle.</li></ul>
   <h2 class="abschnitt">Nur du kannst das</h2>
