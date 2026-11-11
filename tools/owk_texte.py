@@ -72,7 +72,7 @@ Q['m32'] = zwischen(glatt(roh(228)), 'Als sich zeigte', 'Amerikaner und Briten.'
 m33 = [glatt(roh(231, (82, 289, 223, 361))), glatt(roh(231, (305, 289, 225, 361)))]
 Q['m33'] = ['In ihrer Zone stellte die sowjetische Besatzungsmacht von Anfang an die Weichen in Richtung Volksdemokratie. Immer deutlicher und größer wurden deshalb die Gegensätze ' + m33[0],
             'Bis 1949 führte die sowjetische Militärverwaltung in Zusammenarbeit mit den deutschen Kommunisten einige wichtige Maßnahmen durch: Bereits Ende Juli 1945 begann die Er' + m33[1]]
-t = glatt(roh(238)); Q['m36_lemo'] = zwischen(t, 'Die Meinungsverschiedenheiten', '(SED).'); Q['m36_a'] = zwischen(t, 'Konrad Adenauer – der erste', 'Soldaten geben.'); Q['m36_spd'] = zwischen(t, 'Die Bundesrepublik hat nach', 'führen …')
+t = glatt(roh(238)); Q['m36_lemo'] = zwischen(t, 'Die Meinungsverschiedenheiten', '(SED).'); Q['lemo'] = saetze(Q['m36_lemo']); Q['m36_a'] = zwischen(t, 'Konrad Adenauer – der erste', 'Soldaten geben.'); Q['m36_spd'] = zwischen(t, 'Die Bundesrepublik hat nach', 'führen …')
 Q['m36_b'] = zwischen(glatt(roh(239)), 'Im Juli 1951', 'allgemeinen Wehrpflicht.')
 Q['m35_wahl'] = zwischen(glatt(roh(241)), 'Bundeskanzler Konrad Adenauer hatte', 'durchgesetzt.')
 t = glatt(roh(251)); Q['m39'] = zwischen(t, 'Bis 1961 verließen', 'höchsten Lebensstandar') + 'd.'

@@ -75,6 +75,23 @@ function lehrkraft(){
   <p class="hinweis" style="margin-top:1rem">Speicherschlüssel <code>${esc(L.key)}</code>. „Verorten und vernetzen“ schreibt zusätzlich in den Speicher der Einheit (<code>${OWK_KEY}</code>). „Eingaben löschen“ auf dieser Seite löscht nur die Stunde; Verbindungen und roter Faden löschst du in der Übersicht der Einheit.</p></div>
   ${weiter("start", "Zum Anfang der Stunde")}`;
 }
+/* ---------- Reihen (Muster 4): Schritte durch Antippen in eine Reihenfolge bringen ----------
+   schritte = Texte in der richtigen Reihenfolge; misch = Reihenfolge der Anzeige (Indizes) */
+function reihe(id, schritte, misch, tipp){
+  const r = (S.reihe = S.reihe || {})[id] || (S.reihe[id] = { folge:[], gepr:false }), frei = misch.filter(i => !r.folge.includes(i)), alle = r.folge.length === schritte.length;
+  const falsch = r.gepr ? r.folge.filter((x, i) => x !== i) : [];
+  return `<div class="ordwerk"><div><h3 class="klein" style="margin-top:0">Noch offen (${frei.length})</h3><div class="ordpool eins" role="group" aria-label="Noch nicht eingeordnet">${frei.map(i => `<button type="button" class="chip" data-akt="rrein" data-id="${id}" data-w="${i}">${esc(schritte[i])}</button>`).join("") || `<p class="hinweis">Alles liegt.</p>`}</div></div>
+  <div><h3 class="klein" style="margin-top:0">Deine Reihenfolge</h3><ol class="ordfolge eins">${r.folge.map((x, i) => `<li class="${r.gepr ? (x === i ? "ok" : "nein") : ""}"><button type="button" data-akt="rraus" data-id="${id}" data-w="${x}" aria-label="Schritt ${i + 1} herausnehmen"><span>${i + 1}</span><b>${esc(schritte[x])}</b></button></li>`).join("") || `<li class="leer">Tippe links an, was zuerst geschah.</li>`}</ol></div></div>
+  <div class="reihe"><button type="button" class="btn dunkel" data-akt="rpruef" data-id="${id}" ${alle && !r.gepr ? "" : "disabled"}>Prüfen</button><button type="button" class="btn" data-akt="rneu" data-id="${id}">Neu beginnen</button></div>
+  <div aria-live="polite">${r.gepr ? (falsch.length ? `<div class="rm teils"><b>${schritte.length - falsch.length} von ${schritte.length} liegen richtig.</b> Goldene Kante: noch einmal prüfen. ${esc(tipp || "Lies im Text nach, was worauf antwortet.")}</div>` : `<div class="rm zentral"><b>Die Reihenfolge stimmt.</b> Achte auf das Muster: Jeder Schritt ist eine Antwort auf den Schritt davor.</div>`) : ""}</div>`;
+}
+const reiheOk = id => { const r = (S.reihe || {})[id]; return !!(r && r.gepr && r.folge.every((x, i) => x === i)); };
+AKTION.rrein = t => { const r = S.reihe[t.dataset.id]; r.folge.push(+t.dataset.w); r.gepr = false; speichere(); zeichneBehalte(); };
+AKTION.rraus = t => { const r = S.reihe[t.dataset.id]; r.folge = r.folge.filter(x => x !== +t.dataset.w); r.gepr = false; speichere(); zeichneBehalte(); };
+AKTION.rpruef = t => { S.reihe[t.dataset.id].gepr = true; speichere(); zeichneBehalte(); };
+AKTION.rneu = t => { S.reihe[t.dataset.id] = { folge:[], gepr:false }; speichere(); zeichneBehalte(); };
+/* Tabelle mit eigenen Einträgen: zeilen = [[schlüssel, Titel]], pfad = Ort in S */
+const tabelle = (pfad, kopf, zeilen) => `<div class="matrix-wrap"><table class="tab3"><thead><tr>${kopf.map(k => `<th>${esc(k)}</th>`).join("")}</tr></thead><tbody>${zeilen.map(z => `<tr><th scope="row">${esc(z[1])}</th>${kopf.slice(1).map((k, i) => { const p = pfad + "." + z[0] + (kopf.length > 2 ? "_" + i : ""); return `<td><label class="sr" for="f-${p.replace(/\W/g, "-")}">${esc(z[1])}: ${esc(k)}</label><textarea id="f-${p.replace(/\W/g, "-")}" data-f="${p}" rows="2">${esc(hol(p) || "")}</textarea></td>`; }).join("")}</tr>`).join("")}</tbody></table></div>`;
 function stundeStart(){
   const eig = L.nachEingabe;
   L.nachEingabe = p => {
