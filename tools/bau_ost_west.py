@@ -7,14 +7,25 @@ REPO = pathlib.Path(__file__).resolve().parent.parent
 K = REPO/'src'/'m25-m27'; H = REPO/'src'/'ost-west'; ZIEL = REPO/'ost-west'
 # Schlüssel: (Datei, Titel, Beschreibung, weitere JS-Dateien, Textdateien aus ost-west/texte/)
 ST = {
+ 's1': ('s1-stunde-null.html', 'Ost-West 1 · Die Stunde Null', 'Potsdam 1945: Interessen der Sieger, Vorhersage, Abkommen, Urteil.', [], []),
+ 's2': ('s2-ideologien.html', 'Ost-West 2 · Kommunismus gegen Kapitalismus', 'Truman-Doktrin und Zwei-Lager-Theorie im Vergleich, Marshallplan, Blockbildung.', [], []),
+ 's3': ('s3-blockade.html', 'Ost-West 3 · Die Berlin-Blockade', 'Währungsreform, Blockade und Luftbrücke; die sowjetische Besatzungszone.', [], []),
+ 's4': ('s4-staatsgruendung.html', 'Ost-West 4 · Die doppelte Staatsgründung', 'Grotewohl und Adenauer 1949: zwei Regierungserklärungen im Vergleich.', [], []),
+ 's5': ('s5-westintegration.html', 'Ost-West 5 · Die Bindung an den Westen', 'Westintegration und Wiederbewaffnung der Bundesrepublik: Streit, Schritte, Wahl 1957.', [], []),
+ 's6': ('s6-flucht-und-mauer.html', 'Ost-West 6 · Flucht und Mauer', 'Fluchtbewegung 1949 bis 1961, Fluchtgründe, Mauerbau.', [], []),
+ 's7': ('s7-geschichte-im-staatsdienst.html', 'Ost-West 7 · Geschichte im Staatsdienst?', 'Der 17. Juni 1953 in einem Schulbuch der DDR und einem der Bundesrepublik.', [], []),
+ 's8': ('s8-ostpolitik.html', 'Ost-West 8 · Wandel durch Annäherung', 'Ostverträge, Streit im Bundestag, KSZE.', [], ['owk-m41.js']),
+ 's9': ('s9-ende.html', 'Ost-West 9 · Das Ende der DDR und des Ost-West-Konflikts', '1989 bis 1991: Wege zum Mauerfall, friedliche Revolution, Zwei-plus-Vier.', [], []),
  'hub': ('index.html', 'Der Ost-West-Konflikt – Einheit', 'GGK Jahrgangsstufe 2: Der Ost-West-Konflikt 1945–1991. Zeitraster mit 16 Ereigniskarten, Ordnen, Vernetzen, Glossar und roter Faden.', [], []),
 }
 def gebaut():
     return [k for k in ST if k != 'hub' and (H/f'{k}.js').exists()]
+def vorhanden():
+    return ['hub'] + gebaut()
 def bau(k):
     datei, titel, desc, extra, texte = ST[k]
     css = (K/'basis.css').read_text('utf-8').replace('url(assets/', 'url(../assets/') + (K/'kern.css').read_text('utf-8') + (H/'owk.css').read_text('utf-8') + ((H/f'{k}.css').read_text('utf-8') if (H/f'{k}.css').exists() else '')
-    teile = [K/'kern.js', H/'karten.js', H/'glossar.js', H/'einheit.js'] + [H/e for e in extra] + [H/f'{k}.js']
+    teile = [K/'kern.js', H/'karten.js'] + ([H/'glossar.js', H/'einheit.js'] if k == 'hub' else [H/'einheit.js', H/'quellen.js', H/'stunde.js']) + [H/e for e in extra] + [H/f'{k}.js']
     js = 'window.OWK_GEBAUT = ' + json.dumps(gebaut()) + ';\n' + ''.join(t.read_text('utf-8') for t in teile)
     assert '</script' not in js
     tx = ''.join(f'\n<script src="texte/{t}"></script>' for t in texte)
@@ -43,4 +54,4 @@ def bau(k):
 '''
     (ZIEL/datei).write_text(html, 'utf-8'); print(datei, len(html))
 if __name__ == '__main__':
-    for k in (sys.argv[1:] or ST): bau(k)
+    for k in (sys.argv[1:] or vorhanden()): bau(k)

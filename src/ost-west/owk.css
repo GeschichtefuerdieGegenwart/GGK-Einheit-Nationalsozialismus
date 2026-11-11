@@ -125,3 +125,23 @@ main.breit:has(.zraster.gross){max-width:78rem}
   .zraster.druck .chip small{font-size:6.2pt}
   .zf .fadenliste{font-size:9pt;gap:.25rem}.zf .netzliste.klein li{font-size:8.5pt;padding:.15rem .4rem}
 }
+
+/* Stunden */
+.fragen7,.fakten{padding-left:1.3rem;display:grid;gap:.35rem}
+.fragen7{grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem 2rem}
+.deleg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}
+.deleg .karte+.karte{margin-top:0}
+.deleg ul{padding-left:1.1rem;margin:.4rem 0 0;font-size:.95rem;display:grid;gap:.3rem}
+@media (max-width:820px){.deleg,.fragen7{grid-template-columns:1fr}}
+.vkarte{display:grid;gap:.6rem}
+.qblatt.lese .qtext p{margin:0 0 .7rem}
+.zweispalt{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;align-items:start}
+@media (max-width:820px){.zweispalt{grid-template-columns:1fr}}
+.tab3{width:100%;border-collapse:collapse;font-size:.95rem}
+.tab3 th,.tab3 td{border:1px solid var(--line);padding:.4rem .5rem;text-align:left;vertical-align:top}
+.tab3 textarea{width:100%;min-height:3.2rem;border:1px solid var(--stahl);border-radius:.4rem;padding:.3rem;font:inherit}
+.bslot{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:.3rem .8rem;align-items:center;padding:.35rem 0;border-bottom:1px solid var(--line)}
+.bslot label{font-weight:700}
+.bslot select{min-height:48px;border:1.5px solid var(--stahl);border-radius:.5rem;background:var(--surface2);padding:.3rem .5rem;font:inherit;width:100%}
+.bslot .rm{grid-column:1/-1;margin:.2rem 0}
+@media (max-width:640px){.bslot{grid-template-columns:1fr}}

@@ -2,3 +2,6 @@ privat/
 media/m23-voices-in-the-void-2021.mp4
 # Artikel von welt.de (M27) im vollen Wortlaut: nur im Moodle-Paket
 texte/m27-artikel.js
+# Ost-West: Artikel der bpb (M41) im vollen Wortlaut und Schulbuchseiten (M42–M44): nur im Moodle-Paket
+ost-west/texte/owk-m41.js
+ost-west/media/owk-scan-*.jpg
