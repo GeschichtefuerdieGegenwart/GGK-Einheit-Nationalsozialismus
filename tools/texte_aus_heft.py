@@ -2,7 +2,7 @@
 """Liest den BND-Text (M26) und den Artikel von Nils Sandrisser (M27) aus dem Heft
 „Geschichte aktuell 1“ (PDF) und schreibt sie als texte/m26-bnd.js und texte/m27-artikel.js.
 Aufruf: python3 tools/texte_aus_heft.py <Heft.pdf>
-Die Dateien enthalten Texte Dritter und liegen nur im Moodle-Paket (siehe .gitignore)."""
+m26-bnd.js (Fassung der Lehrkraft) liegt auch im Repository; m27-artikel.js (welt.de, voller Wortlaut) nur im Moodle-Paket (siehe .gitignore)."""
 import sys, re, json, subprocess, pathlib
 REPO = pathlib.Path(__file__).resolve().parent.parent
 def seite(pdf, p):
@@ -75,5 +75,5 @@ for oid, wort in ORTE:
 m27 = {'titel': titel, 'autor': 'Nils Sandrisser', 'datum': '22.06.2015', 'lead': abs_[0], 'abs': abs_[1:],
        'nachweis': 'Nils Sandrisser: Kolonien stellten Kanonenfutter und füllten Bordelle, welt.de, 22.06.2015. Wiedergabe nach dem Unterrichtsheft „Geschichte aktuell 1“, M27.'}
 for name, var, d in (('m26-bnd.js', 'TEXT_M26', m26), ('m27-artikel.js', 'TEXT_M27', m27)):
-    (REPO / 'texte' / name).write_text(f'/* {d["nachweis"]} Nur im Moodle-Paket. */\nwindow.{var} = ' + json.dumps(d, ensure_ascii=False, indent=1) + ';\n', 'utf-8')
+    (REPO / 'texte' / name).write_text(f'/* {d["nachweis"]} */\nwindow.{var} = ' + json.dumps(d, ensure_ascii=False, indent=1) + ';\n', 'utf-8')
     print(name, sum(len(json.dumps(d, ensure_ascii=False).split()) for _ in [0]))

@@ -95,3 +95,5 @@ Geprüft (Chromium, gelaufen):
 - 36/36 Texttests mit Dateien (Akte mit sieben Karten, Kette nach den Antworten, zwölf Ortsmarken, Tippen und Tastatur, wieder entfernen, Stand nach Neuladen, Fotos im Text), bei 1280, 768 und 390 px.
 - 18/18 ohne Dateien (Rückfall).
 - 35/35 Interaktionstests; Rundgang über alle Seiten ohne Befund.
+
+**Freigabe 11.11.2026:** PR #18 zusammengeführt. `texte/m26-bnd.js` liegt jetzt auch im öffentlichen Repository: Es ist die Fassung der Lehrkraft aus dem Heft, mit kurzen, belegten Zitaten aus tagesschau.de. `texte/m27-artikel.js` (welt.de, vollständiger Wortlaut) bleibt nur im Moodle-Paket. Auf der öffentlichen Seite zeigt M27 den Verweis aufs Heft und die Ortsliste.
