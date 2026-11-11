@@ -1,0 +1,120 @@
+/* ===== Gemeinsamer Kern M25–M27 (Ergänzungen zum Stand von M23) ===== */
+.band{margin-top:.2rem}
+.ziele{padding-left:1.2rem;display:grid;gap:.3rem;margin:.6rem 0}
+.ablauf{list-style:none;display:grid;gap:.35rem;margin:.8rem 0 0}
+.ablauf li{display:grid;grid-template-columns:5.6rem 1fr;gap:.8rem;border-top:1px solid var(--line);padding-top:.35rem}
+.ablauf li b{color:var(--red);font-variant-numeric:tabular-nums}
+.auflage{border-left:6px solid var(--green);background:var(--green-hi);padding:.8rem 1rem;border-radius:0 .6rem .6rem 0;margin:1rem 0}
+.auflage.neu,.rm.neu{animation:auf 360ms var(--ease) both}
+.rm{border-left:6px solid var(--stahl);background:var(--surface);padding:.7rem 1rem;border-radius:0 .6rem .6rem 0;margin:.7rem 0;font-size:.97rem}
+.rm.zentral{border-left-color:var(--green)}.rm.teils{border-left-color:var(--gold)}.rm.kaum{border-left-color:var(--red)}
+.rm b.sw{display:block}
+.gesperrt{opacity:.45}
+.zaehl{font-size:.88rem;color:var(--muted);margin-top:.25rem;font-variant-numeric:tabular-nums}
+textarea,input[type=text],select{color:var(--kuli)}
+input[type=text],select{width:100%;min-height:48px;border:1.5px solid var(--border);border-radius:var(--r);padding:.5rem .8rem;background:var(--surface2);margin-top:.3rem}
+textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
+.felder2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:700px){.felder2{grid-template-columns:1fr}}
+
+/* Quelle zum Markieren (Gegenwart: Markierung) – Sätze sind die Einheiten */
+.qwerk{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:1.2rem;align-items:start;margin-top:1rem}
+@media (max-width:860px){.qwerk{grid-template-columns:1fr}}
+.qblatt{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
+.qblatt h3{font-size:1.12rem;margin-bottom:.15rem}
+.qblatt .qkopf{font-size:.92rem;color:var(--muted);margin-bottom:.7rem}
+.qblatt .qtext p{margin:.55rem 0;line-height:1.75;font-size:1.06rem}
+.qblatt .qtag{font-weight:700;color:var(--red);font-size:.9rem;margin-right:.3rem}
+.qblatt .g-wort{padding:.08em 0;-webkit-tap-highlight-color:transparent}
+.qblatt .g-wort:focus-visible{outline:3px solid var(--kuli);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){.qblatt .g-wort:hover{background:var(--offset)}}
+.qblatt .g-stifte{margin:.2rem 0 .8rem;position:sticky;top:112px;background:var(--surface2);padding:.35rem 0;z-index:2}
+.g-stift .z{font-size:.8em;margin-right:.25rem}
+.qreiter{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1rem}
+.qreiter button{min-height:44px;border:1.5px solid var(--border);border-bottom-width:3px;background:var(--surface);border-radius:.6rem .6rem 0 0;padding:.4rem .9rem;font-weight:700}
+.qreiter button[aria-selected=true]{background:var(--surface2);border-bottom-color:var(--red)}
+.belege{display:grid;gap:.8rem}
+.belege .sp{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;min-height:5.5rem}
+.belege .sp h4{font-family:var(--body);font-size:.95rem;margin-bottom:.3rem}
+.belege .sp ul{list-style:none;display:grid;gap:.3rem;font-size:.92rem}
+.belege .sp li{border-left:4px solid var(--marker);padding-left:.5rem;line-height:1.35}
+.belege .sp.b li{border-left:4px dotted var(--kuli)}
+.belege .leer{color:var(--faint);font-size:.9rem}
+
+/* Wörter wählen */
+.woerter{display:flex;gap:.45rem;flex-wrap:wrap;margin:.8rem 0}
+.woerter button{min-height:44px;padding:.35rem .9rem;border-radius:.6rem;border:2px solid var(--stahl);background:var(--surface2);font-weight:700}
+.woerter button[aria-pressed=true]{border-color:var(--kuli);background:var(--kuli-hi);color:var(--ink)}
+.woerter button[disabled]{opacity:.5}
+.wgrp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin-top:.6rem}
+@media (max-width:760px){.wgrp{grid-template-columns:1fr}}
+.wgrp div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .8rem;font-size:.93rem}
+.wgrp b{display:block;margin-bottom:.2rem}
+.wgrp .dein{font-weight:700;color:var(--kuli)}
+
+/* Landkarten-Moment */
+.prinzipien{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;margin:.9rem 0}
+@media (max-width:860px){.prinzipien{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.prinzipien{grid-template-columns:1fr}}
+.prinzipien button{text-align:left;border:2px solid var(--stahl);background:var(--surface2);border-radius:.7rem;padding:.55rem .7rem;min-height:56px;display:grid;gap:.15rem;align-content:start}
+.prinzipien button small{font-size:.82rem;color:var(--muted);line-height:1.3}
+.prinzipien button[aria-pressed=true]{border-color:var(--kuli);box-shadow:inset 0 0 0 1px var(--kuli)}
+.prinzipien button.zentral{border-left:6px solid var(--green)}.prinzipien button.teils{border-left:6px solid var(--gold)}.prinzipien button.kaum{border-left:6px solid var(--red)}
+.prinzipien button[disabled]{opacity:.6}.prinzipien button[disabled][aria-pressed=true]{opacity:1}
+.trift{margin-top:1.2rem;border:1.5px dashed var(--stahl);border-radius:.7rem;padding:.8rem 1rem;font-size:.96rem}
+
+/* Stimmkarte und Beamer-Tafel */
+#ueber:empty{display:none}
+.tafel-voll{position:fixed;inset:0;z-index:60;background:var(--dunkel);color:var(--inverse);display:grid;grid-template-rows:auto 1fr;padding:max(1rem,env(safe-area-inset-top,0px)) 1.4rem 1.4rem;overflow:auto}
+.tafel-voll .tk{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.tafel-voll .tk .btn{background:transparent;color:var(--inverse);border-color:#6b665d}
+.tafel-voll .mitte{display:grid;place-content:center;text-align:center;gap:1rem}
+.tafel-voll .buchstabe{font:600 clamp(8rem,34vw,20rem)/.9 var(--display)}
+.tafel-voll .wort{font:600 clamp(1.6rem,5vw,3.4rem)/1.15 var(--display)}
+.tafel-voll.hell{background:var(--bg);color:var(--ink)}
+.tafel-voll.hell .tk .btn{color:var(--ink);border-color:var(--stahl)}
+.folie{width:min(100%,calc((100vh - 6.5rem)*16/9));aspect-ratio:16/9;margin:auto;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:clamp(1rem,2.6vw,2.4rem);display:grid;grid-template-rows:auto 1fr auto;gap:.8rem;text-align:left;overflow:hidden}
+.folie h2{font-size:clamp(1.4rem,3vw,2.5rem)}
+.folie .vier{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 1.4rem;align-content:start;font-size:clamp(.85rem,1.45vw,1.25rem);line-height:1.35}
+.folie .vier b{display:block;color:var(--red);font-size:.85em}
+.folie .vier p{color:var(--kuli);white-space:pre-wrap;overflow-wrap:anywhere}
+.folie .fq{font-size:clamp(.75rem,1.1vw,1rem);color:var(--muted)}
+@media (max-width:700px){.folie{aspect-ratio:auto}.folie .vier{grid-template-columns:1fr}}
+.stimmwahl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.8rem}
+@media (max-width:640px){.stimmwahl{grid-template-columns:1fr}}
+.stimmwahl button{min-height:64px;border:2px solid var(--stahl);border-radius:.8rem;background:var(--surface2);font-weight:700;padding:.5rem .8rem;display:grid;gap:.1rem;text-align:left}
+.stimmwahl button b{font:600 1.5rem/1 var(--display)}
+.stimmwahl button[aria-pressed=true]{border-color:var(--green);box-shadow:inset 0 0 0 2px var(--green);background:var(--green-hi)}
+
+/* Zeitleiste klein (Zusammenfassung) */
+.zl{list-style:none;display:grid;gap:.25rem;margin-top:.4rem}
+.zl li{display:grid;grid-template-columns:7.2rem 1fr;gap:.7rem;font-size:.95rem;border-top:1px solid var(--line);padding-top:.25rem}
+.zl li b{font-variant-numeric:tabular-nums}
+.begriffe{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem;margin-top:.4rem}
+.begriffe div{font-size:.95rem;border-left:4px solid var(--line);padding-left:.6rem}
+@media (max-width:640px){.begriffe{grid-template-columns:1fr}}
+.mein{color:var(--kuli);white-space:pre-wrap;overflow-wrap:anywhere}
+.mein.leer{color:var(--faint);font-style:italic}
+.zf .werk{background:var(--gold-hi);border-radius:.6rem;padding:.6rem .9rem;margin-top:.5rem;font-size:.95rem}
+.zf h1{margin-top:0}
+.zf .seitenumbruch{margin-top:2rem;border-top:3px solid var(--ink);padding-top:1rem}
+.lk table{font-size:.92rem}
+.lk ul{padding-left:1.2rem;display:grid;gap:.4rem;margin-top:.4rem}
+
+@media print{
+  @page{size:A4;margin:12mm 13mm}
+  body{background:#fff;font-size:10pt;line-height:1.36}
+  .kopf,.fuss,.loesch,.nodruck,.reihe,#ueber{display:none!important}
+  main{max-width:none;padding:0}
+  .zf h1{font-size:18pt;margin:0 0 .15rem}
+  .zf .leitfrage{font-size:12pt;margin-bottom:.3rem}
+  .zf h2{font-size:12pt;margin:.55rem 0 .2rem;break-after:avoid}
+  .zf .merksatz{margin:.45rem 0;padding:.35rem 0;font-size:11pt}
+  .zf .begriffe div,.zf .zl li,.zf .werk{font-size:9pt}
+  .zf .karte{padding:.4rem .6rem;break-inside:avoid}
+  .zf .seitenumbruch{break-before:page;border-top:0;margin-top:0;padding-top:0}
+  .zf .mein{font-size:9.5pt}
+  .zf th,.zf td{padding:.2rem .4rem;font-size:8.6pt}
+  .auflage{background:#fff;border:1px solid #bbb;border-left:4px solid #555}
+  a{color:inherit;text-decoration:none}
+}

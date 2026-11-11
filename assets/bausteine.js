@@ -97,6 +97,27 @@
     datei: "m23-die-gesellschaft.html"
   };
 
+  B.m25 = {
+    nr: "M25",
+    titel: "Leben in Ruinen und der Umgang mit Schuld",
+    thema: "Kriegsende 1945 · Quellen markieren, Fotos aus Buchenwald lesen, die Zwangsbesichtigung beurteilen",
+    datei: "m25-leben-in-ruinen.html"
+  };
+
+  B.m26 = {
+    nr: "M26",
+    titel: "Ende gut, alles gut? Kontinuitäten des Nationalsozialismus",
+    thema: "Schätzen vor dem BND-Text, Steckbrief der Gruppe am Beamer, Vergleichstafel, Sach- und Werturteil",
+    datei: "m26-kontinuitaeten.html"
+  };
+
+  B.m27 = {
+    nr: "M27",
+    titel: "Die Vergessenen! Eine Globalgeschichte des Zweiten Weltkriegs",
+    thema: "Dein Bild vom Krieg auf der Weltkarte, Karte drehen, Eurozentrismus, Strukturbild legen",
+    datei: "m27-die-vergessenen.html"
+  };
+
   B.geplant = [];
   window.BAUSTEINE = B;
 })();

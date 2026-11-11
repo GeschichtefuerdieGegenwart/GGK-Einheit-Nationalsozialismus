@@ -24,7 +24,7 @@ Maßgeblich ist der Lizenztext von Creative Commons.
 - **Programmcode:** MIT-Lizenz, siehe `LICENSE`.
 - **Fremdmaterial:** Bilder, Karten, Zitate und Datensätze Dritter behalten ihre eigene
   Lizenz. Sie sind am Ort ihrer Verwendung und in der README nachgewiesen.
-  Bekannt: Fotos aus Wikimedia Commons (`media/m21-wc-*`, `media/m22-wc-*`, `media/m23-wc-*`), Yad Vashem (`media/m22-yv-*`), Jüdisches Museum (`media/m22-jm-*`) und aus dem Schulheft (`media/m22-heft-*`); Opferzahlen des USHMM; Bilder der Imperial War Museums (IWM Non-Commercial Licence) und des London Transport Museum nur im Moodle-Paket; Foto und Originalton der Science Museum Group bzw. Wikimedia Commons per Zwei-Klick-Lösung; Karten aus CShapes 2.0 (Schvitz u. a. 2022, CC BY-NC-SA 4.0); Nachweise in `M21_Bildliste.html`, `M22_Bildliste.html`, `M23_Bildliste.html`.
+  Bekannt: Fotos aus Wikimedia Commons (`media/m21-wc-*`, `media/m22-wc-*`, `media/m23-wc-*`), Yad Vashem (`media/m22-yv-*`), Jüdisches Museum (`media/m22-jm-*`) und aus dem Schulheft (`media/m22-heft-*`); Opferzahlen des USHMM; Bilder der Imperial War Museums (IWM Non-Commercial Licence) und des London Transport Museum nur im Moodle-Paket; Foto und Originalton der Science Museum Group bzw. Wikimedia Commons per Zwei-Klick-Lösung; Karten aus CShapes 2.0 (Schvitz u. a. 2022, CC BY-NC-SA 4.0); Landflächen der Weltkarte in M27 aus Natural Earth (gemeinfrei); Nachweise in `M21_Bildliste.html`, `M22_Bildliste.html`, `M23_Bildliste.html`.
 - **Schriften** in `assets/fonts/`, soweit vorhanden: SIL Open Font License.
 - **Der Name** »GGK-Labor · Quellen-Labore zum Nationalsozialismus« ist von keiner dieser Lizenzen erfasst.
 

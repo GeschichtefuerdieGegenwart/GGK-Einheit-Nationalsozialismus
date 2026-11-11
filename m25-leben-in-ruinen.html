@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>M25 Leben in Ruinen und der Umgang mit Schuld</title>
+<meta name="description" content="GGK M25: Kriegsende 1945. Quellen markieren, Belege sammeln, Fotos lesen, die Zwangsbesichtigung von Buchenwald beurteilen.">
+<link rel="stylesheet" href="assets/gegenwart/bundle.css">
+<style>
+
+/* Schriften lokal im Repository (SIL Open Font License) */
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBoldItalic.woff) format("woff");font-weight:600;font-style:italic;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+/* Bewusst nur hell (Beamer, Druck), wie M18–M22. Farben und Formen aus dem Designsystem GGK-Labor.
+   Die Bausteine von »Gegenwart« (assets/gegenwart/) laufen über Tokens – hier auf die Farben des GGK-Labors gesetzt. */
+:root{
+  color-scheme:light;
+  --bg:#F3EFE7; --surface:#FAF8F3; --surface2:#FFFDF8; --offset:#E9E2D7; --line:#D5CEC3; --border:rgba(36,34,31,.14);
+  --ink:#24221F; --muted:#5F5C56; --faint:#6A655E; --inverse:#FFFAF2; --dunkel:#1B1A17;
+  --red:#9B402D; --red-hi:#EAD7CF; --green:#2E5A47; --green-hi:#D6E4DC; --gold:#7D5C12; --gold-hi:#EEE2BF;
+  --kuli:#1E4FB5; --kuli-hi:#DCE5F7; --slate:#4B4F57; --slate-hi:#DFE1E5; --marker:#F3D54E;
+  /* Säulenfarben (sechs, aus der GGK-Palette abgeleitet) */
+  --s-inst:#2E5A47; --s-kult:#7D5C12; --s-sozi:#1E4FB5; --s-geo:#4B6F8F; --s-pol:#9B402D; --s-takt:#4B4F57;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:.75rem; --r-lg:1rem; --ease:cubic-bezier(.23,1,.32,1);
+  /* Gegenwart-Tokens → GGK-Labor */
+  --grund:var(--bg); --flaeche:var(--surface); --karton:var(--offset); --text:var(--ink); --leise:var(--muted); --stahl:#8F887D; --linie:var(--line);
+  --petrol:var(--green); --petrol-hi:var(--green-hi); --auf-petrol:var(--inverse);
+  --honig:var(--gold); --honig-hi:var(--gold-hi); --honigplatte:var(--gold-hi); --auf-honig:var(--ink);
+  --ueberdruck:var(--slate); --auf-ueberdruck:var(--inverse);
+  --oxid:var(--red); --oxid-hi:var(--red-hi);
+  --erfolg:var(--green); --erfolg-hi:var(--green-hi); --warnung:var(--gold); --warnung-hi:var(--gold-hi); --fehler:var(--red); --fehler-hi:var(--red-hi);
+  --font-display:var(--display); --font-stimme:var(--display); --font-text:var(--body);
+  --radius-sm:.6rem; --radius-md:.75rem; --radius-pill:999px; --radius-none:0;
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:20px; --space-6:28px;
+  --knopf-hoehe:48px; --tablet-ziel:56px; --platte:6px 6px 0 0 var(--karton); --platte-knopf:4px 4px 0 0 var(--karton); --fokus-innen:inset 0 0 0 2px var(--grund);
+  --dauer-druck:100ms; --dauer-schnell:140ms; --dauer-mittel:220ms; --dauer-langsam:300ms; --dauer-staffel:30ms; --dauer-wende:460ms; --dauer-aufdecken:420ms; --dauer-reihe:440ms; --dauer-aus:150ms;
+  --kurve-aus:cubic-bezier(.23,1,.32,1); --kurve-beidseits:cubic-bezier(.77,0,.175,1); --kurve-feder:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+button,input,select,textarea,[tabindex]{scroll-margin-top:140px}
+html{-webkit-text-size-adjust:none;text-size-adjust:none;overflow-x:clip}
+body{min-height:100dvh;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:clamp(1rem,.95rem + .25vw,1.125rem);line-height:1.58;-webkit-font-smoothing:antialiased;overflow-x:clip}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.14;text-wrap:balance}
+p,li{text-wrap:pretty}
+a{color:var(--red)}
+:focus-visible{outline:3px solid var(--kuli);outline-offset:3px;border-radius:.35rem}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}}
+html[data-bewegung=weniger] *,html[data-bewegung=weniger] *::before,html[data-bewegung=weniger] *::after{animation:none!important;transition-duration:1ms!important}
+@keyframes auf{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+.g{background:transparent;font-size:inherit;line-height:inherit}
+.g .g-frage{font-size:clamp(1.2rem,1.05rem + .7vw,1.5rem)}
+.g .g-knopf{min-height:48px}
+.g-wahl legend{font-weight:700;font-family:var(--body);font-style:normal;font-size:1.05rem}
+.g .g-option span{font-weight:700}
+.g .g-option__urteil{font-weight:400;font-style:normal;font-size:.95rem;padding:0;border:0;min-height:0;background:transparent;box-shadow:none}
+.g .g-option span span::before,.g .g-option span span::after{display:none!important}
+.g .g-balken__zeile{grid-template-columns:minmax(6.5rem,10rem) 1fr 4.2rem}
+.g .g-schieber{max-width:none}
+.g .g-schieber>label{display:grid;gap:.2rem}.g .g-schieber input[type=range]{width:100%;accent-color:var(--kuli);height:32px}
+.g .g-schieber__buehne{aspect-ratio:auto;min-height:14rem}
+.g .g-schieber__vor,.g .g-schieber__nach{padding:2.6rem 1.2rem 1.2rem}
+.g .g-schieber__vor p,.g .g-schieber__nach p{font-size:.98rem}
+.g .g-schieber__vor .zahl,.g .g-schieber__nach .zahl{font:600 2.2rem/1 var(--display)}
+.g .g-zeit{padding-top:34px}
+@media (max-width:640px){.g .g-zeit{grid-auto-flow:row;grid-auto-columns:auto;gap:var(--space-3)}.g .g-zeit::before{display:none}}
+.g .g-schalter input{margin:0}
+
+/* Kopf mit Lernweg */
+.kopf{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--border);padding-top:env(safe-area-inset-top,0px)}
+.kopf-in{max-width:1100px;margin:auto;padding:.55rem max(1.25rem,env(safe-area-inset-right,0px)) .55rem max(1.25rem,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:.6rem .9rem;flex-wrap:wrap}
+.mark{width:32px;height:32px;flex:0 0 auto}
+.titel{font-weight:700;line-height:1.2;margin-right:auto}.titel small{display:block;color:var(--muted);font-weight:400;font-size:.82rem}
+.pill{border:1px solid var(--border);background:var(--surface2);border-radius:999px;padding:.45rem 1rem;font-weight:700;min-height:44px;display:inline-flex;align-items:center;text-decoration:none;color:var(--ink)}
+.weg{max-width:1100px;margin:auto;padding:0 1.25rem .6rem;display:flex;gap:.35rem;overflow-x:auto;scrollbar-width:none}
+.weg button{flex:1 0 auto;min-width:7.4rem;border:0;border-top:3px solid var(--line);background:transparent;text-align:left;padding:.45rem .5rem .2rem;color:var(--faint);font-size:.85rem;line-height:1.25;min-height:48px}
+.weg button b{display:block;color:inherit;font-size:.78rem}
+.weg button.da{color:var(--muted);border-top-color:var(--muted)}
+.weg button.akt{color:var(--ink);border-top-color:var(--red)}
+
+main{max-width:46rem;margin:auto;padding:clamp(1.5rem,4vw,3rem) max(1.25rem,env(safe-area-inset-right,0px)) 5rem max(1.25rem,env(safe-area-inset-left,0px))}
+main.breit{max-width:62rem}
+.zeit{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;color:var(--red);font-weight:700;font-size:.95rem}
+.zeit .nr{font-family:var(--display);font-size:1.1rem}
+h1{font-size:clamp(2rem,1.4rem + 2.4vw,3.1rem);margin:.5rem 0 .7rem}
+.leitfrage{font-family:var(--display);font-style:italic;font-weight:600;font-size:clamp(1.35rem,1.1rem + .9vw,1.8rem);color:var(--muted);margin-bottom:1.4rem}
+.lead{font-size:clamp(1.1rem,1rem + .5vw,1.28rem);color:var(--muted);margin-bottom:1.4rem}
+h2.abschnitt{font-size:1.45rem;margin:2.2rem 0 .7rem}
+h3.klein{font-size:1.15rem;margin:1.4rem 0 .4rem}
+p+p{margin-top:.7rem}
+.auftrag{background:var(--ink);color:var(--inverse);border-radius:var(--r-lg);padding:1.2rem 1.4rem;margin:1.5rem 0 1.1rem}
+.auftrag h3{font-size:1.2rem;margin-bottom:.35rem}
+.auftrag p{color:#DCD5CA}
+.auftrag .form{display:inline-block;font-weight:700;color:var(--marker);font-size:.9rem;margin-bottom:.2rem}
+.hinweis{font-size:.9rem;color:var(--muted)}
+.belastend{border-left:6px solid var(--gold);background:var(--gold-hi);padding:.75rem 1rem;border-radius:0 .5rem .5rem 0;margin:1rem 0}
+.merksatz{font-family:var(--display);font-weight:600;font-size:1.25rem;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);padding:.7rem 0;margin:1.4rem 0;text-align:center}
+.btn{min-height:48px;border:1px solid var(--border);border-radius:var(--r);padding:.6rem 1.2rem;background:var(--surface2);font-weight:700;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.4rem}
+.btn:hover{background:var(--offset)}
+.btn.primary{background:var(--red);color:var(--inverse);border-color:transparent}
+.btn.primary:hover{background:#86361f}
+.btn.dunkel{background:var(--ink);color:var(--inverse);border-color:transparent}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn:active{transform:scale(.97)}
+.reihe{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-top:.8rem}
+.fuss{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-top:1px solid var(--line);margin-top:2.2rem;padding-top:1.3rem;flex-wrap:wrap}
+label{font-weight:700;display:block}
+textarea{width:100%;min-height:5rem;border:1.5px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;background:var(--surface2);resize:vertical;margin-top:.35rem}
+.feldgruppe{display:grid;gap:1rem;margin-top:1rem}
+.karte{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
+.karte+.karte{margin-top:1rem}
+.kennung{font-weight:700;color:var(--red);font-size:.88rem;margin-bottom:.3rem}
+.quelle{font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.4}
+.quelle a{color:var(--muted)}
+blockquote{margin:.8rem 0;padding:.7rem 1rem;border-left:5px solid var(--kuli);background:var(--kuli-hi);border-radius:0 .5rem .5rem 0;font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.35}
+blockquote .wer{display:block;font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--muted);margin-top:.35rem}
+details.hilfe{margin-top:.8rem;border:1.5px dashed var(--line);border-radius:.6rem;padding:.4rem .8rem}
+details.hilfe summary{cursor:pointer;font-weight:700;min-height:40px;display:flex;align-items:center}
+details.hilfe p{margin:.3rem 0 .4rem}
+.status{display:inline-block;font-size:.78rem;font-weight:700;padding:.1rem .5rem;border-radius:.35rem;background:var(--slate-hi);color:var(--slate);margin-right:.3rem}
+.status.beleg{background:var(--green-hi);color:var(--green)}
+.status.modell{background:var(--gold-hi);color:var(--gold)}
+.aufdeck{margin-top:1rem;background:var(--offset);border-radius:var(--r-lg);padding:1rem 1.2rem}
+.aufdeck.neu{animation:auf 360ms var(--ease) both}
+.zwei{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+@media (max-width:640px){.zwei{grid-template-columns:1fr}}
+.zwei .alt{background:var(--offset);border-radius:.6rem;padding:.8rem 1rem;min-width:0}
+
+.band{position:relative;background:var(--dunkel);color:var(--inverse);border-radius:var(--r-lg);overflow:hidden;margin:0 0 1.6rem;min-height:9rem;display:grid;grid-template-columns:minmax(0,1fr)}
+.band.mit{grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:15rem}
+@media (max-width:640px){.band.mit{grid-template-columns:1fr}}
+.band .bt{padding:1.3rem 1.4rem;display:flex;flex-direction:column;justify-content:center;gap:.4rem}
+.band .bt .ob{font-size:.85rem;font-weight:700;color:#C9BFAE;letter-spacing:.02em}
+.band .bt h2{font-size:clamp(1.5rem,1.2rem + 1.4vw,2.2rem);color:var(--inverse)}
+.band .bt p{color:#DCD5CA}
+.band figure{margin:0;position:relative;min-height:12rem;background:#2A2824}
+.band figure img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:.92}
+.band.neu figure img{animation:band-ein 650ms var(--ease) both}
+@keyframes band-ein{from{opacity:0;transform:translateX(4%) scale(1.03)}to{opacity:.92;transform:none}}
+.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:.45rem .8rem;font-size:.75rem;line-height:1.35;color:#E6DFD2;background:linear-gradient(transparent,rgba(27,26,23,.85))}
+.band figcaption b{color:var(--inverse)}
+.urt{font-size:.95rem}.urt+.urt{margin-top:.3rem}
+.urt.zentral b{color:var(--green)}.urt.begruendbar b{color:var(--gold)}.urt.kaum b{color:var(--red)}
+.matrix-wrap{overflow-x:auto;margin-top:1rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%}
+th,td{padding:.55rem .7rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.92rem}
+th{background:var(--offset)}
+tr:last-child td{border-bottom:0}
+td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* Produkt */
+.raster3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.6rem;font-size:.88rem}
+@media (max-width:640px){.raster3{grid-template-columns:1fr}}
+.raster3 div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .7rem}
+.raster3 b{display:block;margin-bottom:.2rem}
+.satzanfaenge{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem}
+.satzanfaenge button{min-height:40px;border:1.5px solid var(--border);background:var(--surface2);border-radius:.5rem;padding:.3rem .7rem;font-size:.9rem}
+.pole{display:flex;justify-content:space-between;gap:1rem;font-weight:700;font-size:.95rem;margin-top:.6rem}
+.pole span{max-width:46%}
+
+/* Löschen */
+.loesch{margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.92rem;color:var(--muted);display:flex;gap:.9rem;flex-wrap:wrap;align-items:center}
+.loesch-frage{margin-top:.6rem;border:2px solid var(--red);border-radius:.7rem;padding:.8rem 1rem;background:var(--red-hi);color:var(--ink);flex:1 0 100%}
+/* ===== Gemeinsamer Kern M25–M27 (Ergänzungen zum Stand von M23) ===== */
+.band{margin-top:.2rem}
+.ziele{padding-left:1.2rem;display:grid;gap:.3rem;margin:.6rem 0}
+.ablauf{list-style:none;display:grid;gap:.35rem;margin:.8rem 0 0}
+.ablauf li{display:grid;grid-template-columns:5.6rem 1fr;gap:.8rem;border-top:1px solid var(--line);padding-top:.35rem}
+.ablauf li b{color:var(--red);font-variant-numeric:tabular-nums}
+.auflage{border-left:6px solid var(--green);background:var(--green-hi);padding:.8rem 1rem;border-radius:0 .6rem .6rem 0;margin:1rem 0}
+.auflage.neu,.rm.neu{animation:auf 360ms var(--ease) both}
+.rm{border-left:6px solid var(--stahl);background:var(--surface);padding:.7rem 1rem;border-radius:0 .6rem .6rem 0;margin:.7rem 0;font-size:.97rem}
+.rm.zentral{border-left-color:var(--green)}.rm.teils{border-left-color:var(--gold)}.rm.kaum{border-left-color:var(--red)}
+.rm b.sw{display:block}
+.gesperrt{opacity:.45}
+.zaehl{font-size:.88rem;color:var(--muted);margin-top:.25rem;font-variant-numeric:tabular-nums}
+textarea,input[type=text],select{color:var(--kuli)}
+input[type=text],select{width:100%;min-height:48px;border:1.5px solid var(--border);border-radius:var(--r);padding:.5rem .8rem;background:var(--surface2);margin-top:.3rem}
+textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
+.felder2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:700px){.felder2{grid-template-columns:1fr}}
+
+/* Quelle zum Markieren (Gegenwart: Markierung) – Sätze sind die Einheiten */
+.qwerk{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:1.2rem;align-items:start;margin-top:1rem}
+@media (max-width:860px){.qwerk{grid-template-columns:1fr}}
+.qblatt{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
+.qblatt h3{font-size:1.12rem;margin-bottom:.15rem}
+.qblatt .qkopf{font-size:.92rem;color:var(--muted);margin-bottom:.7rem}
+.qblatt .qtext p{margin:.55rem 0;line-height:1.75;font-size:1.06rem}
+.qblatt .qtag{font-weight:700;color:var(--red);font-size:.9rem;margin-right:.3rem}
+.qblatt .g-wort{padding:.08em 0;-webkit-tap-highlight-color:transparent}
+.qblatt .g-wort:focus-visible{outline:3px solid var(--kuli);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){.qblatt .g-wort:hover{background:var(--offset)}}
+.qblatt .g-stifte{margin:.2rem 0 .8rem;position:sticky;top:112px;background:var(--surface2);padding:.35rem 0;z-index:2}
+.g-stift .z{font-size:.8em;margin-right:.25rem}
+.qreiter{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1rem}
+.qreiter button{min-height:44px;border:1.5px solid var(--border);border-bottom-width:3px;background:var(--surface);border-radius:.6rem .6rem 0 0;padding:.4rem .9rem;font-weight:700}
+.qreiter button[aria-selected=true]{background:var(--surface2);border-bottom-color:var(--red)}
+.belege{display:grid;gap:.8rem}
+.belege .sp{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;min-height:5.5rem}
+.belege .sp h4{font-family:var(--body);font-size:.95rem;margin-bottom:.3rem}
+.belege .sp ul{list-style:none;display:grid;gap:.3rem;font-size:.92rem}
+.belege .sp li{border-left:4px solid var(--marker);padding-left:.5rem;line-height:1.35}
+.belege .sp.b li{border-left:4px dotted var(--kuli)}
+.belege .leer{color:var(--faint);font-size:.9rem}
+
+/* Wörter wählen */
+.woerter{display:flex;gap:.45rem;flex-wrap:wrap;margin:.8rem 0}
+.woerter button{min-height:44px;padding:.35rem .9rem;border-radius:.6rem;border:2px solid var(--stahl);background:var(--surface2);font-weight:700}
+.woerter button[aria-pressed=true]{border-color:var(--kuli);background:var(--kuli-hi);color:var(--ink)}
+.woerter button[disabled]{opacity:.5}
+.wgrp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin-top:.6rem}
+@media (max-width:760px){.wgrp{grid-template-columns:1fr}}
+.wgrp div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .8rem;font-size:.93rem}
+.wgrp b{display:block;margin-bottom:.2rem}
+.wgrp .dein{font-weight:700;color:var(--kuli)}
+
+/* Landkarten-Moment */
+.prinzipien{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;margin:.9rem 0}
+@media (max-width:860px){.prinzipien{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.prinzipien{grid-template-columns:1fr}}
+.prinzipien button{text-align:left;border:2px solid var(--stahl);background:var(--surface2);border-radius:.7rem;padding:.55rem .7rem;min-height:56px;display:grid;gap:.15rem;align-content:start}
+.prinzipien button small{font-size:.82rem;color:var(--muted);line-height:1.3}
+.prinzipien button[aria-pressed=true]{border-color:var(--kuli);box-shadow:inset 0 0 0 1px var(--kuli)}
+.prinzipien button.zentral{border-left:6px solid var(--green)}.prinzipien button.teils{border-left:6px solid var(--gold)}.prinzipien button.kaum{border-left:6px solid var(--red)}
+.prinzipien button[disabled]{opacity:.6}.prinzipien button[disabled][aria-pressed=true]{opacity:1}
+.trift{margin-top:1.2rem;border:1.5px dashed var(--stahl);border-radius:.7rem;padding:.8rem 1rem;font-size:.96rem}
+
+/* Stimmkarte und Beamer-Tafel */
+#ueber:empty{display:none}
+.tafel-voll{position:fixed;inset:0;z-index:60;background:var(--dunkel);color:var(--inverse);display:grid;grid-template-rows:auto 1fr;padding:max(1rem,env(safe-area-inset-top,0px)) 1.4rem 1.4rem;overflow:auto}
+.tafel-voll .tk{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.tafel-voll .tk .btn{background:transparent;color:var(--inverse);border-color:#6b665d}
+.tafel-voll .mitte{display:grid;place-content:center;text-align:center;gap:1rem}
+.tafel-voll .buchstabe{font:600 clamp(8rem,34vw,20rem)/.9 var(--display)}
+.tafel-voll .wort{font:600 clamp(1.6rem,5vw,3.4rem)/1.15 var(--display)}
+.tafel-voll.hell{background:var(--bg);color:var(--ink)}
+.tafel-voll.hell .tk .btn{color:var(--ink);border-color:var(--stahl)}
+.folie{width:min(100%,calc((100vh - 6.5rem)*16/9));aspect-ratio:16/9;margin:auto;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:clamp(1rem,2.6vw,2.4rem);display:grid;grid-template-rows:auto 1fr auto;gap:.8rem;text-align:left;overflow:hidden}
+.folie h2{font-size:clamp(1.4rem,3vw,2.5rem)}
+.folie .vier{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 1.4rem;align-content:start;font-size:clamp(.85rem,1.45vw,1.25rem);line-height:1.35}
+.folie .vier b{display:block;color:var(--red);font-size:.85em}
+.folie .vier p{color:var(--kuli);white-space:pre-wrap;overflow-wrap:anywhere}
+.folie .fq{font-size:clamp(.75rem,1.1vw,1rem);color:var(--muted)}
+@media (max-width:700px){.folie{aspect-ratio:auto}.folie .vier{grid-template-columns:1fr}}
+.stimmwahl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.8rem}
+@media (max-width:640px){.stimmwahl{grid-template-columns:1fr}}
+.stimmwahl button{min-height:64px;border:2px solid var(--stahl);border-radius:.8rem;background:var(--surface2);font-weight:700;padding:.5rem .8rem;display:grid;gap:.1rem;text-align:left}
+.stimmwahl button b{font:600 1.5rem/1 var(--display)}
+.stimmwahl button[aria-pressed=true]{border-color:var(--green);box-shadow:inset 0 0 0 2px var(--green);background:var(--green-hi)}
+
+/* Zeitleiste klein (Zusammenfassung) */
+.zl{list-style:none;display:grid;gap:.25rem;margin-top:.4rem}
+.zl li{display:grid;grid-template-columns:7.2rem 1fr;gap:.7rem;font-size:.95rem;border-top:1px solid var(--line);padding-top:.25rem}
+.zl li b{font-variant-numeric:tabular-nums}
+.begriffe{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem;margin-top:.4rem}
+.begriffe div{font-size:.95rem;border-left:4px solid var(--line);padding-left:.6rem}
+@media (max-width:640px){.begriffe{grid-template-columns:1fr}}
+.mein{color:var(--kuli);white-space:pre-wrap;overflow-wrap:anywhere}
+.mein.leer{color:var(--faint);font-style:italic}
+.zf .werk{background:var(--gold-hi);border-radius:.6rem;padding:.6rem .9rem;margin-top:.5rem;font-size:.95rem}
+.zf h1{margin-top:0}
+.zf .seitenumbruch{margin-top:2rem;border-top:3px solid var(--ink);padding-top:1rem}
+.lk table{font-size:.92rem}
+.lk ul{padding-left:1.2rem;display:grid;gap:.4rem;margin-top:.4rem}
+
+@media print{
+  @page{size:A4;margin:12mm 13mm}
+  body{background:#fff;font-size:10pt;line-height:1.36}
+  .kopf,.fuss,.loesch,.nodruck,.reihe,#ueber{display:none!important}
+  main{max-width:none;padding:0}
+  .zf h1{font-size:18pt;margin:0 0 .15rem}
+  .zf .leitfrage{font-size:12pt;margin-bottom:.3rem}
+  .zf h2{font-size:12pt;margin:.55rem 0 .2rem;break-after:avoid}
+  .zf .merksatz{margin:.45rem 0;padding:.35rem 0;font-size:11pt}
+  .zf .begriffe div,.zf .zl li,.zf .werk{font-size:9pt}
+  .zf .karte{padding:.4rem .6rem;break-inside:avoid}
+  .zf .seitenumbruch{break-before:page;border-top:0;margin-top:0;padding-top:0}
+  .zf .mein{font-size:9.5pt}
+  .zf th,.zf td{padding:.2rem .4rem;font-size:8.6pt}
+  .auflage{background:#fff;border:1px solid #bbb;border-left:4px solid #555}
+  a{color:inherit;text-decoration:none}
+}
+</style>
+</head>
+<body>
+<header class="kopf"><div class="kopf-in" id="kopf"></div><nav class="weg" id="weg" aria-label="Lernweg"></nav></header>
+<main id="main" tabindex="-1"></main>
+<div id="ueber"></div>
+<noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft „Geschichte aktuell 1“ (M25).</p></noscript>
+<script src="assets/gegenwart/bundle.js"></script>
+<script>
+"use strict";
+/* ===== Gemeinsamer Kern M25–M27. Jede Stunde definiert danach L (Einstellungen), ihre Daten, SEITE_FN und ruft kernStart(). ===== */
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let S = {};
+const lade = () => { try { return JSON.parse(localStorage.getItem(L.key)) || {}; } catch(e) { return {}; } };
+const speichere = () => { try { localStorage.setItem(L.key, JSON.stringify(S)); } catch(e) {} };
+const hol = p => p.split(".").reduce((o, k) => (o == null ? undefined : o[k]), S);
+const setz = (p, v) => { const k = p.split("."); let o = S; for (let i = 0; i < k.length - 1; i++) { if (o[k[i]] == null || typeof o[k[i]] !== "object") o[k[i]] = {}; o = o[k[i]]; } o[k[k.length - 1]] = v; speichere(); };
+const woerter = t => String(t || "").trim().split(/\s+/).filter(Boolean).length;
+const ruhig = () => { try { return !!S.ruhig || matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e) { return !!S.ruhig; } };
+const neu = (el, k) => { if (!el) return; el.classList.remove(k); void el.offsetWidth; if (!ruhig()) el.classList.add(k); };
+const LABOR = /github\.io$/.test(location.hostname) ? "index.html" : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
+const LK = "https://geschichtefuerdiegegenwart.github.io/kognitive-Landkarte-des-Geschichtsunterrichts/#s-";
+const idx = id => Math.max(0, L.seiten.findIndex(s => s[0] === id));
+
+/* ---------- Bausteine für Seiten ---------- */
+const zeitKopf = id => { const s = L.seiten[idx(id)]; return `<p class="zeit"><span class="nr">${esc(s[1])}</span><span>${esc(s[2])}</span></p>`; };
+const weiter = (nach, text, o = {}) => `<div class="fuss"><span class="hinweis">${o.hinweis || "Dein Stand wird nur auf diesem Gerät gespeichert."}</span><button class="btn primary" data-geh="${nach}">${esc(text)} ›</button></div>`;
+const auftrag = (form, titel, text) => `<div class="auftrag"><span class="form">${esc(form)}</span><h3>${esc(titel)}</h3><p>${text}</p></div>`;
+const belastend = text => `<p class="belastend"><b>Hinweis vorab.</b> ${text}</p>`;
+const status = (art, text) => `<span class="status ${art}">${esc(text)}</span>`;
+const band = (ob, titel, text) => `<div class="band"><div class="bt"><span class="ob">${esc(ob)}</span><h2>${esc(titel)}</h2><p>${text}</p></div></div>`;
+const hilfe = (titel, html) => `<details class="hilfe"><summary>${esc(titel)}</summary>${html}</details>`;
+
+/* Textfeld mit Satzanfängen und Wortzähler (Gegenwart: Textfeld). pfad = Ort in S. */
+function textfeld(pfad, label, o = {}){
+  const v = hol(pfad) || "", id = "f-" + pfad.replace(/\W/g, "-");
+  return `<div class="tf"><label for="${id}">${label}</label>
+  <textarea id="${id}" data-f="${pfad}" rows="${o.rows || 3}" placeholder="${esc(o.platz || "")}">${esc(v)}</textarea>
+  ${o.anfaenge ? `<div class="satzanfaenge nodruck" role="group" aria-label="Satzanfänge">${o.anfaenge.map(a => `<button type="button" data-satz="${id}" data-text="${esc(a)}">${esc(a)} …</button>`).join("")}</div>` : ""}
+  ${o.zaehl === false ? "" : `<p class="zaehl" data-zaehl="${pfad}">${woerter(v)} Wörter${o.ziel ? " · " + esc(o.ziel) : ""}</p>`}</div>`;
+}
+const eingabe = (pfad, label, platz = "") => { const id = "f-" + pfad.replace(/\W/g, "-"); return `<div><label for="${id}">${label}</label><input type="text" id="${id}" data-f="${pfad}" value="${esc(hol(pfad) || "")}" placeholder="${esc(platz)}" autocomplete="off"></div>`; };
+/* Kriterienraster: erscheint, sobald das Feld pfad mindestens min Wörter hat (P6: Vergleich erst nach dem eigenen Text). */
+function raster(pfad, min, titel, zeilen){
+  const da = woerter(hol(pfad)) >= min;
+  return `<div data-raster="${pfad}" data-min="${min}" ${da ? "" : "hidden"}><h3 class="klein">${esc(titel)}</h3><div class="matrix-wrap"><table><thead><tr><th>Prüfe deinen Text</th><th>Grundlegend</th><th>Sicher</th><th>Souverän</th></tr></thead><tbody>${zeilen.map(z => `<tr><td><b>${esc(z[0])}</b></td><td>${esc(z[1])}</td><td>${esc(z[2])}</td><td>${esc(z[3])}</td></tr>`).join("")}</tbody></table></div></div>
+  <p class="hinweis" data-rasterhinweis="${pfad}" ${da ? "hidden" : ""}>Ab ${min} Wörtern erscheint ein Raster, mit dem du deinen Text selbst prüfst.</p>`;
+}
+/* Vergleich, der erst nach eigenen Antworten erscheint: bed = Liste von Pfaden, die gefüllt sein müssen. */
+function vergleich(id, bed, min, titel, html){
+  const ok = bed.every(p => String(hol(p) || "").trim().length >= min), offen = !!(S.offen || {})[id];
+  return `<div class="reihe nodruck"><button type="button" class="btn dunkel" data-vergleich="${id}" data-bed="${bed.join(",")}" data-min="${min}" data-titel="${esc(titel)}" ${ok ? "" : "disabled"}>${offen ? "Vergleich ausblenden" : esc(titel)}</button><span class="hinweis" data-vergleichhinweis="${id}">${ok ? "" : "Erst deine Antworten, dann der Vergleich."}</span></div>
+  <div class="auflage" id="vgl-${id}" ${offen && ok ? "" : "hidden"}>${html}</div>`;
+}
+
+/* ---------- Quelle zum Markieren (Muster 11; Gegenwart: Markierung, zwei Stifte) ----------
+   QUELLEN[id] = { titel, kopf, abs:[[tag|null, [Sätze…]], …], nachweis, stifte:[[ "a", Zeichen, Name ], [ "b", Zeichen, Name ]] }
+   Stand: S.mark[id] = { "0": "a", "3": "b" }, S.stift[id] = "a" */
+const STIFTKLASSE = { a:"g-mark g-mark--beleg", b:"g-mark g-mark--gedanke" };
+function quelle(id){
+  const q = QUELLEN[id], m = (S.mark || {})[id] || {}, st = (S.stift || {})[id] || "a"; let n = 0;
+  const text = q.abs.map(([tag, saetze]) => `<p>${tag ? `<span class="qtag">${esc(tag)}</span>` : ""}${saetze.map(s => { const i = n++; return `<span class="g-wort ${m[i] ? STIFTKLASSE[m[i]] : ""}" role="button" tabindex="0" aria-pressed="${!!m[i]}" data-mark="${id}:${i}">${esc(s)}</span>`; }).join(" ")}</p>`).join("");
+  return `<div class="qblatt g" data-quelle="${id}"><h3>${esc(q.titel)}</h3><p class="qkopf">${q.kopf}</p>
+  <div class="g-stifte nodruck" role="group" aria-label="Stift wählen">${q.stifte.map(s => `<button type="button" class="g-stift" data-stift="${id}:${s[0]}" aria-pressed="${st === s[0]}"><span class="z" aria-hidden="true">${s[1]}</span>${esc(s[2])}</button>`).join("")}</div>
+  <div class="qtext">${text}</div><p class="quelle">${q.nachweis}</p></div>`;
+}
+const saetze = id => QUELLEN[id].abs.flatMap(a => a[1]);
+function belegListe(ids, stift){
+  const li = ids.flatMap(id => { const m = (S.mark || {})[id] || {}, s = saetze(id); return Object.keys(m).filter(i => m[i] === stift).sort((a, b) => a - b).map(i => `<li>${esc(s[i])} <span class="hinweis">(${esc(QUELLEN[id].kurz)})</span></li>`); });
+  return li.length ? `<ul>${li.join("")}</ul>` : `<p class="leer">Noch nichts markiert.</p>`;
+}
+function belege(ids, o = {}){
+  const st = QUELLEN[ids[0]].stifte;
+  return `<div class="belege" data-belege="${ids.join(",")}">${st.map(s => `<div class="sp ${s[0]}"><h4><span aria-hidden="true">${s[1]}</span> ${esc(o["t" + s[0]] || s[2])}</h4>${belegListe(ids, s[0])}</div>`).join("")}</div>`;
+}
+const markZahl = ids => ids.reduce((n, id) => n + Object.keys((S.mark || {})[id] || {}).length, 0);
+
+/* ---------- Wahl mit Erklärung je Option (Muster 2; Gegenwart: Wahl) ---------- */
+const STUFENWORT = { zentral:"zentral", begruendbar:"auch begründbar", kaum:"passt kaum" };
+function gWahl(id, frage, optionen, o = {}){
+  const st = (S.wahl || {})[id] || {}, zu = !!st.zu;
+  return `<div class="g"><div class="g-wahl" data-g="wahl" data-mind="${o.mind ?? 8}" data-id="${id}" ${zu ? 'data-zu=""' : ""}>
+  <fieldset><legend>${frage}</legend>${optionen.map((op, i) => `<label class="g-option" data-urteil="${op[1]}" data-grund="${esc(op[2])}"><input type="radio" name="w-${id}" value="${i}" ${st.o === i ? "checked" : ""} ${zu ? "disabled" : ""}><span>${esc(op[0])}<span class="g-option__urteil">${STUFENWORT[op[1]]} – ${esc(op[2])}</span></span></label>`).join("")}</fieldset>
+  ${o.ohneGrund ? "" : `<label>Begründung in einem Satz<textarea data-grund-feld rows="2" ${zu ? "readonly" : ""} placeholder="${esc(o.platz || "Ich wähle das, weil …")}">${esc(st.grund || "")}</textarea></label>`}
+  <div class="g-wahl__fuss"><button type="button" class="g-knopf g-knopf--primaer" data-g-festlegen ${zu ? "disabled" : ""}>Festlegen</button><span class="g-stempel" ${zu ? "" : "hidden"}>Festgelegt</span>${zu ? `<button type="button" class="btn nodruck" data-neu-wahl="${id}">Noch einmal</button>` : ""}<span class="sr" aria-live="polite"></span></div>
+  </div></div>`;
+}
+function pruefeWahl(w){
+  if (w.hasAttribute("data-zu")) return;
+  const gew = w.querySelector("input:checked"), ta = w.querySelector("textarea"), f = w.querySelector("[data-g-festlegen]");
+  if (f) f.disabled = !gew || (ta && ta.value.trim().length < 8);
+}
+
+/* ---------- Landkarten-Moment (Muster AT aus M22). Namen und Kurzerklärungen wörtlich aus der kognitiven Landkarte, Abschnitt 2.1. ---------- */
+const PRINZIP = {
+  "2-1-1": ["Retrospektivität", "Wir betrachten die Vergangenheit immer im Nachhinein (ex post), also aus der Gegenwart heraus."],
+  "2-1-2": ["Perspektivität", "Jede Betrachtung erfolgt aus einer bestimmten Sichtweise, geprägt von Überzeugungen, Interessen und Erfahrungen."],
+  "2-1-3": ["Partikularität", "Historische Erkenntnisse sind immer nur Ausschnitte der gesamten Vergangenheit."],
+  "2-1-4": ["Selektivität", "Wer Geschichte erzählt, wählt aus: Welche Quellen, Ereignisse und Personen sind für die eigene Frage wichtig?"],
+  "2-1-5": ["Partialität", "Quellen zeigen immer nur einen Teil der Vergangenheit, und nur ein Teil der Quellen ist überhaupt erhalten."],
+  "2-1-6": ["Narrativität", "Geschichte gibt es nur als Erzählung."],
+  "2-1-7": ["Konstruktivität", "Geschichte wird nicht „gefunden“, sondern aktiv zusammengesetzt. Deshalb können aus denselben Fakten unterschiedliche Geschichten entstehen."],
+  "2-1-8": ["Standortgebundenheit", "Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Gesamtkontext geprägt, oft unbewusst."],
+};
+const LKSTUFE = { zentral:"Zentral.", teils:"Auch begründbar.", kaum:"Passt kaum." };
+/* cfg = { seite, frage, lead, platz, folge:[Name, Kurzerklärung] (Eintrag 2.1.9), urteil:{ id:[stufe, text] }, bruecke } */
+function landkarte(cfg){
+  const l = S.lk, frei = l.vermutung.trim().length >= 10;
+  const liste = Object.keys(PRINZIP).map(id => ({ id, n:PRINZIP[id][0], k:PRINZIP[id][1] })).concat([{ id:"2-1-9", n:cfg.folge[0], k:cfg.folge[1] }]);
+  const p = liste.find(x => x.id === l.prinzip), u = p ? cfg.urteil[p.id] : null;
+  return `${zeitKopf(cfg.seite)}<h1>${esc(cfg.titel)}</h1>
+  <p class="leitfrage">${esc(cfg.frage)}</p>
+  ${auftrag("Allein · 2 Minuten", "Erst vermuten", cfg.lead)}
+  ${textfeld("lk.vermutung", "Meine Vermutung", { rows:2, platz:cfg.platz, zaehl:false })}
+  <p class="hinweis" id="lk-hinweis">${frei ? "Gut. Jetzt die Landkarte öffnen, dann unten ein Prinzip wählen." : "Schreib mindestens einen Satz. Danach geht es weiter."}</p>
+  <div id="lk-teil2" class="${frei ? "" : "gesperrt"}">
+  ${auftrag("Allein · 4 Minuten", "Dann die Landkarte", "Öffne „Was ist Geschichte?“ in der kognitiven Landkarte. Sie öffnet sich in einem neuen Tab, deine Eingaben hier bleiben. Wähle das Prinzip, das hier am besten passt, und begründe in einem Satz.")}
+  <p><a class="btn dunkel" id="lk-link" href="${LK}2-1" target="_blank" rel="noopener" ${frei ? "" : 'aria-disabled="true" tabindex="-1"'}>Landkarte öffnen: 2.1 Die Gemeinsamkeiten einer jeden Geschichte ↗</a></p>
+  <div class="prinzipien" role="group" aria-label="Prinzip wählen">${liste.map(x => `<button type="button" data-prinzip="${x.id}" aria-pressed="${l.prinzip === x.id}" class="${l.ok && l.prinzip === x.id ? cfg.urteil[x.id][0] : ""}" ${(!frei || l.ok) ? "disabled" : ""}><b>${esc(x.n)}</b><small>${esc(x.k)}</small></button>`).join("")}</div>
+  <label for="lk-grund">Meine Begründung</label><textarea id="lk-grund" data-f="lk.grund" rows="2" placeholder="Dieses Prinzip passt hier, weil …" ${(!frei || !l.prinzip || l.ok) ? "disabled" : ""}>${esc(l.grund)}</textarea>
+  <div class="reihe"><button type="button" class="btn dunkel" data-lkpruef ${(!frei || !l.prinzip || l.grund.trim().length < 10 || l.ok) ? "disabled" : ""}>Prüfen</button>${l.ok ? `<button type="button" class="btn" data-lkneu>Noch einmal</button>` : ""}<span class="hinweis">Rückmeldung in drei Stufen: zentral · auch begründbar · passt kaum.</span></div>
+  <div id="lk-fb" aria-live="polite">${l.ok && u ? `<div class="rm ${u[0]}"><b>${LKSTUFE[u[0]]}</b> ${esc(u[1])} <a href="${LK}${p.id}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a></div>` : ""}</div>
+  </div>
+  ${cfg.bruecke ? `<div class="trift">${cfg.bruecke}</div>` : ""}
+  ${weiter(cfg.nach[0], cfg.nach[1])}`;
+}
+
+/* ---------- Stimmkarte (Muster 12; Gegenwart: Stimmkarte): groß am Gerät, hochhalten, Lehrkraft zählt ---------- */
+function stimmkarte(pfad, optionen){
+  const v = hol(pfad);
+  return `<div class="stimmwahl" role="group" aria-label="Stimme wählen">${optionen.map(o => `<button type="button" data-stimme="${pfad}" data-wert="${o[0]}" aria-pressed="${v === o[0]}"><b>${o[0]}</b>${esc(o[1])}</button>`).join("")}</div>
+  <div class="reihe nodruck"><button type="button" class="btn dunkel" data-stimmkarte="${pfad}" data-opt="${esc(JSON.stringify(optionen))}" ${v ? "" : "disabled"}>Stimmkarte groß zeigen</button><span class="hinweis">Auf Ansage: iPad hochhalten. Die Lehrkraft zählt. Es wird nichts übertragen.</span></div>`;
+}
+let TAFEL_ZURUECK = null;
+function tafel(html, o = {}){
+  TAFEL_ZURUECK = document.activeElement;
+  const u = document.getElementById("ueber");
+  u.innerHTML = `<div class="tafel-voll ${o.hell ? "hell" : ""}" role="dialog" aria-modal="true" aria-label="${esc(o.titel || "Ansicht für den Beamer")}"><div class="tk"><b>${esc(o.titel || "")}</b><button type="button" class="btn" data-tafelzu>Schließen</button></div><div class="mitte">${html}</div></div>`;
+  u.querySelector("[data-tafelzu]").focus();
+}
+function tafelZu(){ const u = document.getElementById("ueber"); if (!u.innerHTML) return; u.innerHTML = ""; if (TAFEL_ZURUECK && document.contains(TAFEL_ZURUECK)) TAFEL_ZURUECK.focus(); }
+
+/* ---------- Kopf, Löschen, Zeichnen ---------- */
+function kopf(){
+  document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div><a class="pill" href="${LABOR}">← GGK-Labor</a><button class="pill" data-geh="lehrkraft">Für Lehrkräfte</button>`;
+  const a = idx(S.seite);
+  document.getElementById("weg").innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
+}
+function loeschBereich(){
+  return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button><label class="g-schalter" style="font-family:var(--body)"><input type="checkbox" role="switch" data-bewegung ${S.ruhig ? "checked" : ""}> Weniger Bewegung</label><span>Alles bleibt auf diesem Gerät. Nichts wird übertragen.</span>
+  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> ${esc(L.loesch)}</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div>
+  <p style="flex:1 0 100%;font-size:.85rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p></div>`;
+}
+function zeichne(fokus){
+  if (!SEITE_FN[S.seite]) S.seite = "start";
+  if (S.ruhig) document.documentElement.setAttribute("data-bewegung", "weniger"); else document.documentElement.removeAttribute("data-bewegung");
+  kopf();
+  const m = document.getElementById("main");
+  m.classList.toggle("breit", (L.breit || []).includes(S.seite));
+  m.innerHTML = SEITE_FN[S.seite]() + loeschBereich();
+  window.Gegenwart && Gegenwart.init(m);
+  nachInit();
+  if (fokus) { m.focus({ preventScroll:true }); window.scrollTo(0, 0); }
+}
+function nachInit(){
+  document.querySelectorAll(".g-wahl[data-id]").forEach(w => { pruefeWahl(w); const st = (S.wahl || {})[w.dataset.id] || {}; if (st.zu) { w.querySelectorAll("input").forEach(i => { i.disabled = true; }); const f = w.querySelector("[data-g-festlegen]"); if (f) f.disabled = true; } });
+  if (typeof L.nachInit === "function") L.nachInit();
+}
+function geh(id){ S.seite = id; speichere(); tafelZu(); zeichne(true); }
+/* Nach einer Texteingabe: Zähler, Raster und Freigaben nachführen, ohne neu zu zeichnen (Fokus und Scrollstand bleiben). */
+function nachEingabe(pfad){
+  const z = document.querySelector(`[data-zaehl="${pfad}"]`); if (z) z.textContent = z.textContent.replace(/^\d+/, woerter(hol(pfad)));
+  const r = document.querySelector(`[data-raster="${pfad}"]`);
+  if (r) { const da = woerter(hol(pfad)) >= +r.dataset.min, war = !r.hidden; r.hidden = !da; const h = document.querySelector(`[data-rasterhinweis="${pfad}"]`); if (h) h.hidden = da; if (da && !war) neu(r, "neu"); }
+  document.querySelectorAll("[data-vergleich]").forEach(b => { const ok = b.dataset.bed.split(",").every(p => String(hol(p) || "").trim().length >= +b.dataset.min); b.disabled = !ok; const h = document.querySelector(`[data-vergleichhinweis="${b.dataset.vergleich}"]`); if (h) h.textContent = ok ? "" : "Erst deine Antworten, dann der Vergleich."; });
+  if (pfad === "lk.vermutung") { const frei = S.lk.vermutung.trim().length >= 10, t = document.getElementById("lk-teil2"); if (t && t.classList.contains("gesperrt") === frei) zeichneBehalte(); }
+  if (pfad === "lk.grund") { const b = document.querySelector("[data-lkpruef]"); if (b) b.disabled = !(S.lk.prinzip && S.lk.grund.trim().length >= 10 && !S.lk.ok); }
+  if (typeof L.nachEingabe === "function") L.nachEingabe(pfad);
+}
+/* Neu zeichnen, aber Scrollstand und Fokus (samt Cursor) behalten. */
+function zeichneBehalte(){
+  const y = window.scrollY, a = document.activeElement, id = a && a.id, pos = a && typeof a.selectionStart === "number" ? a.selectionStart : null;
+  zeichne(false); window.scrollTo(0, y);
+  if (id) { const e = document.getElementById(id); if (e) { e.focus({ preventScroll:true }); if (pos !== null && e.setSelectionRange) { try { e.setSelectionRange(pos, pos); } catch(err) {} } } }
+}
+
+function kernStart(){
+  const d = L.init(), g = lade();
+  S = Object.assign({ seite:"start", ruhig:false, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false } }, d);
+  Object.keys(g).forEach(k => { S[k] = (S[k] && typeof S[k] === "object" && !Array.isArray(S[k]) && g[k] && typeof g[k] === "object" && !Array.isArray(g[k])) ? Object.assign({}, S[k], g[k]) : g[k]; });
+  const h = location.hash.replace("#", ""); if (h && SEITE_FN[h]) S.seite = h;
+  zeichne(false);
+}
+
+document.addEventListener("click", ev => {
+  const t = ev.target.closest("[data-geh],[data-mark],[data-stift],[data-satz],[data-vergleich],[data-prinzip],[data-lkpruef],[data-lkneu],[data-stimme],[data-stimmkarte],[data-tafelzu],[data-loeschfrage],[data-loeschen],[data-g-festlegen],[data-neu-wahl],[data-akt],[data-drucken]");
+  if (!t) return;
+  if (t.dataset.geh) return geh(t.dataset.geh);
+  if (t.dataset.mark) return markiere(t);
+  if (t.dataset.stift) { const [id, s] = t.dataset.stift.split(":"); setz("stift." + id, s); t.parentElement.querySelectorAll(".g-stift").forEach(b => b.setAttribute("aria-pressed", String(b === t))); return; }
+  if (t.dataset.satz) { const f = document.getElementById(t.dataset.satz); if (!f) return; f.value = (f.value.trim() ? f.value.replace(/\s*$/, "") + " " : "") + t.dataset.text + " "; setz(f.dataset.f, f.value); nachEingabe(f.dataset.f); f.focus(); return; }
+  if (t.dataset.vergleich) { const id = t.dataset.vergleich; setz("offen." + id, !(S.offen || {})[id]); const v = document.getElementById("vgl-" + id); v.hidden = !S.offen[id]; t.textContent = S.offen[id] ? "Vergleich ausblenden" : (t.dataset.titel || "Vergleich zeigen"); if (S.offen[id] && ev.detail !== 0) neu(v, "neu"); return; }
+  if (t.dataset.prinzip) { S.lk.prinzip = t.dataset.prinzip; speichere(); return zeichneBehalte(); }
+  if (t.hasAttribute("data-lkpruef")) { S.lk.ok = true; speichere(); zeichneBehalte(); if (ev.detail !== 0) neu(document.querySelector("#lk-fb .rm"), "neu"); return; }
+  if (t.hasAttribute("data-lkneu")) { S.lk.ok = false; S.lk.prinzip = null; S.lk.grund = ""; speichere(); return zeichneBehalte(); }
+  if (t.dataset.stimme) { setz(t.dataset.stimme, t.dataset.wert); return zeichneBehalte(); }
+  if (t.dataset.stimmkarte) { const o = JSON.parse(t.dataset.opt).find(x => x[0] === hol(t.dataset.stimmkarte)); if (o) tafel(`<div class="buchstabe">${esc(o[0])}</div><div class="wort">${esc(o[1])}</div>`, { titel:"Meine Stimme" }); return; }
+  if (t.hasAttribute("data-tafelzu")) return tafelZu();
+  if (t.hasAttribute("data-loeschfrage")) { const f = document.getElementById("loesch-frage"); f.hidden = false; f.querySelector("button").focus(); return; }
+  if (t.dataset.loeschen) { if (t.dataset.loeschen === "ja") { try { localStorage.removeItem(L.key); } catch(e) {} const r = S.ruhig; kernStartLeer(r); } else { document.getElementById("loesch-frage").hidden = true; } return; }
+  if (t.hasAttribute("data-g-festlegen")) { const w = t.closest(".g-wahl[data-id]"); if (!w) return; const gew = w.querySelector("input:checked"), ta = w.querySelector("textarea"); if (!gew) return; setz("wahl." + w.dataset.id, { o:+gew.value, grund: ta ? ta.value : "", zu:true }); setTimeout(() => { zeichneBehalte(); if (typeof L.nachWahl === "function") L.nachWahl(w.dataset.id); }, ruhig() ? 0 : 420); return; }
+  if (t.dataset.neuWahl) { setz("wahl." + t.dataset.neuWahl, {}); return zeichneBehalte(); }
+  if (t.hasAttribute("data-drucken")) return window.print();
+  if (t.dataset.akt && AKTION[t.dataset.akt]) return AKTION[t.dataset.akt](t, ev);
+});
+function kernStartLeer(r){ S = {}; const d = L.init(); S = Object.assign({ seite:"start", ruhig:r, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false } }, d); speichere(); zeichne(true); }
+function markiere(t){
+  const [id, i] = t.dataset.mark.split(":"), st = (S.stift || {})[id] || "a";
+  if (!S.mark[id]) S.mark[id] = {};
+  const hat = S.mark[id][i] === st;
+  if (hat) delete S.mark[id][i]; else S.mark[id][i] = st;
+  speichere();
+  t.className = "g-wort " + (hat ? "" : STIFTKLASSE[st]); t.setAttribute("aria-pressed", String(!hat));
+  if (!hat && window.Gegenwart && st === "a") Gegenwart.bewegen(t, [{ backgroundSize:"0% 100%" }, { backgroundSize:"100% 100%" }], { dauer:260 });
+  document.querySelectorAll("[data-belege]").forEach(b => { const ids = b.dataset.belege.split(","); if (!ids.includes(id)) return; QUELLEN[ids[0]].stifte.forEach(s => { const sp = b.querySelector(".sp." + s[0]); const alt = sp.querySelector("ul,.leer"); if (alt) alt.outerHTML = belegListe(ids, s[0]); }); });
+  if (typeof L.nachMark === "function") L.nachMark(id);
+}
+document.addEventListener("keydown", ev => {
+  if (ev.key === "Escape") return tafelZu();
+  const t = ev.target.closest && ev.target.closest("[data-mark]");
+  if (t && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); markiere(t); }
+});
+document.addEventListener("input", ev => {
+  const t = ev.target;
+  if (t.dataset && t.dataset.f) { setz(t.dataset.f, t.type === "range" ? +t.value : t.value); nachEingabe(t.dataset.f); return; }
+  if (t.hasAttribute && t.hasAttribute("data-grund-feld")) { const w = t.closest(".g-wahl"); if (w) pruefeWahl(w); }
+});
+document.addEventListener("change", ev => {
+  const t = ev.target;
+  if (t.hasAttribute && t.hasAttribute("data-bewegung")) { S.ruhig = t.checked; speichere(); if (S.ruhig) document.documentElement.setAttribute("data-bewegung", "weniger"); else document.documentElement.removeAttribute("data-bewegung"); return; }
+  if (t.tagName === "SELECT" && t.dataset.f) { setz(t.dataset.f, t.value); nachEingabe(t.dataset.f); if (t.dataset.neu !== undefined) zeichneBehalte(); return; }
+  const w = t.closest && t.closest(".g-wahl"); if (w) pruefeWahl(w);
+});
+const AKTION = {
+  /* data-akt="setz" data-p="pfad" data-w="wert": Wert setzen und neu zeichnen */
+  setz(t){ let w = t.dataset.w; if (w === "true") w = true; else if (w === "false") w = false; setz(t.dataset.p, w); zeichneBehalte(); },
+};
+/* ===== M25 · Leben in Ruinen und der Umgang mit Schuld ===== */
+const L = {
+  key:"ggk-m25-ruinen:v1", nr:"M25", titel:"Leben in Ruinen und der Umgang mit Schuld", unter:"Kriegsende 1945",
+  /* Zeichen der Stunde: ein offenes Tor */
+  mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M5 30V8h24v22" fill="none" stroke="#24221F" stroke-width="2.4" stroke-linejoin="round"/><path d="M12 30V14l10-3v19" fill="none" stroke="#9B402D" stroke-width="2.4" stroke-linejoin="round"/><path d="M3 30h28" stroke="#24221F" stroke-width="2.4" stroke-linecap="round"/></svg>`,
+  seiten:[["start","",""],["kriegsende","0–20 Min.","Der Krieg ist vorbei"],["ruinen","20–30 Min.","Überleben in Ruinen"],["verbrechen","30–50 Min.","Im Angesicht des Verbrechens"],["verantwortung","50–72 Min.","Verantwortung"],["landkarte","72–80 Min.","Landkarte"],["plenum","80–90 Min.","Plenum"],["zusammenfassung","Zum Abheften","Zusammenfassung"]],
+  breit:["kriegsende","ruinen","verbrechen","verantwortung","zusammenfassung","lehrkraft"],
+  loesch:"Erste Antwort, Markierungen, alle Texte, Wörter, Urteil und Stimme werden auf diesem Gerät entfernt.",
+  init:() => ({ vor:{ wahl:null, satz:"", zu:false }, q12:"q1", b1:"", b2:"", schwur:"", fotos:false, wort:[], woran:"", wortzu:false, deutung:"", satzwahl:null, satz:"", ab:null, urteilA:"", urteilB:"", pos:{ wert:50 }, stimme:null, nach:"" }),
+  nachEingabe(p){ if (p === "vor.satz") { const b = document.querySelector("[data-akt=vorfest]"); if (b) b.disabled = !(S.vor.wahl && S.vor.satz.trim().length >= 8); } if (p === "woran") { const b = document.querySelector("[data-akt=wortfest]"); if (b) b.disabled = !(S.wort.length >= 3 && S.woran.trim().length >= 10); } if (p === "pos.wert") { const w = document.getElementById("poswert"); if (w) w.textContent = posWort(S.pos.wert); } },
+  nachMark(){ const z = document.getElementById("markstand"); if (z) z.textContent = markStand(); },
+};
+
+const VOR = [["a","ein Tag der Befreiung"],["b","ein Tag der Niederlage"],["c","beides zugleich"],["d","je nach Person etwas anderes"]];
+const QUELLEN = {
+  q1:{ kurz:"Q1", titel:"Quelle 1 · Befreiung des Lagers Dachau", kopf:"Der niederländische Journalist Nico Rost war Häftling im Konzentrationslager Dachau. In seinem Tagebuch beschreibt er den Tag der Befreiung durch die US-Armee, den 29. April 1945.",
+    stifte:[["a","▲","Befreiung, Erleichterung"],["b","●","Bedrohung, Angst, Gewalt"]],
+    abs:[[null,["Es war genau 5.28 Uhr – nach der Uhr der Kommandantur – als sich das große Tor öffnete.","Das Schießen hatte aufgehört und alles rannte über den Appellplatz zum Tor.","Die SS-Männer im Torgebäude und in den Wachttürmen wurden von den Amerikanern heruntergeholt und niedergeknallt. […]","Vorsichtig betraten die ersten Amerikaner unser Lager – ihre Maschinenpistolen schußbereit – […]: „Hallo boys, here we are!“","Nun gab es kein Halten mehr.","In einem einzigen, brüllenden, jubelnden, langanhaltenden Schrei entlud sich die aufgespeicherte Spannung der letzten Stunden, und Tausende stürzten auf die Amerikaner zu: lachend, weinend, rufend. […]"]],
+         [null,["Viele Kranke waren durch den Schock gestorben, andere wollten und konnten es einfach nicht glauben […].","[Ein Amerikaner kommt in die Krankenstube.] Alle wollten sie ihm danken; jeder ihm die Hand drücken; aus allen Betten streckten sich ihm magere Arme und zitternde Hände entgegen […].","Dann legte er kurz entschlossen seine Maschinenpistole auf den Tisch und ging von Bett zu Bett, um jeden einzelnen der Kranken zu umarmen. […]","Der Franzose im zweiten Bett rechts war gerade fünf Minuten vorher gestorben, aber der Amerikaner umarmte auch ihn, entdeckte dann plötzlich, daß der Franzose tot war und schüttelte – all das noch nicht begreifend erschrocken den Kopf."]]],
+    nachweis:"Nico Rost: Goethe in Dachau. Frankfurt 1983, S. 244–245. Gekürzt; Auslassungen […]; Ergänzung in eckigen Klammern. Schreibweise wie im Original." },
+  q2:{ kurz:"Q2", titel:"Quelle 2 · Tagebuch einer 20-Jährigen", kopf:"Eine 20-jährige Frau aus Aichach in Bayern schreibt Tagebuch. Sie arbeitet in einem Amt. Ihren Namen kennen wir nicht.",
+    stifte:[["a","▲","Befreiung, Erleichterung"],["b","●","Bedrohung, Angst, Gewalt"]],
+    abs:[["24.4.",["Ganz kopflos und aufgescheucht laufen die Leute alle herum […].","Zwischendurch kommen wieder Tiefflieger, die Leute laufen auseinander, suchen Deckung. […]","Ganz Aichach räumt fleißig auf mit allem Nazi-Kram.","Im Amt nahmen wir das Hitlerbild von der Wand.","Der HJ-Bann machte im Hof gestern ein offenes Feuer und verbrannte Akten usw. […]"]],
+         ["27.4.",["Kein Mensch will mehr arbeiten. […] Alles ist nervös und aufgeregt.","Aichach soll verteidigt werden. Alle Brücken sind bereit zum Sprengen.","Marie traf ich mittags. Wir verabschiedeten uns, weil wir uns vielleicht nicht mehr wiedersehen.","Mein Gott, ist das eine Zeit. Im Grunde eigentlich sehr interessant, wenn man sie überlebt. […]"]],
+         ["28.4.",["Alles schimpfte über die Nazis, alle wollten sofort weiße Tücher hissen. […]","Nun ist es aus, nun ist Friede, unser schönes Bayernland ist gerettet!","Am liebsten wären sie sich alle um den Hals gefallen.","Ich dachte nur immer: Jetzt wird's interessant. Und es wurde interessant."]]],
+    nachweis:"Aus: Erich Kuby (Hrsg.): Das Ende des Schreckens. Dokumente des Untergangs Januar bis Mai 1945. München 1955, S. 131–132. Gekürzt; Auslassungen […]. „HJ-Bann“: Dienststelle der Hitlerjugend im Kreis." },
+  q3:{ kurz:"M3", titel:"Quelle M3 · Berlin, Mai 1945", kopf:"Die Journalistin Marta Hillers, 34 Jahre alt, schreibt in Berlin Tagebuch. Das Buch erschien zuerst ohne ihren Namen („Anonyma“).",
+    stifte:[["a","▲","Problem"],["b","●","Ressource: Was hilft?"]],
+    abs:[["9.5.",["Beim Holzsuchen betrat ich zum ersten Mal seit zwei Wochen den Rasenplatz vorm Kino, auf dem man jetzt die Toten unseres Blocks begräbt.","Zwischen Trümmerbrocken und Geschoßtrichtern drei Doppelgräber, drei Ehepaare, dreimal Selbstmord. […]","Ein anderer, sehr umlagerter, sehr umstrittener Anschlag meldet, daß die Russen neue und höhere Lebensmittelrationen zur Verfügung stellen, die in fünf Gruppen gestuft an uns ausgegeben werden sollen. […]","Zum Teil höhere Rationen als zuletzt unter Adolf.","Die Wirkung dieser Neuigkeit ist stark. Ich hörte: „Da sieht man wieder, daß unsere Propaganda uns bloß dumm gemacht hat.“"]],
+         ["22.5.",["[…] Die Straße vor dem Rathaus bot das Bild einer wiederbelebten Baustelle.","Der Graben in der Mitte des Fahrdamms […] wird nun von den Unsrigen zugeschüttet – ein Vorgang, dessen Logik mir einleuchtet. […]","Morgen früh um acht soll ich auch zu dieser Arbeit antreten. Ich habe nichts dagegen."]]],
+    nachweis:"Anonyma: Eine Frau in Berlin, hg. von Hans Magnus Enzensberger. Frankfurt a. M. 2003, S. 174–176, 196, 228–230. Gekürzt; Auslassungen […]. „Anschlag“: ein öffentlich ausgehängter Zettel." },
+};
+const WOERTER = ["stumpf","bewegt","fassungslos","ohnmächtig","angewidert","distanziert","leugnend","arrogant","hochnäsig","unberührt","schuldig","angstvoll","empathisch","unschuldig","erschreckt","schockiert","abwehrend","schlechtes Gewissen"];
+const WGRUPPE = [
+  ["Ausdruck", "Das lässt sich an Gesicht, Haltung und Abstand beschreiben.", ["bewegt","fassungslos","erschreckt","schockiert","angewidert","angstvoll","stumpf","unberührt","distanziert","abwehrend"]],
+  ["Deutung des Inneren", "Das vermutest du. Es braucht eine Begründung am Bild.", ["ohnmächtig","empathisch","arrogant","hochnäsig","schlechtes Gewissen"]],
+  ["Urteil über Schuld und Wahrheit", "Das kann ein Foto allein nicht belegen. Dafür brauchst du weitere Quellen.", ["schuldig","unschuldig","leugnend"]],
+];
+const SATZWAHL = ["Der protestantische Pfarrer lügt, weil","Der protestantische Pfarrer will es nicht wahrhaben, dass diese Verbrechen in unmittelbarer Nähe geschehen sind. Denn das würde bedeuten, dass","Der protestantische Pfarrer wusste tatsächlich nichts von den Verbrechen in Buchenwald, weil","Der protestantische Pfarrer hat die Gerüchte über die Geschehnisse in Buchenwald nicht glauben können und beruft sich jetzt auf sein Nichtwissen, denn","Die befreiten Häftlinge lügen, denn","Die amerikanische Journalistin ist vom Besuch Buchenwalds geschockt und übertreibt die Reaktion der Ex-Häftlinge, denn","Die amerikanischen Journalisten berichten nicht objektiv über die Besichtigung, weil"];
+const STIMMEN = [["A","geeignet"],["B","nicht geeignet"],["C","kommt darauf an"]];
+const URTEILRASTER = [
+  ["Sachanalyse: Was ist geschehen?", "Ich nenne das Ereignis.", "Ich nenne Datum, Beteiligte und einen Beleg aus M4 bis M6.", "Ich nenne Belege aus mehreren Quellen und sage, wer jeweils spricht."],
+  ["Sachurteil: aus der Zeit heraus", "Ich nenne ein Ziel oder eine Wirkung.", "Ich wäge Ziel, Wirkung und Handlungsspielraum im April 1945 ab.", "Ich prüfe meine Einschätzung an den Reaktionen in M5 und M6."],
+  ["Werturteil: mein Maßstab", "Ich sage, wie ich es finde.", "Ich nenne den Maßstab, nach dem ich urteile.", "Ich trenne Sach- und Werturteil und nenne einen Einwand gegen mich."],
+];
+const markStand = () => { const n = markZahl(["q1","q2"]); return `${n} Stellen markiert. Ziel: mindestens 4, in beiden Quellen.`; };
+const posWort = v => v < 35 ? "eher ungeeignet" : (v > 65 ? "eher geeignet" : "dazwischen");
+const vorText = () => (VOR.find(v => v[0] === S.vor.wahl) || [,"–"])[1];
+
+/* ---------- Seiten ---------- */
+function start(){
+  return `${band("M25 · Doppelstunde · 90 Minuten", "Leben in Ruinen und der Umgang mit Schuld", "Im Frühjahr 1945 endet der Krieg in Europa. Was das bedeutet, hängt davon ab, wen du fragst.")}
+  <p class="leitfrage">Wie erlebten Menschen das Kriegsende 1945 – und wie gingen sie mit der Frage nach Schuld um?</p>
+  ${belastend("In dieser Stunde liest du Berichte aus befreiten Lagern und aus zerstörten Städten. Es geht um Tod, Selbsttötung und Mord. Fotos aus Buchenwald erscheinen nur, wenn du sie selbst öffnest. Du darfst jederzeit aussetzen und mit deiner Lehrkraft sprechen.")}
+  <h2 class="abschnitt">Am Ende kannst du</h2>
+  <ul class="ziele"><li>an Quellen zeigen, wie verschieden Menschen das Kriegsende erlebten,</li><li>auf einem Foto unterscheiden, was du siehst und was du deutest,</li><li>begründet beurteilen, wie Deutsche 1945 mit ihrer Verantwortung konfrontiert wurden.</li></ul>
+  <h2 class="abschnitt">So läuft die Stunde</h2>
+  <ol class="ablauf">${L.seiten.slice(1, 7).map(s => `<li><b>${esc(s[1])}</b><span>${esc(s[2])}</span></li>`).join("")}</ol>
+  <p class="hinweis" style="margin-top:.8rem">So arbeitest du: Du tippst Sätze in den Quellen an, um sie zu markieren. Deine Markierungen stehen danach als Belege neben deinem Schreibfeld und am Ende auf deiner Zusammenfassung.</p>
+  ${weiter("kriegsende", "Beginnen")}`;
+}
+
+function kriegsende(){
+  const v = S.vor, q = S.q12 === "q2" ? "q2" : "q1";
+  const kopfteil = v.zu
+    ? `<p class="auflage"><b>Deine erste Antwort ist festgehalten:</b> Der 8. Mai 1945 war für die Menschen in Deutschland vor allem <b>${esc(vorText())}</b>. Am Ende der Stunde kommst du darauf zurück.</p>`
+    : `${auftrag("Allein · 2 Minuten", "Erst festlegen", "Am 7. und 8. Mai 1945 kapituliert Deutschland. Vervollständige den Satz und begründe kurz. Es gibt hier keine falsche Wahl – am Ende prüfst du sie an den Quellen.")}
+  <p><b>Der 8. Mai 1945 war für die Menschen in Deutschland vor allem …</b></p>
+  <div class="woerter" role="group" aria-label="Erste Antwort">${VOR.map(o => `<button type="button" data-akt="setz" data-p="vor.wahl" data-w="${o[0]}" aria-pressed="${v.wahl === o[0]}">${esc(o[1])}</button>`).join("")}</div>
+  ${textfeld("vor.satz", "Weil …", { rows:2, platz:"Ich denke das, weil …", zaehl:false })}
+  <div class="reihe"><button type="button" class="btn dunkel" data-akt="vorfest" ${v.wahl && v.satz.trim().length >= 8 ? "" : "disabled"}>Festlegen</button></div>`;
+  const arbeit = `
+  ${auftrag("Allein · 10 Minuten", "Zwei Menschen, dieselben Tage", "Lies beide Quellen. Tippe Sätze an, die zeigen, wie die Person das Kriegsende erlebt. Wähle vorher den Stift: ▲ für Befreiung und Erleichterung, ● für Bedrohung, Angst und Gewalt. Noch einmal tippen löscht die Markierung.")}
+  <div class="qreiter" role="tablist" aria-label="Quelle wählen">${["q1","q2"].map(id => `<button type="button" role="tab" aria-selected="${q === id}" data-akt="setz" data-p="q12" data-w="${id}">${esc(QUELLEN[id].titel)}</button>`).join("")}</div>
+  <div class="qwerk" style="margin-top:0">${quelle(q)}
+    <div><h3 class="klein" style="margin-top:0">Deine Belege aus beiden Quellen</h3>${belege(["q1","q2"], { ta:"Als Befreiung …", tb:"Als Bedrohung …" })}<p class="hinweis" id="markstand" aria-live="polite" style="margin-top:.5rem">${markStand()}</p></div>
+  </div>
+  ${auftrag("Allein · 6 Minuten", "Zusammenfassen", "Fasse mit eigenen Worten zusammen, wie unterschiedlich die Menschen das Kriegsende und das Ende der nationalsozialistischen Herrschaft erlebten. Etwa fünf Sätze. Nutze deine Belege.")}
+  ${textfeld("b1", "Meine Zusammenfassung", { rows:6, anfaenge:["Für die Häftlinge in Dachau bedeutete das Kriegsende","Die junge Frau in Aichach erlebt","Gemeinsam ist beiden","Der wichtigste Unterschied ist"], ziel:"Ziel: etwa 60 Wörter" })}
+  ${raster("b1", 40, "Selbstprüfung", [["Beide Seiten", "Ich beschreibe eine Sicht.", "Ich beschreibe beide Sichten.", "Ich erkläre, warum sie sich unterscheiden."],["Belege", "Ich behaupte ohne Beleg.", "Ich nenne je Quelle einen Beleg.", "Ich zitiere kurz und sage, wer spricht."],["Sprache", "Ich übernehme Wörter der Quelle.", "Ich formuliere in eigenen Worten.", "Ich setze Wörter der Zeit in Anführungszeichen."]])}
+  <p class="hinweis" style="margin-top:.8rem">Danach, zu zweit, 2 Minuten: Lest euch je einen Satz vor. Wo habt ihr verschieden markiert?</p>`;
+  return `${zeitKopf("kriegsende")}<h1>Der Krieg ist vorbei</h1>
+  <p class="lead">Seit März 1945 rücken die alliierten Truppen von Westen und Osten vor. Sie befreien die Konzentrationslager. Hunderte deutsche Städte liegen in Trümmern, Millionen Menschen sind auf der Flucht. Mehr als 65 Millionen Menschen sind in diesem von Deutschland begonnenen Krieg gestorben.</p>
+  ${kopfteil}${v.zu ? arbeit : ""}
+  ${weiter("ruinen", "Weiter: Überleben in Ruinen")}`;
+}
+
+function ruinen(){
+  return `${zeitKopf("ruinen")}<h1>Überleben in Ruinen</h1>
+  <p class="lead">Die Wirtschaft ist zusammengebrochen. Für Reichsmark gibt es nichts mehr zu kaufen. Viele Männer sind in Kriegsgefangenschaft. Vor allem Frauen sichern jetzt das Überleben.</p>
+  ${belastend("Die Quelle erwähnt Gräber und Selbsttötungen.")}
+  ${auftrag("Allein · 10 Minuten", "Probleme und Ressourcen", "Markiere in der Quelle: ▲ Welche Probleme müssen sofort gelöst werden? ● Was hilft den Frauen dabei – was können sie nutzen? Schreib danach zwei bis vier Sätze.")}
+  <div class="qwerk">${quelle("q3")}
+    <div>${belege(["q3"], { ta:"Probleme", tb:"Ressourcen" })}
+    <div style="margin-top:1rem">${textfeld("b2", "Meine Erkenntnisse", { rows:5, anfaenge:["Das dringendste Problem ist","Die Frauen können nutzen, dass","Auffällig finde ich"], ziel:"Ziel: 3 bis 4 Sätze" })}</div></div>
+  </div>
+  ${hilfe("Hilfe: Was ist eine Ressource?", "<p>Eine Ressource ist alles, was beim Überleben hilft: Dinge (Holz, Lebensmittelkarten), Regeln (Rationen in Gruppen), Arbeit, andere Menschen, eine Haltung.</p>")}
+  ${weiter("verbrechen", "Weiter: Im Angesicht des Verbrechens")}`;
+}
+
+function verbrechen(){
+  const fest = S.wortzu;
+  const fotos = S.fotos ? `<div class="felder2" id="fotos">${[1,2].map(n => `<figure style="margin:0"><img src="media/m25-buchenwald-besichtigung-${n}.jpg" alt="Foto der Besichtigung des Lagers Buchenwald durch Einwohner*innen Weimars, April 1945. Beschreibung siehe Text." style="width:100%;border-radius:.6rem;display:block;filter:grayscale(1)" onerror="fotoFehlt()"><figcaption class="quelle">Deutsche Zivilist*innen, die gezwungen wurden, das befreite Lager Buchenwald zu besichtigen. Foto: Margaret Bourke-White, April 1945 (Bild teilweise retuschiert).</figcaption></figure>`).join("")}</div>`
+    : `<div class="reihe"><button type="button" class="btn dunkel" data-akt="setz" data-p="fotos" data-w="true">Fotos zeigen</button><span class="hinweis">Du kannst die Aufgabe auch mit den Fotos im Heft oder am Beamer bearbeiten.</span></div>`;
+  return `${zeitKopf("verbrechen")}<h1>Im Angesicht des Verbrechens</h1>
+  <p class="lead">Am 11. April 1945 befreit die US-Armee das Konzentrationslager Buchenwald bei Weimar. Jetzt stellt sich die Frage: Was soll mit den Tätern geschehen – und mit allen anderen Deutschen?</p>
+  ${auftrag("Allein · 6 Minuten", "Der Schwur von Buchenwald", "Am 19. April 1945 gedenken die Überlebenden auf dem Appellplatz ihrer Toten. Die Ansprache wird in mehreren Sprachen verlesen. Fasse in ein bis zwei Sätzen zusammen: Was fordern die befreiten Häftlinge?")}
+  <blockquote>„Wir Buchenwälder Antifaschisten sind heute angetreten zu Ehren der in Buchenwald und seinen Außenkommandos […] ermordeten 51 000 Gefangenen! […] Noch leben die Mörder unserer Kameraden! […] Wir schwören deshalb vor aller Welt auf diesem Appellplatz […]: Wir stellen den Kampf erst ein, wenn auch der letzte Schuldige vor den Richtern der Völker steht! Die Vernichtung des Nazismus mit seinen Wurzeln ist unsere Losung. Der Aufbau einer neuen Welt des Friedens und der Freiheit ist unser Ziel. Das sind wir unseren gemordeten Kameraden, ihren Angehörigen schuldig.“<span class="wer">Quelle M4 · Schwur von Buchenwald, 19. April 1945. Gekürzt. Die Zahl 51 000 war die damalige Schätzung der Toten.</span></blockquote>
+  ${textfeld("schwur", "Die Forderungen in ein bis zwei Sätzen", { rows:3, platz:"Die Überlebenden fordern …", zaehl:false })}
+  ${vergleich("schwur", ["schwur"], 20, "Mit dem Text vergleichen", "<p><b>Drei Forderungen stehen im Text:</b> 1. Jeder Schuldige soll vor Gericht („vor den Richtern der Völker“). 2. Der Nationalsozialismus soll „mit seinen Wurzeln“ beseitigt werden. 3. Eine „neue Welt des Friedens und der Freiheit“ soll aufgebaut werden.</p><p>Prüfe: Welche der drei hast du genannt? Ergänze deinen Satz.</p>")}
+
+  <h2 class="abschnitt">Die Besichtigung, 16. April 1945</h2>
+  <p>Fünf Tage nach der Befreiung befiehlt der US-General George S. Patton: Rund 1.000 Frauen und Männer aus Weimar müssen das Lager ansehen – noch bevor die Toten bestattet sind. Die US-Armee lässt das fotografieren. Unter den Fotograf*innen ist Margaret Bourke-White.</p>
+  ${belastend("Die Fotos zeigen Menschen aus Weimar vor einem Anhänger mit Toten. Die Toten sind auf den Bildern im Heft unkenntlich gemacht. Sieh sie dir nur an, wenn du möchtest.")}
+  ${fotos}
+  ${auftrag("Allein · 8 Minuten", "Sehen und deuten", "Sieh dir die Menschen aus Weimar auf den Fotos an. Wähle drei bis fünf Wörter, mit denen du ihre Reaktion beschreiben würdest. Schreib dann auf, woran du das im Bild festmachst.")}
+  <div class="woerter" role="group" aria-label="Wörter wählen">${WOERTER.map(w => `<button type="button" data-akt="wort" data-w="${esc(w)}" aria-pressed="${S.wort.includes(w)}" ${fest ? "disabled" : ""}>${esc(w)}</button>`).join("")}</div>
+  ${textfeld("woran", "Woran im Bild machst du das fest?", { rows:2, platz:"Ich sehe … (Blick, Haltung, Hände, Abstand)", zaehl:false })}
+  <div class="reihe"><button type="button" class="btn dunkel" data-akt="wortfest" ${(!fest && S.wort.length >= 3 && S.woran.trim().length >= 10) ? "" : "disabled"}>Festlegen</button>${fest ? `<button type="button" class="btn" data-akt="setz" data-p="wortzu" data-w="false">Noch einmal</button>` : `<span class="hinweis">${S.wort.length} gewählt · mindestens 3, höchstens 5</span>`}</div>
+  ${fest ? `<div class="auflage" id="wortauf"><p><b>Sehen ist nicht dasselbe wie deuten.</b> Ein Foto zeigt Gesichter und Haltungen – keine Gedanken. Ordne deine Wörter ein:</p>
+    <div class="wgrp">${WGRUPPE.map(g => `<div><b>${esc(g[0])}</b>${esc(g[1])}<br><span class="dein">${g[2].filter(w => S.wort.includes(w)).map(esc).join(" · ") || "–"}</span></div>`).join("")}</div>
+    <p style="margin-top:.6rem">Frag außerdem: <b>Wer fotografiert, in wessen Auftrag – und wer fehlt im Bild?</b> Die Fotos entstanden im Auftrag der US-Armee. Sie sollten zeigen, dass Deutsche die Verbrechen ansehen mussten.</p></div>` : ""}
+  ${auftrag("Allein · 6 Minuten", "Interpretieren", "Wie interpretierst du die Gefühle der fotografierten Menschen aus Weimar? Schreib fünf bis sechs Sätze. Trenne dabei, was du siehst, von dem, was du vermutest.")}
+  ${textfeld("deutung", "Meine Interpretation", { rows:6, anfaenge:["Auf den Fotos sehe ich","Das deute ich als","Nicht belegen kann ich","Um mehr zu wissen, bräuchte ich"], ziel:"Ziel: 5 bis 6 Sätze" })}
+  ${weiter("verantwortung", "Weiter: Verantwortung")}`;
+}
+function fotoFehlt(){ const f = document.getElementById("fotos"); if (f) f.outerHTML = `<p class="hinweis" id="fotos">Die Fotos liegen in dieser Fassung nicht vor (Bildrechte). Du findest sie im Heft, M25, Baustein 3. Deine Lehrkraft kann sie am Beamer zeigen.</p>`; }
+
+function verantwortung(){
+  const ab = S.ab;
+  const A = `${auftrag("Aufgabe A · allein · 10 Minuten", "Schuld der Nazis oder aller Deutschen?", "Der Pfarrer betont: „So dürfen wir vor Gott bekennen, daß wir keinerlei Mitschuld an diesen Greueln haben.“ Kann man das im Frühjahr 1945 so sagen? Beurteile die Frage nach der Schuld aller Deutschen für die Verbrechen.")}
+    ${textfeld("urteilA", "Mein Urteil", { rows:8, anfaenge:["In den Quellen steht","Aus Sicht der Zeit","Ich unterscheide zwischen Schuld und Verantwortung, weil","Mein Maßstab ist"], ziel:"Ziel: etwa 100 Wörter" })}
+    ${raster("urteilA", 60, "Vom Sachurteil zum Werturteil", URTEILRASTER)}`;
+  const B = `${auftrag("Aufgabe B · allein · 10 Minuten", "Die richtige Methode?", "Rund 1.000 Einwohner*innen Weimars werden gezwungen, das Lager zu besichtigen, noch bevor die Ermordeten bestattet sind. War das ein geeignetes Mittel, um Deutsche mit ihrer Verantwortung zu konfrontieren? Setz zuerst den Regler, dann schreib zehn bis zwölf Sätze.")}
+    <div class="karte"><div class="g"><div class="g-skala"><div class="g-skala__spur"><input type="range" min="0" max="100" step="1" value="${S.pos.wert}" data-f="pos.wert" aria-label="Zwangsbesichtigung: ungeeignet (0) bis geeignet (100)"></div><div class="g-skala__enden"><span>ungeeignet</span><span>geeignet</span></div><p>Deine Einschätzung: <span class="g-skala__wert" id="poswert">${posWort(S.pos.wert)}</span></p></div></div></div>
+    ${hilfe("Denkanstöße (erst nach einem eigenen Versuch)", "<p>Was wollten die Amerikaner erreichen? · Was zeigen M5 und M6 über die Wirkung? · Was bedeutet es für die Würde der Toten, dass sie gezeigt wurden? · Welche anderen Wege hätte es gegeben?</p>")}
+    ${textfeld("urteilB", "Mein Urteil", { rows:8, anfaenge:["Die Amerikaner wollten","Für die Maßnahme spricht","Dagegen spricht","Mein Maßstab ist"], ziel:"Ziel: 10 bis 12 Sätze" })}
+    ${raster("urteilB", 60, "Vom Sachurteil zum Werturteil", URTEILRASTER)}`;
+  return `${zeitKopf("verantwortung")}<h1>Verantwortung und Verbrechen</h1>
+  <p class="lead">Die Überlebenden verlangen, dass alle Schuldigen bestraft werden. Die Menschen aus Weimar reagieren sehr verschieden. Zwei Quellen berichten davon – und widersprechen sich.</p>
+  <div class="zwei">
+    <div class="karte" style="margin:0"><p class="kennung">Quelle M5 · der Pfarrer</p><p>Fünf Tage nach der Besichtigung wird in allen evangelischen Kirchen Weimars verlesen (Propst Richard Kade):</p><blockquote>„Dort sind Vorgänge ans Licht gekommen, die uns bisher völlig unbekannt waren. Wir verurteilen die Grausamkeit und den Sadismus, mit denen Menschen behandelt und vielfach zu Tode gequält wurden. Das ist alles nur möglich gewesen auf dem Boden einer Geisteshaltung, die mit dem Christentum völlig gebrochen hat und unter der wir als Kirche auch sonst schmerzlich gelitten haben. So dürfen wir vor Gott bekennen, daß wir keinerlei Mitschuld an diesen Greueln haben.“</blockquote><p class="quelle">Stadtarchiv Weimar, Hauptamt nach 1945, 008/02/3; zitiert nach Volkhard Knigge: Buchenwald, in: Detlef Hoffmann (Hg.): Das Gedächtnis der Dinge, Frankfurt a. M./New York 1998, S. 161, Fußnote 63. Gekürzt.</p></div>
+    <div class="karte" style="margin:0"><p class="kennung">Quelle M6 · die Journalistin</p><p>Die US-Fotografin Margaret Bourke-White schreibt in ihrer Reportage über den Tag der Besichtigung:</p><blockquote>„Als die Zivilisten immer wieder riefen: ‚Wir haben nichts gewusst! Wir haben nichts gewusst!‘, gerieten die Ex-Häftlinge außer sich vor Wut. ‚Ihr habt es gewusst‘, schrien sie. ‚Wir haben neben Euch in den Fabriken gearbeitet. Wir haben es euch gesagt und dabei unser Leben riskiert. Aber ihr habt nichts getan.‘“</blockquote><p class="quelle">Zitiert nach: Der SPIEGEL, 23.2.2018: Konfrontation mit der Hölle. Gekürzt.</p></div>
+  </div>
+  ${auftrag("Allein · 8 Minuten", "„Wir haben nichts gewusst!“", "Der Pfarrer und die Journalistin widersprechen einander. Worauf könnte man das zurückführen? Wähle den Satz, der deiner Einschätzung am nächsten kommt, führe ihn zu Ende und erkläre, warum du diese Deutung für wahrscheinlicher hältst.")}
+  <div class="g"><div class="g-wahl"><fieldset><legend>Satz wählen</legend>${SATZWAHL.map((s, i) => `<label class="g-option"><input type="radio" name="satzwahl" value="${i}" data-satzwahl ${S.satzwahl === i ? "checked" : ""}><span>${esc(s)} …</span></label>`).join("")}</fieldset></div></div>
+  <div style="margin-top:1rem">${textfeld("satz", "Mein Satz und meine Begründung", { rows:5, platz:"Wähle oben einen Satz. Er erscheint hier – schreib ihn zu Ende und begründe.", ziel:"Ziel: mindestens 30 Wörter" })}</div>
+  ${vergleich("satz", ["satz"], 120, "An den Quellen prüfen", "<p><b>Drei Prüffragen für deine Deutung:</b></p><ol style='padding-left:1.2rem;display:grid;gap:.3rem'><li><b>Was steht da – und was nicht?</b> M5 sagt „uns bisher völlig unbekannt“ und „keinerlei Mitschuld“. Über die eigene Stadt und die Häftlinge in Weimar sagt der Text nichts.</li><li><b>Womit belegen die Überlebenden ihren Vorwurf?</b> „Wir haben neben Euch in den Fabriken gearbeitet.“</li><li><b>Wer spricht, wann, vor wem?</b> Ein Pfarrer vor seiner Gemeinde, wenige Tage danach. Eine Journalistin für Leser*innen in den USA. Überlebende, die im Lager waren.</li></ol><p>Die Gedenkstätte Buchenwald hält fest: Schon wenige Tage nach der Besichtigung wiesen Vertreter der Stadt jede Schuld der Bürger*innen zurück.</p>")}
+
+  <h2 class="abschnitt">Jetzt urteilst du</h2>
+  <p>Wähle eine der beiden Aufgaben.</p>
+  <div class="qreiter" role="tablist" aria-label="Aufgabe wählen"><button type="button" role="tab" aria-selected="${ab === "A"}" data-akt="setz" data-p="ab" data-w="A">Aufgabe A · Schuld aller Deutschen?</button><button type="button" role="tab" aria-selected="${ab === "B"}" data-akt="setz" data-p="ab" data-w="B">Aufgabe B · Die richtige Methode?</button></div>
+  ${ab === "A" ? A : (ab === "B" ? B : `<p class="hinweis" style="margin-top:.6rem">Noch keine Aufgabe gewählt.</p>`)}
+  ${weiter("landkarte", "Weiter: Landkarte")}`;
+}
+
+const LKCFG = { seite:"landkarte", titel:"Ein Tag, drei Stimmen", nach:["plenum","Weiter: Plenum"],
+  frage:"Ein Pfarrer, eine Journalistin und die Überlebenden berichten über dieselben Tage in Weimar – und sagen Verschiedenes. Warum?",
+  lead:"Schreib einen Satz: Warum berichten die drei so verschieden über dasselbe Ereignis?", platz:"Sie berichten verschieden, weil …",
+  folge:["Multiperspektivität (Folgerung)", "Ein Ereignis wird aus Quellen verschiedener Beteiligter betrachtet (z. B. Täter*innen, Opfer, Zuschauende)."],
+  urteil:{
+    "2-1-1":["kaum","Alle drei Zeugnisse stammen aus dem April 1945. Sie blicken nicht aus großem Abstand zurück. Retrospektivität betrifft hier eher dich: Du kennst die Forschung von heute, die Menschen in Weimar sprachen mitten im Geschehen."],
+    "2-1-2":["zentral","Die Landkarte nennt Perspektivität zuerst „bei den Quellen (wer hat sie verfasst?)“. Der Pfarrer spricht für seine Gemeinde und weist Mitschuld zurück. Die Überlebenden haben das Lager erlitten. Die Journalistin begleitet die US-Armee und schreibt für Leser*innen in den USA. Jede Stimme hat eigene Erfahrungen und Interessen."],
+    "2-1-3":["kaum","Dass jede Quelle nur einen Ausschnitt zeigt, stimmt. Es erklärt aber nicht, warum sich die Aussagen widersprechen. Dafür braucht es ein Prinzip, das auf die Sprechenden schaut."],
+    "2-1-4":["teils","Bourke-White wählt aus, was sie fotografiert und zitiert. Die Abkündigung wählt aus, was sie nennt: die Grausamkeit ja, das eigene Wissen nein. Zentral bleibt, wer da auswählt und warum: Perspektivität."],
+    "2-1-5":["teils","Was die 1.000 Besucher*innen dachten, haben die wenigsten aufgeschrieben. Überliefert sind vor allem Fotos der Armee, eine Reportage und eine Erklärung der Kirche. Das begrenzt, was wir wissen können – erklärt aber nicht den Widerspruch."],
+    "2-1-6":["kaum","Narrativität betrifft die Form der Erzählung. Hier unterscheiden sich die Stimmen im Inhalt: gewusst oder nicht gewusst."],
+    "2-1-7":["kaum","Konstruktivität betrifft die Geschichte, die du am Ende aus den Quellen zusammensetzt. Die Quellen selbst sind Zeugnisse von Beteiligten."],
+    "2-1-8":["teils","Das Umfeld prägt, was selbstverständlich scheint: In der Kirchengemeinde ist „wir haben gelitten“ selbstverständlich, für die Befreiten ist es das Lager. Die Landkarte unterscheidet davon die Perspektivität als Weltanschauung und Interessen."],
+    "2-1-9":["zentral","Genau das tut diese Stunde: Sie betrachtet ein Ereignis aus Quellen verschiedener Beteiligter – Überlebende (M4, in M6), Zuschauende (M5), eine Beobachterin von außen (M6). Achtung: Kontroversität meint etwas anderes, nämlich Deutungen von Historiker*innen (so in M22)."],
+  },
+  bruecke:`<b>Brücke zum Urteil.</b> Mehrere Perspektiven heißt nicht, dass alle gleich gut belegt sind. Die Landkarte trennt drei Schritte: <i>Sachanalyse</i> (Was ist geschehen?), <i>Sachurteil</i> (Wie ist es aus der Zeit heraus zu beurteilen?), <i>Werturteil</i> (Wie bewerte ich es heute, nach welchem Maßstab?). <a href="${LK}2-4-3" target="_blank" rel="noopener">Landkarte 2.4.3 Vom Sachurteil zum Werturteil ↗</a>` };
+
+function plenum(){
+  return `${zeitKopf("plenum")}<h1>Plenum</h1>
+  ${auftrag("Plenum · 6 Minuten · iPad hochhalten", "War die Zwangsbesichtigung ein geeignetes Mittel?", "Wähle deine Stimme. Auf Ansage zeigen alle ihre Karte. Dann begründen je zwei Stimmen aus A, B und C ihre Wahl.")}
+  ${stimmkarte("stimme", STIMMEN)}
+  <p class="hinweis" style="margin-top:.8rem">Gesprächsregel: Erst die Quelle nennen, dann die eigene Bewertung. Niemand muss von der eigenen Familie erzählen.</p>
+  <h2 class="abschnitt">Zurück zum Anfang</h2>
+  <p>Am Anfang hast du gewählt: Der 8. Mai 1945 war für die Menschen in Deutschland vor allem <b>${esc(vorText())}</b>${S.vor.satz ? ` – „${esc(S.vor.satz)}“` : "."}</p>
+  ${textfeld("nach", "Was denkst du jetzt – und warum?", { rows:3, anfaenge:["Ich bleibe dabei, weil","Ich sehe es jetzt anders, weil","Neu ist für mich"], zaehl:false })}
+  <p class="merksatz">iPad umdrehen. Danach: Zusammenfassung sichern.</p>
+  ${weiter("zusammenfassung", "Zur Zusammenfassung")}`;
+}
+
+function zusammenfassung(){
+  const m = (t, leer = "noch offen") => `<p class="mein ${String(t || "").trim() ? "" : "leer"}">${esc(String(t || "").trim() || leer)}</p>`;
+  const urteil = S.ab === "A" ? S.urteilA : S.urteilB;
+  const lkp = S.lk.ok && S.lk.prinzip ? ((PRINZIP[S.lk.prinzip] || LKCFG.folge)[0] + ": " + S.lk.grund) : "";
+  return `<div class="zf"><div class="reihe nodruck" style="margin:0 0 1rem"><button type="button" class="btn dunkel" data-drucken>Drucken oder als PDF sichern</button><span class="hinweis">Zwei Seiten A4. In GoodNotes ablegen.</span></div>
+  <h1>M25 · Leben in Ruinen und der Umgang mit Schuld</h1>
+  <p class="leitfrage">Wie erlebten Menschen das Kriegsende 1945 – und wie gingen sie mit der Frage nach Schuld um?</p>
+  <p class="merksatz">Das Kriegsende war nicht für alle dasselbe: Für die Befreiten der Lager war es Rettung, für viele Deutsche zuerst Zusammenbruch und Angst. Mit ihrer Verantwortung konfrontiert, wiesen viele die Schuld zurück.</p>
+  <h2>Begriffe</h2>
+  <div class="begriffe">
+    <div><b>Befreiung:</b> Alliierte Truppen öffnen die Lager. Beispiel: Dachau, 29. April 1945 (Quelle 1).</div>
+    <div><b>Kapitulation:</b> Die Wehrmacht gibt am 7./8. Mai 1945 bedingungslos auf. Der Krieg in Europa ist zu Ende.</div>
+    <div><b>Schwur von Buchenwald:</b> Überlebende fordern am 19. April 1945 Gericht über alle Schuldigen und eine „neue Welt des Friedens und der Freiheit“.</div>
+    <div><b>Zwangsbesichtigung:</b> Am 16. April 1945 müssen rund 1.000 Menschen aus Weimar das Lager Buchenwald ansehen (Befehl von General Patton).</div>
+    <div><b>Multiperspektivität:</b> Ein Ereignis wird aus Quellen verschiedener Beteiligter betrachtet (z. B. Täter*innen, Opfer, Zuschauende).</div>
+    <div><b>Sach- und Werturteil:</b> Erst aus der Zeit heraus beurteilen (an Quellen prüfbar), dann heute bewerten – und den eigenen Maßstab nennen.</div>
+  </div>
+  <h2>Frühjahr 1945</h2>
+  <ul class="zl"><li><b>11. April</b><span>Die US-Armee befreit das Konzentrationslager Buchenwald.</span></li><li><b>16. April</b><span>Menschen aus Weimar müssen das Lager besichtigen.</span></li><li><b>19. April</b><span>Schwur von Buchenwald.</span></li><li><b>29. April</b><span>Die US-Armee befreit das Konzentrationslager Dachau.</span></li><li><b>7./8. Mai</b><span>Kapitulation Deutschlands. Ende des Krieges in Europa.</span></li></ul>
+  <div class="werk"><b>Denkwerkzeug: Ein Foto lesen.</b> 1. <b>Sehen:</b> Blick, Haltung, Abstand – ohne Deutung. 2. <b>Fragen:</b> Wer fotografiert, in wessen Auftrag, und wer fehlt im Bild? 3. <b>Deuten:</b> Welche Deutung kann ich am Bild belegen, welche nicht?</div>
+  <div class="werk" style="background:var(--kuli-hi)"><b>Zwei Stimmen zum selben Tag.</b> Pfarrer (M5): „keinerlei Mitschuld“. Überlebende (M6): „Ihr habt es gewusst.“ Prüffragen: Was steht da – und was nicht? Womit wird belegt? Wer spricht, wann, vor wem?</div>
+
+  <div class="seitenumbruch"><h2 style="margin-top:0">Meine Ergebnisse</h2>
+  <h2>Der 8. Mai 1945 – vorher und nachher</h2>${m(S.vor.zu ? `Am Anfang: ${vorText()} – ${S.vor.satz}` : "")}${m(S.nach ? "Am Ende: " + S.nach : "")}
+  <h2>Wie Menschen das Kriegsende erlebten (Quelle 1 und 2)</h2>${m(S.b1)}
+  <h2>Überleben in Ruinen (M3)</h2>${m(S.b2)}
+  <h2>Schwur von Buchenwald: die Forderungen</h2>${m(S.schwur)}
+  <h2>Die Fotos aus Buchenwald</h2>${m(S.wort.length ? "Meine Wörter: " + S.wort.join(", ") + ". " + S.woran : "")}${m(S.deutung)}
+  <h2>„Wir haben nichts gewusst!“</h2>${m(S.satz)}
+  <h2>Mein Urteil${S.ab ? " (Aufgabe " + S.ab + ")" : ""}</h2>${m(urteil)}
+  <h2>Landkarte</h2>${m(lkp)}</div></div>
+  ${weiter("start", "Zur Startseite")}`;
+}
+
+function lehrkraft(){
+  return `<div class="lk"><p class="zeit"><span class="nr">Für Lehrkräfte</span><span>nicht geschützt – enthält keine Lösungen, die Lernende nicht sehen dürfen</span></p><h1>M25 · Hinweise</h1>
+  <p class="lead">Grundlage ist dein Heft „Geschichte aktuell 1“, M25 (vier Bausteine, Quellen 1–2, M3–M6). Die Seite übernimmt Aufbau, Quellen und Aufgaben. Neu ist, was nur das Gerät kann.</p>
+  <h2 class="abschnitt">Was das Gerät hier leistet</h2>
+  <ul><li><b>Markierungen werden zu Belegen:</b> Was Lernende antippen, steht geordnet neben dem Schreibfeld (Befreiung · Bedrohung, Problem · Ressource).</li><li><b>Festlegen vor dem Lesen:</b> erste Antwort zum 8. Mai, am Ende die Rückkehr dazu.</li><li><b>Fotos nur nach Hinweis und eigener Entscheidung</b>; die Wortwahl wird danach in „Ausdruck · Deutung · Urteil“ sortiert.</li><li><b>Vergleiche erst nach dem eigenen Text</b> (Schwur, Prüffragen zu M5/M6, Raster Sach- und Werturteil).</li><li><b>Stimmkarte</b> für das Plenum; <b>Zusammenfassung</b> auf zwei Seiten A4 mit den eigenen Texten.</li></ul>
+  <p>Papier bleibt besser für: die langen Originalfassungen der Quellen (Heft) und das Gespräch.</p>
+  <h2 class="abschnitt">Ablauf (90 Minuten)</h2>
+  <div class="matrix-wrap"><table><thead><tr><th>Zeit</th><th>Phase</th><th>Sozialform</th><th>Hinweis</th></tr></thead><tbody>
+  <tr><td class="n">0–20</td><td>Der Krieg ist vorbei</td><td>allein, dann zu zweit</td><td>Erste Antwort 2, Quellen 10, Text 6, Austausch 2</td></tr>
+  <tr><td class="n">20–30</td><td>Überleben in Ruinen</td><td>allein</td><td>Hinweis zu Selbsttötungen in der Quelle</td></tr>
+  <tr><td class="n">30–50</td><td>Im Angesicht des Verbrechens</td><td>allein; Fotos am Beamer</td><td>Schwur 6, Wörter 8, Interpretation 6</td></tr>
+  <tr><td class="n">50–72</td><td>Verantwortung</td><td>allein</td><td>M5/M6 und Satz 12, Urteil A oder B 10</td></tr>
+  <tr><td class="n">72–80</td><td>Landkarte</td><td>allein</td><td>Perspektivität, Multiperspektivität</td></tr>
+  <tr><td class="n">80–90</td><td>Plenum</td><td>Plenum, iPad zu</td><td>Stimmkarte, Begründungen, Rückkehr zur ersten Antwort</td></tr></tbody></table></div>
+  <p class="hinweis">Zeitdiagnose bei 150 Wörtern pro Minute (gemessen an der fertigen Seite): Lesen rund 18 Minuten (rund 2.700 Wörter mit beiden Quellen), Schreiben rund 38 Minuten (sieben Texte), Markieren und Wählen rund 12 Minuten, Landkarte, Plenum und Wechsel rund 30 Minuten. Das sind fast 100 Minuten. <b>In 90 Minuten passt die Stunde nur mit einer Kürzung</b> – empfohlen K1, oder K2 und K3 zusammen.</p>
+  <h2 class="abschnitt">Kürzungen zur Auswahl</h2>
+  <ul><li><b>K1</b> Baustein 2 (Ruinen) als Hausaufgabe: 10 Minuten frei.</li><li><b>K2</b> Interpretation der Fotos mündlich im Plenum statt schriftlich: 6 Minuten frei.</li><li><b>K3</b> Landkarten-Moment gemeinsam am Beamer: 4 Minuten frei.</li><li><b>K4</b> Urteil A/B als Hausaufgabe, im Unterricht nur Stimmkarte und Gespräch: 10 Minuten frei.</li></ul>
+  <h2 class="abschnitt">Abweichungen vom Heft</h2>
+  <ul><li>Anrede durchgehend „du“ (Heft: gemischt).</li><li>Die Quellen sind für die öffentliche Seite stärker gekürzt als im Heft; jede Kürzung ist mit […] markiert. Die vollen Auszüge stehen im Heft.</li><li>In M3 ist ein Nebensatz mit einer abwertenden Bezeichnung gekürzt.</li><li>Die Leitfrage der Stunde ist neu formuliert (das Heft nennt keine).</li><li>Die Sortierung der 18 Wörter in „Ausdruck · Deutung · Urteil“ ist ein Vorschlag von Claude, kein Forschungsstand. Bitte prüfen.</li><li>Die Einstufungen im Landkarten-Moment (zentral: Perspektivität, Multiperspektivität) sind ein Vorschlag. Wortlaut der Prinzipien aus der Landkarte 2.1.</li><li>Ergänzt aus der Gedenkstätte Buchenwald: Datum der Besichtigung (16. April), Befehl Pattons, Schwur am 19. April, 51 000 als damalige Schätzung.</li></ul>
+  <h2 class="abschnitt">Quellen und Rechte</h2>
+  <ul><li>Textauszüge von Rost, Kuby (Hg.), Hillers, Bourke-White: kurze Zitate mit Fundstelle zur Analyse im Unterricht (§ 51 UrhG). Ob der Umfang auf einer öffentlichen Seite trägt, entscheidest du; sonst die Stunde nur im Moodle-Kurs einsetzen.</li><li><b>Fotos Buchenwald</b> (Margaret Bourke-White / Getty Images): nicht im Repository. Für den Moodle-Kurs (§ 60a UrhG) zwei Dateien in <code>media/</code> legen: <code>m25-buchenwald-besichtigung-1.jpg</code> und <code>-2.jpg</code>. Fehlen sie, verweist die Seite auf das Heft.</li><li>Gedenkstätte Buchenwald: buchenwald.de, Dossiers „Die Bevölkerung konfrontieren“ und „Schwur von Buchenwald“; liberation.buchenwald.de, „Denials of guilt“.</li></ul>
+  <h2 class="abschnitt">Vor dem Einsatz prüfen</h2>
+  <ul><li>Nico Rost: Angaben „niederländischer Journalist, Tagebuch“ und Datum 29. April 1945.</li><li>Fußnote des Hefts zu Baustein 4 (offene-geschichte.de): Übernahmen von dort kennzeichnen.</li><li>Zitat Bourke-White: im Heft nach SPIEGEL 23.2.2018; die Gedenkstätte zitiert nach „Dear Fatherland, Rest Quietly“ (1946).</li></ul>
+  <h2 class="abschnitt">Nur du kannst das</h2>
+  <ul><li>Entscheiden, ob und wie die Fotos gezeigt werden; Lernende mit Flucht- oder Kriegserfahrung in der Familie im Blick behalten.</li><li>Test auf dem iPad in Safari (hoch und quer), VoiceOver, Moodle-Upload.</li><li>Im Plenum Sach- und Werturteil trennen helfen; kein Moral-Ranking der Weimarer*innen.</li></ul>
+  <h2 class="abschnitt">Nach der Stunde</h2>
+  <div class="matrix-wrap"><table><thead><tr><th>Beobachtung</th><th>Notiz</th></tr></thead><tbody><tr><td>Haben die Markierungen beim Schreiben geholfen – oder wurde nur markiert?</td><td></td></tr><tr><td>Wie viele haben die Fotos am Gerät geöffnet?</td><td></td></tr><tr><td>Welche Satzanfänge zu „Wir haben nichts gewusst“ wurden gewählt?</td><td></td></tr><tr><td>Zeit: Wo wurde es eng?</td><td></td></tr></tbody></table></div>
+  <p class="hinweis" style="margin-top:1rem">Speicherschlüssel <code>${L.key}</code>. Eingaben bleiben im Browser des Geräts.</p></div>
+  ${weiter("start", "Zur Startseite")}`;
+}
+
+AKTION.vorfest = () => { S.vor.zu = true; speichere(); zeichne(true); };
+AKTION.wort = t => { const w = t.dataset.w, i = S.wort.indexOf(w); if (i >= 0) S.wort.splice(i, 1); else if (S.wort.length < 5) S.wort.push(w); speichere(); zeichneBehalte(); };
+AKTION.wortfest = (t, ev) => { S.wortzu = true; speichere(); zeichneBehalte(); if (ev.detail !== 0) neu(document.getElementById("wortauf"), "neu"); };
+document.addEventListener("change", ev => { const t = ev.target; if (t.hasAttribute && t.hasAttribute("data-satzwahl")) { S.satzwahl = +t.value; const s = SATZWAHL[S.satzwahl]; if (!S.satz.trim() || SATZWAHL.some(x => S.satz.trim() === x)) S.satz = s + " "; speichere(); const f = document.getElementById("f-satz"); if (f) { f.value = S.satz; f.focus(); } nachEingabe("satz"); } });
+const SEITE_FN = { start, kriegsende, ruinen, verbrechen, verantwortung, landkarte:() => landkarte(LKCFG), plenum, zusammenfassung, lehrkraft };
+kernStart();
+</script>
+</body>
+</html>

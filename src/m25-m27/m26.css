@@ -1,0 +1,23 @@
+/* ===== M26 ===== */
+.pfelder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:.8rem 0}
+@media (max-width:640px){.pfelder{grid-template-columns:1fr 1fr}}
+.pfelder figure{margin:0}
+.pf svg{display:block;width:100%;max-width:210px;background:var(--surface2);border:1px solid var(--border);border-radius:.6rem;padding:4px}
+.pf circle.leer{fill:var(--offset)}
+.pf.ich circle.voll{fill:var(--kuli)}
+.pf.gehlen circle.voll{fill:var(--slate)}
+.pf.studie circle.voll{fill:var(--red)}
+.pf.studie circle.halb{fill:var(--red-hi);stroke:var(--red);stroke-width:2;stroke-dasharray:3 2}
+.pfelder figcaption{font-size:.9rem;line-height:1.35;margin-top:.35rem}
+.pfelder figcaption b{display:block;font:600 1.3rem/1.1 var(--display);font-variant-numeric:tabular-nums}
+.stufen{display:flex;gap:.35rem;flex-wrap:wrap}
+.stufen button{min-height:44px;min-width:4.6rem;padding:.3rem .7rem;border:2px solid var(--stahl);border-radius:.6rem;background:var(--surface2);font-weight:700}
+.stufen button[aria-pressed=true]{border-color:var(--kuli);background:var(--kuli-hi)}
+.vtafel{display:grid;gap:.5rem;margin-top:1rem}
+.vz{display:grid;grid-template-columns:minmax(0,1.3fr) auto minmax(5rem,1fr) minmax(0,1.2fr);gap:.5rem .8rem;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.55rem .8rem}
+.vz .vn{display:grid;gap:.15rem;justify-items:start;line-height:1.25}
+.vz input{margin:0}
+.vz .vb .g-balken__spur{display:block}
+@media (max-width:900px){.vz{grid-template-columns:1fr 1fr}.vz .vn{grid-column:1/-1}}
+@media (max-width:520px){.vz{grid-template-columns:1fr}}
+@media print{.pfelder.druck{grid-template-columns:repeat(3,1fr);gap:.6rem;margin:.3rem 0}.pfelder.druck .pf svg{max-width:105px}.pfelder.druck figcaption{font-size:8.5pt}.pfelder.druck figcaption b{font-size:11pt}}
