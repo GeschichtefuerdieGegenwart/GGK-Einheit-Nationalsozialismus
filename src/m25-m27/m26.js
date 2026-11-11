@@ -7,7 +7,7 @@ const L = {
   /* Zeichen der Stunde: eine Akte, die weiterwandert */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M4 9h9l3 4h14v16H4z" fill="none" stroke="#24221F" stroke-width="2.4" stroke-linejoin="round"/><path d="M10 21h12m-4-4 4 4-4 4" fill="none" stroke="#9B402D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   seiten:[["start","",""],["schaetzen","0–6 Min.","Schätzen"],["bnd","6–21 Min.","Der BND"],["gruppe","21–46 Min.","Eure Gruppe"],["vergleich","46–71 Min.","Vergleich"],["urteil","71–90 Min.","Urteil"],["zusammenfassung","Zum Abheften","Zusammenfassung"]],
-  breit:["schaetzen","gruppe","vergleich","urteil","zusammenfassung","lehrkraft"],
+  breit:["schaetzen","bnd","gruppe","vergleich","urteil","zusammenfassung","lehrkraft"],
   loesch:"Schätzung, Antworten zum BND, Steckbrief, Vergleichstafel, Gründe, Urteil und Stimme werden auf diesem Gerät entfernt.",
   init:() => ({ pos:{ start:50, ende:50, ref:false }, schaetz:{ n:5, zu:false }, bnd:{ a:"", b:"", c:"", d:"" }, bereich:null, steck:{ f1:"", f2:"", f3:"", f4:"", beleg:"", quelle:"" }, tafel:{}, gruende:{ g1:"", g2:"", g3:"" }, wo:"", urteil:"", stimme:null }),
   nachEingabe(p){
@@ -56,21 +56,50 @@ function schaetzen(){
   ${weiter("bnd", "Weiter: Der BND")}`;
 }
 
+/* ---------- Der BND-Text als Akte (Text aus dem Heft, Datei texte/m26-bnd.js nur im Moodle-Paket) ---------- */
+const T26 = window.TEXT_M26 || null;
+const p26 = t => t.map(x => `<p>${esc(x)}</p>`).join("");
+const personKarte = p => { const m = p.name.match(/^([^(]+)\s*\((.+)\)\s*$/); return `<div class="pakte"><span class="preiter">Personalakte</span><h4>${esc(m ? m[1].trim() : p.name)}</h4>${m ? `<p class="pmeta">${esc(m[2])}</p>` : ""}${p26(p.saetze)}</div>`; };
+function akteKarte(k, i){
+  const kopf = `<p class="anr">${i + 1}</p><h3>${esc(k.titel)}</h3>`;
+  if (k.personen) return `<section class="akarte personen">${kopf}<div class="pzwei">${k.personen.map(personKarte).join("")}</div></section>`;
+  if (i === 0) return `<section class="akarte studie">${kopf}<div class="sgross"><span class="zahl">10–20&nbsp;%</span><span class="pf studie klein" aria-hidden="true">${punkte(10, 20)}</span></div>${p26(k.saetze)}</section>`;
+  if (/vier Lügen/.test(k.titel)) { const q = k.saetze.join(" ").match(/„([^“]+)“/), l = q ? q[1].replace(/\[[^\]]*\]/g, "").split(",").map(x => x.trim()).filter(Boolean) : [];
+    return `<section class="akarte luegen">${kopf}${l.length === 4 ? `<ol class="vier" aria-label="Die vier Behauptungen">${l.map(x => `<li>${esc(x)}</li>`).join("")}</ol>` : ""}${p26(k.saetze)}</section>`; }
+  return `<section class="akarte ${/Bilanz/.test(k.titel) ? "bilanz" : ""}">${kopf}${p26(k.saetze)}</section>`;
+}
+function akte(){
+  const t = T26;
+  return `<article class="akte" aria-label="Text: ${esc(t.titel)}"><div class="akopf"><span class="areiter">Akte · Bundesnachrichtendienst</span><h2>${esc(t.titel)}</h2><p class="ameta">${esc(t.autor)} · tagesschau.de, 10.10.2022</p><p class="alead">${esc(t.lead)}</p></div>
+  ${t.karten.map(akteKarte).join("")}<p class="quelle">${esc(t.nachweis)}</p></article>`;
+}
+/* Schaubild: Kette des Wegsehens (aus dem Text abgeleitet; Modell) */
+const KETTE = `<div class="kette" role="img" aria-label="Schaubild Kette des Wegsehens: NS-Täter wie Schreiber und Grauer werden von Gehlen für den BND angeworben. Gehlen meldet dem Kanzleramt: ein Prozent, alle überprüft. Das Kanzleramt unter Globke, selbst belastet, akzeptiert. Adenauer nutzt den BND gegen die SPD und greift nicht ein.">
+  <div class="kg"><b>NS-Täter</b><span>z. B. Schreiber (Oradour, Einsatzgruppe B), Grauer (Einsatzgruppe A)</span></div><div class="kp" aria-hidden="true"><span>angeworben von</span>→</div>
+  <div class="kg"><b>Reinhard Gehlen</b><span>BND-Chef ab 1956</span></div><div class="kp" aria-hidden="true"><span>meldet: „Ein Prozent … alle ok“</span>→</div>
+  <div class="kg"><b>Kanzleramt</b><span>Chef Hans Globke, selbst belastet: akzeptiert</span></div><div class="kp" aria-hidden="true"><span>Kontrolle bei</span>→</div>
+  <div class="kg"><b>Konrad Adenauer</b><span>nutzt den BND gegen die SPD, greift nicht ein</span></div></div>
+  <p class="hinweis">${status("modell", "Modell")}Schaubild aus dem Text: Es zeigt, wer wen gewähren ließ. Was lässt es weg? Zum Beispiel, wer außerhalb der Regierung nachfragte – und warum Kritik als „übertrieben“ galt.</p>`;
 function bnd(){
-  return `${zeitKopf("bnd")}<h1>Der BND</h1>
-  ${auftrag("Allein · 15 Minuten · mit dem Heft", "Text lesen, vier Fragen", "Lies im Heft den Text „Neue Studie: BND rekrutierte gezielt NS-Verbrecher“ (M26, Arbeitsauftrag 1). Beantworte dann die vier Fragen in Stichworten oder kurzen Sätzen. Bei c) zitierst du wörtlich.")}
-  <div class="feldgruppe">
+  const fragen = `<div class="feldgruppe">
   ${textfeld("bnd.a", "a) Welche Personen wurden vom BND gezielt angeworben?", { rows:2, zaehl:false })}
   ${textfeld("bnd.b", "b) Welche Rolle spielte Reinhard Gehlen bei der Personalpolitik des BND?", { rows:2, zaehl:false })}
   ${textfeld("bnd.c", "c) Wie rechtfertigte der BND die Einstellung ehemaliger NS-Täter? Zitiere aus dem Text.", { rows:2, platz:"„…“", zaehl:false })}
   ${textfeld("bnd.d", "d) Warum griff das Bundeskanzleramt nicht ein?", { rows:2, zaehl:false })}
-  </div>
-  ${vergleich("bnd", ["bnd.a","bnd.b","bnd.c","bnd.d"], 15, "Mit dem Text vergleichen", `<p><b>Das steht im Text.</b> Vergleiche und ergänze deine Antworten.</p><ul style="padding-left:1.2rem;display:grid;gap:.3rem"><li><b>a)</b> Ehemalige SS- und Gestapoleute – darunter Männer, die an Mordaktionen beteiligt waren. Der Text nennt Helmut Schreiber und Gustav Grauer.</li><li><b>b)</b> Gehlen, Chef des BND ab 1956, warb sie gezielt an. Der Historiker Sälter: „Da hat sich keiner reingeschlichen, sondern man hatte eine Leitung, die die einfach gewollt hat.“</li><li><b>c)</b> Gehlen antwortete auf Nachfragen stets: „Ein Prozent [NS-Belastete], alle entnazifiziert, alle überprüft, alle ok.“ Kritik von außen galt als „übertrieben“.</li><li><b>d)</b> Das Kanzleramt nahm diese Antworten hin. Sein Chef Hans Globke war selbst belastet. Laut Text nutzte Adenauer den BND für parteipolitische Zwecke.</li></ul><p class="quelle">Nach tagesschau.de, 10.10.2022, wie im Heft abgedruckt.</p>`)}
-  <h2 class="abschnitt">Deine Einstufung</h2>
+  </div>`;
+  if (!T26) return `${zeitKopf("bnd")}<h1>Der BND</h1>
+  ${auftrag("Allein · 15 Minuten · mit dem Heft", "Text lesen, vier Fragen", "Lies im Heft den Text „Neue Studie: BND rekrutierte gezielt NS-Verbrecher“ (M26, Arbeitsauftrag 1). Beantworte dann die vier Fragen in Stichworten oder kurzen Sätzen. Bei c) zitierst du wörtlich.")}
+  ${fragen}${VGL()}${EINSTUFUNG()}`;
+  return `${zeitKopf("bnd")}<h1>Der BND</h1>
+  ${auftrag("Allein · 15 Minuten", "Die Akte lesen, vier Fragen", "Lies die Akte Karte für Karte. Beantworte daneben die vier Fragen in Stichworten oder kurzen Sätzen. Bei c) zitierst du wörtlich.")}
+  <div class="lesepult"><div>${akte()}</div><aside class="fragenspalte" aria-label="Vier Fragen">${fragen}</aside></div>
+  ${VGL()}${EINSTUFUNG()}`;
+}
+const VGL = () => `${vergleich("bnd", ["bnd.a","bnd.b","bnd.c","bnd.d"], 15, "Mit dem Text vergleichen", `<p><b>Das steht im Text.</b> Vergleiche und ergänze deine Antworten.</p><ul style="padding-left:1.2rem;display:grid;gap:.3rem"><li><b>a)</b> Ehemalige SS- und Gestapoleute – darunter Männer, die an Mordaktionen beteiligt waren. Der Text nennt Helmut Schreiber und Gustav Grauer.</li><li><b>b)</b> Gehlen, Chef des BND ab 1956, warb sie gezielt an. Der Historiker Sälter: „Da hat sich keiner reingeschlichen, sondern man hatte eine Leitung, die die einfach gewollt hat.“</li><li><b>c)</b> Gehlen antwortete auf Nachfragen stets: „Ein Prozent [NS-Belastete], alle entnazifiziert, alle überprüft, alle ok.“ Kritik von außen galt als „übertrieben“.</li><li><b>d)</b> Das Kanzleramt nahm diese Antworten hin. Sein Chef Hans Globke war selbst belastet. Laut Text nutzte Adenauer den BND für parteipolitische Zwecke.</li></ul><p class="quelle">Nach tagesschau.de, 10.10.2022, wie im Heft abgedruckt.</p>${KETTE}`)}`;
+const EINSTUFUNG = () => `<h2 class="abschnitt">Deine Einstufung</h2>
   <p>Wie stark war nach dem Text die personelle Kontinuität im BND? Diese Einstufung erscheint später in deiner Vergleichstafel.</p>
   ${stufenWahl("bnd")}
   ${weiter("gruppe", "Weiter: Eure Gruppe")}`;
-}
 
 function gruppe(){
   const b = S.bereich, name = b ? BEREICHE.find(x => x[0] === b)[1] : "";
@@ -197,7 +226,7 @@ function lehrkraft(){
   <h2 class="abschnitt">Kürzungen zur Auswahl</h2>
   <ul><li><b>K1</b> Präsentationen auf 4 Minuten begrenzen: 5 Minuten frei für das Plenum.</li><li><b>K2</b> Sortieraufgabe (Landkarte 2.4.3) gemeinsam am Beamer mit zwei statt fünf Sätzen: 4 Minuten frei.</li><li><b>K3</b> Urteilstext als Hausaufgabe; im Unterricht nur Skala, Abstimmung, Gespräch: 5 Minuten frei.</li><li><b>K4</b> Zwei Doppelstunden: Gruppenarbeit und Präsentationen in der ersten, Vergleich und Urteil in der zweiten.</li></ul>
   <h2 class="abschnitt">Abweichungen vom Heft</h2>
-  <ul><li>Anrede „du“/„ihr“ (Heft: gemischt mit „Sie“).</li><li>Der BND-Text bleibt im Heft; die Seite druckt ihn nicht ab (Urheberrecht tagesschau.de) und zitiert nur kurz.</li><li>„Digitale Präsentation“: Der Steckbrief ist die Präsentation. Wer lieber Folien baut, kann das weiterhin tun.</li><li>Neu: Herkunft des stärksten Belegs. Grund: Die Infoseite „NS-Kontinuitäten“ enthält prüfbedürftige Angaben (im Tresor vermerkt: Landgericht München 1951 und die Urteile gegen die Weiße Rose).</li><li>Plenumsfragen a) bis c) sind auf „Vergleich“ und „Urteil“ verteilt.</li><li>Das Foto im Heft (Teppich mit dem Bundesadler und dem Schriftzug des BND) ist nicht übernommen: Es hat keine Aufgabe in der Stunde und zeigt ein Hoheitszeichen.</li></ul>
+  <ul><li>Anrede „du“/„ihr“ (Heft: gemischt mit „Sie“).</li><li><b>BND-Text als Akte:</b> Der Text aus dem Heft steht in deinen sieben Abschnitten als Karten (Studie mit Punktefeld, Personalakten Schreiber und Grauer, Globke und Adenauer, die „vier Lügen“ als vier Felder, Bilanz), daneben die vier Fragen. Nach den Antworten erscheint mit dem Vergleich das Schaubild „Kette des Wegsehens“ (Modell). Der Text liegt in <code>texte/m26-bnd.js</code>, auf deine Freigabe (11.11.2026) auch im öffentlichen Repository: Es ist deine eigene Fassung aus dem Heft mit kurzen, belegten Zitaten aus tagesschau.de; fehlt die Datei, verweist die Seite aufs Heft.</li><li>„Digitale Präsentation“: Der Steckbrief ist die Präsentation. Wer lieber Folien baut, kann das weiterhin tun.</li><li>Neu: Herkunft des stärksten Belegs. Grund: Die Infoseite „NS-Kontinuitäten“ enthält prüfbedürftige Angaben (im Tresor vermerkt: Landgericht München 1951 und die Urteile gegen die Weiße Rose).</li><li>Plenumsfragen a) bis c) sind auf „Vergleich“ und „Urteil“ verteilt.</li><li>Das Foto im Heft (Teppich mit dem Bundesadler und dem Schriftzug des BND) ist nicht übernommen: Es hat keine Aufgabe in der Stunde und zeigt ein Hoheitszeichen.</li></ul>
   <h2 class="abschnitt">Vor dem Einsatz prüfen</h2>
   <ul><li>Die Zahlen und Zitate zum BND stammen aus dem Heft (dort nach tagesschau.de, 10.10.2022). Den Artikel konnte Claude nicht selbst abrufen. Bitte am Original prüfen: Worauf beziehen sich die „10 bis 20 Prozent“ genau (welcher Zeitraum, welche Gruppe)? Stimmen die Zitate von Sälter und Gehlen wörtlich?</li><li>Studie: Gerhard Sälter, NS-Kontinuitäten im BND. Rekrutierung, Diskurse, Vernetzungen (2022).</li><li>Infoseite: Angaben ohne belastbare Quelle (teils Wikipedia, YouTube) markieren oder ersetzen.</li><li>Der Link zur Infoseite führt in der Arbeitsphase aus der Lernseite heraus. Das ist gewollt, aber die einzige Stelle.</li></ul>
   <h2 class="abschnitt">Nur du kannst das</h2>

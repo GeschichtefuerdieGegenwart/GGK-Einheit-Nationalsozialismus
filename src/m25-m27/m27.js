@@ -6,7 +6,7 @@ const L = {
   seiten:[["start","",""],["bild","0–10 Min.","Dein Bild vom Krieg"],["artikel","10–30 Min.","Der Artikel"],["karte","30–48 Min.","Eurozentrismus"],["struktur","48–70 Min.","Strukturbild"],["landkarte","70–78 Min.","Landkarte"],["schluss","78–90 Min.","Was fehlt?"],["zusammenfassung","Zum Abheften","Zusammenfassung"]],
   breit:["bild","artikel","karte","struktur","zusammenfassung","lehrkraft"],
   loesch:"Deine Orte, Jahre, Erkenntnisse, Hypothese, das Strukturbild, alle Texte werden auf diesem Gerät entfernt.",
-  init:() => ({ vermessung:false, orte:{ t1:"", r1:"", t2:"", r2:"", t3:"", r3:"" }, jahrA:"", jahrE:"", bildzu:false, art:{}, erk:{ e1:"", e2:"", e3:"" }, ueber:"", hyp:"", kartefrage:"", welt:{ sued:false, mitte:"eu" }, euro:"", sb:{ b:{}, e:{}, hand:null, n:0, gepr:false, hilfe:false }, pfeil:{ p1:"", p2:"", p3:"" }, schulbuch:"" }),
+  init:() => ({ vermessung:false, artLetzt:null, orte:{ t1:"", r1:"", t2:"", r2:"", t3:"", r3:"" }, jahrA:"", jahrE:"", bildzu:false, art:{}, erk:{ e1:"", e2:"", e3:"" }, ueber:"", hyp:"", kartefrage:"", welt:{ sued:false, mitte:"eu" }, euro:"", sb:{ b:{}, e:{}, hand:null, n:0, gepr:false, hilfe:false }, pfeil:{ p1:"", p2:"", p3:"" }, schulbuch:"" }),
   nachEingabe(p){
     if (/^orte\.|^jahr/.test(p)) { const b = document.querySelector("[data-akt=bildfest]"); if (b) b.disabled = !bildBereit(); }
     if (p === "kartefrage") { const k = document.getElementById("kartenteil"); if (k && k.classList.contains("gesperrt") === (S.kartefrage.trim().length >= 10)) zeichneBehalte(); }
@@ -90,11 +90,23 @@ function bild(){
   ${weiter("artikel", "Weiter: Der Artikel")}`;
 }
 
+/* ---------- Der Artikel als Lesepult neben der Karte (Text aus dem Heft, Datei texte/m27-artikel.js nur im Moodle-Paket) ---------- */
+const T27 = window.TEXT_M27 || null;
+const ortName = id => (ARTORTE.find(a => a[0] === id) || [, id])[1];
+const ortsKnopf = (id, wort) => `<button type="button" class="ortmarke" data-akt="art" data-w="${id}" aria-pressed="${!!S.art[id]}" aria-label="${esc(wort)}: auf die Karte setzen">${esc(wort)}<span aria-hidden="true">${S.art[id] ? "▲" : "◇"}</span></button>`;
+const absatz = t => esc(t).replace(/\{\{(\w+)\|([^}]+)\}\}/g, (m, id, w) => ortsKnopf(id, w));
+const VERMESSUNG_TOR = () => S.vermessung ? foto(BILD27.vermessung, { gruppe:"m27" }) : `<div class="karte" style="margin:1rem 0">${belastend("Hier folgt ein Foto, das zeigt, wie ein Schwarzer Kriegsgefangener gegen seinen Willen vermessen wird. Es ist ein Bild aus rassistischer „Forschung“.")}<div class="reihe"><button type="button" class="btn dunkel" data-akt="setz" data-p="vermessung" data-w="true">Foto zeigen</button></div></div>`;
+function zuletzt(){
+  const a = ARTORTE.find(x => x[0] === S.artLetzt && S.art[x[0]]);
+  return a ? `<div class="ortkarte"><span class="kennung">Zuletzt auf der Karte</span><b>${esc(a[1])}</b><span>${esc(a[4])}</span></div>` : `<p class="hinweis">Tippe im Text auf einen markierten Ort. Er erscheint als Dreieck auf deiner Karte.</p>`;
+}
 function artikel(){
-  const n = ARTORTE.filter(a => S.art[a[0]]).length;
-  return `${zeitKopf("artikel")}<h1>Der Artikel</h1>
-  ${auftrag("Allein · 10 Minuten · mit dem Heft", "Lesen und festhalten", "Lies im Heft den Artikel von Nils Sandrisser: „Kolonien stellten Kanonenfutter und füllten Bordelle“ (2015). Halte drei zentrale Erkenntnisse fest. Welche hat dich am meisten überrascht?")}
-  <div class="feldgruppe">${eingabe("erk.e1", "Erkenntnis 1")}${eingabe("erk.e2", "Erkenntnis 2")}${eingabe("erk.e3", "Erkenntnis 3")}${textfeld("ueber", "Die größte Überraschung – und warum", { rows:2, zaehl:false })}</div>
+  const n = ARTORTE.filter(a => S.art[a[0]]).length, t = T27;
+  const erk = `${auftrag("Allein · 5 Minuten", "Festhalten", "Halte drei zentrale Erkenntnisse fest. Welche hat dich am meisten überrascht?")}
+  <div class="feldgruppe">${eingabe("erk.e1", "Erkenntnis 1")}${eingabe("erk.e2", "Erkenntnis 2")}${eingabe("erk.e3", "Erkenntnis 3")}${textfeld("ueber", "Die größte Überraschung – und warum", { rows:2, zaehl:false })}</div>`;
+  if (!t) return `${zeitKopf("artikel")}<h1>Der Artikel</h1>
+  ${auftrag("Allein · 10 Minuten · mit dem Heft", "Lesen und festhalten", "Lies im Heft den Artikel von Nils Sandrisser: „Kolonien stellten Kanonenfutter und füllten Bordelle“ (welt.de, 22.06.2015). Halte drei zentrale Erkenntnisse fest. Welche hat dich am meisten überrascht?")}
+  ${erk}
   <h2 class="abschnitt">Zwei Fotos zum Artikel</h2>
   <div class="bilder">${foto(BILD27.soldaten, { gruppe:"m27" })}
   ${S.vermessung ? foto(BILD27.vermessung, { gruppe:"m27" }) : `<div class="karte" style="margin:0">${belastend("Das zweite Foto zeigt, wie ein Schwarzer Kriegsgefangener gegen seinen Willen vermessen wird. Es ist ein Bild aus rassistischer „Forschung“.")}<div class="reihe"><button type="button" class="btn dunkel" data-akt="setz" data-p="vermessung" data-w="true">Foto zeigen</button></div></div>`}</div>
@@ -105,6 +117,29 @@ function artikel(){
   ${welt({ artikel:true })}
   ${S.bildzu ? zaehlSatz() : `<p class="hinweis">Deine drei Orte fehlen noch (Seite „Dein Bild vom Krieg“).</p>`}
   <p class="hinweis" aria-live="polite">${n} von ${ARTORTE.length} Orten eingetragen.</p>
+  ${S.jahrA ? `<div class="auflage"><p><b>Und die Jahre?</b> Du hast als Beginn <b>${esc(S.jahrA)}</b> gewählt, als Ende <b>${esc(S.jahrE)}</b>.</p>
+  <ul class="zl"><li><b>1935</b><span>Italien überfällt Äthiopien. „In Afrika würde jeder sagen, dass der Krieg 1935 angefangen hat“ (Karl Rössel).</span></li><li><b>1937</b><span>Japan greift China an. „In Asien begann der Krieg spätestens 1937“ (Rössel).</span></li><li><b>1939</b><span>Deutschland überfällt Polen. So steht es in den meisten europäischen Schulbüchern.</span></li><li><b>8. Mai 1945</b><span>Kapitulation Deutschlands: Ende des Krieges in Europa.</span></li><li><b>2. Sept. 1945</b><span>Kapitulation Japans nach den Atombomben im August: Ende des Krieges in Asien.</span></li></ul>
+  <p style="margin-top:.5rem">Keine dieser Antworten ist einfach falsch. Welche „richtig“ wirkt, hängt davon ab, von wo aus man schaut.</p></div>` : ""}
+  ${weiter("karte", "Weiter: Eurozentrismus")}`;
+  return `${zeitKopf("artikel")}<h1>Der Artikel</h1>
+  ${auftrag("Allein · 10 Minuten", "Lesen und die Welt des Artikels einzeichnen", "Lies den Artikel. Zwölf Orte sind markiert ◇. Tippe jeden Ort an, wenn du ihn liest: Er erscheint als Dreieck auf deiner Karte – neben deinen drei Punkten vom Anfang. Noch einmal tippen nimmt ihn wieder weg.")}
+  <p class="ortstand nodruck" aria-live="polite"><b>${n} von ${ARTORTE.length}</b> Orten auf deiner Karte</p>
+  <div class="lesepult">
+    <article class="zeitung" aria-label="Artikel: ${esc(t.titel)}">
+      <p class="zkopf">welt.de · ${esc(t.datum)} · ${esc(t.autor)}</p>
+      <h2>${esc(t.titel)}</h2>
+      <p class="zlead">${absatz(t.lead)}</p>
+      ${t.abs.map((x, i) => `<p><span class="znr" aria-hidden="true">${i + 1}</span>${absatz(x)}</p>${i === 0 ? VERMESSUNG_TOR() : ""}${i === 1 ? foto(BILD27.soldaten, { gruppe:"m27" }) : ""}`).join("")}
+      <p class="hinweis" data-bildhinweis="m27" hidden>Die Fotos fehlen in dieser Fassung. Du findest sie im Heft, M27.</p>
+      <p class="quelle">${esc(t.nachweis)}</p>
+    </article>
+    <aside class="kartenspalte" aria-label="Deine Karte">
+      ${welt({ artikel:true })}
+      ${S.bildzu ? zaehlSatz() : `<p class="hinweis">Deine drei Orte fehlen noch (Seite „Dein Bild vom Krieg“).</p>`}
+      <div id="zuletzt" aria-live="polite">${zuletzt()}</div>
+    </aside>
+  </div>
+  ${erk}
   ${S.jahrA ? `<div class="auflage"><p><b>Und die Jahre?</b> Du hast als Beginn <b>${esc(S.jahrA)}</b> gewählt, als Ende <b>${esc(S.jahrE)}</b>.</p>
   <ul class="zl"><li><b>1935</b><span>Italien überfällt Äthiopien. „In Afrika würde jeder sagen, dass der Krieg 1935 angefangen hat“ (Karl Rössel).</span></li><li><b>1937</b><span>Japan greift China an. „In Asien begann der Krieg spätestens 1937“ (Rössel).</span></li><li><b>1939</b><span>Deutschland überfällt Polen. So steht es in den meisten europäischen Schulbüchern.</span></li><li><b>8. Mai 1945</b><span>Kapitulation Deutschlands: Ende des Krieges in Europa.</span></li><li><b>2. Sept. 1945</b><span>Kapitulation Japans nach den Atombomben im August: Ende des Krieges in Asien.</span></li></ul>
   <p style="margin-top:.5rem">Keine dieser Antworten ist einfach falsch. Welche „richtig“ wirkt, hängt davon ab, von wo aus man schaut.</p></div>` : ""}
@@ -249,7 +284,7 @@ function lehrkraft(){
   <h2 class="abschnitt">Kürzungen zur Auswahl</h2>
   <ul><li><b>K1 · Einzelstunde (45 Min.):</b> Dein Bild (6) · Artikel als Hausaufgabe vorab, im Unterricht nur Orte und Jahre (8) · Karte und Begriff (10) · Strukturbild mit Hilfe 2 (15) · Plenum (6).</li><li><b>K2</b> Landkarten-Moment gemeinsam am Beamer: 4 Minuten frei.</li><li><b>K3</b> Absatz fürs Schulbuch als Hausaufgabe: 6 Minuten frei.</li></ul>
   <h2 class="abschnitt">Abweichungen vom Heft</h2>
-  <ul><li>Anrede „du“ (Heft: „Sie“).</li><li>Der Artikel (welt.de, 22.06.2015) bleibt im Heft; die Seite fasst nur Orte in je einem Satz zusammen.</li><li>Zwei Fotos aus dem Heft (Soldaten 1944; „Vermessung“ 1940, Stadtarchiv Münster) im Moodle-Paket unter <code>media/</code> (§ 60a UrhG) und auf deinen Wunsch (11.11.2026) auch im öffentlichen Repository. Die „Vermessung“ erscheint erst nach Hinweis und Tippen, mit der Frage nach dem Blick der Täter. Nachweise: <code>M27_Bildliste.html</code>.</li><li>Das Poster der Upside-down-Weltkarte (interkart.de, Produktfoto mit Wasserzeichen) ist nicht übernommen; die drehbare Karte aus gemeinfreien Daten (Natural Earth) ersetzt es.</li><li>Im Strukturbild sind die Felder vorgegeben (zweite Fassung im Heft). Die freie Fassung bleibt auf Papier möglich.</li><li>Die Zuordnung „Schwarze haben nicht für Frankreich gekämpft“ → Denken ist als falsche Vorstellung gekennzeichnet.</li><li>Schreibweise „Schwarze Soldaten“ mit großem S als Selbstbezeichnung – bitte nach deiner Linie anpassen.</li><li>Ergänzt: 2. September 1945 (Kapitulation Japans) als Gegenstück zum 8. Mai.</li><li>Einstufungen im Landkarten-Moment (zentral: Perspektivität, Standortgebundenheit) sind ein Vorschlag von Claude. Wortlaut aus der Landkarte 2.1.</li></ul>
+  <ul><li>Anrede „du“ (Heft: „Sie“).</li><li><b>Artikel als Lesepult:</b> Der Artikel aus dem Heft steht links, die eigene Weltkarte rechts (bleibt beim Lesen stehen). Zwölf Orte sind im Text markiert; antippen setzt sie als Dreieck auf die Karte, die Kurzinfo erscheint darunter. Die beiden Fotos stehen an ihrer Stelle im Text. Der Text liegt in <code>texte/m27-artikel.js</code> – nur im Moodle-Paket, nicht im öffentlichen Repository, weil er dort vollständig und wörtlich steht (Entscheidung 11.11.2026); fehlt die Datei, verweist die Seite aufs Heft und zeigt die Ortsliste. Korrigiert: fehlender Punkt im Heft („… Massaker unter der Zivilbevölkerung an. Rössel ist …“).</li><li>Zwei Fotos aus dem Heft (Soldaten 1944; „Vermessung“ 1940, Stadtarchiv Münster) im Moodle-Paket unter <code>media/</code> (§ 60a UrhG) und auf deinen Wunsch (11.11.2026) auch im öffentlichen Repository. Die „Vermessung“ erscheint erst nach Hinweis und Tippen, mit der Frage nach dem Blick der Täter. Nachweise: <code>M27_Bildliste.html</code>.</li><li>Das Poster der Upside-down-Weltkarte (interkart.de, Produktfoto mit Wasserzeichen) ist nicht übernommen; die drehbare Karte aus gemeinfreien Daten (Natural Earth) ersetzt es.</li><li>Im Strukturbild sind die Felder vorgegeben (zweite Fassung im Heft). Die freie Fassung bleibt auf Papier möglich.</li><li>Die Zuordnung „Schwarze haben nicht für Frankreich gekämpft“ → Denken ist als falsche Vorstellung gekennzeichnet.</li><li>Schreibweise „Schwarze Soldaten“ mit großem S als Selbstbezeichnung – bitte nach deiner Linie anpassen.</li><li>Ergänzt: 2. September 1945 (Kapitulation Japans) als Gegenstück zum 8. Mai.</li><li>Einstufungen im Landkarten-Moment (zentral: Perspektivität, Standortgebundenheit) sind ein Vorschlag von Claude. Wortlaut aus der Landkarte 2.1.</li></ul>
   <h2 class="abschnitt">Vor dem Einsatz prüfen</h2>
   <ul><li>Die Kurzsätze zu den zwölf Orten gegen den Artikel im Heft lesen.</li><li>Buch: Rheinisches JournalistInnenbüro (Hg.): Unsere Opfer zählen nicht. Die Dritte Welt im Zweiten Weltkrieg, bpb-Schriftenreihe Bd. 10408, Bonn 2014.</li><li>Auswahl der Jahre zum Kriegsbeginn (1931, 1935, 1937, 1939, 1941): 1931 und 1941 stehen nicht im Artikel; sie sind als weitere mögliche Antworten gedacht.</li></ul>
   <h2 class="abschnitt">Nur du kannst das</h2>
@@ -261,7 +296,7 @@ function lehrkraft(){
 }
 
 AKTION.bildfest = (t, ev) => { S.bildzu = true; speichere(); zeichneBehalte(); if (ev.detail !== 0) neu(document.getElementById("bildauf"), "neu"); };
-AKTION.art = t => { const k = t.dataset.w; if (S.art[k]) delete S.art[k]; else S.art[k] = 1; speichere(); zeichneBehalte(); };
+AKTION.art = t => { const k = t.dataset.w; if (S.art[k]) delete S.art[k]; else { S.art[k] = 1; S.artLetzt = k; } speichere(); zeichneBehalte(); };
 AKTION.weltsued = t => { S.welt.sued = t.dataset.w === "1"; speichere(); weltAktualisieren(); };
 AKTION.weltmitte = t => { S.welt.mitte = t.dataset.w; speichere(); weltAktualisieren(); };
 AKTION.sbkarte = t => { S.sb.hand = S.sb.hand === t.dataset.k ? null : t.dataset.k; speichere(); zeichneBehalte(); };

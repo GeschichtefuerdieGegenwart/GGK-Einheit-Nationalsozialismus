@@ -53,3 +53,25 @@
 .sb.klein{padding:.5rem;gap:.3rem}.sb.klein .ab{min-height:0;padding:.2rem .35rem;font-size:.8rem}.sb.klein .ab.e{font-size:.72rem}.sb.klein .pf{font-size:1rem}.sb.klein .pf.drei{gap:1.6rem}
 @media print{.sb.klein{grid-template-columns:minmax(0,1fr) 1rem minmax(0,1fr) 1rem minmax(0,1fr) 1rem minmax(0,1fr);grid-template-areas:". . sk . . a3 d1" "v a1 p a2 g a3 d2" ". . . . . a3 d3"}.sb.klein .ab{font-size:8pt}.sb.klein .ab.e{font-size:7.4pt}.sb .pf{transform:none!important}}
 @media print{.sb .pf.drei{display:grid!important}.sb .pf.drei span+span{display:inline!important}.weltwrap{display:none}}
+/* Zeitungsspalte und Ortsmarken */
+.zeitung{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
+.zkopf{font-size:.85rem;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:.35rem;margin-bottom:.5rem}
+.zeitung h2{font-size:clamp(1.3rem,1.05rem+1vw,1.75rem);margin:0 0 .5rem}
+.zlead{font-weight:700;line-height:1.55}
+.zeitung p{margin:.65rem 0;line-height:1.75;font-size:1.04rem}
+.znr{display:inline-block;min-width:1.5rem;height:1.5rem;border-radius:50%;background:var(--offset);color:var(--muted);font:600 .8rem/1.5rem var(--display);text-align:center;margin-right:.4rem;vertical-align:.1em}
+.ortmarke{display:inline;font:inherit;font-weight:700;color:var(--ink);background:transparent;border:0;border-bottom:3px solid var(--gold);padding:0 .1rem;margin:0;border-radius:.2rem .2rem 0 0;cursor:pointer;min-height:0;line-height:inherit}
+.ortmarke span{font-size:.75em;margin-left:.15rem;color:var(--gold)}
+.ortmarke[aria-pressed=true]{background:var(--gold-hi);border-bottom-color:var(--ink)}
+.ortmarke[aria-pressed=true] span{color:var(--red)}
+.ortmarke:focus-visible{outline:3px solid var(--kuli);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){.ortmarke:hover{background:var(--offset)}}
+@media (pointer:coarse){.ortmarke{padding:.35rem .15rem;margin:-.35rem 0}}
+.ortstand{position:fixed;right:12px;bottom:max(12px,env(safe-area-inset-bottom,0px));z-index:20;display:inline-block;box-shadow:0 2px 0 var(--stahl);background:var(--ink);color:var(--inverse);border-radius:.5rem;padding:.3rem .8rem;font-size:.92rem;margin:0}
+@media (min-width:901px){.ortstand{display:none}}
+.kartenspalte .weltwrap{margin-top:0}
+.kartenspalte .zahlsatz{font-size:1.02rem}
+.ortkarte{display:grid;gap:.15rem;border-left:6px solid var(--gold);background:var(--gold-hi);padding:.55rem .8rem;border-radius:0 .6rem .6rem 0;margin-top:.6rem;font-size:.93rem}
+.ortkarte b{font:600 1.08rem/1.2 var(--display)}
+.zeitung .bild{margin:1rem 0}
+@media print{.zeitung,.akte{display:none}}

@@ -127,3 +127,10 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 .bild .nachweis{display:block;font-size:.8rem;color:var(--muted);margin-top:.2rem}
 .bild.klein{max-width:34rem}
 @media print{.bild,.bilder{display:none}}
+
+/* Lesepult: Text links, Arbeitsspalte rechts (bleibt beim Lesen stehen) */
+.lesepult{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:1.4rem;align-items:start;margin-top:1rem}
+.lesepult>aside{position:sticky;top:122px;padding-bottom:.4rem}
+.lesepult>aside.fragenspalte{position:static}
+@media (min-height:820px){.lesepult>aside.fragenspalte{position:sticky}}
+@media (max-width:900px){.lesepult{grid-template-columns:1fr}.lesepult>aside{position:static;max-height:none}}
