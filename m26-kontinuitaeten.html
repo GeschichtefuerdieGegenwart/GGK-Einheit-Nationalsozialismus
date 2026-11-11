@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>M26 Ende gut, alles gut? Kontinuitäten</title>
+<meta name="description" content="GGK M26: Wie viel Nationalsozialismus steckte in der BRD? Schätzen, BND-Text, Steckbrief der Gruppe, Vergleichstafel, Sach- und Werturteil.">
+<link rel="stylesheet" href="assets/gegenwart/bundle.css">
+<style>
+
+/* Schriften lokal im Repository (SIL Open Font License) */
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBoldItalic.woff) format("woff");font-weight:600;font-style:italic;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+/* Bewusst nur hell (Beamer, Druck), wie M18–M22. Farben und Formen aus dem Designsystem GGK-Labor.
+   Die Bausteine von »Gegenwart« (assets/gegenwart/) laufen über Tokens – hier auf die Farben des GGK-Labors gesetzt. */
+:root{
+  color-scheme:light;
+  --bg:#F3EFE7; --surface:#FAF8F3; --surface2:#FFFDF8; --offset:#E9E2D7; --line:#D5CEC3; --border:rgba(36,34,31,.14);
+  --ink:#24221F; --muted:#5F5C56; --faint:#6A655E; --inverse:#FFFAF2; --dunkel:#1B1A17;
+  --red:#9B402D; --red-hi:#EAD7CF; --green:#2E5A47; --green-hi:#D6E4DC; --gold:#7D5C12; --gold-hi:#EEE2BF;
+  --kuli:#1E4FB5; --kuli-hi:#DCE5F7; --slate:#4B4F57; --slate-hi:#DFE1E5; --marker:#F3D54E;
+  /* Säulenfarben (sechs, aus der GGK-Palette abgeleitet) */
+  --s-inst:#2E5A47; --s-kult:#7D5C12; --s-sozi:#1E4FB5; --s-geo:#4B6F8F; --s-pol:#9B402D; --s-takt:#4B4F57;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:.75rem; --r-lg:1rem; --ease:cubic-bezier(.23,1,.32,1);
+  /* Gegenwart-Tokens → GGK-Labor */
+  --grund:var(--bg); --flaeche:var(--surface); --karton:var(--offset); --text:var(--ink); --leise:var(--muted); --stahl:#8F887D; --linie:var(--line);
+  --petrol:var(--green); --petrol-hi:var(--green-hi); --auf-petrol:var(--inverse);
+  --honig:var(--gold); --honig-hi:var(--gold-hi); --honigplatte:var(--gold-hi); --auf-honig:var(--ink);
+  --ueberdruck:var(--slate); --auf-ueberdruck:var(--inverse);
+  --oxid:var(--red); --oxid-hi:var(--red-hi);
+  --erfolg:var(--green); --erfolg-hi:var(--green-hi); --warnung:var(--gold); --warnung-hi:var(--gold-hi); --fehler:var(--red); --fehler-hi:var(--red-hi);
+  --font-display:var(--display); --font-stimme:var(--display); --font-text:var(--body);
+  --radius-sm:.6rem; --radius-md:.75rem; --radius-pill:999px; --radius-none:0;
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:20px; --space-6:28px;
+  --knopf-hoehe:48px; --tablet-ziel:56px; --platte:6px 6px 0 0 var(--karton); --platte-knopf:4px 4px 0 0 var(--karton); --fokus-innen:inset 0 0 0 2px var(--grund);
+  --dauer-druck:100ms; --dauer-schnell:140ms; --dauer-mittel:220ms; --dauer-langsam:300ms; --dauer-staffel:30ms; --dauer-wende:460ms; --dauer-aufdecken:420ms; --dauer-reihe:440ms; --dauer-aus:150ms;
+  --kurve-aus:cubic-bezier(.23,1,.32,1); --kurve-beidseits:cubic-bezier(.77,0,.175,1); --kurve-feder:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+button,input,select,textarea,[tabindex]{scroll-margin-top:140px}
+html{-webkit-text-size-adjust:none;text-size-adjust:none;overflow-x:clip}
+body{min-height:100dvh;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:clamp(1rem,.95rem + .25vw,1.125rem);line-height:1.58;-webkit-font-smoothing:antialiased;overflow-x:clip}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.14;text-wrap:balance}
+p,li{text-wrap:pretty}
+a{color:var(--red)}
+:focus-visible{outline:3px solid var(--kuli);outline-offset:3px;border-radius:.35rem}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}}
+html[data-bewegung=weniger] *,html[data-bewegung=weniger] *::before,html[data-bewegung=weniger] *::after{animation:none!important;transition-duration:1ms!important}
+@keyframes auf{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+.g{background:transparent;font-size:inherit;line-height:inherit}
+.g .g-frage{font-size:clamp(1.2rem,1.05rem + .7vw,1.5rem)}
+.g .g-knopf{min-height:48px}
+.g-wahl legend{font-weight:700;font-family:var(--body);font-style:normal;font-size:1.05rem}
+.g .g-option span{font-weight:700}
+.g .g-option__urteil{font-weight:400;font-style:normal;font-size:.95rem;padding:0;border:0;min-height:0;background:transparent;box-shadow:none}
+.g .g-option span span::before,.g .g-option span span::after{display:none!important}
+.g .g-balken__zeile{grid-template-columns:minmax(6.5rem,10rem) 1fr 4.2rem}
+.g .g-schieber{max-width:none}
+.g .g-schieber>label{display:grid;gap:.2rem}.g .g-schieber input[type=range]{width:100%;accent-color:var(--kuli);height:32px}
+.g .g-schieber__buehne{aspect-ratio:auto;min-height:14rem}
+.g .g-schieber__vor,.g .g-schieber__nach{padding:2.6rem 1.2rem 1.2rem}
+.g .g-schieber__vor p,.g .g-schieber__nach p{font-size:.98rem}
+.g .g-schieber__vor .zahl,.g .g-schieber__nach .zahl{font:600 2.2rem/1 var(--display)}
+.g .g-zeit{padding-top:34px}
+@media (max-width:640px){.g .g-zeit{grid-auto-flow:row;grid-auto-columns:auto;gap:var(--space-3)}.g .g-zeit::before{display:none}}
+.g .g-schalter input{margin:0}
+
+/* Kopf mit Lernweg */
+.kopf{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--border);padding-top:env(safe-area-inset-top,0px)}
+.kopf-in{max-width:1100px;margin:auto;padding:.55rem max(1.25rem,env(safe-area-inset-right,0px)) .55rem max(1.25rem,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:.6rem .9rem;flex-wrap:wrap}
+.mark{width:32px;height:32px;flex:0 0 auto}
+.titel{font-weight:700;line-height:1.2;margin-right:auto}.titel small{display:block;color:var(--muted);font-weight:400;font-size:.82rem}
+.pill{border:1px solid var(--border);background:var(--surface2);border-radius:999px;padding:.45rem 1rem;font-weight:700;min-height:44px;display:inline-flex;align-items:center;text-decoration:none;color:var(--ink)}
+.weg{max-width:1100px;margin:auto;padding:0 1.25rem .6rem;display:flex;gap:.35rem;overflow-x:auto;scrollbar-width:none}
+.weg button{flex:1 0 auto;min-width:7.4rem;border:0;border-top:3px solid var(--line);background:transparent;text-align:left;padding:.45rem .5rem .2rem;color:var(--faint);font-size:.85rem;line-height:1.25;min-height:48px}
+.weg button b{display:block;color:inherit;font-size:.78rem}
+.weg button.da{color:var(--muted);border-top-color:var(--muted)}
+.weg button.akt{color:var(--ink);border-top-color:var(--red)}
+
+main{max-width:46rem;margin:auto;padding:clamp(1.5rem,4vw,3rem) max(1.25rem,env(safe-area-inset-right,0px)) 5rem max(1.25rem,env(safe-area-inset-left,0px))}
+main.breit{max-width:62rem}
+.zeit{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;color:var(--red);font-weight:700;font-size:.95rem}
+.zeit .nr{font-family:var(--display);font-size:1.1rem}
+h1{font-size:clamp(2rem,1.4rem + 2.4vw,3.1rem);margin:.5rem 0 .7rem}
+.leitfrage{font-family:var(--display);font-style:italic;font-weight:600;font-size:clamp(1.35rem,1.1rem + .9vw,1.8rem);color:var(--muted);margin-bottom:1.4rem}
+.lead{font-size:clamp(1.1rem,1rem + .5vw,1.28rem);color:var(--muted);margin-bottom:1.4rem}
+h2.abschnitt{font-size:1.45rem;margin:2.2rem 0 .7rem}
+h3.klein{font-size:1.15rem;margin:1.4rem 0 .4rem}
+p+p{margin-top:.7rem}
+.auftrag{background:var(--ink);color:var(--inverse);border-radius:var(--r-lg);padding:1.2rem 1.4rem;margin:1.5rem 0 1.1rem}
+.auftrag h3{font-size:1.2rem;margin-bottom:.35rem}
+.auftrag p{color:#DCD5CA}
+.auftrag .form{display:inline-block;font-weight:700;color:var(--marker);font-size:.9rem;margin-bottom:.2rem}
+.hinweis{font-size:.9rem;color:var(--muted)}
+.belastend{border-left:6px solid var(--gold);background:var(--gold-hi);padding:.75rem 1rem;border-radius:0 .5rem .5rem 0;margin:1rem 0}
+.merksatz{font-family:var(--display);font-weight:600;font-size:1.25rem;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);padding:.7rem 0;margin:1.4rem 0;text-align:center}
+.btn{min-height:48px;border:1px solid var(--border);border-radius:var(--r);padding:.6rem 1.2rem;background:var(--surface2);font-weight:700;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.4rem}
+.btn:hover{background:var(--offset)}
+.btn.primary{background:var(--red);color:var(--inverse);border-color:transparent}
+.btn.primary:hover{background:#86361f}
+.btn.dunkel{background:var(--ink);color:var(--inverse);border-color:transparent}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn:active{transform:scale(.97)}
+.reihe{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-top:.8rem}
+.fuss{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-top:1px solid var(--line);margin-top:2.2rem;padding-top:1.3rem;flex-wrap:wrap}
+label{font-weight:700;display:block}
+textarea{width:100%;min-height:5rem;border:1.5px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;background:var(--surface2);resize:vertical;margin-top:.35rem}
+.feldgruppe{display:grid;gap:1rem;margin-top:1rem}
+.karte{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
+.karte+.karte{margin-top:1rem}
+.kennung{font-weight:700;color:var(--red);font-size:.88rem;margin-bottom:.3rem}
+.quelle{font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.4}
+.quelle a{color:var(--muted)}
+blockquote{margin:.8rem 0;padding:.7rem 1rem;border-left:5px solid var(--kuli);background:var(--kuli-hi);border-radius:0 .5rem .5rem 0;font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.35}
+blockquote .wer{display:block;font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--muted);margin-top:.35rem}
+details.hilfe{margin-top:.8rem;border:1.5px dashed var(--line);border-radius:.6rem;padding:.4rem .8rem}
+details.hilfe summary{cursor:pointer;font-weight:700;min-height:40px;display:flex;align-items:center}
+details.hilfe p{margin:.3rem 0 .4rem}
+.status{display:inline-block;font-size:.78rem;font-weight:700;padding:.1rem .5rem;border-radius:.35rem;background:var(--slate-hi);color:var(--slate);margin-right:.3rem}
+.status.beleg{background:var(--green-hi);color:var(--green)}
+.status.modell{background:var(--gold-hi);color:var(--gold)}
+.aufdeck{margin-top:1rem;background:var(--offset);border-radius:var(--r-lg);padding:1rem 1.2rem}
+.aufdeck.neu{animation:auf 360ms var(--ease) both}
+.zwei{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+@media (max-width:640px){.zwei{grid-template-columns:1fr}}
+.zwei .alt{background:var(--offset);border-radius:.6rem;padding:.8rem 1rem;min-width:0}
+
+.band{position:relative;background:var(--dunkel);color:var(--inverse);border-radius:var(--r-lg);overflow:hidden;margin:0 0 1.6rem;min-height:9rem;display:grid;grid-template-columns:minmax(0,1fr)}
+.band.mit{grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:15rem}
+@media (max-width:640px){.band.mit{grid-template-columns:1fr}}
+.band .bt{padding:1.3rem 1.4rem;display:flex;flex-direction:column;justify-content:center;gap:.4rem}
+.band .bt .ob{font-size:.85rem;font-weight:700;color:#C9BFAE;letter-spacing:.02em}
+.band .bt h2{font-size:clamp(1.5rem,1.2rem + 1.4vw,2.2rem);color:var(--inverse)}
+.band .bt p{color:#DCD5CA}
+.band figure{margin:0;position:relative;min-height:12rem;background:#2A2824}
+.band figure img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:.92}
+.band.neu figure img{animation:band-ein 650ms var(--ease) both}
+@keyframes band-ein{from{opacity:0;transform:translateX(4%) scale(1.03)}to{opacity:.92;transform:none}}
+.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:.45rem .8rem;font-size:.75rem;line-height:1.35;color:#E6DFD2;background:linear-gradient(transparent,rgba(27,26,23,.85))}
+.band figcaption b{color:var(--inverse)}
+.urt{font-size:.95rem}.urt+.urt{margin-top:.3rem}
+.urt.zentral b{color:var(--green)}.urt.begruendbar b{color:var(--gold)}.urt.kaum b{color:var(--red)}
+.matrix-wrap{overflow-x:auto;margin-top:1rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%}
+th,td{padding:.55rem .7rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.92rem}
+th{background:var(--offset)}
+tr:last-child td{border-bottom:0}
+td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* Produkt */
+.raster3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.6rem;font-size:.88rem}
+@media (max-width:640px){.raster3{grid-template-columns:1fr}}
+.raster3 div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .7rem}
+.raster3 b{display:block;margin-bottom:.2rem}
+.satzanfaenge{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem}
+.satzanfaenge button{min-height:40px;border:1.5px solid var(--border);background:var(--surface2);border-radius:.5rem;padding:.3rem .7rem;font-size:.9rem}
+.pole{display:flex;justify-content:space-between;gap:1rem;font-weight:700;font-size:.95rem;margin-top:.6rem}
+.pole span{max-width:46%}
+
+/* Löschen */
+.loesch{margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.92rem;color:var(--muted);display:flex;gap:.9rem;flex-wrap:wrap;align-items:center}
+.loesch-frage{margin-top:.6rem;border:2px solid var(--red);border-radius:.7rem;padding:.8rem 1rem;background:var(--red-hi);color:var(--ink);flex:1 0 100%}
+/* ===== Gemeinsamer Kern M25–M27 (Ergänzungen zum Stand von M23) ===== */
+.band{margin-top:.2rem}
+.ziele{padding-left:1.2rem;display:grid;gap:.3rem;margin:.6rem 0}
+.ablauf{list-style:none;display:grid;gap:.35rem;margin:.8rem 0 0}
+.ablauf li{display:grid;grid-template-columns:5.6rem 1fr;gap:.8rem;border-top:1px solid var(--line);padding-top:.35rem}
+.ablauf li b{color:var(--red);font-variant-numeric:tabular-nums}
+.auflage{border-left:6px solid var(--green);background:var(--green-hi);padding:.8rem 1rem;border-radius:0 .6rem .6rem 0;margin:1rem 0}
+.auflage.neu,.rm.neu{animation:auf 360ms var(--ease) both}
+.rm{border-left:6px solid var(--stahl);background:var(--surface);padding:.7rem 1rem;border-radius:0 .6rem .6rem 0;margin:.7rem 0;font-size:.97rem}
+.rm.zentral{border-left-color:var(--green)}.rm.teils{border-left-color:var(--gold)}.rm.kaum{border-left-color:var(--red)}
+.rm b.sw{display:block}
+.gesperrt{opacity:.45}
+.zaehl{font-size:.88rem;color:var(--muted);margin-top:.25rem;font-variant-numeric:tabular-nums}
+textarea,input[type=text],select{color:var(--kuli)}
+input[type=text],select{width:100%;min-height:48px;border:1.5px solid var(--border);border-radius:var(--r);padding:.5rem .8rem;background:var(--surface2);margin-top:.3rem}
+textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
+.felder2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:700px){.felder2{grid-template-columns:1fr}}
+
+/* Quelle zum Markieren (Gegenwart: Markierung) – Sätze sind die Einheiten */
+.qwerk{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:1.2rem;align-items:start;margin-top:1rem}
+@media (max-width:860px){.qwerk{grid-template-columns:1fr}}
+.qblatt{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
+.qblatt h3{font-size:1.12rem;margin-bottom:.15rem}
+.qblatt .qkopf{font-size:.92rem;color:var(--muted);margin-bottom:.7rem}
+.qblatt .qtext p{margin:.55rem 0;line-height:1.75;font-size:1.06rem}
+.qblatt .qtag{font-weight:700;color:var(--red);font-size:.9rem;margin-right:.3rem}
+.qblatt .g-wort{padding:.08em 0;-webkit-tap-highlight-color:transparent}
+.qblatt .g-wort:focus-visible{outline:3px solid var(--kuli);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){.qblatt .g-wort:hover{background:var(--offset)}}
+.qblatt .g-stifte{margin:.2rem 0 .8rem;position:sticky;top:112px;background:var(--surface2);padding:.35rem 0;z-index:2}
+.g-stift .z{font-size:.8em;margin-right:.25rem}
+.qreiter{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1rem}
+.qreiter button{min-height:44px;border:1.5px solid var(--border);border-bottom-width:3px;background:var(--surface);border-radius:.6rem .6rem 0 0;padding:.4rem .9rem;font-weight:700}
+.qreiter button[aria-selected=true]{background:var(--surface2);border-bottom-color:var(--red)}
+.belege{display:grid;gap:.8rem}
+.belege .sp{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;min-height:5.5rem}
+.belege .sp h4{font-family:var(--body);font-size:.95rem;margin-bottom:.3rem}
+.belege .sp ul{list-style:none;display:grid;gap:.3rem;font-size:.92rem}
+.belege .sp li{border-left:4px solid var(--marker);padding-left:.5rem;line-height:1.35}
+.belege .sp.b li{border-left:4px dotted var(--kuli)}
+.belege .leer{color:var(--faint);font-size:.9rem}
+
+/* Wörter wählen */
+.woerter{display:flex;gap:.45rem;flex-wrap:wrap;margin:.8rem 0}
+.woerter button{min-height:44px;padding:.35rem .9rem;border-radius:.6rem;border:2px solid var(--stahl);background:var(--surface2);font-weight:700}
+.woerter button[aria-pressed=true]{border-color:var(--kuli);background:var(--kuli-hi);color:var(--ink)}
+.woerter button[disabled]{opacity:.5}
+.wgrp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin-top:.6rem}
+@media (max-width:760px){.wgrp{grid-template-columns:1fr}}
+.wgrp div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .8rem;font-size:.93rem}
+.wgrp b{display:block;margin-bottom:.2rem}
+.wgrp .dein{font-weight:700;color:var(--kuli)}
+
+/* Landkarten-Moment */
+.prinzipien{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;margin:.9rem 0}
+@media (max-width:860px){.prinzipien{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.prinzipien{grid-template-columns:1fr}}
+.prinzipien button{text-align:left;border:2px solid var(--stahl);background:var(--surface2);border-radius:.7rem;padding:.55rem .7rem;min-height:56px;display:grid;gap:.15rem;align-content:start}
+.prinzipien button small{font-size:.82rem;color:var(--muted);line-height:1.3}
+.prinzipien button[aria-pressed=true]{border-color:var(--kuli);box-shadow:inset 0 0 0 1px var(--kuli)}
+.prinzipien button.zentral{border-left:6px solid var(--green)}.prinzipien button.teils{border-left:6px solid var(--gold)}.prinzipien button.kaum{border-left:6px solid var(--red)}
+.prinzipien button[disabled]{opacity:.6}.prinzipien button[disabled][aria-pressed=true]{opacity:1}
+.trift{margin-top:1.2rem;border:1.5px dashed var(--stahl);border-radius:.7rem;padding:.8rem 1rem;font-size:.96rem}
+
+/* Stimmkarte und Beamer-Tafel */
+#ueber:empty{display:none}
+.tafel-voll{position:fixed;inset:0;z-index:60;background:var(--dunkel);color:var(--inverse);display:grid;grid-template-rows:auto 1fr;padding:max(1rem,env(safe-area-inset-top,0px)) 1.4rem 1.4rem;overflow:auto}
+.tafel-voll .tk{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.tafel-voll .tk .btn{background:transparent;color:var(--inverse);border-color:#6b665d}
+.tafel-voll .mitte{display:grid;place-content:center;text-align:center;gap:1rem}
+.tafel-voll .buchstabe{font:600 clamp(8rem,34vw,20rem)/.9 var(--display)}
+.tafel-voll .wort{font:600 clamp(1.6rem,5vw,3.4rem)/1.15 var(--display)}
+.tafel-voll.hell{background:var(--bg);color:var(--ink)}
+.tafel-voll.hell .tk .btn{color:var(--ink);border-color:var(--stahl)}
+.folie{width:min(100%,calc((100vh - 6.5rem)*16/9));aspect-ratio:16/9;margin:auto;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:clamp(1rem,2.6vw,2.4rem);display:grid;grid-template-rows:auto 1fr auto;gap:.8rem;text-align:left;overflow:hidden}
+.folie h2{font-size:clamp(1.4rem,3vw,2.5rem)}
+.folie .vier{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 1.4rem;align-content:start;font-size:clamp(.85rem,1.45vw,1.25rem);line-height:1.35}
+.folie .vier b{display:block;color:var(--red);font-size:.85em}
+.folie .vier p{color:var(--kuli);white-space:pre-wrap;overflow-wrap:anywhere}
+.folie .fq{font-size:clamp(.75rem,1.1vw,1rem);color:var(--muted)}
+@media (max-width:700px){.folie{aspect-ratio:auto}.folie .vier{grid-template-columns:1fr}}
+.stimmwahl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.8rem}
+@media (max-width:640px){.stimmwahl{grid-template-columns:1fr}}
+.stimmwahl button{min-height:64px;border:2px solid var(--stahl);border-radius:.8rem;background:var(--surface2);font-weight:700;padding:.5rem .8rem;display:grid;gap:.1rem;text-align:left}
+.stimmwahl button b{font:600 1.5rem/1 var(--display)}
+.stimmwahl button[aria-pressed=true]{border-color:var(--green);box-shadow:inset 0 0 0 2px var(--green);background:var(--green-hi)}
+
+/* Zeitleiste klein (Zusammenfassung) */
+.zl{list-style:none;display:grid;gap:.25rem;margin-top:.4rem}
+.zl li{display:grid;grid-template-columns:7.2rem 1fr;gap:.7rem;font-size:.95rem;border-top:1px solid var(--line);padding-top:.25rem}
+.zl li b{font-variant-numeric:tabular-nums}
+.begriffe{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem;margin-top:.4rem}
+.begriffe div{font-size:.95rem;border-left:4px solid var(--line);padding-left:.6rem}
+@media (max-width:640px){.begriffe{grid-template-columns:1fr}}
+.mein{color:var(--kuli);white-space:pre-wrap;overflow-wrap:anywhere}
+.mein.leer{color:var(--faint);font-style:italic}
+.zf .werk{background:var(--gold-hi);border-radius:.6rem;padding:.6rem .9rem;margin-top:.5rem;font-size:.95rem}
+.zf h1{margin-top:0}
+.zf .seitenumbruch{margin-top:2rem;border-top:3px solid var(--ink);padding-top:1rem}
+.lk table{font-size:.92rem}
+.lk ul{padding-left:1.2rem;display:grid;gap:.4rem;margin-top:.4rem}
+
+@media print{
+  @page{size:A4;margin:12mm 13mm}
+  body{background:#fff;font-size:10pt;line-height:1.36}
+  .kopf,.fuss,.loesch,.nodruck,.reihe,#ueber{display:none!important}
+  main{max-width:none;padding:0}
+  .zf h1{font-size:18pt;margin:0 0 .15rem}
+  .zf .leitfrage{font-size:12pt;margin-bottom:.3rem}
+  .zf h2{font-size:12pt;margin:.55rem 0 .2rem;break-after:avoid}
+  .zf .merksatz{margin:.45rem 0;padding:.35rem 0;font-size:11pt}
+  .zf .begriffe div,.zf .zl li,.zf .werk{font-size:9pt}
+  .zf .karte{padding:.4rem .6rem;break-inside:avoid}
+  .zf .seitenumbruch{break-before:page;border-top:0;margin-top:0;padding-top:0}
+  .zf .mein{font-size:9.5pt}
+  .zf th,.zf td{padding:.2rem .4rem;font-size:8.6pt}
+  .auflage{background:#fff;border:1px solid #bbb;border-left:4px solid #555}
+  a{color:inherit;text-decoration:none}
+}
+/* ===== M26 ===== */
+.pfelder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:.8rem 0}
+@media (max-width:640px){.pfelder{grid-template-columns:1fr 1fr}}
+.pfelder figure{margin:0}
+.pf svg{display:block;width:100%;max-width:210px;background:var(--surface2);border:1px solid var(--border);border-radius:.6rem;padding:4px}
+.pf circle.leer{fill:var(--offset)}
+.pf.ich circle.voll{fill:var(--kuli)}
+.pf.gehlen circle.voll{fill:var(--slate)}
+.pf.studie circle.voll{fill:var(--red)}
+.pf.studie circle.halb{fill:var(--red-hi);stroke:var(--red);stroke-width:2;stroke-dasharray:3 2}
+.pfelder figcaption{font-size:.9rem;line-height:1.35;margin-top:.35rem}
+.pfelder figcaption b{display:block;font:600 1.3rem/1.1 var(--display);font-variant-numeric:tabular-nums}
+.stufen{display:flex;gap:.35rem;flex-wrap:wrap}
+.stufen button{min-height:44px;min-width:4.6rem;padding:.3rem .7rem;border:2px solid var(--stahl);border-radius:.6rem;background:var(--surface2);font-weight:700}
+.stufen button[aria-pressed=true]{border-color:var(--kuli);background:var(--kuli-hi)}
+.vtafel{display:grid;gap:.5rem;margin-top:1rem}
+.vz{display:grid;grid-template-columns:minmax(0,1.3fr) auto minmax(5rem,1fr) minmax(0,1.2fr);gap:.5rem .8rem;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.55rem .8rem}
+.vz .vn{display:grid;gap:.15rem;justify-items:start;line-height:1.25}
+.vz input{margin:0}
+.vz .vb .g-balken__spur{display:block}
+@media (max-width:900px){.vz{grid-template-columns:1fr 1fr}.vz .vn{grid-column:1/-1}}
+@media (max-width:520px){.vz{grid-template-columns:1fr}}
+@media print{.pfelder.druck{grid-template-columns:repeat(3,1fr);gap:.6rem;margin:.3rem 0}.pfelder.druck .pf svg{max-width:105px}.pfelder.druck figcaption{font-size:8.5pt}.pfelder.druck figcaption b{font-size:11pt}}
+</style>
+</head>
+<body>
+<header class="kopf"><div class="kopf-in" id="kopf"></div><nav class="weg" id="weg" aria-label="Lernweg"></nav></header>
+<main id="main" tabindex="-1"></main>
+<div id="ueber"></div>
+<noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft „Geschichte aktuell 1“ (M26).</p></noscript>
+<script src="assets/gegenwart/bundle.js"></script>
+<script>
+"use strict";
+/* ===== Gemeinsamer Kern M25–M27. Jede Stunde definiert danach L (Einstellungen), ihre Daten, SEITE_FN und ruft kernStart(). ===== */
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let S = {};
+const lade = () => { try { return JSON.parse(localStorage.getItem(L.key)) || {}; } catch(e) { return {}; } };
+const speichere = () => { try { localStorage.setItem(L.key, JSON.stringify(S)); } catch(e) {} };
+const hol = p => p.split(".").reduce((o, k) => (o == null ? undefined : o[k]), S);
+const setz = (p, v) => { const k = p.split("."); let o = S; for (let i = 0; i < k.length - 1; i++) { if (o[k[i]] == null || typeof o[k[i]] !== "object") o[k[i]] = {}; o = o[k[i]]; } o[k[k.length - 1]] = v; speichere(); };
+const woerter = t => String(t || "").trim().split(/\s+/).filter(Boolean).length;
+const ruhig = () => { try { return !!S.ruhig || matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e) { return !!S.ruhig; } };
+const neu = (el, k) => { if (!el) return; el.classList.remove(k); void el.offsetWidth; if (!ruhig()) el.classList.add(k); };
+const LABOR = /github\.io$/.test(location.hostname) ? "index.html" : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
+const LK = "https://geschichtefuerdiegegenwart.github.io/kognitive-Landkarte-des-Geschichtsunterrichts/#s-";
+const idx = id => Math.max(0, L.seiten.findIndex(s => s[0] === id));
+
+/* ---------- Bausteine für Seiten ---------- */
+const zeitKopf = id => { const s = L.seiten[idx(id)]; return `<p class="zeit"><span class="nr">${esc(s[1])}</span><span>${esc(s[2])}</span></p>`; };
+const weiter = (nach, text, o = {}) => `<div class="fuss"><span class="hinweis">${o.hinweis || "Dein Stand wird nur auf diesem Gerät gespeichert."}</span><button class="btn primary" data-geh="${nach}">${esc(text)} ›</button></div>`;
+const auftrag = (form, titel, text) => `<div class="auftrag"><span class="form">${esc(form)}</span><h3>${esc(titel)}</h3><p>${text}</p></div>`;
+const belastend = text => `<p class="belastend"><b>Hinweis vorab.</b> ${text}</p>`;
+const status = (art, text) => `<span class="status ${art}">${esc(text)}</span>`;
+const band = (ob, titel, text) => `<div class="band"><div class="bt"><span class="ob">${esc(ob)}</span><h2>${esc(titel)}</h2><p>${text}</p></div></div>`;
+const hilfe = (titel, html) => `<details class="hilfe"><summary>${esc(titel)}</summary>${html}</details>`;
+
+/* Textfeld mit Satzanfängen und Wortzähler (Gegenwart: Textfeld). pfad = Ort in S. */
+function textfeld(pfad, label, o = {}){
+  const v = hol(pfad) || "", id = "f-" + pfad.replace(/\W/g, "-");
+  return `<div class="tf"><label for="${id}">${label}</label>
+  <textarea id="${id}" data-f="${pfad}" rows="${o.rows || 3}" placeholder="${esc(o.platz || "")}">${esc(v)}</textarea>
+  ${o.anfaenge ? `<div class="satzanfaenge nodruck" role="group" aria-label="Satzanfänge">${o.anfaenge.map(a => `<button type="button" data-satz="${id}" data-text="${esc(a)}">${esc(a)} …</button>`).join("")}</div>` : ""}
+  ${o.zaehl === false ? "" : `<p class="zaehl" data-zaehl="${pfad}">${woerter(v)} Wörter${o.ziel ? " · " + esc(o.ziel) : ""}</p>`}</div>`;
+}
+const eingabe = (pfad, label, platz = "") => { const id = "f-" + pfad.replace(/\W/g, "-"); return `<div><label for="${id}">${label}</label><input type="text" id="${id}" data-f="${pfad}" value="${esc(hol(pfad) || "")}" placeholder="${esc(platz)}" autocomplete="off"></div>`; };
+/* Kriterienraster: erscheint, sobald das Feld pfad mindestens min Wörter hat (P6: Vergleich erst nach dem eigenen Text). */
+function raster(pfad, min, titel, zeilen){
+  const da = woerter(hol(pfad)) >= min;
+  return `<div data-raster="${pfad}" data-min="${min}" ${da ? "" : "hidden"}><h3 class="klein">${esc(titel)}</h3><div class="matrix-wrap"><table><thead><tr><th>Prüfe deinen Text</th><th>Grundlegend</th><th>Sicher</th><th>Souverän</th></tr></thead><tbody>${zeilen.map(z => `<tr><td><b>${esc(z[0])}</b></td><td>${esc(z[1])}</td><td>${esc(z[2])}</td><td>${esc(z[3])}</td></tr>`).join("")}</tbody></table></div></div>
+  <p class="hinweis" data-rasterhinweis="${pfad}" ${da ? "hidden" : ""}>Ab ${min} Wörtern erscheint ein Raster, mit dem du deinen Text selbst prüfst.</p>`;
+}
+/* Vergleich, der erst nach eigenen Antworten erscheint: bed = Liste von Pfaden, die gefüllt sein müssen. */
+function vergleich(id, bed, min, titel, html){
+  const ok = bed.every(p => String(hol(p) || "").trim().length >= min), offen = !!(S.offen || {})[id];
+  return `<div class="reihe nodruck"><button type="button" class="btn dunkel" data-vergleich="${id}" data-bed="${bed.join(",")}" data-min="${min}" data-titel="${esc(titel)}" ${ok ? "" : "disabled"}>${offen ? "Vergleich ausblenden" : esc(titel)}</button><span class="hinweis" data-vergleichhinweis="${id}">${ok ? "" : "Erst deine Antworten, dann der Vergleich."}</span></div>
+  <div class="auflage" id="vgl-${id}" ${offen && ok ? "" : "hidden"}>${html}</div>`;
+}
+
+/* ---------- Quelle zum Markieren (Muster 11; Gegenwart: Markierung, zwei Stifte) ----------
+   QUELLEN[id] = { titel, kopf, abs:[[tag|null, [Sätze…]], …], nachweis, stifte:[[ "a", Zeichen, Name ], [ "b", Zeichen, Name ]] }
+   Stand: S.mark[id] = { "0": "a", "3": "b" }, S.stift[id] = "a" */
+const STIFTKLASSE = { a:"g-mark g-mark--beleg", b:"g-mark g-mark--gedanke" };
+function quelle(id){
+  const q = QUELLEN[id], m = (S.mark || {})[id] || {}, st = (S.stift || {})[id] || "a"; let n = 0;
+  const text = q.abs.map(([tag, saetze]) => `<p>${tag ? `<span class="qtag">${esc(tag)}</span>` : ""}${saetze.map(s => { const i = n++; return `<span class="g-wort ${m[i] ? STIFTKLASSE[m[i]] : ""}" role="button" tabindex="0" aria-pressed="${!!m[i]}" data-mark="${id}:${i}">${esc(s)}</span>`; }).join(" ")}</p>`).join("");
+  return `<div class="qblatt g" data-quelle="${id}"><h3>${esc(q.titel)}</h3><p class="qkopf">${q.kopf}</p>
+  <div class="g-stifte nodruck" role="group" aria-label="Stift wählen">${q.stifte.map(s => `<button type="button" class="g-stift" data-stift="${id}:${s[0]}" aria-pressed="${st === s[0]}"><span class="z" aria-hidden="true">${s[1]}</span>${esc(s[2])}</button>`).join("")}</div>
+  <div class="qtext">${text}</div><p class="quelle">${q.nachweis}</p></div>`;
+}
+const saetze = id => QUELLEN[id].abs.flatMap(a => a[1]);
+function belegListe(ids, stift){
+  const li = ids.flatMap(id => { const m = (S.mark || {})[id] || {}, s = saetze(id); return Object.keys(m).filter(i => m[i] === stift).sort((a, b) => a - b).map(i => `<li>${esc(s[i])} <span class="hinweis">(${esc(QUELLEN[id].kurz)})</span></li>`); });
+  return li.length ? `<ul>${li.join("")}</ul>` : `<p class="leer">Noch nichts markiert.</p>`;
+}
+function belege(ids, o = {}){
+  const st = QUELLEN[ids[0]].stifte;
+  return `<div class="belege" data-belege="${ids.join(",")}">${st.map(s => `<div class="sp ${s[0]}"><h4><span aria-hidden="true">${s[1]}</span> ${esc(o["t" + s[0]] || s[2])}</h4>${belegListe(ids, s[0])}</div>`).join("")}</div>`;
+}
+const markZahl = ids => ids.reduce((n, id) => n + Object.keys((S.mark || {})[id] || {}).length, 0);
+
+/* ---------- Wahl mit Erklärung je Option (Muster 2; Gegenwart: Wahl) ---------- */
+const STUFENWORT = { zentral:"zentral", begruendbar:"auch begründbar", kaum:"passt kaum" };
+function gWahl(id, frage, optionen, o = {}){
+  const st = (S.wahl || {})[id] || {}, zu = !!st.zu;
+  return `<div class="g"><div class="g-wahl" data-g="wahl" data-mind="${o.mind ?? 8}" data-id="${id}" ${zu ? 'data-zu=""' : ""}>
+  <fieldset><legend>${frage}</legend>${optionen.map((op, i) => `<label class="g-option" data-urteil="${op[1]}" data-grund="${esc(op[2])}"><input type="radio" name="w-${id}" value="${i}" ${st.o === i ? "checked" : ""} ${zu ? "disabled" : ""}><span>${esc(op[0])}<span class="g-option__urteil">${STUFENWORT[op[1]]} – ${esc(op[2])}</span></span></label>`).join("")}</fieldset>
+  ${o.ohneGrund ? "" : `<label>Begründung in einem Satz<textarea data-grund-feld rows="2" ${zu ? "readonly" : ""} placeholder="${esc(o.platz || "Ich wähle das, weil …")}">${esc(st.grund || "")}</textarea></label>`}
+  <div class="g-wahl__fuss"><button type="button" class="g-knopf g-knopf--primaer" data-g-festlegen ${zu ? "disabled" : ""}>Festlegen</button><span class="g-stempel" ${zu ? "" : "hidden"}>Festgelegt</span>${zu ? `<button type="button" class="btn nodruck" data-neu-wahl="${id}">Noch einmal</button>` : ""}<span class="sr" aria-live="polite"></span></div>
+  </div></div>`;
+}
+function pruefeWahl(w){
+  if (w.hasAttribute("data-zu")) return;
+  const gew = w.querySelector("input:checked"), ta = w.querySelector("textarea"), f = w.querySelector("[data-g-festlegen]");
+  if (f) f.disabled = !gew || (ta && ta.value.trim().length < 8);
+}
+
+/* ---------- Landkarten-Moment (Muster AT aus M22). Namen und Kurzerklärungen wörtlich aus der kognitiven Landkarte, Abschnitt 2.1. ---------- */
+const PRINZIP = {
+  "2-1-1": ["Retrospektivität", "Wir betrachten die Vergangenheit immer im Nachhinein (ex post), also aus der Gegenwart heraus."],
+  "2-1-2": ["Perspektivität", "Jede Betrachtung erfolgt aus einer bestimmten Sichtweise, geprägt von Überzeugungen, Interessen und Erfahrungen."],
+  "2-1-3": ["Partikularität", "Historische Erkenntnisse sind immer nur Ausschnitte der gesamten Vergangenheit."],
+  "2-1-4": ["Selektivität", "Wer Geschichte erzählt, wählt aus: Welche Quellen, Ereignisse und Personen sind für die eigene Frage wichtig?"],
+  "2-1-5": ["Partialität", "Quellen zeigen immer nur einen Teil der Vergangenheit, und nur ein Teil der Quellen ist überhaupt erhalten."],
+  "2-1-6": ["Narrativität", "Geschichte gibt es nur als Erzählung."],
+  "2-1-7": ["Konstruktivität", "Geschichte wird nicht „gefunden“, sondern aktiv zusammengesetzt. Deshalb können aus denselben Fakten unterschiedliche Geschichten entstehen."],
+  "2-1-8": ["Standortgebundenheit", "Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Gesamtkontext geprägt, oft unbewusst."],
+};
+const LKSTUFE = { zentral:"Zentral.", teils:"Auch begründbar.", kaum:"Passt kaum." };
+/* cfg = { seite, frage, lead, platz, folge:[Name, Kurzerklärung] (Eintrag 2.1.9), urteil:{ id:[stufe, text] }, bruecke } */
+function landkarte(cfg){
+  const l = S.lk, frei = l.vermutung.trim().length >= 10;
+  const liste = Object.keys(PRINZIP).map(id => ({ id, n:PRINZIP[id][0], k:PRINZIP[id][1] })).concat([{ id:"2-1-9", n:cfg.folge[0], k:cfg.folge[1] }]);
+  const p = liste.find(x => x.id === l.prinzip), u = p ? cfg.urteil[p.id] : null;
+  return `${zeitKopf(cfg.seite)}<h1>${esc(cfg.titel)}</h1>
+  <p class="leitfrage">${esc(cfg.frage)}</p>
+  ${auftrag("Allein · 2 Minuten", "Erst vermuten", cfg.lead)}
+  ${textfeld("lk.vermutung", "Meine Vermutung", { rows:2, platz:cfg.platz, zaehl:false })}
+  <p class="hinweis" id="lk-hinweis">${frei ? "Gut. Jetzt die Landkarte öffnen, dann unten ein Prinzip wählen." : "Schreib mindestens einen Satz. Danach geht es weiter."}</p>
+  <div id="lk-teil2" class="${frei ? "" : "gesperrt"}">
+  ${auftrag("Allein · 4 Minuten", "Dann die Landkarte", "Öffne „Was ist Geschichte?“ in der kognitiven Landkarte. Sie öffnet sich in einem neuen Tab, deine Eingaben hier bleiben. Wähle das Prinzip, das hier am besten passt, und begründe in einem Satz.")}
+  <p><a class="btn dunkel" id="lk-link" href="${LK}2-1" target="_blank" rel="noopener" ${frei ? "" : 'aria-disabled="true" tabindex="-1"'}>Landkarte öffnen: 2.1 Die Gemeinsamkeiten einer jeden Geschichte ↗</a></p>
+  <div class="prinzipien" role="group" aria-label="Prinzip wählen">${liste.map(x => `<button type="button" data-prinzip="${x.id}" aria-pressed="${l.prinzip === x.id}" class="${l.ok && l.prinzip === x.id ? cfg.urteil[x.id][0] : ""}" ${(!frei || l.ok) ? "disabled" : ""}><b>${esc(x.n)}</b><small>${esc(x.k)}</small></button>`).join("")}</div>
+  <label for="lk-grund">Meine Begründung</label><textarea id="lk-grund" data-f="lk.grund" rows="2" placeholder="Dieses Prinzip passt hier, weil …" ${(!frei || !l.prinzip || l.ok) ? "disabled" : ""}>${esc(l.grund)}</textarea>
+  <div class="reihe"><button type="button" class="btn dunkel" data-lkpruef ${(!frei || !l.prinzip || l.grund.trim().length < 10 || l.ok) ? "disabled" : ""}>Prüfen</button>${l.ok ? `<button type="button" class="btn" data-lkneu>Noch einmal</button>` : ""}<span class="hinweis">Rückmeldung in drei Stufen: zentral · auch begründbar · passt kaum.</span></div>
+  <div id="lk-fb" aria-live="polite">${l.ok && u ? `<div class="rm ${u[0]}"><b>${LKSTUFE[u[0]]}</b> ${esc(u[1])} <a href="${LK}${p.id}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a></div>` : ""}</div>
+  </div>
+  ${cfg.bruecke ? `<div class="trift">${cfg.bruecke}</div>` : ""}
+  ${weiter(cfg.nach[0], cfg.nach[1])}`;
+}
+
+/* ---------- Stimmkarte (Muster 12; Gegenwart: Stimmkarte): groß am Gerät, hochhalten, Lehrkraft zählt ---------- */
+function stimmkarte(pfad, optionen){
+  const v = hol(pfad);
+  return `<div class="stimmwahl" role="group" aria-label="Stimme wählen">${optionen.map(o => `<button type="button" data-stimme="${pfad}" data-wert="${o[0]}" aria-pressed="${v === o[0]}"><b>${o[0]}</b>${esc(o[1])}</button>`).join("")}</div>
+  <div class="reihe nodruck"><button type="button" class="btn dunkel" data-stimmkarte="${pfad}" data-opt="${esc(JSON.stringify(optionen))}" ${v ? "" : "disabled"}>Stimmkarte groß zeigen</button><span class="hinweis">Auf Ansage: iPad hochhalten. Die Lehrkraft zählt. Es wird nichts übertragen.</span></div>`;
+}
+let TAFEL_ZURUECK = null;
+function tafel(html, o = {}){
+  TAFEL_ZURUECK = document.activeElement;
+  const u = document.getElementById("ueber");
+  u.innerHTML = `<div class="tafel-voll ${o.hell ? "hell" : ""}" role="dialog" aria-modal="true" aria-label="${esc(o.titel || "Ansicht für den Beamer")}"><div class="tk"><b>${esc(o.titel || "")}</b><button type="button" class="btn" data-tafelzu>Schließen</button></div><div class="mitte">${html}</div></div>`;
+  u.querySelector("[data-tafelzu]").focus();
+}
+function tafelZu(){ const u = document.getElementById("ueber"); if (!u.innerHTML) return; u.innerHTML = ""; if (TAFEL_ZURUECK && document.contains(TAFEL_ZURUECK)) TAFEL_ZURUECK.focus(); }
+
+/* ---------- Kopf, Löschen, Zeichnen ---------- */
+function kopf(){
+  document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div><a class="pill" href="${LABOR}">← GGK-Labor</a><button class="pill" data-geh="lehrkraft">Für Lehrkräfte</button>`;
+  const a = idx(S.seite);
+  document.getElementById("weg").innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
+}
+function loeschBereich(){
+  return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button><label class="g-schalter" style="font-family:var(--body)"><input type="checkbox" role="switch" data-bewegung ${S.ruhig ? "checked" : ""}> Weniger Bewegung</label><span>Alles bleibt auf diesem Gerät. Nichts wird übertragen.</span>
+  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> ${esc(L.loesch)}</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div>
+  <p style="flex:1 0 100%;font-size:.85rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p></div>`;
+}
+function zeichne(fokus){
+  if (!SEITE_FN[S.seite]) S.seite = "start";
+  if (S.ruhig) document.documentElement.setAttribute("data-bewegung", "weniger"); else document.documentElement.removeAttribute("data-bewegung");
+  kopf();
+  const m = document.getElementById("main");
+  m.classList.toggle("breit", (L.breit || []).includes(S.seite));
+  m.innerHTML = SEITE_FN[S.seite]() + loeschBereich();
+  window.Gegenwart && Gegenwart.init(m);
+  nachInit();
+  if (fokus) { m.focus({ preventScroll:true }); window.scrollTo(0, 0); }
+}
+function nachInit(){
+  document.querySelectorAll(".g-wahl[data-id]").forEach(w => { pruefeWahl(w); const st = (S.wahl || {})[w.dataset.id] || {}; if (st.zu) { w.querySelectorAll("input").forEach(i => { i.disabled = true; }); const f = w.querySelector("[data-g-festlegen]"); if (f) f.disabled = true; } });
+  if (typeof L.nachInit === "function") L.nachInit();
+}
+function geh(id){ S.seite = id; speichere(); tafelZu(); zeichne(true); }
+/* Nach einer Texteingabe: Zähler, Raster und Freigaben nachführen, ohne neu zu zeichnen (Fokus und Scrollstand bleiben). */
+function nachEingabe(pfad){
+  const z = document.querySelector(`[data-zaehl="${pfad}"]`); if (z) z.textContent = z.textContent.replace(/^\d+/, woerter(hol(pfad)));
+  const r = document.querySelector(`[data-raster="${pfad}"]`);
+  if (r) { const da = woerter(hol(pfad)) >= +r.dataset.min, war = !r.hidden; r.hidden = !da; const h = document.querySelector(`[data-rasterhinweis="${pfad}"]`); if (h) h.hidden = da; if (da && !war) neu(r, "neu"); }
+  document.querySelectorAll("[data-vergleich]").forEach(b => { const ok = b.dataset.bed.split(",").every(p => String(hol(p) || "").trim().length >= +b.dataset.min); b.disabled = !ok; const h = document.querySelector(`[data-vergleichhinweis="${b.dataset.vergleich}"]`); if (h) h.textContent = ok ? "" : "Erst deine Antworten, dann der Vergleich."; });
+  if (pfad === "lk.vermutung") { const frei = S.lk.vermutung.trim().length >= 10, t = document.getElementById("lk-teil2"); if (t && t.classList.contains("gesperrt") === frei) zeichneBehalte(); }
+  if (pfad === "lk.grund") { const b = document.querySelector("[data-lkpruef]"); if (b) b.disabled = !(S.lk.prinzip && S.lk.grund.trim().length >= 10 && !S.lk.ok); }
+  if (typeof L.nachEingabe === "function") L.nachEingabe(pfad);
+}
+/* Neu zeichnen, aber Scrollstand und Fokus (samt Cursor) behalten. */
+function zeichneBehalte(){
+  const y = window.scrollY, a = document.activeElement, id = a && a.id, pos = a && typeof a.selectionStart === "number" ? a.selectionStart : null;
+  zeichne(false); window.scrollTo(0, y);
+  if (id) { const e = document.getElementById(id); if (e) { e.focus({ preventScroll:true }); if (pos !== null && e.setSelectionRange) { try { e.setSelectionRange(pos, pos); } catch(err) {} } } }
+}
+
+function kernStart(){
+  const d = L.init(), g = lade();
+  S = Object.assign({ seite:"start", ruhig:false, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false } }, d);
+  Object.keys(g).forEach(k => { S[k] = (S[k] && typeof S[k] === "object" && !Array.isArray(S[k]) && g[k] && typeof g[k] === "object" && !Array.isArray(g[k])) ? Object.assign({}, S[k], g[k]) : g[k]; });
+  const h = location.hash.replace("#", ""); if (h && SEITE_FN[h]) S.seite = h;
+  zeichne(false);
+}
+
+document.addEventListener("click", ev => {
+  const t = ev.target.closest("[data-geh],[data-mark],[data-stift],[data-satz],[data-vergleich],[data-prinzip],[data-lkpruef],[data-lkneu],[data-stimme],[data-stimmkarte],[data-tafelzu],[data-loeschfrage],[data-loeschen],[data-g-festlegen],[data-neu-wahl],[data-akt],[data-drucken]");
+  if (!t) return;
+  if (t.dataset.geh) return geh(t.dataset.geh);
+  if (t.dataset.mark) return markiere(t);
+  if (t.dataset.stift) { const [id, s] = t.dataset.stift.split(":"); setz("stift." + id, s); t.parentElement.querySelectorAll(".g-stift").forEach(b => b.setAttribute("aria-pressed", String(b === t))); return; }
+  if (t.dataset.satz) { const f = document.getElementById(t.dataset.satz); if (!f) return; f.value = (f.value.trim() ? f.value.replace(/\s*$/, "") + " " : "") + t.dataset.text + " "; setz(f.dataset.f, f.value); nachEingabe(f.dataset.f); f.focus(); return; }
+  if (t.dataset.vergleich) { const id = t.dataset.vergleich; setz("offen." + id, !(S.offen || {})[id]); const v = document.getElementById("vgl-" + id); v.hidden = !S.offen[id]; t.textContent = S.offen[id] ? "Vergleich ausblenden" : (t.dataset.titel || "Vergleich zeigen"); if (S.offen[id] && ev.detail !== 0) neu(v, "neu"); return; }
+  if (t.dataset.prinzip) { S.lk.prinzip = t.dataset.prinzip; speichere(); return zeichneBehalte(); }
+  if (t.hasAttribute("data-lkpruef")) { S.lk.ok = true; speichere(); zeichneBehalte(); if (ev.detail !== 0) neu(document.querySelector("#lk-fb .rm"), "neu"); return; }
+  if (t.hasAttribute("data-lkneu")) { S.lk.ok = false; S.lk.prinzip = null; S.lk.grund = ""; speichere(); return zeichneBehalte(); }
+  if (t.dataset.stimme) { setz(t.dataset.stimme, t.dataset.wert); return zeichneBehalte(); }
+  if (t.dataset.stimmkarte) { const o = JSON.parse(t.dataset.opt).find(x => x[0] === hol(t.dataset.stimmkarte)); if (o) tafel(`<div class="buchstabe">${esc(o[0])}</div><div class="wort">${esc(o[1])}</div>`, { titel:"Meine Stimme" }); return; }
+  if (t.hasAttribute("data-tafelzu")) return tafelZu();
+  if (t.hasAttribute("data-loeschfrage")) { const f = document.getElementById("loesch-frage"); f.hidden = false; f.querySelector("button").focus(); return; }
+  if (t.dataset.loeschen) { if (t.dataset.loeschen === "ja") { try { localStorage.removeItem(L.key); } catch(e) {} const r = S.ruhig; kernStartLeer(r); } else { document.getElementById("loesch-frage").hidden = true; } return; }
+  if (t.hasAttribute("data-g-festlegen")) { const w = t.closest(".g-wahl[data-id]"); if (!w) return; const gew = w.querySelector("input:checked"), ta = w.querySelector("textarea"); if (!gew) return; setz("wahl." + w.dataset.id, { o:+gew.value, grund: ta ? ta.value : "", zu:true }); setTimeout(() => { zeichneBehalte(); if (typeof L.nachWahl === "function") L.nachWahl(w.dataset.id); }, ruhig() ? 0 : 420); return; }
+  if (t.dataset.neuWahl) { setz("wahl." + t.dataset.neuWahl, {}); return zeichneBehalte(); }
+  if (t.hasAttribute("data-drucken")) return window.print();
+  if (t.dataset.akt && AKTION[t.dataset.akt]) return AKTION[t.dataset.akt](t, ev);
+});
+function kernStartLeer(r){ S = {}; const d = L.init(); S = Object.assign({ seite:"start", ruhig:r, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false } }, d); speichere(); zeichne(true); }
+function markiere(t){
+  const [id, i] = t.dataset.mark.split(":"), st = (S.stift || {})[id] || "a";
+  if (!S.mark[id]) S.mark[id] = {};
+  const hat = S.mark[id][i] === st;
+  if (hat) delete S.mark[id][i]; else S.mark[id][i] = st;
+  speichere();
+  t.className = "g-wort " + (hat ? "" : STIFTKLASSE[st]); t.setAttribute("aria-pressed", String(!hat));
+  if (!hat && window.Gegenwart && st === "a") Gegenwart.bewegen(t, [{ backgroundSize:"0% 100%" }, { backgroundSize:"100% 100%" }], { dauer:260 });
+  document.querySelectorAll("[data-belege]").forEach(b => { const ids = b.dataset.belege.split(","); if (!ids.includes(id)) return; QUELLEN[ids[0]].stifte.forEach(s => { const sp = b.querySelector(".sp." + s[0]); const alt = sp.querySelector("ul,.leer"); if (alt) alt.outerHTML = belegListe(ids, s[0]); }); });
+  if (typeof L.nachMark === "function") L.nachMark(id);
+}
+document.addEventListener("keydown", ev => {
+  if (ev.key === "Escape") return tafelZu();
+  const t = ev.target.closest && ev.target.closest("[data-mark]");
+  if (t && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); markiere(t); }
+});
+document.addEventListener("input", ev => {
+  const t = ev.target;
+  if (t.dataset && t.dataset.f) { setz(t.dataset.f, t.type === "range" ? +t.value : t.value); nachEingabe(t.dataset.f); return; }
+  if (t.hasAttribute && t.hasAttribute("data-grund-feld")) { const w = t.closest(".g-wahl"); if (w) pruefeWahl(w); }
+});
+document.addEventListener("change", ev => {
+  const t = ev.target;
+  if (t.hasAttribute && t.hasAttribute("data-bewegung")) { S.ruhig = t.checked; speichere(); if (S.ruhig) document.documentElement.setAttribute("data-bewegung", "weniger"); else document.documentElement.removeAttribute("data-bewegung"); return; }
+  if (t.tagName === "SELECT" && t.dataset.f) { setz(t.dataset.f, t.value); nachEingabe(t.dataset.f); if (t.dataset.neu !== undefined) zeichneBehalte(); return; }
+  const w = t.closest && t.closest(".g-wahl"); if (w) pruefeWahl(w);
+});
+const AKTION = {
+  /* data-akt="setz" data-p="pfad" data-w="wert": Wert setzen und neu zeichnen */
+  setz(t){ let w = t.dataset.w; if (w === "true") w = true; else if (w === "false") w = false; setz(t.dataset.p, w); zeichneBehalte(); },
+};
+/* ===== M26 · Ende gut, alles gut? Kontinuitäten des Nationalsozialismus ===== */
+const BEREICHE = [["bnd","BND (Geheimdienst)"],["justiz","Justiz (Richter und Staatsanwälte)"],["medizin","Medizin (Ärzt*innen)"],["bundeswehr","Bundeswehr (Offiziere)"],["aa","Auswärtiges Amt (Diplomaten)"],["polizei","Polizei (Kriminal- und Ordnungspolizei)"]];
+const GRUPPEN = BEREICHE.slice(1);
+const STUFEN = ["–","gering","mittel","hoch","sehr hoch"];
+const L = {
+  key:"ggk-m26-kontinuitaeten:v1", nr:"M26", titel:"Ende gut, alles gut?", unter:"Kontinuitäten des Nationalsozialismus",
+  /* Zeichen der Stunde: eine Akte, die weiterwandert */
+  mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M4 9h9l3 4h14v16H4z" fill="none" stroke="#24221F" stroke-width="2.4" stroke-linejoin="round"/><path d="M10 21h12m-4-4 4 4-4 4" fill="none" stroke="#9B402D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  seiten:[["start","",""],["schaetzen","0–6 Min.","Schätzen"],["bnd","6–21 Min.","Der BND"],["gruppe","21–46 Min.","Eure Gruppe"],["vergleich","46–71 Min.","Vergleich"],["urteil","71–90 Min.","Urteil"],["zusammenfassung","Zum Abheften","Zusammenfassung"]],
+  breit:["schaetzen","gruppe","vergleich","urteil","zusammenfassung","lehrkraft"],
+  loesch:"Schätzung, Antworten zum BND, Steckbrief, Vergleichstafel, Gründe, Urteil und Stimme werden auf diesem Gerät entfernt.",
+  init:() => ({ pos:{ start:50, ende:50, ref:false }, schaetz:{ n:5, zu:false }, bnd:{ a:"", b:"", c:"", d:"" }, bereich:null, steck:{ f1:"", f2:"", f3:"", f4:"", beleg:"", quelle:"" }, tafel:{}, gruende:{ g1:"", g2:"", g3:"" }, wo:"", urteil:"", stimme:null }),
+  nachEingabe(p){
+    if (p === "schaetz.n") { const z = document.getElementById("schaetzzahl"); if (z) z.textContent = S.schaetz.n; const f = document.getElementById("pf-ich"); if (f) f.innerHTML = punkte(S.schaetz.n); }
+    if (p === "pos.start" || p === "pos.ende") { const w = document.getElementById("w-" + p.split(".")[1]); if (w) w.textContent = posWort(hol(p)); }
+  },
+};
+const posWort = v => v < 35 ? "eher Neuanfang" : (v > 65 ? "eher Weiter-so" : "dazwischen");
+/* Punktefeld (Muster Y aus M22): 100 Punkte = 100 Mitarbeiter. n gefüllt; von n bis n2 schraffiert (Spanne). */
+function punkte(n, n2 = n){
+  let s = ""; for (let i = 0; i < 100; i++) { const x = 7 + (i % 10) * 14, y = 7 + Math.floor(i / 10) * 14; s += `<circle cx="${x}" cy="${y}" r="5" class="${i < n ? "voll" : (i < n2 ? "halb" : "leer")}"/>`; }
+  return `<svg viewBox="0 0 140 140" aria-hidden="true">${s}</svg>`;
+}
+const stufe = b => ((S.tafel || {})[b] || {}).s || 0;
+const stichwort = b => ((S.tafel || {})[b] || {}).w || "";
+function stufenWahl(b){ return `<div class="stufen" role="group" aria-label="Stärke der Kontinuität">${[1,2,3,4].map(i => `<button type="button" data-akt="stufe" data-b="${b}" data-w="${i}" aria-pressed="${stufe(b) === i}">${STUFEN[i]}</button>`).join("")}</div>`; }
+
+function start(){
+  return `${band("M26 · Doppelstunde · 90 Minuten", "Ende gut, alles gut?", "1945 endet die NS-Diktatur. Deutschland soll demokratisch neu aufgebaut werden. Aber wer baut auf?")}
+  <p class="leitfrage">Wie viel Nationalsozialismus steckte in der Bundesrepublik?</p>
+  <p>Die Alliierten begannen 1945 mit der <b>Entnazifizierung</b>: Mitglieder der NSDAP und NS-Täter sollten aus wichtigen Positionen entfernt werden. Wie gründlich war dieser Neuanfang wirklich?</p>
+  <h2 class="abschnitt">Am Ende kannst du</h2>
+  <ul class="ziele"><li>an einem Bereich zeigen, wo nach 1945 dieselben Menschen weiterarbeiteten,</li><li>mindestens drei Gründe nennen, warum das möglich war,</li><li>begründet beurteilen, ob die Bundesrepublik trotzdem ein demokratischer Neuanfang war.</li></ul>
+  <h2 class="abschnitt">So läuft die Stunde</h2>
+  <ol class="ablauf">${L.seiten.slice(1, 6).map(s => `<li><b>${esc(s[1])}</b><span>${esc(s[2])}</span></li>`).join("")}</ol>
+  <p class="hinweis" style="margin-top:.8rem">Du brauchst dein Heft (M26, Text zum BND). Die Seite ersetzt den Text nicht – sie sammelt deine Schätzung, eure Ergebnisse und dein Urteil.</p>
+  ${weiter("schaetzen", "Beginnen")}`;
+}
+
+function schaetzen(){
+  const z = S.schaetz;
+  return `${zeitKopf("schaetzen")}<h1>Erst schätzen</h1>
+  ${auftrag("Allein · 3 Minuten", "Zwei Festlegungen", "Bevor du etwas liest: Leg dich zweimal fest. Du kommst am Ende darauf zurück.")}
+  <div class="karte"><h3 class="klein" style="margin-top:0">1 · Neuanfang oder Weiter-so?</h3><p>Wie stellst du dir die frühe Bundesrepublik vor – in ihren Behörden, Gerichten, Krankenhäusern?</p>
+    <div class="g"><div class="g-skala"><div class="g-skala__spur"><input type="range" min="0" max="100" step="1" value="${S.pos.start}" data-f="pos.start" ${z.zu ? "disabled" : ""} aria-label="Erste Einschätzung: Neuanfang (0) bis Weiter-so (100)"></div><div class="g-skala__enden"><span>Neuanfang mit neuen Leuten</span><span>Weiter-so mit dem alten Personal</span></div><p>Deine Einschätzung: <span class="g-skala__wert" id="w-start">${posWort(S.pos.start)}</span></p></div></div></div>
+  <div class="karte"><h3 class="klein" style="margin-top:0">2 · Der Geheimdienst</h3><p>Der Bundesnachrichtendienst (BND) ist der Auslandsgeheimdienst der Bundesrepublik. Stell dir 100 seiner Mitarbeiter in den frühen Jahren vor. <b>Wie viele von ihnen waren nach deiner Schätzung im Nationalsozialismus an Mordaktionen beteiligt?</b></p>
+    <label for="f-schaetz-n">Meine Schätzung: <span id="schaetzzahl">${z.n}</span> von 100</label><input type="range" id="f-schaetz-n" min="0" max="50" step="1" value="${z.n}" data-f="schaetz.n" ${z.zu ? "disabled" : ""} style="width:100%;accent-color:var(--kuli);height:32px">
+    <div class="reihe"><button type="button" class="btn dunkel" data-akt="schaetzfest" ${z.zu ? "disabled" : ""}>Festlegen</button>${z.zu ? `<span class="g"><span class="g-stempel" style="width:auto;height:auto;border-radius:.4rem;padding:.3rem .7rem;transform:rotate(-3deg)">Festgelegt</span></span>` : ""}</div></div>
+  <div class="auflage" id="schaetzauf" ${z.zu ? "" : "hidden"}>
+    <p><b>Drei Zahlen nebeneinander.</b> Jeder Punkt steht für einen von 100 Mitarbeitern.</p>
+    <div class="pfelder"><figure><div class="pf ich" id="pf-ich">${punkte(z.n)}</div><figcaption><b>${z.n} von 100</b>Deine Schätzung</figcaption></figure>
+      <figure><div class="pf gehlen">${punkte(1)}</div><figcaption><b>1 von 100</b>Das sagte BND-Chef Reinhard Gehlen dem Kanzleramt: „Ein Prozent“.</figcaption></figure>
+      <figure><div class="pf studie">${punkte(10, 20)}</div><figcaption><b>10 bis 20 von 100</b>Das ergab die Studie des Historikers Gerhard Sälter.</figcaption></figure></div>
+    <p class="quelle">${status("beleg", "belegt")}Zahlen nach tagesschau.de, 10.10.2022 (Christine Rütten, hr): „Neue Studie: BND rekrutierte gezielt NS-Verbrecher“ – der Text steht in deinem Heft. ${status("modell", "Modell")}Die Punkte veranschaulichen den Anteil. Sie zeigen keine einzelnen Personen; die schraffierten Punkte stehen für die Spanne.</p>
+    <p><b>Frage für die Stunde:</b> Wie kommt es zu dem Abstand zwischen „ein Prozent“ und „10 bis 20 Prozent“ – und warum fiel er so lange niemandem auf?</p></div>
+  ${weiter("bnd", "Weiter: Der BND")}`;
+}
+
+function bnd(){
+  return `${zeitKopf("bnd")}<h1>Der BND</h1>
+  ${auftrag("Allein · 15 Minuten · mit dem Heft", "Text lesen, vier Fragen", "Lies im Heft den Text „Neue Studie: BND rekrutierte gezielt NS-Verbrecher“ (M26, Arbeitsauftrag 1). Beantworte dann die vier Fragen in Stichworten oder kurzen Sätzen. Bei c) zitierst du wörtlich.")}
+  <div class="feldgruppe">
+  ${textfeld("bnd.a", "a) Welche Personen wurden vom BND gezielt angeworben?", { rows:2, zaehl:false })}
+  ${textfeld("bnd.b", "b) Welche Rolle spielte Reinhard Gehlen bei der Personalpolitik des BND?", { rows:2, zaehl:false })}
+  ${textfeld("bnd.c", "c) Wie rechtfertigte der BND die Einstellung ehemaliger NS-Täter? Zitiere aus dem Text.", { rows:2, platz:"„…“", zaehl:false })}
+  ${textfeld("bnd.d", "d) Warum griff das Bundeskanzleramt nicht ein?", { rows:2, zaehl:false })}
+  </div>
+  ${vergleich("bnd", ["bnd.a","bnd.b","bnd.c","bnd.d"], 15, "Mit dem Text vergleichen", `<p><b>Das steht im Text.</b> Vergleiche und ergänze deine Antworten.</p><ul style="padding-left:1.2rem;display:grid;gap:.3rem"><li><b>a)</b> Ehemalige SS- und Gestapoleute – darunter Männer, die an Mordaktionen beteiligt waren. Der Text nennt Helmut Schreiber und Gustav Grauer.</li><li><b>b)</b> Gehlen, Chef des BND ab 1956, warb sie gezielt an. Der Historiker Sälter: „Da hat sich keiner reingeschlichen, sondern man hatte eine Leitung, die die einfach gewollt hat.“</li><li><b>c)</b> Gehlen antwortete auf Nachfragen stets: „Ein Prozent [NS-Belastete], alle entnazifiziert, alle überprüft, alle ok.“ Kritik von außen galt als „übertrieben“.</li><li><b>d)</b> Das Kanzleramt nahm diese Antworten hin. Sein Chef Hans Globke war selbst belastet. Laut Text nutzte Adenauer den BND für parteipolitische Zwecke.</li></ul><p class="quelle">Nach tagesschau.de, 10.10.2022, wie im Heft abgedruckt.</p>`)}
+  <h2 class="abschnitt">Deine Einstufung</h2>
+  <p>Wie stark war nach dem Text die personelle Kontinuität im BND? Diese Einstufung erscheint später in deiner Vergleichstafel.</p>
+  ${stufenWahl("bnd")}
+  ${weiter("gruppe", "Weiter: Eure Gruppe")}`;
+}
+
+function gruppe(){
+  const b = S.bereich, name = b ? BEREICHE.find(x => x[0] === b)[1] : "";
+  return `${zeitKopf("gruppe")}<h1>Eure Gruppe</h1>
+  ${auftrag("Gruppe · 25 Minuten", "Ein Bereich, vier Fragen, ein Steckbrief", "Wählt euren Bereich. Lest das Infomaterial. Füllt den Steckbrief – auf <b>einem</b> Gerät der Gruppe. Dieses Gerät zeigt den Steckbrief später am Beamer. Ihr habt höchstens 5 Minuten für eure Präsentation.")}
+  <div class="woerter" role="group" aria-label="Bereich wählen">${GRUPPEN.map((g, i) => `<button type="button" data-akt="setz" data-p="bereich" data-w="${g[0]}" aria-pressed="${b === g[0]}">Gruppe ${i + 1}: ${esc(g[1])}</button>`).join("")}</div>
+  ${b ? `<p><a class="btn dunkel" href="https://geschichtefuerdiegegenwart.github.io/NS-Kontinuit-ten/" target="_blank" rel="noopener">Infomaterial öffnen: NS-Kontinuitäten ↗</a> <span class="hinweis">Öffnet in einem neuen Tab. Wählt dort euren Bereich.</span></p>
+  <div class="karte"><p class="kennung">Steckbrief · ${esc(name)}</p><div class="felder2">
+    ${textfeld("steck.f1", "1 · Personelle Kontinuität: Wie viele arbeiteten nach 1945 weiter?", { rows:3, zaehl:false })}
+    ${textfeld("steck.f2", "2 · Rollen im NS-Regime: Welche Funktionen hatten diese Personen?", { rows:3, zaehl:false })}
+    ${textfeld("steck.f3", "3 · Entnazifizierung: Wie lief sie hier ab? War sie erfolgreich?", { rows:3, zaehl:false })}
+    ${textfeld("steck.f4", "4 · Folgen: Was bedeutete das für die Demokratie?", { rows:3, zaehl:false })}
+    ${eingabe("steck.beleg", "Unser stärkster Beleg (eine Zahl oder ein Name)")}
+    ${eingabe("steck.quelle", "Woher stammt dieser Beleg? Welche Quelle nennt die Seite?")}
+  </div>
+  <p style="margin-top:.8rem"><b>Wie stark war die personelle Kontinuität in eurem Bereich?</b></p>${stufenWahl(b)}
+  ${eingabe("tafel." + b + ".w", "Ein Stichwort, das hängen bleiben soll")}
+  <div class="reihe"><button type="button" class="btn primary" data-akt="folie">Präsentation am Beamer zeigen</button><span class="hinweis">Tipp: iPad per AirPlay mit dem Beamer verbinden. Escape oder „Schließen“ beendet die Ansicht.</span></div></div>
+  ${hilfe("Hilfe: Wie prüfen wir einen Beleg?", "<p>Steht bei der Angabe eine Quelle? Ist es eine Forschungsarbeit, ein Zeitungsbericht oder ein Lexikon? Könnt ihr die Zahl an einer zweiten Stelle finden? Wenn nicht: Sagt in der Präsentation dazu, dass die Angabe noch zu prüfen ist.</p>")}` : `<p class="hinweis">Wählt zuerst euren Bereich.</p>`}
+  ${weiter("vergleich", "Weiter: Vergleich")}`;
+}
+function folieHtml(){
+  const b = S.bereich, name = BEREICHE.find(x => x[0] === b)[1], s = S.steck, t = k => esc(String(s[k] || "").trim() || "–");
+  return `<div class="folie"><div><p class="kennung">M26 · Wie viel Nationalsozialismus steckte in der BRD?</p><h2>${esc(name)}</h2></div>
+  <div class="vier"><div><b>1 · Personelle Kontinuität</b><p>${t("f1")}</p></div><div><b>2 · Rollen im NS-Regime</b><p>${t("f2")}</p></div><div><b>3 · Entnazifizierung</b><p>${t("f3")}</p></div><div><b>4 · Folgen für die Demokratie</b><p>${t("f4")}</p></div></div>
+  <div class="fq"><b>Stärkster Beleg:</b> ${t("beleg")} · <b>Quelle:</b> ${t("quelle")} · <b>Unsere Einstufung:</b> ${STUFEN[stufe(b)]}${stichwort(b) ? " · „" + esc(stichwort(b)) + "“" : ""}</div></div>`;
+}
+
+function vergleich_(){
+  const zeilen = BEREICHE.map(b => `<div class="vz"><div class="vn"><b>${esc(b[1])}</b>${b[0] === S.bereich ? `<span class="status beleg">eure Gruppe</span>` : ""}</div>${stufenWahl(b[0])}
+    <div class="g vb"><span class="g-balken__spur"><span class="g-balken__wert" style="--w:${stufe(b[0]) * 25};--farbe:var(--red)"></span></span></div>
+    <input type="text" data-f="tafel.${b[0]}.w" id="f-tafel-${b[0]}-w" value="${esc(stichwort(b[0]))}" placeholder="Stichwort" aria-label="Stichwort zu ${esc(b[1])}"></div>`).join("");
+  const n = BEREICHE.filter(b => stufe(b[0])).length, max = Math.max(...BEREICHE.map(b => stufe(b[0])));
+  const spitze = max ? BEREICHE.filter(b => stufe(b[0]) === max).map(b => b[1].split(" (")[0]).join(", ") : "";
+  return `${zeitKopf("vergleich")}<h1>Vergleich</h1>
+  ${auftrag("Plenum · 25 Minuten · zuhören und einstufen", "Fünf Präsentationen, eine Tafel", "Während jede Gruppe präsentiert: Stufe ein, wie stark die personelle Kontinuität in diesem Bereich war, und notiere ein Stichwort. So entsteht deine eigene Vergleichstafel. Frag nach, wenn ein Beleg keine Quelle hat.")}
+  <div class="vtafel" role="group" aria-label="Vergleichstafel">${zeilen}</div>
+  <p class="hinweis" aria-live="polite" style="margin-top:.6rem">${n} von 6 Bereichen eingestuft.${spitze ? " Am stärksten nach deiner Tafel: " + esc(spitze) + "." : ""} ${status("modell", "Modell")}Die Balken zeigen deine Einstufung, keine Messwerte.</p>
+  ${textfeld("wo", "In welchen Bereichen war die Kontinuität am stärksten? Gibt es Unterschiede?", { rows:3, anfaenge:["Am stärksten war sie","Anders war es bei","Der Unterschied liegt daran, dass"], zaehl:false })}
+  ${weiter("urteil", "Weiter: Urteil")}`;
+}
+
+const SW = [
+  ["sw1", "Gehlen antwortete auf Nachfragen: „Ein Prozent, alle entnazifiziert, alle überprüft, alle ok.“", "a", "Das ist eine Aussage darüber, was geschehen ist und was die Quellen sagen."],
+  ["sw2", "Der BND hatte größere NS-Kontinuitäten als jede andere Behörde.", "s", "Ein Vergleich und eine Einordnung. Sie lässt sich an Quellen und Zahlen überprüfen."],
+  ["sw3", "Adenauer unternahm nichts, weil er den BND für parteipolitische Zwecke nutzte.", "s", "Achte auf das Wort „weil“: Hier wird eine Ursache behauptet. Das ist ein Sachurteil – es muss sich an Quellen prüfen lassen."],
+  ["sw4", "Das Kanzleramt hätte eingreifen müssen.", "w", "„Hätte müssen“ ist eine Bewertung. Sie braucht einen Maßstab – zum Beispiel: Ein Rechtsstaat darf keine Mörder beschäftigen."],
+  ["sw5", "Die Bundesrepublik war trotz dieser Kontinuitäten ein demokratischer Neuanfang.", "w", "Als Bewertung („gut genug?“) ist es ein Werturteil. Nennst du Kriterien, die sich prüfen lassen – Grundgesetz, freie Wahlen, unabhängige Gerichte –, wird ein Teil davon zum Sachurteil."],
+];
+const SWNAME = { a:"Sachanalyse: Was ist geschehen? Was sagen die Quellen?", s:"Sachurteil: Ursachen, Spielräume, Folgen – an Quellen prüfbar", w:"Werturteil: Bewertung von heute, mit eigenem Maßstab" };
+function swOpt(x){ return ["a","s","w"].map(k => [SWNAME[k], k === x[2] ? "zentral" : ((x[0] === "sw5" && k === "s") ? "begruendbar" : "kaum"), k === x[2] ? x[3] : ((x[0] === "sw5" && k === "s") ? "Vertretbar, wenn du Kriterien nennst, die sich prüfen lassen. " + x[3] : "Lies noch einmal genau: " + x[3])]); }
+
+function urteil(){
+  const fertig = SW.filter(x => ((S.wahl || {})[x[0]] || {}).zu).length;
+  return `${zeitKopf("urteil")}<h1>Urteil</h1>
+  <p class="leitfrage">War die Bundesrepublik trotz dieser Kontinuitäten ein demokratischer Neuanfang?</p>
+  ${auftrag("Allein · 6 Minuten · Landkarte 2.4.3", "Erst sortieren: Was für ein Satz ist das?", `Bevor du urteilst, trennst du drei Arten von Aussagen. So steht es in der kognitiven Landkarte: <a style="color:var(--marker)" href="${LK}2-4-3" target="_blank" rel="noopener">Vom Sachurteil zum Werturteil ↗</a>. Ordne jeden Satz ein und lege fest.`)}
+  ${SW.map(x => `<div class="karte">${gWahl(x[0], esc(x[1]), swOpt(x), { ohneGrund:true })}</div>`).join("")}
+  <p class="hinweis" style="margin-top:.5rem">${fertig} von ${SW.length} eingeordnet. Typischer Fehler laut Landkarte: Das Werturteil kommt vor der Sachanalyse.</p>
+
+  <h2 class="abschnitt">Warum war das möglich?</h2>
+  ${auftrag("Zu zweit · 4 Minuten", "Mindestens drei Gründe", "Sammelt drei Gründe, warum die Kontinuitäten möglich waren. Nutzt eure Vergleichstafel und den BND-Text.")}
+  <div class="feldgruppe">${eingabe("gruende.g1", "Grund 1")}${eingabe("gruende.g2", "Grund 2")}${eingabe("gruende.g3", "Grund 3")}</div>
+  ${hilfe("Denkanstöße (erst nach einem eigenen Versuch)", "<p>Wer hätte die Ämter sonst besetzen sollen? · Wer prüfte wen – und wer bescheinigte wem die Unschuld? · Was war der Politik ab 1949 wichtiger als die Aufarbeitung? · Wer hatte ein Interesse daran, dass nicht genau hingesehen wurde?</p>")}
+
+  <h2 class="abschnitt">Dein Urteil</h2>
+  ${auftrag("Allein · 5 Minuten", "Position und Begründung", "Setz den Regler neu. Dann erscheint deine Marke vom Anfang. Schreib dein Urteil: erst die Sache, dann deine Bewertung mit Maßstab.")}
+  <div class="karte"><div class="g"><div class="g-skala" data-g="skala" data-referenz="${S.pos.start}" id="skala"><div class="g-skala__spur"><input type="range" min="0" max="100" step="1" value="${S.pos.ende}" data-f="pos.ende" aria-label="Urteil: Neuanfang (0) bis Weiter-so (100)"><span class="g-skala__ref" ${S.pos.ref ? `style="left:${S.pos.start}%"` : "hidden"}></span></div><div class="g-skala__enden"><span>Neuanfang</span><span>Weiter-so</span></div><p>Jetzt: <span id="w-ende" style="font-weight:700;color:var(--kuli)">${posWort(S.pos.ende)}</span><span class="g-skala__wert" hidden></span></p>
+    <div class="reihe"><button type="button" class="g-knopf g-knopf--sekundaer" data-g-vergleichen data-akt="ref" ${S.pos.ref ? "disabled" : ""}>Marke vom Anfang zeigen</button><span class="g-skala__ref-text" ${S.pos.ref ? "" : "hidden"}>Am Anfang: ${posWort(S.pos.start)} (${S.pos.start})</span></div></div></div></div>
+  ${textfeld("urteil", "Mein Urteil", { rows:7, anfaenge:["In den Behörden zeigt sich","Möglich war das, weil","Für einen Neuanfang spricht trotzdem","Mein Maßstab ist"], ziel:"Ziel: etwa 80 Wörter" })}
+  ${raster("urteil", 50, "Vom Sachurteil zum Werturteil", [["Sachanalyse", "Ich nenne einen Bereich.", "Ich nenne zwei Bereiche mit je einem Beleg.", "Ich vergleiche Bereiche und nenne die Herkunft der Belege."],["Sachurteil", "Ich nenne einen Grund.", "Ich erkläre mit zwei Gründen, warum es möglich war.", "Ich wäge Gründe und Folgen für die Demokratie ab."],["Werturteil", "Ich sage ja oder nein.", "Ich nenne meinen Maßstab für „demokratischer Neuanfang“.", "Ich trenne Sach- und Werturteil und nenne einen Einwand gegen mich."]])}
+  ${auftrag("Plenum · 4 Minuten · iPad hochhalten", "Abstimmung", "War die Bundesrepublik trotz der Kontinuitäten ein demokratischer Neuanfang? Zeigt eure Karte. Je eine Stimme aus A, B und C begründet.")}
+  ${stimmkarte("stimme", [["A","Ja"],["B","Nein"],["C","Ja, aber"]])}
+  <p class="merksatz">iPad umdrehen. Danach: Zusammenfassung sichern.</p>
+  ${weiter("zusammenfassung", "Zur Zusammenfassung")}`;
+}
+
+function zusammenfassung(){
+  const m = (t, leer = "noch offen") => `<p class="mein ${String(t || "").trim() ? "" : "leer"}">${esc(String(t || "").trim() || leer)}</p>`;
+  const b = S.bereich, name = b ? BEREICHE.find(x => x[0] === b)[1] : "", s = S.steck, g = S.gruende;
+  return `<div class="zf"><div class="reihe nodruck" style="margin:0 0 1rem"><button type="button" class="btn dunkel" data-drucken>Drucken oder als PDF sichern</button><span class="hinweis">Zwei Seiten A4. In GoodNotes ablegen.</span></div>
+  <h1>M26 · Ende gut, alles gut?</h1>
+  <p class="leitfrage">Wie viel Nationalsozialismus steckte in der Bundesrepublik?</p>
+  <p class="merksatz">Die Bundesrepublik begann mit einer neuen Verfassung – aber in vielen Behörden mit altem Personal. Wie stark diese Kontinuität war, unterscheidet sich je Bereich.</p>
+  <h2>Begriffe</h2>
+  <div class="begriffe">
+    <div><b>Entnazifizierung:</b> Ab 1945 wollten die Alliierten NSDAP-Mitglieder und NS-Täter aus wichtigen Positionen entfernen.</div>
+    <div><b>Personelle Kontinuität:</b> Dieselben Menschen arbeiten nach 1945 in denselben Berufen und Ämtern weiter.</div>
+    <div><b>BND:</b> Auslandsgeheimdienst der Bundesrepublik, ab 1956 Bundesbehörde unter dem Kanzleramt. Chef: Reinhard Gehlen.</div>
+    <div><b>Die „vier Lügen“:</b> Gehlens Antwort auf Nachfragen: „Ein Prozent, alle entnazifiziert, alle überprüft, alle ok.“</div>
+    <div><b>Sachurteil:</b> Wie ist das Geschehen aus seiner Zeit heraus zu beurteilen? Ursachen, Spielräume, Folgen – an Quellen prüfbar.</div>
+    <div><b>Werturteil:</b> Wie bewerte ich das Geschehen heute, und nach welchen Normen? Nur gut, wenn der Maßstab offenliegt.</div>
+  </div>
+  <h2>Der BND in Zahlen</h2>
+  <div class="pfelder druck"><figure><div class="pf gehlen">${punkte(1)}</div><figcaption><b>1 von 100</b>Gehlens Auskunft</figcaption></figure><figure><div class="pf studie">${punkte(10, 20)}</div><figcaption><b>10 bis 20 von 100</b>Studie Sälter: „Blut an den Händen“</figcaption></figure><figure><div class="pf ich">${punkte(S.schaetz.n)}</div><figcaption><b>${S.schaetz.n} von 100</b>Meine Schätzung am Anfang</figcaption></figure></div>
+  <p class="quelle">Nach tagesschau.de, 10.10.2022 (Heft M26). Modell: Punkte zeigen Anteile, keine Personen.</p>
+  <div class="werk"><b>Denkwerkzeug: Drei Schritte zum Urteil</b> (Landkarte 2.4.3). 1. <b>Sachanalyse:</b> Was ist geschehen? Was sagen die Quellen? 2. <b>Sachurteil:</b> Ursachen, Handlungsspielräume, Folgen – aus der Zeit heraus. 3. <b>Werturteil:</b> Bewertung von heute, Maßstab offenlegen. Typischer Fehler: Das Werturteil kommt vor der Sachanalyse.</div>
+  <div class="werk" style="background:var(--kuli-hi)"><b>Vier Fragen an jeden Bereich:</b> Wie viele arbeiteten weiter? · Welche Rolle hatten sie im NS-Regime? · Wie lief die Entnazifizierung? · Was folgte daraus für die Demokratie?</div>
+
+  <div class="seitenumbruch"><h2 style="margin-top:0">Meine Ergebnisse</h2>
+  <h2>Der BND (Fragen a bis d)</h2>${m(["a","b","c","d"].map(k => S.bnd[k] ? k + ") " + S.bnd[k] : "").filter(Boolean).join("\n"))}
+  <h2>Unser Steckbrief${name ? ": " + esc(name) : ""}</h2>${m([s.f1 && "1 · " + s.f1, s.f2 && "2 · " + s.f2, s.f3 && "3 · " + s.f3, s.f4 && "4 · " + s.f4, s.beleg && "Beleg: " + s.beleg + (s.quelle ? " (Quelle: " + s.quelle + ")" : "")].filter(Boolean).join("\n"))}
+  <h2>Meine Vergleichstafel</h2>
+  <div class="matrix-wrap"><table><thead><tr><th>Bereich</th><th>Kontinuität (meine Einstufung)</th><th>Stichwort</th></tr></thead><tbody>${BEREICHE.map(x => `<tr><td>${esc(x[1])}</td><td>${STUFEN[stufe(x[0])]}</td><td class="mein">${esc(stichwort(x[0]))}</td></tr>`).join("")}</tbody></table></div>${m(S.wo, "")}
+  <h2>Drei Gründe</h2>${m([g.g1, g.g2, g.g3].filter(x => x && x.trim()).map((x, i) => (i + 1) + ". " + x).join("\n"))}
+  <h2>Mein Urteil</h2>${m(`Am Anfang: ${posWort(S.pos.start)} (${S.pos.start}) · am Ende: ${posWort(S.pos.ende)} (${S.pos.ende})${S.stimme ? " · Stimme " + S.stimme : ""}`)}${m(S.urteil)}</div></div>
+  ${weiter("start", "Zur Startseite")}`;
+}
+
+function lehrkraft(){
+  return `<div class="lk"><p class="zeit"><span class="nr">Für Lehrkräfte</span><span>nicht geschützt</span></p><h1>M26 · Hinweise</h1>
+  <p class="lead">Grundlage ist dein Heft, M26: zentrale Frage, BND-Text mit vier Fragen (15 Min.), fünf Gruppen mit vier Fragen (25 Min.), Plenum mit Vergleich, Ursachen und Bewertung (20 Min.). Die Seite übernimmt diese drei Arbeitsaufträge und ihre Zeiten.</p>
+  <h2 class="abschnitt">Was das Gerät hier leistet</h2>
+  <ul><li><b>Schätzen vor dem Lesen:</b> eigene Zahl neben Gehlens „ein Prozent“ und den 10 bis 20 Prozent der Studie, als Punktefeld. Der Abstand ist die Frage der Stunde.</li><li><b>Steckbrief statt Folien:</b> Die vier Fragen der Gruppe werden direkt zur Präsentation am Beamer (ein Gerät je Gruppe, keine Übertragung zwischen Geräten). Zusätzlich: stärkster Beleg und seine Herkunft.</li><li><b>Vergleichstafel beim Zuhören:</b> Jede*r stuft alle sechs Bereiche ein; daraus entsteht das eigene Profil für Frage a) des Plenums.</li><li><b>Landkarte 2.4.3:</b> fünf Sätze aus dem BND-Text als Sachanalyse, Sachurteil oder Werturteil einordnen – vor dem eigenen Urteil.</li><li><b>Skala mit Marke vom Anfang</b> und <b>Stimmkarte</b> für die Abstimmung.</li></ul>
+  <p>Papier bleibt besser für: den BND-Text (Heft) und die Diskussion im Plenum.</p>
+  <h2 class="abschnitt">Ablauf (90 Minuten)</h2>
+  <div class="matrix-wrap"><table><thead><tr><th>Zeit</th><th>Phase</th><th>Sozialform</th><th>Hinweis</th></tr></thead><tbody>
+  <tr><td class="n">0–6</td><td>Schätzen</td><td>allein</td><td>zwei Festlegungen, dann drei Punktefelder am Beamer besprechen</td></tr>
+  <tr><td class="n">6–21</td><td>Der BND</td><td>allein, mit Heft</td><td>Arbeitsauftrag 1; Vergleich erst nach vier Antworten</td></tr>
+  <tr><td class="n">21–46</td><td>Eure Gruppe</td><td>fünf Gruppen</td><td>Arbeitsauftrag 2; ein Gerät je Gruppe für den Steckbrief</td></tr>
+  <tr><td class="n">46–71</td><td>Vergleich</td><td>Plenum</td><td>5 × 5 Minuten; alle füllen die Vergleichstafel</td></tr>
+  <tr><td class="n">71–90</td><td>Urteil</td><td>allein, zu zweit, Plenum</td><td>Sortieren 6, Gründe 4, Urteil 5, Abstimmung und Gespräch 4</td></tr></tbody></table></div>
+  <p class="hinweis">Zeitdiagnose bei 150 Wörtern pro Minute (gemessen): Die Seite hat rund 1.600 Wörter Lesetext (gut 10 Minuten, die Hälfte davon auf der Seite „Urteil“), der BND-Text im Heft rund 340 Wörter (gut 2 Minuten). Eng wird es bei den Präsentationen und am Schluss: Für „Urteil“ sind 19 Minuten knapp – K2 oder K3 einplanen.</p>
+  <h2 class="abschnitt">Kürzungen zur Auswahl</h2>
+  <ul><li><b>K1</b> Präsentationen auf 4 Minuten begrenzen: 5 Minuten frei für das Plenum.</li><li><b>K2</b> Sortieraufgabe (Landkarte 2.4.3) gemeinsam am Beamer mit zwei statt fünf Sätzen: 4 Minuten frei.</li><li><b>K3</b> Urteilstext als Hausaufgabe; im Unterricht nur Skala, Abstimmung, Gespräch: 5 Minuten frei.</li><li><b>K4</b> Zwei Doppelstunden: Gruppenarbeit und Präsentationen in der ersten, Vergleich und Urteil in der zweiten.</li></ul>
+  <h2 class="abschnitt">Abweichungen vom Heft</h2>
+  <ul><li>Anrede „du“/„ihr“ (Heft: gemischt mit „Sie“).</li><li>Der BND-Text bleibt im Heft; die Seite druckt ihn nicht ab (Urheberrecht tagesschau.de) und zitiert nur kurz.</li><li>„Digitale Präsentation“: Der Steckbrief ist die Präsentation. Wer lieber Folien baut, kann das weiterhin tun.</li><li>Neu: Herkunft des stärksten Belegs. Grund: Die Infoseite „NS-Kontinuitäten“ enthält prüfbedürftige Angaben (im Tresor vermerkt: Landgericht München 1951 und die Urteile gegen die Weiße Rose).</li><li>Plenumsfragen a) bis c) sind auf „Vergleich“ und „Urteil“ verteilt.</li></ul>
+  <h2 class="abschnitt">Vor dem Einsatz prüfen</h2>
+  <ul><li>Die Zahlen und Zitate zum BND stammen aus dem Heft (dort nach tagesschau.de, 10.10.2022). Den Artikel konnte Claude nicht selbst abrufen. Bitte am Original prüfen: Worauf beziehen sich die „10 bis 20 Prozent“ genau (welcher Zeitraum, welche Gruppe)? Stimmen die Zitate von Sälter und Gehlen wörtlich?</li><li>Studie: Gerhard Sälter, NS-Kontinuitäten im BND. Rekrutierung, Diskurse, Vernetzungen (2022).</li><li>Infoseite: Angaben ohne belastbare Quelle (teils Wikipedia, YouTube) markieren oder ersetzen.</li><li>Der Link zur Infoseite führt in der Arbeitsphase aus der Lernseite heraus. Das ist gewollt, aber die einzige Stelle.</li></ul>
+  <h2 class="abschnitt">Nur du kannst das</h2>
+  <ul><li>AirPlay und Beamer im Raum testen; iPad in Safari hoch und quer; Moodle.</li><li>Im Gespräch auf den Unterschied achten: Mitgliedschaft in der NSDAP ist nicht dasselbe wie Beteiligung an Verbrechen.</li><li>Beutelsbacher Konsens bei Frage c): „Ja“, „Nein“ und „Ja, aber“ sind vertretbar, wenn der Maßstab genannt wird.</li></ul>
+  <h2 class="abschnitt">Nach der Stunde</h2>
+  <div class="matrix-wrap"><table><thead><tr><th>Beobachtung</th><th>Notiz</th></tr></thead><tbody><tr><td>Hat der Steckbrief als Präsentation am Beamer funktioniert (Lesbarkeit, Zeit)?</td><td></td></tr><tr><td>Wurde die Vergleichstafel beim Zuhören wirklich gefüllt?</td><td></td></tr><tr><td>Welche Sätze wurden bei Sach- und Werturteil verwechselt?</td><td></td></tr><tr><td>Hat sich die Position gegenüber dem Anfang bewegt?</td><td></td></tr></tbody></table></div>
+  <p class="hinweis" style="margin-top:1rem">Speicherschlüssel <code>${L.key}</code>. Eingaben bleiben im Browser des Geräts.</p></div>
+  ${weiter("start", "Zur Startseite")}`;
+}
+
+AKTION.schaetzfest = (t, ev) => { S.schaetz.zu = true; speichere(); zeichneBehalte(); if (ev.detail !== 0) neu(document.getElementById("schaetzauf"), "neu"); };
+AKTION.stufe = t => { const b = t.dataset.b, w = +t.dataset.w; if (!S.tafel[b]) S.tafel[b] = {}; S.tafel[b].s = S.tafel[b].s === w ? 0 : w; speichere(); zeichneBehalte(); };
+AKTION.folie = () => tafel(folieHtml(), { hell:true, titel:"Präsentation der Gruppe" });
+AKTION.ref = () => { S.pos.ref = true; speichere(); };
+const SEITE_FN = { start, schaetzen, bnd, gruppe, vergleich:vergleich_, urteil, zusammenfassung, lehrkraft };
+kernStart();
+</script>
+</body>
+</html>

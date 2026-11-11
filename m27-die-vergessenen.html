@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>M27 Die Vergessenen – Globalgeschichte des Zweiten Weltkriegs</title>
+<meta name="description" content="GGK M27: Welche Geschichten des Zweiten Weltkriegs sind bekannt, welche nicht? Eigene Karte des Krieges, Weltkarte drehen, Strukturbild legen.">
+<link rel="stylesheet" href="assets/gegenwart/bundle.css">
+<style>
+
+/* Schriften lokal im Repository (SIL Open Font License) */
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBoldItalic.woff) format("woff");font-weight:600;font-style:italic;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+/* Bewusst nur hell (Beamer, Druck), wie M18–M22. Farben und Formen aus dem Designsystem GGK-Labor.
+   Die Bausteine von »Gegenwart« (assets/gegenwart/) laufen über Tokens – hier auf die Farben des GGK-Labors gesetzt. */
+:root{
+  color-scheme:light;
+  --bg:#F3EFE7; --surface:#FAF8F3; --surface2:#FFFDF8; --offset:#E9E2D7; --line:#D5CEC3; --border:rgba(36,34,31,.14);
+  --ink:#24221F; --muted:#5F5C56; --faint:#6A655E; --inverse:#FFFAF2; --dunkel:#1B1A17;
+  --red:#9B402D; --red-hi:#EAD7CF; --green:#2E5A47; --green-hi:#D6E4DC; --gold:#7D5C12; --gold-hi:#EEE2BF;
+  --kuli:#1E4FB5; --kuli-hi:#DCE5F7; --slate:#4B4F57; --slate-hi:#DFE1E5; --marker:#F3D54E;
+  /* Säulenfarben (sechs, aus der GGK-Palette abgeleitet) */
+  --s-inst:#2E5A47; --s-kult:#7D5C12; --s-sozi:#1E4FB5; --s-geo:#4B6F8F; --s-pol:#9B402D; --s-takt:#4B4F57;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:.75rem; --r-lg:1rem; --ease:cubic-bezier(.23,1,.32,1);
+  /* Gegenwart-Tokens → GGK-Labor */
+  --grund:var(--bg); --flaeche:var(--surface); --karton:var(--offset); --text:var(--ink); --leise:var(--muted); --stahl:#8F887D; --linie:var(--line);
+  --petrol:var(--green); --petrol-hi:var(--green-hi); --auf-petrol:var(--inverse);
+  --honig:var(--gold); --honig-hi:var(--gold-hi); --honigplatte:var(--gold-hi); --auf-honig:var(--ink);
+  --ueberdruck:var(--slate); --auf-ueberdruck:var(--inverse);
+  --oxid:var(--red); --oxid-hi:var(--red-hi);
+  --erfolg:var(--green); --erfolg-hi:var(--green-hi); --warnung:var(--gold); --warnung-hi:var(--gold-hi); --fehler:var(--red); --fehler-hi:var(--red-hi);
+  --font-display:var(--display); --font-stimme:var(--display); --font-text:var(--body);
+  --radius-sm:.6rem; --radius-md:.75rem; --radius-pill:999px; --radius-none:0;
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:20px; --space-6:28px;
+  --knopf-hoehe:48px; --tablet-ziel:56px; --platte:6px 6px 0 0 var(--karton); --platte-knopf:4px 4px 0 0 var(--karton); --fokus-innen:inset 0 0 0 2px var(--grund);
+  --dauer-druck:100ms; --dauer-schnell:140ms; --dauer-mittel:220ms; --dauer-langsam:300ms; --dauer-staffel:30ms; --dauer-wende:460ms; --dauer-aufdecken:420ms; --dauer-reihe:440ms; --dauer-aus:150ms;
+  --kurve-aus:cubic-bezier(.23,1,.32,1); --kurve-beidseits:cubic-bezier(.77,0,.175,1); --kurve-feder:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+button,input,select,textarea,[tabindex]{scroll-margin-top:140px}
+html{-webkit-text-size-adjust:none;text-size-adjust:none;overflow-x:clip}
+body{min-height:100dvh;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:clamp(1rem,.95rem + .25vw,1.125rem);line-height:1.58;-webkit-font-smoothing:antialiased;overflow-x:clip}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.14;text-wrap:balance}
+p,li{text-wrap:pretty}
+a{color:var(--red)}
+:focus-visible{outline:3px solid var(--kuli);outline-offset:3px;border-radius:.35rem}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}}
+html[data-bewegung=weniger] *,html[data-bewegung=weniger] *::before,html[data-bewegung=weniger] *::after{animation:none!important;transition-duration:1ms!important}
+@keyframes auf{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+.g{background:transparent;font-size:inherit;line-height:inherit}
+.g .g-frage{font-size:clamp(1.2rem,1.05rem + .7vw,1.5rem)}
+.g .g-knopf{min-height:48px}
+.g-wahl legend{font-weight:700;font-family:var(--body);font-style:normal;font-size:1.05rem}
+.g .g-option span{font-weight:700}
+.g .g-option__urteil{font-weight:400;font-style:normal;font-size:.95rem;padding:0;border:0;min-height:0;background:transparent;box-shadow:none}
+.g .g-option span span::before,.g .g-option span span::after{display:none!important}
+.g .g-balken__zeile{grid-template-columns:minmax(6.5rem,10rem) 1fr 4.2rem}
+.g .g-schieber{max-width:none}
+.g .g-schieber>label{display:grid;gap:.2rem}.g .g-schieber input[type=range]{width:100%;accent-color:var(--kuli);height:32px}
+.g .g-schieber__buehne{aspect-ratio:auto;min-height:14rem}
+.g .g-schieber__vor,.g .g-schieber__nach{padding:2.6rem 1.2rem 1.2rem}
+.g .g-schieber__vor p,.g .g-schieber__nach p{font-size:.98rem}
+.g .g-schieber__vor .zahl,.g .g-schieber__nach .zahl{font:600 2.2rem/1 var(--display)}
+.g .g-zeit{padding-top:34px}
+@media (max-width:640px){.g .g-zeit{grid-auto-flow:row;grid-auto-columns:auto;gap:var(--space-3)}.g .g-zeit::before{display:none}}
+.g .g-schalter input{margin:0}
+
+/* Kopf mit Lernweg */
+.kopf{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--border);padding-top:env(safe-area-inset-top,0px)}
+.kopf-in{max-width:1100px;margin:auto;padding:.55rem max(1.25rem,env(safe-area-inset-right,0px)) .55rem max(1.25rem,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:.6rem .9rem;flex-wrap:wrap}
+.mark{width:32px;height:32px;flex:0 0 auto}
+.titel{font-weight:700;line-height:1.2;margin-right:auto}.titel small{display:block;color:var(--muted);font-weight:400;font-size:.82rem}
+.pill{border:1px solid var(--border);background:var(--surface2);border-radius:999px;padding:.45rem 1rem;font-weight:700;min-height:44px;display:inline-flex;align-items:center;text-decoration:none;color:var(--ink)}
+.weg{max-width:1100px;margin:auto;padding:0 1.25rem .6rem;display:flex;gap:.35rem;overflow-x:auto;scrollbar-width:none}
+.weg button{flex:1 0 auto;min-width:7.4rem;border:0;border-top:3px solid var(--line);background:transparent;text-align:left;padding:.45rem .5rem .2rem;color:var(--faint);font-size:.85rem;line-height:1.25;min-height:48px}
+.weg button b{display:block;color:inherit;font-size:.78rem}
+.weg button.da{color:var(--muted);border-top-color:var(--muted)}
+.weg button.akt{color:var(--ink);border-top-color:var(--red)}
+
+main{max-width:46rem;margin:auto;padding:clamp(1.5rem,4vw,3rem) max(1.25rem,env(safe-area-inset-right,0px)) 5rem max(1.25rem,env(safe-area-inset-left,0px))}
+main.breit{max-width:62rem}
+.zeit{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;color:var(--red);font-weight:700;font-size:.95rem}
+.zeit .nr{font-family:var(--display);font-size:1.1rem}
+h1{font-size:clamp(2rem,1.4rem + 2.4vw,3.1rem);margin:.5rem 0 .7rem}
+.leitfrage{font-family:var(--display);font-style:italic;font-weight:600;font-size:clamp(1.35rem,1.1rem + .9vw,1.8rem);color:var(--muted);margin-bottom:1.4rem}
+.lead{font-size:clamp(1.1rem,1rem + .5vw,1.28rem);color:var(--muted);margin-bottom:1.4rem}
+h2.abschnitt{font-size:1.45rem;margin:2.2rem 0 .7rem}
+h3.klein{font-size:1.15rem;margin:1.4rem 0 .4rem}
+p+p{margin-top:.7rem}
+.auftrag{background:var(--ink);color:var(--inverse);border-radius:var(--r-lg);padding:1.2rem 1.4rem;margin:1.5rem 0 1.1rem}
+.auftrag h3{font-size:1.2rem;margin-bottom:.35rem}
+.auftrag p{color:#DCD5CA}
+.auftrag .form{display:inline-block;font-weight:700;color:var(--marker);font-size:.9rem;margin-bottom:.2rem}
+.hinweis{font-size:.9rem;color:var(--muted)}
+.belastend{border-left:6px solid var(--gold);background:var(--gold-hi);padding:.75rem 1rem;border-radius:0 .5rem .5rem 0;margin:1rem 0}
+.merksatz{font-family:var(--display);font-weight:600;font-size:1.25rem;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);padding:.7rem 0;margin:1.4rem 0;text-align:center}
+.btn{min-height:48px;border:1px solid var(--border);border-radius:var(--r);padding:.6rem 1.2rem;background:var(--surface2);font-weight:700;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.4rem}
+.btn:hover{background:var(--offset)}
+.btn.primary{background:var(--red);color:var(--inverse);border-color:transparent}
+.btn.primary:hover{background:#86361f}
+.btn.dunkel{background:var(--ink);color:var(--inverse);border-color:transparent}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn:active{transform:scale(.97)}
+.reihe{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-top:.8rem}
+.fuss{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-top:1px solid var(--line);margin-top:2.2rem;padding-top:1.3rem;flex-wrap:wrap}
+label{font-weight:700;display:block}
+textarea{width:100%;min-height:5rem;border:1.5px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;background:var(--surface2);resize:vertical;margin-top:.35rem}
+.feldgruppe{display:grid;gap:1rem;margin-top:1rem}
+.karte{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
+.karte+.karte{margin-top:1rem}
+.kennung{font-weight:700;color:var(--red);font-size:.88rem;margin-bottom:.3rem}
+.quelle{font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.4}
+.quelle a{color:var(--muted)}
+blockquote{margin:.8rem 0;padding:.7rem 1rem;border-left:5px solid var(--kuli);background:var(--kuli-hi);border-radius:0 .5rem .5rem 0;font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.35}
+blockquote .wer{display:block;font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--muted);margin-top:.35rem}
+details.hilfe{margin-top:.8rem;border:1.5px dashed var(--line);border-radius:.6rem;padding:.4rem .8rem}
+details.hilfe summary{cursor:pointer;font-weight:700;min-height:40px;display:flex;align-items:center}
+details.hilfe p{margin:.3rem 0 .4rem}
+.status{display:inline-block;font-size:.78rem;font-weight:700;padding:.1rem .5rem;border-radius:.35rem;background:var(--slate-hi);color:var(--slate);margin-right:.3rem}
+.status.beleg{background:var(--green-hi);color:var(--green)}
+.status.modell{background:var(--gold-hi);color:var(--gold)}
+.aufdeck{margin-top:1rem;background:var(--offset);border-radius:var(--r-lg);padding:1rem 1.2rem}
+.aufdeck.neu{animation:auf 360ms var(--ease) both}
+.zwei{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+@media (max-width:640px){.zwei{grid-template-columns:1fr}}
+.zwei .alt{background:var(--offset);border-radius:.6rem;padding:.8rem 1rem;min-width:0}
+
+.band{position:relative;background:var(--dunkel);color:var(--inverse);border-radius:var(--r-lg);overflow:hidden;margin:0 0 1.6rem;min-height:9rem;display:grid;grid-template-columns:minmax(0,1fr)}
+.band.mit{grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:15rem}
+@media (max-width:640px){.band.mit{grid-template-columns:1fr}}
+.band .bt{padding:1.3rem 1.4rem;display:flex;flex-direction:column;justify-content:center;gap:.4rem}
+.band .bt .ob{font-size:.85rem;font-weight:700;color:#C9BFAE;letter-spacing:.02em}
+.band .bt h2{font-size:clamp(1.5rem,1.2rem + 1.4vw,2.2rem);color:var(--inverse)}
+.band .bt p{color:#DCD5CA}
+.band figure{margin:0;position:relative;min-height:12rem;background:#2A2824}
+.band figure img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:.92}
+.band.neu figure img{animation:band-ein 650ms var(--ease) both}
+@keyframes band-ein{from{opacity:0;transform:translateX(4%) scale(1.03)}to{opacity:.92;transform:none}}
+.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:.45rem .8rem;font-size:.75rem;line-height:1.35;color:#E6DFD2;background:linear-gradient(transparent,rgba(27,26,23,.85))}
+.band figcaption b{color:var(--inverse)}
+.urt{font-size:.95rem}.urt+.urt{margin-top:.3rem}
+.urt.zentral b{color:var(--green)}.urt.begruendbar b{color:var(--gold)}.urt.kaum b{color:var(--red)}
+.matrix-wrap{overflow-x:auto;margin-top:1rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%}
+th,td{padding:.55rem .7rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.92rem}
+th{background:var(--offset)}
+tr:last-child td{border-bottom:0}
+td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* Produkt */
+.raster3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.6rem;font-size:.88rem}
+@media (max-width:640px){.raster3{grid-template-columns:1fr}}
+.raster3 div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .7rem}
+.raster3 b{display:block;margin-bottom:.2rem}
+.satzanfaenge{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem}
+.satzanfaenge button{min-height:40px;border:1.5px solid var(--border);background:var(--surface2);border-radius:.5rem;padding:.3rem .7rem;font-size:.9rem}
+.pole{display:flex;justify-content:space-between;gap:1rem;font-weight:700;font-size:.95rem;margin-top:.6rem}
+.pole span{max-width:46%}
+
+/* Löschen */
+.loesch{margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.92rem;color:var(--muted);display:flex;gap:.9rem;flex-wrap:wrap;align-items:center}
+.loesch-frage{margin-top:.6rem;border:2px solid var(--red);border-radius:.7rem;padding:.8rem 1rem;background:var(--red-hi);color:var(--ink);flex:1 0 100%}
+/* ===== Gemeinsamer Kern M25–M27 (Ergänzungen zum Stand von M23) ===== */
+.band{margin-top:.2rem}
+.ziele{padding-left:1.2rem;display:grid;gap:.3rem;margin:.6rem 0}
+.ablauf{list-style:none;display:grid;gap:.35rem;margin:.8rem 0 0}
+.ablauf li{display:grid;grid-template-columns:5.6rem 1fr;gap:.8rem;border-top:1px solid var(--line);padding-top:.35rem}
+.ablauf li b{color:var(--red);font-variant-numeric:tabular-nums}
+.auflage{border-left:6px solid var(--green);background:var(--green-hi);padding:.8rem 1rem;border-radius:0 .6rem .6rem 0;margin:1rem 0}
+.auflage.neu,.rm.neu{animation:auf 360ms var(--ease) both}
+.rm{border-left:6px solid var(--stahl);background:var(--surface);padding:.7rem 1rem;border-radius:0 .6rem .6rem 0;margin:.7rem 0;font-size:.97rem}
+.rm.zentral{border-left-color:var(--green)}.rm.teils{border-left-color:var(--gold)}.rm.kaum{border-left-color:var(--red)}
+.rm b.sw{display:block}
+.gesperrt{opacity:.45}
+.zaehl{font-size:.88rem;color:var(--muted);margin-top:.25rem;font-variant-numeric:tabular-nums}
+textarea,input[type=text],select{color:var(--kuli)}
+input[type=text],select{width:100%;min-height:48px;border:1.5px solid var(--border);border-radius:var(--r);padding:.5rem .8rem;background:var(--surface2);margin-top:.3rem}
+textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
+.felder2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:700px){.felder2{grid-template-columns:1fr}}
+
+/* Quelle zum Markieren (Gegenwart: Markierung) – Sätze sind die Einheiten */
+.qwerk{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:1.2rem;align-items:start;margin-top:1rem}
+@media (max-width:860px){.qwerk{grid-template-columns:1fr}}
+.qblatt{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
+.qblatt h3{font-size:1.12rem;margin-bottom:.15rem}
+.qblatt .qkopf{font-size:.92rem;color:var(--muted);margin-bottom:.7rem}
+.qblatt .qtext p{margin:.55rem 0;line-height:1.75;font-size:1.06rem}
+.qblatt .qtag{font-weight:700;color:var(--red);font-size:.9rem;margin-right:.3rem}
+.qblatt .g-wort{padding:.08em 0;-webkit-tap-highlight-color:transparent}
+.qblatt .g-wort:focus-visible{outline:3px solid var(--kuli);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){.qblatt .g-wort:hover{background:var(--offset)}}
+.qblatt .g-stifte{margin:.2rem 0 .8rem;position:sticky;top:112px;background:var(--surface2);padding:.35rem 0;z-index:2}
+.g-stift .z{font-size:.8em;margin-right:.25rem}
+.qreiter{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1rem}
+.qreiter button{min-height:44px;border:1.5px solid var(--border);border-bottom-width:3px;background:var(--surface);border-radius:.6rem .6rem 0 0;padding:.4rem .9rem;font-weight:700}
+.qreiter button[aria-selected=true]{background:var(--surface2);border-bottom-color:var(--red)}
+.belege{display:grid;gap:.8rem}
+.belege .sp{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;min-height:5.5rem}
+.belege .sp h4{font-family:var(--body);font-size:.95rem;margin-bottom:.3rem}
+.belege .sp ul{list-style:none;display:grid;gap:.3rem;font-size:.92rem}
+.belege .sp li{border-left:4px solid var(--marker);padding-left:.5rem;line-height:1.35}
+.belege .sp.b li{border-left:4px dotted var(--kuli)}
+.belege .leer{color:var(--faint);font-size:.9rem}
+
+/* Wörter wählen */
+.woerter{display:flex;gap:.45rem;flex-wrap:wrap;margin:.8rem 0}
+.woerter button{min-height:44px;padding:.35rem .9rem;border-radius:.6rem;border:2px solid var(--stahl);background:var(--surface2);font-weight:700}
+.woerter button[aria-pressed=true]{border-color:var(--kuli);background:var(--kuli-hi);color:var(--ink)}
+.woerter button[disabled]{opacity:.5}
+.wgrp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin-top:.6rem}
+@media (max-width:760px){.wgrp{grid-template-columns:1fr}}
+.wgrp div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .8rem;font-size:.93rem}
+.wgrp b{display:block;margin-bottom:.2rem}
+.wgrp .dein{font-weight:700;color:var(--kuli)}
+
+/* Landkarten-Moment */
+.prinzipien{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;margin:.9rem 0}
+@media (max-width:860px){.prinzipien{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.prinzipien{grid-template-columns:1fr}}
+.prinzipien button{text-align:left;border:2px solid var(--stahl);background:var(--surface2);border-radius:.7rem;padding:.55rem .7rem;min-height:56px;display:grid;gap:.15rem;align-content:start}
+.prinzipien button small{font-size:.82rem;color:var(--muted);line-height:1.3}
+.prinzipien button[aria-pressed=true]{border-color:var(--kuli);box-shadow:inset 0 0 0 1px var(--kuli)}
+.prinzipien button.zentral{border-left:6px solid var(--green)}.prinzipien button.teils{border-left:6px solid var(--gold)}.prinzipien button.kaum{border-left:6px solid var(--red)}
+.prinzipien button[disabled]{opacity:.6}.prinzipien button[disabled][aria-pressed=true]{opacity:1}
+.trift{margin-top:1.2rem;border:1.5px dashed var(--stahl);border-radius:.7rem;padding:.8rem 1rem;font-size:.96rem}
+
+/* Stimmkarte und Beamer-Tafel */
+#ueber:empty{display:none}
+.tafel-voll{position:fixed;inset:0;z-index:60;background:var(--dunkel);color:var(--inverse);display:grid;grid-template-rows:auto 1fr;padding:max(1rem,env(safe-area-inset-top,0px)) 1.4rem 1.4rem;overflow:auto}
+.tafel-voll .tk{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.tafel-voll .tk .btn{background:transparent;color:var(--inverse);border-color:#6b665d}
+.tafel-voll .mitte{display:grid;place-content:center;text-align:center;gap:1rem}
+.tafel-voll .buchstabe{font:600 clamp(8rem,34vw,20rem)/.9 var(--display)}
+.tafel-voll .wort{font:600 clamp(1.6rem,5vw,3.4rem)/1.15 var(--display)}
+.tafel-voll.hell{background:var(--bg);color:var(--ink)}
+.tafel-voll.hell .tk .btn{color:var(--ink);border-color:var(--stahl)}
+.folie{width:min(100%,calc((100vh - 6.5rem)*16/9));aspect-ratio:16/9;margin:auto;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:clamp(1rem,2.6vw,2.4rem);display:grid;grid-template-rows:auto 1fr auto;gap:.8rem;text-align:left;overflow:hidden}
+.folie h2{font-size:clamp(1.4rem,3vw,2.5rem)}
+.folie .vier{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 1.4rem;align-content:start;font-size:clamp(.85rem,1.45vw,1.25rem);line-height:1.35}
+.folie .vier b{display:block;color:var(--red);font-size:.85em}
+.folie .vier p{color:var(--kuli);white-space:pre-wrap;overflow-wrap:anywhere}
+.folie .fq{font-size:clamp(.75rem,1.1vw,1rem);color:var(--muted)}
+@media (max-width:700px){.folie{aspect-ratio:auto}.folie .vier{grid-template-columns:1fr}}
+.stimmwahl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.8rem}
+@media (max-width:640px){.stimmwahl{grid-template-columns:1fr}}
+.stimmwahl button{min-height:64px;border:2px solid var(--stahl);border-radius:.8rem;background:var(--surface2);font-weight:700;padding:.5rem .8rem;display:grid;gap:.1rem;text-align:left}
+.stimmwahl button b{font:600 1.5rem/1 var(--display)}
+.stimmwahl button[aria-pressed=true]{border-color:var(--green);box-shadow:inset 0 0 0 2px var(--green);background:var(--green-hi)}
+
+/* Zeitleiste klein (Zusammenfassung) */
+.zl{list-style:none;display:grid;gap:.25rem;margin-top:.4rem}
+.zl li{display:grid;grid-template-columns:7.2rem 1fr;gap:.7rem;font-size:.95rem;border-top:1px solid var(--line);padding-top:.25rem}
+.zl li b{font-variant-numeric:tabular-nums}
+.begriffe{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem;margin-top:.4rem}
+.begriffe div{font-size:.95rem;border-left:4px solid var(--line);padding-left:.6rem}
+@media (max-width:640px){.begriffe{grid-template-columns:1fr}}
+.mein{color:var(--kuli);white-space:pre-wrap;overflow-wrap:anywhere}
+.mein.leer{color:var(--faint);font-style:italic}
+.zf .werk{background:var(--gold-hi);border-radius:.6rem;padding:.6rem .9rem;margin-top:.5rem;font-size:.95rem}
+.zf h1{margin-top:0}
+.zf .seitenumbruch{margin-top:2rem;border-top:3px solid var(--ink);padding-top:1rem}
+.lk table{font-size:.92rem}
+.lk ul{padding-left:1.2rem;display:grid;gap:.4rem;margin-top:.4rem}
+
+@media print{
+  @page{size:A4;margin:12mm 13mm}
+  body{background:#fff;font-size:10pt;line-height:1.36}
+  .kopf,.fuss,.loesch,.nodruck,.reihe,#ueber{display:none!important}
+  main{max-width:none;padding:0}
+  .zf h1{font-size:18pt;margin:0 0 .15rem}
+  .zf .leitfrage{font-size:12pt;margin-bottom:.3rem}
+  .zf h2{font-size:12pt;margin:.55rem 0 .2rem;break-after:avoid}
+  .zf .merksatz{margin:.45rem 0;padding:.35rem 0;font-size:11pt}
+  .zf .begriffe div,.zf .zl li,.zf .werk{font-size:9pt}
+  .zf .karte{padding:.4rem .6rem;break-inside:avoid}
+  .zf .seitenumbruch{break-before:page;border-top:0;margin-top:0;padding-top:0}
+  .zf .mein{font-size:9.5pt}
+  .zf th,.zf td{padding:.2rem .4rem;font-size:8.6pt}
+  .auflage{background:#fff;border:1px solid #bbb;border-left:4px solid #555}
+  a{color:inherit;text-decoration:none}
+}
+/* ===== M27 ===== */
+.orte3{display:grid;gap:.6rem;margin-top:.6rem}
+.orte3 .oz{display:grid;grid-template-columns:2rem minmax(0,1.4fr) minmax(0,1fr);gap:.6rem;align-items:center}
+.orte3 .oz b{font:600 1.3rem/1 var(--display);color:var(--kuli)}
+.orte3 input,.orte3 select{margin:0}
+@media (max-width:560px){.orte3 .oz{grid-template-columns:2rem 1fr}.orte3 .oz select{grid-column:2}}
+/* Weltkarte: Plattkarte, drehbar (Süden oben) und verschiebbar (Mitte) */
+.weltwrap{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:.6rem;margin-top:.8rem}
+.welt{display:block;width:100%;height:auto;border-radius:.5rem;background:#DCE4E6;overflow:hidden}
+.welt .dreh{transform-box:view-box;transform-origin:center;transition:transform 440ms var(--kurve-beidseits)}
+.welt .schub{transition:transform 440ms var(--kurve-beidseits)}
+.welt .land{fill:#F4EFE4;stroke:#8F887D;stroke-width:.6;vector-effect:non-scaling-stroke}
+.welt .aeq{stroke:#8F887D;stroke-width:.8;stroke-dasharray:4 4;vector-effect:non-scaling-stroke}
+.welt .pkt{transition:transform 440ms var(--kurve-beidseits)}
+.welt .pkt.ich circle{fill:var(--kuli);stroke:#fff;stroke-width:1.5}
+.welt .pkt.ich text{fill:#fff;font:700 9px var(--body);text-anchor:middle}
+.welt .pkt.art path{fill:var(--marker);stroke:var(--ink);stroke-width:1.2}
+.welt .pkt.art.an path{fill:var(--red);stroke:#fff}
+.welt .rand{font:700 11px var(--body);fill:var(--muted);text-anchor:middle}
+.kartenleg{display:flex;gap:1rem;flex-wrap:wrap;font-size:.9rem;margin-top:.45rem;color:var(--muted)}
+.kartenleg i{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--kuli);margin-right:.3rem;vertical-align:-1px}
+.kartenleg i.t{border-radius:0;background:transparent;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:12px solid var(--gold)}
+.kartenknopf{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem;align-items:center}
+.kartenknopf button{min-height:44px;padding:.35rem .9rem;border:2px solid var(--stahl);border-radius:.6rem;background:var(--surface2);font-weight:700}
+.kartenknopf button[aria-pressed=true]{border-color:var(--kuli);background:var(--kuli-hi)}
+.kartenknopf .tr{width:1px;height:28px;background:var(--line);margin:0 .3rem}
+.artorte{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:.45rem;margin-top:.7rem}
+.artorte button{text-align:left;min-height:56px;border:2px solid var(--stahl);border-radius:.7rem;background:var(--surface2);padding:.45rem .7rem;display:grid;gap:.1rem}
+.artorte button small{font-size:.84rem;color:var(--muted);line-height:1.3}
+.artorte button[aria-pressed=true]{border-color:var(--gold);background:var(--gold-hi)}
+.zahlsatz{font:600 1.2rem/1.35 var(--display);margin-top:.7rem}
+/* Strukturbild */
+.sbpool{display:grid;gap:.5rem;margin:.8rem 0}
+.sbpool .pr{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.sbpool .pr>span{font-size:.85rem;font-weight:700;color:var(--muted);min-width:5.2rem}
+.sbk{min-height:44px;padding:.35rem .7rem;border-radius:.55rem;border:2px solid var(--ink);background:var(--surface2);font-weight:700;text-align:left}
+.sbk.e{border:2px dashed var(--stahl);font-weight:400;font-size:.93rem}
+.sbk[aria-pressed=true]{background:var(--kuli-hi);border-color:var(--kuli);border-style:solid}
+.sb{display:grid;grid-template-columns:minmax(0,1fr) 1.6rem minmax(0,1fr) 1.6rem minmax(0,1fr) 1.6rem minmax(0,1fr);grid-template-areas:". . sk . . a3 d1" "v a1 p a2 g a3 d2" ". . . . . a3 d3";gap:.5rem;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:.9rem}
+.sb .pf{font:600 1.5rem/1 var(--display);color:var(--muted);text-align:center}
+.sb .pf.drei{display:grid;gap:2.6rem}
+.sbf{display:grid;gap:.3rem;min-width:0}
+.sbf .ab{min-height:48px;border-radius:.55rem;padding:.35rem .55rem;text-align:center;font-size:.95rem;line-height:1.25;overflow-wrap:anywhere}
+.sbf .ab.b{border:2px solid var(--ink);background:var(--surface2);font-weight:700}
+.sbf .ab.e{border:2px dashed var(--stahl);background:var(--bg);font-size:.86rem}
+.sbf .ab.leer{color:var(--faint);font-weight:400;border-color:var(--line)}
+.sbf .ab.ziel{border-color:var(--kuli);background:var(--kuli-hi)}
+.sbf.ok .ab.b{border-left:6px solid var(--green)}.sbf.nein .ab.b{border-left:6px solid var(--gold)}
+.sbf.eok .ab.e{border-left:6px solid var(--green)}.sbf.enein .ab.e{border-left:6px solid var(--gold)}
+.sbf .fb{font-size:.8rem;line-height:1.3;color:var(--muted)}
+.sbf .runter{text-align:center;font:600 1.3rem/1 var(--display);color:var(--muted)}
+@media (max-width:820px){.sb{grid-template-columns:1fr;grid-template-areas:"v" "a1" "sk" "p" "a2" "g" "a3" "d1" "d2" "d3"}.sb .pf{transform:rotate(90deg)}.sb .pf.drei{display:block}.sb .pf.drei span+span{display:none}}
+.sb.klein{padding:.5rem;gap:.3rem}.sb.klein .ab{min-height:0;padding:.2rem .35rem;font-size:.8rem}.sb.klein .ab.e{font-size:.72rem}.sb.klein .pf{font-size:1rem}.sb.klein .pf.drei{gap:1.6rem}
+@media print{.sb.klein{grid-template-columns:minmax(0,1fr) 1rem minmax(0,1fr) 1rem minmax(0,1fr) 1rem minmax(0,1fr);grid-template-areas:". . sk . . a3 d1" "v a1 p a2 g a3 d2" ". . . . . a3 d3"}.sb.klein .ab{font-size:8pt}.sb.klein .ab.e{font-size:7.4pt}.sb .pf{transform:none!important}}
+@media print{.sb .pf.drei{display:grid!important}.sb .pf.drei span+span{display:inline!important}.weltwrap{display:none}}
+</style>
+</head>
+<body>
+<header class="kopf"><div class="kopf-in" id="kopf"></div><nav class="weg" id="weg" aria-label="Lernweg"></nav></header>
+<main id="main" tabindex="-1"></main>
+<div id="ueber"></div>
+<noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft „Geschichte aktuell 1“ (M27).</p></noscript>
+<script src="assets/gegenwart/bundle.js"></script>
+<script>
+"use strict";
+/* ===== Gemeinsamer Kern M25–M27. Jede Stunde definiert danach L (Einstellungen), ihre Daten, SEITE_FN und ruft kernStart(). ===== */
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let S = {};
+const lade = () => { try { return JSON.parse(localStorage.getItem(L.key)) || {}; } catch(e) { return {}; } };
+const speichere = () => { try { localStorage.setItem(L.key, JSON.stringify(S)); } catch(e) {} };
+const hol = p => p.split(".").reduce((o, k) => (o == null ? undefined : o[k]), S);
+const setz = (p, v) => { const k = p.split("."); let o = S; for (let i = 0; i < k.length - 1; i++) { if (o[k[i]] == null || typeof o[k[i]] !== "object") o[k[i]] = {}; o = o[k[i]]; } o[k[k.length - 1]] = v; speichere(); };
+const woerter = t => String(t || "").trim().split(/\s+/).filter(Boolean).length;
+const ruhig = () => { try { return !!S.ruhig || matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e) { return !!S.ruhig; } };
+const neu = (el, k) => { if (!el) return; el.classList.remove(k); void el.offsetWidth; if (!ruhig()) el.classList.add(k); };
+const LABOR = /github\.io$/.test(location.hostname) ? "index.html" : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
+const LK = "https://geschichtefuerdiegegenwart.github.io/kognitive-Landkarte-des-Geschichtsunterrichts/#s-";
+const idx = id => Math.max(0, L.seiten.findIndex(s => s[0] === id));
+
+/* ---------- Bausteine für Seiten ---------- */
+const zeitKopf = id => { const s = L.seiten[idx(id)]; return `<p class="zeit"><span class="nr">${esc(s[1])}</span><span>${esc(s[2])}</span></p>`; };
+const weiter = (nach, text, o = {}) => `<div class="fuss"><span class="hinweis">${o.hinweis || "Dein Stand wird nur auf diesem Gerät gespeichert."}</span><button class="btn primary" data-geh="${nach}">${esc(text)} ›</button></div>`;
+const auftrag = (form, titel, text) => `<div class="auftrag"><span class="form">${esc(form)}</span><h3>${esc(titel)}</h3><p>${text}</p></div>`;
+const belastend = text => `<p class="belastend"><b>Hinweis vorab.</b> ${text}</p>`;
+const status = (art, text) => `<span class="status ${art}">${esc(text)}</span>`;
+const band = (ob, titel, text) => `<div class="band"><div class="bt"><span class="ob">${esc(ob)}</span><h2>${esc(titel)}</h2><p>${text}</p></div></div>`;
+const hilfe = (titel, html) => `<details class="hilfe"><summary>${esc(titel)}</summary>${html}</details>`;
+
+/* Textfeld mit Satzanfängen und Wortzähler (Gegenwart: Textfeld). pfad = Ort in S. */
+function textfeld(pfad, label, o = {}){
+  const v = hol(pfad) || "", id = "f-" + pfad.replace(/\W/g, "-");
+  return `<div class="tf"><label for="${id}">${label}</label>
+  <textarea id="${id}" data-f="${pfad}" rows="${o.rows || 3}" placeholder="${esc(o.platz || "")}">${esc(v)}</textarea>
+  ${o.anfaenge ? `<div class="satzanfaenge nodruck" role="group" aria-label="Satzanfänge">${o.anfaenge.map(a => `<button type="button" data-satz="${id}" data-text="${esc(a)}">${esc(a)} …</button>`).join("")}</div>` : ""}
+  ${o.zaehl === false ? "" : `<p class="zaehl" data-zaehl="${pfad}">${woerter(v)} Wörter${o.ziel ? " · " + esc(o.ziel) : ""}</p>`}</div>`;
+}
+const eingabe = (pfad, label, platz = "") => { const id = "f-" + pfad.replace(/\W/g, "-"); return `<div><label for="${id}">${label}</label><input type="text" id="${id}" data-f="${pfad}" value="${esc(hol(pfad) || "")}" placeholder="${esc(platz)}" autocomplete="off"></div>`; };
+/* Kriterienraster: erscheint, sobald das Feld pfad mindestens min Wörter hat (P6: Vergleich erst nach dem eigenen Text). */
+function raster(pfad, min, titel, zeilen){
+  const da = woerter(hol(pfad)) >= min;
+  return `<div data-raster="${pfad}" data-min="${min}" ${da ? "" : "hidden"}><h3 class="klein">${esc(titel)}</h3><div class="matrix-wrap"><table><thead><tr><th>Prüfe deinen Text</th><th>Grundlegend</th><th>Sicher</th><th>Souverän</th></tr></thead><tbody>${zeilen.map(z => `<tr><td><b>${esc(z[0])}</b></td><td>${esc(z[1])}</td><td>${esc(z[2])}</td><td>${esc(z[3])}</td></tr>`).join("")}</tbody></table></div></div>
+  <p class="hinweis" data-rasterhinweis="${pfad}" ${da ? "hidden" : ""}>Ab ${min} Wörtern erscheint ein Raster, mit dem du deinen Text selbst prüfst.</p>`;
+}
+/* Vergleich, der erst nach eigenen Antworten erscheint: bed = Liste von Pfaden, die gefüllt sein müssen. */
+function vergleich(id, bed, min, titel, html){
+  const ok = bed.every(p => String(hol(p) || "").trim().length >= min), offen = !!(S.offen || {})[id];
+  return `<div class="reihe nodruck"><button type="button" class="btn dunkel" data-vergleich="${id}" data-bed="${bed.join(",")}" data-min="${min}" data-titel="${esc(titel)}" ${ok ? "" : "disabled"}>${offen ? "Vergleich ausblenden" : esc(titel)}</button><span class="hinweis" data-vergleichhinweis="${id}">${ok ? "" : "Erst deine Antworten, dann der Vergleich."}</span></div>
+  <div class="auflage" id="vgl-${id}" ${offen && ok ? "" : "hidden"}>${html}</div>`;
+}
+
+/* ---------- Quelle zum Markieren (Muster 11; Gegenwart: Markierung, zwei Stifte) ----------
+   QUELLEN[id] = { titel, kopf, abs:[[tag|null, [Sätze…]], …], nachweis, stifte:[[ "a", Zeichen, Name ], [ "b", Zeichen, Name ]] }
+   Stand: S.mark[id] = { "0": "a", "3": "b" }, S.stift[id] = "a" */
+const STIFTKLASSE = { a:"g-mark g-mark--beleg", b:"g-mark g-mark--gedanke" };
+function quelle(id){
+  const q = QUELLEN[id], m = (S.mark || {})[id] || {}, st = (S.stift || {})[id] || "a"; let n = 0;
+  const text = q.abs.map(([tag, saetze]) => `<p>${tag ? `<span class="qtag">${esc(tag)}</span>` : ""}${saetze.map(s => { const i = n++; return `<span class="g-wort ${m[i] ? STIFTKLASSE[m[i]] : ""}" role="button" tabindex="0" aria-pressed="${!!m[i]}" data-mark="${id}:${i}">${esc(s)}</span>`; }).join(" ")}</p>`).join("");
+  return `<div class="qblatt g" data-quelle="${id}"><h3>${esc(q.titel)}</h3><p class="qkopf">${q.kopf}</p>
+  <div class="g-stifte nodruck" role="group" aria-label="Stift wählen">${q.stifte.map(s => `<button type="button" class="g-stift" data-stift="${id}:${s[0]}" aria-pressed="${st === s[0]}"><span class="z" aria-hidden="true">${s[1]}</span>${esc(s[2])}</button>`).join("")}</div>
+  <div class="qtext">${text}</div><p class="quelle">${q.nachweis}</p></div>`;
+}
+const saetze = id => QUELLEN[id].abs.flatMap(a => a[1]);
+function belegListe(ids, stift){
+  const li = ids.flatMap(id => { const m = (S.mark || {})[id] || {}, s = saetze(id); return Object.keys(m).filter(i => m[i] === stift).sort((a, b) => a - b).map(i => `<li>${esc(s[i])} <span class="hinweis">(${esc(QUELLEN[id].kurz)})</span></li>`); });
+  return li.length ? `<ul>${li.join("")}</ul>` : `<p class="leer">Noch nichts markiert.</p>`;
+}
+function belege(ids, o = {}){
+  const st = QUELLEN[ids[0]].stifte;
+  return `<div class="belege" data-belege="${ids.join(",")}">${st.map(s => `<div class="sp ${s[0]}"><h4><span aria-hidden="true">${s[1]}</span> ${esc(o["t" + s[0]] || s[2])}</h4>${belegListe(ids, s[0])}</div>`).join("")}</div>`;
+}
+const markZahl = ids => ids.reduce((n, id) => n + Object.keys((S.mark || {})[id] || {}).length, 0);
+
+/* ---------- Wahl mit Erklärung je Option (Muster 2; Gegenwart: Wahl) ---------- */
+const STUFENWORT = { zentral:"zentral", begruendbar:"auch begründbar", kaum:"passt kaum" };
+function gWahl(id, frage, optionen, o = {}){
+  const st = (S.wahl || {})[id] || {}, zu = !!st.zu;
+  return `<div class="g"><div class="g-wahl" data-g="wahl" data-mind="${o.mind ?? 8}" data-id="${id}" ${zu ? 'data-zu=""' : ""}>
+  <fieldset><legend>${frage}</legend>${optionen.map((op, i) => `<label class="g-option" data-urteil="${op[1]}" data-grund="${esc(op[2])}"><input type="radio" name="w-${id}" value="${i}" ${st.o === i ? "checked" : ""} ${zu ? "disabled" : ""}><span>${esc(op[0])}<span class="g-option__urteil">${STUFENWORT[op[1]]} – ${esc(op[2])}</span></span></label>`).join("")}</fieldset>
+  ${o.ohneGrund ? "" : `<label>Begründung in einem Satz<textarea data-grund-feld rows="2" ${zu ? "readonly" : ""} placeholder="${esc(o.platz || "Ich wähle das, weil …")}">${esc(st.grund || "")}</textarea></label>`}
+  <div class="g-wahl__fuss"><button type="button" class="g-knopf g-knopf--primaer" data-g-festlegen ${zu ? "disabled" : ""}>Festlegen</button><span class="g-stempel" ${zu ? "" : "hidden"}>Festgelegt</span>${zu ? `<button type="button" class="btn nodruck" data-neu-wahl="${id}">Noch einmal</button>` : ""}<span class="sr" aria-live="polite"></span></div>
+  </div></div>`;
+}
+function pruefeWahl(w){
+  if (w.hasAttribute("data-zu")) return;
+  const gew = w.querySelector("input:checked"), ta = w.querySelector("textarea"), f = w.querySelector("[data-g-festlegen]");
+  if (f) f.disabled = !gew || (ta && ta.value.trim().length < 8);
+}
+
+/* ---------- Landkarten-Moment (Muster AT aus M22). Namen und Kurzerklärungen wörtlich aus der kognitiven Landkarte, Abschnitt 2.1. ---------- */
+const PRINZIP = {
+  "2-1-1": ["Retrospektivität", "Wir betrachten die Vergangenheit immer im Nachhinein (ex post), also aus der Gegenwart heraus."],
+  "2-1-2": ["Perspektivität", "Jede Betrachtung erfolgt aus einer bestimmten Sichtweise, geprägt von Überzeugungen, Interessen und Erfahrungen."],
+  "2-1-3": ["Partikularität", "Historische Erkenntnisse sind immer nur Ausschnitte der gesamten Vergangenheit."],
+  "2-1-4": ["Selektivität", "Wer Geschichte erzählt, wählt aus: Welche Quellen, Ereignisse und Personen sind für die eigene Frage wichtig?"],
+  "2-1-5": ["Partialität", "Quellen zeigen immer nur einen Teil der Vergangenheit, und nur ein Teil der Quellen ist überhaupt erhalten."],
+  "2-1-6": ["Narrativität", "Geschichte gibt es nur als Erzählung."],
+  "2-1-7": ["Konstruktivität", "Geschichte wird nicht „gefunden“, sondern aktiv zusammengesetzt. Deshalb können aus denselben Fakten unterschiedliche Geschichten entstehen."],
+  "2-1-8": ["Standortgebundenheit", "Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Gesamtkontext geprägt, oft unbewusst."],
+};
+const LKSTUFE = { zentral:"Zentral.", teils:"Auch begründbar.", kaum:"Passt kaum." };
+/* cfg = { seite, frage, lead, platz, folge:[Name, Kurzerklärung] (Eintrag 2.1.9), urteil:{ id:[stufe, text] }, bruecke } */
+function landkarte(cfg){
+  const l = S.lk, frei = l.vermutung.trim().length >= 10;
+  const liste = Object.keys(PRINZIP).map(id => ({ id, n:PRINZIP[id][0], k:PRINZIP[id][1] })).concat([{ id:"2-1-9", n:cfg.folge[0], k:cfg.folge[1] }]);
+  const p = liste.find(x => x.id === l.prinzip), u = p ? cfg.urteil[p.id] : null;
+  return `${zeitKopf(cfg.seite)}<h1>${esc(cfg.titel)}</h1>
+  <p class="leitfrage">${esc(cfg.frage)}</p>
+  ${auftrag("Allein · 2 Minuten", "Erst vermuten", cfg.lead)}
+  ${textfeld("lk.vermutung", "Meine Vermutung", { rows:2, platz:cfg.platz, zaehl:false })}
+  <p class="hinweis" id="lk-hinweis">${frei ? "Gut. Jetzt die Landkarte öffnen, dann unten ein Prinzip wählen." : "Schreib mindestens einen Satz. Danach geht es weiter."}</p>
+  <div id="lk-teil2" class="${frei ? "" : "gesperrt"}">
+  ${auftrag("Allein · 4 Minuten", "Dann die Landkarte", "Öffne „Was ist Geschichte?“ in der kognitiven Landkarte. Sie öffnet sich in einem neuen Tab, deine Eingaben hier bleiben. Wähle das Prinzip, das hier am besten passt, und begründe in einem Satz.")}
+  <p><a class="btn dunkel" id="lk-link" href="${LK}2-1" target="_blank" rel="noopener" ${frei ? "" : 'aria-disabled="true" tabindex="-1"'}>Landkarte öffnen: 2.1 Die Gemeinsamkeiten einer jeden Geschichte ↗</a></p>
+  <div class="prinzipien" role="group" aria-label="Prinzip wählen">${liste.map(x => `<button type="button" data-prinzip="${x.id}" aria-pressed="${l.prinzip === x.id}" class="${l.ok && l.prinzip === x.id ? cfg.urteil[x.id][0] : ""}" ${(!frei || l.ok) ? "disabled" : ""}><b>${esc(x.n)}</b><small>${esc(x.k)}</small></button>`).join("")}</div>
+  <label for="lk-grund">Meine Begründung</label><textarea id="lk-grund" data-f="lk.grund" rows="2" placeholder="Dieses Prinzip passt hier, weil …" ${(!frei || !l.prinzip || l.ok) ? "disabled" : ""}>${esc(l.grund)}</textarea>
+  <div class="reihe"><button type="button" class="btn dunkel" data-lkpruef ${(!frei || !l.prinzip || l.grund.trim().length < 10 || l.ok) ? "disabled" : ""}>Prüfen</button>${l.ok ? `<button type="button" class="btn" data-lkneu>Noch einmal</button>` : ""}<span class="hinweis">Rückmeldung in drei Stufen: zentral · auch begründbar · passt kaum.</span></div>
+  <div id="lk-fb" aria-live="polite">${l.ok && u ? `<div class="rm ${u[0]}"><b>${LKSTUFE[u[0]]}</b> ${esc(u[1])} <a href="${LK}${p.id}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a></div>` : ""}</div>
+  </div>
+  ${cfg.bruecke ? `<div class="trift">${cfg.bruecke}</div>` : ""}
+  ${weiter(cfg.nach[0], cfg.nach[1])}`;
+}
+
+/* ---------- Stimmkarte (Muster 12; Gegenwart: Stimmkarte): groß am Gerät, hochhalten, Lehrkraft zählt ---------- */
+function stimmkarte(pfad, optionen){
+  const v = hol(pfad);
+  return `<div class="stimmwahl" role="group" aria-label="Stimme wählen">${optionen.map(o => `<button type="button" data-stimme="${pfad}" data-wert="${o[0]}" aria-pressed="${v === o[0]}"><b>${o[0]}</b>${esc(o[1])}</button>`).join("")}</div>
+  <div class="reihe nodruck"><button type="button" class="btn dunkel" data-stimmkarte="${pfad}" data-opt="${esc(JSON.stringify(optionen))}" ${v ? "" : "disabled"}>Stimmkarte groß zeigen</button><span class="hinweis">Auf Ansage: iPad hochhalten. Die Lehrkraft zählt. Es wird nichts übertragen.</span></div>`;
+}
+let TAFEL_ZURUECK = null;
+function tafel(html, o = {}){
+  TAFEL_ZURUECK = document.activeElement;
+  const u = document.getElementById("ueber");
+  u.innerHTML = `<div class="tafel-voll ${o.hell ? "hell" : ""}" role="dialog" aria-modal="true" aria-label="${esc(o.titel || "Ansicht für den Beamer")}"><div class="tk"><b>${esc(o.titel || "")}</b><button type="button" class="btn" data-tafelzu>Schließen</button></div><div class="mitte">${html}</div></div>`;
+  u.querySelector("[data-tafelzu]").focus();
+}
+function tafelZu(){ const u = document.getElementById("ueber"); if (!u.innerHTML) return; u.innerHTML = ""; if (TAFEL_ZURUECK && document.contains(TAFEL_ZURUECK)) TAFEL_ZURUECK.focus(); }
+
+/* ---------- Kopf, Löschen, Zeichnen ---------- */
+function kopf(){
+  document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div><a class="pill" href="${LABOR}">← GGK-Labor</a><button class="pill" data-geh="lehrkraft">Für Lehrkräfte</button>`;
+  const a = idx(S.seite);
+  document.getElementById("weg").innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
+}
+function loeschBereich(){
+  return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button><label class="g-schalter" style="font-family:var(--body)"><input type="checkbox" role="switch" data-bewegung ${S.ruhig ? "checked" : ""}> Weniger Bewegung</label><span>Alles bleibt auf diesem Gerät. Nichts wird übertragen.</span>
+  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> ${esc(L.loesch)}</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div>
+  <p style="flex:1 0 100%;font-size:.85rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p></div>`;
+}
+function zeichne(fokus){
+  if (!SEITE_FN[S.seite]) S.seite = "start";
+  if (S.ruhig) document.documentElement.setAttribute("data-bewegung", "weniger"); else document.documentElement.removeAttribute("data-bewegung");
+  kopf();
+  const m = document.getElementById("main");
+  m.classList.toggle("breit", (L.breit || []).includes(S.seite));
+  m.innerHTML = SEITE_FN[S.seite]() + loeschBereich();
+  window.Gegenwart && Gegenwart.init(m);
+  nachInit();
+  if (fokus) { m.focus({ preventScroll:true }); window.scrollTo(0, 0); }
+}
+function nachInit(){
+  document.querySelectorAll(".g-wahl[data-id]").forEach(w => { pruefeWahl(w); const st = (S.wahl || {})[w.dataset.id] || {}; if (st.zu) { w.querySelectorAll("input").forEach(i => { i.disabled = true; }); const f = w.querySelector("[data-g-festlegen]"); if (f) f.disabled = true; } });
+  if (typeof L.nachInit === "function") L.nachInit();
+}
+function geh(id){ S.seite = id; speichere(); tafelZu(); zeichne(true); }
+/* Nach einer Texteingabe: Zähler, Raster und Freigaben nachführen, ohne neu zu zeichnen (Fokus und Scrollstand bleiben). */
+function nachEingabe(pfad){
+  const z = document.querySelector(`[data-zaehl="${pfad}"]`); if (z) z.textContent = z.textContent.replace(/^\d+/, woerter(hol(pfad)));
+  const r = document.querySelector(`[data-raster="${pfad}"]`);
+  if (r) { const da = woerter(hol(pfad)) >= +r.dataset.min, war = !r.hidden; r.hidden = !da; const h = document.querySelector(`[data-rasterhinweis="${pfad}"]`); if (h) h.hidden = da; if (da && !war) neu(r, "neu"); }
+  document.querySelectorAll("[data-vergleich]").forEach(b => { const ok = b.dataset.bed.split(",").every(p => String(hol(p) || "").trim().length >= +b.dataset.min); b.disabled = !ok; const h = document.querySelector(`[data-vergleichhinweis="${b.dataset.vergleich}"]`); if (h) h.textContent = ok ? "" : "Erst deine Antworten, dann der Vergleich."; });
+  if (pfad === "lk.vermutung") { const frei = S.lk.vermutung.trim().length >= 10, t = document.getElementById("lk-teil2"); if (t && t.classList.contains("gesperrt") === frei) zeichneBehalte(); }
+  if (pfad === "lk.grund") { const b = document.querySelector("[data-lkpruef]"); if (b) b.disabled = !(S.lk.prinzip && S.lk.grund.trim().length >= 10 && !S.lk.ok); }
+  if (typeof L.nachEingabe === "function") L.nachEingabe(pfad);
+}
+/* Neu zeichnen, aber Scrollstand und Fokus (samt Cursor) behalten. */
+function zeichneBehalte(){
+  const y = window.scrollY, a = document.activeElement, id = a && a.id, pos = a && typeof a.selectionStart === "number" ? a.selectionStart : null;
+  zeichne(false); window.scrollTo(0, y);
+  if (id) { const e = document.getElementById(id); if (e) { e.focus({ preventScroll:true }); if (pos !== null && e.setSelectionRange) { try { e.setSelectionRange(pos, pos); } catch(err) {} } } }
+}
+
+function kernStart(){
+  const d = L.init(), g = lade();
+  S = Object.assign({ seite:"start", ruhig:false, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false } }, d);
+  Object.keys(g).forEach(k => { S[k] = (S[k] && typeof S[k] === "object" && !Array.isArray(S[k]) && g[k] && typeof g[k] === "object" && !Array.isArray(g[k])) ? Object.assign({}, S[k], g[k]) : g[k]; });
+  const h = location.hash.replace("#", ""); if (h && SEITE_FN[h]) S.seite = h;
+  zeichne(false);
+}
+
+document.addEventListener("click", ev => {
+  const t = ev.target.closest("[data-geh],[data-mark],[data-stift],[data-satz],[data-vergleich],[data-prinzip],[data-lkpruef],[data-lkneu],[data-stimme],[data-stimmkarte],[data-tafelzu],[data-loeschfrage],[data-loeschen],[data-g-festlegen],[data-neu-wahl],[data-akt],[data-drucken]");
+  if (!t) return;
+  if (t.dataset.geh) return geh(t.dataset.geh);
+  if (t.dataset.mark) return markiere(t);
+  if (t.dataset.stift) { const [id, s] = t.dataset.stift.split(":"); setz("stift." + id, s); t.parentElement.querySelectorAll(".g-stift").forEach(b => b.setAttribute("aria-pressed", String(b === t))); return; }
+  if (t.dataset.satz) { const f = document.getElementById(t.dataset.satz); if (!f) return; f.value = (f.value.trim() ? f.value.replace(/\s*$/, "") + " " : "") + t.dataset.text + " "; setz(f.dataset.f, f.value); nachEingabe(f.dataset.f); f.focus(); return; }
+  if (t.dataset.vergleich) { const id = t.dataset.vergleich; setz("offen." + id, !(S.offen || {})[id]); const v = document.getElementById("vgl-" + id); v.hidden = !S.offen[id]; t.textContent = S.offen[id] ? "Vergleich ausblenden" : (t.dataset.titel || "Vergleich zeigen"); if (S.offen[id] && ev.detail !== 0) neu(v, "neu"); return; }
+  if (t.dataset.prinzip) { S.lk.prinzip = t.dataset.prinzip; speichere(); return zeichneBehalte(); }
+  if (t.hasAttribute("data-lkpruef")) { S.lk.ok = true; speichere(); zeichneBehalte(); if (ev.detail !== 0) neu(document.querySelector("#lk-fb .rm"), "neu"); return; }
+  if (t.hasAttribute("data-lkneu")) { S.lk.ok = false; S.lk.prinzip = null; S.lk.grund = ""; speichere(); return zeichneBehalte(); }
+  if (t.dataset.stimme) { setz(t.dataset.stimme, t.dataset.wert); return zeichneBehalte(); }
+  if (t.dataset.stimmkarte) { const o = JSON.parse(t.dataset.opt).find(x => x[0] === hol(t.dataset.stimmkarte)); if (o) tafel(`<div class="buchstabe">${esc(o[0])}</div><div class="wort">${esc(o[1])}</div>`, { titel:"Meine Stimme" }); return; }
+  if (t.hasAttribute("data-tafelzu")) return tafelZu();
+  if (t.hasAttribute("data-loeschfrage")) { const f = document.getElementById("loesch-frage"); f.hidden = false; f.querySelector("button").focus(); return; }
+  if (t.dataset.loeschen) { if (t.dataset.loeschen === "ja") { try { localStorage.removeItem(L.key); } catch(e) {} const r = S.ruhig; kernStartLeer(r); } else { document.getElementById("loesch-frage").hidden = true; } return; }
+  if (t.hasAttribute("data-g-festlegen")) { const w = t.closest(".g-wahl[data-id]"); if (!w) return; const gew = w.querySelector("input:checked"), ta = w.querySelector("textarea"); if (!gew) return; setz("wahl." + w.dataset.id, { o:+gew.value, grund: ta ? ta.value : "", zu:true }); setTimeout(() => { zeichneBehalte(); if (typeof L.nachWahl === "function") L.nachWahl(w.dataset.id); }, ruhig() ? 0 : 420); return; }
+  if (t.dataset.neuWahl) { setz("wahl." + t.dataset.neuWahl, {}); return zeichneBehalte(); }
+  if (t.hasAttribute("data-drucken")) return window.print();
+  if (t.dataset.akt && AKTION[t.dataset.akt]) return AKTION[t.dataset.akt](t, ev);
+});
+function kernStartLeer(r){ S = {}; const d = L.init(); S = Object.assign({ seite:"start", ruhig:r, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false } }, d); speichere(); zeichne(true); }
+function markiere(t){
+  const [id, i] = t.dataset.mark.split(":"), st = (S.stift || {})[id] || "a";
+  if (!S.mark[id]) S.mark[id] = {};
+  const hat = S.mark[id][i] === st;
+  if (hat) delete S.mark[id][i]; else S.mark[id][i] = st;
+  speichere();
+  t.className = "g-wort " + (hat ? "" : STIFTKLASSE[st]); t.setAttribute("aria-pressed", String(!hat));
+  if (!hat && window.Gegenwart && st === "a") Gegenwart.bewegen(t, [{ backgroundSize:"0% 100%" }, { backgroundSize:"100% 100%" }], { dauer:260 });
+  document.querySelectorAll("[data-belege]").forEach(b => { const ids = b.dataset.belege.split(","); if (!ids.includes(id)) return; QUELLEN[ids[0]].stifte.forEach(s => { const sp = b.querySelector(".sp." + s[0]); const alt = sp.querySelector("ul,.leer"); if (alt) alt.outerHTML = belegListe(ids, s[0]); }); });
+  if (typeof L.nachMark === "function") L.nachMark(id);
+}
+document.addEventListener("keydown", ev => {
+  if (ev.key === "Escape") return tafelZu();
+  const t = ev.target.closest && ev.target.closest("[data-mark]");
+  if (t && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); markiere(t); }
+});
+document.addEventListener("input", ev => {
+  const t = ev.target;
+  if (t.dataset && t.dataset.f) { setz(t.dataset.f, t.type === "range" ? +t.value : t.value); nachEingabe(t.dataset.f); return; }
+  if (t.hasAttribute && t.hasAttribute("data-grund-feld")) { const w = t.closest(".g-wahl"); if (w) pruefeWahl(w); }
+});
+document.addEventListener("change", ev => {
+  const t = ev.target;
+  if (t.hasAttribute && t.hasAttribute("data-bewegung")) { S.ruhig = t.checked; speichere(); if (S.ruhig) document.documentElement.setAttribute("data-bewegung", "weniger"); else document.documentElement.removeAttribute("data-bewegung"); return; }
+  if (t.tagName === "SELECT" && t.dataset.f) { setz(t.dataset.f, t.value); nachEingabe(t.dataset.f); if (t.dataset.neu !== undefined) zeichneBehalte(); return; }
+  const w = t.closest && t.closest(".g-wahl"); if (w) pruefeWahl(w);
+});
+const AKTION = {
+  /* data-akt="setz" data-p="pfad" data-w="wert": Wert setzen und neu zeichnen */
+  setz(t){ let w = t.dataset.w; if (w === "true") w = true; else if (w === "false") w = false; setz(t.dataset.p, w); zeichneBehalte(); },
+};
+/* Weltkarte: Landflächen aus Natural Earth (1:110 Mio., gemeinfrei, naturalearthdata.com), vereinfacht; Plattkarte 720 × 360 (2 Einheiten je Grad). */
+const LAND = "M240.9,340.1L239.7,342L231,341.8L227.4,340.5L236.2,340.8L238.8,339.3L240.9,340.1ZM41.6,339L37.7,339.3L32.6,337.2L33.8,336.4L37.5,336.8L41,338.1L41.6,339ZM269.7,336.1L272.2,337L273.3,340.1L259,342.1L251.7,341.3L252,340.4L258,339.2L262.7,336.1L269.7,336.1ZM117.6,327L122.6,327L119.5,328.2L114.8,327.3L115.2,326.6L117.6,327ZM108.9,327L111.9,327.7L105.4,326.9L108.9,327ZM162,323.9L166.4,323.9L167.6,325L158.4,325L155.3,323.8L162,323.9ZM223.1,321.9L223.3,322.8L222.4,324.3L217.8,325L215.2,325L216.2,324.2L211.6,324.7L210.1,324.1L210,323.3L215.9,322.4L216.5,319L219.5,317.8L223.1,321.9ZM242.8,308.3L236,309.6L234.7,311L235.8,312.4L232.5,313L228.7,315.9L230.4,317.4L233.6,318.5L236.4,321.4L238.6,326.3L238.3,327.4L231.3,330.5L220.4,332.4L218.8,333.3L205.5,333.4L206.1,334.2L212.7,335.8L204.1,336.8L204,338.4L209.3,340.5L240.6,344.8L243.6,346.4L260.5,343.5L274.4,344.2L278.5,342.7L302.9,340.7L300.6,339.3L300.6,338.5L288.7,338.9L288.2,338.2L288.4,336.7L302.2,333.3L315.1,332.2L325,330.3L328.6,329L329.2,328.2L327.1,327.7L329.1,326.3L335.4,324.8L339.4,322.5L345.2,323.4L346.3,321.9L351.3,322.9L358.7,322.5L359.5,323.3L372.5,320.9L375.5,319.8L379.1,320L381.6,321.7L386.8,319.9L389.5,320.1L390.3,320.8L391.9,320.1L398.5,319.8L402.9,320.1L405.1,321.4L414.2,320.9L424,319.3L427.7,317L437.3,319.6L443.9,317.2L453,315.2L454.9,315.4L458,314.2L461.5,313.8L463.6,312.5L469.1,311.6L472.7,311.9L477.5,314.6L482.9,315.9L484.8,316L488.1,314.8L497.8,315.9L499.3,318.5L499.1,319.4L495.6,320.6L495.9,321.4L498.1,321.4L495.9,323.7L499.7,324.5L502,324.2L507.7,319.7L515.3,318.9L518.2,316.7L525.6,314.4L533.5,314.3L536,312.4L537.7,313.9L539.3,314.3L551.6,314.8L559.4,314.5L565.7,311.1L572.4,313.9L580.5,313.4L587.2,311.8L591.2,313.4L599.7,314.5L606.4,313L617.6,313.5L629.5,312.4L630.1,310.6L631.4,311.2L633.2,313.6L634.9,313.9L651,313.8L653.3,315.8L657.7,316.8L665,317.7L668.6,317.1L673.6,318.8L678.4,319.2L683.1,321.2L694.6,321.7L702.4,323.4L698.6,327.3L692.2,328.8L688.5,330.9L687.1,332.5L687,334.1L689.5,336.4L693.2,336.6L694,337.5L683.5,338.3L679.6,341.9L687.4,344.8L697.8,346.7L698.8,347.7L706.4,348.8L712,348.3L720,349.4L720,352L0,352L0,349.4L1.9,348.3L5.5,348.9L8.1,348.2L11.2,349.1L14.2,348.1L20.1,347.8L26,349.1L43.9,350.7L49.6,350.2L62.9,351.2L73.8,350.1L74.2,349.1L59.9,348.6L58.2,347.8L52.8,347.4L54.7,344.9L54.3,344.1L46.3,342.2L55.8,342L58.7,342.7L67.2,340.7L66.5,339.9L60.9,338.7L49.3,338.1L43.9,336.1L43.3,333.8L46.1,334.6L52.5,334.1L54.2,335L57.3,334.8L67.8,333L67,331.5L67.6,330.8L70.2,330.4L71.4,331.1L89.6,328.6L120.6,329L125.1,328.1L127.6,328.5L132.1,327.4L135.4,329.4L137.5,328.8L144.9,330.4L150.2,329.9L158.7,330.6L159.8,329.7L157.5,328.4L154.9,328.2L153.8,327.5L152.6,325.2L161.7,325.8L164.6,327.1L167.3,327.2L175.1,326.3L179.8,326.6L181.5,325.1L183.2,326L188,326.2L189.6,327L197.1,327.7L199.4,326.3L207.6,327.9L222.1,326L224.1,325.6L225.7,324.1L222.9,319.4L224.8,317.1L224.5,314.7L225.5,313.8L234,309.3L242.8,306.8L245.6,307.1L242.8,308.3ZM224.5,287.7L229.9,289.4L229,290.4L227.1,290.5L226.1,289.8L223.7,291.2L221.5,291L215.5,289L210.7,285.7L217.8,288.1L219.5,285.9L221.3,285L222.7,285.3L224.5,287.7ZM242.9,282.2L244.5,283.1L243.9,283.8L241.2,284.4L240.3,283.7L238.6,284.6L237.6,283.7L240,282.5L241.7,283L242.9,282.2ZM500.6,279.4L497.5,279.6L497.9,277.2L501.1,278.1L500.6,279.4ZM650.8,261.6L652.7,262.3L656.6,261.8L656.7,264.1L655.8,266.4L655.1,265.9L653.7,267.3L652.1,267.1L649.4,262.3L649.5,261.4L650.8,261.6ZM706,261.8L706.5,262.7L707.9,261.9L708.5,262.7L708.5,263.5L705.4,266.7L706.2,267.7L702.9,268.5L701.2,271.8L698.7,273.3L693.4,272.4L693,271.7L694.1,270.2L701,266.1L704.2,261.9L705.6,261L706,261.8ZM709.2,252.3L710.7,254.4L710.7,253.1L711.6,253.6L711.9,255.1L713.5,255.8L717,255.4L715.9,258.3L714.4,258.3L712,262.6L710.5,263.4L709.3,262.6L710.5,260.9L709.8,259.8L707.6,259L707.7,258.3L709.1,257.6L709.4,254.8L705.3,249.1L708.7,250.5L709.2,252.3ZM694.2,224.3L693.5,224.8L690.9,223.4L688.1,220.2L690,220.9L694.2,224.3ZM460.1,207.1L460.8,211.4L460.4,212L459.7,210.8L459.3,211.4L459.5,213.8L454.2,229.9L450.8,231.2L448.1,230L446.5,224.1L448.7,220.1L447.9,214.8L448.9,212.4L452.6,211.6L455.4,209.2L455.7,207.3L456.6,207.6L458.4,204.1L460.1,207.1ZM647.1,207.5L647.8,209.1L649.1,208.3L650.7,210L652.8,217.9L657.7,220.8L659.4,224.7L660.2,224.2L661,225.1L661.5,224.8L661.8,226.9L665.7,230.5L666.3,232.1L666.2,234.5L667.1,236.2L665.8,243.3L664.9,245.1L663.4,246.1L660.7,251.3L660,254.9L656.6,255.6L652.6,258.1L649.8,256.8L650.1,255.8L647.2,257.6L641.3,256L640,254.8L639.1,252.3L636.2,251.2L636.9,250.3L636.4,248.8L635.4,250.2L633.7,250.5L635.8,247.3L635.6,245.8L632.7,248.2L632,249.8L630.4,249L630.5,247.9L628.2,245.7L628.5,245.2L622.7,243L612.3,244.4L608.4,245.9L607.3,247.8L599.8,248L596,250.1L593.3,250.1L590.1,248.4L590.1,247.2L591.4,246.5L591.4,243.2L590.1,238.9L586.7,232.2L587.6,233.1L586.9,231.2L588.5,232.6L586.8,228.8L588.3,223.5L588.5,225L589.3,223.7L593.4,221.4L601.7,219.4L604.5,216.4L604.6,214.5L606,212.8L606.9,214.5L607.7,214.1L607,213.2L607.6,212.2L608.5,212.7L608.8,211.1L611.4,208.5L612.3,208.7L614.1,207.6L616.7,209.7L619.2,209.9L618.8,208.8L621.2,205.1L625.2,204.2L625.1,203.2L623.6,202.5L624.7,202.3L630.6,204.5L633,203.7L633.9,204.7L631.9,206.6L631,210L640.4,215.4L641.8,214.7L642.5,212.8L643.4,210.1L643.4,204.8L645,201.3L647,205.7L647.1,207.5ZM601.4,200.5L597.9,199.1L599.8,198.7L601.6,199.9L601.4,200.5ZM608.9,200.3L606.9,200.5L608,198.6L610.2,197.3L614.7,196.8L610.2,198.8L608.9,200.3ZM595.8,196.2L597.8,196.6L598.3,197.4L593.5,198.1L594.2,196.9L595.8,196.2ZM605.8,196.2L605.5,197.3L599.8,197.6L599.8,196.9L601.4,196.5L602.7,197.1L605.8,196.2ZM577.2,193.6L581.1,193.8L581.5,192.9L585.2,193.9L586,195.2L589,195.6L591.4,196.7L589.1,197.5L586.9,196.7L576.6,195.5L570.7,193.7L572.1,191.8L574.5,191.9L577,192.8L577.2,193.6ZM671.8,193.6L670.3,193.1L669,190.3L672,193.1L671.8,193.6ZM664,191L660.5,192.6L656.6,191.5L656.8,190.9L659.7,191L660.3,190L660.5,191.1L661.6,190.9L663.3,189.5L663.1,188.3L664.7,188.6L664,191ZM620.9,186.2L621.7,187.7L620,186.9L615.8,186.8L616.3,185.7L620.9,186.2ZM666.3,189L665.7,189.5L664.8,187.6L661.3,185.5L661.9,185L664.5,186.5L666.3,189ZM628.3,182.3L628.8,185.5L630.9,186.7L632.6,184.6L634.9,183.4L636.7,183.4L649.2,187.7L651.7,189.8L652,190.9L655.3,192.2L655.8,193.2L653.9,193.4L654.4,194.8L656.2,196.1L657.5,198.2L658.6,198.1L658.5,199L661.6,200.6L661.4,201.2L655.8,200.3L652.1,196.1L649.5,195.3L646.6,196.5L646.8,198L645.3,198.7L642.1,198.2L640.3,196.6L638.3,196.2L637.8,196.8L635.2,196.8L636.1,195.2L637.3,194.6L635.9,190.8L630.3,188.9L627.3,187.1L626,188.2L625.5,186.6L624,185.6L627.6,185L627.4,184.4L624.5,184.4L623.7,183.2L621.9,182.9L621,181.9L624.8,180.7L628,181.6L628.3,182.3ZM610.5,177.2L608.9,179.1L607.4,179.5L600.4,179.5L600.1,181L601.9,182.8L603,181.9L606.7,181.2L606.5,182.2L605.6,181.9L603,183.8L604.9,186.4L604.5,187.1L606.3,189.4L606.3,190.7L605.3,191.3L604.5,190.6L605.4,188.9L603.5,189.7L603,189.1L603.2,188.4L601.8,187.2L601.9,185.3L600.6,185.9L600.9,191.1L599.6,191.3L598.7,190.8L599,187L598.2,187L597.5,185.6L600.1,178.9L601.8,177.4L605.9,178.2L608.2,178.2L610.1,176.7L610.5,177.2ZM617.4,177.7L617.3,179.5L616.2,179.3L615.9,180.5L616.8,181.6L616.2,181.8L614.8,178L615.9,175.7L616,176.7L617.2,176.9L617.4,177.7ZM571.6,191.7L569.4,191.7L565.2,188.4L558.5,179.6L557.2,176.4L550.8,170.1L550.6,169L555,169.5L561.3,175.8L563.3,175.8L567.7,179.8L566.9,181.4L568.7,182.2L569.8,184.7L571.2,184.9L572.2,186.1L571.6,191.7ZM595.8,176.3L598,178.2L595.6,178.4L595,181.6L593.1,183L592.3,188L592,187.3L589.7,188.2L588.9,187L586.5,186.2L584.1,187L583.4,186L580.4,185.9L580.1,183.2L578.2,180.9L578.1,177.3L579.3,176L580.8,176.7L582.3,176.3L582.7,174.6L586,173.8L593.5,166.2L594.3,166.1L595.4,168L598.4,169.2L598.2,170L596.9,170.1L597.2,171L595.8,171.7L594.6,173.5L596.1,175.4L595.8,176.3ZM612.8,163.2L613.1,165.6L612.4,167.5L611.7,165.4L610.7,166.4L611.4,167.9L610.8,168.8L608.4,167.7L607.9,166.2L608.5,165.3L607.2,164.3L604.2,166.2L603.8,165.6L604.6,163.9L607,162.6L607.7,163.5L609.2,163L609.5,162.1L610.9,162L610.8,160.5L612.4,161.4L612.8,163.2ZM522.4,167.6L520.7,168.1L519.7,166.5L519.4,163.6L520.3,160.4L521.7,161.5L523.6,165L523.3,167L522.4,167.6ZM608,159.4L606,162L604.8,160.6L605.9,158.2L607,158.1L606.7,159.5L608.2,157.5L608,159.4ZM597,161.4L594.3,163.3L599,157.3L599.4,158.9L597,161.4ZM611,155.7L611.6,157.9L610,157.4L610.6,159.3L609.6,159.7L608.6,157L609.8,157.2L609.8,156.4L608.5,154.9L610.5,154.9L611,155.7ZM602.6,143L603.9,143.6L604.5,143L605,145.8L604.5,147.5L603.3,148.1L603.5,151.3L605.4,151.3L607.9,152.4L608.2,154.9L605.9,152.9L605.3,153.6L604.1,152.4L601.3,152.3L602,150.9L601.4,150.5L601.1,151.2L600.1,150.1L599.8,147.3L600.6,147.9L601.4,143L602.6,143ZM228.8,143.5L225.6,144.1L225.5,143.3L228.8,143.5ZM206.2,144.3L205.6,144.6L203.3,143.5L204.4,143L206.2,143.2L207.6,144.2L206.2,144.3ZM214.8,140.3L220.1,140.7L223.4,142.8L222.6,143.6L218.7,143.1L217.2,144.8L215.3,143.6L212.2,143.9L211.1,143.3L211.3,142.7L215.3,142.7L214.4,141L213.2,140.7L214.8,140.3ZM580.7,142.6L579,143.6L577.3,143L577.3,141.3L578.2,140.4L581.6,139.8L582,140.6L580.7,142.6ZM200.6,134.5L201.4,135.2L203.3,135L207,137.6L208.8,138L208.7,138.5L211.6,139.4L210.1,140.2L204.5,140.3L205.8,139.2L203.7,138.5L202.6,136.8L195.7,135.2L196.4,134.7L194.4,134.6L191.9,136.2L190.1,136.2L192.4,134.4L195.5,133.6L200.6,134.5ZM602.4,134.4L601.5,136.1L600.2,132.9L603,129.4L603.9,130L602.4,134.4ZM629.3,111.7L629.5,112.4L628.4,113.6L627.6,113L626,114.6L624.7,114L625.8,111.9L627,112.1L627.8,111.3L629.3,111.7ZM429.2,108.7L427.8,109.5L428,110L426,110.9L424.5,109.8L429.2,108.7ZM407.4,108.6L408.5,109.3L412.6,109.4L412.3,110L409.4,110.2L407,109.4L407.4,108.6ZM391,103.5L390.2,106.8L384.9,104.8L385.1,103.7L391,103.5ZM378.4,97.6L379.6,99L379.3,101.6L377.6,102.2L376.9,101.7L376.3,98.1L378.4,97.6ZM642,105.7L641.2,107.3L641.5,108.3L640.5,109.7L638,110.7L634.4,110.8L631.6,113.1L630.2,112.3L630.2,110.8L622,112.2L624,113.7L622.7,117.1L621.4,117.9L620.4,117.2L620.9,115.4L618.8,113.4L620.7,112.8L625.2,109.1L629.2,108.5L631.4,108.9L633.4,105.4L634.8,106.3L638.9,103.6L640.1,101.1L639.8,98.9L640.6,97.6L642.7,97.2L643.8,101.6L641.9,103.7L642,105.7ZM379.1,95.7L378.5,97.2L377.6,96.8L377.1,95.5L378.8,94L379.1,95.7ZM647.8,91.7L649.2,92.1L650.6,91.2L651.1,93.5L648.1,94L646.4,96L643.2,94.6L642.1,96.8L639.9,96.9L639.6,94.9L640.6,93.3L642.8,93.2L643.9,88.9L647.8,91.7ZM232.7,86.9L236,87.1L234.3,88.1L231.2,86.5L232,85.9L232.7,86.9ZM236.4,81.8L231,80.3L234.3,80.6L236.4,81.8ZM113,83L108.7,82.3L105.9,80.4L103.9,80L103.3,78.5L108.5,79.4L113,83ZM247.7,78.6L246.4,80.4L247.7,79.7L249.1,80.1L248.4,80.8L253,81.5L252.4,83L253.8,82.6L254.7,84.9L253.9,86.7L251.6,86.4L252.1,84.7L251.5,84.5L249.2,86.2L248,86.2L249.4,85.2L247.5,84.7L241.5,84.8L241.2,84.2L242.4,83.5L241.5,83L243.2,81.7L245.3,78.6L246.5,77.4L249.2,76.8L247.7,78.6ZM94.6,71.9L96.5,71.8L95.9,74L97.6,75.6L93.9,73.2L93.6,71.7L94.6,71.9ZM647.3,78.5L649.3,82L646.3,81.4L645.1,84.3L647.1,86.3L647,87.7L645.5,86.5L644.2,88.1L643.8,82.3L644.4,78.1L643.2,76.1L643.4,73.4L645.2,72.5L644.4,71.5L645.3,71.3L647.3,78.5ZM346.4,75.5L342.9,76.7L340,76.4L341.7,74.3L340.6,72.2L344.9,69.7L346.5,69.7L348.7,70.9L347.6,72.3L347.9,73.7L346.4,75.5ZM385.4,68.8L384.2,70.4L382.1,69.3L381.8,68.4L384.7,67.8L385.4,68.8ZM54,65.8L52,66.5L50.7,65.1L53.5,64.1L55.7,64.8L54,65.8ZM354,62.7L351.9,64.9L356.1,64.6L355.6,66.3L353.8,68.1L355.8,68.2L357.8,70.8L359.1,71.1L360.9,74.1L363.4,74.5L363.1,75.8L362.1,76.4L362.9,77.4L361.1,78.5L354.1,78.6L352.8,79.5L350.9,79.3L349.5,80.1L348.4,79.7L351.4,77.6L353.2,77.1L350,76.8L349.5,76L351.6,75.4L350.5,74.3L350.8,73L353.8,73.2L354.1,72L352.7,70.8L350.3,70.4L349.8,69.9L350.6,69L349.9,68.4L348.8,69.4L348.7,67.4L347.7,66.4L348.4,64.4L350,62.7L354,62.7ZM28.8,60.2L27.6,60.5L25.1,59.6L28.7,59.4L28.8,60.2ZM196.2,54.6L193.9,55.7L192,55.1L193.5,54.2L196.2,54.6ZM16.5,52.4L22.6,53.4L20.9,54L16.9,53.4L16.5,52.4ZM189.7,48.7L190,49.6L191.1,49.3L196.7,51.1L196.9,52L199.8,52.5L198,53.2L194.9,52.7L193.8,51.8L189,53.9L188.3,52.7L185.6,52.9L187.3,51.9L188.2,48.5L189.7,48.7ZM331,47.1L330.5,48.4L332.8,49.7L330.2,51.3L322.7,53L314.5,52.1L316.4,51.2L312.1,50.2L315.6,49.8L315.5,49.2L311.3,48.8L312.7,47.5L315.7,47.2L318.8,48.5L321.9,47.4L324.4,48L327.7,46.9L331,47.1ZM208.3,45.7L206,45.8L205.5,44.8L206.4,43.7L209.8,44L209.6,45.1L208.3,45.7ZM10,46.8L11.3,47.3L10.9,45.9L16.3,46.2L20.2,48L18.2,48.9L14.9,49.1L14.9,51.1L14.1,51.5L8,50.2L7.6,49.3L3.3,49.2L2.2,48.5L2.6,47.8L0.2,48.3L1.1,49.2L0,50L0,42.1L10.1,45.6L10,46.8ZM168.7,41.8L167.5,42.5L160.4,41.2L163.6,39.7L168.7,41.8ZM2.6,38.2L0,38.3L0,37L4.8,37.5L2.6,38.2ZM178.9,41L178.9,43L181.6,41.5L184,42.8L183.4,44.3L185.3,45.6L188.8,42.4L189,40.2L194.8,40.7L197.4,41.7L197.6,42.7L196.1,43.7L197.5,44.8L197.2,45.8L193.3,47.2L190.5,47.5L188.5,46.9L185.4,50.4L183,51.8L180.2,51.9L178.6,52.8L178.5,54.1L176.1,54.3L173.7,56L171.5,58.2L170.6,62.1L173.6,62.4L175.4,65.8L178.2,65.4L190,69.4L195.5,69.7L195.1,71.4L195.8,73.4L197.2,75.7L200.2,77.6L201.7,76.9L202.8,74.9L201.8,71.7L200.3,70.7L203.5,69.7L206.9,66.9L206.8,65.6L205.4,63.9L203,62.4L205.3,60.3L203.8,55.4L205.2,54.9L210.7,55.6L212.3,55.1L217.3,57.7L220.8,57.9L221.4,62.1L223.3,62.4L224.7,63.6L227.6,62.5L230.8,59.3L237.2,66.1L236.4,67.3L240.9,69.6L245.3,70.7L246.1,72.4L248.5,73.5L248.6,75.7L242.5,77.9L239.9,79.5L227.2,79.5L225.5,81L223,81.9L217.8,86.4L219.5,86L222.7,83.4L226.9,81.7L229.9,81.5L231.7,82.5L229.8,83.9L231.1,87.5L233.7,88.5L237,88.2L239,86L239.1,87.4L240.4,88.2L229.3,92.9L227.8,92.8L227.7,91.1L231.1,89.4L225.7,89.7L226.1,90.4L219.8,92.6L218.6,93.9L218.3,95.3L219,96.4L219.8,96.4L219.6,95.7L220.2,96.2L220.1,96.7L212.6,98.1L216.1,98.1L212.1,98.5L211.5,99.1L212.1,99.1L211.6,100.6L210.2,102.1L208.9,101L209.9,103.2L208.1,105.6L208.6,104.1L207.5,103.4L207.3,101.7L207.3,103.8L206.1,103.5L207.4,104.2L208.5,108.9L207.3,110.4L201.9,113L197.3,117.1L197.4,119.9L199.9,126.2L199.2,129.6L197.7,129.6L196.6,128.3L194.3,124.2L194.7,122.9L194.1,121.8L191.8,119.8L189.8,120.7L187.2,119.2L181.6,119.4L180.8,119.6L181.6,121.4L179.7,121.8L178.2,121.7L176.7,120.6L172.3,120.6L166.8,123.4L165.3,125.2L165.7,128.3L164.3,135.1L167.4,141.4L171.1,143.7L175.9,142.6L178.5,141.4L179.4,138L185.9,136.9L186.3,138.3L184.8,140.7L184.3,143.5L183.4,143L183.3,146.9L182.1,148.2L190,148L193.2,149.5L193.6,151.4L192.4,157.8L195.6,162L197.1,162.4L200.9,160.8L206.3,162.7L208.7,161.1L209,158.8L210.2,157.8L213.2,157.5L216.5,155.1L217.7,155.8L217.3,156.9L216.1,157.2L216.7,159.1L215.9,160.3L216.6,161.9L217.5,161.7L217.9,160.3L217.2,158.1L219.7,157.2L219.4,156.3L220.1,155.7L220.8,157.1L222.2,157.1L223.6,158.9L227.5,158.7L230.2,159.8L231.4,158.7L236.2,158.6L234.5,159.2L235.2,160.1L238.3,161.2L238.7,162.8L241.8,164L243,165.3L243.1,166.3L245.7,168.1L252.1,168.5L254.2,169.2L256.7,171.7L257.4,171.6L259,176.2L260.1,176.5L260.1,177.9L258.6,179.6L259.2,180.2L262.8,180.5L262.8,182.5L264.4,181.2L270.2,183.1L271.2,184.3L270.8,185.4L273.2,184.8L277.1,185.8L280,185.7L285.6,189.6L288.8,190.3L290.5,194.7L289.7,198L282.7,206.1L281.5,215.7L280.5,219.2L278.5,221.8L278.1,223.9L276.5,224.7L276,225.9L270.7,226.7L264.7,229.8L263,231.8L262.2,237.3L258.6,242L255.5,244.5L252.4,248.8L250.1,249.9L247.6,249.7L244.4,248.9L243.1,247.8L243,248.9L245.5,250.6L245.3,252L246.5,252.8L246.4,253.8L244.5,256.4L241.5,257.4L235.3,257.7L235.7,261.4L234.5,262.1L232.5,262.3L230.5,261.6L229.8,262.1L230,264.1L231.4,264.7L232.5,264.1L233.1,265.1L229.6,267L228.9,270.1L227,270.1L225.4,271.1L224.8,272.6L226.8,274.1L228.7,274.5L228,276.3L225.7,277.4L224.4,279.7L221.7,281.5L222.4,283.5L223.7,284.7L221.1,284.6L218.3,285.8L218,287.7L214.9,287.1L210.1,284.5L208.8,277.3L209.6,275.4L211.7,273.9L208.7,273.3L210.6,271.5L211.3,268.2L213.5,268.9L214.6,264.8L213.2,264.2L212.6,266.7L211.3,266.4L212.6,259.9L213.6,258.5L212.8,254.3L213.7,254.2L217.1,244.8L217,237.7L218.2,235.3L219.8,222.8L219.7,219.5L219.3,216.7L217.2,215.5L217.1,214.7L208,209.3L207.5,207.1L200.5,194.4L197.5,192.3L198.1,191.4L197.2,189.5L200.5,185.3L200,184.4L199.3,185.4L198.1,184.5L198.1,182.1L198.8,181.8L199.8,178.5L202.3,177.2L202,176.6L202.8,176.5L203.1,174.7L204.1,174.6L205.7,172.3L205,171.8L205,166.6L203.6,165L203.1,163.9L203.6,163.4L201.8,162L200.9,162.1L199,163.8L200,164.9L198.2,165.6L197.9,164.4L193,163.1L192.7,161.9L190,159.8L189.8,160.9L188.7,160.1L188.7,158.5L188.1,158.2L188.6,157.8L184.7,154.2L185.4,154L185,153.4L183,153.7L177.5,152.1L173.3,148.8L170.6,147.6L166.9,148.7L153,143.4L149,140.1L148.5,139.1L149.2,138.9L149.5,137.2L147.9,134.5L143.2,129.7L141.5,128.8L141.4,127.1L139.2,125.7L138.7,124.3L137.6,124.1L135.5,122.1L133.7,117.7L130.4,116.4L130.7,119.7L136.8,126.7L138.7,131.4L139.7,131.5L141.1,133.6L139.9,134.4L139.4,133.1L135.6,130.5L135.4,128L129.9,124.6L130.9,124.5L131.7,122.9L129,120.9L125.4,113.9L123,111.9L118.8,110.8L111.2,99.4L111.6,96L110.9,94.5L112.2,89L110.6,83.6L113.8,83.9L114.8,85.8L115.3,85.3L114.3,82L108.8,79.2L105.1,78.3L104,76.6L104.3,75.3L101.7,74.5L101.4,72.9L99,71.4L98.9,70.4L96.1,69L95.5,67.3L92.9,65.6L91.8,63.8L86.7,63.6L80.3,60.9L74.9,59.8L72.1,60L65.8,58.2L63.6,58.7L64,60L56.6,61.7L56.3,60.5L57.2,58.5L59.3,57.9L58.8,57.4L52,61.3L53.4,62.3L51.5,63.7L47.4,65.2L46.9,66L43.8,67.1L43.1,68L30.4,71.2L30.1,70.9L36.4,68.2L38.9,68L44.6,64.9L45.9,62.2L41.9,63.2L40.6,62.1L40,62.9L39.3,61.9L36.1,62.7L36.3,60.7L35,60L32.4,60.4L29.3,59L29.3,57.9L27.8,57L30.9,53.7L33.9,53.9L38.5,52.5L38.1,51.6L37,51.2L38.4,50.4L34.5,51.3L30.1,51.1L27.1,50.6L23.8,48.7L31.1,46.8L32.7,46.8L32.4,47.8L36.6,47.8L29.2,43.9L26.5,43.3L27.6,42.2L31.1,42.2L33.7,41.3L34.1,40.3L36.2,39.3L43.8,38.4L46.8,37.3L49.9,37.7L51.3,38.6L55.6,38.3L55.5,38.8L58.5,39.1L72.8,39.7L87,42.2L91.2,40.7L94.1,41L100.4,39.6L101.8,40.4L103.3,40L103.7,39L108.5,41L111.2,39.7L111.4,41.2L114.6,40.3L117.1,40.4L124.8,42L129.5,42.2L132.2,43.2L129.4,44.2L133,44.6L140.1,44L142.2,45.2L144.4,44.2L142.4,43.4L143.7,42.7L147.7,42.4L151.3,44L157.1,44.7L163.1,44.4L162.9,43.2L164.7,42.8L167.8,43.5L167.7,45.4L169,43.8L170.6,43.9L171.5,41.9L167.1,39.8L167.2,37.6L169.6,36.2L174.2,37.4L177,39.6L175.2,40.6L178.9,41ZM131.7,33.8L130.7,34.7L135.1,34.1L137.9,35.1L140.2,34.1L142,34.7L143.6,36.7L144.6,35.9L143.2,33.8L147,33.8L149.2,34.7L151.1,38L158,40L157.8,40.8L154.5,41L155.8,41.8L155.1,42.5L148.1,41.6L133.4,42.9L132.3,42L127.8,41.7L125.3,40.1L135.2,39.3L124.2,38.9L123.1,38.2L127.8,37.4L121.2,36.9L124.3,34.6L129.6,33.4L131.7,33.8ZM151,33.2L149.2,34.5L146.1,33.1L151,33.2ZM207.3,33.8L207.5,34.3L201,34.5L198.2,33.3L198.3,32.6L199.3,32.5L203.9,32.7L207.3,33.8ZM186.9,33.7L188.5,34.9L190.3,33.3L195.4,32.5L198.8,34.6L198.5,35.9L204.4,34.5L211.5,36.5L211.8,37.3L215.5,36.9L217.6,38.2L222.4,38.9L226.1,41.6L222.4,42.6L230.3,44.3L233.2,46.1L236.3,46.3L235.7,47.7L232.2,50L226.6,47.2L224,47.5L223.7,48.6L229.4,51.2L230.7,53.2L230,54.7L222.4,52.5L227.7,56.1L218,54.2L215.5,53.2L216.2,52.6L210.3,50.6L210.4,51.2L204.6,51.5L202.9,50.9L204.2,49.4L212.1,49.1L211.4,48.4L214.7,45.4L214.1,44.5L210.3,42.9L206.3,42.2L207.5,41.7L202.1,39.7L197.4,40.5L190.1,40.1L182.6,39.2L181,38.5L183.1,37.6L180.2,37.6L179.6,35.5L181.1,33.7L188.3,32.4L186.9,33.7ZM159.3,32.3L165.2,32.5L165.8,33.1L163.9,34L166.9,34.9L166.6,36.7L161.4,37.3L155,35L155,34.3L159.1,34.6L156.9,33.3L159.3,32.3ZM647.2,33.6L639.7,33.3L644.1,32.3L647.2,33.6ZM173.6,34.5L171.5,36L169.2,35.9L168,33.1L171,31.7L179,32.3L176,34.1L173.6,34.5ZM119.1,37.2L113.8,38.2L112.8,37.3L108.1,36.3L112.1,32.6L110.2,31.4L124.9,31.6L129,33L121.6,35L119.1,36.4L119.1,37.2ZM661.5,29.8L659.2,30.6L652.2,29.7L652.7,29L661.5,29.8ZM172.8,30L171.7,30.8L166.4,30.1L167.4,29.2L170.3,28.7L172.8,30ZM650.2,28.9L648.6,30.4L637.9,30.8L633.9,29.5L635,28.1L637.7,27.7L650.2,28.9ZM163,26.6L164.5,27.5L163.7,30L160.4,30.2L158.2,29.9L158.3,28.7L155,28.9L154.9,27.3L163,26.6ZM143.6,27.6L144.4,28.3L148.2,28.1L148.6,29L147.4,30L135.6,31.2L132.5,31.2L132.3,30.6L136.4,29.7L124.6,29.6L129.2,27L141.9,29.1L139,27.1L140.8,26.4L142.9,26.6L143.6,27.6ZM475.1,38.6L467.4,38.5L466.8,37.6L463.2,37.1L462.9,36L465,35.5L464.9,34.5L468.9,32.7L467,32.5L471.8,30.7L471.3,29.8L482.3,27.5L496.3,26.1L497.7,26.9L483.2,29.5L477,31.4L470.8,35.3L471.2,36.9L475.1,38.6ZM170.6,25.8L176.8,26.4L178.5,27.1L178.1,27.9L181.6,28.8L197.7,28.6L199.9,29.3L200.3,30.2L196.1,31.1L180.5,31L175.2,30.3L174.2,28.2L172.2,27.4L165.8,26.5L166.5,25.7L170.6,25.8ZM127.6,24.7L127.3,26.2L125.8,26.9L117,28.2L114.3,27.8L121.8,25L127.6,24.7ZM573.9,26.1L574.5,27L582.2,26.6L588.3,28.3L587.8,29.3L578.8,31.6L584.2,32.4L586,32L587.1,33.3L591.1,32.5L597.6,32.8L598,33.8L606.4,34.1L606.5,32.5L614,32.9L617.2,33.9L618.1,35.2L616.9,36L619.4,37.6L622.6,38.4L624.5,36.3L627.7,37.2L631.1,36.7L635,37.3L636.5,36.7L639.7,37L638.3,35.2L640.9,34.3L659,35.6L660.7,36.8L665.9,38.3L678,38.3L679.7,39.1L679.4,40.6L681.9,41.1L695.7,40.8L699.2,42.6L701.6,42L700,40.7L700.9,39.8L711.4,40.2L720,42.1L720,50L717.4,50.9L714.8,50.8L718.7,54L718.5,55.4L714.7,55L707.4,56.7L701.4,59.3L700.7,60.2L697.8,58.9L692.6,60.4L691.7,59.7L689.8,60.5L687.1,60.3L684,63.5L684.1,64.3L686.4,64.8L686.1,67.7L684.3,67.8L683.4,69.4L684.2,70.3L680.7,71.3L680,73.6L677.1,74.1L676.5,76.1L673.6,78L670.9,69.2L671.8,66.5L673.5,65.3L673.6,64.3L676.7,63.9L687.3,57.7L688.9,54.9L686.5,55.1L685.3,56.7L680.2,58.9L678.6,56.5L673.4,57.1L668.4,60.5L670.1,61.7L662.5,62.4L662.7,61L659.6,60.7L657.1,61.7L651,61.3L644.4,61.9L630.3,70.5L633.4,70.8L634.4,72L636.3,72.5L637.6,71.5L639.8,71.6L642.7,73.8L642.8,75.5L641.2,77.5L640.1,83.1L636.4,87.4L629.7,93.2L627.1,94.4L625.8,94.4L624.6,93.4L619.9,96.1L619.4,98.2L615.1,100.5L614.8,101.6L616.7,102.8L618.9,106.4L618.9,108.7L618.2,109.8L613,111.2L613.1,108.6L612.2,106.5L613.7,106.2L612.3,104.5L611.4,104.1L610.6,104.7L609.4,103.8L610.4,102.7L610.6,100.9L608.5,100.1L602.1,102.2L603.2,101.3L602.8,100.5L604.3,99.2L603.3,98.1L598,101.5L596.1,101.6L595.1,102.5L596.1,103.9L597.8,104.2L597.8,105.1L599.4,105.7L601.6,104.3L604.7,105.1L605,106.1L602.2,106.7L598.3,110.2L600.5,111.3L603.8,116.6L603.8,118.1L602.5,118.6L604.2,120.3L603.4,123.5L602.3,123.7L597.3,130.9L591.8,134.4L589.5,134.7L588.3,135.6L587.6,134.9L586.5,135.9L581.6,137.2L580.9,139.3L579.8,139.4L579.3,138L579.7,137.2L577,136.6L573.4,138.6L571.8,140.5L571.3,141.9L574.7,146.6L577.8,149.4L578.7,153.1L578.4,156.7L570.3,162.8L569.6,161.5L570.2,160.2L567,158.7L565.2,155.6L563.4,154.7L561.7,154.7L562,153.2L560.2,153.2L558.4,161.5L559.7,161.6L560.9,165.1L565.9,169L566.8,170.3L567,174.4L568.5,177.4L567,177.5L562.8,174.5L560.4,169.4L560.2,167.1L557,163.2L556.7,164.4L556.3,163.3L557.5,157.1L556.9,155.9L557,153.8L554.3,146.1L550.7,148.6L548.4,147.9L549.1,145.4L548.6,143.6L547.1,141.3L547.3,140.5L546.2,140.3L544.7,138.7L542.8,134.5L541,134.4L540.5,136.3L538.1,135.9L537.8,136.6L534,137L534.1,138.5L533,139.7L530.1,141L524.4,146L524.4,146.9L520.6,148.2L520.1,149.7L520.6,154L519.7,155.9L519.7,159.3L518.7,159.4L517.8,160.9L518.4,161.6L516.6,162.1L515.1,164.1L513.2,162.2L509.7,154.5L508.9,150.8L507.1,148L505.3,137.3L502.4,138.5L500.9,138.2L498.3,135.8L499.3,135.1L498.7,134.3L494.9,132.1L492.7,129.1L483,129.8L474.8,128.5L473.9,126.1L473,125.7L469.4,127L463,124.3L460.2,119.7L459.2,120L457.9,119.4L457.1,120.1L455.9,120L457.6,124.6L460.3,126.6L460.2,128.1L461.6,130.5L462,128L463.2,128.4L462.8,130.7L463.6,132L468,131.8L472.7,127.2L472.8,130.2L473.7,131.5L477.5,132.9L479.6,135.4L477,139.1L475.7,139.5L475.4,142.1L473.2,142.9L472.6,144.2L470.5,144.7L470.5,145.5L464.8,147.2L464.3,148.8L459.1,150.6L457.4,152L451.3,153.4L450,154.6L447,154.7L445.2,149.6L445.3,146.5L441.9,141L438.3,137.4L438.1,134.8L437,132.6L435,131.4L433.9,128.8L430.3,123.9L429.3,123.9L429.8,121L427.8,124.7L424.8,120.3L428.2,127.7L431.4,132.1L431.1,133.8L433.7,136L435,142.8L436.8,144L438.5,148.2L446.6,155.2L446.6,156.1L445.4,156.5L448.2,159.1L449.2,159.1L462.2,156L462.1,158.7L458.9,166.4L455.5,171.6L453.1,174.3L446.3,179.4L443.2,183.4L440.5,185.1L438.4,189.4L437.6,193L438.9,193.7L438.4,197L441,201.5L441.6,209.4L438.9,213.4L434.8,215.2L429.6,219.6L429.4,221L431.1,224.2L430.7,227.1L431.2,227.4L430.1,229L425.1,231.5L425.8,232.4L424.4,237.5L416.4,245.5L411.6,247.9L405.1,247.7L399.2,249.6L396.8,248.3L395.9,245.2L396.5,244.9L396.4,243.3L390.4,234.2L388.5,224.2L383.6,216.1L383.6,211.6L385,207.1L387.3,204.1L387.4,201.5L385.8,198.3L386.5,197.1L383.8,190.1L377.6,182.2L379.6,173.9L378.8,172.5L377.9,172.2L377,170.5L371.8,171.5L368.7,167.5L363.7,167.7L356.1,170.6L350.7,169.7L345,171.3L342,170.3L335.1,165.5L334.1,164.4L333.5,162.2L330.3,158.2L326.8,155.7L326.6,152.8L324.8,150.5L327.1,147.7L327.7,143.8L327.4,139.8L325.9,138L326.1,136.2L327.5,134.6L328,132.6L329.8,131L331.1,127.5L334.8,123.9L336.6,123.7L340.9,120.1L340.4,117.6L341.4,114.9L346.2,111.8L348.1,108.5L355.7,109.7L362.9,106.8L370.6,106.6L372.5,105.8L376.8,106.1L379,105.3L380.4,105.5L380.4,106.6L382.2,106.2L381.2,107.2L381.9,108.6L381.6,110.3L380.3,111.3L380.7,112.4L381.7,112.5L383,113.7L390.5,115.5L391.4,117.2L398.2,119.5L400.1,118L399.6,116.5L400.3,115.5L403.1,114.3L405.8,114.7L406.5,115.6L409.8,116.2L410.3,116.9L413,116.8L417.8,118.3L422,116.9L423.4,117.1L423.9,118.1L424.4,117.5L427.5,118.1L429.1,116.9L432,110.7L432.3,108.4L431.6,107.4L432.3,106.7L429.4,106.4L428.1,107.6L425,107.8L423.4,106.7L421.2,106.6L420.8,107.5L419.4,107.7L417.5,106.6L415.3,106.7L412.6,103.6L413.6,102L412.3,101.1L414.6,99.2L417.6,99.1L418.5,97.6L422.3,97.8L427,96L430.3,95.9L436.7,98.1L440.7,98L443.1,96.9L443.4,96.1L442.9,94.7L433.4,89.5L434.8,89.2L436.5,87.5L435.3,86.7L438.2,85.5L429.9,87.5L430,88.7L433.1,89.1L432.7,89.8L427.8,91.3L426.7,90.9L427.1,89.9L424.9,89.3L427.2,88.3L426.6,87.8L423.5,87.3L423.4,86.6L421.5,86.8L419.3,89.9L417.7,90.2L417.1,92.6L415.3,94.8L416.2,96.8L418,97.4L417.6,97.9L415.2,98L412.7,99.7L412.1,98.4L409.9,98.1L407.4,98.6L408.8,99.7L407.8,100.1L406.7,100.1L405.6,99L405.3,99.5L406.7,101.6L405.9,102.1L408.1,103.6L408.1,104.7L406.2,104.2L406.8,105.2L405.6,105.4L406.3,107.2L405,107.2L403.3,106.3L402.2,103.4L398.8,99.5L399.1,96.6L392,93L390.3,91.5L389.8,89.8L388.5,89.5L387.9,90.4L387.3,89.7L387.9,88.8L386.3,88.5L384.7,89.2L385.2,91.8L390.3,96.1L391.9,96.1L392.3,96.5L391.8,96.9L397,99.7L396.6,100.4L393.7,99.1L392.9,100.4L394.3,101.2L394.1,102.2L393.3,102.3L392.2,104L391.4,104.2L392.2,102.1L390.8,99.9L384.2,96.6L381,94.1L380.4,92.2L377.8,91.3L373.1,93.7L369.1,93.2L366.2,93.8L366.1,96.2L364.2,97.5L361.6,98L359.4,101.4L360.2,102.5L358.6,104.7L357.1,105.1L355.7,106.7L351.3,106.6L349.2,108.1L348.3,107.9L347,106.1L342.2,106.3L342.3,103.5L340.9,102.5L342.5,98.5L342,94.8L341.2,93.9L344,92.5L356.2,93.2L357.2,92L357.6,88L354.1,84.9L351,84.1L350.8,82.6L353.4,82.2L356.8,82.7L356.1,80.4L358,81.3L362.7,79.7L363.3,78.1L367.7,76.8L369.4,73.8L374.2,72.6L376.2,72.9L377.6,72L376.2,69L376.2,66.9L377.1,65.8L381.2,64.5L380.5,66.2L381.8,67.1L379.3,69.1L379.9,70.8L381.9,71.3L381.9,72L385,71.1L388.2,72.5L395.2,70.3L399.3,71.1L399.8,70.3L402.5,69.6L402.2,66.4L403.2,65.2L405,64.5L406.6,66L408.2,65.9L408.9,63.2L406.9,62.8L406.7,61.6L411.7,60.8L416,61L418.2,59.9L416.1,59L405.7,60.3L402.6,58.6L403.1,56.6L402.1,54.8L403.1,53.6L410.8,49.8L410.6,48.9L407.8,48L404.4,48.6L402.4,49.9L402.7,51.2L395.7,54.5L394.2,57.3L397.6,59.8L395.7,62.1L393.7,62.6L391.8,67.8L389.3,67.6L388.2,69.2L385.9,69.3L382.1,62.3L380.7,61.1L376.8,63.4L374.1,63.8L371.3,62.8L370,56.1L381.1,51L389.5,44.4L398.4,40.4L406,39.6L409.1,37.9L416.3,37.6L422.6,39.1L420,39.6L422.2,40.9L424.3,40.2L427.6,41.4L433,41.9L442.1,45.1L442.3,46.4L436.8,48L426.4,46.7L429.6,48.2L429.9,51.2L434,52.3L434.3,51.3L433,50.4L434.4,49.7L439.2,51L440.9,50.5L439.5,49L444.2,47L447.9,47.9L449.1,46.5L447.4,45.3L448.4,44.1L446.9,42.9L452.5,43.5L453.6,44.6L451.1,44.9L451.1,46L452.7,46.7L455.8,46.2L456.3,45L467.4,42.3L468.9,42.4L467,43.6L469.5,43.8L477.6,42.2L479.9,43.4L482.2,42.1L480.1,41L481.1,40.3L487,40.9L497,43.8L498.4,42.8L496.3,41.3L493.9,41.1L494.5,40.1L493.4,37.9L497.1,36.1L498.4,34.3L505.2,34.4L505.6,35.6L503.7,37.2L504.9,37.8L505.6,39.2L505.1,42L507.3,43.2L502.6,47.4L504.8,47.7L507.8,46.4L510.1,44.5L508.9,43.3L509.9,42L507.7,41.9L507.2,40.7L508.8,38.7L506.2,37.1L509.8,35.8L509.3,34.3L510.3,34.3L511.4,35.4L510.6,37.3L512.7,37.7L511.8,36.3L515.2,35.5L519.3,35.4L523,36.5L521.2,34.8L521,32.7L533.6,32.1L532,31.1L534.3,29.8L546.5,27.9L553.4,28.2L557.8,27.1L561.5,27.1L564,25.4L568.7,24.6L572.1,25.3L569.4,25.7L573.9,26.1ZM172.3,25L167.7,24.9L167.1,24.3L171.2,24.4L172.3,25ZM139.6,24.6L135.9,25.2L132.9,24.5L134.6,23.9L140.3,24L139.6,24.6ZM409.4,24.3L405,25.1L401.5,24.6L402.8,24.1L401.6,23.5L405.8,23.1L406.6,23.8L409.4,24.3ZM140.7,22.8L134.9,23.2L137,22.3L140.7,22.8ZM168.3,23.9L163.8,23.8L162.7,22.3L168.9,23.2L168.3,23.9ZM159.9,23.4L160.7,24.2L149.6,23.2L151.6,22.6L149.2,22.2L149,21.4L158.3,22.4L159.9,23.4ZM570.2,23.4L558.9,24.2L562.5,21.5L564.2,21.3L570.7,22.6L570.2,23.4ZM396.5,20.6L403.1,22.1L398.1,22.9L396.9,24.3L395.2,24.7L394.2,26.4L391.8,26.5L387.5,25.2L389.3,24.5L382.4,22.3L380.9,20.7L386.3,20L387.4,20.7L390.3,20.7L391,20L394,19.9L396.5,20.6ZM410.9,19.2L414.8,19.9L411.8,21L406,21.2L400.2,20.9L394.7,19.4L400.9,18.8L403.8,19.3L405.8,18.7L410.9,19.2ZM462.3,18.9L455.2,20L453,19.5L454.1,18.9L449.7,18.8L456.6,18.4L457,19L460.1,18.2L463,18.6L462.3,18.9ZM559.9,22.2L549.9,21.9L546.6,21.1L545.1,19.7L542.4,19.3L551.9,17.5L560.4,20.4L559.9,22.2ZM186,20.7L188.4,21.3L181.9,23.4L178.4,23.6L174.2,23.3L172.1,22.5L172.1,21.8L173.7,21.2L170.1,21.3L166.6,19.7L169.4,18.2L171.4,18L170.5,17.6L175.2,17.5L177.7,18.6L184.4,19.4L186,20.7ZM223,13.8L236.3,14.7L236.2,15.3L224.7,17L229,17L221.1,18.8L217.6,20.4L206.2,21.4L208.9,21.6L207.6,22L209.2,22.9L200.5,25.6L204.2,26L204.2,26.4L198.9,27.6L181,27.1L180.8,26.1L184.5,25.6L183.5,24.2L190,24.9L187.3,23.6L184.1,23.3L189.2,22L189.8,21.3L187,20.5L186.1,19.5L193.2,19.8L196.3,19.1L184.8,19L181.3,18.3L176.8,16.2L189,14.7L193.6,15.4L195.2,14.3L201.4,13.7L223,13.8ZM305.8,13L318.3,14.5L314.6,15.3L296.2,15.6L310.3,16.4L314.2,15.8L315.9,16.5L313.7,17.7L328.5,16.2L334.5,16.6L335.6,17.4L326.3,19.3L319.9,19.6L324.5,19.7L320.6,22.5L320.7,24.7L323.1,26L316.6,26.7L320.3,27.8L320.8,29.5L318.7,29.7L321.3,31.4L316.8,31.6L319.1,32.4L318.5,33.1L312.9,33.4L315.4,34.7L315.4,35.6L311.4,34.8L310.4,35.3L315.7,37.1L316.5,38.7L312.9,39.1L308.9,37.1L309.6,38.5L307.3,39.5L315.3,39.7L304.5,43.1L296.4,43.8L291.6,46.6L287.3,48L280.4,49.1L278.7,50.3L278.6,51.7L277.6,53L274.4,54.6L275.2,56.2L273.2,59.8L270.4,59.9L267.5,58.3L263.5,58.3L256.7,52.7L255.4,49.6L252.7,47.8L253.4,46.3L252.1,45.6L254,43.3L257,42.5L258.3,40.1L253.1,41.4L250.6,40.8L250.5,39.4L251.3,38.4L257.2,38.9L252,36.9L248.3,36.7L250.6,34.8L245.4,30.6L242.8,29.8L242.8,29L237.5,27.8L223,27.9L217.2,26L226.5,25.2L213.4,23.9L213.7,23.1L228.6,21.2L229.4,20.5L224,19.8L235.5,17.4L234.7,16.5L245.6,15.6L251.7,15.6L253.9,16.2L259.2,15.1L271,16.7L266.2,15.6L266.5,14.7L282.8,12.9L305.8,13Z";
+/* ===== M27 · Die Vergessenen! Eine Globalgeschichte des Zweiten Weltkriegs ===== */
+const L = {
+  key:"ggk-m27-vergessene:v1", nr:"M27", titel:"Die Vergessenen!", unter:"Eine Globalgeschichte des Zweiten Weltkriegs",
+  /* Zeichen der Stunde: ein Globus, der auf dem Kopf steht */
+  mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="12" fill="none" stroke="#24221F" stroke-width="2.4"/><path d="M5 17h24M17 5c-6 7-6 17 0 24M17 5c6 7 6 17 0 24" fill="none" stroke="#24221F" stroke-width="1.8"/><path d="M12 23l5 6 5-6" fill="none" stroke="#9B402D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  seiten:[["start","",""],["bild","0–10 Min.","Dein Bild vom Krieg"],["artikel","10–30 Min.","Der Artikel"],["karte","30–48 Min.","Eurozentrismus"],["struktur","48–70 Min.","Strukturbild"],["landkarte","70–78 Min.","Landkarte"],["schluss","78–90 Min.","Was fehlt?"],["zusammenfassung","Zum Abheften","Zusammenfassung"]],
+  breit:["bild","artikel","karte","struktur","zusammenfassung","lehrkraft"],
+  loesch:"Deine Orte, Jahre, Erkenntnisse, Hypothese, das Strukturbild, alle Texte werden auf diesem Gerät entfernt.",
+  init:() => ({ orte:{ t1:"", r1:"", t2:"", r2:"", t3:"", r3:"" }, jahrA:"", jahrE:"", bildzu:false, art:{}, erk:{ e1:"", e2:"", e3:"" }, ueber:"", hyp:"", kartefrage:"", welt:{ sued:false, mitte:"eu" }, euro:"", sb:{ b:{}, e:{}, hand:null, n:0, gepr:false, hilfe:false }, pfeil:{ p1:"", p2:"", p3:"" }, schulbuch:"" }),
+  nachEingabe(p){
+    if (/^orte\.|^jahr/.test(p)) { const b = document.querySelector("[data-akt=bildfest]"); if (b) b.disabled = !bildBereit(); }
+    if (p === "kartefrage") { const k = document.getElementById("kartenteil"); if (k && k.classList.contains("gesperrt") === (S.kartefrage.trim().length >= 10)) zeichneBehalte(); }
+  },
+  nachInit(){ weltAktualisieren(false); },
+};
+const REGIONEN = [["eu","Europa",15,50],["na","Nordafrika und Naher Osten",28,28],["af","Afrika südlich der Sahara",22,-4],["sa","Südasien (Indien)",79,22],["oa","Ostasien (China, Japan, Korea)",114,36],["so","Südostasien und Pazifik",135,2],["am","Amerika",-98,38],["xx","auf See oder weiß ich nicht",null,null]];
+const ARTORTE = [
+  ["fr","Frankreich, 1940",2.5,47,"Edouard Kouka Ouédraogo, Unteroffizier aus dem heutigen Burkina Faso, gerät am 4. Juni 1940 in deutsche Gefangenschaft.",true],
+  ["bf","Burkina Faso (damals Obervolta)",-1.5,12.3,"Französische Kolonie. Von hier kommt Ouédraogo.",false],
+  ["et","Äthiopien, 1935",39,9,"Italien überfällt Äthiopien. Für Karl Rössel beginnt hier der Krieg.",false],
+  ["cn","China, 1937",112,33,"Japan greift China an. In Asien beginnt der Krieg spätestens jetzt.",false],
+  ["ly","Libyen",17,27,"Kriegsschauplatz in Afrika. Auch Soldaten aus Südafrika kämpfen hier.",false],
+  ["za","Südafrika",24,-29,"Tritt auf alliierter Seite in den Krieg ein. Tote werden nach Hautfarbe getrennt beerdigt.",false],
+  ["in","Indien, 1944",79,23,"Japanischer Invasionsversuch. Subhas Chandra Bose kämpft an der Seite Japans.",false],
+  ["kr","Korea",127.5,36.5,"Frauen aus Korea und anderen Ländern werden in japanische Militärbordelle gezwungen.",false],
+  ["ph","Manila, Februar 1945",121,14.6,"Die Hauptstadt der Philippinen wird zerstört. Massaker an der Zivilbevölkerung.",false],
+  ["pz","Pazifikinseln",165,-6,"Palmen werden für Flugpisten gefällt, Menschen verschleppt.",false],
+  ["hi","Hiroshima, August 1945",132.5,34.4,"Atombombe – drei Monate nach dem 8. Mai.",false],
+  ["ke","Kenia",38,0,"Im Jahr 2000 erhalten nur 330 Veteranen eine Rente.",false],
+];
+const MITTEN = { eu:[10,"Europa und Afrika"], pz:[160,"Pazifik"], am:[-90,"Amerika"] };
+const bildBereit = () => [1,2,3].every(i => S.orte["t" + i].trim().length >= 2 && S.orte["r" + i]) && S.jahrA && S.jahrE;
+const eigene = () => [1,2,3].map(i => ({ i, t:S.orte["t" + i], r:REGIONEN.find(x => x[0] === S.orte["r" + i]) })).filter(o => o.r && o.r[2] !== null);
+
+/* ---------- Weltkarte ---------- */
+function weltPos(lon, lat){ const c = MITTEN[S.welt.mitte][0]; const dx = ((lon - c + 540) % 360) - 180; let x = 360 + dx * 2, y = (90 - lat) * 2; if (S.welt.sued) { x = 720 - x; y = 360 - y; } return [x, y]; }
+function welt(o = {}){
+  const ich = S.bildzu ? eigene() : [], art = o.artikel ? ARTORTE.filter(a => S.art[a[0]]) : [];
+  const c = MITTEN[S.welt.mitte][0];
+  const pk = ich.map((e, k) => `<g class="pkt ich" data-lon="${e.r[2] + (e.i - 2) * 7}" data-lat="${e.r[3] + (k % 2) * 4}" style="transform:translate(${weltPos(e.r[2] + (e.i - 2) * 7, e.r[3] + (k % 2) * 4).join("px,")}px)"><circle r="8"/><text y="3">${e.i}</text><title>${esc(e.t)} (${esc(e.r[1])})</title></g>`).join("")
+    + art.map(a => `<g class="pkt art" data-lon="${a[2]}" data-lat="${a[3]}" style="transform:translate(${weltPos(a[2], a[3]).join("px,")}px)"><path d="M0-8L7 5H-7Z"/><title>${esc(a[1])}</title></g>`).join("");
+  const text = `Weltkarte, ${S.welt.sued ? "Süden" : "Norden"} oben, Mitte: ${MITTEN[S.welt.mitte][1]}. ${ich.length ? "Deine Orte: " + ich.map(e => e.t + " in " + e.r[1]).join("; ") + ". " : ""}${art.length ? "Aus dem Artikel: " + art.map(a => a[1]).join("; ") + "." : ""}`;
+  return `<div class="weltwrap"><svg class="welt" id="welt" viewBox="0 0 720 360" role="img" aria-label="${esc(text)}">
+    <g class="dreh" style="transform:rotate(${S.welt.sued ? 180 : 0}deg)"><g class="schub" style="transform:translateX(${-c * 2}px)"><path class="land" d="${LAND}"/><path class="land" d="${LAND}" transform="translate(720 0)"/><path class="land" d="${LAND}" transform="translate(-720 0)"/><line class="aeq" x1="-720" x2="1440" y1="180" y2="180"/></g></g>
+    ${pk}<text class="rand" id="weltoben" x="360" y="14">${S.welt.sued ? "Süden" : "Norden"}</text><text class="rand" id="weltunten" x="360" y="354">${S.welt.sued ? "Norden" : "Süden"}</text></svg>
+    <div class="kartenleg"><span><i></i>deine drei Orte</span>${o.artikel ? `<span><i class="t"></i>Orte aus dem Artikel</span>` : ""}<span>${status("modell", "Modell")}Plattkarte: Jede Weltkarte verzerrt. Landflächen: Natural Earth.</span></div></div>`;
+}
+function weltAktualisieren(){
+  const w = document.getElementById("welt"); if (!w) return;
+  w.querySelector(".dreh").style.transform = `rotate(${S.welt.sued ? 180 : 0}deg)`;
+  w.querySelector(".schub").style.transform = `translateX(${-MITTEN[S.welt.mitte][0] * 2}px)`;
+  w.querySelectorAll(".pkt").forEach(p => { const [x, y] = weltPos(+p.dataset.lon, +p.dataset.lat); p.style.transform = `translate(${x}px,${y}px)`; });
+  document.getElementById("weltoben").textContent = S.welt.sued ? "Süden" : "Norden"; document.getElementById("weltunten").textContent = S.welt.sued ? "Norden" : "Süden";
+  document.querySelectorAll("[data-akt=weltsued]").forEach(b => b.setAttribute("aria-pressed", String((b.dataset.w === "1") === S.welt.sued)));
+  document.querySelectorAll("[data-akt=weltmitte]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.w === S.welt.mitte)));
+  const live = document.getElementById("weltlive"); if (live) live.textContent = `${S.welt.sued ? "Süden" : "Norden"} oben, Mitte: ${MITTEN[S.welt.mitte][1]}.`;
+}
+function zaehlSatz(){
+  const ich = eigene(), eu = ich.filter(e => e.r[0] === "eu").length, art = ARTORTE.filter(a => S.art[a[0]]), aeu = art.filter(a => a[5]).length;
+  return `<p class="zahlsatz">Deine drei Orte: ${eu} in Europa, ${ich.length - eu} außerhalb.${art.length ? ` Aus dem Artikel: ${aeu} in Europa, ${art.length - aeu} außerhalb.` : ""}</p>`;
+}
+
+/* ---------- Seiten ---------- */
+function start(){
+  return `${band("M27 · Doppelstunde · 90 Minuten", "Die Vergessenen!", "Eine Globalgeschichte des Zweiten Weltkriegs: Wer kämpfte, wer litt – und von wem erzählen unsere Schulbücher?")}
+  <p class="leitfrage">Welche Geschichten zum Zweiten Weltkrieg sind bekannt, welche nicht? Warum werden manche Geschichten erzählt und andere verschwiegen?</p>
+  ${belastend("Der Artikel im Heft berichtet von Rassismus, Gewalt gegen Gefangene und Zivilist*innen und von Frauen, die zur Prostitution gezwungen wurden. Du darfst jederzeit aussetzen und mit deiner Lehrkraft sprechen.")}
+  <h2 class="abschnitt">Am Ende kannst du</h2>
+  <ul class="ziele"><li>Beispiele dafür nennen, wer im Zweiten Weltkrieg außerhalb Europas kämpfte und litt,</li><li>mit dem Begriff Eurozentrismus erklären, warum diese Menschen in europäischen Erzählungen fehlen,</li><li>in einem Strukturbild zeigen, wie aus Vergangenheit Geschichte wird und wie Geschichte auf Denken, Fühlen und Handeln wirkt.</li></ul>
+  <h2 class="abschnitt">So läuft die Stunde</h2>
+  <ol class="ablauf">${L.seiten.slice(1, 7).map(s => `<li><b>${esc(s[1])}</b><span>${esc(s[2])}</span></li>`).join("")}</ol>
+  <p class="hinweis" style="margin-top:.8rem">Du brauchst dein Heft (M27, Artikel von Nils Sandrisser). Die Seite zeigt dir dein eigenes Bild vom Krieg – und was sich daran ändert.</p>
+  ${weiter("bild", "Beginnen")}`;
+}
+
+function bild(){
+  const z = S.bildzu, sel = (p) => `<select data-f="${p}" aria-label="Region" ${z ? "disabled" : ""}><option value="">Wo liegt das?</option>${REGIONEN.map(r => `<option value="${r[0]}" ${hol(p) === r[0] ? "selected" : ""}>${esc(r[1])}</option>`).join("")}</select>`;
+  return `${zeitKopf("bild")}<h1>Dein Bild vom Krieg</h1>
+  ${auftrag("Allein · 4 Minuten · ohne Heft", "Was fällt dir zuerst ein?", "Schreib drei Orte oder Ereignisse des Zweiten Weltkriegs auf – die ersten, die dir einfallen. Wähle zu jedem die Region. Beantworte dann die zwei Fragen und lege fest. Es gibt hier kein Richtig oder Falsch: Du hältst fest, was du im Kopf hast.")}
+  <div class="karte"><div class="orte3">${[1,2,3].map(i => `<div class="oz"><b>${i}</b><input type="text" data-f="orte.t${i}" id="f-orte-t${i}" value="${esc(S.orte["t" + i])}" placeholder="Ort oder Ereignis" aria-label="Ort oder Ereignis ${i}" ${z ? "disabled" : ""} autocomplete="off">${sel("orte.r" + i)}</div>`).join("")}</div>
+  <div class="felder2" style="margin-top:1rem"><div><label for="f-jahrA">Wann begann der Zweite Weltkrieg?</label><select id="f-jahrA" data-f="jahrA" ${z ? "disabled" : ""}><option value="">Jahr wählen</option>${["1931","1935","1937","1939","1941"].map(j => `<option ${S.jahrA === j ? "selected" : ""}>${j}</option>`).join("")}</select></div>
+  <div><label for="f-jahrE">Wann endete er?</label><select id="f-jahrE" data-f="jahrE" ${z ? "disabled" : ""}><option value="">Datum wählen</option>${["8. Mai 1945","2. September 1945"].map(j => `<option ${S.jahrE === j ? "selected" : ""}>${j}</option>`).join("")}</select></div></div>
+  <div class="reihe"><button type="button" class="btn dunkel" data-akt="bildfest" ${!z && bildBereit() ? "" : "disabled"}>Festlegen</button>${z ? `<button type="button" class="btn" data-akt="setz" data-p="bildzu" data-w="false">Noch einmal</button>` : ""}</div></div>
+  ${z ? `<div id="bildauf"><h2 class="abschnitt">Deine Karte des Krieges</h2>${welt()}${zaehlSatz()}
+  <p>Das ist kein Fehler – es ist ein Befund. Heb ihn auf. Nach dem Artikel siehst du, was auf deiner Karte fehlt.</p></div>` : ""}
+  ${weiter("artikel", "Weiter: Der Artikel")}`;
+}
+
+function artikel(){
+  const n = ARTORTE.filter(a => S.art[a[0]]).length;
+  return `${zeitKopf("artikel")}<h1>Der Artikel</h1>
+  ${auftrag("Allein · 10 Minuten · mit dem Heft", "Lesen und festhalten", "Lies im Heft den Artikel von Nils Sandrisser: „Kolonien stellten Kanonenfutter und füllten Bordelle“ (2015). Halte drei zentrale Erkenntnisse fest. Welche hat dich am meisten überrascht?")}
+  <div class="feldgruppe">${eingabe("erk.e1", "Erkenntnis 1")}${eingabe("erk.e2", "Erkenntnis 2")}${eingabe("erk.e3", "Erkenntnis 3")}${textfeld("ueber", "Die größte Überraschung – und warum", { rows:2, zaehl:false })}</div>
+  <h2 class="abschnitt">Orte aus dem Artikel</h2>
+  ${auftrag("Allein · 3 Minuten", "Was steht im Text?", "Tippe die Orte an, die du im Artikel gefunden hast. Sie erscheinen als Dreiecke auf deiner Karte – neben deinen drei Punkten vom Anfang.")}
+  <div class="artorte" role="group" aria-label="Orte aus dem Artikel">${ARTORTE.map(a => `<button type="button" data-akt="art" data-w="${a[0]}" aria-pressed="${!!S.art[a[0]]}"><b>${esc(a[1])}</b><small>${esc(a[4])}</small></button>`).join("")}</div>
+  ${welt({ artikel:true })}
+  ${S.bildzu ? zaehlSatz() : `<p class="hinweis">Deine drei Orte fehlen noch (Seite „Dein Bild vom Krieg“).</p>`}
+  <p class="hinweis" aria-live="polite">${n} von ${ARTORTE.length} Orten eingetragen.</p>
+  ${S.jahrA ? `<div class="auflage"><p><b>Und die Jahre?</b> Du hast als Beginn <b>${esc(S.jahrA)}</b> gewählt, als Ende <b>${esc(S.jahrE)}</b>.</p>
+  <ul class="zl"><li><b>1935</b><span>Italien überfällt Äthiopien. „In Afrika würde jeder sagen, dass der Krieg 1935 angefangen hat“ (Karl Rössel).</span></li><li><b>1937</b><span>Japan greift China an. „In Asien begann der Krieg spätestens 1937“ (Rössel).</span></li><li><b>1939</b><span>Deutschland überfällt Polen. So steht es in den meisten europäischen Schulbüchern.</span></li><li><b>8. Mai 1945</b><span>Kapitulation Deutschlands: Ende des Krieges in Europa.</span></li><li><b>2. Sept. 1945</b><span>Kapitulation Japans nach den Atombomben im August: Ende des Krieges in Asien.</span></li></ul>
+  <p style="margin-top:.5rem">Keine dieser Antworten ist einfach falsch. Welche „richtig“ wirkt, hängt davon ab, von wo aus man schaut.</p></div>` : ""}
+  ${weiter("karte", "Weiter: Eurozentrismus")}`;
+}
+
+function karte(){
+  const frei = S.kartefrage.trim().length >= 10;
+  return `${zeitKopf("karte")}<h1>Eurozentrismus</h1>
+  ${auftrag("Zu zweit · 5 Minuten", "Hypothese", "Diskutiert und haltet fest: Warum wurden diese Menschen in der Geschichte bisher so wenig beachtet? Schreibt eine Vermutung auf.")}
+  ${textfeld("hyp", "Unsere Hypothese", { rows:3, anfaenge:["Diese Menschen wurden wenig beachtet, weil","Wer die Geschichte schreibt,","Es könnte auch daran liegen, dass"], zaehl:false })}
+  <h2 class="abschnitt">Europa – wirklich in der Mitte der Welt?</h2>
+  ${auftrag("Allein · 6 Minuten", "Erst eine Frage, dann die Karte", "Auf fast jeder Weltkarte, die du kennst, ist Norden oben und Europa in der Mitte. Schreib einen Satz: Wer hat das festgelegt – und könnte es auch anders sein?")}
+  ${textfeld("kartefrage", "Meine Antwort", { rows:2, zaehl:false, platz:"Ich vermute, dass …" })}
+  <div id="kartenteil" class="${frei ? "" : "gesperrt"}">
+  <div class="kartenknopf" role="group" aria-label="Karte umstellen"><button type="button" data-akt="weltsued" data-w="0" ${frei ? "" : "disabled"}>Norden oben</button><button type="button" data-akt="weltsued" data-w="1" ${frei ? "" : "disabled"}>Süden oben</button><span class="tr" aria-hidden="true"></span><span class="hinweis">Mitte:</span>${Object.keys(MITTEN).map(k => `<button type="button" data-akt="weltmitte" data-w="${k}" ${frei ? "" : "disabled"}>${esc(MITTEN[k][1])}</button>`).join("")}</div>
+  ${welt({ artikel:true })}<p class="sr" id="weltlive" aria-live="polite"></p>
+  <p style="margin-top:.6rem">Dieselbe Erde, dieselben Orte. Keine der Ansichten ist falsch: Dass Norden oben liegt und Europa in der Mitte, ist eine Gewohnheit – entstanden dort, wo diese Karten gezeichnet wurden. <b>Achte darauf, wo deine Punkte und die Dreiecke jetzt liegen.</b></p></div>
+  <h2 class="abschnitt">Der Begriff</h2>
+  <blockquote>„Eurozentrismus, eine Einstellung, die Europa unhinterfragt in den Mittelpunkt des Denkens und Handelns stellt. […] Die europäische Geschichte und Gesellschaftsentwicklung wird als Norm verstanden, die erfüllt oder von der abgewichen wird, ohne die historische und kulturelle Partialität dieser Perspektive zu erkennen.“<span class="wer">Lexikon der Geographie, spektrum.de, Stichwort Eurozentrismus. Gekürzt. „Partialität“ heißt hier: Die Perspektive zeigt nur einen Teil.</span></blockquote>
+  ${auftrag("Allein · 5 Minuten", "Erklären", "Erkläre mithilfe der Definition, weshalb viele Opfer in der europäischen Geschichtsschreibung unerwähnt bleiben. Nutze ein Beispiel aus dem Artikel.")}
+  ${textfeld("euro", "Meine Erklärung", { rows:5, anfaenge:["Eurozentrismus bedeutet","Deshalb fehlen in europäischen Darstellungen","Ein Beispiel aus dem Artikel ist"], ziel:"Ziel: etwa 50 Wörter" })}
+  ${raster("euro", 35, "Selbstprüfung", [["Begriff", "Ich nenne den Begriff.", "Ich erkläre ihn in eigenen Worten.", "Ich erkläre auch, warum er „unhinterfragt“ wirkt."],["Beispiel", "Ich nenne ein Beispiel.", "Ich verbinde Beispiel und Begriff.", "Ich zeige am Beispiel, was die europäische Erzählung weglässt."],["Vergleich mit der Hypothese", "–", "Ich sage, ob unsere Hypothese passt.", "Ich verbessere unsere Hypothese mit dem Begriff."]])}
+  ${weiter("struktur", "Weiter: Strukturbild")}`;
+}
+
+/* ---------- Strukturbild (Lernaufgabe aus dem Heft) ---------- */
+const SBB = [["v","Vergangenheit"],["p","Perspektivität"],["g","Geschichte"],["sk","Selbstkonzept"],["de","Denken"],["fu","Fühlen"],["ha","Handeln"]];
+const SBE = [["v","Schwarze und weiße Soldaten befreien Frankreich"],["g","Weiße Soldaten stehen im Schulbuch"],["p","Eurozentrismus"],["sk","Überlegenheitsgefühl"],["de","„Schwarze haben nicht für Frankreich gekämpft“"],["fu","Keine Sympathie und Solidarität mit Schwarzen Soldaten"],["ha","Keine Unterstützung für Denkmäler oder Pensionen"]];
+const SBSLOT = { sk:["sk"], v:["v"], p:["p"], g:["g"], d1:["de","fu","ha"], d2:["de","fu","ha"], d3:["de","fu","ha"] };
+const SBTIPP = { v:"Was ist geschehen – egal, wer davon erzählt?", p:"Durch welche „Brille“ wird aus dem Geschehen eine Erzählung?", g:"Was wird am Ende erzählt, gedruckt, gelernt?", sk:"Was denkt eine Gruppe über sich selbst – und prägt damit ihren Blick?", d1:"Geschichte wirkt auf Kopf, Gefühl und Tat. Welche Ebene ist das?", d2:"Geschichte wirkt auf Kopf, Gefühl und Tat. Welche Ebene ist das?", d3:"Geschichte wirkt auf Kopf, Gefühl und Tat. Welche Ebene ist das?" };
+const sbName = (liste, id) => (liste.find(x => x[0] === id) || [,""])[1];
+const sbVoll = () => Object.keys(SBSLOT).every(s => S.sb.b[s] && S.sb.e[s]);
+const sbBok = s => SBSLOT[s].includes(S.sb.b[s]);
+const sbEok = s => sbBok(s) && S.sb.e[s] === S.sb.b[s];
+const sbFertig = () => Object.keys(SBSLOT).every(s => sbBok(s) && sbEok(s));
+function sbFeld(s, o = {}){
+  const b = S.sb.b[s], e = S.sb.e[s], hand = S.sb.hand, gp = S.sb.gepr && !o.loesung;
+  const B = o.loesung ? o.loesung[0] : (b ? sbName(SBB, b) : "Begriff"), E = o.loesung ? o.loesung[1] : (e ? sbName(SBE, e) : "Beispiel");
+  const kl = gp ? `${b ? (sbBok(s) ? "ok" : "nein") : ""} ${e ? (sbEok(s) ? "eok" : "enein") : ""}` : "";
+  const fb = gp && (b || e) ? ((sbBok(s) && sbEok(s)) ? "passt" : (!sbBok(s) ? "Begriff noch einmal prüfen: " + SBTIPP[s] : "Der Begriff passt. Beispiel noch einmal prüfen.")) : "";
+  if (o.loesung) return `<div class="sbf" style="grid-area:${s}"><div class="ab b">${esc(B)}</div><div class="ab e">${esc(E)}</div>${s === "sk" ? `<div class="runter" aria-hidden="true">↓</div>` : ""}</div>`;
+  return `<div class="sbf ${kl}" style="grid-area:${s}"><button type="button" class="ab b ${b ? "" : "leer"} ${hand && hand[0] === "b" ? "ziel" : ""}" data-akt="sbslot" data-art="b" data-slot="${s}" aria-label="Feld für einen Begriff: ${esc(b ? B : "leer")}">${esc(B)}</button><button type="button" class="ab e ${e ? "" : "leer"} ${hand && hand[0] === "e" ? "ziel" : ""}" data-akt="sbslot" data-art="e" data-slot="${s}" aria-label="Feld für ein Beispiel: ${esc(e ? E : "leer")}">${esc(E)}</button>${fb ? `<p class="fb">${esc(fb)}</p>` : ""}${s === "sk" ? `<div class="runter" aria-hidden="true">↓</div>` : ""}</div>`;
+}
+const sbPfeile = `<div class="pf" style="grid-area:a1" aria-hidden="true">→</div><div class="pf" style="grid-area:a2" aria-hidden="true">→</div><div class="pf drei" style="grid-area:a3" aria-hidden="true"><span>↗</span><span>→</span><span>↘</span></div>`;
+function struktur(){
+  const sb = S.sb, bFrei = SBB.filter(x => !Object.values(sb.b).includes(x[0])), eFrei = SBE.filter(x => !Object.values(sb.e).includes(x[0])), fertig = sb.gepr && sbFertig();
+  return `${zeitKopf("struktur")}<h1>Wir erstellen ein Strukturbild</h1>
+  ${auftrag("Allein oder zu zweit · 15 Minuten", "Begriffe ordnen, Beispiele zuordnen", "Bring die sieben Begriffe in eine sinnvolle Struktur und ordne jedem ein Beispiel zu. So geht es: Karte antippen, dann ein Feld antippen. Ein belegtes Feld antippen holt die Karte zurück. Wenn alles liegt: prüfen.")}
+  <div class="sbpool" aria-label="Karten">
+    <div class="pr"><span>Begriffe</span>${bFrei.map(x => `<button type="button" class="sbk" data-akt="sbkarte" data-k="b:${x[0]}" aria-pressed="${sb.hand === "b:" + x[0]}">${esc(x[1])}</button>`).join("") || `<span class="hinweis" style="font-weight:400">alle gelegt</span>`}</div>
+    <div class="pr"><span>Beispiele</span>${eFrei.map(x => `<button type="button" class="sbk e" data-akt="sbkarte" data-k="e:${x[0]}" aria-pressed="${sb.hand === "e:" + x[0]}">${esc(x[1])}</button>`).join("") || `<span class="hinweis" style="font-weight:400">alle gelegt</span>`}</div>
+  </div>
+  <div class="sb" id="sb">${Object.keys(SBSLOT).map(s => sbFeld(s)).join("")}${sbPfeile}</div>
+  <div class="reihe"><button type="button" class="btn dunkel" data-akt="sbpruef" ${sbVoll() && !sb.gepr ? "" : "disabled"}>Prüfen</button><span class="hinweis" aria-live="polite">${sb.gepr ? (fertig ? "Alle Felder passen." : "Grüne Kante: passt. Goldene Kante: noch einmal prüfen. Tippe das Feld an, um die Karte zurückzuholen.") : (sbVoll() ? "Alles liegt. Jetzt prüfen." : "Lege alle 14 Karten.")}</span></div>
+  ${sb.n >= 1 && !fertig ? hilfe("Hilfe 1: Wo fängt es an?", "<p>Die Kette beginnt links mit dem, was geschehen ist, und endet rechts bei dem, was Menschen heute denken, fühlen und tun. Ein Begriff steht über der Kette und wirkt auf sie ein.</p>") + `<div class="reihe"><button type="button" class="btn" data-akt="sbhilfe">Hilfe 2: Begriffe an ihren Platz legen</button><span class="hinweis">Die Beispiele ordnest du weiter selbst zu.</span></div>` : ""}
+  ${fertig ? `<div class="auflage" id="sbauf"><p><b>So liest du dein Bild.</b> Aus der <b>Vergangenheit</b> (was geschah) wird durch eine <b>Perspektive</b> eine <b>Geschichte</b> (was erzählt wird). Die Perspektive hängt vom <b>Selbstkonzept</b> ab – davon, wie eine Gruppe sich selbst sieht. Die erzählte Geschichte wirkt weiter auf <b>Denken, Fühlen und Handeln</b>.</p><p><b>Achtung:</b> Der Satz „Schwarze haben nicht für Frankreich gekämpft“ ist falsch. Er steht hier als Beispiel für ein Denken, das entsteht, wenn im Schulbuch nur weiße Soldaten vorkommen.</p></div>` : ""}
+  <h2 class="abschnitt">Die Pfeile erklären</h2>
+  ${auftrag("Allein · 5 Minuten", "Was bewirkt der Pfeil?", "Schreib zu jedem Pfeil einen Satz: Wie beeinflusst der eine Begriff den nächsten?")}
+  <div class="feldgruppe">${textfeld("pfeil.p1", "Vergangenheit → Perspektivität → Geschichte", { rows:2, platz:"Aus Vergangenheit wird Geschichte, indem …", zaehl:false })}${textfeld("pfeil.p2", "Selbstkonzept ↓ Perspektivität", { rows:2, platz:"Das Bild von sich selbst prägt die Perspektive, weil …", zaehl:false })}${textfeld("pfeil.p3", "Geschichte → Denken, Fühlen, Handeln", { rows:2, platz:"Die erzählte Geschichte wirkt, indem …", zaehl:false })}</div>
+  ${hilfe("Zwei Begriffe aus deinem Heft", "<p><b>Retrospektivität:</b> Wir wenden uns der Vergangenheit immer im Nachhinein zu, von der Gegenwart aus. Vergangenheit ist uns deshalb nur als Erzählung zugänglich.</p><p><b>Perspektivität:</b> Dieser Blick zurück ist an einen Standort gebunden. Ob eine Perspektive haltbar ist, zeigt die Prüfung der Triftigkeit: empirisch, narrativ, normativ.</p>")}
+  ${weiter("landkarte", "Weiter: Landkarte")}`;
+}
+
+const LKCFG = { seite:"landkarte", titel:"Warum fehlen sie?", nach:["schluss","Weiter: Was fehlt?"],
+  frage:"Millionen Menschen aus Afrika, Asien und Ozeanien kämpften und litten – und stehen in europäischen Schulbüchern kaum. Welches Prinzip der Landkarte erklärt das am besten?",
+  lead:"Schreib einen Satz in der Sprache der Landkarte: Warum erzählen europäische Schulbücher den Krieg so?", platz:"Europäische Schulbücher erzählen so, weil …",
+  folge:["Multiperspektivität (Folgerung)", "Ein Ereignis wird aus Quellen verschiedener Beteiligter betrachtet (z. B. Täter*innen, Opfer, Zuschauende)."],
+  urteil:{
+    "2-1-1":["teils","Wir blicken von heute zurück – und fragen heute anders als 1950. Dass die Kolonialsoldaten jetzt Thema werden, hat mit neuen Fragen der Gegenwart zu tun. Die Landkarte ordnet das dem zeitlichen Kontext zu (Standortgebundenheit, 2.1.8.3). Warum sie fehlten, erklärt es noch nicht."],
+    "2-1-2":["zentral","„Wer erzählt, und mit welcher Weltanschauung und welchen Interessen?“ Europäische Autor*innen erzählten für europäische Leser*innen. Eurozentrismus ist eine solche Sichtweise – so steht es auch in deinem Strukturbild. Die Landkarte nennt auch die dritte Ebene: Wer liest mit welchen Erwartungen?"],
+    "2-1-3":["teils","Keine Darstellung kann alles erzählen, das stimmt. Die Frage ist aber, warum gerade dieser Ausschnitt fehlt. Dafür braucht es ein Prinzip, das auf die Erzählenden schaut."],
+    "2-1-4":["teils","„Was wurde ausgewählt, was weggelassen, und warum?“ – das ist die Leitfrage der Stunde. Die Auswahl ist aber die Folge. Die Ursache liegt davor: bei der Perspektive und beim Standort derer, die auswählen."],
+    "2-1-5":["teils","Die Landkarte nennt genau dieses Beispiel: Aus der Kolonialzeit gibt es viele Akten der Verwaltung, aber wenige schriftliche Zeugnisse der Kolonisierten. Das verzerrt das Bild, bevor jemand erzählt. Es erklärt einen Teil – nicht, warum vorhandene Stimmen wie die von Ouédraogo so lange niemand druckte."],
+    "2-1-6":["kaum","Dass Geschichte nur als Erzählung existiert, gilt immer. Es erklärt nicht, warum diese Erzählung bestimmte Menschen auslässt."],
+    "2-1-7":["teils","„1935, 1937 oder 1939?“ zeigt: Aus denselben Fakten entstehen verschiedene Geschichten. Konstruiert heißt aber nicht beliebig – welche Fassung besser begründet ist, prüfst du mit den Triftigkeiten."],
+    "2-1-8":["zentral","Die Landkarte nennt die geografische Perspektive ausdrücklich (2.1.8.1): Wo jemand lebt, prägt, was ihm selbstverständlich scheint. Für Europa beginnt der Krieg 1939 und endet am 8. Mai. Das Wort „unhinterfragt“ in der Definition von Eurozentrismus meint genau das."],
+    "2-1-9":["teils","Multiperspektivität ist die Antwort auf das Problem, nicht seine Erklärung: Wer Quellen von Kolonialsoldaten, Zwangsarbeiter*innen und Zivilist*innen aus Asien und Afrika dazunimmt, erzählt den Krieg vollständiger."],
+  },
+  bruecke:`<b>Brücke zur Gegenwart.</b> Die Landkarte fragt unter <i>Agency</i>: „Wer darf an der Erinnerung mitwirken, wessen Geschichten werden gehört?“ Und unter <i>Erinnerungskultur</i>: Schulbücher sind zugleich „Konstrukteure und Konstruktionen von Erinnerungskultur“. <a href="${LK}3-1-4" target="_blank" rel="noopener">Landkarte 3.1.4 Erinnerungskultur ↗</a> · <a href="${LK}3-1-5" target="_blank" rel="noopener">3.1.5 Agency ↗</a>` };
+
+function schluss(){
+  return `${zeitKopf("schluss")}<h1>Was fehlt im Schulbuch?</h1>
+  ${auftrag("Allein · 6 Minuten", "Ein Absatz, der fehlt", "Schreib vier bis fünf Sätze für ein Schulbuchkapitel über den Zweiten Weltkrieg – über jemanden oder etwas, das dort bisher fehlt. Begründe im letzten Satz, warum das hineingehört.")}
+  ${textfeld("schulbuch", "Mein Absatz für das Schulbuch", { rows:6, anfaenge:["Im Zweiten Weltkrieg kämpften auch","Nach dem Krieg","Das gehört ins Schulbuch, weil"], ziel:"Ziel: etwa 60 Wörter" })}
+  ${raster("schulbuch", 40, "Selbstprüfung", [["Inhalt", "Ich nenne eine Gruppe oder einen Ort.", "Ich nenne Gruppe, Ort und Zeit mit einem Beleg aus dem Artikel.", "Ich zeige, was die Menschen taten und was ihnen angetan wurde."],["Sprache", "Ich übernehme Wörter des Artikels.", "Ich schreibe sachlich und in eigenen Worten.", "Ich vermeide abwertende Wörter der Zeit oder setze sie in Anführungszeichen."],["Begründung", "Ich sage, dass es wichtig ist.", "Ich begründe mit Perspektivität oder Eurozentrismus.", "Ich sage, was sich im Denken, Fühlen oder Handeln ändern könnte."]])}
+  ${auftrag("Plenum · 6 Minuten · iPad zu", "Vorlesen und fragen", "Drei von euch lesen ihren Absatz vor. Die anderen fragen: Wer müsste diese Geschichte erzählen? Welche Quelle bräuchten wir dafür?")}
+  ${hilfe("Extra für Schnelle: Chimamanda Adichie", `<p>Sieh dir zu Hause den Vortrag „Die Gefahr einer einzigen Geschichte“ an und stelle ihre Kritik an einer solchen Geschichtsschreibung dar. <a href="https://www.youtube.com/watch?v=mgs2Do88zp0" target="_blank" rel="noopener">Vortrag auf YouTube öffnen ↗</a> (verlässt diese Seite; YouTube überträgt Daten an Google).</p>`)}
+  <p class="merksatz">iPad umdrehen. Danach: Zusammenfassung sichern.</p>
+  ${weiter("zusammenfassung", "Zur Zusammenfassung")}`;
+}
+
+function zusammenfassung(){
+  const m = (t, leer = "noch offen") => `<p class="mein ${String(t || "").trim() ? "" : "leer"}">${esc(String(t || "").trim() || leer)}</p>`;
+  const ich = eigene(), lkp = S.lk.ok && S.lk.prinzip ? ((PRINZIP[S.lk.prinzip] || LKCFG.folge)[0] + ": " + S.lk.grund) : "";
+  const lsg = { v:["Vergangenheit","Schwarze und weiße Soldaten befreien Frankreich"], sk:["Selbstkonzept","Überlegenheitsgefühl"], p:["Perspektivität","Eurozentrismus"], g:["Geschichte","Weiße Soldaten stehen im Schulbuch"], d1:["Denken","„Schwarze haben nicht für Frankreich gekämpft“ (falsch!)"], d2:["Fühlen","Keine Sympathie und Solidarität"], d3:["Handeln","Keine Unterstützung für Denkmäler oder Pensionen"] };
+  return `<div class="zf"><div class="reihe nodruck" style="margin:0 0 1rem"><button type="button" class="btn dunkel" data-drucken>Drucken oder als PDF sichern</button><span class="hinweis">Zwei Seiten A4. In GoodNotes ablegen.</span></div>
+  <h1>M27 · Die Vergessenen!</h1>
+  <p class="leitfrage">Welche Geschichten zum Zweiten Weltkrieg sind bekannt, welche nicht – und warum?</p>
+  <p class="merksatz">Der Zweite Weltkrieg war ein Weltkrieg: Millionen Soldaten und Opfer kamen aus Kolonien in Afrika, Asien und Ozeanien. Dass sie in Europa kaum vorkommen, liegt nicht an der Vergangenheit, sondern an der Perspektive, aus der erzählt wird.</p>
+  <h2>Begriffe</h2>
+  <div class="begriffe">
+    <div><b>Kolonialsoldaten:</b> Soldaten aus den Kolonien, vor allem in den Armeen Großbritanniens und Frankreichs. Beispiel: Edouard Kouka Ouédraogo aus dem heutigen Burkina Faso.</div>
+    <div><b>Eurozentrismus:</b> eine Einstellung, die Europa unhinterfragt in den Mittelpunkt des Denkens und Handelns stellt.</div>
+    <div><b>Perspektivität:</b> Jede Betrachtung erfolgt aus einer bestimmten Sichtweise, geprägt von Überzeugungen, Interessen und Erfahrungen.</div>
+    <div><b>Standortgebundenheit:</b> Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Gesamtkontext geprägt, oft unbewusst – auch durch den Ort.</div>
+    <div><b>Selbstkonzept:</b> das Bild, das ein Mensch oder eine Gruppe von sich selbst hat. Es prägt die Perspektive.</div>
+    <div><b>Erinnerungskultur:</b> alle Formen, in denen eine Gesellschaft bewusst an Vergangenes erinnert – auch Schulbücher.</div>
+  </div>
+  <h2>Wann begann, wann endete der Krieg?</h2>
+  <ul class="zl"><li><b>1935</b><span>Italien überfällt Äthiopien (Beginn aus afrikanischer Sicht, nach Karl Rössel).</span></li><li><b>1937</b><span>Japan greift China an (Beginn aus asiatischer Sicht).</span></li><li><b>1939</b><span>Deutschland überfällt Polen (Beginn aus europäischer Sicht).</span></li><li><b>8. Mai 1945</b><span>Ende des Krieges in Europa.</span></li><li><b>2. Sept. 1945</b><span>Kapitulation Japans: Ende des Krieges in Asien.</span></li></ul>
+  <h2>Strukturbild ${status("modell", "Modell")}</h2>
+  <div class="sb klein" role="img" aria-label="Strukturbild: Vergangenheit führt über Perspektivität zu Geschichte; Selbstkonzept wirkt auf Perspektivität; Geschichte wirkt auf Denken, Fühlen und Handeln. Zu jedem Begriff steht ein Beispiel.">${Object.keys(SBSLOT).map(s => sbFeld(s, { loesung:lsg[s] })).join("")}${sbPfeile}</div>
+  <div class="werk"><b>Denkwerkzeug: Drei Fragen an jede Erzählung.</b> 1. Von wo aus wird erzählt (Ort, Zeit, Gruppe)? 2. Wer kommt vor – und wer fehlt? 3. Was ändert sich, wenn ich die Karte drehe: Wie würde dieselbe Geschichte von dort aus klingen?</div>
+
+  <div class="seitenumbruch"><h2 style="margin-top:0">Meine Ergebnisse</h2>
+  <h2>Mein Bild vom Krieg am Anfang</h2>${m(S.bildzu ? `${[1,2,3].map(i => S.orte["t" + i]).join(" · ")} – davon ${ich.filter(e => e.r[0] === "eu").length} in Europa. Beginn: ${S.jahrA}, Ende: ${S.jahrE}.` : "")}
+  <h2>Erkenntnisse aus dem Artikel</h2>${m([S.erk.e1, S.erk.e2, S.erk.e3].filter(x => x && x.trim()).map((x, i) => (i + 1) + ". " + x).join("\n"))}${m(S.ueber ? "Größte Überraschung: " + S.ueber : "", "")}
+  <h2>Unsere Hypothese</h2>${m(S.hyp)}
+  <h2>Eurozentrismus: meine Erklärung</h2>${m(S.euro)}
+  <h2>Die Pfeile im Strukturbild</h2>${m([S.pfeil.p1 && "Vergangenheit → Geschichte: " + S.pfeil.p1, S.pfeil.p2 && "Selbstkonzept → Perspektivität: " + S.pfeil.p2, S.pfeil.p3 && "Geschichte → Denken, Fühlen, Handeln: " + S.pfeil.p3].filter(Boolean).join("\n"))}
+  <h2>Landkarte</h2>${m(lkp)}
+  <h2>Mein Absatz für das Schulbuch</h2>${m(S.schulbuch)}</div></div>
+  ${weiter("start", "Zur Startseite")}`;
+}
+
+function lehrkraft(){
+  return `<div class="lk"><p class="zeit"><span class="nr">Für Lehrkräfte</span><span>nicht geschützt</span></p><h1>M27 · Hinweise</h1>
+  <p class="lead">Grundlage ist dein Heft, M27: zentrale Frage, Artikel von Nils Sandrisser mit Erkenntnissen und größter Überraschung (10 Min.), Hypothese zu zweit (5 Min.), Eurozentrismus mit Weltkarte und Definition (5 Min.), Extra Adichie, Lernaufgabe Strukturbild in zwei Fassungen (15 Min.).</p>
+  <h2 class="abschnitt">Was das Gerät hier leistet</h2>
+  <ul><li><b>Das eigene Bild sichtbar machen:</b> Drei Orte, Beginn und Ende des Krieges – festgelegt vor dem Lesen. Die Seite zeigt sie als Punkte auf einer Weltkarte und zählt: wie viele in Europa?</li><li><b>Vorher neben nachher:</b> Die Orte aus dem Artikel kommen als Dreiecke dazu. Der Abstand ist der Gesprächsanlass.</li><li><b>Die Karte drehen:</b> Süden oben, Pazifik in der Mitte – dieselben Punkte wandern mit. Das ersetzt das Poster im Heft (Bildrechte) und ist die eine Bewegung der Stunde; vorher steht eine Frage.</li><li><b>Strukturbild zum Legen:</b> 14 Karten, Rückmeldung je Feld erst nach dem Prüfen, zwei Hilfen, danach die Pfeile erklären. Die Lösung erscheint erst auf der Zusammenfassung.</li><li><b>Landkarten-Moment</b> und ein eigener Absatz „fürs Schulbuch“ als Produkt.</li></ul>
+  <p>Papier bleibt besser für: den Artikel (Heft) und das Vorlesen im Plenum.</p>
+  <h2 class="abschnitt">Ablauf (90 Minuten)</h2>
+  <div class="matrix-wrap"><table><thead><tr><th>Zeit</th><th>Phase</th><th>Sozialform</th><th>Hinweis</th></tr></thead><tbody>
+  <tr><td class="n">0–10</td><td>Dein Bild vom Krieg</td><td>allein, dann Beamer</td><td>4 Min. festlegen; eine Karte am Beamer zeigen und zählen lassen</td></tr>
+  <tr><td class="n">10–30</td><td>Der Artikel</td><td>allein, mit Heft</td><td>Lesen 10, Erkenntnisse 5, Orte und Jahre 5</td></tr>
+  <tr><td class="n">30–48</td><td>Eurozentrismus</td><td>zu zweit, allein</td><td>Hypothese 5, Karte 6, Definition und Erklärung 7</td></tr>
+  <tr><td class="n">48–70</td><td>Strukturbild</td><td>frei wählbar</td><td>Legen 15, Pfeile 5; ein Bild am Beamer besprechen</td></tr>
+  <tr><td class="n">70–78</td><td>Landkarte</td><td>allein</td><td>Perspektivität, Standortgebundenheit</td></tr>
+  <tr><td class="n">78–90</td><td>Was fehlt?</td><td>allein, Plenum</td><td>Absatz 6, Vorlesen 6</td></tr></tbody></table></div>
+  <p class="hinweis">Zeitdiagnose bei 150 Wörtern pro Minute (gemessen): Der Artikel im Heft hat rund 970 Wörter – 6 bis 7 Minuten, mit Markieren 10. Die Seite selbst hat rund 1.600 Wörter Lesetext (gut 10 Minuten). Mit Schreiben, Legen und Plenum füllt das 90 Minuten ohne Puffer.</p>
+  <h2 class="abschnitt">Kürzungen zur Auswahl</h2>
+  <ul><li><b>K1 · Einzelstunde (45 Min.):</b> Dein Bild (6) · Artikel als Hausaufgabe vorab, im Unterricht nur Orte und Jahre (8) · Karte und Begriff (10) · Strukturbild mit Hilfe 2 (15) · Plenum (6).</li><li><b>K2</b> Landkarten-Moment gemeinsam am Beamer: 4 Minuten frei.</li><li><b>K3</b> Absatz fürs Schulbuch als Hausaufgabe: 6 Minuten frei.</li></ul>
+  <h2 class="abschnitt">Abweichungen vom Heft</h2>
+  <ul><li>Anrede „du“ (Heft: „Sie“).</li><li>Der Artikel (welt.de, 22.06.2015) bleibt im Heft; die Seite fasst nur Orte in je einem Satz zusammen.</li><li>Das Foto des rassistischen „Vermessens“ (Stadtarchiv Münster) und das Poster der Upside-down-Weltkarte (interkart.de) sind nicht übernommen: Rechte, und beim Foto die Würde des Abgebildeten. Die drehbare Karte beruht auf gemeinfreien Daten (Natural Earth).</li><li>Im Strukturbild sind die Felder vorgegeben (zweite Fassung im Heft). Die freie Fassung bleibt auf Papier möglich.</li><li>Die Zuordnung „Schwarze haben nicht für Frankreich gekämpft“ → Denken ist als falsche Vorstellung gekennzeichnet.</li><li>Schreibweise „Schwarze Soldaten“ mit großem S als Selbstbezeichnung – bitte nach deiner Linie anpassen.</li><li>Ergänzt: 2. September 1945 (Kapitulation Japans) als Gegenstück zum 8. Mai.</li><li>Einstufungen im Landkarten-Moment (zentral: Perspektivität, Standortgebundenheit) sind ein Vorschlag von Claude. Wortlaut aus der Landkarte 2.1.</li></ul>
+  <h2 class="abschnitt">Vor dem Einsatz prüfen</h2>
+  <ul><li>Die Kurzsätze zu den zwölf Orten gegen den Artikel im Heft lesen.</li><li>Buch: Rheinisches JournalistInnenbüro (Hg.): Unsere Opfer zählen nicht. Die Dritte Welt im Zweiten Weltkrieg, bpb-Schriftenreihe Bd. 10408, Bonn 2014.</li><li>Auswahl der Jahre zum Kriegsbeginn (1931, 1935, 1937, 1939, 1941): 1931 und 1941 stehen nicht im Artikel; sie sind als weitere mögliche Antworten gedacht.</li></ul>
+  <h2 class="abschnitt">Nur du kannst das</h2>
+  <ul><li>Lernende mit Familiengeschichte in ehemaligen Kolonien oder mit Rassismuserfahrung im Blick behalten; niemand muss „für eine Gruppe“ sprechen.</li><li>Den Abschnitt zu erzwungener Prostitution vorab ankündigen.</li><li>iPad in Safari hoch und quer, Beamer, VoiceOver, Moodle.</li></ul>
+  <h2 class="abschnitt">Nach der Stunde</h2>
+  <div class="matrix-wrap"><table><thead><tr><th>Beobachtung</th><th>Notiz</th></tr></thead><tbody><tr><td>Wie viele der drei ersten Orte lagen in Europa (grob, im Kurs)?</td><td></td></tr><tr><td>Hat das Drehen der Karte ein Gespräch ausgelöst – oder war es nur ein Effekt?</td><td></td></tr><tr><td>Wo hakte das Strukturbild (Selbstkonzept? Denken/Fühlen/Handeln)?</td><td></td></tr><tr><td>Zeit: Wo wurde es eng?</td><td></td></tr></tbody></table></div>
+  <p class="hinweis" style="margin-top:1rem">Speicherschlüssel <code>${L.key}</code>. Eingaben bleiben im Browser des Geräts.</p></div>
+  ${weiter("start", "Zur Startseite")}`;
+}
+
+AKTION.bildfest = (t, ev) => { S.bildzu = true; speichere(); zeichneBehalte(); if (ev.detail !== 0) neu(document.getElementById("bildauf"), "neu"); };
+AKTION.art = t => { const k = t.dataset.w; if (S.art[k]) delete S.art[k]; else S.art[k] = 1; speichere(); zeichneBehalte(); };
+AKTION.weltsued = t => { S.welt.sued = t.dataset.w === "1"; speichere(); weltAktualisieren(); };
+AKTION.weltmitte = t => { S.welt.mitte = t.dataset.w; speichere(); weltAktualisieren(); };
+AKTION.sbkarte = t => { S.sb.hand = S.sb.hand === t.dataset.k ? null : t.dataset.k; speichere(); zeichneBehalte(); };
+AKTION.sbslot = t => { const sb = S.sb, art = t.dataset.art, s = t.dataset.slot; if (sb.hand && sb.hand[0] === art) { sb[art][s] = sb.hand.slice(2); sb.hand = null; } else if (!sb.hand && sb[art][s]) { delete sb[art][s]; } else return; sb.gepr = false; speichere(); zeichneBehalte(); };
+AKTION.sbpruef = (t, ev) => { S.sb.n++; S.sb.gepr = true; speichere(); zeichneBehalte(); if (ev.detail !== 0) neu(document.getElementById("sbauf"), "neu"); };
+AKTION.sbhilfe = () => { S.sb.b = { sk:"sk", v:"v", p:"p", g:"g", d1:"de", d2:"fu", d3:"ha" }; S.sb.hilfe = true; S.sb.gepr = false; S.sb.hand = null; speichere(); zeichneBehalte(); };
+const SEITE_FN = { start, bild, artikel, karte, struktur, landkarte:() => landkarte(LKCFG), schluss, zusammenfassung, lehrkraft };
+kernStart();
+</script>
+</body>
+</html>
