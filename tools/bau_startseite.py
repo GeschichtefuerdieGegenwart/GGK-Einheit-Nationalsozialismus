@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Baut die Startseite index.html (Fassung 3.0, Entwurf F2 »Nacht mit Papierkarten«): drei Kapitel 1918–1991.
+"""Baut die Startseite index.html (Fassung 3.1, Entwurf F2 »Nacht mit Papierkarten« mit Lupe H): drei Kapitel 1918–1991.
 Je Kapitel: Kopf mit wechselndem Bild, eine schmale Leiste mit Merkdaten und Modulnummern, darunter das Regal mit gleich großen Papierkarten.
 Alle Links stehen als HTML im Dokument und sind ohne JavaScript erreichbar. Aufruf: python3 tools/bau_startseite.py"""
 import pathlib, html
@@ -79,10 +79,12 @@ def lagen(ep):
 def leiste(ep):
     """Die schmale Leiste: alle Halte in einer Zeile. Nur fürs Auge (aria-hidden); dieselben Daten stehen im Regal als Text."""
     L = lagen(ep); z = ''
-    for (d, w, m), lage in zip(SPALTEN[ep], L):
+    for i, ((d, w, m), lage) in enumerate(zip(SPALTEN[ep], L)):
         dt = f'<span class="dt"><b>{e(d)}</b><span>{e(w)}</span></span>' if d else ''
-        z += (f'<span class="st{" ank" if d else ""}"><span class="ob">{dt if lage == "ob" else ""}</span><span class="pk"></span>'
-              f'<span class="nr">{HEFTNR[m] if m else ""}</span><span class="un">{dt if lage == "un" else ""}</span></span>')
+        # .tp = Tippfläche (Punkt und Nummer). Die Zeit hinter der Nummer (.zz) erscheint erst, wenn die Leiste herangefahren ist.
+        nr = f'<span class="nz">{HEFTNR[m]}</span><span class="zz"> · {e(INFO[m][0])}</span>' if m else ''
+        z += (f'<span class="st{" ank" if d else ""}"><span class="ob">{dt if lage == "ob" else ""}</span>'
+              f'<span class="tp"{f" data-stop=\"{i}\"" if m else ""}><span class="pk"></span><span class="nr">{nr}</span></span><span class="un">{dt if lage == "un" else ""}</span></span>')
     return f'<div class="leiste{"" if any(m for d, w, m in SPALTEN[ep]) else " ohnenr"}" aria-hidden="true">{z}</div>'
 def regal(ep, name):
     """Das Regal: je Halt ein Listenpunkt mit Merkdatum (als Text) und Karte. Auf dem Telefon wird daraus der senkrechte Zeitstrahl."""
@@ -90,9 +92,21 @@ def regal(ep, name):
     for d, w, m in SPALTEN[ep]:
         merk = f'<p class="merk"><b>{e(d)}</b> <span>{e(w)}</span></p>' if d else ''
         kl = 'sp' + (' anker' if d else '') + ('' if m else ' nurdatum')
-        z += f'<li class="{kl}"{f" id=\"k-{HEFTNR[m].replace(chr(47), chr(45))}\"" if m else ""}>{merk}{karte(m) if m else ""}</li>'
+        daten = (f' id="k-{HEFTNR[m].replace(chr(47), chr(45))}" data-nr="{HEFTNR[m]}" data-zeit="{e(INFO[m][0])}" data-lang="{e(MOD[m][0])}" data-schritte="{e(" · ".join(SCHRITTE[m]))}"' if m else '')
+        z += f'<li class="{kl}"{daten}>{merk}{karte(m) if m else ""}</li>'
     return f'<ol class="regal" aria-label="{name}: Merkdaten und Module in der Reihenfolge der Zeit">{z}</ol>'
-def kapitel(ep, ziffer, name, jahre, satz, bilder, zusatz=''):
+SCHRITTE = {m[0]: m[3] for m in NS + ST}
+def fenster(wort):
+    """Das Fenster der Lupe: die gewählte Karte in groß, auf demselben Papier. Leeres Gerüst; das Skript füllt es aus den Angaben im Regal."""
+    zeile = lambda kl, w: f'<li class="{kl}"><span class="fw">{w}</span><b></b><span class="fe"></span></li>'
+    return ('<div class="fenster" data-fenster hidden tabindex="-1" role="region" aria-label="Gewählte Karte"><div class="finh">'
+            '<div class="fbild"><img alt="" hidden><span class="fnr" aria-hidden="true"></span></div>'
+            f'<div class="ftext"><p class="fkopf"></p><h3></h3><p class="fschritte"><b>In {"diesem Modul" if wort == "Modul" else "dieser Stunde"}:</b> <span></span></p></div>'
+            f'<div class="fnah"><p class="fl">Merkdaten in der Nähe</p><ol>{zeile("fdavor", "davor")}{zeile("fhier", "du bist hier")}{zeile("fdanach", "danach")}</ol></div>'
+            f'<div class="fknopf"><a class="auf" href="#">{wort} öffnen</a><button type="button" data-reise="-1">‹ früher</button><button type="button" data-reise="1">später ›</button>'
+            '<button type="button" data-zu>Zurück zur Übersicht</button></div></div></div>')
+TIPP = '<p class="tipp" data-tipp hidden>Tippe auf eine Karte<span class="nurbreit"> oder auf einen Punkt der Leiste</span>: Du siehst, wo du in der Zeit bist, und öffnest von dort {was}.</p>'
+def kapitel(ep, ziffer, name, jahre, satz, bilder, zusatz='', wort=''):
     hinter = ''
     wahl = ''
     if bilder:
@@ -103,11 +117,11 @@ def kapitel(ep, ziffer, name, jahre, satz, bilder, zusatz=''):
                 f'<p data-bildtext>Bild 1 von {len(bilder)}: {e(bilder[0][1])}</p></div>')
     return (f'<section class="kapitel" id="{ep}" data-ep="{ep}" aria-labelledby="h-{ep}">{hinter}<div class="huelle">'
             f'<div class="kkopf"><div class="ktitel"><span class="ziffer" aria-hidden="true">{ziffer}</span><div><h2 id="h-{ep}">{name}</h2><p class="jahre">{jahre}</p></div></div>'
-            f'<p class="satz">{satz}</p>{wahl}</div>{leiste(ep)}{regal(ep, name)}{zusatz}</div></section>')
+            f'<p class="satz">{satz}</p>{wahl}{TIPP.format(was="das Modul" if wort == "Modul" else "die Stunde") if wort else ""}</div>{leiste(ep)}{fenster(wort) if wort else ""}{regal(ep, name)}{zusatz}</div></section>')
 wz = '<p class="werkzeuge"><b>Werkzeuge für alle neun Stunden:</b>' + ''.join(f'<a href="ost-west/index.html#{a}">{e(n)}</a>' for n, w, a in WZ) + '</p>'
 zeit_html = (kapitel('weimar', 1, 'Weimarer Republik', '1918 – 1933', 'Die erste deutsche Demokratie.', [], '<p class="leer">Die Module zu diesem Kapitel entstehen gerade. Die Merkdaten stehen schon da.</p>')
- + kapitel('ns', 2, 'Nationalsozialismus', f'1933 – 1945 und die Folgen · {ZAHLWORT[len(NS)]} Module', 'Ideologie, Krieg und Menschheitsverbrechen – und die Frage, wer mitgemacht hat und was danach daraus wurde.', NS_BILDER)
- + kapitel('ostwest', 3, 'Ost-West-Konflikt', f'1945 – 1991 · {ZAHLWORT[len(ST)]} Stunden', 'Welchen Einfluss hatten Ideologien, Machtinteressen und Handlungsspielräume der Akteure – und wie wird dieser Konflikt heute erinnert?', OW_BILDER, wz))
+ + kapitel('ns', 2, 'Nationalsozialismus', f'1933 – 1945 und die Folgen · {ZAHLWORT[len(NS)]} Module', 'Ideologie, Krieg und Menschheitsverbrechen – und die Frage, wer mitgemacht hat und was danach daraus wurde.', NS_BILDER, wort='Modul')
+ + kapitel('ostwest', 3, 'Ost-West-Konflikt', f'1945 – 1991 · {ZAHLWORT[len(ST)]} Stunden', 'Welchen Einfluss hatten Ideologien, Machtinteressen und Handlungsspielräume der Akteure – und wie wird dieser Konflikt heute erinnert?', OW_BILDER, wz, 'Stunde'))
 def mlink(nr):
     t, z = MOD[nr]; ep = 'ostwest' if isinstance(nr, int) else 'ns'
     return f'<li><a href="{z}" data-ep="{ep}"><span class="pnr">{HEFTNR[nr]}</span>{e(t)}</a></li>'
@@ -159,20 +173,54 @@ h2{margin:0;font:600 clamp(1.7rem,3.4vw,2.25rem)/1.05 var(--display)}
 .bildwahl{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:.9rem;min-height:44px}
 .bildwahl button{width:44px;height:44px;padding:0;border:2px solid var(--akz);border-radius:999px;background:transparent;font-size:1.4rem;line-height:1}
 .bildwahl p{margin:0;flex:1 1 14rem;font-size:.875rem;line-height:1.35;color:#E8E4DB}
+.tipp{margin:.9rem 0 0;max-width:70ch;font-weight:700}
 /* Leiste: alle Halte in einer Zeile. Raute = Merkdatum, Ring = Modul ohne eigenes Merkdatum, darunter die Nummer im Heft */
-.leiste{position:relative;display:flex;margin-bottom:1.4rem}
-.leiste::before{content:"";position:absolute;left:0;right:0;top:calc(3.3rem + 8px);height:4px;background:var(--akz)}
-.st{flex:1 1 0;min-width:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:3.3rem 20px auto auto}
+.leiste{position:relative;display:flex;margin:0 -1.5rem 1.4rem;padding-inline:1.5rem;overflow:hidden;scroll-margin-top:4.6rem}
+.leiste::before{content:"";position:absolute;left:1.5rem;right:1.5rem;top:calc(3.3rem + 8px);height:4px;background:var(--akz)}
+.st{flex:1 1 0;min-width:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:3.3rem auto auto;transition:transform 320ms cubic-bezier(.23,1,.32,1),opacity 200ms linear}
+.tp{display:block;min-height:44px}.ohnenr .tp{min-height:20px}.js .tp[data-stop]{cursor:pointer}
 .ob{display:flex;align-items:flex-end;padding:0 0 .4rem 4px}
 .un{padding:.25rem 0 0 4px;min-height:3.1rem}
 .dt{display:block;flex:0 0 auto;width:max-content;max-width:calc(200% - .6rem)}
 .dt b{display:block;font:600 .94rem/1.15 var(--display);white-space:nowrap}
 .dt span{display:block;font-size:.75rem;line-height:1.2;color:#D9D4CA}
-.pk{position:relative}
+.pk{display:block;position:relative;height:20px}
 .pk::before{content:"";position:absolute;left:4px;top:1px;width:10px;height:10px;border-radius:999px;background:var(--grund);border:4px solid var(--akz)}
 .ank .pk::before{top:2px;width:12px;height:12px;border-radius:0;transform:rotate(45deg);background:var(--text);border:2px solid var(--grund)}
-.nr{padding:.1rem 0 0 4px;font-size:.8125rem;font-weight:700;color:var(--akzt);white-space:nowrap}
-.nr{min-height:1.3rem}.ohnenr .nr{display:none}
+.nr{display:block;padding:.1rem 0 0 4px;font-size:.8125rem;font-weight:700;color:var(--akzt);white-space:nowrap}
+.ohnenr .nr{display:none}
+/* Lupe (Vorschlag H): Die Leiste fährt an den gewählten Halt heran. Jeder Halt wird nur verschoben, nichts wird verzerrt. */
+.zz{font-weight:400;opacity:0;transition:opacity 200ms linear}
+.lupe .zz{opacity:1}.lupe .dt{max-width:12.5rem}
+.lupe{-webkit-mask-image:linear-gradient(to right,transparent 0,#000 1.4rem,#000 calc(100% - 4.5rem),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 1.4rem,#000 calc(100% - 4.5rem),transparent 100%)}
+.st.aus{opacity:0;pointer-events:none}
+.st.an .pk::before{box-shadow:0 0 0 3px var(--grund),0 0 0 6px #fff}.st.an:not(.ank) .pk::before{background:#fff}.st.an .nr{color:#fff}
+/* Fenster: die gewählte Karte in groß, auf dem Papier ihrer Epoche. Ausgelegt für das iPad quer (drei Spalten) und hoch (zwei Spalten, Merkdaten als Zeile). */
+.fenster{margin-bottom:1.4rem;border:1px solid var(--akz);border-radius:6px;color:var(--kink);background-color:var(--papier);background-image:var(--korn);background-size:384px;background-blend-mode:multiply}
+.fenster a:focus-visible,.fenster button:focus-visible{outline-color:var(--kink)}
+.finh{display:grid;grid-template-columns:16.25rem minmax(0,1fr) 15.6rem;grid-template-rows:1fr auto;gap:1.1rem 1.75rem;padding:1.25rem}
+.fbild{position:relative;height:11.9rem;border-radius:4px;overflow:hidden;background:var(--slot)}
+.fbild img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+.fnr{display:flex;align-items:center;justify-content:center;height:100%;font:600 4.2rem/1 var(--display);color:var(--slotink)}
+.fkopf{margin:0;font-weight:700;color:var(--kakz)}
+.fenster h3{margin:.35rem 0 0;font:600 clamp(1.3rem,2.35vw,1.7rem)/1.16 var(--display);text-wrap:balance;hyphens:manual;overflow-wrap:break-word}
+.fschritte{margin:.8rem 0 0;line-height:1.45}
+.fl{margin:0;font-size:.875rem;font-weight:700;color:var(--kakz)}
+.fnah ol{list-style:none;margin:.5rem 0 0 .45rem;padding:.2rem 0 0 1.35rem;border-left:3px solid var(--slotink)}
+.fnah li{position:relative;padding:0 0 .7rem}
+.fnah li::before{content:"";position:absolute;left:calc(-1.35rem - 7px);top:.3rem;width:10px;height:10px;transform:rotate(45deg);background:var(--kink)}
+.fnah li.fhier::before{left:calc(-1.35rem - 10px);top:.15rem;transform:none;border-radius:999px;background:var(--papier);border:4px solid var(--kink)}
+.fw{display:block;font-size:.8125rem;font-weight:700;color:var(--kakz)}
+.fnah b{display:block;font:600 1.06rem/1.2 var(--display)}.fnah .fhier b{font-size:1.16rem}
+.fe{display:block;font-size:.875rem;line-height:1.3}
+.fknopf{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.fknopf a,.fknopf button{display:inline-flex;align-items:center;min-height:48px;padding:0 1.1rem;border:2px solid var(--kink);border-radius:6px;background:transparent;color:var(--kink);font-size:1rem;text-decoration:none}
+.fknopf a.auf{padding:0 1.4rem;background:var(--kink);color:#F4F1EA;font-weight:700}
+.fknopf [data-zu]{margin-left:auto}
+.fknopf button:disabled{opacity:.4;cursor:default}
+.fenster.neu .finh{animation:fein 220ms cubic-bezier(.23,1,.32,1)}
+@keyframes fein{from{opacity:0;transform:translateY(8px)}}
+.regal.wahl .karte{opacity:.62}.regal.wahl .gewaehlt .karte{opacity:1;outline:3px solid #fff;outline-offset:3px}
 /* Regal: gleich große Papierkarten in der Reihenfolge der Zeit */
 .regal{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:1.25rem}
 .sp{min-width:0}
@@ -216,6 +264,15 @@ footer p{margin:0 0 .4rem;max-width:100ch}
 footer a{display:inline-block;padding:.35rem 0}
 /* Schmal: Das letzte Datum einer Leiste endet am rechten Rand, statt darüber hinauszuragen */
 @media (max-width:1099px){.st:last-child .ob,.st:last-child .un{display:flex;justify-content:flex-end;text-align:right}.st:last-child .un{align-items:flex-start}}
+/* iPad hoch (700 bis 999 px): Bild und Text nebeneinander, die Merkdaten als Zeile darunter */
+@media (min-width:700px) and (max-width:999px){
+  .finh{grid-template-columns:13.75rem minmax(0,1fr);grid-template-rows:auto}
+  .fbild{height:10.5rem}
+  .fnah{grid-column:1/-1}
+  .fnah ol{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 1.25rem;margin:.5rem 0 0;padding:.9rem 0 0;border-left:0;border-top:3px solid var(--slotink)}
+  .fnah li{padding:0}.fnah li.fdavor{grid-column:1}.fnah li.fhier{grid-column:2}.fnah li.fdanach{grid-column:3}
+  .fnah li::before{left:0;top:calc(-.9rem - 8px)}.fnah li.fhier::before{left:0;top:calc(-.9rem - 10px)}
+}
 /* Telefon: Die Leiste entfällt. Das Regal wird zum senkrechten Zeitstrahl, die Merkdaten stehen an ihrer Stelle über den Karten */
 @media (max-width:699px){
   .band{position:static}.band ol{gap:.4rem}.band li{flex:1 1 auto}.band a{width:100%;padding:0 .7rem;font-size:.94rem}
@@ -232,10 +289,14 @@ footer a{display:inline-block;padding:.35rem 0}
   .ktext{padding:.5rem .7rem .6rem;min-width:0}
   .stand{position:static;align-self:flex-end;margin:0 .5rem .5rem auto;background:transparent;padding:0}
   .leer{margin-top:.6rem}
+  .nurbreit{display:none}
+  .fenster{margin:.6rem 0 0}.finh{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;gap:.9rem;padding:1rem}.fbild{display:none}
+  .fknopf [data-zu]{margin-left:0}.fknopf a.auf{flex:1 1 100%;justify-content:center}
+  .regal.wahl .karte{opacity:1}
 }
 @media (hover:hover) and (pointer:fine){.karte:hover{border-color:#fff}.prinzip li a:hover{border-color:#fff}.werkzeuge a:hover,.bildwahl button:hover,.wechsel button[data-halt]:hover,.band a:hover{background-color:rgba(255,255,255,.14)}.band a[aria-current]:hover{background:var(--b)}.wechsel button[data-wechsel]:hover{background:#fff}}
-@media (prefers-reduced-motion:reduce){.hinter img{transition:none}}
-@media print{body{background:#fff;color:#000}.band,.wechsel,.bildwahl,.hinter,.kbild img,.leiste{display:none}.kapitel{background:#fff;border-top-color:#000}.karte,.prinzip{background:#fff;border-color:#999}
+@media (prefers-reduced-motion:reduce){.hinter img,.st,.zz{transition:none}.fenster.neu .finh{animation:none}}
+@media print{body{background:#fff;color:#000}.band,.wechsel,.bildwahl,.hinter,.kbild img,.leiste,.fenster,.tipp{display:none}.kapitel{background:#fff;border-top-color:#000}.karte,.prinzip{background:#fff;border-color:#999}
   .merk,.sp.nurdatum{position:static;width:auto;height:auto;margin:0;overflow:visible;clip-path:none;white-space:normal}*{color:#000!important}}
 """
 JS = """(function(){
@@ -249,10 +310,77 @@ JS = """(function(){
     var t = "Bild " + (i + 1) + " von " + n + ": " + b[i].dataset.text;
     k.querySelector("[data-bildtext]").textContent = t; if (sag) ansage.textContent = t;
   }
-  document.querySelectorAll("[data-bildschritt]").forEach(function(b){ b.hidden = false; });
+  document.querySelectorAll("[data-bildschritt], [data-tipp]").forEach(function(b){ b.hidden = false; });
+  document.documentElement.classList.add("js");
+  /* ---- Lupe (Vorschlag H): Karte oder Punkt wählen -> die Leiste fährt an die Stelle heran, darunter öffnet sich das Fenster ---- */
+  var schmal = window.matchMedia("(max-width: 699px)"), offen = null, uhr = 0;
+  function halte(kap){ return [].slice.call(kap.querySelectorAll(".regal > .sp")); }
+  function merk(li){ var m = li && li.querySelector(".merk"); return m ? [m.querySelector("b").textContent, m.querySelector("span").textContent] : null; }
+  /* Fenster mit den Angaben eines Halts füllen; gibt den Satz für die Ansage zurück */
+  function fuelle(kap, i){
+    var L = halte(kap), li = L[i], f = kap.querySelector("[data-fenster]"), k = li.querySelector(".karte"), im = k.querySelector(".kbild img"), fi = f.querySelector(".fbild img"), a = null, b = null;
+    L.forEach(function(x, j){ if (!x.classList.contains("anker")) return; if (j < i) a = x; if (j > i && !b) b = x; });
+    function setz(sel, d){ var el = f.querySelector(sel); el.hidden = !d; if (!d) return; el.querySelector("b").textContent = d[0]; var s = el.querySelector(".fe"); s.textContent = d[1] || ""; s.hidden = !d[1]; }
+    var kopf = li.dataset.nr + " · " + li.dataset.zeit, hier = merk(li);
+    f.querySelector(".fkopf").textContent = kopf; f.querySelector("h3").textContent = li.dataset.lang.replace(/ – /g, "\u00a0– "); f.querySelector(".fschritte span").textContent = li.dataset.schritte;
+    if (im) { fi.setAttribute("src", im.getAttribute("src")); fi.hidden = false; } else { fi.hidden = true; fi.removeAttribute("src"); }
+    var fn = f.querySelector(".fnr"); fn.textContent = li.dataset.nr; fn.hidden = !!im;
+    setz(".fdavor", merk(a)); setz(".fhier", [kopf, hier ? "An dieser Stelle der Leiste: " + hier[0] + " – " + hier[1] : ""]); setz(".fdanach", merk(b));
+    f.querySelector(".auf").setAttribute("href", k.getAttribute("href")); f.setAttribute("aria-label", li.dataset.nr + ": " + k.querySelector("b").textContent);
+    var mod = []; L.forEach(function(x, j){ if (x.dataset.nr) mod.push(j); }); var p = mod.indexOf(i);
+    f.querySelector('[data-reise="-1"]').disabled = p <= 0; f.querySelector('[data-reise="1"]').disabled = p >= mod.length - 1;
+    f.dataset.frueher = p > 0 ? mod[p - 1] : ""; f.dataset.spaeter = p < mod.length - 1 ? mod[p + 1] : "";
+    return "Du bist bei " + li.dataset.nr + ", " + li.dataset.zeit + "." + (a ? " Davor: " + merk(a).join(", ") + "." : "") + (b ? " Danach: " + merk(b).join(", ") + "." : "");
+  }
+  /* Das Fenster ist für alle Halte eines Kapitels gleich hoch: So springt das Regal nicht, wenn du mit »früher« und »später« wanderst */
+  function hoehe(kap){
+    var inh = kap.querySelector("[data-fenster] .finh"); inh.style.minHeight = "";
+    if (schmal.matches) return;
+    var key = window.innerWidth + "/" + (document.fonts ? document.fonts.status : "");
+    if (kap._hk !== key) { var max = 0; halte(kap).forEach(function(x, j){ if (!x.dataset.nr) return; fuelle(kap, j); max = Math.max(max, inh.offsetHeight); }); kap._hk = key; kap._h = max; }
+    inh.style.minHeight = kap._h + "px";
+  }
+  /* Die Leiste heranfahren: Die Halte rücken auseinander (mindestens 215 px), der gewählte steht bei gut einem Drittel der Breite */
+  function lupe(kap, i){
+    var l = kap.querySelector(".leiste"), S = [].slice.call(l.children), n = S.length;
+    if (i == null || schmal.matches) { l.classList.remove("lupe"); S.forEach(function(s){ s.style.transform = ""; s.classList.remove("aus", "an"); }); return; }
+    var c = S[0].getBoundingClientRect().width, s = Math.min(3.6, Math.max(2.2, 215 / c)), t = Math.min(0, Math.max(n * (1 - s), .36 * n - s * i));
+    S.forEach(function(el, j){ var x = s * j + t; el.style.transform = "translateX(" + (((s - 1) * j + t) * 100).toFixed(2) + "%)"; el.classList.toggle("aus", !(x > -.05 && x < n - 190 / c)); el.classList.toggle("an", j === i); });
+    l.classList.add("lupe");
+  }
+  function waehle(kap, i){
+    if (offen && offen.kap !== kap) schliesse(false);
+    var L = halte(kap), li = L[i], f = kap.querySelector("[data-fenster]"), l = kap.querySelector(".leiste"), neu = !offen, vorher = li.getBoundingClientRect().top;
+    L.forEach(function(x, j){ x.classList.toggle("gewaehlt", j === i); var k = x.querySelector(".karte"); if (!k) return; if (j === i) k.setAttribute("aria-current", "true"); else k.removeAttribute("aria-current"); });
+    kap.querySelector(".regal").classList.add("wahl");
+    if (schmal.matches) li.appendChild(f); else if (l.nextElementSibling !== f) l.parentNode.insertBefore(f, l.nextSibling);
+    f.hidden = false; hoehe(kap); ansage.textContent = fuelle(kap, i); offen = { kap: kap, i: i };
+    if (neu && !ruhig) { f.classList.remove("neu"); void f.offsetWidth; f.classList.add("neu"); }
+    /* Die Karte unter dem Finger bleibt zuerst, wo sie ist; dann fährt die Seite ruhig zur Leiste */
+    var sprung = li.getBoundingClientRect().top - vorher; if (sprung) window.scrollBy(0, sprung);
+    f.focus({ preventScroll: true }); clearTimeout(uhr);
+    if (schmal.matches) { lupe(kap, null); f.scrollIntoView({ block: "nearest", behavior: ruhig ? "auto" : "smooth" }); return; }
+    var oben = (band.hidden ? 0 : band.offsetHeight) + 8, r = l.getBoundingClientRect(), weg = r.top - oben, muss = r.top < oben - 4 || f.getBoundingClientRect().bottom > window.innerHeight;
+    if (muss) window.scrollBy({ top: weg, behavior: ruhig ? "auto" : "smooth" });
+    if (muss && !ruhig && Math.abs(weg) > 40) uhr = setTimeout(function(){ lupe(kap, i); }, 380); else lupe(kap, i);
+  }
+  function schliesse(fokus){
+    if (!offen) return;
+    var kap = offen.kap, li = halte(kap)[offen.i], k = li.querySelector(".karte"), vorher = li.getBoundingClientRect().top;
+    kap.querySelector("[data-fenster]").hidden = true; kap.querySelector(".regal").classList.remove("wahl");
+    li.classList.remove("gewaehlt"); k.removeAttribute("aria-current"); clearTimeout(uhr); lupe(kap, null); offen = null; ansage.textContent = "";
+    var sprung = li.getBoundingClientRect().top - vorher; if (sprung) window.scrollBy(0, sprung);
+    if (fokus) { k.focus({ preventScroll: true }); k.scrollIntoView({ block: "nearest" }); }
+  }
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && offen) { e.preventDefault(); schliesse(true); } });
+  var neuLegen = 0;
+  window.addEventListener("resize", function(){ clearTimeout(neuLegen); neuLegen = setTimeout(function(){ if (!offen) return; var o = offen, kap = o.kap, f = kap.querySelector("[data-fenster]"), l = kap.querySelector(".leiste");
+    if (schmal.matches) halte(kap)[o.i].appendChild(f); else if (l.nextElementSibling !== f) l.parentNode.insertBefore(f, l.nextSibling);
+    hoehe(kap); fuelle(kap, o.i); lupe(kap, o.i); }, 120); });
   var knopf = document.querySelector("[data-wechsel]"), satz = document.querySelector("[data-wechselsatz]"), band = document.querySelector(".band"), hb = document.querySelector("[data-halt]");
   function haltsatz(){ return ruhig ? " Am Gerät ist „weniger Bewegung“ eingestellt: Die Bilder wechseln nur, wenn du auf die Pfeile tippst." : (halt ? " Die Bilder stehen still." : " Die Bilder hinter den Kapiteln wechseln alle acht Sekunden."); }
   function ordnung(w, springen){
+    if (w !== "zeit") schliesse(false);
     document.getElementById("zeit").hidden = w !== "zeit"; document.getElementById("prinzipien").hidden = w !== "prinzip"; band.hidden = w !== "zeit";
     hb.hidden = ruhig || w !== "zeit";
     knopf.dataset.wechsel = w === "zeit" ? "prinzip" : "zeit";
@@ -263,6 +391,16 @@ JS = """(function(){
   }
   document.addEventListener("click", function(e){
     var o = e.target.closest("[data-wechsel]"); if (o) { ordnung(o.dataset.wechsel, true); return; }
+    /* Erster Tipp auf eine Karte wählt sie aus, der zweite öffnet sie. Mit gedrückter Zusatztaste öffnet der Link wie gewohnt. */
+    var kl = e.target.closest(".regal .karte");
+    if (kl && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+      var kap = kl.closest("section.kapitel"), i = halte(kap).indexOf(kl.closest(".sp"));
+      if (offen && offen.kap === kap && offen.i === i) return;
+      e.preventDefault(); waehle(kap, i); return;
+    }
+    var tp = e.target.closest(".tp[data-stop]"); if (tp) { waehle(tp.closest("section.kapitel"), +tp.dataset.stop); return; }
+    var rs = e.target.closest("[data-reise]"); if (rs && offen) { var z = +rs.dataset.reise < 0 ? rs.closest("[data-fenster]").dataset.frueher : rs.closest("[data-fenster]").dataset.spaeter; if (z !== "") waehle(offen.kap, +z); return; }
+    if (e.target.closest("[data-zu]")) { schliesse(true); return; }
     var s = e.target.closest("[data-bildschritt]"); if (s) { var k = s.closest("section.kapitel"); zeige(k, (+k.dataset.bild || 0) + (+s.dataset.bildschritt), true); return; }
     var h = e.target.closest("[data-halt]"); if (h) { halt = !halt; h.setAttribute("aria-pressed", halt); h.textContent = halt ? "Bildwechsel fortsetzen" : "Bildwechsel anhalten"; ordnung("zeit", false); }
   });
@@ -282,7 +420,7 @@ JS = """(function(){
     });
   } catch (e) {}
   if (ruhig) return;
-  setInterval(function(){ if (halt || document.hidden) return; document.querySelectorAll("section.kapitel").forEach(function(k){ zeige(k, (+k.dataset.bild || 0) + 1, false); }); }, 8000);
+  setInterval(function(){ if (halt || document.hidden || offen) return; document.querySelectorAll("section.kapitel").forEach(function(k){ zeige(k, (+k.dataset.bild || 0) + 1, false); }); }, 8000);
 })();"""
 SEITE = f"""<!doctype html>
 <html lang="de">
