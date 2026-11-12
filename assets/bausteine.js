@@ -71,8 +71,8 @@
 
   B.m20 = {
     nr: "M20",
-    titel: "Großbritannien im Zweiten Weltkrieg – drei Dilemmata",
-    thema: "Mai 1940, Juli 1941, Februar 1944 · drei Entscheidungen mit geprüften Quellen",
+    titel: "Der Verlauf des Zweiten Weltkriegs. Der Krieg und seine Dilemmata.",
+    thema: "Großbritannien im Mai 1940, Juli 1941, Februar 1944 · drei Entscheidungen mit geprüften Quellen",
     datei: "m20-dilemmata.html"
   };
 
@@ -99,7 +99,7 @@
 
   B.m25 = {
     nr: "M25",
-    titel: "Leben in Ruinen und der Umgang mit Schuld",
+    titel: "Kriegsende 1945: Leben in Ruinen und der Umgang mit Schuld – nach dem Modul von Offene Geschichte",
     thema: "Kriegsende 1945 · Quellen markieren, Fotos aus Buchenwald lesen, die Zwangsbesichtigung beurteilen",
     datei: "m25-leben-in-ruinen.html"
   };
