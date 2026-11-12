@@ -12,10 +12,15 @@ OW_BILDER = [('ost-west/media/owk-s1-potsdam.jpg', 'Potsdam, Sommer 1945 (Stunde
  ('ost-west/media/owk-s3-luftbruecke.jpg', 'Luftbrücke nach West-Berlin, 1948/49 (Stunde 3).', 'Ein Flugzeug fliegt tief über Menschen auf einem Trümmerhügel.'),
  ('ost-west/media/owk-s6-bernauer.jpg', 'Mauerbau an der Bernauer Straße in Berlin, August 1961 (Stunde 6).', 'Bauarbeiter setzen Betonsteine zu einer Mauer.'),
  ('ost-west/media/owk-s9-trabi.jpg', 'Nach der Grenzöffnung, November 1989 (Stunde 9).', 'Menschen umringen Autos der Marke Trabant; auf einem Transparent steht „Test the West!“.')]
-NS = [('Herrschaft und Ideologie', [('M18', 'Die fünf Säulen der NS-Ideologie', 'Quellen-Labor zur Ideologie', 'ns-ideologie.html')]),
- ('Außenpolitik und Krieg', [('M19', 'Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg?', 'NS-Außenpolitik 1933–1939', 'appeasement.html'), ('M20', 'Großbritannien im Zweiten Weltkrieg – drei Dilemmata', 'Mai 1940 · Juli 1941 · Februar 1944', 'm20-dilemmata.html'), ('M27', 'Die Vergessenen! Eine Globalgeschichte des Zweiten Weltkriegs', 'Dein Bild vom Krieg auf der Weltkarte', 'm27-die-vergessenen.html')]),
- ('Verbrechen und Verantwortung', [('M21', 'Es geht um Menschen – Shoa oder Holocaust?', 'Der letzte Brief, vier Lebenswege', 'm21-es-geht-um-menschen.html'), ('M22', '„Große Verbrechen brauchen keine Monster!“ – Wie war das möglich?', 'Täterforschung · der Fall Józefów 1942', 'm22-wie-war-das-moeglich.html'), ('M23', 'Die Gesellschaft, in der ich leb(t)e? – Ländervergleich', 'Dänemark 1943, Niederlande, Bulgarien, Ungarn', 'm23-die-gesellschaft.html')]),
- ('Nach 1945', [('M25', 'Leben in Ruinen und der Umgang mit Schuld', 'Kriegsende 1945', 'm25-leben-in-ruinen.html'), ('M26', 'Ende gut, alles gut? Kontinuitäten des Nationalsozialismus', 'Personal und Denken nach 1945', 'm26-kontinuitaeten.html')])]
+NS = [('M18', '1920–1935', 'Die fünf Säulen der NS-Ideologie', ['Vermutung', 'Sechs Zeugnisse', 'Fünf Säulen', 'Expertenrunde', 'Von der Idee zur Tat'], 'ns-ideologie.html', None),
+ ('M19', '1933–1939', 'Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg?', ['Was bedroht uns?', 'Was tun wir?', '„Anschluss“', 'Sudetenfrage', 'März 1939', 'Polen', 'Beurteilung'], 'appeasement.html', None),
+ ('M20', '1940–1944', 'Großbritannien im Zweiten Weltkrieg – drei Dilemmata', ['Mai 1940', 'Juli 1941', 'Februar 1944', 'Beurteilung'], 'm20-dilemmata.html', None),
+ ('M21', '1933–1945', 'Es geht um Menschen – Shoa oder Holocaust?', ['Der Brief', 'Das Wort', 'Vier Menschen', 'Die Matrix', 'Die Zahl'], 'm21-es-geht-um-menschen.html', 'media/m21-wc-westerbork-2018.jpg'),
+ ('M22', '1942', '„Große Verbrechen brauchen keine Monster!“ – Wie war das möglich?', ['Faktencheck', 'Józefów', 'Erklärungen', 'Landkarte', 'Marktplatz'], 'm22-wie-war-das-moeglich.html', 'media/m22-wc-jozefow-wald-2022.jpg'),
+ ('M23', '1943', 'Die Gesellschaft, in der ich leb(t)e? – Ländervergleich', ['Die Karte', 'Der Film', 'Sechs Säulen', 'Thesen testen', 'Deine Position'], 'm23-die-gesellschaft.html', 'media/m23-wc-elisabeth-dragoer-2026.jpg'),
+ ('M25', '1945', 'Leben in Ruinen und der Umgang mit Schuld', ['Der Krieg ist vorbei', 'Überleben in Ruinen', 'Im Angesicht des Verbrechens', 'Verantwortung', 'Landkarte'], 'm25-leben-in-ruinen.html', 'media/m25-weimar-frauen-1945.jpg'),
+ ('M26', 'nach 1945', 'Ende gut, alles gut? Kontinuitäten des Nationalsozialismus', ['Schätzen', 'Der BND', 'Eure Gruppe', 'Vergleich', 'Urteil'], 'm26-kontinuitaeten.html', None),
+ ('M27', '1939–1945, weltweit', 'Die Vergessenen! Eine Globalgeschichte des Zweiten Weltkriegs', ['Dein Bild vom Krieg', 'Der Artikel', 'Eurozentrismus', 'Strukturbild', 'Landkarte'], 'm27-die-vergessenen.html', 'media/m27-afrikanische-soldaten-1944.jpg')]
 WZ = [('Zeitraster', '16 Ereignisse im Überblick', 'raster'), ('Ordnen', 'Was kam wann?', 'ordnen'), ('Vernetzen', 'Ereignisse verbinden', 'netz'), ('Glossar', 'Begriffe nachschlagen', 'glossar'), ('Roter Faden', 'Deine Antwort auf die Leitfrage', 'faden')]
 ST = [(1, 'Potsdam, 1945', 'Die „Stunde Null“ – Was wird jetzt mit Deutschland?', ['Die Lage', 'Vorhersagen', 'Das Potsdamer Abkommen'], 's1-stunde-null.html', 'owk-s1-potsdam'),
  (2, '1947', 'Kommunismus gegen Kapitalismus: Truman-Doktrin und Zwei-Lager-Theorie', ['Truman', 'Shdanow', 'Spiegelbild', 'Blockbildung'], 's2-ideologien.html', 'owk-s2-marshallplan'),
@@ -30,14 +35,18 @@ def buehne(kennung, bilder, name):
     imgs = ''.join(f'<img src="{e(b[0])}" alt="{e(b[2]) if i == 0 else ""}" data-alt="{e(b[2])}" data-text="{e(b[1])}"{" class=\"an\"" if i == 0 else ""} onerror="this.remove()">' for i, b in enumerate(bilder))
     return imgs, f'<div class="blaettern" data-buehne="{kennung}"><button type="button" data-schritt="-1" aria-label="Vorheriges Bild: {name}">‹</button><button type="button" data-schritt="1" aria-label="Nächstes Bild: {name}">›</button><p aria-live="polite"><span data-zaehl>Bild 1 von {len(bilder)}</span>: <span data-bildtext>{e(bilder[0][1])}</span></p></div>'
 ns_img, ns_nav = buehne('ns', NS_BILDER, 'Nationalsozialismus'); ow_img, ow_nav = buehne('ow', OW_BILDER, 'Ost-West-Konflikt')
-ns_html = ''.join(f'<div><h3>{e(g)}</h3><div class="liste">' + ''.join(f'<a class="modul" href="{d}"><span class="nr">{nr}</span><b>{e(t)}</b><span class="th">{e(th)}</span></a>' for nr, t, th, d in ms) + '</div></div>' for g, ms in NS)
+def karte(nr, zeit, titel, teile, ziel, bild):
+    b = f'<img src="{bild}" alt="" onerror="this.remove()">' if bild else ''
+    return (f'<li class="station"><span class="jahr">{e(zeit)}</span><a class="modulkarte" href="{ziel}"><span class="sbild{"" if bild else " ohne"}">{b}<span class="snr{" lang" if len(str(nr)) > 1 else ""}">{nr}</span></span>'
+            f'<span class="stext"><b>{e(titel)}</b><span class="teile">' + ''.join(f'<span>{e(x)}</span>' for x in teile) + '</span></span></a></li>')
+ns_html = ''.join(karte(nr, z, t, teile, d, b) for nr, z, t, teile, d, b in NS)
 wz_html = ''.join(f'<a href="ost-west/index.html#{a}"><b>{e(n)}</b><span>{e(w)}</span></a>' for n, w, a in WZ)
-st_html = ''.join(f'<li><a class="stunde" href="ost-west/{d}"><span class="sbild"><img src="ost-west/media/{b}.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="snr">{nr}</span></span><span class="stext"><span class="zeit">{e(z)}</span><b>{e(t)}</b><span class="teile">' + ''.join(f'<span>{e(x)}</span>' for x in teile) + '</span></span></a></li>' for nr, z, t, teile, d, b in ST)
+st_html = ''.join(karte(nr, z, t, teile, 'ost-west/' + d, f'ost-west/media/{b}.jpg') for nr, z, t, teile, d, b in ST)
 CSS = '''@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
 :root{color-scheme:dark;--grund:#15171A;--text:#F4F1EA;--leise:#C9C4BA;--weimar:#E0B74A;--ns:#B9C0C8;--ow:#7FA6FF;--display:"Fraunces",Georgia,serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
 body{margin:0;background:var(--grund);color:var(--text);font:400 1.0625rem/1.5 "Atkinson Hyperlegible",system-ui,sans-serif;overflow-x:clip}
 a{color:var(--text)}a:focus-visible,button:focus-visible{outline:3px solid #fff;outline-offset:3px}
 button{font:inherit;color:inherit;cursor:pointer}
@@ -66,35 +75,42 @@ h2{margin:.5rem 0 .4rem;font:600 clamp(2.1rem,5vw,3.75rem)/1.02 var(--display);h
 .blaettern p{margin:0;font-size:.94rem;color:#E2DED5;flex:1 1 18rem}
 .leer{border:2px dashed var(--f);border-radius:.9rem;padding:1.5rem}
 .weimar .huelle{padding-block:2.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:2rem;align-items:end}
-.gruppen{padding-top:1.75rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1.5rem;align-items:start}
 h3{margin:0 0 .6rem;font-size:1rem;font-weight:700;color:var(--f)}
-.liste{display:flex;flex-direction:column;gap:.5rem}
-.modul{display:block;min-height:76px;padding:.75rem .9rem;background:#22262B;border:1px solid #4A5059;border-radius:.75rem;text-decoration:none}
-.modul .nr{font-size:.94rem;color:var(--ns);font-weight:700}
-.modul b{display:block;font:600 1.19rem/1.22 var(--display)}
-.modul .th{font-size:.94rem;color:var(--leise)}
 .werkzeuge{display:flex;flex-wrap:wrap;gap:.6rem}
 .werkzeuge a{flex:1 1 11rem;min-height:80px;padding:.75rem .9rem;border:2px solid var(--ow);border-radius:.75rem;text-decoration:none}
 .werkzeuge b{display:block;font-size:1.125rem}.werkzeuge span{font-size:.94rem;color:var(--leise)}
-.stunden{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(20rem,100%),1fr));gap:1rem}
-.stunde{display:flex;flex-direction:column;height:100%;background:#1C2333;border:1px solid #3B4A6B;border-radius:.9rem;overflow:hidden;text-decoration:none}
-.sbild{position:relative;display:block;height:150px;background:#10182E}
-.sbild img{width:100%;height:150px;object-fit:cover;filter:grayscale(1);display:block}
-.snr{position:absolute;left:.75rem;top:.75rem;width:44px;height:44px;border-radius:999px;background:var(--ow);color:#10182E;font:600 1.5rem/1 var(--display);display:grid;place-items:center}
-.stext{padding:.9rem 1rem 1rem;display:flex;flex-direction:column;gap:.5rem}
-.stext .zeit{font-size:.94rem;color:#BFD2FF;font-weight:700}
+/* Übersichtsband: Breite = Dauer; bleibt beim Scrollen oben stehen und zeigt, wo du bist */
+.band{position:sticky;top:0;z-index:5;background:var(--grund);padding-block:.5rem;border-bottom:1px solid #2B2F35}
+.band ol{list-style:none;margin:0;padding:0;display:flex;gap:4px}
+.band li{min-width:4.6rem}
+.band a{display:flex;flex-direction:column;justify-content:center;min-height:48px;padding:.2rem .6rem;border:2px solid var(--f);border-radius:.5rem;text-decoration:none;line-height:1.15;overflow:hidden}
+.band a b{font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.band a span{font-size:.8rem;color:var(--leise);white-space:nowrap}
+.band a[aria-current]{background:var(--f);color:#15171A}.band a[aria-current] span{color:#15171A}
+/* Zeitstrahl: eine Linie, daran jede Station mit Zeitangabe und Modulkarte */
+.strahl{list-style:none;margin:0;padding:1.5rem 0 0;position:relative}
+.strahl::before{content:"";position:absolute;left:8.25rem;top:0;bottom:0;width:4px;background:var(--f);border-radius:2px}
+.station{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:2.5rem;align-items:start;position:relative;padding-bottom:1.1rem}
+.station::before{content:"";position:absolute;left:7.75rem;top:1.35rem;width:1.25rem;height:1.25rem;border-radius:999px;background:var(--grund);border:4px solid var(--f)}
+.jahr{padding-top:1.05rem;text-align:right;font:600 1.15rem/1.2 var(--display);color:var(--f)}
+.modulkarte{display:grid;grid-template-columns:13rem minmax(0,1fr);min-height:9.5rem;background:var(--karte);border:1px solid var(--rand);border-radius:.9rem;overflow:hidden;text-decoration:none}
+.sbild{position:relative;display:block;min-height:9.5rem;background:var(--tief2)}
+.sbild img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+.snr{position:absolute;left:.75rem;top:.75rem;min-width:44px;height:44px;padding:0 .5rem;border-radius:999px;background:var(--f);color:#15171A;font:600 1.5rem/1 var(--display);display:grid;place-items:center}
+.snr.lang{font-size:1.15rem}
+.stext{padding:.9rem 1rem 1rem;display:flex;flex-direction:column;gap:.6rem;justify-content:center}
 .stext b{font:600 1.35rem/1.18 var(--display)}
 .teile{display:flex;flex-wrap:wrap;gap:.4rem}
-.teile span{font-size:.875rem;padding:.15rem .55rem;border:1px solid #6F86B8;border-radius:.4rem;color:#E4EBFB}
+.teile span{font-size:.875rem;padding:.15rem .55rem;border:1px solid var(--rand2);border-radius:.4rem;color:#E9EDF5}
+@media (max-width:760px){.strahl::before{left:.5rem}.station{grid-template-columns:1fr;gap:.3rem;padding-left:2rem}.station::before{left:0;top:.2rem}.jahr{text-align:left;padding-top:0}.modulkarte{grid-template-columns:1fr}.sbild{min-height:8rem}.sbild.ohne{min-height:4.2rem}}
 .klein{font-size:.94rem;color:var(--leise)}
 footer{margin-top:4rem;padding-top:1.1rem;padding-bottom:3rem;border-top:1px solid #4A5059;font-size:.94rem;color:var(--leise)}
 footer p{margin:0 0 .4rem}
 footer a,.klein a{display:inline-block;padding:.35rem 0}
 .halt{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin-bottom:.7rem}
 .halt button{min-height:44px;padding:0 1rem;border:2px solid var(--leise);border-radius:.6rem;background:transparent}
-@media (hover:hover) and (pointer:fine){.modul:hover,.stunde:hover{border-color:#fff}.werkzeuge a:hover,.epochen a:hover,.blaettern button:hover,.halt button:hover{background:rgba(255,255,255,.1)}}
+@media (hover:hover) and (pointer:fine){.modulkarte:hover{border-color:#fff}.werkzeuge a:hover,.epochen a:hover,.blaettern button:hover,.halt button:hover{background:rgba(255,255,255,.1)}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.buehne>img{transition:none}}
-@media print{body{background:#fff;color:#000}.buehne>img,.sbild,.blaettern,.halt{display:none}.buehne::after{display:none}.buehne{min-height:0}a{color:#000}.modul,.stunde{background:#fff;border-color:#999}.modul .th,.klein,.teile span,.stext .zeit,.modul .nr,h3,.jahre,.ziffer{color:#000}}
+@media print{body{background:#fff;color:#000}.buehne>img,.sbild,.blaettern,.halt{display:none}.buehne::after{display:none}.buehne{min-height:0}a{color:#000}.band{position:static}.modulkarte{background:#fff;border-color:#999}.klein,.teile span,.jahr,h3,.jahre,.ziffer{color:#000}}
 '''
 JS = '''(function(){
   var ruhig = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches, halt = false, stand = {};
@@ -109,6 +125,11 @@ JS = '''(function(){
     var s = e.target.closest("[data-schritt]"); if (s) { var k = s.parentNode.dataset.buehne; zeig(k, (stand[k] || 0) + (+s.dataset.schritt)); return; }
     var h = e.target.closest("[data-halt]"); if (h) { halt = !halt; h.setAttribute("aria-pressed", halt); h.textContent = halt ? "Bildwechsel fortsetzen" : "Bildwechsel anhalten"; }
   });
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(x){ if (!x.isIntersecting) return;
+      document.querySelectorAll(".band a").forEach(function(a){ if (a.dataset.ep === x.target.id) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); }); }); }, { rootMargin:"-45% 0px -50% 0px" });
+    document.querySelectorAll("section.kapitel").forEach(function(k){ io.observe(k); });
+  }
   var hb = document.querySelector("[data-halt]");
   if (ruhig) { hb.parentNode.querySelector("span").textContent = "Am Gerät ist „weniger Bewegung“ eingestellt: Die Bilder wechseln nur auf Tippen."; hb.hidden = true; return; }
   setInterval(function(){ if (halt || document.hidden) return; ["ns", "ow"].forEach(function(k){ zeig(k, (stand[k] || 0) + 1); }); }, 8000);
@@ -138,8 +159,13 @@ SEITE = f'''<!doctype html>
 <main id="inhalt">
 <section class="hero huelle">
 <h1>Geschichte für die Gegenwart</h1>
-<p>Drei Epochen, 1918 bis 1991 – untersucht mit der <a href="{LK}"><b>kognitiven Landkarte des Geschichtsunterrichts</b></a>. In jedem Modul legst du dich zuerst fest und prüfst dann an Quellen, ob dein Urteil trägt.</p>
+<p>Ein Zeitstrahl, drei Epochen, 1918 bis 1991 – untersucht mit der <a href="{LK}"><b>kognitiven Landkarte des Geschichtsunterrichts</b></a>. In jedem Modul legst du dich zuerst fest und prüfst dann an Quellen, ob dein Urteil trägt.</p>
 </section>
+<nav class="band" aria-label="Zeitstrahl 1918 bis 1991"><ol class="huelle">
+<li style="flex:15 1 0"><a href="#weimar" data-ep="weimar" style="--f:var(--weimar)"><b>Weimarer Republik</b><span>1918–1933</span></a></li>
+<li style="flex:12 1 0"><a href="#ns" data-ep="ns" style="--f:var(--ns)"><b>Nationalsozialismus</b><span>1933–1945</span></a></li>
+<li style="flex:46 1 0"><a href="#ostwest" data-ep="ostwest" style="--f:var(--ow)"><b>Ost-West-Konflikt</b><span>1945–1991</span></a></li>
+</ol></nav>
 
 <section class="kapitel weimar" id="weimar" style="--f:var(--weimar);background:#211D12">
 <div class="huelle">
@@ -153,7 +179,7 @@ SEITE = f'''<!doctype html>
 <div class="huelle"><p class="ziffer">2</p><h2>National&shy;sozialismus</h2><p class="jahre">1933 – 1945 und die Folgen · neun Module</p>
 <p class="frage">Ideologie, Krieg und Menschheitsverbrechen – und die Frage, wer mitgemacht hat und was danach daraus wurde.</p>
 {ns_nav}</div></div>
-<div class="huelle gruppen">{ns_html}</div>
+<div class="huelle" style="--karte:#22262B;--rand:#4A5059;--rand2:#7C848E;--tief2:#2B3037"><ol class="strahl" aria-label="Module zum Nationalsozialismus in der Reihenfolge des Unterrichts">{ns_html}</ol></div>
 <p class="huelle klein" style="margin-top:1rem">Bildnachweise: <a href="M21_Bildliste.html">Bildliste M21</a> · <a href="M22_Bildliste.html">M22</a> · <a href="M23_Bildliste.html">M23</a></p>
 </section>
 
@@ -166,7 +192,7 @@ SEITE = f'''<!doctype html>
 <h3>Werkzeuge für die ganze Einheit</h3>
 <div class="werkzeuge">{wz_html}</div>
 <h3 style="margin-top:2rem">Neun Stunden – und was in jeder steckt</h3>
-<ol class="stunden">{st_html}</ol>
+<ol class="strahl" aria-label="Stunden zum Ost-West-Konflikt" style="--karte:#1C2333;--rand:#3B4A6B;--rand2:#6F86B8;--tief2:#10182E">{st_html}</ol>
 <p class="klein" style="margin:.9rem 0 0">Am Ende jeder Stunde: Landkarte · Verorten und vernetzen · Merkseite. Bilder aus dem Unterrichtsheft, Nachweise offen (<a href="ost-west/Bildliste.html">Bildliste</a>).</p>
 </div>
 </section>
