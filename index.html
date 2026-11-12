@@ -6,158 +6,153 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="GGK-Labor">
 <title>Geschichte für die Gegenwart – GGK-Labor</title>
-<meta name="description" content="GGK-Labor: Lernmodule für Geschichte mit Gemeinschaftskunde am Beruflichen Gymnasium – Weimarer Republik, Nationalsozialismus, Ost-West-Konflikt.">
+<meta name="description" content="GGK-Labor: Lernmodule für Geschichte mit Gemeinschaftskunde am Beruflichen Gymnasium – Weimarer Republik, Nationalsozialismus, Ost-West-Konflikt auf einem Zeitstrahl.">
 <style>
 @font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
 :root{color-scheme:dark;--grund:#15171A;--text:#F4F1EA;--leise:#C9C4BA;--weimar:#E0B74A;--ns:#B9C0C8;--ow:#7FA6FF;--display:"Fraunces",Georgia,serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+*{box-sizing:border-box}
 body{margin:0;background:var(--grund);color:var(--text);font:400 1.0625rem/1.5 "Atkinson Hyperlegible",system-ui,sans-serif;overflow-x:clip}
 a{color:var(--text)}a:focus-visible,button:focus-visible{outline:3px solid #fff;outline-offset:3px}
 button{font:inherit;color:inherit;cursor:pointer}
-.huelle{max-width:75rem;margin:0 auto;padding-inline:1.5rem}
+.huelle{max-width:80rem;margin:0 auto;padding-inline:1.5rem}
 .sprung{position:absolute;left:-999rem}.sprung:focus{left:1rem;top:1rem;background:#fff;color:#000;padding:.5rem 1rem;z-index:9}
-header.kopf{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:space-between;align-items:center;padding-block:1.25rem}
-.marke{font-weight:700;font-size:1.25rem;text-decoration:none}
-.epochen{display:flex;flex-wrap:wrap;gap:.5rem}
-.epochen a{min-height:44px;display:inline-flex;align-items:center;padding:0 .9rem;border:2px solid var(--f);border-radius:999px;text-decoration:none}
-.hero{padding-block:2.2rem 2.8rem}
-h1{margin:0;font:600 clamp(2.75rem,8vw,6.75rem)/.98 var(--display);text-wrap:balance}
-.hero p{margin:1.4rem 0 0;max-width:60ch;font-size:1.25rem;color:#D9D4CA}
-section.kapitel{border-top:6px solid var(--f)}
-section.kapitel+section.kapitel{margin-top:3.5rem}
-.buehne{position:relative;min-height:30rem;display:flex;align-items:flex-end;overflow:hidden;background:var(--tief)}
-.buehne>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1);opacity:0;transition:opacity 600ms cubic-bezier(.23,1,.32,1)}
-.buehne>img.an{opacity:1}
-.buehne::after{content:"";position:absolute;inset:0;background:var(--tief);opacity:.72}
-.buehne .huelle{position:relative;z-index:1;width:100%;padding-block:2.5rem 1.5rem}
-.ziffer{margin:0;font:600 6rem/.9 var(--display);color:var(--f)}
-h2{margin:.5rem 0 .4rem;font:600 clamp(2.1rem,5vw,3.75rem)/1.02 var(--display);hyphens:manual}
-.jahre{margin:0 0 .6rem;font-size:1.19rem;font-weight:700;color:var(--f)}
-.frage{margin:0;max-width:56ch;font-size:1.19rem}
-.blaettern{margin-top:1.1rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
-.blaettern button{width:44px;height:44px;border:2px solid var(--f);border-radius:999px;background:transparent;font-size:1.4rem;line-height:1}
-.blaettern p{margin:0;font-size:.94rem;color:#E2DED5;flex:1 1 18rem}
-.leer{border:2px dashed var(--f);border-radius:.9rem;padding:1.5rem}
-.weimar .huelle{padding-block:2.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:2rem;align-items:end}
-h3{margin:0 0 .6rem;font-size:1rem;font-weight:700;color:var(--f)}
-.werkzeuge{display:flex;flex-wrap:wrap;gap:.6rem}
-.werkzeuge a{flex:1 1 11rem;min-height:80px;padding:.75rem .9rem;border:2px solid var(--ow);border-radius:.75rem;text-decoration:none}
-.werkzeuge b{display:block;font-size:1.125rem}.werkzeuge span{font-size:.94rem;color:var(--leise)}
-/* Übersichtsband: Breite = Dauer; bleibt beim Scrollen oben stehen und zeigt, wo du bist */
-.band{position:sticky;top:0;z-index:5;background:var(--grund);padding-block:.5rem;border-bottom:1px solid #2B2F35}
+header.kopf{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;justify-content:space-between;align-items:center;padding-block:.9rem .4rem}
+.marke{font-weight:700;font-size:1.15rem;text-decoration:none}
+header.kopf nav{display:flex;flex-wrap:wrap;gap:.3rem 1.25rem;font-size:.95rem}
+header.kopf nav a{display:inline-block;padding:.5rem 0}
+.hero{padding-block:.2rem .8rem}
+h1{margin:0;font:600 clamp(2.1rem,4.6vw,3.6rem)/1.02 var(--display);text-wrap:balance}
+.hero p{margin:.5rem 0 0;max-width:78ch;color:#D9D4CA}
+/* Bühne: Hintergrundbild der Epoche, in der man gerade ist */
+.zeit{position:relative;overflow:hidden;--f:var(--weimar);--tief:#211D12;--karte:#2A2516;--rand:#6B5A24;--rand2:#A08A3C;background:var(--tief);border-top:6px solid var(--f);padding-block:.75rem 1rem}
+.zeit[data-ep=ns]{--f:var(--ns);--tief:#15171A;--karte:#22262B;--rand:#4A5059;--rand2:#7C848E}
+.zeit[data-ep=ostwest]{--f:var(--ow);--tief:#10182E;--karte:#1C2333;--rand:#3B4A6B;--rand2:#6F86B8}
+.zeit>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1);opacity:0;transition:opacity 600ms cubic-bezier(.23,1,.32,1)}
+.zeit[data-ep=ns]>img.an[data-ep=ns],.zeit[data-ep=ostwest]>img.an[data-ep=ostwest]{opacity:1}
+.zeit::after{content:"";position:absolute;inset:0;background:var(--tief);opacity:.8}
+.zeit>.huelle,.zeit>.spur{position:relative;z-index:1}
+/* Übersichtsband: Breite = Dauer */
 .band ol{list-style:none;margin:0;padding:0;display:flex;gap:4px}
 .band li{min-width:4.6rem}
-.band a{display:flex;flex-direction:column;justify-content:center;min-height:48px;padding:.2rem .6rem;border:2px solid var(--f);border-radius:.5rem;text-decoration:none;line-height:1.15;overflow:hidden}
+.band a{display:flex;flex-direction:column;justify-content:center;min-height:48px;padding:.2rem .6rem;border:2px solid var(--b);border-radius:.5rem;text-decoration:none;line-height:1.15;overflow:hidden;background:rgba(21,23,26,.6)}
 .band a b{font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.band a span{font-size:.8rem;color:var(--leise);white-space:nowrap}
-.band a[aria-current]{background:var(--f);color:#15171A}.band a[aria-current] span{color:#15171A}
-/* Zeitstrahl: eine Linie, daran jede Station mit Zeitangabe und Modulkarte */
-.strahl{list-style:none;margin:0;padding:1.5rem 0 0;position:relative}
-.strahl::before{content:"";position:absolute;left:8.25rem;top:0;bottom:0;width:4px;background:var(--f);border-radius:2px}
-.station{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:2.5rem;align-items:start;position:relative;padding-bottom:1.1rem}
-.station::before{content:"";position:absolute;left:7.75rem;top:1.35rem;width:1.25rem;height:1.25rem;border-radius:999px;background:var(--grund);border:4px solid var(--f)}
-.jahr{padding-top:1.05rem;text-align:right;font:600 1.15rem/1.2 var(--display);color:var(--f)}
-.modulkarte{display:grid;grid-template-columns:13rem minmax(0,1fr);min-height:9.5rem;background:var(--karte);border:1px solid var(--rand);border-radius:.9rem;overflow:hidden;text-decoration:none}
-.sbild{position:relative;display:block;min-height:9.5rem;background:var(--tief2)}
+.band a[aria-current]{background:var(--b);color:#15171A}.band a[aria-current] span{color:#15171A}
+.leiste{display:flex;flex-wrap:wrap;gap:.5rem .75rem;align-items:center;margin-top:.5rem}
+.leiste button{min-height:44px;min-width:44px;padding:0 .9rem;border:2px solid var(--f);border-radius:999px;background:rgba(21,23,26,.6)}
+.leiste .pfeil{font-size:1.4rem;line-height:1;padding:0}
+.leiste p{margin:0;font-size:.9rem;color:#E2DED5;flex:1 1 14rem}
+/* Spur: waagerechter Zeitstrahl */
+.spur{list-style:none;margin:.6rem 0 0;padding:0 max(1.5rem,calc((100vw - 80rem)/2 + 1.5rem)) .6rem;display:flex;align-items:stretch;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding-inline:1.5rem;scrollbar-color:var(--f) transparent;overscroll-behavior-x:contain}
+.station{flex:0 0 17.5rem;display:grid;grid-template-rows:auto auto 1fr;scroll-snap-align:start;--f:var(--ns);--karte:#22262B;--rand:#4A5059;--rand2:#7C848E}
+.station[data-ep=weimar]{--f:var(--weimar)}.station[data-ep=ostwest]{--f:var(--ow);--karte:#1C2333;--rand:#3B4A6B;--rand2:#6F86B8}
+.station.kap{flex-basis:19rem}.station.ende{flex-basis:5rem}
+.jahr{font:600 1.05rem/1.2 var(--display);color:var(--f);min-height:1.35rem;white-space:nowrap}
+.jahr.gross{font-size:1.5rem;min-height:1.35rem;line-height:.9}
+.linie{display:block;height:4px;background:var(--f);margin:.6rem 0 .9rem;position:relative}
+.linie::before{content:"";position:absolute;left:0;top:-.5rem;width:1.25rem;height:1.25rem;border-radius:999px;background:var(--grund);border:4px solid var(--f)}
+.kap .linie::before{top:-.75rem;width:1.75rem;height:1.75rem;background:var(--f)}
+.ende .linie{background:transparent}
+.modulkarte,.kapkarte,.wzkarte{margin-right:1rem}
+.modulkarte{display:flex;flex-direction:column;background:var(--karte);border:1px solid var(--rand);border-radius:.9rem;overflow:hidden;text-decoration:none}
+.sbild{position:relative;display:block;flex:0 0 6.25rem;background:rgba(0,0,0,.28)}
 .sbild img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
 .snr{position:absolute;left:.75rem;top:.75rem;min-width:44px;height:44px;padding:0 .5rem;border-radius:999px;background:var(--f);color:#15171A;font:600 1.5rem/1 var(--display);display:grid;place-items:center}
 .snr.lang{font-size:1.15rem}
-.stext{padding:.9rem 1rem 1rem;display:flex;flex-direction:column;gap:.6rem;justify-content:center}
-.stext b{font:600 1.35rem/1.18 var(--display)}
-.teile{display:flex;flex-wrap:wrap;gap:.4rem}
-.teile span{font-size:.875rem;padding:.15rem .55rem;border:1px solid var(--rand2);border-radius:.4rem;color:#E9EDF5}
-@media (max-width:760px){.strahl::before{left:.5rem}.station{grid-template-columns:1fr;gap:.3rem;padding-left:2rem}.station::before{left:0;top:.2rem}.jahr{text-align:left;padding-top:0}.modulkarte{grid-template-columns:1fr}.sbild{min-height:8rem}.sbild.ohne{min-height:4.2rem}}
-.klein{font-size:.94rem;color:var(--leise)}
-footer{margin-top:4rem;padding-top:1.1rem;padding-bottom:3rem;border-top:1px solid #4A5059;font-size:.94rem;color:var(--leise)}
+.sbild.ohne .snr{left:50%;top:50%;transform:translate(-50%,-50%);height:3.5rem;min-width:5.5rem;font-size:1.9rem;background:transparent;color:var(--f);border:3px solid var(--f)}
+.stext{padding:.75rem .9rem .9rem;display:flex;flex-direction:column;gap:.55rem;flex:1}
+.stext b{font:600 1.2rem/1.18 var(--display)}
+.teile{display:flex;flex-wrap:wrap;gap:.35rem}
+.teile span{font-size:.84rem;padding:.1rem .5rem;border:1px solid var(--rand2);border-radius:.4rem;color:#E9EDF5}
+.stand{margin-top:auto;font-size:.88rem;font-weight:700;color:var(--f)}
+.kapkarte{padding-right:.5rem}
+.ziffer{margin:0;font:600 3.6rem/.9 var(--display);color:var(--f)}
+h2{margin:.3rem 0 .3rem;font:600 2.1rem/1.04 var(--display);hyphens:manual}
+.jahre{margin:0 0 .5rem;font-weight:700;color:var(--f)}
+.satz{margin:0;font-size:1rem}
+.wzkarte{display:flex;flex-direction:column;gap:.3rem}
+h3{margin:0 0 .2rem;font:600 1.2rem/1.2 var(--display)}
+.wzkarte a{display:block;min-height:44px;padding:.2rem .7rem;border:2px solid var(--f);border-radius:.6rem;text-decoration:none;background:rgba(16,24,46,.6);line-height:1.2}
+.wzkarte b{display:block}.wzkarte span{font-size:.86rem;color:var(--leise)}
+footer{padding-top:1rem;padding-bottom:2.5rem;font-size:.94rem;color:var(--leise)}
 footer p{margin:0 0 .4rem}
-footer a,.klein a{display:inline-block;padding:.35rem 0}
-.halt{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin-bottom:.7rem}
-.halt button{min-height:44px;padding:0 1rem;border:2px solid var(--leise);border-radius:.6rem;background:transparent}
-@media (hover:hover) and (pointer:fine){.modulkarte:hover{border-color:#fff}.werkzeuge a:hover,.epochen a:hover,.blaettern button:hover,.halt button:hover{background:rgba(255,255,255,.1)}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.buehne>img{transition:none}}
-@media print{body{background:#fff;color:#000}.buehne>img,.sbild,.blaettern,.halt{display:none}.buehne::after{display:none}.buehne{min-height:0}a{color:#000}.band{position:static}.modulkarte{background:#fff;border-color:#999}.klein,.teile span,.jahr,h3,.jahre,.ziffer{color:#000}}
+footer a{display:inline-block;padding:.35rem 0}
+@media (max-width:640px){.station{flex-basis:80vw}.station.kap{flex-basis:84vw}.band li{flex:1 1 0!important;min-width:0}.band a{padding:.2rem .4rem}.band a b{white-space:normal;font-size:.8rem;hyphens:auto}}
+@media (hover:hover) and (pointer:fine){.modulkarte:hover{border-color:#fff}.wzkarte a:hover,.leiste button:hover{background:rgba(255,255,255,.14)}}
+@media (prefers-reduced-motion:reduce){.zeit>img{transition:none}}
+@media print{body{background:#fff;color:#000}.zeit{background:#fff;border:0}.zeit>img,.zeit::after,.leiste,.sbild img{display:none}.spur{flex-wrap:wrap;overflow:visible;gap:.5rem 0}.station{flex-basis:33%}.modulkarte{background:#fff;border-color:#999}a,.jahr,.jahre,.ziffer,.teile span,.snr,.band a span{color:#000!important}.band a{background:#fff}}
 </style>
 </head>
 <body>
 <a class="sprung" href="#inhalt">Zum Inhalt</a>
 <header class="kopf huelle">
 <a class="marke" href="index.html">GGK-Labor</a>
-<nav class="epochen" aria-label="Epochen">
-<a href="#weimar" style="--f:var(--weimar)">1 · Weimarer Republik</a>
-<a href="#ns" style="--f:var(--ns)">2 · Nationalsozialismus</a>
-<a href="#ostwest" style="--f:var(--ow)">3 · Ost-West-Konflikt</a>
-</nav>
+<nav aria-label="Weitere Seiten"><a href="https://geschichtefuerdiegegenwart.github.io/kognitive-Landkarte-des-Geschichtsunterrichts/">Kognitive Landkarte</a><a href="lehrkraft.html">Für Lehrkräfte</a></nav>
 </header>
 <main id="inhalt">
 <section class="hero huelle">
 <h1>Geschichte für die Gegenwart</h1>
-<p>Ein Zeitstrahl, drei Epochen, 1918 bis 1991 – untersucht mit der <a href="https://geschichtefuerdiegegenwart.github.io/kognitive-Landkarte-des-Geschichtsunterrichts/"><b>kognitiven Landkarte des Geschichtsunterrichts</b></a>. In jedem Modul legst du dich zuerst fest und prüfst dann an Quellen, ob dein Urteil trägt.</p>
+<p>Ein Zeitstrahl von 1918 bis 1991 – untersucht mit der <a href="https://geschichtefuerdiegegenwart.github.io/kognitive-Landkarte-des-Geschichtsunterrichts/"><b>kognitiven Landkarte des Geschichtsunterrichts</b></a>. In jedem Modul legst du dich zuerst fest und prüfst dann an Quellen, ob dein Urteil trägt.</p>
 </section>
-<nav class="band" aria-label="Zeitstrahl 1918 bis 1991"><ol class="huelle">
-<li style="flex:15 1 0"><a href="#weimar" data-ep="weimar" style="--f:var(--weimar)"><b>Weimarer Republik</b><span>1918–1933</span></a></li>
-<li style="flex:12 1 0"><a href="#ns" data-ep="ns" style="--f:var(--ns)"><b>Nationalsozialismus</b><span>1933–1945</span></a></li>
-<li style="flex:46 1 0"><a href="#ostwest" data-ep="ostwest" style="--f:var(--ow)"><b>Ost-West-Konflikt</b><span>1945–1991</span></a></li>
-</ol></nav>
-
-<section class="kapitel weimar" id="weimar" style="--f:var(--weimar);background:#211D12">
+<section class="zeit" data-ep="weimar" aria-label="Zeitstrahl"><img src="media/m21-wc-umschlagplatz-2012.jpg" alt="" data-ep="ns" data-text="Gedenkstätte am Umschlagplatz in Warschau, 2012 (zu M21)." class="an" onerror="this.remove()"><img src="media/m22-wc-jozefow-wald-2022.jpg" alt="" data-ep="ns" data-text="Wald bei Józefów in Polen, 2022 (zu M22)." onerror="this.remove()"><img src="media/m23-wc-elisabeth-dragoer-2026.jpg" alt="" data-ep="ns" data-text="Fischerboot „Elisabeth“ in Dragør, Dänemark; mit ihm wurden 1943 Menschen nach Schweden gebracht (zu M23)." onerror="this.remove()"><img src="ost-west/media/owk-s1-potsdam.jpg" alt="" data-ep="ostwest" data-text="Potsdam, Sommer 1945 (Stunde 1)." class="an" onerror="this.remove()"><img src="ost-west/media/owk-s3-luftbruecke.jpg" alt="" data-ep="ostwest" data-text="Luftbrücke nach West-Berlin, 1948/49 (Stunde 3)." onerror="this.remove()"><img src="ost-west/media/owk-s6-bernauer.jpg" alt="" data-ep="ostwest" data-text="Mauerbau an der Bernauer Straße in Berlin, August 1961 (Stunde 6)." onerror="this.remove()"><img src="ost-west/media/owk-s9-trabi.jpg" alt="" data-ep="ostwest" data-text="Nach der Grenzöffnung, November 1989 (Stunde 9)." onerror="this.remove()">
 <div class="huelle">
-<div><p class="ziffer">1</p><h2>Weimarer Republik</h2><p class="jahre">1918 – 1933</p></div>
-<div class="leer"><p style="margin:0 0 .4rem;font-weight:700;font-size:1.19rem">Dieses Kapitel entsteht gerade.</p><p style="margin:0;color:#D9D4CA">Die Module zur Weimarer Republik erscheinen hier, sobald sie fertig sind.</p></div>
+<nav class="band" aria-label="Epochen auf dem Zeitstrahl"><ol>
+<li style="flex:15 1 0"><a href="#weimar" data-ep="weimar" style="--b:var(--weimar)"><b>Weimarer Republik</b><span>1918–1933</span></a></li>
+<li style="flex:12 1 0"><a href="#ns" data-ep="ns" style="--b:var(--ns)"><b>Nationalsozialismus</b><span>1933–1945</span></a></li>
+<li style="flex:46 1 0"><a href="#ostwest" data-ep="ostwest" style="--b:var(--ow)"><b>Ost-West-Konflikt</b><span>1945–1991</span></a></li>
+</ol></nav>
+<div class="leiste"><button type="button" class="pfeil" data-schritt="-1" aria-label="Auf dem Zeitstrahl zurück">‹</button><button type="button" class="pfeil" data-schritt="1" aria-label="Auf dem Zeitstrahl weiter">›</button>
+<p aria-live="polite" data-bildtext></p><button type="button" data-bild hidden>Nächstes Bild</button><button type="button" data-halt aria-pressed="false" hidden>Bildwechsel anhalten</button></div>
 </div>
-</section>
-
-<section class="kapitel" id="ns" style="--f:var(--ns)">
-<div class="buehne" data-buehne="ns" style="--tief:#15171A"><img src="media/m21-wc-umschlagplatz-2012.jpg" alt="Eine helle Mauer mit eingemeißelten Vornamen an der Gedenkstätte Umschlagplatz in Warschau." data-alt="Eine helle Mauer mit eingemeißelten Vornamen an der Gedenkstätte Umschlagplatz in Warschau." data-text="Gedenkstätte am Umschlagplatz in Warschau, 2012 (zu M21)." class="an" onerror="this.remove()"><img src="media/m22-wc-jozefow-wald-2022.jpg" alt="" data-alt="Hohe Kiefern und ein Weg im Wald bei Józefów." data-text="Wald bei Józefów in Polen, 2022 (zu M22)." onerror="this.remove()"><img src="media/m23-wc-elisabeth-dragoer-2026.jpg" alt="" data-alt="Ein kleines Fischerboot liegt im Hafen von Dragør." data-text="Fischerboot „Elisabeth“ in Dragør, Dänemark; mit ihm wurden 1943 Menschen nach Schweden gebracht (zu M23)." onerror="this.remove()">
-<div class="huelle"><p class="ziffer">2</p><h2>National&shy;sozialismus</h2><p class="jahre">1933 – 1945 und die Folgen · neun Module</p>
-<p class="frage">Ideologie, Krieg und Menschheitsverbrechen – und die Frage, wer mitgemacht hat und was danach daraus wurde.</p>
-<div class="blaettern" data-buehne="ns"><button type="button" data-schritt="-1" aria-label="Vorheriges Bild: Nationalsozialismus">‹</button><button type="button" data-schritt="1" aria-label="Nächstes Bild: Nationalsozialismus">›</button><p aria-live="polite"><span data-zaehl>Bild 1 von 3</span>: <span data-bildtext>Gedenkstätte am Umschlagplatz in Warschau, 2012 (zu M21).</span></p></div></div></div>
-<div class="huelle" style="--karte:#22262B;--rand:#4A5059;--rand2:#7C848E;--tief2:#2B3037"><ol class="strahl" aria-label="Module zum Nationalsozialismus in der Reihenfolge des Unterrichts"><li class="station"><span class="jahr">1920–1935</span><a class="modulkarte" href="ns-ideologie.html"><span class="sbild ohne"><span class="snr lang">M18</span></span><span class="stext"><b>Die fünf Säulen der NS-Ideologie</b><span class="teile"><span>Vermutung</span><span>Sechs Zeugnisse</span><span>Fünf Säulen</span><span>Expertenrunde</span><span>Von der Idee zur Tat</span></span></span></a></li><li class="station"><span class="jahr">1933–1939</span><a class="modulkarte" href="appeasement.html"><span class="sbild ohne"><span class="snr lang">M19</span></span><span class="stext"><b>Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg?</b><span class="teile"><span>Was bedroht uns?</span><span>Was tun wir?</span><span>„Anschluss“</span><span>Sudetenfrage</span><span>März 1939</span><span>Polen</span><span>Beurteilung</span></span></span></a></li><li class="station"><span class="jahr">1940–1944</span><a class="modulkarte" href="m20-dilemmata.html"><span class="sbild ohne"><span class="snr lang">M20</span></span><span class="stext"><b>Großbritannien im Zweiten Weltkrieg – drei Dilemmata</b><span class="teile"><span>Mai 1940</span><span>Juli 1941</span><span>Februar 1944</span><span>Beurteilung</span></span></span></a></li><li class="station"><span class="jahr">1933–1945</span><a class="modulkarte" href="m21-es-geht-um-menschen.html"><span class="sbild"><img src="media/m21-wc-westerbork-2018.jpg" alt="" onerror="this.remove()"><span class="snr lang">M21</span></span><span class="stext"><b>Es geht um Menschen – Shoa oder Holocaust?</b><span class="teile"><span>Der Brief</span><span>Das Wort</span><span>Vier Menschen</span><span>Die Matrix</span><span>Die Zahl</span></span></span></a></li><li class="station"><span class="jahr">1942</span><a class="modulkarte" href="m22-wie-war-das-moeglich.html"><span class="sbild"><img src="media/m22-wc-jozefow-wald-2022.jpg" alt="" onerror="this.remove()"><span class="snr lang">M22</span></span><span class="stext"><b>„Große Verbrechen brauchen keine Monster!“ – Wie war das möglich?</b><span class="teile"><span>Faktencheck</span><span>Józefów</span><span>Erklärungen</span><span>Landkarte</span><span>Marktplatz</span></span></span></a></li><li class="station"><span class="jahr">1943</span><a class="modulkarte" href="m23-die-gesellschaft.html"><span class="sbild"><img src="media/m23-wc-elisabeth-dragoer-2026.jpg" alt="" onerror="this.remove()"><span class="snr lang">M23</span></span><span class="stext"><b>Die Gesellschaft, in der ich leb(t)e? – Ländervergleich</b><span class="teile"><span>Die Karte</span><span>Der Film</span><span>Sechs Säulen</span><span>Thesen testen</span><span>Deine Position</span></span></span></a></li><li class="station"><span class="jahr">1945</span><a class="modulkarte" href="m25-leben-in-ruinen.html"><span class="sbild"><img src="media/m25-weimar-frauen-1945.jpg" alt="" onerror="this.remove()"><span class="snr lang">M25</span></span><span class="stext"><b>Leben in Ruinen und der Umgang mit Schuld</b><span class="teile"><span>Der Krieg ist vorbei</span><span>Überleben in Ruinen</span><span>Im Angesicht des Verbrechens</span><span>Verantwortung</span><span>Landkarte</span></span></span></a></li><li class="station"><span class="jahr">nach 1945</span><a class="modulkarte" href="m26-kontinuitaeten.html"><span class="sbild ohne"><span class="snr lang">M26</span></span><span class="stext"><b>Ende gut, alles gut? Kontinuitäten des Nationalsozialismus</b><span class="teile"><span>Schätzen</span><span>Der BND</span><span>Eure Gruppe</span><span>Vergleich</span><span>Urteil</span></span></span></a></li><li class="station"><span class="jahr">1939–1945, weltweit</span><a class="modulkarte" href="m27-die-vergessenen.html"><span class="sbild"><img src="media/m27-afrikanische-soldaten-1944.jpg" alt="" onerror="this.remove()"><span class="snr lang">M27</span></span><span class="stext"><b>Die Vergessenen! Eine Globalgeschichte des Zweiten Weltkriegs</b><span class="teile"><span>Dein Bild vom Krieg</span><span>Der Artikel</span><span>Eurozentrismus</span><span>Strukturbild</span><span>Landkarte</span></span></span></a></li></ol></div>
-<p class="huelle klein" style="margin-top:1rem">Bildnachweise: <a href="M21_Bildliste.html">Bildliste M21</a> · <a href="M22_Bildliste.html">M22</a> · <a href="M23_Bildliste.html">M23</a></p>
-</section>
-
-<section class="kapitel" id="ostwest" style="--f:var(--ow)">
-<div class="buehne" data-buehne="ow" style="--tief:#10182E"><img src="ost-west/media/owk-s1-potsdam.jpg" alt="Churchill, Truman und Stalin reichen einander die Hände." data-alt="Churchill, Truman und Stalin reichen einander die Hände." data-text="Potsdam, Sommer 1945 (Stunde 1)." class="an" onerror="this.remove()"><img src="ost-west/media/owk-s3-luftbruecke.jpg" alt="" data-alt="Ein Flugzeug fliegt tief über Menschen auf einem Trümmerhügel." data-text="Luftbrücke nach West-Berlin, 1948/49 (Stunde 3)." onerror="this.remove()"><img src="ost-west/media/owk-s6-bernauer.jpg" alt="" data-alt="Bauarbeiter setzen Betonsteine zu einer Mauer." data-text="Mauerbau an der Bernauer Straße in Berlin, August 1961 (Stunde 6)." onerror="this.remove()"><img src="ost-west/media/owk-s9-trabi.jpg" alt="" data-alt="Menschen umringen Autos der Marke Trabant; auf einem Transparent steht „Test the West!“." data-text="Nach der Grenzöffnung, November 1989 (Stunde 9)." onerror="this.remove()">
-<div class="huelle"><p class="ziffer">3</p><h2>Ost-West-Konflikt</h2><p class="jahre">1945 – 1991 · neun Stunden, fünf Werkzeuge</p>
-<p class="frage">Welchen Einfluss hatten Ideologien, Machtinteressen und Handlungsspielräume der Akteure – und wie wird dieser Konflikt heute erinnert?</p>
-<div class="blaettern" data-buehne="ow"><button type="button" data-schritt="-1" aria-label="Vorheriges Bild: Ost-West-Konflikt">‹</button><button type="button" data-schritt="1" aria-label="Nächstes Bild: Ost-West-Konflikt">›</button><p aria-live="polite"><span data-zaehl>Bild 1 von 4</span>: <span data-bildtext>Potsdam, Sommer 1945 (Stunde 1).</span></p></div></div></div>
-<div class="huelle" style="padding-top:1.75rem">
-<h3>Werkzeuge für die ganze Einheit</h3>
-<div class="werkzeuge"><a href="ost-west/index.html#raster"><b>Zeitraster</b><span>16 Ereignisse im Überblick</span></a><a href="ost-west/index.html#ordnen"><b>Ordnen</b><span>Was kam wann?</span></a><a href="ost-west/index.html#netz"><b>Vernetzen</b><span>Ereignisse verbinden</span></a><a href="ost-west/index.html#glossar"><b>Glossar</b><span>Begriffe nachschlagen</span></a><a href="ost-west/index.html#faden"><b>Roter Faden</b><span>Deine Antwort auf die Leitfrage</span></a></div>
-<h3 style="margin-top:2rem">Neun Stunden – und was in jeder steckt</h3>
-<ol class="strahl" aria-label="Stunden zum Ost-West-Konflikt" style="--karte:#1C2333;--rand:#3B4A6B;--rand2:#6F86B8;--tief2:#10182E"><li class="station"><span class="jahr">Potsdam, 1945</span><a class="modulkarte" href="ost-west/s1-stunde-null.html"><span class="sbild"><img src="ost-west/media/owk-s1-potsdam.jpg" alt="" onerror="this.remove()"><span class="snr">1</span></span><span class="stext"><b>Die „Stunde Null“ – Was wird jetzt mit Deutschland?</b><span class="teile"><span>Die Lage</span><span>Vorhersagen</span><span>Das Potsdamer Abkommen</span></span></span></a></li><li class="station"><span class="jahr">1947</span><a class="modulkarte" href="ost-west/s2-ideologien.html"><span class="sbild"><img src="ost-west/media/owk-s2-marshallplan.jpg" alt="" onerror="this.remove()"><span class="snr">2</span></span><span class="stext"><b>Kommunismus gegen Kapitalismus: Truman-Doktrin und Zwei-Lager-Theorie</b><span class="teile"><span>Truman</span><span>Shdanow</span><span>Spiegelbild</span><span>Blockbildung</span></span></span></a></li><li class="station"><span class="jahr">1945–1949</span><a class="modulkarte" href="ost-west/s3-blockade.html"><span class="sbild"><img src="ost-west/media/owk-s3-luftbruecke.jpg" alt="" onerror="this.remove()"><span class="snr">3</span></span><span class="stext"><b>Die Berlin-Blockade und die sowjetische Besatzungszone</b><span class="teile"><span>Entscheiden</span><span>Ablauf</span><span>Sowjetische Zone</span></span></span></a></li><li class="station"><span class="jahr">1949</span><a class="modulkarte" href="ost-west/s4-staatsgruendung.html"><span class="sbild"><img src="ost-west/media/owk-s4-goldfisch.jpg" alt="" onerror="this.remove()"><span class="snr">4</span></span><span class="stext"><b>Die doppelte Staatsgründung</b><span class="teile"><span>Der Weg zu zwei Staaten</span><span>Grotewohl</span><span>Adenauer</span><span>Vergleich</span></span></span></a></li><li class="station"><span class="jahr">1949–1957</span><a class="modulkarte" href="ost-west/s5-westintegration.html"><span class="sbild"><img src="ost-west/media/owk-s5-andernach.jpg" alt="" onerror="this.remove()"><span class="snr">5</span></span><span class="stext"><b>Die Bindung der Bundesrepublik an den Westen</b><span class="teile"><span>Der Streit</span><span>Die Schritte</span><span>Das Urteil</span></span></span></a></li><li class="station"><span class="jahr">1949–1961</span><a class="modulkarte" href="ost-west/s6-flucht-und-mauer.html"><span class="sbild"><img src="ost-west/media/owk-s6-bernauer.jpg" alt="" onerror="this.remove()"><span class="snr">6</span></span><span class="stext"><b>Flucht aus der DDR und Mauerbau</b><span class="teile"><span>Die Zahlen</span><span>Die Gründe</span><span>Die Mauer</span></span></span></a></li><li class="station"><span class="jahr">17. Juni 1953</span><a class="modulkarte" href="ost-west/s7-geschichte-im-staatsdienst.html"><span class="sbild"><img src="ost-west/media/owk-s7-juni.jpg" alt="" onerror="this.remove()"><span class="snr">7</span></span><span class="stext"><b>Geschichte im Staatsdienst? Der 17. Juni 1953 im Schulbuch</b><span class="teile"><span>Zwei Texte</span><span>Was geschah</span><span>Lehrpläne</span></span></span></a></li><li class="station"><span class="jahr">1970–1972</span><a class="modulkarte" href="ost-west/s8-ostpolitik.html"><span class="sbild"><img src="ost-west/media/owk-s8-demo.jpg" alt="" onerror="this.remove()"><span class="snr">8</span></span><span class="stext"><b>Wandel durch Annäherung: die Ostverträge</b><span class="teile"><span>Die Verträge</span><span>Die Debatte</span></span></span></a></li><li class="station"><span class="jahr">1985–1991</span><a class="modulkarte" href="ost-west/s9-ende.html"><span class="sbild"><img src="ost-west/media/owk-s9-trabi.jpg" alt="" onerror="this.remove()"><span class="snr">9</span></span><span class="stext"><b>Das Ende der DDR und des Ost-West-Konflikts</b><span class="teile"><span>Vier Blickwinkel</span><span>Moskau</span><span>Herbst 1989</span></span></span></a></li></ol>
-<p class="klein" style="margin:.9rem 0 0">Am Ende jeder Stunde: Landkarte · Verorten und vernetzen · Merkseite. Bilder aus dem Unterrichtsheft, Nachweise offen (<a href="ost-west/Bildliste.html">Bildliste</a>).</p>
-</div>
+<ol class="spur" tabindex="0" aria-label="Zeitstrahl: Epochen und Module von 1918 bis 1991, waagerecht zu wischen"><li class="station kap" id="weimar" data-ep="weimar"><span class="jahr gross">1918</span><span class="linie" aria-hidden="true"></span><div class="kapkarte"><p class="ziffer">1</p><h2>Weimarer Republik</h2><p class="jahre">1918 – 1933</p><p class="satz">Dieses Kapitel entsteht gerade. Die Module erscheinen hier, sobald sie fertig sind.</p></div></li><li class="station kap" id="ns" data-ep="ns"><span class="jahr gross">1933</span><span class="linie" aria-hidden="true"></span><div class="kapkarte"><p class="ziffer">2</p><h2>National&shy;sozialismus</h2><p class="jahre">1933 – 1945 und die Folgen · neun Module</p><p class="satz">Ideologie, Krieg und Menschheitsverbrechen – und die Frage, wer mitgemacht hat und was danach daraus wurde.</p></div></li><li class="station" data-ep="ns"><span class="jahr">1920–1935</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="ns-ideologie.html"><span class="sbild ohne"><span class="snr lang">M18</span></span><span class="stext"><b>Die fünf Säulen der NS-Ideologie</b><span class="teile"><span>Vermutung</span><span>Sechs Zeugnisse</span><span>Fünf Säulen</span><span>Expertenrunde</span><span>Von der Idee zur Tat</span></span><span class="stand" data-key="ggklabor:" data-faden="" hidden></span></span></a></li><li class="station" data-ep="ns"><span class="jahr">1933–1939</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="appeasement.html"><span class="sbild ohne"><span class="snr lang">M19</span></span><span class="stext"><b>Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg?</b><span class="teile"><span>Was bedroht uns?</span><span>Was tun wir?</span><span>„Anschluss“</span><span>Sudetenfrage</span><span>März 1939</span><span>Polen</span><span>Beurteilung</span></span><span class="stand" data-key="ggk-m19-appeasement" data-faden="" hidden></span></span></a></li><li class="station" data-ep="ns"><span class="jahr">1940–1944</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="m20-dilemmata.html"><span class="sbild ohne"><span class="snr lang">M20</span></span><span class="stext"><b>Großbritannien im Zweiten Weltkrieg – drei Dilemmata</b><span class="teile"><span>Mai 1940</span><span>Juli 1941</span><span>Februar 1944</span><span>Beurteilung</span></span><span class="stand" data-key="ggk-m20-dilemmata" data-faden="" hidden></span></span></a></li><li class="station" data-ep="ns"><span class="jahr">1933–1945</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="m21-es-geht-um-menschen.html"><span class="sbild"><img src="media/m21-wc-westerbork-2018.jpg" alt="" onerror="this.remove()"><span class="snr lang">M21</span></span><span class="stext"><b>Es geht um Menschen – Shoa oder Holocaust?</b><span class="teile"><span>Der Brief</span><span>Das Wort</span><span>Vier Menschen</span><span>Die Matrix</span><span>Die Zahl</span></span><span class="stand" data-key="ggk-m21-menschen" data-faden="" hidden></span></span></a></li><li class="station" data-ep="ns"><span class="jahr">1942</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="m22-wie-war-das-moeglich.html"><span class="sbild"><img src="media/m22-wc-jozefow-wald-2022.jpg" alt="" onerror="this.remove()"><span class="snr lang">M22</span></span><span class="stext"><b>„Große Verbrechen brauchen keine Monster!“ – Wie war das möglich?</b><span class="teile"><span>Faktencheck</span><span>Józefów</span><span>Erklärungen</span><span>Landkarte</span><span>Marktplatz</span></span><span class="stand" data-key="ggk-m22-taeter" data-faden="" hidden></span></span></a></li><li class="station" data-ep="ns"><span class="jahr">1943</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="m23-die-gesellschaft.html"><span class="sbild"><img src="media/m23-wc-elisabeth-dragoer-2026.jpg" alt="" onerror="this.remove()"><span class="snr lang">M23</span></span><span class="stext"><b>Die Gesellschaft, in der ich leb(t)e? – Ländervergleich</b><span class="teile"><span>Die Karte</span><span>Der Film</span><span>Sechs Säulen</span><span>Thesen testen</span><span>Deine Position</span></span><span class="stand" data-key="ggk-m23-gesellschaft" data-faden="" hidden></span></span></a></li><li class="station" data-ep="ns"><span class="jahr">1945</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="m25-leben-in-ruinen.html"><span class="sbild"><img src="media/m25-weimar-frauen-1945.jpg" alt="" onerror="this.remove()"><span class="snr lang">M25</span></span><span class="stext"><b>Leben in Ruinen und der Umgang mit Schuld</b><span class="teile"><span>Der Krieg ist vorbei</span><span>Überleben in Ruinen</span><span>Im Angesicht des Verbrechens</span><span>Verantwortung</span><span>Landkarte</span></span><span class="stand" data-key="ggk-m25-ruinen" data-faden="" hidden></span></span></a></li><li class="station" data-ep="ns"><span class="jahr">nach 1945</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="m26-kontinuitaeten.html"><span class="sbild ohne"><span class="snr lang">M26</span></span><span class="stext"><b>Ende gut, alles gut? Kontinuitäten des Nationalsozialismus</b><span class="teile"><span>Schätzen</span><span>Der BND</span><span>Eure Gruppe</span><span>Vergleich</span><span>Urteil</span></span><span class="stand" data-key="ggk-m26-kontinuitaeten" data-faden="" hidden></span></span></a></li><li class="station" data-ep="ns"><span class="jahr">1939–1945, weltweit</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="m27-die-vergessenen.html"><span class="sbild"><img src="media/m27-afrikanische-soldaten-1944.jpg" alt="" onerror="this.remove()"><span class="snr lang">M27</span></span><span class="stext"><b>Die Vergessenen! Eine Globalgeschichte des Zweiten Weltkriegs</b><span class="teile"><span>Dein Bild vom Krieg</span><span>Der Artikel</span><span>Eurozentrismus</span><span>Strukturbild</span><span>Landkarte</span></span><span class="stand" data-key="ggk-m27-vergessene" data-faden="" hidden></span></span></a></li><li class="station kap" id="ostwest" data-ep="ostwest"><span class="jahr gross">1945</span><span class="linie" aria-hidden="true"></span><div class="kapkarte"><p class="ziffer">3</p><h2>Ost-West-Konflikt</h2><p class="jahre">1945 – 1991 · neun Stunden, fünf Werkzeuge</p><p class="satz">Welchen Einfluss hatten Ideologien, Machtinteressen und Handlungsspielräume der Akteure – und wie wird dieser Konflikt heute erinnert?</p></div></li><li class="station" data-ep="ostwest"><span class="jahr">für alle neun Stunden</span><span class="linie" aria-hidden="true"></span><div class="wzkarte"><h3>Fünf Werkzeuge</h3><a href="ost-west/index.html#raster"><b>Zeitraster</b><span>16 Ereignisse im Überblick</span></a><a href="ost-west/index.html#ordnen"><b>Ordnen</b><span>Was kam wann?</span></a><a href="ost-west/index.html#netz"><b>Vernetzen</b><span>Ereignisse verbinden</span></a><a href="ost-west/index.html#glossar"><b>Glossar</b><span>Begriffe nachschlagen</span></a><a href="ost-west/index.html#faden"><b>Roter Faden</b><span>Deine Antwort auf die Leitfrage</span></a></div></li><li class="station" data-ep="ostwest"><span class="jahr">Potsdam, 1945</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="ost-west/s1-stunde-null.html"><span class="sbild"><img src="ost-west/media/owk-s1-potsdam.jpg" alt="" onerror="this.remove()"><span class="snr">1</span></span><span class="stext"><b>Die „Stunde Null“ – Was wird jetzt mit Deutschland?</b><span class="teile"><span>Die Lage</span><span>Vorhersagen</span><span>Das Potsdamer Abkommen</span></span><span class="stand" data-key="ggk-owk-s1" data-faden="s1" hidden></span></span></a></li><li class="station" data-ep="ostwest"><span class="jahr">1947</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="ost-west/s2-ideologien.html"><span class="sbild"><img src="ost-west/media/owk-s2-marshallplan.jpg" alt="" onerror="this.remove()"><span class="snr">2</span></span><span class="stext"><b>Kommunismus gegen Kapitalismus: Truman-Doktrin und Zwei-Lager-Theorie</b><span class="teile"><span>Truman</span><span>Shdanow</span><span>Spiegelbild</span><span>Blockbildung</span></span><span class="stand" data-key="ggk-owk-s2" data-faden="s2" hidden></span></span></a></li><li class="station" data-ep="ostwest"><span class="jahr">1945–1949</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="ost-west/s3-blockade.html"><span class="sbild"><img src="ost-west/media/owk-s3-luftbruecke.jpg" alt="" onerror="this.remove()"><span class="snr">3</span></span><span class="stext"><b>Die Berlin-Blockade und die sowjetische Besatzungszone</b><span class="teile"><span>Entscheiden</span><span>Ablauf</span><span>Sowjetische Zone</span></span><span class="stand" data-key="ggk-owk-s3" data-faden="s3" hidden></span></span></a></li><li class="station" data-ep="ostwest"><span class="jahr">1949</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="ost-west/s4-staatsgruendung.html"><span class="sbild"><img src="ost-west/media/owk-s4-goldfisch.jpg" alt="" onerror="this.remove()"><span class="snr">4</span></span><span class="stext"><b>Die doppelte Staatsgründung</b><span class="teile"><span>Der Weg zu zwei Staaten</span><span>Grotewohl</span><span>Adenauer</span><span>Vergleich</span></span><span class="stand" data-key="ggk-owk-s4" data-faden="s4" hidden></span></span></a></li><li class="station" data-ep="ostwest"><span class="jahr">1949–1957</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="ost-west/s5-westintegration.html"><span class="sbild"><img src="ost-west/media/owk-s5-andernach.jpg" alt="" onerror="this.remove()"><span class="snr">5</span></span><span class="stext"><b>Die Bindung der Bundesrepublik an den Westen</b><span class="teile"><span>Der Streit</span><span>Die Schritte</span><span>Das Urteil</span></span><span class="stand" data-key="ggk-owk-s5" data-faden="s5" hidden></span></span></a></li><li class="station" data-ep="ostwest"><span class="jahr">1949–1961</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="ost-west/s6-flucht-und-mauer.html"><span class="sbild"><img src="ost-west/media/owk-s6-bernauer.jpg" alt="" onerror="this.remove()"><span class="snr">6</span></span><span class="stext"><b>Flucht aus der DDR und Mauerbau</b><span class="teile"><span>Die Zahlen</span><span>Die Gründe</span><span>Die Mauer</span></span><span class="stand" data-key="ggk-owk-s6" data-faden="s6" hidden></span></span></a></li><li class="station" data-ep="ostwest"><span class="jahr">17. Juni 1953</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="ost-west/s7-geschichte-im-staatsdienst.html"><span class="sbild"><img src="ost-west/media/owk-s7-juni.jpg" alt="" onerror="this.remove()"><span class="snr">7</span></span><span class="stext"><b>Geschichte im Staatsdienst? Der 17. Juni 1953 im Schulbuch</b><span class="teile"><span>Zwei Texte</span><span>Was geschah</span><span>Lehrpläne</span></span><span class="stand" data-key="ggk-owk-s7" data-faden="s7" hidden></span></span></a></li><li class="station" data-ep="ostwest"><span class="jahr">1970–1972</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="ost-west/s8-ostpolitik.html"><span class="sbild"><img src="ost-west/media/owk-s8-demo.jpg" alt="" onerror="this.remove()"><span class="snr">8</span></span><span class="stext"><b>Wandel durch Annäherung: die Ostverträge</b><span class="teile"><span>Die Verträge</span><span>Die Debatte</span></span><span class="stand" data-key="ggk-owk-s8" data-faden="s8" hidden></span></span></a></li><li class="station" data-ep="ostwest"><span class="jahr">1985–1991</span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="ost-west/s9-ende.html"><span class="sbild"><img src="ost-west/media/owk-s9-trabi.jpg" alt="" onerror="this.remove()"><span class="snr">9</span></span><span class="stext"><b>Das Ende der DDR und des Ost-West-Konflikts</b><span class="teile"><span>Vier Blickwinkel</span><span>Moskau</span><span>Herbst 1989</span></span><span class="stand" data-key="ggk-owk-s9" data-faden="s9" hidden></span></span></a></li><li class="station ende" data-ep="ostwest"><span class="jahr gross">1991</span><span class="linie" aria-hidden="true"></span></li></ol>
 </section>
 </main>
 <footer class="huelle">
-<div class="halt"><button type="button" data-halt aria-pressed="false">Bildwechsel anhalten</button><span>Die Bilder der Epochen wechseln alle acht Sekunden.</span></div>
-<p>Datenschutz: Alle Ergebnisse bleiben auf deinem Gerät. Diese Seiten senden nichts ins Internet und brauchen keine Anmeldung.</p>
-<p><a href="https://geschichtefuerdiegegenwart.github.io/kognitive-Landkarte-des-Geschichtsunterrichts/">Kognitive Landkarte des Geschichtsunterrichts</a> · <a href="auswertung.html">Kursauswertung für die Lehrkraft</a> · <a href="lehrkraft.html">Hinweise für Lehrkräfte</a></p>
+<p>Die Reihenfolge innerhalb einer Epoche folgt dem Unterricht. Bildnachweise: <a href="M21_Bildliste.html">M21</a> · <a href="M22_Bildliste.html">M22</a> · <a href="M23_Bildliste.html">M23</a> · <a href="M25_Bildliste.html">M25</a> · <a href="M27_Bildliste.html">M27</a> · <a href="ost-west/Bildliste.html">Ost-West (Heft, Nachweise offen)</a></p>
+<p>Datenschutz: Alle Ergebnisse bleiben auf deinem Gerät. Diese Seiten senden nichts ins Internet und brauchen keine Anmeldung. · <a href="auswertung.html">Kursauswertung für die Lehrkraft</a></p>
 <p>© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p>
 </footer>
 <script>
 (function(){
-  var ruhig = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches, halt = false, stand = {};
-  function zeig(k, i){
-    var b = document.querySelector('.buehne[data-buehne="' + k + '"]'), imgs = b.querySelectorAll(":scope > img"), n = imgs.length; if (!n) return;
-    i = ((i % n) + n) % n; stand[k] = i;
-    imgs.forEach(function(im, j){ im.classList.toggle("an", j === i); im.alt = j === i ? im.dataset.alt : ""; });
-    var nav = document.querySelector('.blaettern[data-buehne="' + k + '"]');
-    nav.querySelector("[data-zaehl]").textContent = "Bild " + (i + 1) + " von " + n; nav.querySelector("[data-bildtext]").textContent = imgs[i].dataset.text;
+  var ruhig = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches, halt = false, idx = { ns:0, ostwest:0 };
+  var zeit = document.querySelector(".zeit"), spur = document.querySelector(".spur"), text = document.querySelector("[data-bildtext]"), bildKnopf = document.querySelector("[data-bild]"), haltKnopf = document.querySelector("[data-halt]");
+  var weich = ruhig ? "auto" : "smooth";
+  function bilder(ep){ return zeit.querySelectorAll(':scope > img[data-ep="' + ep + '"]'); }
+  function zeigBild(ep, i){
+    var b = bilder(ep), n = b.length; if (!n) { text.textContent = ""; return; }
+    i = ((i % n) + n) % n; idx[ep] = i; b.forEach(function(im, j){ im.classList.toggle("an", j === i); });
+    text.textContent = "Bild " + (i + 1) + " von " + n + ": " + b[i].dataset.text;
   }
+  function epoche(ep){
+    if (zeit.dataset.ep === ep) return; zeit.dataset.ep = ep;
+    document.querySelectorAll(".band a").forEach(function(a){ if (a.dataset.ep === ep) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
+    zeigBild(ep, idx[ep] || 0); bildKnopf.hidden = haltKnopf.hidden = !bilder(ep).length; if (ruhig) haltKnopf.hidden = true;
+  }
+  function wo(){
+    var l = spur.getBoundingClientRect().left + 80, ep = "weimar";
+    spur.querySelectorAll(".station").forEach(function(s){ if (s.getBoundingClientRect().left <= l) ep = s.dataset.ep; });
+    epoche(ep); try { sessionStorage.setItem("ggk-start:x", String(Math.round(spur.scrollLeft))); } catch (e) {}
+  }
+  var wartet = false;
+  spur.addEventListener("scroll", function(){ if (wartet) return; wartet = true; requestAnimationFrame(function(){ wartet = false; wo(); }); }, { passive:true });
   document.addEventListener("click", function(e){
-    var s = e.target.closest("[data-schritt]"); if (s) { var k = s.parentNode.dataset.buehne; zeig(k, (stand[k] || 0) + (+s.dataset.schritt)); return; }
+    var a = e.target.closest(".band a"); if (a) { e.preventDefault(); var z = document.getElementById(a.dataset.ep); spur.scrollTo({ left: z.offsetLeft - spur.querySelector(".station").offsetLeft, behavior: weich }); return; }
+    var s = e.target.closest("[data-schritt]"); if (s) { spur.scrollBy({ left: (+s.dataset.schritt) * Math.max(280, spur.clientWidth * .75), behavior: weich }); return; }
+    if (e.target.closest("[data-bild]")) { var ep = zeit.dataset.ep; zeigBild(ep, (idx[ep] || 0) + 1); return; }
     var h = e.target.closest("[data-halt]"); if (h) { halt = !halt; h.setAttribute("aria-pressed", halt); h.textContent = halt ? "Bildwechsel fortsetzen" : "Bildwechsel anhalten"; }
   });
-  if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function(es){ es.forEach(function(x){ if (!x.isIntersecting) return;
-      document.querySelectorAll(".band a").forEach(function(a){ if (a.dataset.ep === x.target.id) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); }); }); }, { rootMargin:"-45% 0px -50% 0px" });
-    document.querySelectorAll("section.kapitel").forEach(function(k){ io.observe(k); });
-  }
-  var hb = document.querySelector("[data-halt]");
-  if (ruhig) { hb.parentNode.querySelector("span").textContent = "Am Gerät ist „weniger Bewegung“ eingestellt: Die Bilder wechseln nur auf Tippen."; hb.hidden = true; return; }
-  setInterval(function(){ if (halt || document.hidden) return; ["ns", "ow"].forEach(function(k){ zeig(k, (stand[k] || 0) + 1); }); }, 8000);
+  /* Stand: Was hast du auf diesem Gerät schon geöffnet? */
+  try {
+    var keys = Object.keys(localStorage), owk = JSON.parse(localStorage.getItem("ggk-owk:v1") || "{}"), faden = owk.faden || {};
+    document.querySelectorAll(".stand").forEach(function(el){
+      var k = el.dataset.key, da = keys.some(function(x){ return x.indexOf(k) === 0; }), f = el.dataset.faden && (faden[el.dataset.faden] || "").trim();
+      if (f) { el.textContent = "✓ roter Faden geschrieben"; el.hidden = false; } else if (da) { el.textContent = "schon geöffnet"; el.hidden = false; }
+    });
+  } catch (e) {}
+  try { var x = +sessionStorage.getItem("ggk-start:x"); if (x) spur.scrollLeft = x; } catch (e) {}
+  zeit.dataset.ep = ""; wo();
+  if (!ruhig) setInterval(function(){ if (halt || document.hidden) return; var ep = zeit.dataset.ep; zeigBild(ep, (idx[ep] || 0) + 1); }, 8000);
 })();
 </script>
 </body>
