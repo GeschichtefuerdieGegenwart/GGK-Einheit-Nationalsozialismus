@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
-"""Baut die Startseite index.html: ein waagerechter Zeitstrahl 1918–1991 mit drei Epochen (Weimarer Republik, Nationalsozialismus, Ost-West-Konflikt).
-Alle Links stehen als HTML im Dokument und sind ohne JavaScript erreichbar (die Spur lässt sich wischen). Aufruf: python3 tools/bau_startseite.py"""
+"""Baut die Startseite index.html (Fassung 3.1, Entwurf F2 »Nacht mit Papierkarten« mit Lupe H): drei Kapitel 1918–1991.
+Je Kapitel: Kopf mit wechselndem Bild, eine schmale Leiste mit Merkdaten und Modulnummern, darunter das Regal mit gleich großen Papierkarten.
+Alle Links stehen als HTML im Dokument und sind ohne JavaScript erreichbar. Aufruf: python3 tools/bau_startseite.py"""
 import pathlib, html
 R = pathlib.Path(__file__).resolve().parent.parent
 e = html.escape
 LK = 'https://geschichtefuerdiegegenwart.github.io/kognitive-Landkarte-des-Geschichtsunterrichts/'
-NS_BILDER = [('media/m21-wc-umschlagplatz-2012.jpg', 'Gedenkstätte am Umschlagplatz in Warschau, 2012 (zu M21).', 'Eine helle Mauer mit eingemeißelten Vornamen an der Gedenkstätte Umschlagplatz in Warschau.'),
- ('media/m22-wc-jozefow-wald-2022.jpg', 'Wald bei Józefów in Polen, 2022 (zu M22).', 'Hohe Kiefern und ein Weg im Wald bei Józefów.'),
- ('media/m23-wc-elisabeth-dragoer-2026.jpg', 'Fischerboot „Elisabeth“ in Dragør, Dänemark; mit ihm wurden 1943 Menschen nach Schweden gebracht (zu M23).', 'Ein kleines Fischerboot liegt im Hafen von Dragør.')]
-OW_BILDER = [('ost-west/media/owk-s1-potsdam.jpg', 'Potsdam, Sommer 1945 (Stunde 1).', 'Churchill, Truman und Stalin reichen einander die Hände.'),
- ('ost-west/media/owk-s3-luftbruecke.jpg', 'Luftbrücke nach West-Berlin, 1948/49 (Stunde 3).', 'Ein Flugzeug fliegt tief über Menschen auf einem Trümmerhügel.'),
- ('ost-west/media/owk-s6-bernauer.jpg', 'Mauerbau an der Bernauer Straße in Berlin, August 1961 (Stunde 6).', 'Bauarbeiter setzen Betonsteine zu einer Mauer.'),
- ('ost-west/media/owk-s9-trabi.jpg', 'Nach der Grenzöffnung, November 1989 (Stunde 9).', 'Menschen umringen Autos der Marke Trabant; auf einem Transparent steht „Test the West!“.')]
+# Bilder hinter dem Kapitelkopf: (Datei, Bildtext). Schmuck mit sichtbarem Bildtext, deshalb alt="". Bildtexte nach den Bildlisten der Module.
+NS_BILDER = [('media/m19-heft-karte-deutsches-reich.jpg', 'Karte aus dem Heft: das Deutsche Reich und seine Nachbarn (zu M19).'),
+ ('media/m20-heft-london-1940.jpg', 'London, 7. September 1940 (zu M20).'),
+ ('media/m21-wc-umschlagplatz-2012.jpg', 'Tor des Umschlagplatz-Denkmals in Warschau, errichtet 1988; Foto von 2012 (zu M21).'),
+ ('media/m22-wc-jozefow-wald-2022.jpg', 'Tafel im Wald bei Józefów in Polen an den Massengräbern der Opfer vom 13. Juli 1942; Foto von 2022 (zu M22).'),
+ ('media/m23-wc-elisabeth-dragoer-2026.jpg', 'Fischerboot „Elisabeth“ im Hafen von Dragør, Dänemark; mit ihm wurden 1943 Menschen nach Schweden gebracht (zu M23).')]
+OW_BILDER = [('ost-west/media/owk-s1-potsdam.jpg', 'Potsdam, Sommer 1945 (Stunde 1).'),
+ ('ost-west/media/owk-s3-luftbruecke.jpg', 'Luftbrücke nach West-Berlin, 1948/49 (Stunde 3).'),
+ ('ost-west/media/owk-s6-bernauer.jpg', 'Mauerbau an der Bernauer Straße in Berlin, August 1961 (Stunde 6).'),
+ ('ost-west/media/owk-s9-trabi.jpg', 'Nach der Grenzöffnung, November 1989 (Stunde 9).')]
 # Reihenfolge = Zeitfolge auf dem Strahl (nicht die Nummernfolge im Heft): M27 steht beim Krieg, nicht am Ende.
 NS = [('M16', 'Einstieg in die Einheit', 'Was macht den Menschen zum Menschen?', ['Der Appell', 'Menschlich', 'Humanismus', 'Meine Werte', 'Die Frage'], 'm16-was-macht-den-menschen.html', None),
  ('M17', '1933–1939', 'Mein Leben in der NS-Diktatur I – Ausgrenzung 1933 bis 1939 aus zwei Blickwinkeln', ['Rolle', 'Boykott 1933', 'Entlassung 1933', 'Nürnberger Gesetze 1935', 'Pogrom 1938', 'Spielraum'], 'm17-leben-in-der-diktatur.html', None),
@@ -38,7 +42,7 @@ KEYS = {'M16': 'ggk-m16-mensch', 'M17': 'ggk-m17-leben', 'M18': 'ggklabor:', 'M1
 # Kurztitel für die Übersicht (die vollen Titel stehen in der Ordnung nach Prinzip und in den Modulen)
 KURZ = {'M16': 'Was macht den Menschen zum Menschen?', 'M17': 'Leben in der NS-Diktatur: Ausgrenzung 1933–1939', 'M18': 'Die fünf Säulen der NS-Ideologie', 'M19': 'Appeasement: Frieden oder Krieg?', 'M20': 'Der Verlauf des Zweiten Weltkriegs. Der Krieg und seine Dilemmata.', 'M27': 'Globalgeschichte des Zweiten Weltkriegs', 'M21': 'Die Shoa: Es geht um Menschen', 'M22': 'Wie war das möglich? Täterforschung', 'M23': 'Die Shoa im Ländervergleich', 'M25': 'Kriegsende 1945 – nach dem Modul von Offene Geschichte', 'M26': 'NS-Kontinuitäten in der Bundesrepublik',
  1: '„Stunde Null“ und Potsdamer Abkommen', 2: 'Truman-Doktrin und Zwei-Lager-Theorie', 3: 'Berlin-Blockade und sowjetische Zone', 4: 'Doppelte Staatsgründung', 5: 'Westbindung der Bundesrepublik', 6: 'Flucht aus der DDR und Mauerbau', 7: 'Der 17. Juni 1953 im Schulbuch', 8: 'Ostverträge', 9: 'Ende der DDR und des Ost-West-Konflikts'}
-# Spalten je Zeitstrahl: (Ankerdatum, Ereignis, Modul). Über der Linie das Datum, darunter das Modul. Vorschlag – bitte prüfen.
+# Halte je Kapitel in Zeitfolge: (Merkdatum, Ereignis, Modul). In der Leiste stehen die Daten abwechselnd über und unter der Linie. Vorschlag – bitte prüfen.
 SPALTEN = {'weimar': [('9. Nov. 1918', 'Ausrufung der Republik', None), ('11. Aug. 1919', 'Weimarer Verfassung', None), ('1923', 'Krisenjahr: Inflation, Hitlerputsch', None), ('Okt. 1929', 'Beginn der Weltwirtschaftskrise', None)],
  'ns': [(None, None, 'M16'), ('30. Jan. 1933', 'Hitler wird Reichskanzler', 'M17'), ('15. Sept. 1935', 'Nürnberger Gesetze', 'M18'), ('9. Nov. 1938', 'Novemberpogrome', 'M19'), ('1. Sept. 1939', 'Überfall auf Polen', 'M20'), (None, None, 'M27'), ('22. Juni 1941', 'Überfall auf die Sowjetunion', 'M21'), (None, None, 'M22'), (None, None, 'M23'), ('8. Mai 1945', 'Bedingungslose Kapitulation', 'M25'), (None, None, 'M26')],
  'ostwest': [('2. Aug. 1945', 'Potsdamer Abkommen', 1), ('12. März 1947', 'Truman-Doktrin', 2), ('24. Juni 1948', 'Beginn der Berlin-Blockade', 3), ('1949', 'Zwei deutsche Staaten', 4), (None, None, 5), ('17. Juni 1953', 'Aufstand in der DDR', 7), ('13. Aug. 1961', 'Bau der Berliner Mauer', 6), (None, None, 8), ('9. Nov. 1989', 'Öffnung der Mauer', 9), ('3. Okt. 1990', 'Deutsche Einheit', None)]}
@@ -53,30 +57,71 @@ PRINZIP = [('2-1-1', 'Retrospektivität', 'Wir betrachten die Vergangenheit imme
  ('2-1-8', 'Standortgebundenheit', 'Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Kontext geprägt, oft unbewusst.', ['M27', 4])]
 OFFEN = ['M16', 'M18', 'M21', 'M23', 'M26']
 MOD = {m[0]: (m[2], m[4]) for m in NS}; MOD.update({m[0]: (m[2], 'ost-west/' + m[4]) for m in ST})
-MOD = {m[0]: (m[2], m[4]) for m in NS}; MOD.update({m[0]: (m[2], 'ost-west/' + m[4]) for m in ST})
 # Nummer im Heft (steht im Titel). Die Reihenfolge der Karten ist die Zeitfolge; eine zweite Zählung gibt es nicht mehr.
 HEFTNR = {1: 'M29/M30', 2: 'M31', 3: 'M32/M33', 4: 'M34', 5: 'M35/M36', 6: 'M36–M39', 7: 'M40', 8: 'M41', 9: 'M42–M44'}
 HEFTNR.update({m[0]: m[0] for m in NS})
 INFO = {m[0]: (m[1], m[4], m[5], KEYS[m[0]], '') for m in NS}
 INFO.update({m[0]: (m[1], 'ost-west/' + m[4], f'ost-west/media/{m[5]}.jpg', f'ggk-owk-s{m[0]}', f's{m[0]}') for m in ST})
-def kachel(nr):
+ZAHLWORT = {1: 'ein', 2: 'zwei', 3: 'drei', 4: 'vier', 5: 'fünf', 6: 'sechs', 7: 'sieben', 8: 'acht', 9: 'neun', 10: 'zehn', 11: 'elf', 12: 'zwölf'}
+def karte(nr):
+    """Eine Papierkarte: Bildfeld (oder Nummernfeld), Zeile »Nummer · Zeit«, Kurztitel. Alle Karten sind gleich groß."""
     zeit, ziel, bild, key, faden = INFO[nr]
-    b = f'<img src="{bild}" alt="" onerror="this.remove()">' if bild else ''
-    return (f'<a class="kachel" href="{ziel}"><span class="kbild{"" if bild else " ohne"}">{b}</span>'
-            f'<span class="ktext"><span class="kzeit">{e(zeit)}</span><b><span class="mnr">{HEFTNR[nr]}</span> {e(KURZ[nr])}</b><span class="stand" data-key="{key}" data-faden="{faden}" hidden></span></span></a>')
-def spur(ep, name):
-    sp = SPALTEN[ep]
-    li = ''.join(f'<li class="sp{" anker" if d else ""}"><span class="oben">' + (f'<b class="datum">{e(d)}</b><span class="was">{e(w)}</span>' if d else '') + '</span><span class="linie" aria-hidden="true"></span>' + (kachel(m) if m else '') + '</li>' for d, w, m in sp)
-    return f'<ol class="spur" style="--n:{len(sp)}" aria-label="Zeitstrahl {name}: über der Linie die Ankerdaten, darunter die Module">{li}</ol>'
-def kapitel(ep, ziffer, name, jahre, satz, bilder, zusatz=''):
-    imgs = ''.join(f'<img src="{e(b[0])}" alt="" data-text="{e(b[1])}"{" class=\"an\"" if i == 0 else ""} onerror="this.remove()">' for i, b in enumerate(bilder))
-    bild = f'<p class="bildzeile" data-bildtext>Bild: {e(bilder[0][1])}</p>' if bilder else ''
-    return (f'<section class="kapitel" id="{ep}" data-ep="{ep}">{imgs}<div class="huelle"><div class="kopfzeile"><p class="ziffer">{ziffer}</p><div><h2>{name}</h2><p class="jahre">{jahre}</p></div><p class="satz">{satz}</p></div>'
-            f'{spur(ep, name)}{zusatz}{bild}</div></section>')
+    feld = (f'<img src="{bild}" alt="" loading="lazy" onerror="this.parentNode.classList.add(\'ohne\');this.remove()">' if bild else '') + f'<span class="knr" aria-hidden="true">{HEFTNR[nr]}</span>'
+    return (f'<a class="karte" href="{ziel}"><span class="kbild{"" if bild else " ohne"}">{feld}</span>'
+            f'<span class="ktext"><span class="kmeta">{HEFTNR[nr]} · {e(zeit)}</span><b>{e(KURZ[nr])}</b></span>'
+            f'<span class="stand" data-key="{key}" data-faden="{faden}" hidden></span></a>')
+def lagen(ep):
+    """Merkdaten abwechselnd über und unter der Linie, damit sie sich nicht in die Quere kommen."""
+    k = 0; out = []
+    for d, w, m in SPALTEN[ep]:
+        out.append(None if not d else ('ob' if k % 2 == 0 else 'un')); k += 1 if d else 0
+    return out
+def leiste(ep):
+    """Die schmale Leiste: alle Halte in einer Zeile. Nur fürs Auge (aria-hidden); dieselben Daten stehen im Regal als Text."""
+    L = lagen(ep); z = ''
+    for i, ((d, w, m), lage) in enumerate(zip(SPALTEN[ep], L)):
+        dt = f'<span class="dt"><b>{e(d)}</b><span>{e(w)}</span></span>' if d else ''
+        # .tp = Tippfläche (Punkt und Nummer). Die Zeit hinter der Nummer (.zz) erscheint erst, wenn die Leiste herangefahren ist.
+        nr = f'<span class="nz">{HEFTNR[m]}</span><span class="zz"> · {e(INFO[m][0])}</span>' if m else ''
+        z += (f'<span class="st{" ank" if d else ""}"><span class="ob">{dt if lage == "ob" else ""}</span>'
+              f'<span class="tp"{f" data-stop=\"{i}\"" if m else ""}><span class="pk"></span><span class="nr">{nr}</span></span><span class="un">{dt if lage == "un" else ""}</span></span>')
+    return f'<div class="leiste{"" if any(m for d, w, m in SPALTEN[ep]) else " ohnenr"}" aria-hidden="true">{z}</div>'
+def regal(ep, name):
+    """Das Regal: je Halt ein Listenpunkt mit Merkdatum (als Text) und Karte. Auf dem Telefon wird daraus der senkrechte Zeitstrahl."""
+    z = ''
+    for d, w, m in SPALTEN[ep]:
+        merk = f'<p class="merk"><b>{e(d)}</b> <span>{e(w)}</span></p>' if d else ''
+        kl = 'sp' + (' anker' if d else '') + ('' if m else ' nurdatum')
+        daten = (f' id="k-{HEFTNR[m].replace(chr(47), chr(45))}" data-nr="{HEFTNR[m]}" data-zeit="{e(INFO[m][0])}" data-lang="{e(MOD[m][0])}" data-schritte="{e(" · ".join(SCHRITTE[m]))}"' if m else '')
+        z += f'<li class="{kl}"{daten}>{merk}{karte(m) if m else ""}</li>'
+    return f'<ol class="regal" aria-label="{name}: Merkdaten und Module in der Reihenfolge der Zeit">{z}</ol>'
+SCHRITTE = {m[0]: m[3] for m in NS + ST}
+def fenster(wort):
+    """Das Fenster der Lupe: die gewählte Karte in groß, auf demselben Papier. Leeres Gerüst; das Skript füllt es aus den Angaben im Regal."""
+    zeile = lambda kl, w: f'<li class="{kl}"><span class="fw">{w}</span><b></b><span class="fe"></span></li>'
+    return ('<div class="fenster" data-fenster hidden tabindex="-1" role="region" aria-label="Gewählte Karte"><div class="finh">'
+            '<div class="fbild"><img alt="" hidden><span class="fnr" aria-hidden="true"></span></div>'
+            f'<div class="ftext"><p class="fkopf"></p><h3></h3><p class="fschritte"><b>In {"diesem Modul" if wort == "Modul" else "dieser Stunde"}:</b> <span></span></p></div>'
+            f'<div class="fnah"><p class="fl">Merkdaten in der Nähe</p><ol>{zeile("fdavor", "davor")}{zeile("fhier", "du bist hier")}{zeile("fdanach", "danach")}</ol></div>'
+            f'<div class="fknopf"><a class="auf" href="#">{wort} öffnen</a><button type="button" data-reise="-1">‹ früher</button><button type="button" data-reise="1">später ›</button>'
+            '<button type="button" data-zu>Zurück zur Übersicht</button></div></div></div>')
+TIPP = '<p class="tipp" data-tipp hidden>Tippe auf eine Karte<span class="nurbreit"> oder auf einen Punkt der Leiste</span>: Du siehst, wo du in der Zeit bist, und öffnest von dort {was}.</p>'
+def kapitel(ep, ziffer, name, jahre, satz, bilder, zusatz='', wort=''):
+    hinter = ''
+    wahl = ''
+    if bilder:
+        imgs = ''.join(f'<img src="{e(b[0])}" alt="" data-text="{e(b[1])}"{" class=\"an\"" if i == 0 else " loading=\"lazy\""} onerror="this.remove()">' for i, b in enumerate(bilder))
+        hinter = f'<div class="hinter">{imgs}</div>'
+        wahl = (f'<div class="bildwahl"><button type="button" data-bildschritt="-1" aria-label="Vorheriges Bild: {name}" hidden>‹</button>'
+                f'<button type="button" data-bildschritt="1" aria-label="Nächstes Bild: {name}" hidden>›</button>'
+                f'<p data-bildtext>Bild 1 von {len(bilder)}: {e(bilder[0][1])}</p></div>')
+    return (f'<section class="kapitel" id="{ep}" data-ep="{ep}" aria-labelledby="h-{ep}">{hinter}<div class="huelle">'
+            f'<div class="kkopf"><div class="ktitel"><span class="ziffer" aria-hidden="true">{ziffer}</span><div><h2 id="h-{ep}">{name}</h2><p class="jahre">{jahre}</p></div></div>'
+            f'<p class="satz">{satz}</p>{wahl}{TIPP.format(was="das Modul" if wort == "Modul" else "die Stunde") if wort else ""}</div>{leiste(ep)}{fenster(wort) if wort else ""}{regal(ep, name)}{zusatz}</div></section>')
 wz = '<p class="werkzeuge"><b>Werkzeuge für alle neun Stunden:</b>' + ''.join(f'<a href="ost-west/index.html#{a}">{e(n)}</a>' for n, w, a in WZ) + '</p>'
-zeit_html = (kapitel('weimar', 1, 'Weimarer Republik', '1918 – 1933', 'Die erste deutsche Demokratie.', [], '<p class="leer">Die Module zu diesem Kapitel entstehen gerade. Die Ankerdaten stehen schon über der Linie.</p>')
- + kapitel('ns', 2, 'Nationalsozialismus', '1933 – 1945 und die Folgen', 'Ideologie, Krieg und Menschheitsverbrechen – und die Frage, wer mitgemacht hat und was danach daraus wurde.', NS_BILDER)
- + kapitel('ostwest', 3, 'Ost-West-Konflikt', '1945 – 1991', 'Welchen Einfluss hatten Ideologien, Machtinteressen und Handlungsspielräume der Akteure – und wie wird dieser Konflikt heute erinnert?', OW_BILDER, wz))
+zeit_html = (kapitel('weimar', 1, 'Weimarer Republik', '1918 – 1933', 'Die erste deutsche Demokratie.', [], '<p class="leer">Die Module zu diesem Kapitel entstehen gerade. Die Merkdaten stehen schon da.</p>')
+ + kapitel('ns', 2, 'Nationalsozialismus', f'1933 – 1945 und die Folgen · {ZAHLWORT[len(NS)]} Module', 'Ideologie, Krieg und Menschheitsverbrechen – und die Frage, wer mitgemacht hat und was danach daraus wurde.', NS_BILDER, wort='Modul')
+ + kapitel('ostwest', 3, 'Ost-West-Konflikt', f'1945 – 1991 · {ZAHLWORT[len(ST)]} Stunden', 'Welchen Einfluss hatten Ideologien, Machtinteressen und Handlungsspielräume der Akteure – und wie wird dieser Konflikt heute erinnert?', OW_BILDER, wz, 'Stunde'))
 def mlink(nr):
     t, z = MOD[nr]; ep = 'ostwest' if isinstance(nr, int) else 'ns'
     return f'<li><a href="{z}" data-ep="{ep}"><span class="pnr">{HEFTNR[nr]}</span>{e(t)}</a></li>'
@@ -85,121 +130,279 @@ prinzip_html += f'<article class="prinzip offen"><h3>Noch nicht zugeordnet</h3><
 CSS = """@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
-:root{color-scheme:dark;--grund:#15171A;--text:#F4F1EA;--leise:#C9C4BA;--weimar:#E0B74A;--ns:#B9C0C8;--ow:#7FA6FF;--display:"Fraunces",Georgia,serif}
-*{box-sizing:border-box}html{scroll-padding-top:4.5rem}
-body{margin:0;background:var(--grund);color:var(--text);font:400 1.0625rem/1.5 "Atkinson Hyperlegible",system-ui,sans-serif;overflow-x:clip}
+:root{color-scheme:dark;--seite:#15171A;--text:#F4F1EA;--leise:#C9C4BA;--weimar:#E0B74A;--ns:#B9C0C8;--ow:#7FA6FF;--display:"Fraunces",Georgia,serif}
+*{box-sizing:border-box}html{scroll-padding-top:5rem}
+body{margin:0;background:var(--seite);color:var(--text);font:400 1.0625rem/1.5 "Atkinson Hyperlegible",system-ui,sans-serif;overflow-x:clip}
 a{color:var(--text)}a:focus-visible,button:focus-visible{outline:3px solid #fff;outline-offset:3px}
 button{font:inherit;color:inherit;cursor:pointer}
-.huelle{max-width:82rem;margin:0 auto;padding-inline:1.5rem}
+/* Eine Spalte für alles: Kopf, Epochen-Leiste, Kapitel und Fuß stehen an derselben linken Kante */
+.huelle{max-width:72.5rem;margin:0 auto;padding-inline:1.5rem}
 .sprung{position:absolute;left:-999rem}.sprung:focus{left:1rem;top:1rem;background:#fff;color:#000;padding:.5rem 1rem;z-index:9}
-header.kopf{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;justify-content:space-between;align-items:center;padding-block:.8rem .2rem}
-.marke{font-weight:700;font-size:1.15rem;text-decoration:none}
+.nurvorlesen{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+header.kopf{display:flex;flex-wrap:wrap;gap:.3rem 1.5rem;justify-content:space-between;align-items:center;padding-block:1rem 0}
+.marke{font-weight:700;font-size:.95rem;color:var(--leise);text-decoration:none;display:inline-block;padding:.5rem 0}
 header.kopf nav{display:flex;flex-wrap:wrap;gap:.3rem 1.25rem;font-size:.95rem}
 header.kopf nav a{display:inline-block;padding:.5rem 0}
-.hero{padding-block:.2rem .8rem}
-h1{margin:0;font:600 clamp(2.1rem,4.6vw,3.6rem)/1.02 var(--display);text-wrap:balance}
-.hero p{margin:.4rem 0 0;max-width:80ch;color:#D9D4CA}
-/* Leiste: Epochen, Breite = Dauer; bleibt oben stehen und zeigt, wo du bist */
-.band{position:sticky;top:0;z-index:5;background:var(--grund);padding-block:.4rem;border-bottom:1px solid #2B2F35}
-.band ol{list-style:none;margin:0;padding:0;display:flex;gap:4px}
-.band li{min-width:4.6rem}
-.band a{display:flex;flex-direction:column;justify-content:center;min-height:44px;padding:.15rem .6rem;border:2px solid var(--b);border-radius:.5rem;text-decoration:none;line-height:1.15;overflow:hidden}
-.band a b{font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.band a span{font-size:.78rem;color:var(--leise);white-space:nowrap}
-.band a[aria-current]{background:var(--b);color:#15171A}.band a[aria-current] span{color:#15171A}
-/* Kapitel: eine Epoche = ein Zeitstrahl, der auf einen Blick zu sehen ist */
-.kapitel{position:relative;overflow:hidden;border-top:5px solid var(--f);background:var(--tief);padding-block:.8rem .7rem;--f:var(--ns);--tief:#15171A;--karte:#22262B;--rand:#4A5059}
-.kapitel[data-ep=weimar]{--f:var(--weimar);--tief:#211D12}
-.kapitel[data-ep=ostwest]{--f:var(--ow);--tief:#10182E;--karte:#1C2333;--rand:#3B4A6B}
-.kapitel>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1);opacity:0;transition:opacity 600ms cubic-bezier(.23,1,.32,1)}
-.kapitel>img.an{opacity:1}
-.kapitel::after{content:"";position:absolute;inset:0;background:var(--tief);opacity:.84}
-.kapitel>.huelle{position:relative;z-index:1}
-.kopfzeile{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:.2rem 1.25rem;align-items:center}
-.ziffer{margin:0;font:600 3.4rem/.85 var(--display);color:var(--f)}
-h2{margin:0;font:600 clamp(1.6rem,3vw,2.2rem)/1.04 var(--display)}
-.jahre{margin:.1rem 0 0;font-weight:700;color:var(--f)}
-.satz{margin:0;max-width:60ch;font-size:.97rem;color:#E2DED5}
-.spur{list-style:none;margin:.5rem 0 0;padding:0 0 .3rem;display:grid;grid-template-columns:repeat(var(--n),minmax(5.4rem,1fr));overflow-x:auto;scrollbar-color:var(--f) transparent}
-.sp{display:grid;grid-template-rows:3.5rem auto auto;align-content:start;min-width:0}
-.oben{display:flex;flex-direction:column;justify-content:flex-end;padding-right:.5rem}
-.datum{font:600 1.02rem/1.15 var(--display)}
-.was{font-size:.8rem;line-height:1.2;color:#E2DED5}
-.linie{display:block;height:4px;background:var(--f);margin:.55rem 0 .75rem;position:relative}
-.linie::before{content:"";position:absolute;left:0;top:-.4rem;width:1rem;height:1rem;border-radius:999px;background:var(--grund);border:3px solid var(--f)}
-.anker .linie::before{border-radius:2px;background:var(--text);border-color:var(--text);width:.85rem;height:.85rem;top:-.35rem;transform:rotate(45deg)}
-.kachel{display:flex;flex-direction:column;margin-right:.5rem;background:var(--karte);border:1px solid var(--rand);border-radius:.7rem;overflow:hidden;text-decoration:none;min-height:9.2rem}
-.kbild{position:relative;display:block;flex:0 0 3.4rem;background:rgba(0,0,0,.3)}
-.kbild.ohne{flex-basis:.45rem;background:var(--f)}
+.hero{padding-block:.3rem 1rem}
+h1{margin:0;font:600 clamp(2.4rem,5.4vw,4rem)/1.02 var(--display);text-wrap:balance}
+.hero p{margin:.9rem 0 0;max-width:62ch;font-size:1.125rem;color:var(--leise)}
+.hero p a{font-weight:700}
+/* Epochen-Leiste: bleibt oben stehen und zeigt, in welchem Kapitel du bist */
+.band{position:sticky;top:0;z-index:5;background:var(--seite);padding-block:.6rem}
+.band ol{list-style:none;margin:0 auto;display:flex;flex-wrap:wrap;gap:.6rem}
+.band a{display:inline-flex;align-items:center;min-height:44px;padding:0 1rem;border:2px solid var(--b);border-radius:6px;text-decoration:none;font-weight:700;font-size:1rem}
+.band a[aria-current]{background:var(--b);color:#15171A}
+/* Kapitel: eigener Grund, eigene Farbe, eigenes Papier */
+.kapitel{position:relative;overflow:hidden;border-top:6px solid var(--akz);background:var(--grund);
+  --grund:#1B1E22;--akz:#B9C0C8;--akzt:#D5DAE0;--papier:#E2E3E4;--kink:#1C1E21;--kakz:#2E3238;--slot:#CDCFD2;--slotink:#565B62;--korn:url(assets/papier-ns.jpg)}
+.kapitel[data-ep=weimar]{--grund:#211D12;--akz:#E0B74A;--akzt:#F0D58A;--papier:#F3E8C8;--kink:#2A2110;--kakz:#7A5200;--slot:#E6D7A8;--slotink:#735E1F;--korn:url(assets/papier-weimar.jpg)}
+.kapitel[data-ep=ostwest]{--grund:#131A2E;--akz:#7FA6FF;--akzt:#BFD2FF;--papier:#DCE7F6;--kink:#14203A;--kakz:#173F86;--slot:#C3D3EA;--slotink:#4B6694;--korn:url(assets/papier-ostwest.jpg)}
+.kapitel>.huelle{position:relative;z-index:1;padding-block:2.1rem 2.5rem}
+/* Bild hinter dem Kapitelkopf: grau, stark abgedunkelt, läuft unten in den Grund aus */
+.hinter{position:absolute;z-index:0;left:0;right:0;top:0;height:20.6rem;overflow:hidden}
+.hinter img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1);opacity:0;transition:opacity 600ms cubic-bezier(.23,1,.32,1)}
+.hinter img.an{opacity:1}
+.hinter::before{content:"";position:absolute;inset:0;z-index:1;background:var(--grund);opacity:.78}
+.hinter::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5.6rem;z-index:1;background:linear-gradient(to bottom,transparent,var(--grund))}
+.kkopf{margin-bottom:1.4rem}
+.ktitel{display:flex;align-items:center;gap:.9rem}
+.ziffer{font:600 4.5rem/.9 var(--display);color:var(--akzt)}
+h2{margin:0;font:600 clamp(1.7rem,3.4vw,2.25rem)/1.05 var(--display)}
+.jahre{margin:.15rem 0 0;font-weight:700;font-size:1rem;color:var(--akzt)}
+.satz{margin:.75rem 0 0;max-width:54ch;font-size:1rem;color:#E8E4DB}
+.bildwahl{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:.9rem;min-height:44px}
+.bildwahl button{width:44px;height:44px;padding:0;border:2px solid var(--akz);border-radius:999px;background:transparent;font-size:1.4rem;line-height:1}
+.bildwahl p{margin:0;flex:1 1 14rem;font-size:.875rem;line-height:1.35;color:#E8E4DB}
+.tipp{margin:.9rem 0 0;max-width:70ch;font-weight:700}
+/* Leiste: alle Halte in einer Zeile. Raute = Merkdatum, Ring = Modul ohne eigenes Merkdatum, darunter die Nummer im Heft */
+.leiste{position:relative;display:flex;margin:0 -1.5rem 1.4rem;padding-inline:1.5rem;overflow:hidden;scroll-margin-top:4.6rem}
+.leiste::before{content:"";position:absolute;left:1.5rem;right:1.5rem;top:calc(3.3rem + 8px);height:4px;background:var(--akz)}
+.st{flex:1 1 0;min-width:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:3.3rem auto auto;transition:transform 320ms cubic-bezier(.23,1,.32,1),opacity 200ms linear}
+.tp{display:block;min-height:44px}.ohnenr .tp{min-height:20px}.js .tp[data-stop]{cursor:pointer}
+.ob{display:flex;align-items:flex-end;padding:0 0 .4rem 4px}
+.un{padding:.25rem 0 0 4px;min-height:3.1rem}
+.dt{display:block;flex:0 0 auto;width:max-content;max-width:calc(200% - .6rem)}
+.dt b{display:block;font:600 .94rem/1.15 var(--display);white-space:nowrap}
+.dt span{display:block;font-size:.75rem;line-height:1.2;color:#D9D4CA}
+.pk{display:block;position:relative;height:20px}
+.pk::before{content:"";position:absolute;left:4px;top:1px;width:10px;height:10px;border-radius:999px;background:var(--grund);border:4px solid var(--akz)}
+.ank .pk::before{top:2px;width:12px;height:12px;border-radius:0;transform:rotate(45deg);background:var(--text);border:2px solid var(--grund)}
+.nr{display:block;padding:.1rem 0 0 4px;font-size:.8125rem;font-weight:700;color:var(--akzt);white-space:nowrap}
+.ohnenr .nr{display:none}
+/* Lupe (Vorschlag H): Die Leiste fährt an den gewählten Halt heran. Jeder Halt wird nur verschoben, nichts wird verzerrt. */
+.zz{font-weight:400;opacity:0;transition:opacity 200ms linear}
+.lupe .zz{opacity:1}.lupe .dt{max-width:12.5rem}
+.lupe{-webkit-mask-image:linear-gradient(to right,transparent 0,#000 1.4rem,#000 calc(100% - 4.5rem),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 1.4rem,#000 calc(100% - 4.5rem),transparent 100%)}
+.st.aus{opacity:0;pointer-events:none}
+.st.an .pk::before{box-shadow:0 0 0 3px var(--grund),0 0 0 6px #fff}.st.an:not(.ank) .pk::before{background:#fff}.st.an .nr{color:#fff}
+/* Fenster: die gewählte Karte in groß, auf dem Papier ihrer Epoche. Ausgelegt für das iPad quer (drei Spalten) und hoch (zwei Spalten, Merkdaten als Zeile). */
+.fenster{margin-bottom:1.4rem;border:1px solid var(--akz);border-radius:6px;color:var(--kink);background-color:var(--papier);background-image:var(--korn);background-size:384px;background-blend-mode:multiply}
+.fenster a:focus-visible,.fenster button:focus-visible{outline-color:var(--kink)}
+.finh{display:grid;grid-template-columns:16.25rem minmax(0,1fr) 15.6rem;grid-template-rows:1fr auto;gap:1.1rem 1.75rem;padding:1.25rem}
+.fbild{position:relative;height:11.9rem;border-radius:4px;overflow:hidden;background:var(--slot)}
+.fbild img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+.fnr{display:flex;align-items:center;justify-content:center;height:100%;font:600 4.2rem/1 var(--display);color:var(--slotink)}
+.fkopf{margin:0;font-weight:700;color:var(--kakz)}
+.fenster h3{margin:.35rem 0 0;font:600 clamp(1.3rem,2.35vw,1.7rem)/1.16 var(--display);text-wrap:balance;hyphens:manual;overflow-wrap:break-word}
+.fschritte{margin:.8rem 0 0;line-height:1.45}
+.fl{margin:0;font-size:.875rem;font-weight:700;color:var(--kakz)}
+.fnah ol{list-style:none;margin:.5rem 0 0 .45rem;padding:.2rem 0 0 1.35rem;border-left:3px solid var(--slotink)}
+.fnah li{position:relative;padding:0 0 .7rem}
+.fnah li::before{content:"";position:absolute;left:calc(-1.35rem - 7px);top:.3rem;width:10px;height:10px;transform:rotate(45deg);background:var(--kink)}
+.fnah li.fhier::before{left:calc(-1.35rem - 10px);top:.15rem;transform:none;border-radius:999px;background:var(--papier);border:4px solid var(--kink)}
+.fw{display:block;font-size:.8125rem;font-weight:700;color:var(--kakz)}
+.fnah b{display:block;font:600 1.06rem/1.2 var(--display)}.fnah .fhier b{font-size:1.16rem}
+.fe{display:block;font-size:.875rem;line-height:1.3}
+.fknopf{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.fknopf a,.fknopf button{display:inline-flex;align-items:center;min-height:48px;padding:0 1.1rem;border:2px solid var(--kink);border-radius:6px;background:transparent;color:var(--kink);font-size:1rem;text-decoration:none}
+.fknopf a.auf{padding:0 1.4rem;background:var(--kink);color:#F4F1EA;font-weight:700}
+.fknopf [data-zu]{margin-left:auto}
+.fknopf button:disabled{opacity:.4;cursor:default}
+.fenster.neu .finh{animation:fein 220ms cubic-bezier(.23,1,.32,1)}
+@keyframes fein{from{opacity:0;transform:translateY(8px)}}
+.regal.wahl .karte{opacity:.62}.regal.wahl .gewaehlt .karte{opacity:1;outline:3px solid #fff;outline-offset:3px}
+/* Regal: gleich große Papierkarten in der Reihenfolge der Zeit */
+.regal{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:1.25rem}
+.sp{min-width:0}
+.merk,.sp.nurdatum{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.karte{position:relative;display:flex;flex-direction:column;height:100%;min-height:13.25rem;border:1px solid var(--akz);border-radius:6px;overflow:hidden;text-decoration:none;color:var(--kink);
+  background-color:var(--papier);background-image:var(--korn);background-size:384px;background-blend-mode:multiply}
+.kbild{position:relative;display:block;flex:0 0 6rem;background:var(--slot)}
 .kbild img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
-.ktext{padding:.45rem .55rem .55rem;display:flex;flex-direction:column;gap:.15rem;flex:1}
-.kzeit{font-size:.76rem;color:var(--f);font-weight:700}
-.ktext b{font:600 .98rem/1.18 var(--display);hyphens:auto}
-.mnr{display:block;font:700 .8rem/1.3 "Atkinson Hyperlegible",system-ui,sans-serif;color:var(--text)}
-.stand{margin-top:auto;font-size:.76rem;font-weight:700;color:var(--f)}
-.werkzeuge{margin:.5rem 0 0;display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;font-size:.92rem}
-.werkzeuge b{margin-right:.3rem}
-.werkzeuge a{display:inline-flex;align-items:center;min-height:44px;padding:0 .8rem;border:2px solid var(--f);border-radius:999px;text-decoration:none;background:rgba(16,24,46,.6)}
-.leer{margin:.2rem 0 0;font-size:.95rem;color:#E2DED5;border:2px dashed var(--f);border-radius:.7rem;padding:.5rem .8rem;max-width:44rem}
-.bildzeile{margin:.45rem 0 0;font-size:.78rem;color:var(--leise)}
+.knr{display:none}
+.kbild.ohne .knr{display:flex;align-items:center;height:100%;padding:0 .9rem;font:600 2.5rem/1 var(--display);color:var(--slotink)}
+.ktext{display:block;padding:.6rem .9rem .75rem}
+.kmeta{display:block;font-size:.875rem;font-weight:700;color:var(--kakz)}
+.ktext b{display:block;margin-top:.2rem;font:600 1.125rem/1.22 var(--display);hyphens:manual;overflow-wrap:break-word}
+.stand{position:absolute;right:.5rem;top:.5rem;padding:.1rem .5rem;border-radius:4px;background:var(--papier);color:var(--kink);font-size:.8125rem;font-weight:700}
+.werkzeuge{margin:1.6rem 0 0;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;font-size:1rem}
+.werkzeuge b{margin-right:.4rem}
+.werkzeuge a{display:inline-flex;align-items:center;min-height:44px;padding:0 1rem;border:2px solid var(--akz);border-radius:999px;text-decoration:none}
+.leer{margin:0;display:inline-block;padding:.6rem 1rem;border:2px dashed var(--akz);border-radius:6px;font-size:1rem}
 /* Zweite Ordnung: nach den Prinzipien der kognitiven Landkarte */
-.prinzipien{padding-block:1.5rem 2rem}
+.prinzipien{padding-block:2rem 2rem}
 .prinzipien>h2{margin-bottom:.4rem}
 .prinzipien>p{margin:0 0 1.2rem;max-width:70ch;color:#D9D4CA}
 .pgitter{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(19rem,100%),1fr));gap:1rem}
-.prinzip{background:#1E2126;border:1px solid #4A5059;border-top:6px solid var(--text);border-radius:0 0 .9rem .9rem;padding:1rem}
+.prinzip{background:#1E2126;border:1px solid #4A5059;border-top:6px solid var(--text);border-radius:0 0 6px 6px;padding:1rem}
 .prinzip.offen{border-top-style:dashed;background:transparent}
-.prinzip h3{font-size:1.45rem}
+.prinzip h3{margin:0;font:600 1.45rem/1.15 var(--display)}
 .prinzip p{margin:.2rem 0 .7rem;font-size:.95rem;color:var(--leise)}
 .prinzip ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.4rem}
-.prinzip li a{display:grid;grid-template-columns:5.2rem minmax(0,1fr);gap:.6rem;align-items:center;min-height:48px;padding:.3rem .7rem;border:1px solid #4A5059;border-left:6px solid var(--ns);border-radius:0 .6rem .6rem 0;text-decoration:none;line-height:1.25;font-size:.98rem}
+.prinzip li a{display:grid;grid-template-columns:5.2rem minmax(0,1fr);gap:.6rem;align-items:center;min-height:48px;padding:.3rem .7rem;border:1px solid #4A5059;border-left:6px solid var(--ns);border-radius:0 6px 6px 0;text-decoration:none;line-height:1.25;font-size:.98rem}
 .prinzip li a[data-ep=ostwest]{border-left-color:var(--ow)}
 .pnr{font-weight:700;font-size:.9rem;color:var(--ns)}.prinzip li a[data-ep=ostwest] .pnr{color:var(--ow)}
 .legende{margin:1rem 0 0;font-size:.9rem;color:var(--leise)}
 .legende i{display:inline-block;width:.9rem;height:.9rem;vertical-align:-.1rem;margin:0 .3rem 0 .8rem}
-.wechsel{padding-block:1.4rem 1rem;display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center}
-.wechsel button{min-height:52px;padding:0 1.3rem;border:2px solid var(--text);border-radius:.7rem;background:var(--text);color:#15171A;font-weight:700;font-size:1.05rem}
-.wechsel span{color:var(--leise);font-size:.95rem;max-width:56ch}
+.wechsel{padding-block:1.6rem 1.4rem;display:flex;flex-wrap:wrap;gap:.9rem 1.25rem;align-items:center}
+.wechsel button{min-height:48px;padding:0 1.25rem;border:2px solid var(--text);border-radius:6px;background:transparent;font-size:1rem}
+.wechsel button[data-wechsel]{background:var(--text);color:#15171A;font-weight:700}
+.wechsel span{flex:1 1 18rem;max-width:56ch;color:var(--leise);font-size:.94rem}
 [hidden]{display:none!important}
 footer{padding-top:1rem;padding-bottom:2.5rem;font-size:.9rem;color:var(--leise);border-top:1px solid #2B2F35}
-footer p{margin:0 0 .4rem}
+footer p{margin:0 0 .4rem;max-width:100ch}
 footer a{display:inline-block;padding:.35rem 0}
-footer button{min-height:44px;padding:0 1rem;border:2px solid var(--leise);border-radius:.6rem;background:transparent;margin-right:.6rem}
-@media (max-width:900px){.kopfzeile{grid-template-columns:auto minmax(0,1fr)}.satz{grid-column:1/-1}}
-/* Tablet (hoch und quer bis 1279 px): der Zeitstrahl bricht in zwei Zeilen zu je sechs um, statt zu scrollen oder zu quetschen */
-@media (min-width:701px) and (max-width:1279px){.spur{grid-template-columns:repeat(6,minmax(0,1fr));row-gap:.6rem;overflow:visible}}
-/* Telefon: der Zeitstrahl läuft senkrecht */
-@media (max-width:700px){
-  .spur{display:block;overflow:visible;margin-top:.9rem}
-  .sp{display:block;position:relative;border-left:4px solid var(--f);margin-left:.5rem;padding:0 0 .8rem 1.2rem}
-  .sp::before{content:"";position:absolute;left:-.65rem;top:.1rem;width:1rem;height:1rem;border-radius:999px;background:var(--grund);border:3px solid var(--f)}
-  .sp.anker::before{border-radius:2px;background:var(--text);border-color:var(--text);width:.85rem;height:.85rem;left:-.57rem;transform:rotate(45deg)}
-  .linie{display:none}.oben{display:block;padding:0 0 .35rem}.oben:empty{display:none}.datum{margin-right:.5rem}.was{font-size:.95rem}
-  .kachel{flex-direction:row;margin-right:0;min-height:4.6rem}.kbild{flex:0 0 5.5rem}.ktext b{font-size:1.08rem}.kzeit,.stand{font-size:.84rem}
-  .band li{flex:1 1 0!important;min-width:0}.band a{padding:.2rem .4rem}.band a b{white-space:normal;font-size:.8rem;hyphens:auto}
+/* Schmal: Das letzte Datum einer Leiste endet am rechten Rand, statt darüber hinauszuragen */
+@media (max-width:1099px){.st:last-child .ob,.st:last-child .un{display:flex;justify-content:flex-end;text-align:right}.st:last-child .un{align-items:flex-start}}
+/* iPad hoch (700 bis 999 px): Bild und Text nebeneinander, die Merkdaten als Zeile darunter */
+@media (min-width:700px) and (max-width:999px){
+  .finh{grid-template-columns:13.75rem minmax(0,1fr);grid-template-rows:auto}
+  .fbild{height:10.5rem}
+  .fnah{grid-column:1/-1}
+  .fnah ol{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 1.25rem;margin:.5rem 0 0;padding:.9rem 0 0;border-left:0;border-top:3px solid var(--slotink)}
+  .fnah li{padding:0}.fnah li.fdavor{grid-column:1}.fnah li.fhier{grid-column:2}.fnah li.fdanach{grid-column:3}
+  .fnah li::before{left:0;top:calc(-.9rem - 8px)}.fnah li.fhier::before{left:0;top:calc(-.9rem - 10px)}
 }
-@media (hover:hover) and (pointer:fine){.kachel:hover,.prinzip li a:hover{border-color:#fff}.werkzeuge a:hover,footer button:hover{background:rgba(255,255,255,.14)}.wechsel button:hover{background:#fff}}
-@media (prefers-reduced-motion:reduce){.kapitel>img{transition:none}}
-@media print{body{background:#fff;color:#000}.band,.wechsel,.bildzeile,.kapitel>img,.kapitel::after,.kbild img,footer button{display:none}.kapitel{background:#fff}.kachel,.prinzip{background:#fff;border-color:#999}*{color:#000!important}}
+/* Telefon: Die Leiste entfällt. Das Regal wird zum senkrechten Zeitstrahl, die Merkdaten stehen an ihrer Stelle über den Karten */
+@media (max-width:699px){
+  .band{position:static}.band ol{gap:.4rem}.band li{flex:1 1 auto}.band a{width:100%;padding:0 .7rem;font-size:.94rem}
+  .ziffer{font-size:3.4rem}
+  .leiste{display:none}
+  .regal{display:block;margin-left:7px;border-left:4px solid var(--akz)}
+  .sp,.sp.nurdatum{position:relative;width:auto;height:auto;margin:0;overflow:visible;clip-path:none;white-space:normal;padding:0 0 .9rem 1.1rem}
+  .sp::before{content:"";position:absolute;left:-11px;top:.2rem;width:10px;height:10px;border-radius:999px;background:var(--grund);border:4px solid var(--akz)}
+  .sp.anker::before{left:-10px;top:.3rem;width:12px;height:12px;border-radius:0;transform:rotate(45deg);background:var(--text);border:2px solid var(--grund)}
+  .merk{position:static;width:auto;height:auto;margin:0 0 .4rem;overflow:visible;clip-path:none;white-space:normal;line-height:1.25}
+  .merk b{font:600 1.06rem/1.2 var(--display);margin-right:.3rem}.merk span{font-size:.94rem;color:#D9D4CA}
+  .karte{flex-direction:row;min-height:6rem;height:auto}
+  .kbild{flex:0 0 5.75rem}.kbild.ohne .knr{padding:0 .5rem;font-size:1.35rem}
+  .ktext{padding:.5rem .7rem .6rem;min-width:0}
+  .stand{position:static;align-self:flex-end;margin:0 .5rem .5rem auto;background:transparent;padding:0}
+  .leer{margin-top:.6rem}
+  .nurbreit{display:none}
+  .fenster{margin:.6rem 0 0}.finh{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;gap:.9rem;padding:1rem}.fbild{display:none}
+  .fknopf [data-zu]{margin-left:0}.fknopf a.auf{flex:1 1 100%;justify-content:center}
+  .regal.wahl .karte{opacity:1}
+}
+@media (hover:hover) and (pointer:fine){.karte:hover{border-color:#fff}.prinzip li a:hover{border-color:#fff}.werkzeuge a:hover,.bildwahl button:hover,.wechsel button[data-halt]:hover,.band a:hover{background-color:rgba(255,255,255,.14)}.band a[aria-current]:hover{background:var(--b)}.wechsel button[data-wechsel]:hover{background:#fff}}
+@media (prefers-reduced-motion:reduce){.hinter img,.st,.zz{transition:none}.fenster.neu .finh{animation:none}}
+@media print{body{background:#fff;color:#000}.band,.wechsel,.bildwahl,.hinter,.kbild img,.leiste,.fenster,.tipp{display:none}.kapitel{background:#fff;border-top-color:#000}.karte,.prinzip{background:#fff;border-color:#999}
+  .merk,.sp.nurdatum{position:static;width:auto;height:auto;margin:0;overflow:visible;clip-path:none;white-space:normal}*{color:#000!important}}
 """
 JS = """(function(){
   var ruhig = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches, halt = false;
-  function naechstes(k){
-    var b = k.querySelectorAll(":scope > img"), n = b.length; if (n < 2) return;
-    var i = ((+k.dataset.bild || 0) + 1) % n; k.dataset.bild = i; b.forEach(function(im, j){ im.classList.toggle("an", j === i); });
-    k.querySelector("[data-bildtext]").textContent = "Bild: " + b[i].dataset.text;
+  var ansage = document.querySelector("[data-ansage]");
+  /* Bild hinter dem Kapitelkopf wechseln; sag = true: der neue Bildtext wird auch angesagt (nur nach eigenem Tippen) */
+  function zeige(k, i, sag){
+    var b = k.querySelectorAll(".hinter img"), n = b.length; if (!n) return;
+    i = ((i % n) + n) % n; k.dataset.bild = i;
+    b.forEach(function(im, j){ im.classList.toggle("an", j === i); });
+    var t = "Bild " + (i + 1) + " von " + n + ": " + b[i].dataset.text;
+    k.querySelector("[data-bildtext]").textContent = t; if (sag) ansage.textContent = t;
   }
-  var knopf = document.querySelector("[data-wechsel]"), satz = document.querySelector("[data-wechselsatz]"), band = document.querySelector(".band");
+  document.querySelectorAll("[data-bildschritt], [data-tipp]").forEach(function(b){ b.hidden = false; });
+  document.documentElement.classList.add("js");
+  /* ---- Lupe (Vorschlag H): Karte oder Punkt wählen -> die Leiste fährt an die Stelle heran, darunter öffnet sich das Fenster ---- */
+  var schmal = window.matchMedia("(max-width: 699px)"), offen = null, uhr = 0;
+  function halte(kap){ return [].slice.call(kap.querySelectorAll(".regal > .sp")); }
+  function merk(li){ var m = li && li.querySelector(".merk"); return m ? [m.querySelector("b").textContent, m.querySelector("span").textContent] : null; }
+  /* Fenster mit den Angaben eines Halts füllen; gibt den Satz für die Ansage zurück */
+  function fuelle(kap, i){
+    var L = halte(kap), li = L[i], f = kap.querySelector("[data-fenster]"), k = li.querySelector(".karte"), im = k.querySelector(".kbild img"), fi = f.querySelector(".fbild img"), a = null, b = null;
+    L.forEach(function(x, j){ if (!x.classList.contains("anker")) return; if (j < i) a = x; if (j > i && !b) b = x; });
+    function setz(sel, d){ var el = f.querySelector(sel); el.hidden = !d; if (!d) return; el.querySelector("b").textContent = d[0]; var s = el.querySelector(".fe"); s.textContent = d[1] || ""; s.hidden = !d[1]; }
+    var kopf = li.dataset.nr + " · " + li.dataset.zeit, hier = merk(li);
+    f.querySelector(".fkopf").textContent = kopf; f.querySelector("h3").textContent = li.dataset.lang.replace(/ – /g, "\u00a0– "); f.querySelector(".fschritte span").textContent = li.dataset.schritte;
+    if (im) { fi.setAttribute("src", im.getAttribute("src")); fi.hidden = false; } else { fi.hidden = true; fi.removeAttribute("src"); }
+    var fn = f.querySelector(".fnr"); fn.textContent = li.dataset.nr; fn.hidden = !!im;
+    setz(".fdavor", merk(a)); setz(".fhier", [kopf, hier ? "An dieser Stelle der Leiste: " + hier[0] + " – " + hier[1] : ""]); setz(".fdanach", merk(b));
+    f.querySelector(".auf").setAttribute("href", k.getAttribute("href")); f.setAttribute("aria-label", li.dataset.nr + ": " + k.querySelector("b").textContent);
+    var mod = []; L.forEach(function(x, j){ if (x.dataset.nr) mod.push(j); }); var p = mod.indexOf(i);
+    f.querySelector('[data-reise="-1"]').disabled = p <= 0; f.querySelector('[data-reise="1"]').disabled = p >= mod.length - 1;
+    f.dataset.frueher = p > 0 ? mod[p - 1] : ""; f.dataset.spaeter = p < mod.length - 1 ? mod[p + 1] : "";
+    return "Du bist bei " + li.dataset.nr + ", " + li.dataset.zeit + "." + (a ? " Davor: " + merk(a).join(", ") + "." : "") + (b ? " Danach: " + merk(b).join(", ") + "." : "");
+  }
+  /* Das Fenster ist für alle Halte eines Kapitels gleich hoch: So springt das Regal nicht, wenn du mit »früher« und »später« wanderst */
+  function hoehe(kap){
+    var inh = kap.querySelector("[data-fenster] .finh"); inh.style.minHeight = "";
+    if (schmal.matches) return;
+    var key = window.innerWidth + "/" + (document.fonts ? document.fonts.status : "");
+    if (kap._hk !== key) { var max = 0; halte(kap).forEach(function(x, j){ if (!x.dataset.nr) return; fuelle(kap, j); max = Math.max(max, inh.offsetHeight); }); kap._hk = key; kap._h = max; }
+    inh.style.minHeight = kap._h + "px";
+  }
+  /* Die Leiste heranfahren: Die Halte rücken auseinander (mindestens 215 px), der gewählte steht bei gut einem Drittel der Breite */
+  function lupe(kap, i){
+    var l = kap.querySelector(".leiste"), S = [].slice.call(l.children), n = S.length;
+    if (i == null || schmal.matches) { l.classList.remove("lupe"); S.forEach(function(s){ s.style.transform = ""; s.classList.remove("aus", "an"); }); return; }
+    var c = S[0].getBoundingClientRect().width, s = Math.min(3.6, Math.max(2.2, 215 / c)), t = Math.min(0, Math.max(n * (1 - s), .36 * n - s * i));
+    S.forEach(function(el, j){ var x = s * j + t; el.style.transform = "translateX(" + (((s - 1) * j + t) * 100).toFixed(2) + "%)"; el.classList.toggle("aus", !(x > -.05 && x < n - 190 / c)); el.classList.toggle("an", j === i); });
+    l.classList.add("lupe");
+  }
+  function waehle(kap, i){
+    if (offen && offen.kap !== kap) schliesse(false);
+    var L = halte(kap), li = L[i], f = kap.querySelector("[data-fenster]"), l = kap.querySelector(".leiste"), neu = !offen, vorher = li.getBoundingClientRect().top;
+    L.forEach(function(x, j){ x.classList.toggle("gewaehlt", j === i); var k = x.querySelector(".karte"); if (!k) return; if (j === i) k.setAttribute("aria-current", "true"); else k.removeAttribute("aria-current"); });
+    kap.querySelector(".regal").classList.add("wahl");
+    if (schmal.matches) li.appendChild(f); else if (l.nextElementSibling !== f) l.parentNode.insertBefore(f, l.nextSibling);
+    f.hidden = false; hoehe(kap); ansage.textContent = fuelle(kap, i); offen = { kap: kap, i: i };
+    if (neu && !ruhig) { f.classList.remove("neu"); void f.offsetWidth; f.classList.add("neu"); }
+    /* Die Karte unter dem Finger bleibt zuerst, wo sie ist; dann fährt die Seite ruhig zur Leiste */
+    var sprung = li.getBoundingClientRect().top - vorher; if (sprung) window.scrollBy(0, sprung);
+    f.focus({ preventScroll: true }); clearTimeout(uhr);
+    if (schmal.matches) { lupe(kap, null); f.scrollIntoView({ block: "nearest", behavior: ruhig ? "auto" : "smooth" }); return; }
+    var oben = (band.hidden ? 0 : band.offsetHeight) + 8, r = l.getBoundingClientRect(), weg = r.top - oben, muss = r.top < oben - 4 || f.getBoundingClientRect().bottom > window.innerHeight;
+    if (muss) window.scrollBy({ top: weg, behavior: ruhig ? "auto" : "smooth" });
+    if (muss && !ruhig && Math.abs(weg) > 40) uhr = setTimeout(function(){ lupe(kap, i); }, 380); else lupe(kap, i);
+  }
+  function schliesse(fokus){
+    if (!offen) return;
+    var kap = offen.kap, li = halte(kap)[offen.i], k = li.querySelector(".karte"), vorher = li.getBoundingClientRect().top;
+    kap.querySelector("[data-fenster]").hidden = true; kap.querySelector(".regal").classList.remove("wahl");
+    li.classList.remove("gewaehlt"); k.removeAttribute("aria-current"); clearTimeout(uhr); lupe(kap, null); offen = null; ansage.textContent = "";
+    var sprung = li.getBoundingClientRect().top - vorher; if (sprung) window.scrollBy(0, sprung);
+    if (fokus) { k.focus({ preventScroll: true }); k.scrollIntoView({ block: "nearest" }); }
+  }
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && offen) { e.preventDefault(); schliesse(true); } });
+  var neuLegen = 0;
+  window.addEventListener("resize", function(){ clearTimeout(neuLegen); neuLegen = setTimeout(function(){ if (!offen) return; var o = offen, kap = o.kap, f = kap.querySelector("[data-fenster]"), l = kap.querySelector(".leiste");
+    if (schmal.matches) halte(kap)[o.i].appendChild(f); else if (l.nextElementSibling !== f) l.parentNode.insertBefore(f, l.nextSibling);
+    hoehe(kap); fuelle(kap, o.i); lupe(kap, o.i); }, 120); });
+  var knopf = document.querySelector("[data-wechsel]"), satz = document.querySelector("[data-wechselsatz]"), band = document.querySelector(".band"), hb = document.querySelector("[data-halt]");
+  function haltsatz(){ return ruhig ? " Am Gerät ist „weniger Bewegung“ eingestellt: Die Bilder wechseln nur, wenn du auf die Pfeile tippst." : (halt ? " Die Bilder stehen still." : " Die Bilder hinter den Kapiteln wechseln alle acht Sekunden."); }
   function ordnung(w, springen){
+    if (w !== "zeit") schliesse(false);
     document.getElementById("zeit").hidden = w !== "zeit"; document.getElementById("prinzipien").hidden = w !== "prinzip"; band.hidden = w !== "zeit";
+    hb.hidden = ruhig || w !== "zeit";
     knopf.dataset.wechsel = w === "zeit" ? "prinzip" : "zeit";
-    knopf.textContent = w === "zeit" ? "Module nach Prinzip ordnen" : "Zurück zum Zeitstrahl";
-    satz.textContent = w === "zeit" ? "Dieselben Module, geordnet nach den Prinzipien der kognitiven Landkarte – quer durch die Epochen." : "Du siehst die Module nach Prinzip geordnet.";
+    knopf.textContent = w === "zeit" ? "Module nach Prinzip ordnen" : "Zurück zu den Zeitstrahlen";
+    satz.textContent = w === "zeit" ? "Dieselben Module, geordnet nach den Prinzipien der kognitiven Landkarte – quer durch die Epochen." + haltsatz() : "Du siehst die Module nach Prinzip geordnet.";
     try { sessionStorage.setItem("ggk-start:ordnung", w); } catch (e) {}
     if (springen) { var z = document.getElementById(w === "zeit" ? "zeit" : "prinzipien"); z.setAttribute("tabindex", "-1"); z.focus({ preventScroll:true }); z.scrollIntoView({ block:"start" }); }
   }
   document.addEventListener("click", function(e){
     var o = e.target.closest("[data-wechsel]"); if (o) { ordnung(o.dataset.wechsel, true); return; }
-    var h = e.target.closest("[data-halt]"); if (h) { halt = !halt; h.setAttribute("aria-pressed", halt); h.textContent = halt ? "Bildwechsel fortsetzen" : "Bildwechsel anhalten"; }
+    /* Erster Tipp auf eine Karte wählt sie aus, der zweite öffnet sie. Mit gedrückter Zusatztaste öffnet der Link wie gewohnt. */
+    var kl = e.target.closest(".regal .karte");
+    if (kl && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+      var kap = kl.closest("section.kapitel"), i = halte(kap).indexOf(kl.closest(".sp"));
+      if (offen && offen.kap === kap && offen.i === i) return;
+      e.preventDefault(); waehle(kap, i); return;
+    }
+    var tp = e.target.closest(".tp[data-stop]"); if (tp) { waehle(tp.closest("section.kapitel"), +tp.dataset.stop); return; }
+    var rs = e.target.closest("[data-reise]"); if (rs && offen) { var z = +rs.dataset.reise < 0 ? rs.closest("[data-fenster]").dataset.frueher : rs.closest("[data-fenster]").dataset.spaeter; if (z !== "") waehle(offen.kap, +z); return; }
+    if (e.target.closest("[data-zu]")) { schliesse(true); return; }
+    var s = e.target.closest("[data-bildschritt]"); if (s) { var k = s.closest("section.kapitel"); zeige(k, (+k.dataset.bild || 0) + (+s.dataset.bildschritt), true); return; }
+    var h = e.target.closest("[data-halt]"); if (h) { halt = !halt; h.setAttribute("aria-pressed", halt); h.textContent = halt ? "Bildwechsel fortsetzen" : "Bildwechsel anhalten"; ordnung("zeit", false); }
   });
   document.querySelector(".wechsel").hidden = false;
   var start = "zeit"; try { start = sessionStorage.getItem("ggk-start:ordnung") || "zeit"; } catch (e) {}
@@ -216,9 +419,8 @@ JS = """(function(){
       if (f) { el.textContent = "✓ Faden geschrieben"; el.hidden = false; } else if (da) { el.textContent = "schon geöffnet"; el.hidden = false; }
     });
   } catch (e) {}
-  var hb = document.querySelector("[data-halt]");
-  if (ruhig) { hb.hidden = true; document.querySelector("[data-haltsatz]").textContent = "Am Gerät ist „weniger Bewegung“ eingestellt: Die Hintergrundbilder wechseln nicht."; return; }
-  setInterval(function(){ if (halt || document.hidden) return; document.querySelectorAll("section.kapitel").forEach(naechstes); }, 8000);
+  if (ruhig) return;
+  setInterval(function(){ if (halt || document.hidden || offen) return; document.querySelectorAll("section.kapitel").forEach(function(k){ zeige(k, (+k.dataset.bild || 0) + 1, false); }); }, 8000);
 })();"""
 SEITE = f"""<!doctype html>
 <html lang="de">
@@ -228,7 +430,7 @@ SEITE = f"""<!doctype html>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="GGK-Labor">
 <title>Geschichte für die Gegenwart – GGK-Labor</title>
-<meta name="description" content="GGK-Labor: Lernmodule für Geschichte mit Gemeinschaftskunde am Beruflichen Gymnasium – Weimarer Republik, Nationalsozialismus, Ost-West-Konflikt auf drei Zeitstrahlen.">
+<meta name="description" content="GGK-Labor: Lernmodule für Geschichte mit Gemeinschaftskunde am Beruflichen Gymnasium – Weimarer Republik, Nationalsozialismus, Ost-West-Konflikt in drei Kapiteln mit Zeitleiste.">
 <style>
 {CSS}</style>
 </head>
@@ -241,12 +443,12 @@ SEITE = f"""<!doctype html>
 <main id="inhalt">
 <section class="hero huelle">
 <h1>Geschichte für die Gegenwart</h1>
-<p>Drei Zeitstrahlen von 1918 bis 1991 – untersucht mit der <a href="{LK}"><b>kognitiven Landkarte des Geschichtsunterrichts</b></a>. Über der Linie stehen die Daten, die du kennen solltest, darunter die Module.</p>
+<p>Drei Zeitstrahlen von 1918 bis 1991 – untersucht mit der <a href="{LK}">kognitiven Landkarte des Geschichtsunterrichts</a>. In jedem Kapitel stehen zuerst die Daten, die du kennen solltest. Darunter liegen die Module in derselben Reihenfolge.</p>
 </section>
 <nav class="band" aria-label="Epochen"><ol class="huelle">
-<li style="flex:15 1 0"><a href="#weimar" data-ep="weimar" style="--b:var(--weimar)"><b>Weimarer Republik</b><span>1918–1933</span></a></li>
-<li style="flex:12 1 0"><a href="#ns" data-ep="ns" style="--b:var(--ns)"><b>Nationalsozialismus</b><span>1933–1945</span></a></li>
-<li style="flex:46 1 0"><a href="#ostwest" data-ep="ostwest" style="--b:var(--ow)"><b>Ost-West-Konflikt</b><span>1945–1991</span></a></li>
+<li><a href="#weimar" data-ep="weimar" style="--b:var(--weimar)">1 · Weimarer Republik</a></li>
+<li><a href="#ns" data-ep="ns" style="--b:var(--ns)">2 · Nationalsozialismus</a></li>
+<li><a href="#ostwest" data-ep="ostwest" style="--b:var(--ow)">3 · Ost-West-Konflikt</a></li>
 </ol></nav>
 <div id="zeit">{zeit_html}</div>
 <section class="prinzipien huelle" id="prinzipien" aria-labelledby="ph">
@@ -255,11 +457,12 @@ SEITE = f"""<!doctype html>
 <div class="pgitter">{prinzip_html}</div>
 <p class="legende">Kante links:<i style="background:var(--ns)"></i>Nationalsozialismus<i style="background:var(--ow)"></i>Ost-West-Konflikt</p>
 </section>
-<div class="wechsel huelle" hidden><button type="button" data-wechsel="prinzip">Module nach Prinzip ordnen</button><span data-wechselsatz aria-live="polite"></span></div>
+<div class="wechsel huelle" hidden><button type="button" data-wechsel="prinzip">Module nach Prinzip ordnen</button><button type="button" data-halt aria-pressed="false">Bildwechsel anhalten</button><span data-wechselsatz aria-live="polite"></span></div>
+<p class="nurvorlesen" data-ansage aria-live="polite"></p>
 </main>
 <footer class="huelle">
-<p><button type="button" data-halt aria-pressed="false">Bildwechsel anhalten</button><span data-haltsatz>Die Hintergrundbilder wechseln alle acht Sekunden.</span></p>
-<p>Raute über der Linie: ein Datum zum Merken. Karte unter der Linie: ein Modul mit seiner Nummer im Heft. Die Karten stehen in der Reihenfolge der Zeit, nicht in der Reihenfolge der Nummern. Datum und Modul stehen an derselben Stelle des Strahls; sie gehören nicht immer zum selben Thema. Bildnachweise: <a href="M17_Bildliste.html">M17</a> · <a href="M21_Bildliste.html">M21</a> · <a href="M22_Bildliste.html">M22</a> · <a href="M23_Bildliste.html">M23</a> · <a href="M25_Bildliste.html">M25</a> · <a href="M27_Bildliste.html">M27</a> · M19, M20, M26: aus dem Unterrichtsheft, Nachweise offen · <a href="ost-west/Bildliste.html">Ost-West (Heft, Nachweise offen)</a></p>
+<p>Raute auf der Linie: ein Datum zum Merken. Ring: ein Modul ohne eigenes Merkdatum. Unter der Linie steht die Nummer des Moduls im Heft. Die Karten liegen in der Reihenfolge der Zeit, nicht in der Reihenfolge der Nummern. Datum und Modul stehen an derselben Stelle des Strahls; sie gehören nicht immer zum selben Thema.</p>
+<p>Bildnachweise: <a href="M17_Bildliste.html">M17</a> · <a href="M21_Bildliste.html">M21</a> · <a href="M22_Bildliste.html">M22</a> · <a href="M23_Bildliste.html">M23</a> · <a href="M25_Bildliste.html">M25</a> · <a href="M27_Bildliste.html">M27</a> · M19, M20, M26: aus dem Unterrichtsheft, Nachweise offen · <a href="ost-west/Bildliste.html">Ost-West (Heft, Nachweise offen)</a></p>
 <p>Datenschutz: Alle Ergebnisse bleiben auf deinem Gerät. Diese Seiten senden nichts ins Internet und brauchen keine Anmeldung. · <a href="auswertung.html">Kursauswertung für die Lehrkraft</a></p>
 <p>© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p>
 </footer>
