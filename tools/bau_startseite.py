@@ -32,13 +32,13 @@ ST = [(1, 'Potsdam, 1945', 'Die „Stunde Null“ – Was wird jetzt mit Deutsch
  (8, '1970–1972', 'Wandel durch Annäherung: die Ostverträge', ['Die Verträge', 'Die Debatte'], 's8-ostpolitik.html', 'owk-s8-demo'),
  (9, '1985–1991', 'Das Ende der DDR und des Ost-West-Konflikts', ['Vier Blickwinkel', 'Moskau', 'Herbst 1989'], 's9-ende.html', 'owk-s9-trabi')]
 KEYS = {'M18': 'ggklabor:', 'M19': 'ggk-m19-appeasement', 'M20': 'ggk-m20-dilemmata', 'M21': 'ggk-m21-menschen', 'M22': 'ggk-m22-taeter', 'M23': 'ggk-m23-gesellschaft', 'M25': 'ggk-m25-ruinen', 'M26': 'ggk-m26-kontinuitaeten', 'M27': 'ggk-m27-vergessene'}
-# Ankerereignisse (Vorschlag, von der Lehrkraft zu prüfen): (Sortierwert, Datum, Ereignis)
-ANKER = {'weimar': [(1918.86, '9. Nov. 1918', 'Ausrufung der Republik'), (1919.6, '11. Aug. 1919', 'Weimarer Verfassung'), (1923.5, '1923', 'Krisenjahr: Inflation, Hitlerputsch'), (1929.8, 'Okt. 1929', 'Beginn der Weltwirtschaftskrise')],
- 'ns': [(1933.08, '30. Jan. 1933', 'Hitler wird Reichskanzler'), (1935.7, '15. Sept. 1935', 'Nürnberger Gesetze'), (1938.86, '9. Nov. 1938', 'Novemberpogrome'), (1939.67, '1. Sept. 1939', 'Überfall auf Polen'), (1941.47, '22. Juni 1941', 'Überfall auf die Sowjetunion'), (1945.35, '8. Mai 1945', 'Bedingungslose Kapitulation')],
- 'ostwest': [(1945.59, '2. Aug. 1945', 'Potsdamer Abkommen'), (1947.2, '12. März 1947', 'Truman-Doktrin'), (1948.48, '24. Juni 1948', 'Beginn der Berlin-Blockade'), (1949.4, '23. Mai / 7. Okt. 1949', 'Zwei deutsche Staaten'), (1953.46, '17. Juni 1953', 'Aufstand in der DDR'), (1961.62, '13. Aug. 1961', 'Bau der Berliner Mauer'), (1989.86, '9. Nov. 1989', 'Öffnung der Mauer'), (1990.75, '3. Okt. 1990', 'Deutsche Einheit')]}
-# Platz der Module auf der Linie (Sortierwert); die Nummer zeigt die Reihenfolge im Unterricht
-ORT = {'M18': 1933.1, 'M19': 1938.5, 'M27': 1939.7, 'M20': 1940, 'M21': 1941.5, 'M22': 1942, 'M23': 1943, 'M25': 1945.4, 'M26': 1945.6,
-       1: 1945.6, 2: 1947.3, 3: 1948.5, 4: 1949.8, 5: 1950, 7: 1953.5, 6: 1961.7, 8: 1970, 9: 1989.9}
+# Kurztitel für die Übersicht (die vollen Titel stehen in der Ordnung nach Prinzip und in den Modulen)
+KURZ = {'M18': 'Die fünf Säulen der NS-Ideologie', 'M19': 'Appeasement-Politik', 'M20': 'Großbritannien im Zweiten Weltkrieg', 'M21': 'Shoa oder Holocaust?', 'M22': 'Wie war das möglich? Täterforschung', 'M23': 'Die Gesellschaft, in der ich leb(t)e?', 'M25': 'Leben in Ruinen, Umgang mit Schuld', 'M26': 'Kontinuitäten des Nationalsozialismus', 'M27': 'Globalgeschichte des Zweiten Weltkriegs',
+ 1: '„Stunde Null“ und Potsdamer Abkommen', 2: 'Truman-Doktrin und Zwei-Lager-Theorie', 3: 'Berlin-Blockade und sowjetische Zone', 4: 'Doppelte Staatsgründung', 5: 'Westbindung der Bundesrepublik', 6: 'Flucht aus der DDR und Mauerbau', 7: 'Der 17. Juni 1953 im Schulbuch', 8: 'Ostverträge', 9: 'Ende der DDR und des Ost-West-Konflikts'}
+# Spalten je Zeitstrahl: (Ankerdatum, Ereignis, Modul). Über der Linie das Datum, darunter das Modul. Vorschlag – bitte prüfen.
+SPALTEN = {'weimar': [('9. Nov. 1918', 'Ausrufung der Republik', None), ('11. Aug. 1919', 'Weimarer Verfassung', None), ('1923', 'Krisenjahr: Inflation, Hitlerputsch', None), ('Okt. 1929', 'Beginn der Weltwirtschaftskrise', None)],
+ 'ns': [('30. Jan. 1933', 'Hitler wird Reichskanzler', 'M18'), ('15. Sept. 1935', 'Nürnberger Gesetze', 'M19'), ('9. Nov. 1938', 'Novemberpogrome', None), ('1. Sept. 1939', 'Überfall auf Polen', 'M27'), (None, None, 'M20'), ('22. Juni 1941', 'Überfall auf die Sowjetunion', 'M21'), (None, None, 'M22'), (None, None, 'M23'), ('8. Mai 1945', 'Bedingungslose Kapitulation', 'M25'), (None, None, 'M26')],
+ 'ostwest': [('2. Aug. 1945', 'Potsdamer Abkommen', 1), ('12. März 1947', 'Truman-Doktrin', 2), ('24. Juni 1948', 'Beginn der Berlin-Blockade', 3), ('1949', 'Zwei deutsche Staaten', 4), (None, None, 5), ('17. Juni 1953', 'Aufstand in der DDR', 7), ('13. Aug. 1961', 'Bau der Berliner Mauer', 6), (None, None, 8), ('9. Nov. 1989', 'Öffnung der Mauer', 9), ('3. Okt. 1990', 'Deutsche Einheit', None)]}
 # Zweite Ordnung: Prinzipien der kognitiven Landkarte -> Module (aus den Landkarten-Seiten der Module abgelesen)
 PRINZIP = [('2-1-1', 'Retrospektivität', 'Wir betrachten die Vergangenheit immer im Nachhinein, aus der Gegenwart heraus.', ['M19', 'M20', 1, 8]),
  ('2-1-2', 'Perspektivität', 'Jede Betrachtung erfolgt aus einer Sichtweise, geprägt von Überzeugungen, Interessen und Erfahrungen.', ['M22', 'M25', 'M27', 2]),
@@ -50,28 +50,27 @@ PRINZIP = [('2-1-1', 'Retrospektivität', 'Wir betrachten die Vergangenheit imme
  ('2-1-8', 'Standortgebundenheit', 'Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Kontext geprägt, oft unbewusst.', ['M27', 4])]
 OFFEN = ['M18', 'M21', 'M23', 'M26']
 MOD = {m[0]: (m[2], m[4]) for m in NS}; MOD.update({m[0]: (m[2], 'ost-west/' + m[4]) for m in ST})
-def karte(ep, nr, zeit, titel, teile, ziel, bild, key, faden=''):
+MOD = {m[0]: (m[2], m[4]) for m in NS}; MOD.update({m[0]: (m[2], 'ost-west/' + m[4]) for m in ST})
+INFO = {m[0]: (m[1], m[4], m[5], KEYS[m[0]], '') for m in NS}
+INFO.update({m[0]: (m[1], 'ost-west/' + m[4], f'ost-west/media/{m[5]}.jpg', f'ggk-owk-s{m[0]}', f's{m[0]}') for m in ST})
+def kachel(nr):
+    zeit, ziel, bild, key, faden = INFO[nr]
     b = f'<img src="{bild}" alt="" onerror="this.remove()">' if bild else ''
-    return (f'<li class="station"><span class="oben"><span class="jahr">{e(zeit)}</span></span><span class="linie" aria-hidden="true"></span><a class="modulkarte" href="{ziel}"><span class="sbild{"" if bild else " ohne"}">{b}<span class="snr{" lang" if len(str(nr)) > 1 else ""}">{nr}</span></span>'
-            f'<span class="stext"><b>{e(titel)}</b><span class="teile">' + ''.join(f'<span>{e(x)}</span>' for x in teile) + f'</span><span class="stand" data-key="{key}" data-faden="{faden}" hidden></span></span></a></li>')
-def anker(datum, was):
-    return f'<li class="station anker"><span class="oben"><b class="datum">{e(datum)}</b><span class="was">{e(was)}</span></span><span class="linie" aria-hidden="true"></span></li>'
-def spur(ep, stationen, name):
-    teile = [(w, anker(d, t)) for w, d, t in ANKER[ep]] + stationen
-    return f'<ol class="spur" tabindex="0" aria-label="Zeitstrahl {name}: oben die Ankerdaten, unten die Module">' + ''.join(h for _, h in sorted(teile, key=lambda x: x[0])) + '</ol>'
-wz = '<li class="station wz"><span class="oben"><span class="jahr">für alle neun Stunden</span></span><span class="linie" aria-hidden="true"></span><div class="wzkarte"><h3>Fünf Werkzeuge</h3>' + ''.join(f'<a href="ost-west/index.html#{a}"><b>{e(n)}</b><span>{e(w)}</span></a>' for n, w, a in WZ) + '</div></li>'
-leer = '<li class="station"><span class="oben"><span class="jahr">1918–1933</span></span><span class="linie" aria-hidden="true"></span><div class="leer"><b>Die Module entstehen gerade.</b><span>Die Ankerdaten stehen schon über der Linie.</span></div></li>'
-SP = {'weimar': spur('weimar', [(1918.9, leer)], 'Weimarer Republik'),
-      'ns': spur('ns', [(ORT[nr], karte('ns', nr, z, t, teile, d, b, KEYS[nr])) for nr, z, t, teile, d, b in NS], 'Nationalsozialismus'),
-      'ostwest': spur('ostwest', [(1945.0, wz)] + [(ORT[nr], karte('ostwest', nr, z, t, teile, 'ost-west/' + d, f'ost-west/media/{b}.jpg', f'ggk-owk-s{nr}', f's{nr}')) for nr, z, t, teile, d, b in ST], 'Ost-West-Konflikt')}
-def kapitel(ep, ziffer, name, jahre, satz, bilder):
+    return (f'<a class="kachel" href="{ziel}"><span class="kbild{"" if bild else " ohne"}">{b}<span class="knr{" lang" if len(str(nr)) > 1 else ""}">{nr}</span></span>'
+            f'<span class="ktext"><span class="kzeit">{e(zeit)}</span><b>{e(KURZ[nr])}</b><span class="stand" data-key="{key}" data-faden="{faden}" hidden></span></span></a>')
+def spur(ep, name):
+    sp = SPALTEN[ep]
+    li = ''.join(f'<li class="sp{" anker" if d else ""}"><span class="oben">' + (f'<b class="datum">{e(d)}</b><span class="was">{e(w)}</span>' if d else '') + '</span><span class="linie" aria-hidden="true"></span>' + (kachel(m) if m else '') + '</li>' for d, w, m in sp)
+    return f'<ol class="spur" style="--n:{len(sp)}" aria-label="Zeitstrahl {name}: über der Linie die Ankerdaten, darunter die Module">{li}</ol>'
+def kapitel(ep, ziffer, name, jahre, satz, bilder, zusatz=''):
     imgs = ''.join(f'<img src="{e(b[0])}" alt="" data-text="{e(b[1])}"{" class=\"an\"" if i == 0 else ""} onerror="this.remove()">' for i, b in enumerate(bilder))
-    bild = f'<p class="bildzeile"><button type="button" data-bild>Nächstes Bild</button><span aria-live="polite" data-bildtext>Bild 1 von {len(bilder)}: {e(bilder[0][1])}</span></p>' if bilder else ''
-    return (f'<section class="kapitel" id="{ep}" data-ep="{ep}">{imgs}<div class="huelle kopfzeile"><p class="ziffer">{ziffer}</p><div><h2>{name}</h2><p class="jahre">{jahre}</p></div><p class="satz">{satz}</p>'
-            f'<div class="pfeile"><button type="button" data-schritt="-1" aria-label="{e(name)}: auf dem Zeitstrahl zurück">‹</button><button type="button" data-schritt="1" aria-label="{e(name)}: auf dem Zeitstrahl weiter">›</button></div></div>{SP[ep]}<div class="huelle">{bild}</div></section>')
-zeit_html = (kapitel('weimar', 1, 'Weimarer Republik', '1918 – 1933', 'Die erste deutsche Demokratie. Die Module zu diesem Kapitel entstehen gerade.', [])
- + kapitel('ns', 2, 'Nationalsozialismus', '1933 – 1945 und die Folgen · neun Module', 'Ideologie, Krieg und Menschheitsverbrechen – und die Frage, wer mitgemacht hat und was danach daraus wurde.', NS_BILDER)
- + kapitel('ostwest', 3, 'Ost-West-Konflikt', '1945 – 1991 · neun Stunden, fünf Werkzeuge', 'Welchen Einfluss hatten Ideologien, Machtinteressen und Handlungsspielräume der Akteure – und wie wird dieser Konflikt heute erinnert?', OW_BILDER))
+    bild = f'<p class="bildzeile" data-bildtext>Bild: {e(bilder[0][1])}</p>' if bilder else ''
+    return (f'<section class="kapitel" id="{ep}" data-ep="{ep}">{imgs}<div class="huelle"><div class="kopfzeile"><p class="ziffer">{ziffer}</p><div><h2>{name}</h2><p class="jahre">{jahre}</p></div><p class="satz">{satz}</p></div>'
+            f'{spur(ep, name)}{zusatz}{bild}</div></section>')
+wz = '<p class="werkzeuge"><b>Werkzeuge für alle neun Stunden:</b>' + ''.join(f'<a href="ost-west/index.html#{a}">{e(n)}</a>' for n, w, a in WZ) + '</p>'
+zeit_html = (kapitel('weimar', 1, 'Weimarer Republik', '1918 – 1933', 'Die erste deutsche Demokratie.', [], '<p class="leer">Die Module zu diesem Kapitel entstehen gerade. Die Ankerdaten stehen schon über der Linie.</p>')
+ + kapitel('ns', 2, 'Nationalsozialismus', '1933 – 1945 und die Folgen', 'Ideologie, Krieg und Menschheitsverbrechen – und die Frage, wer mitgemacht hat und was danach daraus wurde.', NS_BILDER)
+ + kapitel('ostwest', 3, 'Ost-West-Konflikt', '1945 – 1991', 'Welchen Einfluss hatten Ideologien, Machtinteressen und Handlungsspielräume der Akteure – und wie wird dieser Konflikt heute erinnert?', OW_BILDER, wz))
 def mlink(nr):
     t, z = MOD[nr]; ep = 'ostwest' if isinstance(nr, int) else 'ns'
     return f'<li><a href="{z}" data-ep="{ep}"><span class="pnr">{nr if not isinstance(nr, int) else "Stunde " + str(nr)}</span>{e(t)}</a></li>'
@@ -83,74 +82,59 @@ CSS = """@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-Sem
 :root{color-scheme:dark;--grund:#15171A;--text:#F4F1EA;--leise:#C9C4BA;--weimar:#E0B74A;--ns:#B9C0C8;--ow:#7FA6FF;--display:"Fraunces",Georgia,serif}
 *{box-sizing:border-box}html{scroll-padding-top:4.5rem}
 body{margin:0;background:var(--grund);color:var(--text);font:400 1.0625rem/1.5 "Atkinson Hyperlegible",system-ui,sans-serif;overflow-x:clip}
-a{color:var(--text)}a:focus-visible,button:focus-visible,.spur:focus-visible{outline:3px solid #fff;outline-offset:3px}
+a{color:var(--text)}a:focus-visible,button:focus-visible{outline:3px solid #fff;outline-offset:3px}
 button{font:inherit;color:inherit;cursor:pointer}
-.huelle{max-width:80rem;margin:0 auto;padding-inline:1.5rem}
+.huelle{max-width:82rem;margin:0 auto;padding-inline:1.5rem}
 .sprung{position:absolute;left:-999rem}.sprung:focus{left:1rem;top:1rem;background:#fff;color:#000;padding:.5rem 1rem;z-index:9}
-header.kopf{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;justify-content:space-between;align-items:center;padding-block:.9rem .4rem}
+header.kopf{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;justify-content:space-between;align-items:center;padding-block:.8rem .2rem}
 .marke{font-weight:700;font-size:1.15rem;text-decoration:none}
 header.kopf nav{display:flex;flex-wrap:wrap;gap:.3rem 1.25rem;font-size:.95rem}
 header.kopf nav a{display:inline-block;padding:.5rem 0}
-.hero{padding-block:.6rem 1.2rem}
-h1{margin:0;font:600 clamp(2.3rem,5.5vw,4.5rem)/1.02 var(--display);text-wrap:balance}
-.hero p{margin:.6rem 0 0;max-width:78ch;color:#D9D4CA}
-/* Leiste: Epochen (Breite = Dauer) und Umschalter der Ordnung; bleibt oben stehen */
-.band{position:sticky;top:0;z-index:5;background:var(--grund);padding-block:.45rem;border-bottom:1px solid #2B2F35}
-.band .huelle{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center}
-.band ol{list-style:none;margin:0;padding:0;display:flex;gap:4px;flex:1 1 30rem}
+.hero{padding-block:.2rem .8rem}
+h1{margin:0;font:600 clamp(2.1rem,4.6vw,3.6rem)/1.02 var(--display);text-wrap:balance}
+.hero p{margin:.4rem 0 0;max-width:80ch;color:#D9D4CA}
+/* Leiste: Epochen, Breite = Dauer; bleibt oben stehen und zeigt, wo du bist */
+.band{position:sticky;top:0;z-index:5;background:var(--grund);padding-block:.4rem;border-bottom:1px solid #2B2F35}
+.band ol{list-style:none;margin:0;padding:0;display:flex;gap:4px}
 .band li{min-width:4.6rem}
-.band a{display:flex;flex-direction:column;justify-content:center;min-height:48px;padding:.2rem .6rem;border:2px solid var(--b);border-radius:.5rem;text-decoration:none;line-height:1.15;overflow:hidden}
-.band a b{font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.band a span{font-size:.8rem;color:var(--leise);white-space:nowrap}
+.band a{display:flex;flex-direction:column;justify-content:center;min-height:44px;padding:.15rem .6rem;border:2px solid var(--b);border-radius:.5rem;text-decoration:none;line-height:1.15;overflow:hidden}
+.band a b{font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.band a span{font-size:.78rem;color:var(--leise);white-space:nowrap}
 .band a[aria-current]{background:var(--b);color:#15171A}.band a[aria-current] span{color:#15171A}
-.ordnung{display:flex;gap:4px}
-.ordnung button{min-height:48px;padding:0 .9rem;border:2px solid var(--leise);border-radius:.5rem;background:transparent;font-weight:700}
-.ordnung button[aria-pressed=true]{background:var(--text);color:#15171A;border-color:var(--text)}
-/* Kapitel: eine Epoche = ein waagerechter Zeitstrahl, die Kapitel stehen untereinander */
-.kapitel{position:relative;overflow:hidden;border-top:6px solid var(--f);background:var(--tief);padding-block:1.2rem 1rem;--f:var(--ns);--tief:#15171A;--karte:#22262B;--rand:#4A5059;--rand2:#7C848E}
-.kapitel[data-ep=weimar]{--f:var(--weimar);--tief:#211D12;--karte:#2A2516;--rand:#6B5A24}
-.kapitel[data-ep=ostwest]{--f:var(--ow);--tief:#10182E;--karte:#1C2333;--rand:#3B4A6B;--rand2:#6F86B8}
+/* Kapitel: eine Epoche = ein Zeitstrahl, der auf einen Blick zu sehen ist */
+.kapitel{position:relative;overflow:hidden;border-top:5px solid var(--f);background:var(--tief);padding-block:.8rem .7rem;--f:var(--ns);--tief:#15171A;--karte:#22262B;--rand:#4A5059}
+.kapitel[data-ep=weimar]{--f:var(--weimar);--tief:#211D12}
+.kapitel[data-ep=ostwest]{--f:var(--ow);--tief:#10182E;--karte:#1C2333;--rand:#3B4A6B}
 .kapitel>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1);opacity:0;transition:opacity 600ms cubic-bezier(.23,1,.32,1)}
 .kapitel>img.an{opacity:1}
-.kapitel::after{content:"";position:absolute;inset:0;background:var(--tief);opacity:.82}
-.kapitel>.huelle,.kapitel>.spur{position:relative;z-index:1}
-.kopfzeile{display:grid;grid-template-columns:auto minmax(0,auto) minmax(0,1fr) auto;gap:.4rem 1.5rem;align-items:center}
-.ziffer{margin:0;font:600 4.5rem/.85 var(--display);color:var(--f)}
-h2{margin:0;font:600 clamp(1.8rem,3.4vw,2.6rem)/1.04 var(--display)}
-.jahre{margin:.15rem 0 0;font-weight:700;color:var(--f)}
-.satz{margin:0;max-width:46ch;font-size:1rem}
-.pfeile{display:flex;gap:.5rem}
-.pfeile button,.bildzeile button{min-height:44px;min-width:44px;border:2px solid var(--f);border-radius:999px;background:rgba(21,23,26,.6)}
-.pfeile button{font-size:1.4rem;line-height:1}
-.bildzeile{margin:.2rem 0 0;display:flex;flex-wrap:wrap;gap:.5rem .75rem;align-items:center;font-size:.9rem;color:#E2DED5}
-.bildzeile button{padding:0 .9rem}
-.spur{list-style:none;margin:.5rem 0 0;padding:0 max(1.5rem,calc((100vw - 80rem)/2 + 1.5rem)) .7rem;display:flex;align-items:stretch;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding-inline:1.5rem;scrollbar-color:var(--f) transparent;overscroll-behavior-x:contain}
-.station{flex:0 0 17.5rem;display:grid;grid-template-rows:4.4rem auto 1fr;scroll-snap-align:start}
-.station.anker{flex-basis:10.5rem}
-.oben{display:flex;flex-direction:column;justify-content:flex-end;padding-right:1rem}
-.jahr{font:600 1.05rem/1.2 var(--display);color:var(--f)}
-.datum{font:600 1.2rem/1.15 var(--display);color:var(--text)}
-.was{font-size:.9rem;line-height:1.25;color:#E2DED5}
-.linie{display:block;height:4px;background:var(--f);margin:.6rem 0 .9rem;position:relative}
-.linie::before{content:"";position:absolute;left:0;top:-.5rem;width:1.25rem;height:1.25rem;border-radius:999px;background:var(--grund);border:4px solid var(--f)}
-.anker .linie::before{border-radius:2px;background:var(--text);border-color:var(--text);width:1rem;height:1rem;top:-.4rem;transform:rotate(45deg)}
-.modulkarte,.wzkarte,.leer{margin-right:1rem}
-.modulkarte{display:flex;flex-direction:column;background:var(--karte);border:1px solid var(--rand);border-radius:.9rem;overflow:hidden;text-decoration:none}
-.sbild{position:relative;display:block;flex:0 0 6.25rem;background:rgba(0,0,0,.28)}
-.sbild img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
-.snr{position:absolute;left:.75rem;top:.75rem;min-width:44px;height:44px;padding:0 .5rem;border-radius:999px;background:var(--f);color:#15171A;font:600 1.5rem/1 var(--display);display:grid;place-items:center}
-.snr.lang{font-size:1.15rem}
-.sbild.ohne .snr{left:50%;top:50%;transform:translate(-50%,-50%);height:3.5rem;min-width:5.5rem;font-size:1.9rem;background:transparent;color:var(--f);border:3px solid var(--f)}
-.stext{padding:.75rem .9rem .9rem;display:flex;flex-direction:column;gap:.55rem;flex:1}
-.stext b{font:600 1.2rem/1.18 var(--display)}
-.teile{display:flex;flex-wrap:wrap;gap:.35rem}
-.teile span{font-size:.84rem;padding:.1rem .5rem;border:1px solid var(--rand2,#A08A3C);border-radius:.4rem;color:#E9EDF5}
-.stand{margin-top:auto;font-size:.88rem;font-weight:700;color:var(--f)}
-.wzkarte{display:flex;flex-direction:column;gap:.3rem}
-h3{margin:0 0 .2rem;font:600 1.2rem/1.2 var(--display)}
-.wzkarte a{display:block;min-height:44px;padding:.2rem .7rem;border:2px solid var(--f);border-radius:.6rem;text-decoration:none;background:rgba(16,24,46,.6);line-height:1.2}
-.wzkarte b{display:block}.wzkarte span{font-size:.86rem;color:var(--leise)}
-.leer{border:2px dashed var(--f);border-radius:.9rem;padding:1rem;display:flex;flex-direction:column;gap:.3rem;align-self:start}
-.leer span{font-size:.92rem;color:var(--leise)}
+.kapitel::after{content:"";position:absolute;inset:0;background:var(--tief);opacity:.84}
+.kapitel>.huelle{position:relative;z-index:1}
+.kopfzeile{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:.2rem 1.25rem;align-items:center}
+.ziffer{margin:0;font:600 3.4rem/.85 var(--display);color:var(--f)}
+h2{margin:0;font:600 clamp(1.6rem,3vw,2.2rem)/1.04 var(--display)}
+.jahre{margin:.1rem 0 0;font-weight:700;color:var(--f)}
+.satz{margin:0;max-width:60ch;font-size:.97rem;color:#E2DED5}
+.spur{list-style:none;margin:.5rem 0 0;padding:0 0 .3rem;display:grid;grid-template-columns:repeat(var(--n),minmax(5.9rem,1fr));overflow-x:auto;scrollbar-color:var(--f) transparent}
+.sp{display:grid;grid-template-rows:3.5rem auto auto;align-content:start;min-width:0}
+.oben{display:flex;flex-direction:column;justify-content:flex-end;padding-right:.5rem}
+.datum{font:600 1.02rem/1.15 var(--display)}
+.was{font-size:.8rem;line-height:1.2;color:#E2DED5}
+.linie{display:block;height:4px;background:var(--f);margin:.55rem 0 .75rem;position:relative}
+.linie::before{content:"";position:absolute;left:0;top:-.4rem;width:1rem;height:1rem;border-radius:999px;background:var(--grund);border:3px solid var(--f)}
+.anker .linie::before{border-radius:2px;background:var(--text);border-color:var(--text);width:.85rem;height:.85rem;top:-.35rem;transform:rotate(45deg)}
+.kachel{display:flex;flex-direction:column;margin-right:.5rem;background:var(--karte);border:1px solid var(--rand);border-radius:.7rem;overflow:hidden;text-decoration:none;min-height:9.2rem}
+.kbild{position:relative;display:block;flex:0 0 3.4rem;background:rgba(0,0,0,.3)}
+.kbild img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+.knr{position:absolute;left:.4rem;top:.4rem;min-width:2.1rem;height:2.1rem;padding:0 .35rem;border-radius:999px;background:var(--f);color:#15171A;font:600 1.15rem/1 var(--display);display:grid;place-items:center}
+.knr.lang{font-size:.92rem}
+.ktext{padding:.45rem .55rem .55rem;display:flex;flex-direction:column;gap:.15rem;flex:1}
+.kzeit{font-size:.76rem;color:var(--f);font-weight:700}
+.ktext b{font:600 .98rem/1.18 var(--display);hyphens:auto}
+.stand{margin-top:auto;font-size:.76rem;font-weight:700;color:var(--f)}
+.werkzeuge{margin:.5rem 0 0;display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;font-size:.92rem}
+.werkzeuge b{margin-right:.3rem}
+.werkzeuge a{display:inline-flex;align-items:center;min-height:44px;padding:0 .8rem;border:2px solid var(--f);border-radius:999px;text-decoration:none;background:rgba(16,24,46,.6)}
+.leer{margin:.2rem 0 0;font-size:.95rem;color:#E2DED5;border:2px dashed var(--f);border-radius:.7rem;padding:.5rem .8rem;max-width:44rem}
+.bildzeile{margin:.45rem 0 0;font-size:.78rem;color:var(--leise)}
 /* Zweite Ordnung: nach den Prinzipien der kognitiven Landkarte */
 .prinzipien{padding-block:1.5rem 2rem}
 .prinzipien>h2{margin-bottom:.4rem}
@@ -166,65 +150,68 @@ h3{margin:0 0 .2rem;font:600 1.2rem/1.2 var(--display)}
 .pnr{font-weight:700;font-size:.9rem;color:var(--ns)}.prinzip li a[data-ep=ostwest] .pnr{color:var(--ow)}
 .legende{margin:1rem 0 0;font-size:.9rem;color:var(--leise)}
 .legende i{display:inline-block;width:.9rem;height:.9rem;vertical-align:-.1rem;margin:0 .3rem 0 .8rem}
+.wechsel{padding-block:1.4rem 1rem;display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center}
+.wechsel button{min-height:52px;padding:0 1.3rem;border:2px solid var(--text);border-radius:.7rem;background:var(--text);color:#15171A;font-weight:700;font-size:1.05rem}
+.wechsel span{color:var(--leise);font-size:.95rem;max-width:56ch}
 [hidden]{display:none!important}
-footer{padding-top:1rem;padding-bottom:2.5rem;font-size:.94rem;color:var(--leise);border-top:1px solid #2B2F35}
+footer{padding-top:1rem;padding-bottom:2.5rem;font-size:.9rem;color:var(--leise);border-top:1px solid #2B2F35}
 footer p{margin:0 0 .4rem}
 footer a{display:inline-block;padding:.35rem 0}
 footer button{min-height:44px;padding:0 1rem;border:2px solid var(--leise);border-radius:.6rem;background:transparent;margin-right:.6rem}
-@media (max-width:900px){.kopfzeile{grid-template-columns:auto minmax(0,1fr) auto}.satz{grid-column:1/-1;grid-row:2}}
+@media (max-width:900px){.kopfzeile{grid-template-columns:auto minmax(0,1fr)}.satz{grid-column:1/-1}}
+/* Hochformat am Tablet: der Zeitstrahl bricht in zwei Zeilen um, statt zu scrollen */
+@media (min-width:701px) and (max-width:999px){.spur{grid-template-columns:repeat(5,minmax(0,1fr));row-gap:.6rem;overflow:visible}}
 /* Telefon: der Zeitstrahl läuft senkrecht */
 @media (max-width:700px){
-  .pfeile{display:none}.kopfzeile{grid-template-columns:auto minmax(0,1fr)}
-  .spur{flex-direction:column;overflow:visible;padding:0 1.5rem;margin-top:1rem}
-  .station,.station.anker{flex:none;display:block;position:relative;border-left:4px solid var(--f);margin-left:.5rem;padding:0 0 1.1rem 1.4rem}
-  .station::before{content:"";position:absolute;left:-.75rem;top:0;width:1.25rem;height:1.25rem;border-radius:999px;background:var(--grund);border:4px solid var(--f)}
-  .station.anker::before{left:-.65rem;top:.15rem;width:1rem;height:1rem;border-radius:2px;background:var(--text);border-color:var(--text);transform:rotate(45deg)}
-  .linie{display:none}.oben{display:block;padding:0 0 .4rem}.datum{margin-right:.5rem}.was{font-size:1rem}
-  .modulkarte,.wzkarte,.leer{margin-right:0}
+  .spur{display:block;overflow:visible;margin-top:.9rem}
+  .sp{display:block;position:relative;border-left:4px solid var(--f);margin-left:.5rem;padding:0 0 .8rem 1.2rem}
+  .sp::before{content:"";position:absolute;left:-.65rem;top:.1rem;width:1rem;height:1rem;border-radius:999px;background:var(--grund);border:3px solid var(--f)}
+  .sp.anker::before{border-radius:2px;background:var(--text);border-color:var(--text);width:.85rem;height:.85rem;left:-.57rem;transform:rotate(45deg)}
+  .linie{display:none}.oben{display:block;padding:0 0 .35rem}.oben:empty{display:none}.datum{margin-right:.5rem}.was{font-size:.95rem}
+  .kachel{flex-direction:row;margin-right:0;min-height:4.6rem}.kbild{flex:0 0 5.5rem}.ktext b{font-size:1.08rem}.kzeit,.stand{font-size:.84rem}
   .band li{flex:1 1 0!important;min-width:0}.band a{padding:.2rem .4rem}.band a b{white-space:normal;font-size:.8rem;hyphens:auto}
-  .ordnung{flex:1 1 100%}.ordnung button{flex:1}
 }
-@media (hover:hover) and (pointer:fine){.modulkarte:hover,.prinzip li a:hover{border-color:#fff}.wzkarte a:hover,.pfeile button:hover,.bildzeile button:hover,.ordnung button:hover,footer button:hover{background:rgba(255,255,255,.14)}.ordnung button[aria-pressed=true]:hover{background:var(--text)}}
+@media (hover:hover) and (pointer:fine){.kachel:hover,.prinzip li a:hover{border-color:#fff}.werkzeuge a:hover,footer button:hover{background:rgba(255,255,255,.14)}.wechsel button:hover{background:#fff}}
 @media (prefers-reduced-motion:reduce){.kapitel>img{transition:none}}
-@media print{body{background:#fff;color:#000}.band,.pfeile,.bildzeile,.kapitel>img,.kapitel::after,.sbild img,footer button{display:none}.kapitel{background:#fff}.spur{flex-wrap:wrap;overflow:visible}.modulkarte,.prinzip{background:#fff;border-color:#999}*{color:#000!important}}
+@media print{body{background:#fff;color:#000}.band,.wechsel,.bildzeile,.kapitel>img,.kapitel::after,.kbild img,footer button{display:none}.kapitel{background:#fff}.kachel,.prinzip{background:#fff;border-color:#999}*{color:#000!important}}
 """
 JS = """(function(){
-  var ruhig = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches, halt = false, weich = ruhig ? "auto" : "smooth";
+  var ruhig = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches, halt = false;
   function naechstes(k){
-    var b = k.querySelectorAll(":scope > img"), n = b.length; if (!n) return;
+    var b = k.querySelectorAll(":scope > img"), n = b.length; if (n < 2) return;
     var i = ((+k.dataset.bild || 0) + 1) % n; k.dataset.bild = i; b.forEach(function(im, j){ im.classList.toggle("an", j === i); });
-    k.querySelector("[data-bildtext]").textContent = "Bild " + (i + 1) + " von " + n + ": " + b[i].dataset.text;
+    k.querySelector("[data-bildtext]").textContent = "Bild: " + b[i].dataset.text;
   }
-  function ordnung(w){
-    document.getElementById("zeit").hidden = w !== "zeit"; document.getElementById("prinzipien").hidden = w !== "prinzip";
-    document.querySelectorAll("[data-ordnung]").forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.ordnung === w); });
-    document.querySelector(".band ol").style.visibility = w === "zeit" ? "" : "hidden";
+  var knopf = document.querySelector("[data-wechsel]"), satz = document.querySelector("[data-wechselsatz]"), band = document.querySelector(".band");
+  function ordnung(w, springen){
+    document.getElementById("zeit").hidden = w !== "zeit"; document.getElementById("prinzipien").hidden = w !== "prinzip"; band.hidden = w !== "zeit";
+    knopf.dataset.wechsel = w === "zeit" ? "prinzip" : "zeit";
+    knopf.textContent = w === "zeit" ? "Module nach Prinzip ordnen" : "Zurück zum Zeitstrahl";
+    satz.textContent = w === "zeit" ? "Dieselben Module, geordnet nach den Prinzipien der kognitiven Landkarte – quer durch die Epochen." : "Du siehst die Module nach Prinzip geordnet.";
     try { sessionStorage.setItem("ggk-start:ordnung", w); } catch (e) {}
+    if (springen) { var z = document.getElementById(w === "zeit" ? "zeit" : "prinzipien"); z.setAttribute("tabindex", "-1"); z.focus({ preventScroll:true }); z.scrollIntoView({ block:"start" }); }
   }
   document.addEventListener("click", function(e){
-    var s = e.target.closest("[data-schritt]"); if (s) { var sp = s.closest(".kapitel").querySelector(".spur"); sp.scrollBy({ left: (+s.dataset.schritt) * Math.max(280, sp.clientWidth * .75), behavior: weich }); return; }
-    var b = e.target.closest("[data-bild]"); if (b) { naechstes(b.closest(".kapitel")); return; }
-    var o = e.target.closest("[data-ordnung]"); if (o) { ordnung(o.dataset.ordnung); return; }
-    var a = e.target.closest(".band a"); if (a && document.getElementById("zeit").hidden) ordnung("zeit");
+    var o = e.target.closest("[data-wechsel]"); if (o) { ordnung(o.dataset.wechsel, true); return; }
     var h = e.target.closest("[data-halt]"); if (h) { halt = !halt; h.setAttribute("aria-pressed", halt); h.textContent = halt ? "Bildwechsel fortsetzen" : "Bildwechsel anhalten"; }
   });
-  document.querySelector(".ordnung").hidden = false;
+  document.querySelector(".wechsel").hidden = false;
   var start = "zeit"; try { start = sessionStorage.getItem("ggk-start:ordnung") || "zeit"; } catch (e) {}
-  ordnung(start);
+  ordnung(start, false);
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function(es){ es.forEach(function(x){ if (!x.isIntersecting) return;
-      document.querySelectorAll(".band a").forEach(function(a){ if (a.dataset.ep === x.target.id) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); }); }); }, { rootMargin:"-45% 0px -50% 0px" });
+      document.querySelectorAll(".band a").forEach(function(a){ if (a.dataset.ep === x.target.id) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); }); }); }, { rootMargin:"-40% 0px -55% 0px" });
     document.querySelectorAll("section.kapitel").forEach(function(k){ io.observe(k); });
   }
   try {
     var keys = Object.keys(localStorage), owk = JSON.parse(localStorage.getItem("ggk-owk:v1") || "{}"), faden = owk.faden || {};
     document.querySelectorAll(".stand").forEach(function(el){
       var k = el.dataset.key, da = keys.some(function(x){ return x.indexOf(k) === 0; }), f = el.dataset.faden && (faden[el.dataset.faden] || "").trim();
-      if (f) { el.textContent = "✓ roter Faden geschrieben"; el.hidden = false; } else if (da) { el.textContent = "schon geöffnet"; el.hidden = false; }
+      if (f) { el.textContent = "✓ Faden geschrieben"; el.hidden = false; } else if (da) { el.textContent = "schon geöffnet"; el.hidden = false; }
     });
   } catch (e) {}
   var hb = document.querySelector("[data-halt]");
-  if (ruhig) { hb.hidden = true; document.querySelector("[data-haltsatz]").textContent = "Am Gerät ist „weniger Bewegung“ eingestellt: Die Bilder wechseln nur auf Tippen."; return; }
+  if (ruhig) { hb.hidden = true; document.querySelector("[data-haltsatz]").textContent = "Am Gerät ist „weniger Bewegung“ eingestellt: Die Hintergrundbilder wechseln nicht."; return; }
   setInterval(function(){ if (halt || document.hidden) return; document.querySelectorAll("section.kapitel").forEach(naechstes); }, 8000);
 })();"""
 SEITE = f"""<!doctype html>
@@ -250,14 +237,11 @@ SEITE = f"""<!doctype html>
 <h1>Geschichte für die Gegenwart</h1>
 <p>Drei Zeitstrahlen von 1918 bis 1991 – untersucht mit der <a href="{LK}"><b>kognitiven Landkarte des Geschichtsunterrichts</b></a>. Über der Linie stehen die Daten, die du kennen solltest, darunter die Module.</p>
 </section>
-<nav class="band" aria-label="Epochen und Ordnung"><div class="huelle">
-<ol>
+<nav class="band" aria-label="Epochen"><ol class="huelle">
 <li style="flex:15 1 0"><a href="#weimar" data-ep="weimar" style="--b:var(--weimar)"><b>Weimarer Republik</b><span>1918–1933</span></a></li>
 <li style="flex:12 1 0"><a href="#ns" data-ep="ns" style="--b:var(--ns)"><b>Nationalsozialismus</b><span>1933–1945</span></a></li>
 <li style="flex:46 1 0"><a href="#ostwest" data-ep="ostwest" style="--b:var(--ow)"><b>Ost-West-Konflikt</b><span>1945–1991</span></a></li>
-</ol>
-<div class="ordnung" role="group" aria-label="Module ordnen" hidden><button type="button" data-ordnung="zeit" aria-pressed="true">nach Zeit</button><button type="button" data-ordnung="prinzip" aria-pressed="false">nach Prinzip</button></div>
-</div></nav>
+</ol></nav>
 <div id="zeit">{zeit_html}</div>
 <section class="prinzipien huelle" id="prinzipien" aria-labelledby="ph">
 <h2 id="ph">Dieselben Module – nach Prinzip geordnet</h2>
@@ -265,10 +249,11 @@ SEITE = f"""<!doctype html>
 <div class="pgitter">{prinzip_html}</div>
 <p class="legende">Kante links:<i style="background:var(--ns)"></i>Nationalsozialismus<i style="background:var(--ow)"></i>Ost-West-Konflikt</p>
 </section>
+<div class="wechsel huelle" hidden><button type="button" data-wechsel="prinzip">Module nach Prinzip ordnen</button><span data-wechselsatz aria-live="polite"></span></div>
 </main>
 <footer class="huelle">
 <p><button type="button" data-halt aria-pressed="false">Bildwechsel anhalten</button><span data-haltsatz>Die Hintergrundbilder wechseln alle acht Sekunden.</span></p>
-<p>Die Nummer auf der Karte zeigt die Reihenfolge im Unterricht, die Linie die Zeit. Bildnachweise: <a href="M21_Bildliste.html">M21</a> · <a href="M22_Bildliste.html">M22</a> · <a href="M23_Bildliste.html">M23</a> · <a href="M25_Bildliste.html">M25</a> · <a href="M27_Bildliste.html">M27</a> · <a href="ost-west/Bildliste.html">Ost-West (Heft, Nachweise offen)</a></p>
+<p>Raute über der Linie: ein Datum zum Merken. Karte unter der Linie: ein Modul. Die Nummer zeigt die Reihenfolge im Unterricht, die Linie die Zeit. Bildnachweise: <a href="M21_Bildliste.html">M21</a> · <a href="M22_Bildliste.html">M22</a> · <a href="M23_Bildliste.html">M23</a> · <a href="M25_Bildliste.html">M25</a> · <a href="M27_Bildliste.html">M27</a> · <a href="ost-west/Bildliste.html">Ost-West (Heft, Nachweise offen)</a></p>
 <p>Datenschutz: Alle Ergebnisse bleiben auf deinem Gerät. Diese Seiten senden nichts ins Internet und brauchen keine Anmeldung. · <a href="auswertung.html">Kursauswertung für die Lehrkraft</a></p>
 <p>© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p>
 </footer>
