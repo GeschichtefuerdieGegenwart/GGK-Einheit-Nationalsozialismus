@@ -13,13 +13,13 @@ OW_BILDER = [('ost-west/media/owk-s1-potsdam.jpg', 'Potsdam, Sommer 1945 (Stunde
  ('ost-west/media/owk-s6-bernauer.jpg', 'Mauerbau an der Bernauer Straße in Berlin, August 1961 (Stunde 6).', 'Bauarbeiter setzen Betonsteine zu einer Mauer.'),
  ('ost-west/media/owk-s9-trabi.jpg', 'Nach der Grenzöffnung, November 1989 (Stunde 9).', 'Menschen umringen Autos der Marke Trabant; auf einem Transparent steht „Test the West!“.')]
 NS = [('M18', '1920–1935', 'Die fünf Säulen der NS-Ideologie', ['Vermutung', 'Sechs Zeugnisse', 'Fünf Säulen', 'Expertenrunde', 'Von der Idee zur Tat'], 'ns-ideologie.html', None),
- ('M19', '1933–1939', 'Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg?', ['Was bedroht uns?', 'Was tun wir?', '„Anschluss“', 'Sudetenfrage', 'März 1939', 'Polen', 'Beurteilung'], 'appeasement.html', None),
- ('M20', '1940–1944', 'Großbritannien im Zweiten Weltkrieg – drei Dilemmata', ['Mai 1940', 'Juli 1941', 'Februar 1944', 'Beurteilung'], 'm20-dilemmata.html', None),
+ ('M19', '1933–1939', 'Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg?', ['Was bedroht uns?', 'Was tun wir?', '„Anschluss“', 'Sudetenfrage', 'März 1939', 'Polen', 'Beurteilung'], 'appeasement.html', 'media/m19-heft-karte-deutsches-reich.jpg'),
+ ('M20', '1940–1944', 'Großbritannien im Zweiten Weltkrieg – drei Dilemmata', ['Mai 1940', 'Juli 1941', 'Februar 1944', 'Beurteilung'], 'm20-dilemmata.html', 'media/m20-heft-london-1940.jpg'),
  ('M21', '1933–1945', 'Es geht um Menschen – Shoa oder Holocaust?', ['Der Brief', 'Das Wort', 'Vier Menschen', 'Die Matrix', 'Die Zahl'], 'm21-es-geht-um-menschen.html', 'media/m21-wc-westerbork-2018.jpg'),
  ('M22', '1942', '„Große Verbrechen brauchen keine Monster!“ – Wie war das möglich?', ['Faktencheck', 'Józefów', 'Erklärungen', 'Landkarte', 'Marktplatz'], 'm22-wie-war-das-moeglich.html', 'media/m22-wc-jozefow-wald-2022.jpg'),
  ('M23', '1943', 'Die Gesellschaft, in der ich leb(t)e? – Ländervergleich', ['Die Karte', 'Der Film', 'Sechs Säulen', 'Thesen testen', 'Deine Position'], 'm23-die-gesellschaft.html', 'media/m23-wc-elisabeth-dragoer-2026.jpg'),
  ('M25', '1945', 'Leben in Ruinen und der Umgang mit Schuld', ['Der Krieg ist vorbei', 'Überleben in Ruinen', 'Im Angesicht des Verbrechens', 'Verantwortung', 'Landkarte'], 'm25-leben-in-ruinen.html', 'media/m25-weimar-frauen-1945.jpg'),
- ('M26', 'nach 1945', 'Ende gut, alles gut? Kontinuitäten des Nationalsozialismus', ['Schätzen', 'Der BND', 'Eure Gruppe', 'Vergleich', 'Urteil'], 'm26-kontinuitaeten.html', None),
+ ('M26', 'nach 1945', 'Ende gut, alles gut? Kontinuitäten des Nationalsozialismus', ['Schätzen', 'Der BND', 'Eure Gruppe', 'Vergleich', 'Urteil'], 'm26-kontinuitaeten.html', 'media/m26-heft-bnd.jpg'),
  ('M27', '1939–1945, weltweit', 'Die Vergessenen! Eine Globalgeschichte des Zweiten Weltkriegs', ['Dein Bild vom Krieg', 'Der Artikel', 'Eurozentrismus', 'Strukturbild', 'Landkarte'], 'm27-die-vergessenen.html', 'media/m27-afrikanische-soldaten-1944.jpg')]
 WZ = [('Zeitraster', '16 Ereignisse im Überblick', 'raster'), ('Ordnen', 'Was kam wann?', 'ordnen'), ('Vernetzen', 'Ereignisse verbinden', 'netz'), ('Glossar', 'Begriffe nachschlagen', 'glossar'), ('Roter Faden', 'Deine Antwort auf die Leitfrage', 'faden')]
 ST = [(1, 'Potsdam, 1945', 'Die „Stunde Null“ – Was wird jetzt mit Deutschland?', ['Die Lage', 'Vorhersagen', 'Das Potsdamer Abkommen'], 's1-stunde-null.html', 'owk-s1-potsdam'),
@@ -51,13 +51,17 @@ PRINZIP = [('2-1-1', 'Retrospektivität', 'Wir betrachten die Vergangenheit imme
 OFFEN = ['M18', 'M21', 'M23', 'M26']
 MOD = {m[0]: (m[2], m[4]) for m in NS}; MOD.update({m[0]: (m[2], 'ost-west/' + m[4]) for m in ST})
 MOD = {m[0]: (m[2], m[4]) for m in NS}; MOD.update({m[0]: (m[2], 'ost-west/' + m[4]) for m in ST})
+# Nummer im Heft (steht im Titel) und Platz in der Unterrichtsfolge (steht im Kreis)
+HEFTNR = {1: 'M29/M30', 2: 'M31', 3: 'M32/M33', 4: 'M34', 5: 'M35/M36', 6: 'M36–M39', 7: 'M40', 8: 'M41', 9: 'M42–M44'}
+HEFTNR.update({m[0]: m[0] for m in NS})
+FOLGE = {m[0]: i + 1 for i, m in enumerate(NS)}; FOLGE.update({m[0]: m[0] for m in ST})
 INFO = {m[0]: (m[1], m[4], m[5], KEYS[m[0]], '') for m in NS}
 INFO.update({m[0]: (m[1], 'ost-west/' + m[4], f'ost-west/media/{m[5]}.jpg', f'ggk-owk-s{m[0]}', f's{m[0]}') for m in ST})
 def kachel(nr):
     zeit, ziel, bild, key, faden = INFO[nr]
     b = f'<img src="{bild}" alt="" onerror="this.remove()">' if bild else ''
-    return (f'<a class="kachel" href="{ziel}"><span class="kbild{"" if bild else " ohne"}">{b}<span class="knr{" lang" if len(str(nr)) > 1 else ""}">{nr}</span></span>'
-            f'<span class="ktext"><span class="kzeit">{e(zeit)}</span><b>{e(KURZ[nr])}</b><span class="stand" data-key="{key}" data-faden="{faden}" hidden></span></span></a>')
+    return (f'<a class="kachel" href="{ziel}"><span class="kbild{"" if bild else " ohne"}">{b}<span class="knr" aria-hidden="true">{FOLGE[nr]}</span></span>'
+            f'<span class="ktext"><span class="kzeit">{e(zeit)}</span><b><span class="mnr">{HEFTNR[nr]}</span> {e(KURZ[nr])}</b><span class="stand" data-key="{key}" data-faden="{faden}" hidden></span></span></a>')
 def spur(ep, name):
     sp = SPALTEN[ep]
     li = ''.join(f'<li class="sp{" anker" if d else ""}"><span class="oben">' + (f'<b class="datum">{e(d)}</b><span class="was">{e(w)}</span>' if d else '') + '</span><span class="linie" aria-hidden="true"></span>' + (kachel(m) if m else '') + '</li>' for d, w, m in sp)
@@ -73,7 +77,7 @@ zeit_html = (kapitel('weimar', 1, 'Weimarer Republik', '1918 – 1933', 'Die ers
  + kapitel('ostwest', 3, 'Ost-West-Konflikt', '1945 – 1991', 'Welchen Einfluss hatten Ideologien, Machtinteressen und Handlungsspielräume der Akteure – und wie wird dieser Konflikt heute erinnert?', OW_BILDER, wz))
 def mlink(nr):
     t, z = MOD[nr]; ep = 'ostwest' if isinstance(nr, int) else 'ns'
-    return f'<li><a href="{z}" data-ep="{ep}"><span class="pnr">{nr if not isinstance(nr, int) else "Stunde " + str(nr)}</span>{e(t)}</a></li>'
+    return f'<li><a href="{z}" data-ep="{ep}"><span class="pnr">{HEFTNR[nr]}</span>{e(t)}</a></li>'
 prinzip_html = ''.join(f'<article class="prinzip"><h3><a href="{LK}#s-{i}">{e(n)}</a></h3><p>{e(t)}</p>' + (f'<ul>{"".join(mlink(m) for m in ms)}</ul>' if ms else '<p class="keins">Noch kein Modul, das dieses Prinzip in den Mittelpunkt stellt.</p>') + '</article>' for i, n, t, ms in PRINZIP)
 prinzip_html += f'<article class="prinzip offen"><h3>Noch nicht zugeordnet</h3><p>Diese Module haben noch keinen eigenen Landkarten-Moment.</p><ul>{"".join(mlink(m) for m in OFFEN)}</ul></article>'
 CSS = """@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
@@ -129,6 +133,7 @@ h2{margin:0;font:600 clamp(1.6rem,3vw,2.2rem)/1.04 var(--display)}
 .ktext{padding:.45rem .55rem .55rem;display:flex;flex-direction:column;gap:.15rem;flex:1}
 .kzeit{font-size:.76rem;color:var(--f);font-weight:700}
 .ktext b{font:600 .98rem/1.18 var(--display);hyphens:auto}
+.mnr{display:block;font:700 .8rem/1.3 "Atkinson Hyperlegible",system-ui,sans-serif;color:var(--text)}
 .stand{margin-top:auto;font-size:.76rem;font-weight:700;color:var(--f)}
 .werkzeuge{margin:.5rem 0 0;display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;font-size:.92rem}
 .werkzeuge b{margin-right:.3rem}
@@ -253,7 +258,7 @@ SEITE = f"""<!doctype html>
 </main>
 <footer class="huelle">
 <p><button type="button" data-halt aria-pressed="false">Bildwechsel anhalten</button><span data-haltsatz>Die Hintergrundbilder wechseln alle acht Sekunden.</span></p>
-<p>Raute über der Linie: ein Datum zum Merken. Karte unter der Linie: ein Modul. Die Nummer zeigt die Reihenfolge im Unterricht, die Linie die Zeit. Bildnachweise: <a href="M21_Bildliste.html">M21</a> · <a href="M22_Bildliste.html">M22</a> · <a href="M23_Bildliste.html">M23</a> · <a href="M25_Bildliste.html">M25</a> · <a href="M27_Bildliste.html">M27</a> · <a href="ost-west/Bildliste.html">Ost-West (Heft, Nachweise offen)</a></p>
+<p>Raute über der Linie: ein Datum zum Merken. Karte unter der Linie: ein Modul mit seiner Nummer im Heft. Die Zahl im Kreis zeigt die Reihenfolge im Unterricht, die Linie die Zeit. Bildnachweise: <a href="M21_Bildliste.html">M21</a> · <a href="M22_Bildliste.html">M22</a> · <a href="M23_Bildliste.html">M23</a> · <a href="M25_Bildliste.html">M25</a> · <a href="M27_Bildliste.html">M27</a> · M19, M20, M26: aus dem Unterrichtsheft, Nachweise offen · <a href="ost-west/Bildliste.html">Ost-West (Heft, Nachweise offen)</a></p>
 <p>Datenschutz: Alle Ergebnisse bleiben auf deinem Gerät. Diese Seiten senden nichts ins Internet und brauchen keine Anmeldung. · <a href="auswertung.html">Kursauswertung für die Lehrkraft</a></p>
 <p>© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p>
 </footer>
