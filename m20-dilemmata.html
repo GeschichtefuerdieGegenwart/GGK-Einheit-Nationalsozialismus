@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>M20 Großbritannien im Krieg – drei Dilemmata</title>
-<meta name="description" content="GGK M20: Großbritannien im Zweiten Weltkrieg auf dem iPad – drei Dilemmata 1940, 1941 und 1944 mit geprüften Quellen, Abstimmung und Sicherung an der Tafel.">
+<title>M20 Der Verlauf des Zweiten Weltkriegs. Der Krieg und seine Dilemmata.</title>
+<meta name="description" content="GGK M20: Der Verlauf des Zweiten Weltkriegs. Der Krieg und seine Dilemmata – drei Entscheidungen Großbritanniens 1940, 1941 und 1944 mit geprüften Quellen, Abstimmung und Sicherung an der Tafel.">
 <script src="assets/karten-m20.js"></script>
 <link rel="stylesheet" href="assets/motion.css">
 <script src="assets/motion.js"></script>
@@ -494,7 +494,7 @@ body.eroeff-laeuft{overflow:hidden}
 <script>
 "use strict";
 /* =====================================================================
-   M20 · Großbritannien im Zweiten Weltkrieg – drei Dilemmata.
+   M20 · Der Verlauf des Zweiten Weltkriegs. Der Krieg und seine Dilemmata.
    Durchgängige iPad-Fassung nach der Print-Stunde: Mai 1940 (weiter-
    kämpfen?), Juli 1941 (Bündnis mit der Sowjetunion?), Februar 1944
    (Flächenangriffe?). Je sieben Schritte wie in M19.
@@ -881,7 +881,7 @@ const setze = f => { f(S); speichere(); zeichne(); };
 
 function kopf(){
   const i = SEITEN.findIndex(x=>x.id===S.seite);
-  return `<header class="kopf"><div class="kopf-in">${MARK}<div class="titel">Großbritannien im Krieg<small>M20 · drei Dilemmata 1940–1944</small></div>
+  return `<header class="kopf"><div class="kopf-in">${MARK}<div class="titel">Der Verlauf des Zweiten Weltkriegs<small>M20 · Der Krieg und seine Dilemmata · Großbritannien 1940–1944</small></div>
     <a class="protokoll-btn labor" href="${LABOR}">← GGK-Labor</a><button class="protokoll-btn" data-geh="protokoll">Protokoll</button></div>
     <nav class="weg" aria-label="Abschnitte">${SEITEN.map((x,k)=>{ const zu = x.stufe > S.stufe;
       return `<button class="${x.id===S.seite?"akt":(i>=0&&k<i)?"da":""} ${zu?"zu":""}" data-geh="${x.id}" ${zu?'aria-disabled="true"':""} ${x.id===S.seite?'aria-current="step"':""}><b>${x.nr?"Dilemma "+x.nr:"&nbsp;"}</b>${x.kurz}</button>`; }).join("")}</nav></header>`;
@@ -1195,7 +1195,7 @@ function einstieg(){
   ];
   const N = karten.length;
   return `<section class="seite mv-auf" data-mk="S:${S.seite}"><div class="zeit"><span>Einstieg</span></div>
-    <h1>Großbritannien im Zweiten Weltkrieg – drei Dilemmata</h1>
+    <h1>Der Verlauf des Zweiten Weltkriegs. Der Krieg und seine Dilemmata.</h1>
     <div class="stapel">
       <p class="stapel-tipp nodruck">Blättere selbst: wischen, die Pfeile oder die Pfeiltasten.</p>
       <div class="stapel-leiste">
@@ -1367,7 +1367,7 @@ function zusammenfassung(){
   const kl = k => { const p = S.prot[k]||{}; return ["A","B","C"].some(o=>p[o]) ? ["A","B","C"].map(o=>`${o}: ${esc(p[o]||"0")}`).join(", ") : "–"; };
   return `<section class="seite zf" aria-labelledby="zf-h"><div class="zeit nodruck"><span>Zusammenfassung · zwei Seiten</span></div>
     <article class="zf-blatt">
-      <div class="zf-kopf">GGK · M20 · Großbritannien im Zweiten Weltkrieg – drei Dilemmata · Seite 1 von 2</div>
+      <div class="zf-kopf">GGK · M20 · Der Verlauf des Zweiten Weltkriegs. Der Krieg und seine Dilemmata. · Seite 1 von 2</div>
       <h1 id="zf-h" style="font-size:1.6rem;margin:0">Weiterkämpfen, verbünden, bombardieren?</h1>
       <p class="zf-kern"><b>Leitfrage:</b> Wie hat Großbritannien 1940, 1941 und 1944 entschieden – und was konnte man damals wissen?<br>
         <b>Kernsatz:</b> Großbritannien kämpfte 1940 weiter, statt nach Frieden zu fragen. 1941 half es der Sowjetunion und schloss ein Abkommen mit ihr. Die Flächenangriffe auf deutsche Städte gingen bis 1945 weiter. Jede Entscheidung fiel unter großer Unsicherheit. Die Folgen trugen auch Menschen, die nicht mitentscheiden konnten.</p>

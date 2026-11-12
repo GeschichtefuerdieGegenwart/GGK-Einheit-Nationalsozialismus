@@ -1,6 +1,7 @@
-/* ===== M25 · Leben in Ruinen und der Umgang mit Schuld ===== */
+/* ===== M25 · Leben in Ruinen und der Umgang mit Schuld – nach dem Modul zum Kriegsende von Offene Geschichte ===== */
 const L = {
-  key:"ggk-m25-ruinen:v1", nr:"M25", titel:"Leben in Ruinen und der Umgang mit Schuld", unter:"Kriegsende 1945",
+  key:"ggk-m25-ruinen:v1", nr:"M25", titel:"Leben in Ruinen und der Umgang mit Schuld", unter:"Kriegsende 1945 · nach dem Modul von Offene Geschichte",
+  herkunft:`Dieses Modul beruht auf dem Modul zum Kriegsende von <a href="https://offene-geschichte.de/kriegsende-1/" target="_blank" rel="noopener">Offene Geschichte</a> (offenes Unterrichtsmaterial, herausgegeben von der Universität Tübingen). Für das Unterrichtsheft und diese Seite wurde es angepasst.`,
   /* Zeichen der Stunde: ein offenes Tor */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M5 30V8h24v22" fill="none" stroke="#24221F" stroke-width="2.4" stroke-linejoin="round"/><path d="M12 30V14l10-3v19" fill="none" stroke="#9B402D" stroke-width="2.4" stroke-linejoin="round"/><path d="M3 30h28" stroke="#24221F" stroke-width="2.4" stroke-linecap="round"/></svg>`,
   seiten:[["start","",""],["kriegsende","0–20 Min.","Der Krieg ist vorbei"],["ruinen","20–30 Min.","Überleben in Ruinen"],["verbrechen","30–50 Min.","Im Angesicht des Verbrechens"],["verantwortung","50–72 Min.","Verantwortung"],["landkarte","72–80 Min.","Landkarte"],["plenum","80–90 Min.","Plenum"],["zusammenfassung","Zum Abheften","Zusammenfassung"]],
@@ -55,7 +56,8 @@ const vorText = () => (VOR.find(v => v[0] === S.vor.wahl) || [,"–"])[1];
 
 /* ---------- Seiten ---------- */
 function start(){
-  return `${band("M25 · Doppelstunde · 90 Minuten", "Leben in Ruinen und der Umgang mit Schuld", "Im Frühjahr 1945 endet der Krieg in Europa. Was das bedeutet, hängt davon ab, wen du fragst.")}
+  return `${band("M25 · Doppelstunde · 90 Minuten · nach dem Modul von Offene Geschichte", "Leben in Ruinen und der Umgang mit Schuld", "Im Frühjahr 1945 endet der Krieg in Europa. Was das bedeutet, hängt davon ab, wen du fragst.")}
+  <p class="herkunft">${L.herkunft}</p>
   <p class="leitfrage">Wie erlebten Menschen das Kriegsende 1945 – und wie gingen sie mit der Frage nach Schuld um?</p>
   ${belastend("In dieser Stunde liest du Berichte aus befreiten Lagern und aus zerstörten Städten. Es geht um Tod, Selbsttötung und Mord. Fotos aus Buchenwald erscheinen nur, wenn du sie selbst öffnest. Du darfst jederzeit aussetzen und mit deiner Lehrkraft sprechen.")}
   <h2 class="abschnitt">Am Ende kannst du</h2>
@@ -197,6 +199,7 @@ function zusammenfassung(){
   const lkp = S.lk.ok && S.lk.prinzip ? ((PRINZIP[S.lk.prinzip] || LKCFG.folge)[0] + ": " + S.lk.grund) : "";
   return `<div class="zf"><div class="reihe nodruck" style="margin:0 0 1rem"><button type="button" class="btn dunkel" data-drucken>Drucken oder als PDF sichern</button><span class="hinweis">Zwei Seiten A4. In GoodNotes ablegen.</span></div>
   <h1>M25 · Leben in Ruinen und der Umgang mit Schuld</h1>
+  <p class="herkunft">Nach dem Modul zum Kriegsende von Offene Geschichte (offene-geschichte.de/kriegsende-1).</p>
   <p class="leitfrage">Wie erlebten Menschen das Kriegsende 1945 – und wie gingen sie mit der Frage nach Schuld um?</p>
   <p class="merksatz">Das Kriegsende war nicht für alle dasselbe: Für die Befreiten der Lager war es Rettung, für viele Deutsche zuerst Zusammenbruch und Angst. Mit ihrer Verantwortung konfrontiert, wiesen viele die Schuld zurück.</p>
   <h2>Begriffe</h2>
@@ -227,7 +230,9 @@ function zusammenfassung(){
 
 function lehrkraft(){
   return `<div class="lk"><p class="zeit"><span class="nr">Für Lehrkräfte</span><span>nicht geschützt – enthält keine Lösungen, die Lernende nicht sehen dürfen</span></p><h1>M25 · Hinweise</h1>
-  <p class="lead">Grundlage ist dein Heft „Geschichte aktuell 1“, M25 (vier Bausteine, Quellen 1–2, M3–M6). Die Seite übernimmt Aufbau, Quellen und Aufgaben. Neu ist, was nur das Gerät kann.</p>
+  <p class="lead">Dieses Modul beruht auf dem Modul zum Kriegsende von Offene Geschichte (<a href="https://offene-geschichte.de/kriegsende-1/" target="_blank" rel="noopener">offene-geschichte.de/kriegsende-1</a>). Von dort kam es in dein Heft „Geschichte aktuell 1“, M25 (vier Bausteine, Quellen 1–2, M3–M6). Die Seite übernimmt Aufbau, Quellen und Aufgaben aus dem Heft. Neu ist, was nur das Gerät kann.</p>
+  <h2 class="abschnitt">Herkunft: Offene Geschichte</h2>
+  <ul><li><b>Was Offene Geschichte ist:</b> eine Plattform mit offenen Unterrichtsmodulen für Geschichte. Laut Impressum gibt sie die Universität Tübingen heraus (Sonderforschungsbereich 923). Die Startseite nennt die Module „OER“, die „frei für alle Schulen verwendet werden“ können (abgerufen am 12.11.2026).</li><li><b>Noch offen:</b> der genaue Titel des Moduls und der Wortlaut der Lizenz. Die Modulseite ließ sich beim Bau dieser Fassung nicht abrufen. Bitte dort nachsehen und hier nachtragen.</li><li><b>Noch offen:</b> welche Texte und Aufgaben wörtlich von Offene Geschichte stammen und welche du für das Heft verändert hast. Das Heft nennt die Quelle einmal, bei Baustein 4.</li><li>Die Angabe „Inhalte CC BY-NC-SA 4.0“ im Fuß gilt für deine eigenen Teile, nicht für das, was von Offene Geschichte stammt.</li></ul>
   <h2 class="abschnitt">Was das Gerät hier leistet</h2>
   <ul><li><b>Markierungen werden zu Belegen:</b> Was Lernende antippen, steht geordnet neben dem Schreibfeld (Befreiung · Bedrohung, Problem · Ressource).</li><li><b>Festlegen vor dem Lesen:</b> erste Antwort zum 8. Mai, am Ende die Rückkehr dazu.</li><li><b>Fotos nur nach Hinweis und eigener Entscheidung</b>; die Wortwahl wird danach in „Ausdruck · Deutung · Urteil“ sortiert.</li><li><b>Vergleiche erst nach dem eigenen Text</b> (Schwur, Prüffragen zu M5/M6, Raster Sach- und Werturteil).</li><li><b>Stimmkarte</b> für das Plenum; <b>Zusammenfassung</b> auf zwei Seiten A4 mit den eigenen Texten.</li></ul>
   <p>Papier bleibt besser für: die langen Originalfassungen der Quellen (Heft) und das Gespräch.</p>
@@ -247,7 +252,7 @@ function lehrkraft(){
   <h2 class="abschnitt">Quellen und Rechte</h2>
   <ul><li>Textauszüge von Rost, Kuby (Hg.), Hillers, Bourke-White: kurze Zitate mit Fundstelle zur Analyse im Unterricht (§ 51 UrhG). Ob der Umfang auf einer öffentlichen Seite trägt, entscheidest du.</li><li><b>Vier Fotos aus dem Heft</b> (Buchenwald, April 1945; laut Heft Margaret Bourke-White / Getty Images, zwei ohne Angabe): im Moodle-Paket unter <code>media/</code> (§ 60a UrhG) und auf deinen Wunsch (11.11.2026) auch im öffentlichen Repository – die Verantwortung dafür liegt bei dir. Drei erscheinen in Baustein 3 erst nach Hinweis und „Fotos zeigen“, eines (Frauen, ohne Tote) in Aufgabe B. Fehlen die Dateien, verweist die Seite auf das Heft. Nachweise: <code>M25_Bildliste.html</code>.</li><li>Gedenkstätte Buchenwald: buchenwald.de, Dossiers „Die Bevölkerung konfrontieren“ und „Schwur von Buchenwald“; liberation.buchenwald.de, „Denials of guilt“.</li></ul>
   <h2 class="abschnitt">Vor dem Einsatz prüfen</h2>
-  <ul><li>Nico Rost: Angaben „niederländischer Journalist, Tagebuch“ und Datum 29. April 1945.</li><li>Fußnote des Hefts zu Baustein 4 (offene-geschichte.de): Übernahmen von dort kennzeichnen.</li><li>Zitat Bourke-White: im Heft nach SPIEGEL 23.2.2018; die Gedenkstätte zitiert nach „Dear Fatherland, Rest Quietly“ (1946).</li></ul>
+  <ul><li>Nico Rost: Angaben „niederländischer Journalist, Tagebuch“ und Datum 29. April 1945.</li><li>Offene Geschichte: Modultitel, Lizenz und wörtliche Übernahmen abgleichen (siehe oben, „Herkunft“).</li><li>Zitat Bourke-White: im Heft nach SPIEGEL 23.2.2018; die Gedenkstätte zitiert nach „Dear Fatherland, Rest Quietly“ (1946).</li></ul>
   <h2 class="abschnitt">Nur du kannst das</h2>
   <ul><li>Entscheiden, ob und wie die Fotos gezeigt werden; Lernende mit Flucht- oder Kriegserfahrung in der Familie im Blick behalten.</li><li>Test auf dem iPad in Safari (hoch und quer), VoiceOver, Moodle-Upload.</li><li>Im Plenum Sach- und Werturteil trennen helfen; kein Moral-Ranking der Weimarer*innen.</li></ul>
   <h2 class="abschnitt">Nach der Stunde</h2>

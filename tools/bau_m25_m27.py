@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Baut m25/m26/m27 als je eine HTML-Datei (CSS und JS eingebettet; Gegenwart-Bundle und Schriften aus assets/)."""
+"""Baut m16/m17 und m25/m26/m27 als je eine HTML-Datei (CSS und JS eingebettet; Gegenwart-Bundle und Schriften aus assets/)."""
 import sys, pathlib
 H = pathlib.Path(__file__).resolve().parent.parent / 'src' / 'm25-m27'
 REPO = pathlib.Path(__file__).resolve().parent.parent
 ST = {
- 'm25': ('m25-leben-in-ruinen.html', 'M25 Leben in Ruinen und der Umgang mit Schuld', 'GGK M25: Kriegsende 1945. Quellen markieren, Belege sammeln, Fotos lesen, die Zwangsbesichtigung von Buchenwald beurteilen.', []),
+ 'm16': ('m16-was-macht-den-menschen.html', 'M16 Was macht den Menschen zum Menschen?', 'GGK M16: Einstieg in die Einheit Nationalsozialismus. Margot Friedländers Appell, eigene Wörter mit dem Humanismus vergleichen, Wertekonflikte entscheiden, drei eigene Werte benennen.', []),
+ 'm17': ('m17-leben-in-der-diktatur.html', 'M17 Mein Leben in der NS-Diktatur I – Ausgrenzung 1933 bis 1939', 'GGK M17: Zwei ausgedachte Lebensläufe 1933 bis 1939. Boykott, Berufsbeamtengesetz, Nürnberger Gesetze, Novemberpogrom – erst antworten, dann mit dem Fachtext abgleichen, Spielraum einschätzen.', []),
+ 'm25': ('m25-leben-in-ruinen.html', 'M25 Leben in Ruinen und der Umgang mit Schuld – nach dem Modul von Offene Geschichte', 'GGK M25, nach dem Modul zum Kriegsende von Offene Geschichte: Kriegsende 1945. Quellen markieren, Belege sammeln, Fotos lesen, die Zwangsbesichtigung von Buchenwald beurteilen.', []),
  'm26': ('m26-kontinuitaeten.html', 'M26 Ende gut, alles gut? Kontinuitäten', 'GGK M26: Wie viel Nationalsozialismus steckte in der BRD? Schätzen, BND-Text, Steckbrief der Gruppe, Vergleichstafel, Sach- und Werturteil.', []),
  'm27': ('m27-die-vergessenen.html', 'M27 Die Vergessenen – Globalgeschichte des Zweiten Weltkriegs', 'GGK M27: Welche Geschichten des Zweiten Weltkriegs sind bekannt, welche nicht? Eigene Karte des Krieges, Weltkarte drehen, Strukturbild legen.', ['m27-karte.js']),
 }

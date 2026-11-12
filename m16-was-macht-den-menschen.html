@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>M16 Was macht den Menschen zum Menschen?</title>
+<meta name="description" content="GGK M16: Einstieg in die Einheit Nationalsozialismus. Margot Friedländers Appell, eigene Wörter mit dem Humanismus vergleichen, Wertekonflikte entscheiden, drei eigene Werte benennen.">
+<link rel="stylesheet" href="assets/gegenwart/bundle.css">
+<style>
+
+/* Schriften lokal im Repository (SIL Open Font License) */
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBoldItalic.woff) format("woff");font-weight:600;font-style:italic;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+/* Bewusst nur hell (Beamer, Druck), wie M18–M22. Farben und Formen aus dem Designsystem GGK-Labor.
+   Die Bausteine von »Gegenwart« (assets/gegenwart/) laufen über Tokens – hier auf die Farben des GGK-Labors gesetzt. */
+:root{
+  color-scheme:light;
+  --bg:#F3EFE7; --surface:#FAF8F3; --surface2:#FFFDF8; --offset:#E9E2D7; --line:#D5CEC3; --border:rgba(36,34,31,.14);
+  --ink:#24221F; --muted:#5F5C56; --faint:#6A655E; --inverse:#FFFAF2; --dunkel:#1B1A17;
+  --red:#9B402D; --red-hi:#EAD7CF; --green:#2E5A47; --green-hi:#D6E4DC; --gold:#7D5C12; --gold-hi:#EEE2BF;
+  --kuli:#1E4FB5; --kuli-hi:#DCE5F7; --slate:#4B4F57; --slate-hi:#DFE1E5; --marker:#F3D54E;
+  /* Säulenfarben (sechs, aus der GGK-Palette abgeleitet) */
+  --s-inst:#2E5A47; --s-kult:#7D5C12; --s-sozi:#1E4FB5; --s-geo:#4B6F8F; --s-pol:#9B402D; --s-takt:#4B4F57;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:.75rem; --r-lg:1rem; --ease:cubic-bezier(.23,1,.32,1);
+  /* Gegenwart-Tokens → GGK-Labor */
+  --grund:var(--bg); --flaeche:var(--surface); --karton:var(--offset); --text:var(--ink); --leise:var(--muted); --stahl:#8F887D; --linie:var(--line);
+  --petrol:var(--green); --petrol-hi:var(--green-hi); --auf-petrol:var(--inverse);
+  --honig:var(--gold); --honig-hi:var(--gold-hi); --honigplatte:var(--gold-hi); --auf-honig:var(--ink);
+  --ueberdruck:var(--slate); --auf-ueberdruck:var(--inverse);
+  --oxid:var(--red); --oxid-hi:var(--red-hi);
+  --erfolg:var(--green); --erfolg-hi:var(--green-hi); --warnung:var(--gold); --warnung-hi:var(--gold-hi); --fehler:var(--red); --fehler-hi:var(--red-hi);
+  --font-display:var(--display); --font-stimme:var(--display); --font-text:var(--body);
+  --radius-sm:.6rem; --radius-md:.75rem; --radius-pill:999px; --radius-none:0;
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:20px; --space-6:28px;
+  --knopf-hoehe:48px; --tablet-ziel:56px; --platte:6px 6px 0 0 var(--karton); --platte-knopf:4px 4px 0 0 var(--karton); --fokus-innen:inset 0 0 0 2px var(--grund);
+  --dauer-druck:100ms; --dauer-schnell:140ms; --dauer-mittel:220ms; --dauer-langsam:300ms; --dauer-staffel:30ms; --dauer-wende:460ms; --dauer-aufdecken:420ms; --dauer-reihe:440ms; --dauer-aus:150ms;
+  --kurve-aus:cubic-bezier(.23,1,.32,1); --kurve-beidseits:cubic-bezier(.77,0,.175,1); --kurve-feder:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+button,input,select,textarea,[tabindex]{scroll-margin-top:140px}
+html{-webkit-text-size-adjust:none;text-size-adjust:none;overflow-x:clip}
+body{min-height:100dvh;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:clamp(1rem,.95rem + .25vw,1.125rem);line-height:1.58;-webkit-font-smoothing:antialiased;overflow-x:clip}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.14;text-wrap:balance}
+p,li{text-wrap:pretty}
+a{color:var(--red)}
+:focus-visible{outline:3px solid var(--kuli);outline-offset:3px;border-radius:.35rem}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}}
+html[data-bewegung=weniger] *,html[data-bewegung=weniger] *::before,html[data-bewegung=weniger] *::after{animation:none!important;transition-duration:1ms!important}
+@keyframes auf{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+.g{background:transparent;font-size:inherit;line-height:inherit}
+.g .g-frage{font-size:clamp(1.2rem,1.05rem + .7vw,1.5rem)}
+.g .g-knopf{min-height:48px}
+.g-wahl legend{font-weight:700;font-family:var(--body);font-style:normal;font-size:1.05rem}
+.g .g-option span{font-weight:700}
+.g .g-option__urteil{font-weight:400;font-style:normal;font-size:.95rem;padding:0;border:0;min-height:0;background:transparent;box-shadow:none}
+.g .g-option span span::before,.g .g-option span span::after{display:none!important}
+.g .g-balken__zeile{grid-template-columns:minmax(6.5rem,10rem) 1fr 4.2rem}
+.g .g-schieber{max-width:none}
+.g .g-schieber>label{display:grid;gap:.2rem}.g .g-schieber input[type=range]{width:100%;accent-color:var(--kuli);height:32px}
+.g .g-schieber__buehne{aspect-ratio:auto;min-height:14rem}
+.g .g-schieber__vor,.g .g-schieber__nach{padding:2.6rem 1.2rem 1.2rem}
+.g .g-schieber__vor p,.g .g-schieber__nach p{font-size:.98rem}
+.g .g-schieber__vor .zahl,.g .g-schieber__nach .zahl{font:600 2.2rem/1 var(--display)}
+.g .g-zeit{padding-top:34px}
+@media (max-width:640px){.g .g-zeit{grid-auto-flow:row;grid-auto-columns:auto;gap:var(--space-3)}.g .g-zeit::before{display:none}}
+.g .g-schalter input{margin:0}
+
+/* Kopf mit Lernweg */
+.kopf{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--border);padding-top:env(safe-area-inset-top,0px)}
+.kopf-in{max-width:1100px;margin:auto;padding:.55rem max(1.25rem,env(safe-area-inset-right,0px)) .55rem max(1.25rem,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:.6rem .9rem;flex-wrap:wrap}
+.mark{width:32px;height:32px;flex:0 0 auto}
+.titel{font-weight:700;line-height:1.2;margin-right:auto}.titel small{display:block;color:var(--muted);font-weight:400;font-size:.82rem}
+.pill{border:1px solid var(--border);background:var(--surface2);border-radius:999px;padding:.45rem 1rem;font-weight:700;min-height:44px;display:inline-flex;align-items:center;text-decoration:none;color:var(--ink)}
+.weg{max-width:1100px;margin:auto;padding:0 1.25rem .6rem;display:flex;gap:.35rem;overflow-x:auto;scrollbar-width:none}
+.weg button{flex:1 0 auto;min-width:7.4rem;border:0;border-top:3px solid var(--line);background:transparent;text-align:left;padding:.45rem .5rem .2rem;color:var(--faint);font-size:.85rem;line-height:1.25;min-height:48px}
+.weg button b{display:block;color:inherit;font-size:.78rem}
+.weg button.da{color:var(--muted);border-top-color:var(--muted)}
+.weg button.akt{color:var(--ink);border-top-color:var(--red)}
+
+main{max-width:46rem;margin:auto;padding:clamp(1.5rem,4vw,3rem) max(1.25rem,env(safe-area-inset-right,0px)) 5rem max(1.25rem,env(safe-area-inset-left,0px))}
+main.breit{max-width:62rem}
+.zeit{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;color:var(--red);font-weight:700;font-size:.95rem}
+.zeit .nr{font-family:var(--display);font-size:1.1rem}
+h1{font-size:clamp(2rem,1.4rem + 2.4vw,3.1rem);margin:.5rem 0 .7rem}
+.leitfrage{font-family:var(--display);font-style:italic;font-weight:600;font-size:clamp(1.35rem,1.1rem + .9vw,1.8rem);color:var(--muted);margin-bottom:1.4rem}
+.lead{font-size:clamp(1.1rem,1rem + .5vw,1.28rem);color:var(--muted);margin-bottom:1.4rem}
+h2.abschnitt{font-size:1.45rem;margin:2.2rem 0 .7rem}
+h3.klein{font-size:1.15rem;margin:1.4rem 0 .4rem}
+p+p{margin-top:.7rem}
+.auftrag{background:var(--ink);color:var(--inverse);border-radius:var(--r-lg);padding:1.2rem 1.4rem;margin:1.5rem 0 1.1rem}
+.auftrag h3{font-size:1.2rem;margin-bottom:.35rem}
+.auftrag p{color:#DCD5CA}
+.auftrag .form{display:inline-block;font-weight:700;color:var(--marker);font-size:.9rem;margin-bottom:.2rem}
+.hinweis{font-size:.9rem;color:var(--muted)}
+.belastend{border-left:6px solid var(--gold);background:var(--gold-hi);padding:.75rem 1rem;border-radius:0 .5rem .5rem 0;margin:1rem 0}
+.merksatz{font-family:var(--display);font-weight:600;font-size:1.25rem;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);padding:.7rem 0;margin:1.4rem 0;text-align:center}
+.btn{min-height:48px;border:1px solid var(--border);border-radius:var(--r);padding:.6rem 1.2rem;background:var(--surface2);font-weight:700;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.4rem}
+.btn:hover{background:var(--offset)}
+.btn.primary{background:var(--red);color:var(--inverse);border-color:transparent}
+.btn.primary:hover{background:#86361f}
+.btn.dunkel{background:var(--ink);color:var(--inverse);border-color:transparent}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn:active{transform:scale(.97)}
+.reihe{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-top:.8rem}
+.fuss{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-top:1px solid var(--line);margin-top:2.2rem;padding-top:1.3rem;flex-wrap:wrap}
+label{font-weight:700;display:block}
+textarea{width:100%;min-height:5rem;border:1.5px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;background:var(--surface2);resize:vertical;margin-top:.35rem}
+.feldgruppe{display:grid;gap:1rem;margin-top:1rem}
+.karte{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
+.karte+.karte{margin-top:1rem}
+.kennung{font-weight:700;color:var(--red);font-size:.88rem;margin-bottom:.3rem}
+.quelle{font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.4}
+.quelle a{color:var(--muted)}
+blockquote{margin:.8rem 0;padding:.7rem 1rem;border-left:5px solid var(--kuli);background:var(--kuli-hi);border-radius:0 .5rem .5rem 0;font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.35}
+blockquote .wer{display:block;font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--muted);margin-top:.35rem}
+details.hilfe{margin-top:.8rem;border:1.5px dashed var(--line);border-radius:.6rem;padding:.4rem .8rem}
+details.hilfe summary{cursor:pointer;font-weight:700;min-height:40px;display:flex;align-items:center}
+details.hilfe p{margin:.3rem 0 .4rem}
+.status{display:inline-block;font-size:.78rem;font-weight:700;padding:.1rem .5rem;border-radius:.35rem;background:var(--slate-hi);color:var(--slate);margin-right:.3rem}
+.status.beleg{background:var(--green-hi);color:var(--green)}
+.status.modell{background:var(--gold-hi);color:var(--gold)}
+.aufdeck{margin-top:1rem;background:var(--offset);border-radius:var(--r-lg);padding:1rem 1.2rem}
+.aufdeck.neu{animation:auf 360ms var(--ease) both}
+.zwei{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+@media (max-width:640px){.zwei{grid-template-columns:1fr}}
+.zwei .alt{background:var(--offset);border-radius:.6rem;padding:.8rem 1rem;min-width:0}
+
+.band{position:relative;background:var(--dunkel);color:var(--inverse);border-radius:var(--r-lg);overflow:hidden;margin:0 0 1.6rem;min-height:9rem;display:grid;grid-template-columns:minmax(0,1fr)}
+.band.mit{grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:15rem}
+@media (max-width:640px){.band.mit{grid-template-columns:1fr}}
+.band .bt{padding:1.3rem 1.4rem;display:flex;flex-direction:column;justify-content:center;gap:.4rem}
+.band .bt .ob{font-size:.85rem;font-weight:700;color:#C9BFAE;letter-spacing:.02em}
+.band .bt h2{font-size:clamp(1.5rem,1.2rem + 1.4vw,2.2rem);color:var(--inverse)}
+.band .bt p{color:#DCD5CA}
+.band figure{margin:0;position:relative;min-height:12rem;background:#2A2824}
+.band figure img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:.92}
+.band.neu figure img{animation:band-ein 650ms var(--ease) both}
+@keyframes band-ein{from{opacity:0;transform:translateX(4%) scale(1.03)}to{opacity:.92;transform:none}}
+.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:.45rem .8rem;font-size:.75rem;line-height:1.35;color:#E6DFD2;background:linear-gradient(transparent,rgba(27,26,23,.85))}
+.band figcaption b{color:var(--inverse)}
+.urt{font-size:.95rem}.urt+.urt{margin-top:.3rem}
+.urt.zentral b{color:var(--green)}.urt.begruendbar b{color:var(--gold)}.urt.kaum b{color:var(--red)}
+.matrix-wrap{overflow-x:auto;margin-top:1rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%}
+th,td{padding:.55rem .7rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.92rem}
+th{background:var(--offset)}
+tr:last-child td{border-bottom:0}
+td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* Produkt */
+.raster3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.6rem;font-size:.88rem}
+@media (max-width:640px){.raster3{grid-template-columns:1fr}}
+.raster3 div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .7rem}
+.raster3 b{display:block;margin-bottom:.2rem}
+.satzanfaenge{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem}
+.satzanfaenge button{min-height:44px;border:1.5px solid var(--border);background:var(--surface2);border-radius:.5rem;padding:.3rem .7rem;font-size:.9rem}
+.pole{display:flex;justify-content:space-between;gap:1rem;font-weight:700;font-size:.95rem;margin-top:.6rem}
+.pole span{max-width:46%}
+
+/* Löschen */
+.loesch{margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.92rem;color:var(--muted);display:flex;gap:.9rem;flex-wrap:wrap;align-items:center}
+.loesch-frage{margin-top:.6rem;border:2px solid var(--red);border-radius:.7rem;padding:.8rem 1rem;background:var(--red-hi);color:var(--ink);flex:1 0 100%}
+/* ===== Gemeinsamer Kern M25–M27 (Ergänzungen zum Stand von M23) ===== */
+.band{margin-top:.2rem}
+.ziele{padding-left:1.2rem;display:grid;gap:.3rem;margin:.6rem 0}
+.ablauf{list-style:none;display:grid;gap:.35rem;margin:.8rem 0 0}
+.ablauf li{display:grid;grid-template-columns:5.6rem 1fr;gap:.8rem;border-top:1px solid var(--line);padding-top:.35rem}
+.ablauf li b{color:var(--red);font-variant-numeric:tabular-nums}
+.auflage{border-left:6px solid var(--green);background:var(--green-hi);padding:.8rem 1rem;border-radius:0 .6rem .6rem 0;margin:1rem 0}
+.auflage.neu,.rm.neu{animation:auf 360ms var(--ease) both}
+.rm{border-left:6px solid var(--stahl);background:var(--surface);padding:.7rem 1rem;border-radius:0 .6rem .6rem 0;margin:.7rem 0;font-size:.97rem}
+.rm.zentral{border-left-color:var(--green)}.rm.teils{border-left-color:var(--gold)}.rm.kaum{border-left-color:var(--red)}
+.rm b.sw{display:block}
+.gesperrt{opacity:.45}
+.zaehl{font-size:.88rem;color:var(--muted);margin-top:.25rem;font-variant-numeric:tabular-nums}
+textarea,input[type=text],select{color:var(--kuli)}
+input[type=text],select{width:100%;min-height:48px;border:1.5px solid var(--border);border-radius:var(--r);padding:.5rem .8rem;background:var(--surface2);margin-top:.3rem}
+textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
+.felder2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:700px){.felder2{grid-template-columns:1fr}}
+
+/* Quelle zum Markieren (Gegenwart: Markierung) – Sätze sind die Einheiten */
+.qwerk{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:1.2rem;align-items:start;margin-top:1rem}
+@media (max-width:860px){.qwerk{grid-template-columns:1fr}}
+.qblatt{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
+.qblatt h3{font-size:1.12rem;margin-bottom:.15rem}
+.qblatt .qkopf{font-size:.92rem;color:var(--muted);margin-bottom:.7rem}
+.qblatt .qtext p{margin:.55rem 0;line-height:1.75;font-size:1.06rem}
+.qblatt .qtag{font-weight:700;color:var(--red);font-size:.9rem;margin-right:.3rem}
+.qblatt .g-wort{padding:.08em 0;-webkit-tap-highlight-color:transparent}
+.qblatt .g-wort:focus-visible{outline:3px solid var(--kuli);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){.qblatt .g-wort:hover{background:var(--offset)}}
+.qblatt .g-stifte{margin:.2rem 0 .8rem;position:sticky;top:112px;background:var(--surface2);padding:.35rem 0;z-index:2}
+.g-stift .z{font-size:.8em;margin-right:.25rem}
+.qreiter{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1rem}
+.qreiter button{min-height:44px;border:1.5px solid var(--border);border-bottom-width:3px;background:var(--surface);border-radius:.6rem .6rem 0 0;padding:.4rem .9rem;font-weight:700}
+.qreiter button[aria-selected=true]{background:var(--surface2);border-bottom-color:var(--red)}
+.belege{display:grid;gap:.8rem}
+.belege .sp{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;min-height:5.5rem}
+.belege .sp h4{font-family:var(--body);font-size:.95rem;margin-bottom:.3rem}
+.belege .sp ul{list-style:none;display:grid;gap:.3rem;font-size:.92rem}
+.belege .sp li{border-left:4px solid var(--marker);padding-left:.5rem;line-height:1.35}
+.belege .sp.b li{border-left:4px dotted var(--kuli)}
+.belege .leer{color:var(--faint);font-size:.9rem}
+
+/* Wörter wählen */
+.woerter{display:flex;gap:.45rem;flex-wrap:wrap;margin:.8rem 0}
+.woerter button{min-height:44px;padding:.35rem .9rem;border-radius:.6rem;border:2px solid var(--stahl);background:var(--surface2);font-weight:700}
+.woerter button[aria-pressed=true]{border-color:var(--kuli);background:var(--kuli-hi);color:var(--ink)}
+.woerter button[disabled]{opacity:.5}
+.wgrp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin-top:.6rem}
+@media (max-width:760px){.wgrp{grid-template-columns:1fr}}
+.wgrp div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .8rem;font-size:.93rem}
+.wgrp b{display:block;margin-bottom:.2rem}
+.wgrp .dein{font-weight:700;color:var(--kuli)}
+
+/* Landkarten-Moment */
+.prinzipien{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;margin:.9rem 0}
+@media (max-width:860px){.prinzipien{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.prinzipien{grid-template-columns:1fr}}
+.prinzipien button{text-align:left;border:2px solid var(--stahl);background:var(--surface2);border-radius:.7rem;padding:.55rem .7rem;min-height:56px;display:grid;gap:.15rem;align-content:start}
+.prinzipien button small{font-size:.82rem;color:var(--muted);line-height:1.3}
+.prinzipien button[aria-pressed=true]{border-color:var(--kuli);box-shadow:inset 0 0 0 1px var(--kuli)}
+.prinzipien button.zentral{border-left:6px solid var(--green)}.prinzipien button.teils{border-left:6px solid var(--gold)}.prinzipien button.kaum{border-left:6px solid var(--red)}
+.prinzipien button[disabled]{opacity:.6}.prinzipien button[disabled][aria-pressed=true]{opacity:1}
+.trift{margin-top:1.2rem;border:1.5px dashed var(--stahl);border-radius:.7rem;padding:.8rem 1rem;font-size:.96rem}
+
+/* Stimmkarte und Beamer-Tafel */
+#ueber:empty{display:none}
+.tafel-voll{position:fixed;inset:0;z-index:60;background:var(--dunkel);color:var(--inverse);display:grid;grid-template-rows:auto 1fr;padding:max(1rem,env(safe-area-inset-top,0px)) 1.4rem 1.4rem;overflow:auto}
+.tafel-voll .tk{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.tafel-voll .tk .btn{background:transparent;color:var(--inverse);border-color:#6b665d}
+.tafel-voll .mitte{display:grid;place-content:center;text-align:center;gap:1rem}
+.tafel-voll .buchstabe{font:600 clamp(8rem,34vw,20rem)/.9 var(--display)}
+.tafel-voll .wort{font:600 clamp(1.6rem,5vw,3.4rem)/1.15 var(--display)}
+.tafel-voll.hell{background:var(--bg);color:var(--ink)}
+.tafel-voll.hell .tk .btn{color:var(--ink);border-color:var(--stahl)}
+.folie{width:min(100%,calc((100vh - 6.5rem)*16/9));aspect-ratio:16/9;margin:auto;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:clamp(1rem,2.6vw,2.4rem);display:grid;grid-template-rows:auto 1fr auto;gap:.8rem;text-align:left;overflow:hidden}
+.folie h2{font-size:clamp(1.4rem,3vw,2.5rem)}
+.folie .vier{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 1.4rem;align-content:start;font-size:clamp(.85rem,1.45vw,1.25rem);line-height:1.35}
+.folie .vier b{display:block;color:var(--red);font-size:.85em}
+.folie .vier p{color:var(--kuli);white-space:pre-wrap;overflow-wrap:anywhere}
+.folie .fq{font-size:clamp(.75rem,1.1vw,1rem);color:var(--muted)}
+@media (max-width:700px){.folie{aspect-ratio:auto}.folie .vier{grid-template-columns:1fr}}
+.stimmwahl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.8rem}
+@media (max-width:640px){.stimmwahl{grid-template-columns:1fr}}
+.stimmwahl button{min-height:64px;border:2px solid var(--stahl);border-radius:.8rem;background:var(--surface2);font-weight:700;padding:.5rem .8rem;display:grid;gap:.1rem;text-align:left}
+.stimmwahl button b{font:600 1.5rem/1 var(--display)}
+.stimmwahl button[aria-pressed=true]{border-color:var(--green);box-shadow:inset 0 0 0 2px var(--green);background:var(--green-hi)}
+
+/* Zeitleiste klein (Zusammenfassung) */
+.zl{list-style:none;display:grid;gap:.25rem;margin-top:.4rem}
+.zl li{display:grid;grid-template-columns:7.2rem 1fr;gap:.7rem;font-size:.95rem;border-top:1px solid var(--line);padding-top:.25rem}
+.zl li b{font-variant-numeric:tabular-nums}
+.begriffe{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem;margin-top:.4rem}
+.begriffe div{font-size:.95rem;border-left:4px solid var(--line);padding-left:.6rem}
+@media (max-width:640px){.begriffe{grid-template-columns:1fr}}
+.mein{color:var(--kuli);white-space:pre-wrap;overflow-wrap:anywhere}
+.mein.leer{color:var(--faint);font-style:italic}
+.zf .werk{background:var(--gold-hi);border-radius:.6rem;padding:.6rem .9rem;margin-top:.5rem;font-size:.95rem}
+.zf h1{margin-top:0}
+.zf .seitenumbruch{margin-top:2rem;border-top:3px solid var(--ink);padding-top:1rem}
+.lk table{font-size:.92rem}
+.lk ul{padding-left:1.2rem;display:grid;gap:.4rem;margin-top:.4rem}
+
+@media print{
+  @page{size:A4;margin:12mm 13mm}
+  body{background:#fff;font-size:10pt;line-height:1.36}
+  .kopf,.fuss,.loesch,.nodruck,.reihe,#ueber{display:none!important}
+  main{max-width:none;padding:0}
+  .zf h1{font-size:18pt;margin:0 0 .15rem}
+  .zf .leitfrage{font-size:12pt;margin-bottom:.3rem}
+  .zf h2{font-size:12pt;margin:.55rem 0 .2rem;break-after:avoid}
+  .zf .merksatz{margin:.45rem 0;padding:.35rem 0;font-size:11pt}
+  .zf .begriffe div,.zf .zl li,.zf .werk{font-size:9pt}
+  .zf .karte{padding:.4rem .6rem;break-inside:avoid}
+  .zf .seitenumbruch{break-before:page;border-top:0;margin-top:0;padding-top:0}
+  .zf .mein{font-size:9.5pt}
+  .zf th,.zf td{padding:.2rem .4rem;font-size:8.6pt}
+  .auflage{background:#fff;border:1px solid #bbb;border-left:4px solid #555}
+  a{color:inherit;text-decoration:none}
+}
+
+/* Bilder */
+.bilder{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem;margin:1rem 0;align-items:start}
+.bild{margin:0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:.5rem}
+.bild img{display:block;width:100%;height:auto;border-radius:.5rem;filter:grayscale(1)}
+.bild figcaption{font-size:.9rem;line-height:1.4;margin:.45rem .2rem .1rem}
+.bild .nachweis{display:block;font-size:.8rem;color:var(--muted);margin-top:.2rem}
+.bild.klein{max-width:34rem}
+@media print{.bild,.bilder{display:none}}
+
+/* Lesepult: Text links, Arbeitsspalte rechts (bleibt beim Lesen stehen) */
+.lesepult{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:1.4rem;align-items:start;margin-top:1rem}
+.lesepult>aside{position:sticky;top:122px;padding-bottom:.4rem}
+.lesepult>aside.fragenspalte{position:static}
+@media (min-height:820px){.lesepult>aside.fragenspalte{position:sticky}}
+@media (max-width:900px){.lesepult{grid-template-columns:1fr}.lesepult>aside{position:static;max-height:none}}
+
+/* Rückmeldung je Option erst nach dem Festlegen (die Regel der Bausteine „.g-option span{display:grid}“ ist stärker als deren „display:none“) */
+.g .g-wahl:not([data-zu]) .g-option .g-option__urteil{display:none}
+
+/* Herkunftszeile (z. B. M25: nach Offene Geschichte) */
+.herkunft{font-size:.95rem;border-left:4px solid var(--kuli,#24221F);padding:.15rem 0 .15rem .7rem;margin:.6rem 0 1rem;max-width:68ch}
+.herkunft a{font-weight:700}
+/* ===== M16 und M17: Wörter sammeln, Wertekonflikte ===== */
+.chipfeld label{display:block}
+.chipfeld input[type=text]{flex:1 1 12rem;min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem;min-height:2.6rem;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:.2rem;border:2px solid var(--kuli);background:var(--kuli-hi);border-radius:.6rem;padding:.15rem .2rem .15rem .7rem;font-weight:700;overflow-wrap:anywhere}
+.chip button{min-width:44px;min-height:44px;margin:-.15rem -.2rem -.15rem 0;border:0;background:transparent;font-size:1.3rem;line-height:1;border-radius:.5rem}
+.chips.lese .chip{padding:.3rem .7rem}
+.chips .leer,p.leer{color:var(--muted);font-style:italic}
+.tafelwoerter{display:grid;grid-template-columns:1fr 1fr;gap:2rem;width:min(100%,70rem);text-align:left}
+.tafelwoerter h2{font-size:clamp(1.3rem,2.6vw,2.2rem);margin-bottom:.6rem}
+.tafelwoerter .chip{font-size:clamp(1.1rem,2.2vw,1.9rem);padding:.4rem .9rem}
+@media (max-width:700px){.tafelwoerter{grid-template-columns:1fr}}
+.dilgitter{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(22rem,100%),1fr));gap:1rem;margin-top:1rem}
+.dilgitter .karte+.karte{margin-top:0}
+.dil .optionen{display:grid;gap:.4rem;margin:.7rem 0}
+.dil .optionen button{min-height:48px;text-align:left;padding:.5rem .8rem;border-radius:.6rem;border:2px solid var(--stahl);background:var(--surface2);line-height:1.35}
+.dil .optionen button[aria-pressed=true]{border-color:var(--kuli);background:var(--kuli-hi);font-weight:700}
+.dil select{width:100%;min-height:48px;margin-top:.2rem}
+.wzahl{list-style:none;display:grid;gap:.2rem;margin:.6rem 0}
+.wzahl li{display:grid;grid-template-columns:9rem 6rem auto;gap:.6rem;align-items:baseline}
+.wzahl li span[aria-hidden]{letter-spacing:.15em;color:var(--green)}
+@media print{.chip{border:1px solid #777;background:#fff}}
+</style>
+</head>
+<body>
+<header class="kopf"><div class="kopf-in" id="kopf"></div><nav class="weg" id="weg" aria-label="Lernweg"></nav></header>
+<main id="main" tabindex="-1"></main>
+<div id="ueber"></div>
+<noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft „Geschichte aktuell 1“ (M16).</p></noscript>
+<script src="assets/gegenwart/bundle.js"></script>
+<script>
+"use strict";
+/* ===== Gemeinsamer Kern M25–M27. Jede Stunde definiert danach L (Einstellungen), ihre Daten, SEITE_FN und ruft kernStart(). ===== */
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let S = {};
+const lade = () => { try { return JSON.parse(localStorage.getItem(L.key)) || {}; } catch(e) { return {}; } };
+const speichere = () => { try { localStorage.setItem(L.key, JSON.stringify(S)); } catch(e) {} };
+const hol = p => p.split(".").reduce((o, k) => (o == null ? undefined : o[k]), S);
+const setz = (p, v) => { const k = p.split("."); let o = S; for (let i = 0; i < k.length - 1; i++) { if (o[k[i]] == null || typeof o[k[i]] !== "object") o[k[i]] = {}; o = o[k[i]]; } o[k[k.length - 1]] = v; speichere(); };
+const woerter = t => String(t || "").trim().split(/\s+/).filter(Boolean).length;
+const ruhig = () => { try { return !!S.ruhig || matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e) { return !!S.ruhig; } };
+const neu = (el, k) => { if (!el) return; el.classList.remove(k); void el.offsetWidth; if (!ruhig()) el.classList.add(k); };
+const LABOR = /github\.io$/.test(location.hostname) ? "index.html" : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
+const LK = "https://geschichtefuerdiegegenwart.github.io/kognitive-Landkarte-des-Geschichtsunterrichts/#s-";
+const idx = id => Math.max(0, L.seiten.findIndex(s => s[0] === id));
+
+/* ---------- Bausteine für Seiten ---------- */
+const zeitKopf = id => { const s = L.seiten[idx(id)]; return `<p class="zeit"><span class="nr">${esc(s[1])}</span><span>${esc(s[2])}</span></p>`; };
+const weiter = (nach, text, o = {}) => `<div class="fuss"><span class="hinweis">${o.hinweis || "Dein Stand wird nur auf diesem Gerät gespeichert."}</span><button class="btn primary" data-geh="${nach}">${esc(text)} ›</button></div>`;
+const auftrag = (form, titel, text) => `<div class="auftrag"><span class="form">${esc(form)}</span><h3>${esc(titel)}</h3><p>${text}</p></div>`;
+const belastend = text => `<p class="belastend"><b>Hinweis vorab.</b> ${text}</p>`;
+const status = (art, text) => `<span class="status ${art}">${esc(text)}</span>`;
+const band = (ob, titel, text) => `<div class="band"><div class="bt"><span class="ob">${esc(ob)}</span><h2>${esc(titel)}</h2><p>${text}</p></div></div>`;
+const hilfe = (titel, html) => `<details class="hilfe"><summary>${esc(titel)}</summary>${html}</details>`;
+
+/* Textfeld mit Satzanfängen und Wortzähler (Gegenwart: Textfeld). pfad = Ort in S. */
+function textfeld(pfad, label, o = {}){
+  const v = hol(pfad) || "", id = "f-" + pfad.replace(/\W/g, "-");
+  return `<div class="tf"><label for="${id}">${label}</label>
+  <textarea id="${id}" data-f="${pfad}" rows="${o.rows || 3}" placeholder="${esc(o.platz || "")}">${esc(v)}</textarea>
+  ${o.anfaenge ? `<div class="satzanfaenge nodruck" role="group" aria-label="Satzanfänge">${o.anfaenge.map(a => `<button type="button" data-satz="${id}" data-text="${esc(a)}">${esc(a)} …</button>`).join("")}</div>` : ""}
+  ${o.zaehl === false ? "" : `<p class="zaehl" data-zaehl="${pfad}">${woerter(v)} Wörter${o.ziel ? " · " + esc(o.ziel) : ""}</p>`}</div>`;
+}
+const eingabe = (pfad, label, platz = "") => { const id = "f-" + pfad.replace(/\W/g, "-"); return `<div><label for="${id}">${label}</label><input type="text" id="${id}" data-f="${pfad}" value="${esc(hol(pfad) || "")}" placeholder="${esc(platz)}" autocomplete="off"></div>`; };
+/* Kriterienraster: erscheint, sobald das Feld pfad mindestens min Wörter hat (P6: Vergleich erst nach dem eigenen Text). */
+function raster(pfad, min, titel, zeilen){
+  const da = woerter(hol(pfad)) >= min;
+  return `<div data-raster="${pfad}" data-min="${min}" ${da ? "" : "hidden"}><h3 class="klein">${esc(titel)}</h3><div class="matrix-wrap"><table><thead><tr><th>Prüfe deinen Text</th><th>Grundlegend</th><th>Sicher</th><th>Souverän</th></tr></thead><tbody>${zeilen.map(z => `<tr><td><b>${esc(z[0])}</b></td><td>${esc(z[1])}</td><td>${esc(z[2])}</td><td>${esc(z[3])}</td></tr>`).join("")}</tbody></table></div></div>
+  <p class="hinweis" data-rasterhinweis="${pfad}" ${da ? "hidden" : ""}>Ab ${min} Wörtern erscheint ein Raster, mit dem du deinen Text selbst prüfst.</p>`;
+}
+/* Vergleich, der erst nach eigenen Antworten erscheint: bed = Liste von Pfaden, die gefüllt sein müssen. */
+function vergleich(id, bed, min, titel, html){
+  const ok = bed.every(p => String(hol(p) || "").trim().length >= min), offen = !!(S.offen || {})[id];
+  return `<div class="reihe nodruck"><button type="button" class="btn dunkel" data-vergleich="${id}" data-bed="${bed.join(",")}" data-min="${min}" data-titel="${esc(titel)}" ${ok ? "" : "disabled"}>${offen ? "Vergleich ausblenden" : esc(titel)}</button><span class="hinweis" data-vergleichhinweis="${id}">${ok ? "" : "Erst deine Antworten, dann der Vergleich."}</span></div>
+  <div class="auflage" id="vgl-${id}" ${offen && ok ? "" : "hidden"}>${html}</div>`;
+}
+
+/* ---------- Quelle zum Markieren (Muster 11; Gegenwart: Markierung, zwei Stifte) ----------
+   QUELLEN[id] = { titel, kopf, abs:[[tag|null, [Sätze…]], …], nachweis, stifte:[[ "a", Zeichen, Name ], [ "b", Zeichen, Name ]] }
+   Stand: S.mark[id] = { "0": "a", "3": "b" }, S.stift[id] = "a" */
+const STIFTKLASSE = { a:"g-mark g-mark--beleg", b:"g-mark g-mark--gedanke" };
+function quelle(id){
+  const q = QUELLEN[id], m = (S.mark || {})[id] || {}, st = (S.stift || {})[id] || "a"; let n = 0;
+  const text = q.abs.map(([tag, saetze]) => `<p>${tag ? `<span class="qtag">${esc(tag)}</span>` : ""}${saetze.map(s => { const i = n++; return `<span class="g-wort ${m[i] ? STIFTKLASSE[m[i]] : ""}" role="button" tabindex="0" aria-pressed="${!!m[i]}" data-mark="${id}:${i}">${esc(s)}</span>`; }).join(" ")}</p>`).join("");
+  return `<div class="qblatt g" data-quelle="${id}"><h3>${esc(q.titel)}</h3><p class="qkopf">${q.kopf}</p>
+  <div class="g-stifte nodruck" role="group" aria-label="Stift wählen">${q.stifte.map(s => `<button type="button" class="g-stift" data-stift="${id}:${s[0]}" aria-pressed="${st === s[0]}"><span class="z" aria-hidden="true">${s[1]}</span>${esc(s[2])}</button>`).join("")}</div>
+  <div class="qtext">${text}</div><p class="quelle">${q.nachweis}</p></div>`;
+}
+const saetze = id => QUELLEN[id].abs.flatMap(a => a[1]);
+function belegListe(ids, stift){
+  const li = ids.flatMap(id => { const m = (S.mark || {})[id] || {}, s = saetze(id); return Object.keys(m).filter(i => m[i] === stift).sort((a, b) => a - b).map(i => `<li>${esc(s[i])} <span class="hinweis">(${esc(QUELLEN[id].kurz)})</span></li>`); });
+  return li.length ? `<ul>${li.join("")}</ul>` : `<p class="leer">Noch nichts markiert.</p>`;
+}
+function belege(ids, o = {}){
+  const st = QUELLEN[ids[0]].stifte;
+  return `<div class="belege" data-belege="${ids.join(",")}">${st.map(s => `<div class="sp ${s[0]}"><h4><span aria-hidden="true">${s[1]}</span> ${esc(o["t" + s[0]] || s[2])}</h4>${belegListe(ids, s[0])}</div>`).join("")}</div>`;
+}
+const markZahl = ids => ids.reduce((n, id) => n + Object.keys((S.mark || {})[id] || {}).length, 0);
+
+/* ---------- Wahl mit Erklärung je Option (Muster 2; Gegenwart: Wahl) ---------- */
+const STUFENWORT = { zentral:"zentral", begruendbar:"auch begründbar", kaum:"passt kaum" };
+function gWahl(id, frage, optionen, o = {}){
+  const st = (S.wahl || {})[id] || {}, zu = !!st.zu;
+  return `<div class="g"><div class="g-wahl" data-g="wahl" data-mind="${o.mind ?? 8}" data-id="${id}" ${zu ? 'data-zu=""' : ""}>
+  <fieldset><legend>${frage}</legend>${optionen.map((op, i) => `<label class="g-option" data-urteil="${op[1]}" data-grund="${esc(op[2])}"><input type="radio" name="w-${id}" value="${i}" ${st.o === i ? "checked" : ""} ${zu ? "disabled" : ""}><span>${esc(op[0])}<span class="g-option__urteil">${STUFENWORT[op[1]]} – ${esc(op[2])}</span></span></label>`).join("")}</fieldset>
+  ${o.ohneGrund ? "" : `<label>Begründung in einem Satz<textarea data-grund-feld rows="2" ${zu ? "readonly" : ""} placeholder="${esc(o.platz || "Ich wähle das, weil …")}">${esc(st.grund || "")}</textarea></label>`}
+  <div class="g-wahl__fuss"><button type="button" class="g-knopf g-knopf--primaer" data-g-festlegen ${zu ? "disabled" : ""}>Festlegen</button><span class="g-stempel" ${zu ? "" : "hidden"}>Festgelegt</span>${zu ? `<button type="button" class="btn nodruck" data-neu-wahl="${id}">Noch einmal</button>` : ""}<span class="sr" aria-live="polite"></span></div>
+  </div></div>`;
+}
+function pruefeWahl(w){
+  if (w.hasAttribute("data-zu")) return;
+  const gew = w.querySelector("input:checked"), ta = w.querySelector("textarea"), f = w.querySelector("[data-g-festlegen]");
+  if (f) f.disabled = !gew || (ta && ta.value.trim().length < 8);
+}
+
+/* ---------- Landkarten-Moment (Muster AT aus M22). Namen und Kurzerklärungen wörtlich aus der kognitiven Landkarte, Abschnitt 2.1. ---------- */
+const PRINZIP = {
+  "2-1-1": ["Retrospektivität", "Wir betrachten die Vergangenheit immer im Nachhinein (ex post), also aus der Gegenwart heraus."],
+  "2-1-2": ["Perspektivität", "Jede Betrachtung erfolgt aus einer bestimmten Sichtweise, geprägt von Überzeugungen, Interessen und Erfahrungen."],
+  "2-1-3": ["Partikularität", "Historische Erkenntnisse sind immer nur Ausschnitte der gesamten Vergangenheit."],
+  "2-1-4": ["Selektivität", "Wer Geschichte erzählt, wählt aus: Welche Quellen, Ereignisse und Personen sind für die eigene Frage wichtig?"],
+  "2-1-5": ["Partialität", "Quellen zeigen immer nur einen Teil der Vergangenheit, und nur ein Teil der Quellen ist überhaupt erhalten."],
+  "2-1-6": ["Narrativität", "Geschichte gibt es nur als Erzählung."],
+  "2-1-7": ["Konstruktivität", "Geschichte wird nicht „gefunden“, sondern aktiv zusammengesetzt. Deshalb können aus denselben Fakten unterschiedliche Geschichten entstehen."],
+  "2-1-8": ["Standortgebundenheit", "Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Gesamtkontext geprägt, oft unbewusst."],
+};
+const LKSTUFE = { zentral:"Zentral.", teils:"Auch begründbar.", kaum:"Passt kaum." };
+/* cfg = { seite, frage, lead, platz, folge:[Name, Kurzerklärung] (Eintrag 2.1.9), urteil:{ id:[stufe, text] }, bruecke } */
+function landkarte(cfg){
+  const l = S.lk, frei = l.vermutung.trim().length >= 10;
+  const liste = Object.keys(PRINZIP).map(id => ({ id, n:PRINZIP[id][0], k:PRINZIP[id][1] })).concat([{ id:"2-1-9", n:cfg.folge[0], k:cfg.folge[1] }]);
+  const p = liste.find(x => x.id === l.prinzip), u = p ? cfg.urteil[p.id] : null;
+  return `${zeitKopf(cfg.seite)}<h1>${esc(cfg.titel)}</h1>
+  <p class="leitfrage">${esc(cfg.frage)}</p>
+  ${auftrag("Allein · 2 Minuten", "Erst vermuten", cfg.lead)}
+  ${textfeld("lk.vermutung", "Meine Vermutung", { rows:2, platz:cfg.platz, zaehl:false })}
+  <p class="hinweis" id="lk-hinweis">${frei ? "Gut. Jetzt die Landkarte öffnen, dann unten ein Prinzip wählen." : "Schreib mindestens einen Satz. Danach geht es weiter."}</p>
+  <div id="lk-teil2" class="${frei ? "" : "gesperrt"}">
+  ${auftrag("Allein · 4 Minuten", "Dann die Landkarte", "Öffne „Was ist Geschichte?“ in der kognitiven Landkarte. Sie öffnet sich in einem neuen Tab, deine Eingaben hier bleiben. Wähle das Prinzip, das hier am besten passt, und begründe in einem Satz.")}
+  <p><a class="btn dunkel" id="lk-link" href="${LK}2-1" target="_blank" rel="noopener" ${frei ? "" : 'aria-disabled="true" tabindex="-1"'}>Landkarte öffnen: 2.1 Die Gemeinsamkeiten einer jeden Geschichte ↗</a></p>
+  <div class="prinzipien" role="group" aria-label="Prinzip wählen">${liste.map(x => `<button type="button" data-prinzip="${x.id}" aria-pressed="${l.prinzip === x.id}" class="${l.ok && l.prinzip === x.id ? cfg.urteil[x.id][0] : ""}" ${(!frei || l.ok) ? "disabled" : ""}><b>${esc(x.n)}</b><small>${esc(x.k)}</small></button>`).join("")}</div>
+  <label for="lk-grund">Meine Begründung</label><textarea id="lk-grund" data-f="lk.grund" rows="2" placeholder="Dieses Prinzip passt hier, weil …" ${(!frei || !l.prinzip || l.ok) ? "disabled" : ""}>${esc(l.grund)}</textarea>
+  <div class="reihe"><button type="button" class="btn dunkel" data-lkpruef ${(!frei || !l.prinzip || l.grund.trim().length < 10 || l.ok) ? "disabled" : ""}>Prüfen</button>${l.ok ? `<button type="button" class="btn" data-lkneu>Noch einmal</button>` : ""}<span class="hinweis">Rückmeldung in drei Stufen: zentral · auch begründbar · passt kaum.</span></div>
+  <div id="lk-fb" aria-live="polite">${l.ok && u ? `<div class="rm ${u[0]}"><b>${LKSTUFE[u[0]]}</b> ${esc(u[1])} <a href="${LK}${p.id}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a></div>` : ""}</div>
+  </div>
+  ${cfg.bruecke ? `<div class="trift">${cfg.bruecke}</div>` : ""}
+  ${weiter(cfg.nach[0], cfg.nach[1])}`;
+}
+
+/* ---------- Stimmkarte (Muster 12; Gegenwart: Stimmkarte): groß am Gerät, hochhalten, Lehrkraft zählt ---------- */
+function stimmkarte(pfad, optionen){
+  const v = hol(pfad);
+  return `<div class="stimmwahl" role="group" aria-label="Stimme wählen">${optionen.map(o => `<button type="button" data-stimme="${pfad}" data-wert="${o[0]}" aria-pressed="${v === o[0]}"><b>${o[0]}</b>${esc(o[1])}</button>`).join("")}</div>
+  <div class="reihe nodruck"><button type="button" class="btn dunkel" data-stimmkarte="${pfad}" data-opt="${esc(JSON.stringify(optionen))}" ${v ? "" : "disabled"}>Stimmkarte groß zeigen</button><span class="hinweis">Auf Ansage: iPad hochhalten. Die Lehrkraft zählt. Es wird nichts übertragen.</span></div>`;
+}
+let TAFEL_ZURUECK = null;
+function tafel(html, o = {}){
+  TAFEL_ZURUECK = document.activeElement;
+  const u = document.getElementById("ueber");
+  u.innerHTML = `<div class="tafel-voll ${o.hell ? "hell" : ""}" role="dialog" aria-modal="true" aria-label="${esc(o.titel || "Ansicht für den Beamer")}"><div class="tk"><b>${esc(o.titel || "")}</b><button type="button" class="btn" data-tafelzu>Schließen</button></div><div class="mitte">${html}</div></div>`;
+  u.querySelector("[data-tafelzu]").focus();
+}
+function tafelZu(){ const u = document.getElementById("ueber"); if (!u.innerHTML) return; u.innerHTML = ""; if (TAFEL_ZURUECK && document.contains(TAFEL_ZURUECK)) TAFEL_ZURUECK.focus(); }
+
+/* ---------- Kopf, Löschen, Zeichnen ---------- */
+function kopf(){
+  document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div><a class="pill" href="${LABOR}">← GGK-Labor</a><button class="pill" data-geh="lehrkraft">Für Lehrkräfte</button>`;
+  const a = idx(S.seite);
+  document.getElementById("weg").innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
+}
+function loeschBereich(){
+  return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button><label class="g-schalter" style="font-family:var(--body)"><input type="checkbox" role="switch" data-bewegung ${S.ruhig ? "checked" : ""}> Weniger Bewegung</label><span>Alles bleibt auf diesem Gerät. Nichts wird übertragen.</span>
+  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> ${esc(L.loesch)}</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div>
+  ${L.herkunft ? `<p class="herkunft" style="flex:1 0 100%;margin:0">${L.herkunft}</p>` : ""}<p style="flex:1 0 100%;font-size:.85rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p></div>`;
+}
+function zeichne(fokus){
+  if (!SEITE_FN[S.seite]) S.seite = "start";
+  if (S.ruhig) document.documentElement.setAttribute("data-bewegung", "weniger"); else document.documentElement.removeAttribute("data-bewegung");
+  kopf();
+  const m = document.getElementById("main");
+  m.classList.toggle("breit", (L.breit || []).includes(S.seite));
+  m.innerHTML = SEITE_FN[S.seite]() + loeschBereich();
+  window.Gegenwart && Gegenwart.init(m);
+  nachInit();
+  if (fokus) { m.focus({ preventScroll:true }); window.scrollTo(0, 0); }
+}
+function nachInit(){
+  document.querySelectorAll(".g-wahl[data-id]").forEach(w => { pruefeWahl(w); const st = (S.wahl || {})[w.dataset.id] || {}; if (st.zu) { w.querySelectorAll("input").forEach(i => { i.disabled = true; }); const f = w.querySelector("[data-g-festlegen]"); if (f) f.disabled = true; } });
+  if (typeof L.nachInit === "function") L.nachInit();
+}
+function geh(id){ S.seite = id; speichere(); tafelZu(); zeichne(true); }
+/* Nach einer Texteingabe: Zähler, Raster und Freigaben nachführen, ohne neu zu zeichnen (Fokus und Scrollstand bleiben). */
+function nachEingabe(pfad){
+  const z = document.querySelector(`[data-zaehl="${pfad}"]`); if (z) z.textContent = z.textContent.replace(/^\d+/, woerter(hol(pfad)));
+  const r = document.querySelector(`[data-raster="${pfad}"]`);
+  if (r) { const da = woerter(hol(pfad)) >= +r.dataset.min, war = !r.hidden; r.hidden = !da; const h = document.querySelector(`[data-rasterhinweis="${pfad}"]`); if (h) h.hidden = da; if (da && !war) neu(r, "neu"); }
+  document.querySelectorAll("[data-vergleich]").forEach(b => { const ok = b.dataset.bed.split(",").every(p => String(hol(p) || "").trim().length >= +b.dataset.min); b.disabled = !ok; const h = document.querySelector(`[data-vergleichhinweis="${b.dataset.vergleich}"]`); if (h) h.textContent = ok ? "" : "Erst deine Antworten, dann der Vergleich."; });
+  if (pfad === "lk.vermutung") { const frei = S.lk.vermutung.trim().length >= 10, t = document.getElementById("lk-teil2"); if (t && t.classList.contains("gesperrt") === frei) zeichneBehalte(); }
+  if (pfad === "lk.grund") { const b = document.querySelector("[data-lkpruef]"); if (b) b.disabled = !(S.lk.prinzip && S.lk.grund.trim().length >= 10 && !S.lk.ok); }
+  if (typeof L.nachEingabe === "function") L.nachEingabe(pfad);
+}
+/* Neu zeichnen, aber Scrollstand und Fokus (samt Cursor) behalten. */
+function zeichneBehalte(){
+  const y = window.scrollY, a = document.activeElement, id = a && a.id, pos = a && typeof a.selectionStart === "number" ? a.selectionStart : null;
+  zeichne(false); window.scrollTo(0, y);
+  if (id) { const e = document.getElementById(id); if (e) { e.focus({ preventScroll:true }); if (pos !== null && e.setSelectionRange) { try { e.setSelectionRange(pos, pos); } catch(err) {} } } }
+}
+
+function kernStart(){
+  const d = L.init(), g = lade();
+  S = Object.assign({ seite:"start", ruhig:false, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false } }, d);
+  Object.keys(g).forEach(k => { S[k] = (S[k] && typeof S[k] === "object" && !Array.isArray(S[k]) && g[k] && typeof g[k] === "object" && !Array.isArray(g[k])) ? Object.assign({}, S[k], g[k]) : g[k]; });
+  const h = location.hash.replace("#", ""); if (h && SEITE_FN[h]) S.seite = h;
+  zeichne(false);
+}
+
+document.addEventListener("click", ev => {
+  const t = ev.target.closest("[data-geh],[data-mark],[data-stift],[data-satz],[data-vergleich],[data-prinzip],[data-lkpruef],[data-lkneu],[data-stimme],[data-stimmkarte],[data-tafelzu],[data-loeschfrage],[data-loeschen],[data-g-festlegen],[data-neu-wahl],[data-akt],[data-drucken]");
+  if (!t) return;
+  if (t.dataset.geh) return geh(t.dataset.geh);
+  if (t.dataset.mark) return markiere(t);
+  if (t.dataset.stift) { const [id, s] = t.dataset.stift.split(":"); setz("stift." + id, s); t.parentElement.querySelectorAll(".g-stift").forEach(b => b.setAttribute("aria-pressed", String(b === t))); return; }
+  if (t.dataset.satz) { const f = document.getElementById(t.dataset.satz); if (!f) return; f.value = (f.value.trim() ? f.value.replace(/\s*$/, "") + " " : "") + t.dataset.text + " "; setz(f.dataset.f, f.value); nachEingabe(f.dataset.f); f.focus(); return; }
+  if (t.dataset.vergleich) { const id = t.dataset.vergleich; setz("offen." + id, !(S.offen || {})[id]); const v = document.getElementById("vgl-" + id); v.hidden = !S.offen[id]; t.textContent = S.offen[id] ? "Vergleich ausblenden" : (t.dataset.titel || "Vergleich zeigen"); if (S.offen[id] && ev.detail !== 0) neu(v, "neu"); return; }
+  if (t.dataset.prinzip) { S.lk.prinzip = t.dataset.prinzip; speichere(); return zeichneBehalte(); }
+  if (t.hasAttribute("data-lkpruef")) { S.lk.ok = true; speichere(); zeichneBehalte(); if (ev.detail !== 0) neu(document.querySelector("#lk-fb .rm"), "neu"); return; }
+  if (t.hasAttribute("data-lkneu")) { S.lk.ok = false; S.lk.prinzip = null; S.lk.grund = ""; speichere(); return zeichneBehalte(); }
+  if (t.dataset.stimme) { setz(t.dataset.stimme, t.dataset.wert); return zeichneBehalte(); }
+  if (t.dataset.stimmkarte) { const o = JSON.parse(t.dataset.opt).find(x => x[0] === hol(t.dataset.stimmkarte)); if (o) tafel(`<div class="buchstabe">${esc(o[0])}</div><div class="wort">${esc(o[1])}</div>`, { titel:"Meine Stimme" }); return; }
+  if (t.hasAttribute("data-tafelzu")) return tafelZu();
+  if (t.hasAttribute("data-loeschfrage")) { const f = document.getElementById("loesch-frage"); f.hidden = false; f.querySelector("button").focus(); return; }
+  if (t.dataset.loeschen) { if (t.dataset.loeschen === "ja") { try { localStorage.removeItem(L.key); } catch(e) {} const r = S.ruhig; kernStartLeer(r); } else { document.getElementById("loesch-frage").hidden = true; } return; }
+  if (t.hasAttribute("data-g-festlegen")) { const w = t.closest(".g-wahl[data-id]"); if (!w) return; const gew = w.querySelector("input:checked"), ta = w.querySelector("textarea"); if (!gew) return; setz("wahl." + w.dataset.id, { o:+gew.value, grund: ta ? ta.value : "", zu:true }); setTimeout(() => { zeichneBehalte(); if (typeof L.nachWahl === "function") L.nachWahl(w.dataset.id); }, ruhig() ? 0 : 420); return; }
+  if (t.dataset.neuWahl) { setz("wahl." + t.dataset.neuWahl, {}); return zeichneBehalte(); }
+  if (t.hasAttribute("data-drucken")) return window.print();
+  if (t.dataset.akt && AKTION[t.dataset.akt]) return AKTION[t.dataset.akt](t, ev);
+});
+function kernStartLeer(r){ S = {}; const d = L.init(); S = Object.assign({ seite:"start", ruhig:r, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false } }, d); speichere(); zeichne(true); }
+function markiere(t){
+  const [id, i] = t.dataset.mark.split(":"), st = (S.stift || {})[id] || "a";
+  if (!S.mark[id]) S.mark[id] = {};
+  const hat = S.mark[id][i] === st;
+  if (hat) delete S.mark[id][i]; else S.mark[id][i] = st;
+  speichere();
+  t.className = "g-wort " + (hat ? "" : STIFTKLASSE[st]); t.setAttribute("aria-pressed", String(!hat));
+  if (!hat && window.Gegenwart && st === "a") Gegenwart.bewegen(t, [{ backgroundSize:"0% 100%" }, { backgroundSize:"100% 100%" }], { dauer:260 });
+  document.querySelectorAll("[data-belege]").forEach(b => { const ids = b.dataset.belege.split(","); if (!ids.includes(id)) return; QUELLEN[ids[0]].stifte.forEach(s => { const sp = b.querySelector(".sp." + s[0]); const alt = sp.querySelector("ul,.leer"); if (alt) alt.outerHTML = belegListe(ids, s[0]); }); });
+  if (typeof L.nachMark === "function") L.nachMark(id);
+}
+document.addEventListener("keydown", ev => {
+  if (ev.key === "Escape") return tafelZu();
+  const t = ev.target.closest && ev.target.closest("[data-mark]");
+  if (t && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); markiere(t); }
+});
+document.addEventListener("input", ev => {
+  const t = ev.target;
+  if (t.dataset && t.dataset.f) { setz(t.dataset.f, t.type === "range" ? +t.value : t.value); nachEingabe(t.dataset.f); return; }
+  if (t.hasAttribute && t.hasAttribute("data-grund-feld")) { const w = t.closest(".g-wahl"); if (w) pruefeWahl(w); }
+});
+document.addEventListener("change", ev => {
+  const t = ev.target;
+  if (t.hasAttribute && t.hasAttribute("data-bewegung")) { S.ruhig = t.checked; speichere(); if (S.ruhig) document.documentElement.setAttribute("data-bewegung", "weniger"); else document.documentElement.removeAttribute("data-bewegung"); return; }
+  if (t.tagName === "SELECT" && t.dataset.f) { setz(t.dataset.f, t.value); nachEingabe(t.dataset.f); if (t.dataset.neu !== undefined) zeichneBehalte(); return; }
+  const w = t.closest && t.closest(".g-wahl"); if (w) pruefeWahl(w);
+});
+/* ---------- Bilder (Muster aus M21–M23): Dateien liegen nur im Moodle-Paket unter media/. Fehlt eine Datei, verschwindet die Figur ohne Lücke. ---------- */
+function foto(b, o = {}){
+  return `<figure class="bild ${o.klein ? "klein" : ""}" data-bildgruppe="${o.gruppe || ""}"><img src="media/${b.datei}" alt="${esc(b.alt)}" loading="lazy" onerror="bildFehlt(this)"><figcaption>${b.text}<span class="nachweis">${b.nachweis}</span></figcaption></figure>`;
+}
+function bildFehlt(img){
+  const f = img.closest("figure"), g = f && f.dataset.bildgruppe; if (!f) return; f.remove();
+  if (g) { const rest = document.querySelectorAll(`figure[data-bildgruppe="${g}"]`).length, h = document.querySelector(`[data-bildhinweis="${g}"]`); if (!rest && h) h.hidden = false; }
+}
+const AKTION = {
+  /* data-akt="setz" data-p="pfad" data-w="wert": Wert setzen und neu zeichnen */
+  setz(t){ let w = t.dataset.w; if (w === "true") w = true; else if (w === "false") w = false; setz(t.dataset.p, w); zeichneBehalte(); },
+};
+/* ===== M16 · Was macht den Menschen zum Menschen? (Heft „Geschichte aktuell 1“, M16) ===== */
+const L = {
+  key:"ggk-m16-mensch:v1", nr:"M16", titel:"Was macht den Menschen zum Menschen?", unter:"Einstieg in die Einheit Nationalsozialismus",
+  /* Zeichen der Stunde: zwei Kreise, die sich überschneiden (ich und die anderen) */
+  mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><circle cx="13" cy="17" r="9" fill="none" stroke="#24221F" stroke-width="2.4"/><circle cx="21" cy="17" r="9" fill="none" stroke="#9B402D" stroke-width="2.4"/></svg>`,
+  seiten:[["start","",""],["appell","0–10 Min.","Der Appell"],["menschlich","10–18 Min.","Was ist menschlich?"],["humanismus","18–27 Min.","Humanismus"],["werte","27–38 Min.","Meine Werte"],["frage","38–45 Min.","Die Frage"],["zusammenfassung","Zum Abheften","Zusammenfassung"]],
+  breit:["humanismus","werte","zusammenfassung","lehrkraft"],
+  loesch:"Dein Appell, deine Wörter, Markierungen, Entscheidungen, Werte und deine Stimme werden auf diesem Gerät entfernt.",
+  init:() => ({ appell:"", meint:"", w1:[], w2:[], hsatz:"", dil:{}, top:[], wsatz:"", mehr:false, stimme:null, wo:"" }),
+  nachMark(){ const z = document.getElementById("markstand"); if (z) z.textContent = markStand(); },
+};
+const VIDEO = "https://www.youtube.com/watch?v=hrJBfsXNp1Y";
+const QUELLEN = {
+  hum:{ titel:"Humanismus", kurz:"Humanismus", kopf:`${status("", "Erklärtext aus dem Heft")} Tippe Sätze an. ▲ = steht auch in unseren Wörtern · ● = neu für mich.`,
+    stifte:[["a","▲","steht auch bei uns"],["b","●","neu für mich"]],
+    abs:[[null,["Humanismus bezeichnet eine philosophische, kulturelle und ethische Haltung, bei der der Mensch und seine Würde, seine Vernunft, seine Freiheit sowie seine Fähigkeit zu moralischem Handeln im Mittelpunkt stehen.","Humanismus orientiert sich am Ideal des eigenverantwortlichen, mitfühlenden und gebildeten Menschen, dem Respekt gegenüber allen Menschen unabhängig von Herkunft, Überzeugung oder Status zukommt."]],
+      ["Herkunft",["Der Begriff stammt ursprünglich aus der Renaissance, als Gelehrte sich wieder verstärkt den Werten, Literatur und der Philosophie der Antike zuwandten, um daraus Orientierungen für ein selbstbestimmtes, aufgeklärtes Leben zu gewinnen."]],
+      ["Fünf Merkmale",["Achtung vor jedem Menschen und seiner individuellen Würde.","Streben nach Bildung, kritischem Denken und Selbsterkenntnis.","Förderung von Toleranz, Solidarität und Empathie.","Ablehnung von Fanatismus, Machtmissbrauch und Unterdrückung.","Vertrauen in die Fähigkeiten und die Verantwortung des Menschen, die Gesellschaft zum Besseren zu gestalten."]]],
+    nachweis:"Unterrichtsheft „Geschichte aktuell 1“, M16. Das Heft nennt für diesen Text keine Quelle (noch offen)." },
+};
+/* Wertekonflikte: Situationen und Antworten aus dem Werte-Test der Stunde (Repository Fragen-Humanismus, Teil „Wertekonflikte & Dilemmata“). Die Überschriften dort („Ehrlichkeit vs. Mitgefühl“) sind hier weggelassen: Den Wert benennst du selbst. */
+const DIL = [
+  ["Die Präsentation","Dein Freund fragt dich, ob seine Präsentation vor der Klasse gut war. Du fandest sie schwach, aber er wirkt sehr verunsichert.",["Ich sage ihm ehrlich meine negative Meinung, um ihm bei Verbesserungen zu helfen.","Ich formuliere es diplomatisch und betone positive Aspekte, verschweige aber Wesentliches.","Ich sage, sie war super, um ihn aufzubauen – auch wenn es nicht stimmt.","Ich versuche, das Gespräch auf ein anderes Thema zu lenken, um niemanden zu verletzen."]],
+  ["Die Messengergruppe","In einer Messengergruppe werden diskriminierende Witze verschickt. Du bist neu in der Gruppe.",["Ich sage offen meine Meinung und fordere, mit sowas aufzuhören.","Ich verlasse kommentarlos die Gruppe.","Ich lasse es laufen, weil alle das scheinbar lustig finden.","Ich schreibe den Verfasser privat an und erkläre, warum ich das unpassend finde."]],
+  ["Die Klassenarbeit","Du erfährst, dass eine Freundin bei einer wichtigen Klassenarbeit abgeschrieben hat.",["Ich melde den Vorfall der Lehrkraft, weil Regeln für alle gelten müssen.","Ich spreche meine Freundin darauf an und ermutige sie, es selbst der Lehrkraft zu sagen.","Ich schweige, weil sie meine Freundin ist.","Ich sage ihr, dass ich ihr Verhalten nicht gut finde, unternehme aber sonst nichts."]],
+  ["In der Bahn","Du siehst, wie eine Person in der Bahn lautstark diskriminiert wird, fühlst dich aber nicht sicher einzugreifen.",["Ich mische mich aktiv ein, auch wenn ich selbst Nachteile befürchte.","Ich filme das Geschehen zur Dokumentation und schicke es an eine Vertrauensperson.","Ich ziehe mich raus, um mich selbst zu schützen.","Ich hole Hilfe (zum Beispiel Fahrer*in, Polizei) oder bitte andere, mit einzuschreiten."]],
+  ["Der Spott","Jemand in der Klasse wird ständig wegen eines Makels zum Ziel von Spott. Du wirst gefragt, ob du selbst das auch so siehst.",["Ich widerspreche offen dem Spott, auch wenn ich damit allein dastehe.","Ich versuche, zwischen den Parteien zu vermitteln, ohne klar Stellung zu beziehen.","Ich stimme der Mehrheit diplomatisch zu, um nicht selbst ausgegrenzt zu werden.","Ich sage der betroffenen Person ehrlich, was ich wirklich denke, auch wenn es verletzend sein könnte."]],
+  ["Die Sprüche","Ein Mitschüler äußert sich ständig intolerant über andere Religionen und Minderheiten.",["Ich widerspreche klar und fordere Gerechtigkeit für Betroffene.","Ich versuche, die Beweggründe des Mitschülers besser zu verstehen, ohne zu werten.","Ich ignoriere die Aussagen, um keinen Streit zu provozieren.","Ich melde die Aussagen einer Vertrauenslehrkraft."]],
+  ["Das Ehrenamt","Du hast versprochen, bei einer ehrenamtlichen Aktion mitzumachen, aber nun ein spannendes Freizeitangebot bekommen.",["Ich sage der Gruppe ehrlich ab und mache, worauf ich Lust habe.","Ich gehe trotzdem zum Ehrenamt, weil Verpflichtungen für mich wichtig sind.","Ich versuche, beiden Seiten gerecht zu werden, plane kurzfristig, kann aber eventuell beides nicht richtig machen.","Ich schütze mich vor Stress und gehe zu keinem der beiden Termine."]],
+  ["Der Streit","Zwei Freunde streiten sich. Eine*r ist sehr traurig, obwohl eigentlich die andere Person im Recht ist.",["Ich unterstütze die traurige Person, weil ihr Kummer mir wichtiger ist als die Sache.","Ich ergreife klar Partei für die Person, die sachlich im Recht ist.","Ich höre beiden zu, ohne Position zu beziehen.","Ich ziehe mich zurück, weil ich niemanden enttäuschen will."]],
+];
+const PFLICHT = 5;
+const WERTE = ["Mitgefühl","Gerechtigkeit","Freiheit","Verantwortung","Ehrlichkeit","Toleranz","Menschenwürde","Loyalität","Selbstschutz"];
+const STIMMEN = [["A","Ja, das ist möglich"],["B","Nein, das ist nicht möglich"],["C","Kommt darauf an"]];
+const markStand = () => { const n = markZahl(["hum"]); return `${n} Sätze markiert. Ziel: mindestens 3.`; };
+const dilDa = () => DIL.map((d, i) => (S.dil || {})[i]).filter(x => x && x.o != null && x.w);
+const zaehlWerte = () => { const z = {}; dilDa().forEach(x => { z[x.w] = (z[x.w] || 0) + 1; }); return Object.keys(z).sort((a, b) => z[b] - z[a] || WERTE.indexOf(a) - WERTE.indexOf(b)).map(w => [w, z[w]]); };
+
+/* Wörter sammeln: Eingabefeld + Liste, höchstens max Einträge */
+function chips(pfad, label, max){
+  const a = hol(pfad) || [], id = "c-" + pfad, voll = a.length >= max;
+  return `<div class="chipfeld"><label for="${id}">${label}</label>
+  <div class="reihe" style="margin-top:.3rem"><input type="text" id="${id}" data-chip="${pfad}" data-max="${max}" maxlength="28" placeholder="ein Wort oder kurzer Ausdruck" autocomplete="off" ${voll ? "disabled" : ""}><button type="button" class="btn dunkel" data-akt="chipplus" data-p="${pfad}" data-max="${max}" ${voll ? "disabled" : ""}>Hinzufügen</button><span class="hinweis">${a.length} von ${max}</span></div>
+  <div class="chips" aria-live="polite">${a.map((w, i) => `<span class="chip">${esc(w)}<button type="button" data-akt="chipweg" data-p="${pfad}" data-i="${i}" aria-label="${esc(w)} entfernen">×</button></span>`).join("") || `<span class="leer">Noch kein Wort.</span>`}</div></div>`;
+}
+const chipsLese = a => (a && a.length) ? `<div class="chips lese">${a.map(w => `<span class="chip">${esc(w)}</span>`).join("")}</div>` : `<p class="leer">Noch keine Wörter gesammelt.</p>`;
+
+/* ---------- Seiten ---------- */
+function start(){
+  return `${band("M16 · Einzelstunde · 45 Minuten", "Was macht den Menschen zum Menschen?", "Bevor wir fragen, was im Nationalsozialismus geschah, fragen wir: Was ist dir im Zusammenleben wichtig?")}
+  <p class="leitfrage">Was macht den Menschen zum Menschen – und was ist mir selbst wichtig?</p>
+  ${belastend("Am Anfang spricht Margot Friedländer. Sie hat als Jüdin die Verfolgung durch die Nationalsozialisten überlebt. Es geht um Verfolgung und Verlust. Du darfst jederzeit aussetzen und mit deiner Lehrkraft sprechen.")}
+  <h2 class="abschnitt">Am Ende kannst du</h2>
+  <ul class="ziele"><li>Margot Friedländers Appell wiedergeben und deuten,</li><li>erklären, was „Humanismus“ meint, und mit deinen eigenen Wörtern vergleichen,</li><li>sagen, welche Werte dir wichtig sind, wenn zwei Werte einander widersprechen.</li></ul>
+  <h2 class="abschnitt">So läuft die Stunde</h2>
+  <ol class="ablauf">${L.seiten.slice(1, 6).map(s => `<li><b>${esc(s[1])}</b><span>${esc(s[2])}</span></li>`).join("")}</ol>
+  <p class="hinweis" style="margin-top:.8rem">Deine Werte brauchst du in M17 wieder. Die Seite merkt sie sich auf diesem Gerät; sichere am Ende trotzdem die Zusammenfassung als PDF.</p>
+  ${weiter("appell", "Beginnen")}`;
+}
+
+function appell(){
+  return `${zeitKopf("appell")}<h1>Der Appell</h1>
+  <p class="lead">Margot Friedländer (1921–2025) überlebte als Jüdin den Holocaust. Bis ins hohe Alter sprach sie mit Schüler*innen.</p>
+  ${auftrag("Plenum · 5 Minuten · iPad umdrehen", "Erst zuhören", "Deine Lehrkraft zeigt vorn das Gespräch mit Margot Friedländer (WDR, Aktuelle Stunde, etwa vier Minuten). Achte auf das Ende: Dort richtet sie einen Appell an uns. Ein Appell ist ein dringender Aufruf.")}
+  ${auftrag("Allein · 2 Minuten", "Dann festhalten", "Schreib den Appell auf, so genau du kannst. Dann deute ihn in ein bis zwei Sätzen.")}
+  ${textfeld("appell", "Margot Friedländers Appell", { rows:2, platz:"Sie sagt am Ende: …", zaehl:false })}
+  ${textfeld("meint", "Was meint sie damit?", { rows:3, anfaenge:["Sie meint damit","Sie richtet sich an","Wichtig ist ihr das, weil"], zaehl:false })}
+  <p class="hinweis" style="margin-top:.8rem">Danach, zu zweit, 3 Minuten: Vergleicht euren Wortlaut. Wo deutet ihr den Appell verschieden?</p>
+  ${weiter("menschlich", "Weiter: Was ist menschlich?")}`;
+}
+
+function menschlich(){
+  const alle = S.w1.length + S.w2.length;
+  return `${zeitKopf("menschlich")}<h1>Was ist menschlich?</h1>
+  ${auftrag("Zu zweit · 6 Minuten", "Sprecht und sammelt", "Sprecht über beide Fragen. Jede*r sammelt am eigenen Gerät Wörter – höchstens acht je Frage. Ein Wort, kein Satz.")}
+  <div class="felder2">
+    <div class="karte">${chips("w1", "<b>1. Was ist menschlich? Was unterscheidet den Menschen vom Tier?</b>", 8)}</div>
+    <div class="karte">${chips("w2", "<b>2. Welche Eigenschaften hat ein guter Mensch für dich?</b>", 8)}</div>
+  </div>
+  ${auftrag("Plenum · 2 Minuten", "Ein Gerät vorn", "Ein Paar zeigt seine Wörter am Beamer. Die anderen ergänzen mündlich, was fehlt. Es wird nichts eingesammelt.")}
+  <div class="reihe nodruck"><button type="button" class="btn dunkel" data-akt="tafelwoerter" ${alle ? "" : "disabled"}>Meine Wörter groß zeigen</button><span class="hinweis">${alle ? "" : "Erst Wörter sammeln."}</span></div>
+  ${weiter("humanismus", "Weiter: Humanismus")}`;
+}
+
+function humanismus(){
+  return `${zeitKopf("humanismus")}<h1>Humanismus</h1>
+  ${auftrag("Allein · 6 Minuten", "Vergleiche", "Inwieweit spiegeln sich eure Überlegungen im Humanismus wider? Lies den Text. Tippe Sätze an: ▲, wenn das auch in euren Wörtern steckt, ● wenn es für dich neu ist. Noch einmal tippen löscht die Markierung.")}
+  <div class="qwerk">${quelle("hum")}
+    <div><h3 class="klein" style="margin-top:0">Eure Wörter</h3>${chipsLese(S.w1.concat(S.w2))}
+    <h3 class="klein">Deine Markierungen</h3>${belege(["hum"], { ta:"Steht auch bei uns", tb:"Neu für mich" })}<p class="hinweis" id="markstand" aria-live="polite" style="margin-top:.5rem">${markStand()}</p></div>
+  </div>
+  ${textfeld("hsatz", "Mein Vergleich in zwei Sätzen", { rows:3, anfaenge:["Bei uns und im Humanismus steht","Im Humanismus kommt dazu","Bei uns steht etwas, das im Text fehlt:"], ziel:"Ziel: etwa 25 Wörter" })}
+  ${weiter("werte", "Weiter: Meine Werte")}`;
+}
+
+function werte(){
+  const zeige = S.mehr ? DIL.length : PFLICHT, da = dilDa().length, z = zaehlWerte(), fertig = da >= PFLICHT;
+  const karte = (d, i) => { const st = (S.dil || {})[i] || {}; return `<div class="karte dil"><p class="kennung">Konflikt ${i + 1}${i >= PFLICHT ? " · für Schnelle" : ""} · ${esc(d[0])}</p><p>${esc(d[1])}</p>
+    <div class="optionen" role="group" aria-label="Wie entscheidest du dich?">${d[2].map((o, k) => `<button type="button" data-akt="dil" data-i="${i}" data-o="${k}" aria-pressed="${st.o === k}">${esc(o)}</button>`).join("")}</div>
+    ${st.o != null ? `<label for="dw-${i}">Welcher Wert war dir hier am wichtigsten?</label><select id="dw-${i}" data-f="dil.${i}.w" data-neu><option value="">– wähle selbst –</option>${WERTE.map(w => `<option ${st.w === w ? "selected" : ""}>${w}</option>`).join("")}</select>` : `<p class="hinweis">Erst entscheiden, dann den Wert benennen.</p>`}</div>`; };
+  const bild = fertig ? `<div class="auflage" id="wertebild"><b>Dein Bild aus ${da} Konflikten.</b> So oft hast du einen Wert nach vorn gestellt:
+    <ul class="wzahl">${z.map(x => `<li><b>${esc(x[0])}</b><span aria-hidden="true">${"●".repeat(x[1])}</span><span>${x[1]} von ${da}</span></li>`).join("")}</ul>
+    <p class="hinweis">Das ist kein Messwert und kein Urteil über dich. Es zeigt nur, wie du heute in diesen Fällen gewählt hast.</p></div>
+    ${auftrag("Allein · 3 Minuten", "Meine Werte", "Stimmt das Bild? Wähle selbst die drei Werte, die dir am wichtigsten sind. Begründe den wichtigsten in einem Satz.")}
+    <div class="woerter" role="group" aria-label="Drei Werte wählen">${WERTE.map(w => `<button type="button" data-akt="top" data-w="${w}" aria-pressed="${S.top.includes(w)}" ${!S.top.includes(w) && S.top.length >= 3 ? "disabled" : ""}>${w}</button>`).join("")}</div>
+    <p class="hinweis" aria-live="polite">${S.top.length} von 3 gewählt.</p>
+    ${textfeld("wsatz", "Mein wichtigster Wert, in einem Satz", { rows:2, anfaenge:["Am wichtigsten ist mir","Das merke ich daran, dass","Schwer fällt mir das, wenn"], zaehl:false })}`
+    : `<p class="hinweis" aria-live="polite">${da} von ${PFLICHT} Konflikten entschieden und benannt. Danach erscheint dein Bild.</p>`;
+  return `${zeitKopf("werte")}<h1>Meine Werte</h1>
+  ${auftrag("Allein · 8 Minuten", "Fünf Konflikte", "In jedem Fall stehen zwei Werte gegeneinander. Entscheide dich – ehrlich, nicht „richtig“. Benenne danach selbst den Wert, der dir dabei am wichtigsten war. Es gibt keine Punkte.")}
+  <div class="dilgitter">${DIL.slice(0, zeige).map(karte).join("")}</div>
+  ${S.mehr ? "" : `<div class="reihe nodruck" style="margin-top:.8rem"><button type="button" class="btn" data-akt="setz" data-p="mehr" data-w="true">Für Schnelle: drei weitere Konflikte</button></div>`}
+  ${bild}
+  ${weiter("frage", "Weiter: Die Frage")}`;
+}
+
+function frage(){
+  return `${zeitKopf("frage")}<h1>Die Frage</h1>
+  <p class="leitfrage">Ist es möglich, seine Menschlichkeit zu verlieren? Wenn ja: in welchen Situationen?</p>
+  ${auftrag("Allein · 2 Minuten", "Erst festlegen", "Wähle deine Stimme und schreib einen Satz dazu. Diese Frage nimmst du mit in M17: Dort begleitest du zwei Menschen durch die Jahre 1933 bis 1939.")}
+  ${stimmkarte("stimme", STIMMEN)}
+  ${textfeld("wo", "In welchen Situationen? Oder: Warum nicht?", { rows:3, anfaenge:["Menschlichkeit geht verloren, wenn","Sie geht nicht verloren, weil","Es kommt darauf an, ob"], zaehl:false })}
+  ${auftrag("Plenum · 5 Minuten · iPad hochhalten", "Stimmen zeigen", "Auf Ansage zeigen alle ihre Karte. Je eine Stimme aus A, B und C begründet. Niemand muss von sich oder der eigenen Familie erzählen.")}
+  <p class="merksatz">iPad umdrehen. Danach: Zusammenfassung sichern.</p>
+  ${weiter("zusammenfassung", "Zur Zusammenfassung")}`;
+}
+
+function zusammenfassung(){
+  const m = (t, leer = "noch offen") => `<p class="mein ${String(t || "").trim() ? "" : "leer"}">${esc(String(t || "").trim() || leer)}</p>`;
+  const st = STIMMEN.find(x => x[0] === S.stimme);
+  return `<div class="zf"><div class="reihe nodruck" style="margin:0 0 1rem"><button type="button" class="btn dunkel" data-drucken>Drucken oder als PDF sichern</button><span class="hinweis">Zwei Seiten A4. In GoodNotes ablegen – du brauchst sie in M17.</span></div>
+  <h1>M16 · Was macht den Menschen zum Menschen?</h1>
+  <p class="leitfrage">Was macht den Menschen zum Menschen – und was ist mir selbst wichtig?</p>
+  <p class="merksatz">Der Humanismus stellt die Würde jedes Menschen in den Mittelpunkt. Was mir wichtig ist, zeigt sich, wenn zwei Werte einander widersprechen – oder wenn ein Wert etwas kostet.</p>
+  <h2>Begriffe</h2>
+  <div class="begriffe">
+    <div><b>Humanismus:</b> eine Haltung, bei der der Mensch, seine Würde, seine Vernunft und seine Freiheit im Mittelpunkt stehen.</div>
+    <div><b>Würde:</b> Jeder Mensch verdient Achtung – unabhängig von Herkunft, Überzeugung oder Status.</div>
+    <div><b>Wert:</b> etwas, das dir im Zusammenleben wichtig ist. Beispiel: Ehrlichkeit.</div>
+    <div><b>Wertekonflikt (Dilemma):</b> eine Lage, in der zwei Werte nicht zugleich erfüllt werden können. Beispiel: ehrlich sein oder schonen.</div>
+    <div><b>Appell:</b> ein dringender Aufruf an andere, etwas zu tun.</div>
+  </div>
+  <h2>Fünf Merkmale des Humanismus</h2>
+  <ul class="zl"><li><b>1</b><span>Achtung vor jedem Menschen und seiner individuellen Würde</span></li><li><b>2</b><span>Streben nach Bildung, kritischem Denken und Selbsterkenntnis</span></li><li><b>3</b><span>Förderung von Toleranz, Solidarität und Empathie</span></li><li><b>4</b><span>Ablehnung von Fanatismus, Machtmissbrauch und Unterdrückung</span></li><li><b>5</b><span>Vertrauen in die Fähigkeiten und die Verantwortung des Menschen, die Gesellschaft zum Besseren zu gestalten</span></li></ul>
+  <div class="werk"><b>Denkwerkzeug: Einen Wertekonflikt lesen.</b> 1. Welche zwei Werte stehen gegeneinander? 2. Was kostet jede Wahl – und wen? 3. Wofür entscheide ich mich, und warum?</div>
+
+  <div class="seitenumbruch"><h2 style="margin-top:0">Meine Ergebnisse</h2>
+  <h2>Margot Friedländers Appell</h2>${m(S.appell)}${m(S.meint)}
+  <h2>Was ist menschlich? Was macht einen guten Menschen aus?</h2>${m(S.w1.concat(S.w2).join(" · "))}
+  <h2>Unsere Wörter und der Humanismus</h2>${m(S.hsatz)}
+  <h2>Meine Werte</h2>${m(S.top.length ? "Meine drei Werte: " + S.top.join(", ") + "." : "")}${m(S.wsatz)}
+  <h2>Kann man seine Menschlichkeit verlieren?</h2>${m(st ? `Meine Stimme: ${st[1]}. ${S.wo}` : S.wo)}</div></div>
+  ${weiter("start", "Zur Startseite")}`;
+}
+
+function lehrkraft(){
+  return `<div class="lk"><p class="zeit"><span class="nr">Für Lehrkräfte</span><span>nicht geschützt – enthält keine Lösungen, die Lernende nicht sehen dürfen</span></p><h1>M16 · Hinweise</h1>
+  <p class="lead">Grundlage ist dein Heft „Geschichte aktuell 1“, M16 (zwei Seiten): Video, Appell, zwei Partnerfragen mit Wortwolke, Vergleich mit dem Humanismus-Text, Werte-Test, Schlussfrage. Die Seite übernimmt Aufbau, Text und Aufgaben. Neu ist, was nur das Gerät kann.</p>
+  <h2 class="abschnitt">Was das Gerät hier leistet – nach den sechs Prinzipien aus Kidu</h2>
+  <ul><li><b>Verdecken:</b> Im Werte-Teil entscheiden die Lernenden zuerst und benennen dann selbst den Wert. Die Überschriften des alten Tests („Ehrlichkeit vs. Mitgefühl“) verraten die Deutung nicht mehr.</li><li><b>Messen:</b> Die eigenen Entscheidungen werden zu einem Bild („so oft stand dieser Wert vorn“) – ohne Punkte und ohne Prozent.</li><li><b>Stufen:</b> Fünf Konflikte für alle, drei weitere für Schnelle; Satzanfänge auf Abruf.</li><li><b>Bündeln:</b> Ein Gerät zeigt die Wörter am Beamer; die Schlussfrage läuft über die Stimmkarte. Es wird nichts eingesammelt und nichts übertragen.</li><li><b>Markierungen werden zu Belegen:</b> Was im Humanismus-Text angetippt wird, steht geordnet neben dem Schreibfeld.</li><li><b>Weitergeben:</b> Die drei Werte und die Antwort auf die Schlussfrage stehen in M17 wieder da (gleiches Gerät, gleicher Browser) und auf der Zusammenfassung.</li></ul>
+  <p>Rückmelden und Variieren kommen hier nicht vor: Es gibt in dieser Stunde keine richtige Antwort, die eine Rückmeldung prüfen könnte.</p>
+  <p>Papier und Gespräch bleiben besser für: das gemeinsame Sehen des Videos, das Partnergespräch, das Plenum zur Schlussfrage.</p>
+  <h2 class="abschnitt">Ablauf (45 Minuten)</h2>
+  <div class="matrix-wrap"><table><thead><tr><th>Zeit</th><th>Phase</th><th>Sozialform</th><th>Hinweis</th></tr></thead><tbody>
+  <tr><td class="n">0–10</td><td>Der Appell</td><td>Plenum, allein, zu zweit</td><td>Video vorn (4:15 Minuten), iPads umgedreht; dann Appell notieren und deuten</td></tr>
+  <tr><td class="n">10–18</td><td>Was ist menschlich?</td><td>zu zweit, kurz Plenum</td><td>Wörter sammeln; ein Gerät am Beamer</td></tr>
+  <tr><td class="n">18–27</td><td>Humanismus</td><td>allein</td><td>markieren, Vergleich in zwei Sätzen</td></tr>
+  <tr><td class="n">27–38</td><td>Meine Werte</td><td>allein</td><td>fünf Konflikte, Bild, drei Werte</td></tr>
+  <tr><td class="n">38–45</td><td>Die Frage</td><td>allein, Plenum</td><td>Stimmkarte, drei Begründungen</td></tr></tbody></table></div>
+  <p class="hinweis" id="zeitdiagnose">Zeitdiagnose bei 150 Wörtern pro Minute (gemessen an der fertigen Seite): Lesen rund 8 Minuten (rund 1.150 Wörter mit fünf Konflikten), Video und Start rund 6, Schreiben rund 7 (fünf kurze Texte), Wörter sammeln und Partnergespräche rund 9, Wählen rund 4, Plenum rund 7, Wechsel rund 3. Das sind rund 44 Minuten. <b>Die Stunde passt in 45 Minuten, aber ohne Puffer</b> – empfohlen K1 oder K3.</p>
+  <h2 class="abschnitt">Kürzungen zur Auswahl</h2>
+  <ul><li><b>K1</b> Vergleich mit dem Humanismus nur markieren, den Satz mündlich: 3 Minuten frei.</li><li><b>K2</b> Wörter nur zu Frage 2 sammeln („ein guter Mensch“): 2 Minuten frei.</li><li><b>K3</b> Schlussfrage nur mit Stimmkarte, der Satz als Hausaufgabe: 2 Minuten frei.</li></ul>
+  <h2 class="abschnitt">Video</h2>
+  <p>„Holocaust-Überlebende Margot Friedländer im Gespräch | WDR Aktuelle Stunde“, 4:15 Minuten: <a href="${VIDEO}" target="_blank" rel="noopener">${VIDEO}</a>. Das Video ist nicht eingebettet (fremder Server). Zeig es vorn vom Lehrkraftgerät. Den Wortlaut des Appells nennt das Heft nicht; er steht deshalb auch hier nicht.</p>
+  <h2 class="abschnitt">Abweichungen vom Heft</h2>
+  <ul><li>Anrede durchgehend „du“ (Heft: „Sie“).</li><li><b>Werte-Test:</b> Das Heft verlinkt den „Humanistischen Werte-Test“ (Repository <code>Fragen-Humanismus</code>) und lässt das Ergebnis als Bildschirmfoto einfügen. Die Seite übernimmt daraus nur den Teil „Wertekonflikte“ (acht Situationen, Wortlaut unverändert). Nicht übernommen sind die 16 Situationen mit Punkten – dort ist die erwünschte Antwort immer A – sowie Prozentwerte und Netzdiagramm. Den Wert benennen die Lernenden selbst; die Zuordnung „Antwort → Wert“ des alten Tests entfällt.</li><li>Zur Auswahl der Werte ist „Loyalität“ ergänzt (im alten Test nur in einer Überschrift genannt).</li><li>Die Wortwolke ist eine Wörterliste am eigenen Gerät; gezeigt wird ein Gerät vorn. Grund: Das Zusammenführen vieler Geräte hat in der Erprobung zu viel Zeit gekostet.</li><li>Leitfrage, Merksatz, Begriffserklärungen und Denkwerkzeug der Zusammenfassung sind Vorschläge von Claude. Bitte prüfen.</li><li>Im Arbeitsauftrag „wider“ statt „wieder“; „Appell“ statt „Appel“.</li><li>Das Standbild aus dem Video ist nicht übernommen.</li></ul>
+  <h2 class="abschnitt">Vor dem Einsatz prüfen</h2>
+  <ul><li>Humanismus-Text: Das Heft nennt keine Quelle. Der Satz „Der Begriff stammt ursprünglich aus der Renaissance“ ist ungenau – die Bewegung stammt aus der Renaissance, das Wort „Humanismus“ ist deutlich jünger (aus dem Gedächtnis: 1808, Niethammer; bitte nachschlagen).</li><li>Lebensdaten Margot Friedländers (1921–2025) und der Titel des Videos.</li><li>Ob das Video unter der Adresse noch erreichbar ist.</li></ul>
+  <h2 class="abschnitt">Nur du kannst das</h2>
+  <ul><li>Test auf dem iPad in Safari (hoch und quer), VoiceOver, Moodle-Upload.</li><li>Im Plenum niemanden zu Aussagen über sich oder die eigene Familie drängen; die Wertebilder bleiben am Gerät.</li><li>Entscheiden, ob der alte Werte-Test weiter verlinkt bleibt.</li></ul>
+  <h2 class="abschnitt">Nach der Stunde</h2>
+  <div class="matrix-wrap"><table><thead><tr><th>Beobachtung</th><th>Notiz</th></tr></thead><tbody><tr><td>Haben die Lernenden den Wert selbst benannt – oder geraten, was „gewünscht“ ist?</td><td></td></tr><tr><td>Hat ein Gerät vorn für die Wörter gereicht?</td><td></td></tr><tr><td>Wie viele Tipps bis zum ersten eigenen Wort?</td><td></td></tr><tr><td>Zeit: Wo wurde es eng?</td><td></td></tr><tr><td>Gilt die Lehre nur in Geschichte oder überall? Wo würde sie in einem anderen Fach brechen?</td><td></td></tr></tbody></table></div>
+  <p class="hinweis" style="margin-top:1rem">Speicherschlüssel <code>${L.key}</code>. Eingaben bleiben im Browser des Geräts. M17 liest daraus nur die drei Werte, den Satz dazu und die Antwort auf die Schlussfrage.</p></div>
+  ${weiter("start", "Zur Startseite")}`;
+}
+
+AKTION.chipplus = t => { const p = t.dataset.p, f = document.getElementById("c-" + p), w = (f.value || "").trim().replace(/\s+/g, " "), a = (hol(p) || []).slice(); if (!w) { f.focus(); return; } if (a.length < +t.dataset.max && !a.some(x => x.toLowerCase() === w.toLowerCase())) a.push(w); setz(p, a); zeichneBehalte(); const n = document.getElementById("c-" + p); if (n && !n.disabled) n.focus(); };
+AKTION.chipweg = t => { const p = t.dataset.p, a = (hol(p) || []).slice(); a.splice(+t.dataset.i, 1); setz(p, a); zeichneBehalte(); const n = document.getElementById("c-" + p); if (n) n.focus(); };
+AKTION.tafelwoerter = () => tafel(`<div class="tafelwoerter"><div><h2>Was ist menschlich?</h2>${chipsLese(S.w1)}</div><div><h2>Ein guter Mensch …</h2>${chipsLese(S.w2)}</div></div>`, { titel:"Unsere Wörter", hell:true });
+AKTION.dil = t => { const i = t.dataset.i, alt = (S.dil || {})[i] || {}; setz("dil." + i, { o:+t.dataset.o, w:alt.w || "" }); zeichneBehalte(); };
+AKTION.top = t => { const w = t.dataset.w, a = S.top.slice(), i = a.indexOf(w); if (i >= 0) a.splice(i, 1); else if (a.length < 3) a.push(w); setz("top", a); zeichneBehalte(); };
+document.addEventListener("keydown", ev => { const t = ev.target; if (ev.key === "Enter" && t.dataset && t.dataset.chip) { ev.preventDefault(); const b = document.querySelector(`[data-akt="chipplus"][data-p="${t.dataset.chip}"]`); if (b) AKTION.chipplus(b); } });
+const SEITE_FN = { start, appell, menschlich, humanismus, werte, frage, zusammenfassung, lehrkraft };
+kernStart();
+</script>
+</body>
+</html>

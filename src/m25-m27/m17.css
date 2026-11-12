@@ -1,0 +1,45 @@
+/* ===== M17: Rollen, Zeitleiste in einem Arbeitsfenster, Spielraum-Linie ===== */
+.felder3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:.6rem}
+@media (max-width:860px){.felder3{grid-template-columns:1fr}}
+.rollenwahl{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:1rem 0}
+@media (max-width:560px){.rollenwahl{grid-template-columns:1fr}}
+.rollenwahl button{min-height:72px;text-align:left;padding:.7rem 1rem;border-radius:var(--r);border:2px solid var(--stahl);background:var(--surface2);display:grid;gap:.1rem}
+.rollenwahl button b{font:600 1.5rem/1.1 var(--display)}
+.rollenwahl button span{font-size:.92rem;color:var(--muted)}
+.rollenwahl button[aria-pressed=true]{border-color:var(--kuli);background:var(--kuli-hi)}
+.rollenkarte h3{font-size:1.6rem;margin:.1rem 0 .4rem}
+.fachtext{background:var(--surface2);border:1px solid var(--border);border-left:6px solid var(--green);border-radius:0 var(--r) var(--r) 0;padding:.8rem 1rem;margin:.9rem 0;max-width:74ch}
+.fachtext+.fachtext{margin-top:.8rem}
+.fachtext .quelle{font-size:.82rem;color:var(--muted);margin-top:.5rem}
+.auflage .fachtext{background:var(--surface2)}
+.optionen{display:grid;gap:.4rem;margin:.7rem 0}
+.optionen button{min-height:48px;text-align:left;padding:.5rem .8rem;border-radius:.6rem;border:2px solid var(--stahl);background:var(--surface2);line-height:1.35}
+.optionen button[aria-pressed=true]{border-color:var(--kuli);background:var(--kuli-hi);font-weight:700}
+.optionen button[disabled]{opacity:.75}
+/* Zeitleiste: vier Stationen, ein Arbeitsfenster */
+.strahl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:1rem 0 0;border-top:4px solid var(--ink);scroll-margin-top:150px}
+.strahl:focus{outline:none}
+.strahl button{position:relative;min-height:64px;text-align:left;padding:.7rem .7rem .5rem;border:0;border-right:1px solid var(--line);background:transparent;display:grid;gap:.05rem;align-content:start}
+.strahl button::before{content:"";position:absolute;left:.7rem;top:-.55rem;width:.9rem;height:.9rem;border-radius:999px;background:var(--bg);border:3px solid var(--ink)}
+.strahl button b{font:600 1.05rem/1.15 var(--display)}
+.strahl button span{font-size:.86rem;color:var(--muted)}
+.strahl button[aria-selected=true]{background:var(--surface2);box-shadow:inset 0 -4px 0 var(--red)}
+.strahl button[aria-selected=true]::before{background:var(--red);border-color:var(--red)}
+@media (max-width:640px){.strahl{grid-template-columns:1fr 1fr}.strahl button{border-bottom:1px solid var(--line)}}
+.stationsfeld{background:var(--surface);border:1px solid var(--border);border-top:0;border-radius:0 0 var(--r-lg) var(--r-lg);padding:1.1rem 1.3rem 1.3rem}
+.stationsfeld>p:first-child{margin-top:0}
+.stationsfeld .lead{margin-bottom:.8rem}
+.raumwahl{margin-top:1.6rem;border-top:2px solid var(--ink);padding-top:.8rem}
+.raumwahl .woerter button b,.woerter button b{margin-right:.25rem}
+.raumbild{margin:1rem 0;max-width:30rem}
+.raumbild svg{display:block;width:100%;height:auto;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r)}
+.raumbild .gitter{stroke:var(--line);stroke-width:1}
+.raumbild .achse{font:400 9px var(--body);fill:var(--muted)}
+.raumbild polyline{fill:none;stroke-width:2.5;stroke-linejoin:round}
+.raumbild .eigen{stroke:var(--kuli);fill:var(--kuli)}.raumbild polyline.eigen{fill:none}
+.raumbild .partner{stroke:var(--red);fill:var(--surface2);stroke-width:2}.raumbild polyline.partner{fill:none;stroke-dasharray:5 4}
+.raumbild figcaption{font-size:.9rem;line-height:1.45;margin-top:.4rem}
+.raumbild .leg{display:inline-block;width:1.6rem;height:0;border-top:3px solid var(--kuli);vertical-align:.25rem;margin-right:.4rem}
+.raumbild .leg.partner{border-top:3px dashed var(--red)}
+td select{min-height:44px;min-width:9rem}
+@media print{.zf .raumbild{max-width:95mm;break-inside:avoid}.zf .raumbild figcaption{font-size:8.5pt}.fachtext{border:1px solid #bbb}}

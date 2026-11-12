@@ -1,0 +1,22 @@
+/* ===== M16 und M17: Wörter sammeln, Wertekonflikte ===== */
+.chipfeld label{display:block}
+.chipfeld input[type=text]{flex:1 1 12rem;min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem;min-height:2.6rem;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:.2rem;border:2px solid var(--kuli);background:var(--kuli-hi);border-radius:.6rem;padding:.15rem .2rem .15rem .7rem;font-weight:700;overflow-wrap:anywhere}
+.chip button{min-width:44px;min-height:44px;margin:-.15rem -.2rem -.15rem 0;border:0;background:transparent;font-size:1.3rem;line-height:1;border-radius:.5rem}
+.chips.lese .chip{padding:.3rem .7rem}
+.chips .leer,p.leer{color:var(--muted);font-style:italic}
+.tafelwoerter{display:grid;grid-template-columns:1fr 1fr;gap:2rem;width:min(100%,70rem);text-align:left}
+.tafelwoerter h2{font-size:clamp(1.3rem,2.6vw,2.2rem);margin-bottom:.6rem}
+.tafelwoerter .chip{font-size:clamp(1.1rem,2.2vw,1.9rem);padding:.4rem .9rem}
+@media (max-width:700px){.tafelwoerter{grid-template-columns:1fr}}
+.dilgitter{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(22rem,100%),1fr));gap:1rem;margin-top:1rem}
+.dilgitter .karte+.karte{margin-top:0}
+.dil .optionen{display:grid;gap:.4rem;margin:.7rem 0}
+.dil .optionen button{min-height:48px;text-align:left;padding:.5rem .8rem;border-radius:.6rem;border:2px solid var(--stahl);background:var(--surface2);line-height:1.35}
+.dil .optionen button[aria-pressed=true]{border-color:var(--kuli);background:var(--kuli-hi);font-weight:700}
+.dil select{width:100%;min-height:48px;margin-top:.2rem}
+.wzahl{list-style:none;display:grid;gap:.2rem;margin:.6rem 0}
+.wzahl li{display:grid;grid-template-columns:9rem 6rem auto;gap:.6rem;align-items:baseline}
+.wzahl li span[aria-hidden]{letter-spacing:.15em;color:var(--green)}
+@media print{.chip{border:1px solid #777;background:#fff}}

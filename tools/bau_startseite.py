@@ -12,15 +12,18 @@ OW_BILDER = [('ost-west/media/owk-s1-potsdam.jpg', 'Potsdam, Sommer 1945 (Stunde
  ('ost-west/media/owk-s3-luftbruecke.jpg', 'Luftbrücke nach West-Berlin, 1948/49 (Stunde 3).', 'Ein Flugzeug fliegt tief über Menschen auf einem Trümmerhügel.'),
  ('ost-west/media/owk-s6-bernauer.jpg', 'Mauerbau an der Bernauer Straße in Berlin, August 1961 (Stunde 6).', 'Bauarbeiter setzen Betonsteine zu einer Mauer.'),
  ('ost-west/media/owk-s9-trabi.jpg', 'Nach der Grenzöffnung, November 1989 (Stunde 9).', 'Menschen umringen Autos der Marke Trabant; auf einem Transparent steht „Test the West!“.')]
-NS = [('M18', '1920–1935', 'Die fünf Säulen der NS-Ideologie', ['Vermutung', 'Sechs Zeugnisse', 'Fünf Säulen', 'Expertenrunde', 'Von der Idee zur Tat'], 'ns-ideologie.html', None),
+# Reihenfolge = Zeitfolge auf dem Strahl (nicht die Nummernfolge im Heft): M27 steht beim Krieg, nicht am Ende.
+NS = [('M16', 'Einstieg in die Einheit', 'Was macht den Menschen zum Menschen?', ['Der Appell', 'Menschlich', 'Humanismus', 'Meine Werte', 'Die Frage'], 'm16-was-macht-den-menschen.html', None),
+ ('M17', '1933–1939', 'Mein Leben in der NS-Diktatur I – Ausgrenzung 1933 bis 1939 aus zwei Blickwinkeln', ['Rolle', 'Boykott 1933', 'Entlassung 1933', 'Nürnberger Gesetze 1935', 'Pogrom 1938', 'Spielraum'], 'm17-leben-in-der-diktatur.html', None),
+ ('M18', '1920–1935', 'Die fünf Säulen der NS-Ideologie', ['Vermutung', 'Sechs Zeugnisse', 'Fünf Säulen', 'Expertenrunde', 'Von der Idee zur Tat'], 'ns-ideologie.html', None),
  ('M19', '1933–1939', 'Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg?', ['Was bedroht uns?', 'Was tun wir?', '„Anschluss“', 'Sudetenfrage', 'März 1939', 'Polen', 'Beurteilung'], 'appeasement.html', 'media/m19-heft-karte-deutsches-reich.jpg'),
- ('M20', '1940–1944', 'Großbritannien im Zweiten Weltkrieg – drei Dilemmata', ['Mai 1940', 'Juli 1941', 'Februar 1944', 'Beurteilung'], 'm20-dilemmata.html', 'media/m20-heft-london-1940.jpg'),
+ ('M20', '1940–1944', 'Der Verlauf des Zweiten Weltkriegs. Der Krieg und seine Dilemmata.', ['Mai 1940', 'Juli 1941', 'Februar 1944', 'Beurteilung'], 'm20-dilemmata.html', 'media/m20-heft-london-1940.jpg'),
+ ('M27', '1939–1945, weltweit', 'Die Vergessenen! Eine Globalgeschichte des Zweiten Weltkriegs', ['Dein Bild vom Krieg', 'Der Artikel', 'Eurozentrismus', 'Strukturbild', 'Landkarte'], 'm27-die-vergessenen.html', 'media/m27-afrikanische-soldaten-1944.jpg'),
  ('M21', '1933–1945', 'Es geht um Menschen – Shoa oder Holocaust?', ['Der Brief', 'Das Wort', 'Vier Menschen', 'Die Matrix', 'Die Zahl'], 'm21-es-geht-um-menschen.html', 'media/m21-wc-westerbork-2018.jpg'),
  ('M22', '1942', '„Große Verbrechen brauchen keine Monster!“ – Wie war das möglich?', ['Faktencheck', 'Józefów', 'Erklärungen', 'Landkarte', 'Marktplatz'], 'm22-wie-war-das-moeglich.html', 'media/m22-wc-jozefow-wald-2022.jpg'),
- ('M23', '1943', 'Die Gesellschaft, in der ich leb(t)e? – Ländervergleich', ['Die Karte', 'Der Film', 'Sechs Säulen', 'Thesen testen', 'Deine Position'], 'm23-die-gesellschaft.html', 'media/m23-wc-elisabeth-dragoer-2026.jpg'),
- ('M25', '1945', 'Leben in Ruinen und der Umgang mit Schuld', ['Der Krieg ist vorbei', 'Überleben in Ruinen', 'Im Angesicht des Verbrechens', 'Verantwortung', 'Landkarte'], 'm25-leben-in-ruinen.html', 'media/m25-weimar-frauen-1945.jpg'),
- ('M26', 'nach 1945', 'Ende gut, alles gut? Kontinuitäten des Nationalsozialismus', ['Schätzen', 'Der BND', 'Eure Gruppe', 'Vergleich', 'Urteil'], 'm26-kontinuitaeten.html', 'media/m26-heft-bnd.jpg'),
- ('M27', '1939–1945, weltweit', 'Die Vergessenen! Eine Globalgeschichte des Zweiten Weltkriegs', ['Dein Bild vom Krieg', 'Der Artikel', 'Eurozentrismus', 'Strukturbild', 'Landkarte'], 'm27-die-vergessenen.html', 'media/m27-afrikanische-soldaten-1944.jpg')]
+ ('M23', '1943', 'Die Gesellschaft, in der ich leb(t)e? – Die Shoa im Ländervergleich', ['Die Karte', 'Der Film', 'Sechs Säulen', 'Thesen testen', 'Deine Position'], 'm23-die-gesellschaft.html', 'media/m23-wc-elisabeth-dragoer-2026.jpg'),
+ ('M25', '1945', 'Kriegsende 1945: Leben in Ruinen und der Umgang mit Schuld – nach dem Modul von Offene Geschichte', ['Der Krieg ist vorbei', 'Überleben in Ruinen', 'Im Angesicht des Verbrechens', 'Verantwortung', 'Landkarte'], 'm25-leben-in-ruinen.html', 'media/m25-weimar-frauen-1945.jpg'),
+ ('M26', 'nach 1945', 'Ende gut, alles gut? Kontinuitäten des Nationalsozialismus in der Bundesrepublik', ['Schätzen', 'Der BND', 'Eure Gruppe', 'Vergleich', 'Urteil'], 'm26-kontinuitaeten.html', 'media/m26-heft-bnd.jpg')]
 WZ = [('Zeitraster', '16 Ereignisse im Überblick', 'raster'), ('Ordnen', 'Was kam wann?', 'ordnen'), ('Vernetzen', 'Ereignisse verbinden', 'netz'), ('Glossar', 'Begriffe nachschlagen', 'glossar'), ('Roter Faden', 'Deine Antwort auf die Leitfrage', 'faden')]
 ST = [(1, 'Potsdam, 1945', 'Die „Stunde Null“ – Was wird jetzt mit Deutschland?', ['Die Lage', 'Vorhersagen', 'Das Potsdamer Abkommen'], 's1-stunde-null.html', 'owk-s1-potsdam'),
  (2, '1947', 'Kommunismus gegen Kapitalismus: Truman-Doktrin und Zwei-Lager-Theorie', ['Truman', 'Shdanow', 'Spiegelbild', 'Blockbildung'], 's2-ideologien.html', 'owk-s2-marshallplan'),
@@ -31,36 +34,35 @@ ST = [(1, 'Potsdam, 1945', 'Die „Stunde Null“ – Was wird jetzt mit Deutsch
  (7, '17. Juni 1953', 'Geschichte im Staatsdienst? Der 17. Juni 1953 im Schulbuch', ['Zwei Texte', 'Was geschah', 'Lehrpläne'], 's7-geschichte-im-staatsdienst.html', 'owk-s7-juni'),
  (8, '1970–1972', 'Wandel durch Annäherung: die Ostverträge', ['Die Verträge', 'Die Debatte'], 's8-ostpolitik.html', 'owk-s8-demo'),
  (9, '1985–1991', 'Das Ende der DDR und des Ost-West-Konflikts', ['Vier Blickwinkel', 'Moskau', 'Herbst 1989'], 's9-ende.html', 'owk-s9-trabi')]
-KEYS = {'M18': 'ggklabor:', 'M19': 'ggk-m19-appeasement', 'M20': 'ggk-m20-dilemmata', 'M21': 'ggk-m21-menschen', 'M22': 'ggk-m22-taeter', 'M23': 'ggk-m23-gesellschaft', 'M25': 'ggk-m25-ruinen', 'M26': 'ggk-m26-kontinuitaeten', 'M27': 'ggk-m27-vergessene'}
+KEYS = {'M16': 'ggk-m16-mensch', 'M17': 'ggk-m17-leben', 'M18': 'ggklabor:', 'M19': 'ggk-m19-appeasement', 'M20': 'ggk-m20-dilemmata', 'M21': 'ggk-m21-menschen', 'M22': 'ggk-m22-taeter', 'M23': 'ggk-m23-gesellschaft', 'M25': 'ggk-m25-ruinen', 'M26': 'ggk-m26-kontinuitaeten', 'M27': 'ggk-m27-vergessene'}
 # Kurztitel für die Übersicht (die vollen Titel stehen in der Ordnung nach Prinzip und in den Modulen)
-KURZ = {'M18': 'Die fünf Säulen der NS-Ideologie', 'M19': 'Appeasement-Politik', 'M20': 'Großbritannien im Zweiten Weltkrieg', 'M21': 'Shoa oder Holocaust?', 'M22': 'Wie war das möglich? Täterforschung', 'M23': 'Die Gesellschaft, in der ich leb(t)e?', 'M25': 'Leben in Ruinen, Umgang mit Schuld', 'M26': 'Kontinuitäten des Nationalsozialismus', 'M27': 'Globalgeschichte des Zweiten Weltkriegs',
+KURZ = {'M16': 'Was macht den Menschen zum Menschen?', 'M17': 'Leben in der NS-Diktatur: Ausgrenzung 1933–1939', 'M18': 'Die fünf Säulen der NS-Ideologie', 'M19': 'Appeasement: Frieden oder Krieg?', 'M20': 'Der Verlauf des Zweiten Weltkriegs. Der Krieg und seine Dilemmata.', 'M27': 'Globalgeschichte des Zweiten Weltkriegs', 'M21': 'Die Shoa: Es geht um Menschen', 'M22': 'Wie war das möglich? Täterforschung', 'M23': 'Die Shoa im Ländervergleich', 'M25': 'Kriegsende 1945 – nach dem Modul von Offene Geschichte', 'M26': 'NS-Kontinuitäten in der Bundesrepublik',
  1: '„Stunde Null“ und Potsdamer Abkommen', 2: 'Truman-Doktrin und Zwei-Lager-Theorie', 3: 'Berlin-Blockade und sowjetische Zone', 4: 'Doppelte Staatsgründung', 5: 'Westbindung der Bundesrepublik', 6: 'Flucht aus der DDR und Mauerbau', 7: 'Der 17. Juni 1953 im Schulbuch', 8: 'Ostverträge', 9: 'Ende der DDR und des Ost-West-Konflikts'}
 # Spalten je Zeitstrahl: (Ankerdatum, Ereignis, Modul). Über der Linie das Datum, darunter das Modul. Vorschlag – bitte prüfen.
 SPALTEN = {'weimar': [('9. Nov. 1918', 'Ausrufung der Republik', None), ('11. Aug. 1919', 'Weimarer Verfassung', None), ('1923', 'Krisenjahr: Inflation, Hitlerputsch', None), ('Okt. 1929', 'Beginn der Weltwirtschaftskrise', None)],
- 'ns': [('30. Jan. 1933', 'Hitler wird Reichskanzler', 'M18'), ('15. Sept. 1935', 'Nürnberger Gesetze', 'M19'), ('9. Nov. 1938', 'Novemberpogrome', None), ('1. Sept. 1939', 'Überfall auf Polen', 'M27'), (None, None, 'M20'), ('22. Juni 1941', 'Überfall auf die Sowjetunion', 'M21'), (None, None, 'M22'), (None, None, 'M23'), ('8. Mai 1945', 'Bedingungslose Kapitulation', 'M25'), (None, None, 'M26')],
+ 'ns': [(None, None, 'M16'), ('30. Jan. 1933', 'Hitler wird Reichskanzler', 'M17'), ('15. Sept. 1935', 'Nürnberger Gesetze', 'M18'), ('9. Nov. 1938', 'Novemberpogrome', 'M19'), ('1. Sept. 1939', 'Überfall auf Polen', 'M20'), (None, None, 'M27'), ('22. Juni 1941', 'Überfall auf die Sowjetunion', 'M21'), (None, None, 'M22'), (None, None, 'M23'), ('8. Mai 1945', 'Bedingungslose Kapitulation', 'M25'), (None, None, 'M26')],
  'ostwest': [('2. Aug. 1945', 'Potsdamer Abkommen', 1), ('12. März 1947', 'Truman-Doktrin', 2), ('24. Juni 1948', 'Beginn der Berlin-Blockade', 3), ('1949', 'Zwei deutsche Staaten', 4), (None, None, 5), ('17. Juni 1953', 'Aufstand in der DDR', 7), ('13. Aug. 1961', 'Bau der Berliner Mauer', 6), (None, None, 8), ('9. Nov. 1989', 'Öffnung der Mauer', 9), ('3. Okt. 1990', 'Deutsche Einheit', None)]}
 # Zweite Ordnung: Prinzipien der kognitiven Landkarte -> Module (aus den Landkarten-Seiten der Module abgelesen)
 PRINZIP = [('2-1-1', 'Retrospektivität', 'Wir betrachten die Vergangenheit immer im Nachhinein, aus der Gegenwart heraus.', ['M19', 'M20', 1, 8]),
- ('2-1-2', 'Perspektivität', 'Jede Betrachtung erfolgt aus einer Sichtweise, geprägt von Überzeugungen, Interessen und Erfahrungen.', ['M22', 'M25', 'M27', 2]),
+ ('2-1-2', 'Perspektivität', 'Jede Betrachtung erfolgt aus einer Sichtweise, geprägt von Überzeugungen, Interessen und Erfahrungen.', ['M17', 'M27', 'M22', 'M25', 2]),
  ('2-1-3', 'Partikularität', 'Historische Erkenntnisse sind immer nur Ausschnitte der gesamten Vergangenheit.', []),
  ('2-1-4', 'Selektivität', 'Wer Geschichte erzählt, wählt aus: Welche Quellen, Ereignisse und Personen sind wichtig?', [5]),
  ('2-1-5', 'Partialität', 'Quellen zeigen immer nur einen Teil der Vergangenheit, und nur ein Teil der Quellen ist erhalten.', [6]),
  ('2-1-6', 'Narrativität', 'Geschichte gibt es nur als Erzählung.', [3, 9]),
  ('2-1-7', 'Konstruktivität', 'Geschichte wird nicht gefunden, sondern zusammengesetzt. Aus denselben Fakten können verschiedene Geschichten entstehen.', [7]),
  ('2-1-8', 'Standortgebundenheit', 'Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Kontext geprägt, oft unbewusst.', ['M27', 4])]
-OFFEN = ['M18', 'M21', 'M23', 'M26']
+OFFEN = ['M16', 'M18', 'M21', 'M23', 'M26']
 MOD = {m[0]: (m[2], m[4]) for m in NS}; MOD.update({m[0]: (m[2], 'ost-west/' + m[4]) for m in ST})
 MOD = {m[0]: (m[2], m[4]) for m in NS}; MOD.update({m[0]: (m[2], 'ost-west/' + m[4]) for m in ST})
-# Nummer im Heft (steht im Titel) und Platz in der Unterrichtsfolge (steht im Kreis)
+# Nummer im Heft (steht im Titel). Die Reihenfolge der Karten ist die Zeitfolge; eine zweite Zählung gibt es nicht mehr.
 HEFTNR = {1: 'M29/M30', 2: 'M31', 3: 'M32/M33', 4: 'M34', 5: 'M35/M36', 6: 'M36–M39', 7: 'M40', 8: 'M41', 9: 'M42–M44'}
 HEFTNR.update({m[0]: m[0] for m in NS})
-FOLGE = {m[0]: i + 1 for i, m in enumerate(NS)}; FOLGE.update({m[0]: m[0] for m in ST})
 INFO = {m[0]: (m[1], m[4], m[5], KEYS[m[0]], '') for m in NS}
 INFO.update({m[0]: (m[1], 'ost-west/' + m[4], f'ost-west/media/{m[5]}.jpg', f'ggk-owk-s{m[0]}', f's{m[0]}') for m in ST})
 def kachel(nr):
     zeit, ziel, bild, key, faden = INFO[nr]
     b = f'<img src="{bild}" alt="" onerror="this.remove()">' if bild else ''
-    return (f'<a class="kachel" href="{ziel}"><span class="kbild{"" if bild else " ohne"}">{b}<span class="knr" aria-hidden="true">{FOLGE[nr]}</span></span>'
+    return (f'<a class="kachel" href="{ziel}"><span class="kbild{"" if bild else " ohne"}">{b}</span>'
             f'<span class="ktext"><span class="kzeit">{e(zeit)}</span><b><span class="mnr">{HEFTNR[nr]}</span> {e(KURZ[nr])}</b><span class="stand" data-key="{key}" data-faden="{faden}" hidden></span></span></a>')
 def spur(ep, name):
     sp = SPALTEN[ep]
@@ -117,7 +119,7 @@ h1{margin:0;font:600 clamp(2.1rem,4.6vw,3.6rem)/1.02 var(--display);text-wrap:ba
 h2{margin:0;font:600 clamp(1.6rem,3vw,2.2rem)/1.04 var(--display)}
 .jahre{margin:.1rem 0 0;font-weight:700;color:var(--f)}
 .satz{margin:0;max-width:60ch;font-size:.97rem;color:#E2DED5}
-.spur{list-style:none;margin:.5rem 0 0;padding:0 0 .3rem;display:grid;grid-template-columns:repeat(var(--n),minmax(5.9rem,1fr));overflow-x:auto;scrollbar-color:var(--f) transparent}
+.spur{list-style:none;margin:.5rem 0 0;padding:0 0 .3rem;display:grid;grid-template-columns:repeat(var(--n),minmax(5.4rem,1fr));overflow-x:auto;scrollbar-color:var(--f) transparent}
 .sp{display:grid;grid-template-rows:3.5rem auto auto;align-content:start;min-width:0}
 .oben{display:flex;flex-direction:column;justify-content:flex-end;padding-right:.5rem}
 .datum{font:600 1.02rem/1.15 var(--display)}
@@ -127,9 +129,8 @@ h2{margin:0;font:600 clamp(1.6rem,3vw,2.2rem)/1.04 var(--display)}
 .anker .linie::before{border-radius:2px;background:var(--text);border-color:var(--text);width:.85rem;height:.85rem;top:-.35rem;transform:rotate(45deg)}
 .kachel{display:flex;flex-direction:column;margin-right:.5rem;background:var(--karte);border:1px solid var(--rand);border-radius:.7rem;overflow:hidden;text-decoration:none;min-height:9.2rem}
 .kbild{position:relative;display:block;flex:0 0 3.4rem;background:rgba(0,0,0,.3)}
+.kbild.ohne{flex-basis:.45rem;background:var(--f)}
 .kbild img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
-.knr{position:absolute;left:.4rem;top:.4rem;min-width:2.1rem;height:2.1rem;padding:0 .35rem;border-radius:999px;background:var(--f);color:#15171A;font:600 1.15rem/1 var(--display);display:grid;place-items:center}
-.knr.lang{font-size:.92rem}
 .ktext{padding:.45rem .55rem .55rem;display:flex;flex-direction:column;gap:.15rem;flex:1}
 .kzeit{font-size:.76rem;color:var(--f);font-weight:700}
 .ktext b{font:600 .98rem/1.18 var(--display);hyphens:auto}
@@ -164,8 +165,8 @@ footer p{margin:0 0 .4rem}
 footer a{display:inline-block;padding:.35rem 0}
 footer button{min-height:44px;padding:0 1rem;border:2px solid var(--leise);border-radius:.6rem;background:transparent;margin-right:.6rem}
 @media (max-width:900px){.kopfzeile{grid-template-columns:auto minmax(0,1fr)}.satz{grid-column:1/-1}}
-/* Hochformat am Tablet: der Zeitstrahl bricht in zwei Zeilen um, statt zu scrollen */
-@media (min-width:701px) and (max-width:999px){.spur{grid-template-columns:repeat(5,minmax(0,1fr));row-gap:.6rem;overflow:visible}}
+/* Tablet (hoch und quer bis 1279 px): der Zeitstrahl bricht in zwei Zeilen zu je sechs um, statt zu scrollen oder zu quetschen */
+@media (min-width:701px) and (max-width:1279px){.spur{grid-template-columns:repeat(6,minmax(0,1fr));row-gap:.6rem;overflow:visible}}
 /* Telefon: der Zeitstrahl läuft senkrecht */
 @media (max-width:700px){
   .spur{display:block;overflow:visible;margin-top:.9rem}
@@ -258,7 +259,7 @@ SEITE = f"""<!doctype html>
 </main>
 <footer class="huelle">
 <p><button type="button" data-halt aria-pressed="false">Bildwechsel anhalten</button><span data-haltsatz>Die Hintergrundbilder wechseln alle acht Sekunden.</span></p>
-<p>Raute über der Linie: ein Datum zum Merken. Karte unter der Linie: ein Modul mit seiner Nummer im Heft. Die Zahl im Kreis zeigt die Reihenfolge im Unterricht, die Linie die Zeit. Bildnachweise: <a href="M21_Bildliste.html">M21</a> · <a href="M22_Bildliste.html">M22</a> · <a href="M23_Bildliste.html">M23</a> · <a href="M25_Bildliste.html">M25</a> · <a href="M27_Bildliste.html">M27</a> · M19, M20, M26: aus dem Unterrichtsheft, Nachweise offen · <a href="ost-west/Bildliste.html">Ost-West (Heft, Nachweise offen)</a></p>
+<p>Raute über der Linie: ein Datum zum Merken. Karte unter der Linie: ein Modul mit seiner Nummer im Heft. Die Karten stehen in der Reihenfolge der Zeit, nicht in der Reihenfolge der Nummern. Datum und Modul stehen an derselben Stelle des Strahls; sie gehören nicht immer zum selben Thema. Bildnachweise: <a href="M17_Bildliste.html">M17</a> · <a href="M21_Bildliste.html">M21</a> · <a href="M22_Bildliste.html">M22</a> · <a href="M23_Bildliste.html">M23</a> · <a href="M25_Bildliste.html">M25</a> · <a href="M27_Bildliste.html">M27</a> · M19, M20, M26: aus dem Unterrichtsheft, Nachweise offen · <a href="ost-west/Bildliste.html">Ost-West (Heft, Nachweise offen)</a></p>
 <p>Datenschutz: Alle Ergebnisse bleiben auf deinem Gerät. Diese Seiten senden nichts ins Internet und brauchen keine Anmeldung. · <a href="auswertung.html">Kursauswertung für die Lehrkraft</a></p>
 <p>© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p>
 </footer>
