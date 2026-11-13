@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Baut die Startseite index.html (Fassung 3.1, Entwurf F2 »Nacht mit Papierkarten« mit Lupe H): drei Kapitel 1918–1991.
+"""Baut die Startseite index.html (Fassung 3.2: Nummernfolge, Bildschirmbreite, Kacheln M16–M18; Entwurf F2 »Nacht mit Papierkarten« mit Lupe H): drei Kapitel 1918–1991.
 Je Kapitel: Kopf mit wechselndem Bild, eine schmale Leiste mit Merkdaten und Modulnummern, darunter das Regal mit gleich großen Papierkarten.
 Alle Links stehen als HTML im Dokument und sind ohne JavaScript erreichbar. Aufruf: python3 tools/bau_startseite.py"""
 import pathlib, html
@@ -16,18 +16,18 @@ OW_BILDER = [('ost-west/media/owk-s1-potsdam.jpg', 'Potsdam, Sommer 1945 (Stunde
  ('ost-west/media/owk-s3-luftbruecke.jpg', 'Luftbrücke nach West-Berlin, 1948/49 (Stunde 3).'),
  ('ost-west/media/owk-s6-bernauer.jpg', 'Mauerbau an der Bernauer Straße in Berlin, August 1961 (Stunde 6).'),
  ('ost-west/media/owk-s9-trabi.jpg', 'Nach der Grenzöffnung, November 1989 (Stunde 9).')]
-# Reihenfolge = Zeitfolge auf dem Strahl (nicht die Nummernfolge im Heft): M27 steht beim Krieg, nicht am Ende.
-NS = [('M16', 'Einstieg in die Einheit', 'Was macht den Menschen zum Menschen?', ['Der Appell', 'Menschlich', 'Humanismus', 'Meine Werte', 'Die Frage'], 'm16-was-macht-den-menschen.html', None),
- ('M17', '1933–1939', 'Mein Leben in der NS-Diktatur I – Ausgrenzung 1933 bis 1939 aus zwei Blickwinkeln', ['Rolle', 'Boykott 1933', 'Entlassung 1933', 'Nürnberger Gesetze 1935', 'Pogrom 1938', 'Spielraum'], 'm17-leben-in-der-diktatur.html', None),
- ('M18', '1920–1935', 'Die fünf Säulen der NS-Ideologie', ['Vermutung', 'Sechs Zeugnisse', 'Fünf Säulen', 'Expertenrunde', 'Von der Idee zur Tat'], 'ns-ideologie.html', None),
+# Reihenfolge = Nummernfolge im Heft, also die Folge des Unterrichts (Entscheidung 13.11.2026). M27 steht am Ende und blickt zurück.
+NS = [('M16', 'Einstieg in die Einheit', 'Was macht den Menschen zum Menschen?', ['Der Appell', 'Menschlich', 'Humanismus', 'Meine Werte', 'Die Frage'], 'm16-was-macht-den-menschen.html', 'media/m16-kachel-werte.jpg'),
+ ('M17', '1933–1939', 'Mein Leben in der NS-Diktatur I – Ausgrenzung 1933 bis 1939 aus zwei Blickwinkeln', ['Rolle', 'Boykott 1933', 'Entlassung 1933', 'Nürnberger Gesetze 1935', 'Pogrom 1938', 'Spielraum'], 'm17-leben-in-der-diktatur.html', 'media/m17-kachel-spielraum.jpg'),
+ ('M18', '1920–1935', 'Die fünf Säulen der NS-Ideologie', ['Vermutung', 'Sechs Zeugnisse', 'Fünf Säulen', 'Expertenrunde', 'Von der Idee zur Tat'], 'ns-ideologie.html', 'media/m18-kachel-saeulen.jpg'),
  ('M19', '1933–1939', 'Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg?', ['Was bedroht uns?', 'Was tun wir?', '„Anschluss“', 'Sudetenfrage', 'März 1939', 'Polen', 'Beurteilung'], 'appeasement.html', 'media/m19-heft-karte-deutsches-reich.jpg'),
  ('M20', '1940–1944', 'Der Verlauf des Zweiten Weltkriegs. Der Krieg und seine Dilemmata.', ['Mai 1940', 'Juli 1941', 'Februar 1944', 'Beurteilung'], 'm20-dilemmata.html', 'media/m20-heft-london-1940.jpg'),
- ('M27', '1939–1945, weltweit', 'Die Vergessenen! Eine Globalgeschichte des Zweiten Weltkriegs', ['Dein Bild vom Krieg', 'Der Artikel', 'Eurozentrismus', 'Strukturbild', 'Landkarte'], 'm27-die-vergessenen.html', 'media/m27-afrikanische-soldaten-1944.jpg'),
  ('M21', '1933–1945', 'Es geht um Menschen – Shoa oder Holocaust?', ['Der Brief', 'Das Wort', 'Vier Menschen', 'Die Matrix', 'Die Zahl'], 'm21-es-geht-um-menschen.html', 'media/m21-wc-westerbork-2018.jpg'),
  ('M22', '1942', '„Große Verbrechen brauchen keine Monster!“ – Wie war das möglich?', ['Faktencheck', 'Józefów', 'Erklärungen', 'Landkarte', 'Marktplatz'], 'm22-wie-war-das-moeglich.html', 'media/m22-wc-jozefow-wald-2022.jpg'),
  ('M23', '1943', 'Die Gesellschaft, in der ich leb(t)e? – Die Shoa im Ländervergleich', ['Die Karte', 'Der Film', 'Sechs Säulen', 'Thesen testen', 'Deine Position'], 'm23-die-gesellschaft.html', 'media/m23-wc-elisabeth-dragoer-2026.jpg'),
  ('M25', '1945', 'Kriegsende 1945: Leben in Ruinen und der Umgang mit Schuld – nach dem Modul von Offene Geschichte', ['Der Krieg ist vorbei', 'Überleben in Ruinen', 'Im Angesicht des Verbrechens', 'Verantwortung', 'Landkarte'], 'm25-leben-in-ruinen.html', 'media/m25-weimar-frauen-1945.jpg'),
- ('M26', 'nach 1945', 'Ende gut, alles gut? Kontinuitäten des Nationalsozialismus in der Bundesrepublik', ['Schätzen', 'Der BND', 'Eure Gruppe', 'Vergleich', 'Urteil'], 'm26-kontinuitaeten.html', 'media/m26-heft-bnd.jpg')]
+ ('M26', 'nach 1945', 'Ende gut, alles gut? Kontinuitäten des Nationalsozialismus in der Bundesrepublik', ['Schätzen', 'Der BND', 'Eure Gruppe', 'Vergleich', 'Urteil'], 'm26-kontinuitaeten.html', 'media/m26-heft-bnd.jpg'),
+ ('M27', 'Rückblick: 1939–1945, weltweit', 'Die Vergessenen! Eine Globalgeschichte des Zweiten Weltkriegs', ['Dein Bild vom Krieg', 'Der Artikel', 'Eurozentrismus', 'Strukturbild', 'Landkarte'], 'm27-die-vergessenen.html', 'media/m27-afrikanische-soldaten-1944.jpg')]
 WZ = [('Zeitraster', '16 Ereignisse im Überblick', 'raster'), ('Ordnen', 'Was kam wann?', 'ordnen'), ('Vernetzen', 'Ereignisse verbinden', 'netz'), ('Glossar', 'Begriffe nachschlagen', 'glossar'), ('Roter Faden', 'Deine Antwort auf die Leitfrage', 'faden')]
 ST = [(1, 'Potsdam, 1945', 'Die „Stunde Null“ – Was wird jetzt mit Deutschland?', ['Die Lage', 'Vorhersagen', 'Das Potsdamer Abkommen'], 's1-stunde-null.html', 'owk-s1-potsdam'),
  (2, '1947', 'Kommunismus gegen Kapitalismus: Truman-Doktrin und Zwei-Lager-Theorie', ['Truman', 'Shdanow', 'Spiegelbild', 'Blockbildung'], 's2-ideologien.html', 'owk-s2-marshallplan'),
@@ -35,17 +35,17 @@ ST = [(1, 'Potsdam, 1945', 'Die „Stunde Null“ – Was wird jetzt mit Deutsch
  (4, '1949', 'Die doppelte Staatsgründung', ['Der Weg zu zwei Staaten', 'Grotewohl', 'Adenauer', 'Vergleich'], 's4-staatsgruendung.html', 'owk-s4-goldfisch'),
  (5, '1949–1957', 'Die Bindung der Bundesrepublik an den Westen', ['Der Streit', 'Die Schritte', 'Das Urteil'], 's5-westintegration.html', 'owk-s5-andernach'),
  (6, '1949–1961', 'Flucht aus der DDR und Mauerbau', ['Die Zahlen', 'Die Gründe', 'Die Mauer'], 's6-flucht-und-mauer.html', 'owk-s6-bernauer'),
- (7, '17. Juni 1953', 'Geschichte im Staatsdienst? Der 17. Juni 1953 im Schulbuch', ['Zwei Texte', 'Was geschah', 'Lehrpläne'], 's7-geschichte-im-staatsdienst.html', 'owk-s7-juni'),
+ (7, 'Rückblick: 17. Juni 1953', 'Geschichte im Staatsdienst? Der 17. Juni 1953 im Schulbuch', ['Zwei Texte', 'Was geschah', 'Lehrpläne'], 's7-geschichte-im-staatsdienst.html', 'owk-s7-juni'),
  (8, '1970–1972', 'Wandel durch Annäherung: die Ostverträge', ['Die Verträge', 'Die Debatte'], 's8-ostpolitik.html', 'owk-s8-demo'),
  (9, '1985–1991', 'Das Ende der DDR und des Ost-West-Konflikts', ['Vier Blickwinkel', 'Moskau', 'Herbst 1989'], 's9-ende.html', 'owk-s9-trabi')]
 KEYS = {'M16': 'ggk-m16-mensch', 'M17': 'ggk-m17-leben', 'M18': 'ggklabor:', 'M19': 'ggk-m19-appeasement', 'M20': 'ggk-m20-dilemmata', 'M21': 'ggk-m21-menschen', 'M22': 'ggk-m22-taeter', 'M23': 'ggk-m23-gesellschaft', 'M25': 'ggk-m25-ruinen', 'M26': 'ggk-m26-kontinuitaeten', 'M27': 'ggk-m27-vergessene'}
 # Kurztitel für die Übersicht (die vollen Titel stehen in der Ordnung nach Prinzip und in den Modulen)
 KURZ = {'M16': 'Was macht den Menschen zum Menschen?', 'M17': 'Leben in der NS-Diktatur: Ausgrenzung 1933–1939', 'M18': 'Die fünf Säulen der NS-Ideologie', 'M19': 'Appeasement: Frieden oder Krieg?', 'M20': 'Der Verlauf des Zweiten Weltkriegs. Der Krieg und seine Dilemmata.', 'M27': 'Globalgeschichte des Zweiten Weltkriegs', 'M21': 'Die Shoa: Es geht um Menschen', 'M22': 'Wie war das möglich? Täterforschung', 'M23': 'Die Shoa im Ländervergleich', 'M25': 'Kriegsende 1945 – nach dem Modul von Offene Geschichte', 'M26': 'NS-Kontinuitäten in der Bundesrepublik',
  1: '„Stunde Null“ und Potsdamer Abkommen', 2: 'Truman-Doktrin und Zwei-Lager-Theorie', 3: 'Berlin-Blockade und sowjetische Zone', 4: 'Doppelte Staatsgründung', 5: 'Westbindung der Bundesrepublik', 6: 'Flucht aus der DDR und Mauerbau', 7: 'Der 17. Juni 1953 im Schulbuch', 8: 'Ostverträge', 9: 'Ende der DDR und des Ost-West-Konflikts'}
-# Halte je Kapitel in Zeitfolge: (Merkdatum, Ereignis, Modul). In der Leiste stehen die Daten abwechselnd über und unter der Linie. Vorschlag – bitte prüfen.
+# Halte je Kapitel: (Merkdatum, Ereignis, Modul). Die Module stehen in der Nummernfolge, die Merkdaten in der Zeitfolge; ein Datum ohne Modul (17. Juni 1953) steht an seiner Stelle in der Zeit. In der Leiste stehen die Daten abwechselnd über und unter der Linie. Vorschlag – bitte prüfen.
 SPALTEN = {'weimar': [('9. Nov. 1918', 'Ausrufung der Republik', None), ('11. Aug. 1919', 'Weimarer Verfassung', None), ('1923', 'Krisenjahr: Inflation, Hitlerputsch', None), ('Okt. 1929', 'Beginn der Weltwirtschaftskrise', None)],
- 'ns': [(None, None, 'M16'), ('30. Jan. 1933', 'Hitler wird Reichskanzler', 'M17'), ('15. Sept. 1935', 'Nürnberger Gesetze', 'M18'), ('9. Nov. 1938', 'Novemberpogrome', 'M19'), ('1. Sept. 1939', 'Überfall auf Polen', 'M20'), (None, None, 'M27'), ('22. Juni 1941', 'Überfall auf die Sowjetunion', 'M21'), (None, None, 'M22'), (None, None, 'M23'), ('8. Mai 1945', 'Bedingungslose Kapitulation', 'M25'), (None, None, 'M26')],
- 'ostwest': [('2. Aug. 1945', 'Potsdamer Abkommen', 1), ('12. März 1947', 'Truman-Doktrin', 2), ('24. Juni 1948', 'Beginn der Berlin-Blockade', 3), ('1949', 'Zwei deutsche Staaten', 4), (None, None, 5), ('17. Juni 1953', 'Aufstand in der DDR', 7), ('13. Aug. 1961', 'Bau der Berliner Mauer', 6), (None, None, 8), ('9. Nov. 1989', 'Öffnung der Mauer', 9), ('3. Okt. 1990', 'Deutsche Einheit', None)]}
+ 'ns': [(None, None, 'M16'), ('30. Jan. 1933', 'Hitler wird Reichskanzler', 'M17'), ('15. Sept. 1935', 'Nürnberger Gesetze', 'M18'), ('9. Nov. 1938', 'Novemberpogrome', 'M19'), ('1. Sept. 1939', 'Überfall auf Polen', 'M20'), ('22. Juni 1941', 'Überfall auf die Sowjetunion', 'M21'), (None, None, 'M22'), (None, None, 'M23'), ('8. Mai 1945', 'Bedingungslose Kapitulation', 'M25'), (None, None, 'M26'), (None, None, 'M27')],
+ 'ostwest': [('2. Aug. 1945', 'Potsdamer Abkommen', 1), ('12. März 1947', 'Truman-Doktrin', 2), ('24. Juni 1948', 'Beginn der Berlin-Blockade', 3), ('1949', 'Zwei deutsche Staaten', 4), (None, None, 5), ('17. Juni 1953', 'Aufstand in der DDR', None), ('13. Aug. 1961', 'Bau der Berliner Mauer', 6), (None, None, 7), (None, None, 8), ('9. Nov. 1989', 'Öffnung der Mauer', 9), ('3. Okt. 1990', 'Deutsche Einheit', None)]}
 # Zweite Ordnung: Prinzipien der kognitiven Landkarte -> Module (aus den Landkarten-Seiten der Module abgelesen)
 PRINZIP = [('2-1-1', 'Retrospektivität', 'Wir betrachten die Vergangenheit immer im Nachhinein, aus der Gegenwart heraus.', ['M19', 'M20', 1, 8]),
  ('2-1-2', 'Perspektivität', 'Jede Betrachtung erfolgt aus einer Sichtweise, geprägt von Überzeugungen, Interessen und Erfahrungen.', ['M17', 'M27', 'M22', 'M25', 2]),
@@ -57,7 +57,7 @@ PRINZIP = [('2-1-1', 'Retrospektivität', 'Wir betrachten die Vergangenheit imme
  ('2-1-8', 'Standortgebundenheit', 'Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Kontext geprägt, oft unbewusst.', ['M27', 4])]
 OFFEN = ['M16', 'M18', 'M21', 'M23', 'M26']
 MOD = {m[0]: (m[2], m[4]) for m in NS}; MOD.update({m[0]: (m[2], 'ost-west/' + m[4]) for m in ST})
-# Nummer im Heft (steht im Titel). Die Reihenfolge der Karten ist die Zeitfolge; eine zweite Zählung gibt es nicht mehr.
+# Nummer im Heft (steht im Titel). Die Reihenfolge der Karten ist die Nummernfolge; eine zweite Zählung gibt es nicht.
 HEFTNR = {1: 'M29/M30', 2: 'M31', 3: 'M32/M33', 4: 'M34', 5: 'M35/M36', 6: 'M36–M39', 7: 'M40', 8: 'M41', 9: 'M42–M44'}
 HEFTNR.update({m[0]: m[0] for m in NS})
 INFO = {m[0]: (m[1], m[4], m[5], KEYS[m[0]], '') for m in NS}
@@ -94,7 +94,7 @@ def regal(ep, name):
         kl = 'sp' + (' anker' if d else '') + ('' if m else ' nurdatum')
         daten = (f' id="k-{HEFTNR[m].replace(chr(47), chr(45))}" data-nr="{HEFTNR[m]}" data-zeit="{e(INFO[m][0])}" data-lang="{e(MOD[m][0])}" data-schritte="{e(" · ".join(SCHRITTE[m]))}"' if m else '')
         z += f'<li class="{kl}"{daten}>{merk}{karte(m) if m else ""}</li>'
-    return f'<ol class="regal" aria-label="{name}: Merkdaten und Module in der Reihenfolge der Zeit">{z}</ol>'
+    return f'<ol class="regal" aria-label="{name}: Merkdaten und Module in der Reihenfolge des Unterrichts">{z}</ol>'
 SCHRITTE = {m[0]: m[3] for m in NS + ST}
 def fenster(wort):
     """Das Fenster der Lupe: die gewählte Karte in groß, auf demselben Papier. Leeres Gerüst; das Skript füllt es aus den Angaben im Regal."""
@@ -136,7 +136,14 @@ body{margin:0;background:var(--seite);color:var(--text);font:400 1.0625rem/1.5 "
 a{color:var(--text)}a:focus-visible,button:focus-visible{outline:3px solid #fff;outline-offset:3px}
 button{font:inherit;color:inherit;cursor:pointer}
 /* Eine Spalte für alles: Kopf, Epochen-Leiste, Kapitel und Fuß stehen an derselben linken Kante */
-.huelle{max-width:72.5rem;margin:0 auto;padding-inline:1.5rem}
+.huelle{max-width:120rem;margin:0 auto;padding-inline:var(--rand)}
+/* Bildschirmbreite nutzen: --n Karten je Reihe, --rand Seitenrand.
+   unter 760 px: 2 Karten · iPad hoch: 3 Karten, schmaler Rand · iPad quer: 4 Karten, schmaler Rand (Karten bleiben groß) · ab 1280 px: 4 Karten, Rand = halbe Karte · ab 1440 px: 5 Karten, Rand = halbe Karte */
+:root{--n:2;--rand:1.5rem}
+@media (min-width:760px){:root{--n:3}}
+@media (min-width:1000px){:root{--n:4;--rand:2rem}}
+@media (min-width:1280px){:root{--rand:calc((min(100vw,120rem) - 3 * 1.25rem) / 5 / 2)}}
+@media (min-width:1440px){:root{--n:5;--rand:calc((min(100vw,120rem) - 4 * 1.25rem) / 6 / 2)}}
 .sprung{position:absolute;left:-999rem}.sprung:focus{left:1rem;top:1rem;background:#fff;color:#000;padding:.5rem 1rem;z-index:9}
 .nurvorlesen{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
 header.kopf{display:flex;flex-wrap:wrap;gap:.3rem 1.5rem;justify-content:space-between;align-items:center;padding-block:1rem 0}
@@ -175,8 +182,8 @@ h2{margin:0;font:600 clamp(1.7rem,3.4vw,2.25rem)/1.05 var(--display)}
 .bildwahl p{margin:0;flex:1 1 14rem;font-size:.875rem;line-height:1.35;color:#E8E4DB}
 .tipp{margin:.9rem 0 0;max-width:70ch;font-weight:700}
 /* Leiste: alle Halte in einer Zeile. Raute = Merkdatum, Ring = Modul ohne eigenes Merkdatum, darunter die Nummer im Heft */
-.leiste{position:relative;display:flex;margin:0 -1.5rem 1.4rem;padding-inline:1.5rem;overflow:hidden;scroll-margin-top:4.6rem}
-.leiste::before{content:"";position:absolute;left:1.5rem;right:1.5rem;top:calc(3.3rem + 8px);height:4px;background:var(--akz)}
+.leiste{position:relative;display:flex;margin:0 calc(-1 * var(--rand)) 1.4rem;padding-inline:var(--rand);overflow:hidden;scroll-margin-top:4.6rem}
+.leiste::before{content:"";position:absolute;left:var(--rand);right:var(--rand);top:calc(3.3rem + 8px);height:4px;background:var(--akz)}
 .st{flex:1 1 0;min-width:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:3.3rem auto auto;transition:transform 320ms cubic-bezier(.23,1,.32,1),opacity 200ms linear}
 .tp{display:block;min-height:44px}.ohnenr .tp{min-height:20px}.js .tp[data-stop]{cursor:pointer}
 .ob{display:flex;align-items:flex-end;padding:0 0 .4rem 4px}
@@ -192,7 +199,7 @@ h2{margin:0;font:600 clamp(1.7rem,3.4vw,2.25rem)/1.05 var(--display)}
 /* Lupe (Vorschlag H): Die Leiste fährt an den gewählten Halt heran. Jeder Halt wird nur verschoben, nichts wird verzerrt. */
 .zz{font-weight:400;opacity:0;transition:opacity 200ms linear}
 .lupe .zz{opacity:1}.lupe .dt{max-width:12.5rem}
-.lupe{-webkit-mask-image:linear-gradient(to right,transparent 0,#000 1.4rem,#000 calc(100% - 4.5rem),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 1.4rem,#000 calc(100% - 4.5rem),transparent 100%)}
+.lupe{-webkit-mask-image:linear-gradient(to right,transparent 0,#000 var(--rand),#000 calc(100% - var(--rand)),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 var(--rand),#000 calc(100% - var(--rand)),transparent 100%)}
 .st.aus{opacity:0;pointer-events:none}
 .st.an .pk::before{box-shadow:0 0 0 3px var(--grund),0 0 0 6px #fff}.st.an:not(.ank) .pk::before{background:#fff}.st.an .nr{color:#fff}
 /* Fenster: die gewählte Karte in groß, auf dem Papier ihrer Epoche. Ausgelegt für das iPad quer (drei Spalten) und hoch (zwei Spalten, Merkdaten als Zeile). */
@@ -221,8 +228,8 @@ h2{margin:0;font:600 clamp(1.7rem,3.4vw,2.25rem)/1.05 var(--display)}
 .fenster.neu .finh{animation:fein 220ms cubic-bezier(.23,1,.32,1)}
 @keyframes fein{from{opacity:0;transform:translateY(8px)}}
 .regal.wahl .karte{opacity:.62}.regal.wahl .gewaehlt .karte{opacity:1;outline:3px solid #fff;outline-offset:3px}
-/* Regal: gleich große Papierkarten in der Reihenfolge der Zeit */
-.regal{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:1.25rem}
+/* Regal: gleich große Papierkarten in der Reihenfolge des Unterrichts. --n = Karten je Reihe (siehe .huelle) */
+.regal{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:1.25rem}
 .sp{min-width:0}
 .merk,.sp.nurdatum{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .karte{position:relative;display:flex;flex-direction:column;height:100%;min-height:13.25rem;border:1px solid var(--akz);border-radius:6px;overflow:hidden;text-decoration:none;color:var(--kink);
@@ -443,7 +450,7 @@ SEITE = f"""<!doctype html>
 <main id="inhalt">
 <section class="hero huelle">
 <h1>Geschichte für die Gegenwart</h1>
-<p>Drei Zeitstrahlen von 1918 bis 1991 – untersucht mit der <a href="{LK}">kognitiven Landkarte des Geschichtsunterrichts</a>. In jedem Kapitel stehen zuerst die Daten, die du kennen solltest. Darunter liegen die Module in derselben Reihenfolge.</p>
+<p>Drei Zeitstrahlen von 1918 bis 1991 – untersucht mit der <a href="{LK}">kognitiven Landkarte des Geschichtsunterrichts</a>. In jedem Kapitel stehen zuerst die Daten, die du kennen solltest. Darunter liegen die Module in der Reihenfolge des Unterrichts.</p>
 </section>
 <nav class="band" aria-label="Epochen"><ol class="huelle">
 <li><a href="#weimar" data-ep="weimar" style="--b:var(--weimar)">1 · Weimarer Republik</a></li>
@@ -461,7 +468,7 @@ SEITE = f"""<!doctype html>
 <p class="nurvorlesen" data-ansage aria-live="polite"></p>
 </main>
 <footer class="huelle">
-<p>Raute auf der Linie: ein Datum zum Merken. Ring: ein Modul ohne eigenes Merkdatum. Unter der Linie steht die Nummer des Moduls im Heft. Die Karten liegen in der Reihenfolge der Zeit, nicht in der Reihenfolge der Nummern. Datum und Modul stehen an derselben Stelle des Strahls; sie gehören nicht immer zum selben Thema.</p>
+<p>Raute auf der Linie: ein Datum zum Merken. Ring: ein Modul ohne eigenes Merkdatum. Unter der Linie steht die Nummer des Moduls im Heft. Die Karten liegen in der Reihenfolge der Nummern, so wie im Unterricht. Die Merkdaten stehen in der Reihenfolge der Zeit. M27 und M40 blicken zurück: Sie stehen später im Unterricht als in der Zeit. Datum und Modul an derselben Stelle gehören nicht immer zum selben Thema.</p>
 <p>Bildnachweise: <a href="M17_Bildliste.html">M17</a> · <a href="M21_Bildliste.html">M21</a> · <a href="M22_Bildliste.html">M22</a> · <a href="M23_Bildliste.html">M23</a> · <a href="M25_Bildliste.html">M25</a> · <a href="M27_Bildliste.html">M27</a> · M19, M20, M26: aus dem Unterrichtsheft, Nachweise offen · <a href="ost-west/Bildliste.html">Ost-West (Heft, Nachweise offen)</a></p>
 <p>Datenschutz: Alle Ergebnisse bleiben auf deinem Gerät. Diese Seiten senden nichts ins Internet und brauchen keine Anmeldung. · <a href="auswertung.html">Kursauswertung für die Lehrkraft</a></p>
 <p>© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p>
