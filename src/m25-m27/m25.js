@@ -228,38 +228,7 @@ function zusammenfassung(){
   ${weiter("start", "Zur Startseite")}`;
 }
 
-function lehrkraft(){
-  return `<div class="lk"><p class="zeit"><span class="nr">Für Lehrkräfte</span><span>nicht geschützt – enthält keine Lösungen, die Lernende nicht sehen dürfen</span></p><h1>M25 · Hinweise</h1>
-  <p class="lead">Dieses Modul beruht auf dem Modul zum Kriegsende von Offene Geschichte (<a href="https://offene-geschichte.de/kriegsende-1/" target="_blank" rel="noopener">offene-geschichte.de/kriegsende-1</a>). Von dort kam es in dein Heft „Geschichte aktuell 1“, M25 (vier Bausteine, Quellen 1–2, M3–M6). Die Seite übernimmt Aufbau, Quellen und Aufgaben aus dem Heft. Neu ist, was nur das Gerät kann.</p>
-  <h2 class="abschnitt">Herkunft: Offene Geschichte</h2>
-  <ul><li><b>Was Offene Geschichte ist:</b> eine Plattform mit offenen Unterrichtsmodulen für Geschichte. Laut Impressum gibt sie die Universität Tübingen heraus (Sonderforschungsbereich 923). Die Startseite nennt die Module „OER“, die „frei für alle Schulen verwendet werden“ können (abgerufen am 12.11.2026).</li><li><b>Noch offen:</b> der genaue Titel des Moduls und der Wortlaut der Lizenz. Die Modulseite ließ sich beim Bau dieser Fassung nicht abrufen. Bitte dort nachsehen und hier nachtragen.</li><li><b>Noch offen:</b> welche Texte und Aufgaben wörtlich von Offene Geschichte stammen und welche du für das Heft verändert hast. Das Heft nennt die Quelle einmal, bei Baustein 4.</li><li>Die Angabe „Inhalte CC BY-NC-SA 4.0“ im Fuß gilt für deine eigenen Teile, nicht für das, was von Offene Geschichte stammt.</li></ul>
-  <h2 class="abschnitt">Was das Gerät hier leistet</h2>
-  <ul><li><b>Markierungen werden zu Belegen:</b> Was Lernende antippen, steht geordnet neben dem Schreibfeld (Befreiung · Bedrohung, Problem · Ressource).</li><li><b>Festlegen vor dem Lesen:</b> erste Antwort zum 8. Mai, am Ende die Rückkehr dazu.</li><li><b>Fotos nur nach Hinweis und eigener Entscheidung</b>; die Wortwahl wird danach in „Ausdruck · Deutung · Urteil“ sortiert.</li><li><b>Vergleiche erst nach dem eigenen Text</b> (Schwur, Prüffragen zu M5/M6, Raster Sach- und Werturteil).</li><li><b>Stimmkarte</b> für das Plenum; <b>Zusammenfassung</b> auf zwei Seiten A4 mit den eigenen Texten.</li></ul>
-  <p>Papier bleibt besser für: die langen Originalfassungen der Quellen (Heft) und das Gespräch.</p>
-  <h2 class="abschnitt">Ablauf (90 Minuten)</h2>
-  <div class="matrix-wrap"><table><thead><tr><th>Zeit</th><th>Phase</th><th>Sozialform</th><th>Hinweis</th></tr></thead><tbody>
-  <tr><td class="n">0–20</td><td>Der Krieg ist vorbei</td><td>allein, dann zu zweit</td><td>Erste Antwort 2, Quellen 10, Text 6, Austausch 2</td></tr>
-  <tr><td class="n">20–30</td><td>Überleben in Ruinen</td><td>allein</td><td>Hinweis zu Selbsttötungen in der Quelle</td></tr>
-  <tr><td class="n">30–50</td><td>Im Angesicht des Verbrechens</td><td>allein; Fotos am Beamer</td><td>Schwur 6, Wörter 8, Interpretation 6</td></tr>
-  <tr><td class="n">50–72</td><td>Verantwortung</td><td>allein</td><td>M5/M6 und Satz 12, Urteil A oder B 10</td></tr>
-  <tr><td class="n">72–80</td><td>Landkarte</td><td>allein</td><td>Perspektivität, Multiperspektivität</td></tr>
-  <tr><td class="n">80–90</td><td>Plenum</td><td>Plenum, iPad zu</td><td>Stimmkarte, Begründungen, Rückkehr zur ersten Antwort</td></tr></tbody></table></div>
-  <p class="hinweis">Zeitdiagnose bei 150 Wörtern pro Minute (gemessen an der fertigen Seite): Lesen rund 18 Minuten (rund 2.700 Wörter mit beiden Quellen), Schreiben rund 38 Minuten (sieben Texte), Markieren und Wählen rund 12 Minuten, Landkarte, Plenum und Wechsel rund 30 Minuten. Das sind fast 100 Minuten. <b>In 90 Minuten passt die Stunde nur mit einer Kürzung</b> – empfohlen K1, oder K2 und K3 zusammen.</p>
-  <h2 class="abschnitt">Kürzungen zur Auswahl</h2>
-  <ul><li><b>K1</b> Baustein 2 (Ruinen) als Hausaufgabe: 10 Minuten frei.</li><li><b>K2</b> Interpretation der Fotos mündlich im Plenum statt schriftlich: 6 Minuten frei.</li><li><b>K3</b> Landkarten-Moment gemeinsam am Beamer: 4 Minuten frei.</li><li><b>K4</b> Urteil A/B als Hausaufgabe, im Unterricht nur Stimmkarte und Gespräch: 10 Minuten frei.</li></ul>
-  <h2 class="abschnitt">Abweichungen vom Heft</h2>
-  <ul><li>Anrede durchgehend „du“ (Heft: gemischt).</li><li>Die Quellen sind für die öffentliche Seite stärker gekürzt als im Heft; jede Kürzung ist mit […] markiert. Die vollen Auszüge stehen im Heft.</li><li>In M3 ist ein Nebensatz mit einer abwertenden Bezeichnung gekürzt.</li><li>Die Leitfrage der Stunde ist neu formuliert (das Heft nennt keine).</li><li>Die Sortierung der 18 Wörter in „Ausdruck · Deutung · Urteil“ ist ein Vorschlag von Claude, kein Forschungsstand. Bitte prüfen.</li><li>Die Einstufungen im Landkarten-Moment (zentral: Perspektivität, Multiperspektivität) sind ein Vorschlag. Wortlaut der Prinzipien aus der Landkarte 2.1.</li><li>Ergänzt aus der Gedenkstätte Buchenwald: Datum der Besichtigung (16. April), Befehl Pattons, Schwur am 19. April, 51 000 als damalige Schätzung.</li></ul>
-  <h2 class="abschnitt">Quellen und Rechte</h2>
-  <ul><li>Textauszüge von Rost, Kuby (Hg.), Hillers, Bourke-White: kurze Zitate mit Fundstelle zur Analyse im Unterricht (§ 51 UrhG). Ob der Umfang auf einer öffentlichen Seite trägt, entscheidest du.</li><li><b>Vier Fotos aus dem Heft</b> (Buchenwald, April 1945; laut Heft Margaret Bourke-White / Getty Images, zwei ohne Angabe): im Moodle-Paket unter <code>media/</code> (§ 60a UrhG) und auf deinen Wunsch (11.11.2026) auch im öffentlichen Repository – die Verantwortung dafür liegt bei dir. Drei erscheinen in Baustein 3 erst nach Hinweis und „Fotos zeigen“, eines (Frauen, ohne Tote) in Aufgabe B. Fehlen die Dateien, verweist die Seite auf das Heft. Nachweise: <code>M25_Bildliste.html</code>.</li><li>Gedenkstätte Buchenwald: buchenwald.de, Dossiers „Die Bevölkerung konfrontieren“ und „Schwur von Buchenwald“; liberation.buchenwald.de, „Denials of guilt“.</li></ul>
-  <h2 class="abschnitt">Vor dem Einsatz prüfen</h2>
-  <ul><li>Nico Rost: Angaben „niederländischer Journalist, Tagebuch“ und Datum 29. April 1945.</li><li>Offene Geschichte: Modultitel, Lizenz und wörtliche Übernahmen abgleichen (siehe oben, „Herkunft“).</li><li>Zitat Bourke-White: im Heft nach SPIEGEL 23.2.2018; die Gedenkstätte zitiert nach „Dear Fatherland, Rest Quietly“ (1946).</li></ul>
-  <h2 class="abschnitt">Nur du kannst das</h2>
-  <ul><li>Entscheiden, ob und wie die Fotos gezeigt werden; Lernende mit Flucht- oder Kriegserfahrung in der Familie im Blick behalten.</li><li>Test auf dem iPad in Safari (hoch und quer), VoiceOver, Moodle-Upload.</li><li>Im Plenum Sach- und Werturteil trennen helfen; kein Moral-Ranking der Weimarer*innen.</li></ul>
-  <h2 class="abschnitt">Nach der Stunde</h2>
-  <div class="matrix-wrap"><table><thead><tr><th>Beobachtung</th><th>Notiz</th></tr></thead><tbody><tr><td>Haben die Markierungen beim Schreiben geholfen – oder wurde nur markiert?</td><td></td></tr><tr><td>Wie viele haben die Fotos am Gerät geöffnet?</td><td></td></tr><tr><td>Welche Satzanfänge zu „Wir haben nichts gewusst“ wurden gewählt?</td><td></td></tr><tr><td>Zeit: Wo wurde es eng?</td><td></td></tr></tbody></table></div>
-  <p class="hinweis" style="margin-top:1rem">Speicherschlüssel <code>${L.key}</code>. Eingaben bleiben im Browser des Geräts.</p></div>
-  ${weiter("start", "Zur Startseite")}`;
-}
+/* Für Lehrkräfte: Der Text liegt verschlüsselt in lk/ (Klartext nicht im Repository). Anzeige und Schloss: src/lk-schloss.js. */
 
 AKTION.vorfest = () => { S.vor.zu = true; speichere(); zeichne(true); };
 AKTION.wort = t => { const w = t.dataset.w, i = S.wort.indexOf(w); if (i >= 0) S.wort.splice(i, 1); else if (S.wort.length < 5) S.wort.push(w); speichere(); zeichneBehalte(); };

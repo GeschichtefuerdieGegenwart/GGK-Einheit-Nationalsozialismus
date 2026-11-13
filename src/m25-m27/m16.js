@@ -153,36 +153,7 @@ function zusammenfassung(){
   ${weiter("start", "Zur Startseite")}`;
 }
 
-function lehrkraft(){
-  return `<div class="lk"><p class="zeit"><span class="nr">Für Lehrkräfte</span><span>nicht geschützt – enthält keine Lösungen, die Lernende nicht sehen dürfen</span></p><h1>M16 · Hinweise</h1>
-  <p class="lead">Grundlage ist dein Heft „Geschichte aktuell 1“, M16 (zwei Seiten): Video, Appell, zwei Partnerfragen mit Wortwolke, Vergleich mit dem Humanismus-Text, Werte-Test, Schlussfrage. Die Seite übernimmt Aufbau, Text und Aufgaben. Neu ist, was nur das Gerät kann.</p>
-  <h2 class="abschnitt">Was das Gerät hier leistet – nach den sechs Prinzipien aus Kidu</h2>
-  <ul><li><b>Verdecken:</b> Im Werte-Teil entscheiden die Lernenden zuerst und benennen dann selbst den Wert. Die Überschriften des alten Tests („Ehrlichkeit vs. Mitgefühl“) verraten die Deutung nicht mehr.</li><li><b>Messen:</b> Die eigenen Entscheidungen werden zu einem Bild („so oft stand dieser Wert vorn“) – ohne Punkte und ohne Prozent.</li><li><b>Stufen:</b> Fünf Konflikte für alle, drei weitere für Schnelle; Satzanfänge auf Abruf.</li><li><b>Bündeln:</b> Ein Gerät zeigt die Wörter am Beamer; die Schlussfrage läuft über die Stimmkarte. Es wird nichts eingesammelt und nichts übertragen.</li><li><b>Markierungen werden zu Belegen:</b> Was im Humanismus-Text angetippt wird, steht geordnet neben dem Schreibfeld.</li><li><b>Weitergeben:</b> Die drei Werte und die Antwort auf die Schlussfrage stehen in M17 wieder da (gleiches Gerät, gleicher Browser) und auf der Zusammenfassung.</li></ul>
-  <p>Rückmelden und Variieren kommen hier nicht vor: Es gibt in dieser Stunde keine richtige Antwort, die eine Rückmeldung prüfen könnte.</p>
-  <p>Papier und Gespräch bleiben besser für: das gemeinsame Sehen des Videos, das Partnergespräch, das Plenum zur Schlussfrage.</p>
-  <h2 class="abschnitt">Ablauf (45 Minuten)</h2>
-  <div class="matrix-wrap"><table><thead><tr><th>Zeit</th><th>Phase</th><th>Sozialform</th><th>Hinweis</th></tr></thead><tbody>
-  <tr><td class="n">0–10</td><td>Der Appell</td><td>Plenum, allein, zu zweit</td><td>Video vorn (4:15 Minuten), iPads umgedreht; dann Appell notieren und deuten</td></tr>
-  <tr><td class="n">10–18</td><td>Was ist menschlich?</td><td>zu zweit, kurz Plenum</td><td>Wörter sammeln; ein Gerät am Beamer</td></tr>
-  <tr><td class="n">18–27</td><td>Humanismus</td><td>allein</td><td>markieren, Vergleich in zwei Sätzen</td></tr>
-  <tr><td class="n">27–38</td><td>Meine Werte</td><td>allein</td><td>fünf Konflikte, Bild, drei Werte</td></tr>
-  <tr><td class="n">38–45</td><td>Die Frage</td><td>allein, Plenum</td><td>Stimmkarte, drei Begründungen</td></tr></tbody></table></div>
-  <p class="hinweis" id="zeitdiagnose">Zeitdiagnose bei 150 Wörtern pro Minute (gemessen an der fertigen Seite): Lesen rund 8 Minuten (rund 1.150 Wörter mit fünf Konflikten), Video und Start rund 6, Schreiben rund 7 (fünf kurze Texte), Wörter sammeln und Partnergespräche rund 9, Wählen rund 4, Plenum rund 7, Wechsel rund 3. Das sind rund 44 Minuten. <b>Die Stunde passt in 45 Minuten, aber ohne Puffer</b> – empfohlen K1 oder K3.</p>
-  <h2 class="abschnitt">Kürzungen zur Auswahl</h2>
-  <ul><li><b>K1</b> Vergleich mit dem Humanismus nur markieren, den Satz mündlich: 3 Minuten frei.</li><li><b>K2</b> Wörter nur zu Frage 2 sammeln („ein guter Mensch“): 2 Minuten frei.</li><li><b>K3</b> Schlussfrage nur mit Stimmkarte, der Satz als Hausaufgabe: 2 Minuten frei.</li></ul>
-  <h2 class="abschnitt">Video</h2>
-  <p>„Holocaust-Überlebende Margot Friedländer im Gespräch | WDR Aktuelle Stunde“, 4:15 Minuten: <a href="${VIDEO}" target="_blank" rel="noopener">${VIDEO}</a>. Das Video ist nicht eingebettet (fremder Server). Zeig es vorn vom Lehrkraftgerät. Den Wortlaut des Appells nennt das Heft nicht; er steht deshalb auch hier nicht.</p>
-  <h2 class="abschnitt">Abweichungen vom Heft</h2>
-  <ul><li>Anrede durchgehend „du“ (Heft: „Sie“).</li><li><b>Werte-Test:</b> Das Heft verlinkt den „Humanistischen Werte-Test“ (Repository <code>Fragen-Humanismus</code>) und lässt das Ergebnis als Bildschirmfoto einfügen. Die Seite übernimmt daraus nur den Teil „Wertekonflikte“ (acht Situationen, Wortlaut unverändert). Nicht übernommen sind die 16 Situationen mit Punkten – dort ist die erwünschte Antwort immer A – sowie Prozentwerte und Netzdiagramm. Den Wert benennen die Lernenden selbst; die Zuordnung „Antwort → Wert“ des alten Tests entfällt.</li><li>Zur Auswahl der Werte ist „Loyalität“ ergänzt (im alten Test nur in einer Überschrift genannt).</li><li>Die Wortwolke ist eine Wörterliste am eigenen Gerät; gezeigt wird ein Gerät vorn. Grund: Das Zusammenführen vieler Geräte hat in der Erprobung zu viel Zeit gekostet.</li><li>Leitfrage, Merksatz, Begriffserklärungen und Denkwerkzeug der Zusammenfassung sind Vorschläge von Claude. Bitte prüfen.</li><li>Im Arbeitsauftrag „wider“ statt „wieder“; „Appell“ statt „Appel“.</li><li>Das Standbild aus dem Video ist nicht übernommen.</li></ul>
-  <h2 class="abschnitt">Vor dem Einsatz prüfen</h2>
-  <ul><li>Humanismus-Text: Das Heft nennt keine Quelle. Der Satz „Der Begriff stammt ursprünglich aus der Renaissance“ ist ungenau – die Bewegung stammt aus der Renaissance, das Wort „Humanismus“ ist deutlich jünger (aus dem Gedächtnis: 1808, Niethammer; bitte nachschlagen).</li><li>Lebensdaten Margot Friedländers (1921–2025) und der Titel des Videos.</li><li>Ob das Video unter der Adresse noch erreichbar ist.</li></ul>
-  <h2 class="abschnitt">Nur du kannst das</h2>
-  <ul><li>Test auf dem iPad in Safari (hoch und quer), VoiceOver, Moodle-Upload.</li><li>Im Plenum niemanden zu Aussagen über sich oder die eigene Familie drängen; die Wertebilder bleiben am Gerät.</li><li>Entscheiden, ob der alte Werte-Test weiter verlinkt bleibt.</li></ul>
-  <h2 class="abschnitt">Nach der Stunde</h2>
-  <div class="matrix-wrap"><table><thead><tr><th>Beobachtung</th><th>Notiz</th></tr></thead><tbody><tr><td>Haben die Lernenden den Wert selbst benannt – oder geraten, was „gewünscht“ ist?</td><td></td></tr><tr><td>Hat ein Gerät vorn für die Wörter gereicht?</td><td></td></tr><tr><td>Wie viele Tipps bis zum ersten eigenen Wort?</td><td></td></tr><tr><td>Zeit: Wo wurde es eng?</td><td></td></tr><tr><td>Gilt die Lehre nur in Geschichte oder überall? Wo würde sie in einem anderen Fach brechen?</td><td></td></tr></tbody></table></div>
-  <p class="hinweis" style="margin-top:1rem">Speicherschlüssel <code>${L.key}</code>. Eingaben bleiben im Browser des Geräts. M17 liest daraus nur die drei Werte, den Satz dazu und die Antwort auf die Schlussfrage.</p></div>
-  ${weiter("start", "Zur Startseite")}`;
-}
+/* Für Lehrkräfte: Der Text liegt verschlüsselt in lk/ (Klartext nicht im Repository). Anzeige und Schloss: src/lk-schloss.js. */
 
 AKTION.chipplus = t => { const p = t.dataset.p, f = document.getElementById("c-" + p), w = (f.value || "").trim().replace(/\s+/g, " "), a = (hol(p) || []).slice(); if (!w) { f.focus(); return; } if (a.length < +t.dataset.max && !a.some(x => x.toLowerCase() === w.toLowerCase())) a.push(w); setz(p, a); zeichneBehalte(); const n = document.getElementById("c-" + p); if (n && !n.disabled) n.focus(); };
 AKTION.chipweg = t => { const p = t.dataset.p, a = (hol(p) || []).slice(); a.splice(+t.dataset.i, 1); setz(p, a); zeichneBehalte(); const n = document.getElementById("c-" + p); if (n) n.focus(); };

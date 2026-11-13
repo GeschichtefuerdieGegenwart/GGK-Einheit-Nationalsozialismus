@@ -34,7 +34,7 @@ function karteHtml(k, o = {}){
 /* Kopf mit Rückweg zur Einheit */
 function kopf(){
   const hub = L.hub;
-  document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div>${hub ? `<a class="pill" href="../index.html">← GGK-Labor</a>` : `<a class="pill" href="index.html">← Einheit</a>`}<button class="pill" data-geh="lehrkraft">Für Lehrkräfte</button>`;
+  document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div>${hub ? `<a class="pill" href="../index.html">← GGK-Labor</a>` : `<a class="pill" href="index.html">← Einheit</a>`}`;
   const a = idx(S.seite);
   document.getElementById("weg").innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
 }

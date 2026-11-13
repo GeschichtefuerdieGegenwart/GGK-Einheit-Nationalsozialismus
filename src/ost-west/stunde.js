@@ -64,18 +64,7 @@ function merk(){
 }
 
 /* ---------- Für Lehrkräfte ---------- */
-function lehrkraft(){
-  const c = L.lk, s = meine();
-  return `<div class="lk"><p class="zeit"><span class="nr">Für Lehrkräfte</span><span>nicht geschützt</span></p><h1>Stunde ${stundeNr()} · ${esc(L.titel)}</h1>
-  <p class="lead">Heft: ${esc(s[3])} · Bildungsplan: ${esc(s[5])} · Karten: ${s[4].map(id => esc(karte(id).titel)).join(", ") || "keine"}</p>
-  <h2 class="abschnitt">Ablauf (90 Minuten)</h2><div class="matrix-wrap"><table><thead><tr><th>Zeit</th><th>Phase</th><th>Sozialform</th><th>Was passiert</th></tr></thead><tbody>${c.ablauf.map(a => `<tr><td class="n">${esc(a[0])}</td><td><b>${esc(a[1])}</b></td><td>${esc(a[2])}</td><td>${esc(a[3])}</td></tr>`).join("")}</tbody></table></div>
-  <h2 class="abschnitt">Denkhandlung und Muster</h2><ul>${c.muster.map(x => `<li>${x}</li>`).join("")}</ul>
-  <h2 class="abschnitt">Erwartungen</h2><ul>${c.erwartung.map(x => `<li>${x}</li>`).join("")}</ul>
-  <h2 class="abschnitt">Abweichungen vom Heft</h2><ul>${c.heft.map(x => `<li>${x}</li>`).join("")}</ul>
-  <h2 class="abschnitt">Nur du kannst das</h2><ul>${c.nurdu.concat(["iPad in Safari hoch und quer, Beamer, VoiceOver, Moodle.", "Bildnachweise klären: Die Bilder stammen aus dem Heft und liegen auf deine Verantwortung im öffentlichen Repository."]).map(x => `<li>${x}</li>`).join("")}</ul>
-  <p class="hinweis" style="margin-top:1rem">Speicherschlüssel <code>${esc(L.key)}</code>. „Verorten und vernetzen“ schreibt zusätzlich in den Speicher der Einheit (<code>${OWK_KEY}</code>). „Eingaben löschen“ auf dieser Seite löscht nur die Stunde; Verbindungen und roter Faden löschst du in der Übersicht der Einheit.</p></div>
-  ${weiter("start", "Zum Anfang der Stunde")}`;
-}
+/* Der Text liegt verschlüsselt in lk/ (Klartext nicht im Repository). Anzeige und Schloss: src/lk-schloss.js. */
 /* ---------- Reihen (Muster 4): Schritte durch Antippen in eine Reihenfolge bringen ----------
    schritte = Texte in der richtigen Reihenfolge; misch = Reihenfolge der Anzeige (Indizes) */
 function reihe(id, schritte, misch, tipp){

@@ -25,9 +25,10 @@ def vorhanden():
 def bau(k):
     datei, titel, desc, extra, texte = ST[k]
     css = (K/'basis.css').read_text('utf-8').replace('url(assets/', 'url(../assets/') + (K/'kern.css').read_text('utf-8') + (H/'owk.css').read_text('utf-8') + ((H/f'{k}.css').read_text('utf-8') if (H/f'{k}.css').exists() else '')
-    teile = [K/'kern.js', H/'karten.js'] + ([H/'glossar.js', H/'einheit.js'] if k == 'hub' else [H/'einheit.js', H/'quellen.js', H/'stunde.js']) + [H/e for e in extra] + [H/f'{k}.js']
+    teile = [K/'kern.js', REPO/'src'/'lk-schloss.js', H/'karten.js'] + ([H/'glossar.js', H/'einheit.js'] if k == 'hub' else [H/'einheit.js', H/'quellen.js', H/'stunde.js']) + [H/e for e in extra] + [H/f'{k}.js']
     js = 'window.OWK_GEBAUT = ' + json.dumps(gebaut()) + ';\n' + ''.join(t.read_text('utf-8') for t in teile)
     assert '</script' not in js
+    lehr = (REPO/'lk'/f'ow-{k}.enc.json').read_text('utf-8').strip()
     tx = ''.join(f'\n<script src="texte/{t}"></script>' for t in texte)
     html = f'''<!doctype html>
 <html lang="de">
@@ -46,6 +47,7 @@ def bau(k):
 <main id="main" tabindex="-1"></main>
 <div id="ueber"></div>
 <noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft „Geschichte aktuell 1“ (M28–M44).</p></noscript>
+<script type="application/json" id="lehr-daten">{lehr}</script>
 <script src="../assets/gegenwart/bundle.js"></script>{tx}
 <script>
 {js}</script>

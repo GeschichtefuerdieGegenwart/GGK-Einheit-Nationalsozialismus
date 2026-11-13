@@ -163,7 +163,7 @@ td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
 .raster3 div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .7rem}
 .raster3 b{display:block;margin-bottom:.2rem}
 .satzanfaenge{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem}
-.satzanfaenge button{min-height:40px;border:1.5px solid var(--border);background:var(--surface2);border-radius:.5rem;padding:.3rem .7rem;font-size:.9rem}
+.satzanfaenge button{min-height:44px;border:1.5px solid var(--border);background:var(--surface2);border-radius:.5rem;padding:.3rem .7rem;font-size:.9rem}
 .pole{display:flex;justify-content:space-between;gap:1rem;font-weight:700;font-size:.95rem;margin-top:.6rem}
 .pole span{max-width:46%}
 
@@ -309,6 +309,10 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 
 /* Rückmeldung je Option erst nach dem Festlegen (die Regel der Bausteine „.g-option span{display:grid}“ ist stärker als deren „display:none“) */
 .g .g-wahl:not([data-zu]) .g-option .g-option__urteil{display:none}
+
+/* Herkunftszeile (z. B. M25: nach Offene Geschichte) */
+.herkunft{font-size:.95rem;border-left:4px solid var(--kuli,#24221F);padding:.15rem 0 .15rem .7rem;margin:.6rem 0 1rem;max-width:68ch}
+.herkunft a{font-weight:700}
 /* ===== Ost-West-Einheit: Zeitraster, Ereigniskarten, Ordnen, Netz, Glossar ===== */
 :root{--sp-w:var(--kuli);--sp-w-hi:var(--kuli-hi);--sp-e:var(--gold);--sp-e-hi:var(--gold-hi);--sp-d:var(--green);--sp-d-hi:var(--green-hi)}
 .spur-w{--sp:var(--sp-w);--sp-hi:var(--sp-w-hi)}.spur-e{--sp:var(--sp-e);--sp-hi:var(--sp-e-hi)}.spur-d{--sp:var(--sp-d);--sp-hi:var(--sp-d-hi)}
@@ -472,6 +476,7 @@ main.breit:has(.zraster.gross){max-width:78rem}
 <main id="main" tabindex="-1"></main>
 <div id="ueber"></div>
 <noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft „Geschichte aktuell 1“ (M28–M44).</p></noscript>
+<script type="application/json" id="lehr-daten">{"v":2,"alg":"AES-GCM-256/PBKDF2-SHA256","iter":600000,"salt":"S2AE0Ck1PuvFDIipEmJzCg==","iv":"7jZv7u/iSeASR71t","ct":"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"}</script>
 <script src="../assets/gegenwart/bundle.js"></script>
 <script>
 window.OWK_GEBAUT = ["s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9"];
@@ -610,14 +615,14 @@ function tafelZu(){ const u = document.getElementById("ueber"); if (!u.innerHTML
 
 /* ---------- Kopf, Löschen, Zeichnen ---------- */
 function kopf(){
-  document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div><a class="pill" href="${LABOR}">← GGK-Labor</a><button class="pill" data-geh="lehrkraft">Für Lehrkräfte</button>`;
+  document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div><a class="pill" href="${LABOR}">← GGK-Labor</a>`;
   const a = idx(S.seite);
   document.getElementById("weg").innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
 }
 function loeschBereich(){
-  return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button><label class="g-schalter" style="font-family:var(--body)"><input type="checkbox" role="switch" data-bewegung ${S.ruhig ? "checked" : ""}> Weniger Bewegung</label><span>Alles bleibt auf diesem Gerät. Nichts wird übertragen.</span>
+  return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button><label class="g-schalter" style="font-family:var(--body)"><input type="checkbox" role="switch" data-bewegung ${S.ruhig ? "checked" : ""}> Weniger Bewegung</label><span>Alles bleibt auf diesem Gerät. Nichts wird übertragen.</span>${S.seite === "lehrkraft" ? "" : lehrTuer()}
   <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> ${esc(L.loesch)}</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div>
-  <p style="flex:1 0 100%;font-size:.85rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p></div>`;
+  ${L.herkunft ? `<p class="herkunft" style="flex:1 0 100%;margin:0">${L.herkunft}</p>` : ""}<p style="flex:1 0 100%;font-size:.85rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p></div>`;
 }
 function zeichne(fokus){
   if (!SEITE_FN[S.seite]) S.seite = "start";
@@ -721,6 +726,92 @@ const AKTION = {
   /* data-akt="setz" data-p="pfad" data-w="wert": Wert setzen und neu zeichnen */
   setz(t){ let w = t.dataset.w; if (w === "true") w = true; else if (w === "false") w = false; setz(t.dataset.p, w); zeichneBehalte(); },
 };
+/* ===== Lehrkraft-Schloss · Quelle: src/lk-schloss.js – nur dort ändern =====
+   Der Text für Lehrkräfte steht verschlüsselt auf dieser Seite (Datenblock mit der id lehr-daten): AES-GCM 256,
+   Schlüssel per PBKDF2-SHA-256 (600 000 Runden) aus dem Passwort. Weder Passwort noch Klartext stehen im Repository.
+   Nach dem Öffnen bleibt der abgeleitete Schlüssel bis zum Schließen des Tabs im sessionStorage, damit andere
+   Module ohne neue Eingabe öffnen. »Lehrkraftbereich schließen« entfernt ihn. Nichts wird übertragen. */
+const LEHR_ORT = "ggk-lehr:schluessel";
+const LEHR = { html:null, laeuft:false, versucht:false };
+const lehrB = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const lehrT = u => btoa(String.fromCharCode.apply(null, u));
+const lehrKrypto = () => !!(window.crypto && crypto.subtle);
+function lehrDaten(){ try { return JSON.parse(document.getElementById("lehr-daten").textContent); } catch(e) { return null; } }
+function lehrMerk(){ try { return JSON.parse(sessionStorage.getItem(LEHR_ORT) || "null"); } catch(e) { return null; } }
+function lehrVergiss(){ try { sessionStorage.removeItem(LEHR_ORT); } catch(e) {} }
+async function lehrAuf(roh, d){
+  const key = await crypto.subtle.importKey("raw", roh, "AES-GCM", false, ["decrypt"]);
+  return new TextDecoder().decode(await crypto.subtle.decrypt({ name:"AES-GCM", iv:lehrB(d.iv) }, key, lehrB(d.ct)));
+}
+async function lehrMitPasswort(pass, d){
+  const klar = pass.normalize("NFC").trim().replace(/\s+/g, " ");
+  const km = await crypto.subtle.importKey("raw", new TextEncoder().encode(klar), "PBKDF2", false, ["deriveBits"]);
+  const roh = new Uint8Array(await crypto.subtle.deriveBits({ name:"PBKDF2", salt:lehrB(d.salt), iterations:d.iter, hash:"SHA-256" }, km, 256));
+  const html = await lehrAuf(roh, d);
+  try { sessionStorage.setItem(LEHR_ORT, JSON.stringify({ salt:d.salt, k:lehrT(roh) })); } catch(e) {}
+  return html;
+}
+/* Mit dem Schlüssel aus dieser Sitzung öffnen (ohne neue Eingabe). */
+async function lehrStill(m, d){
+  LEHR.laeuft = true;
+  try { LEHR.html = await lehrAuf(lehrB(m.k), d); } catch(e) { lehrVergiss(); }
+  LEHR.laeuft = false; lehrNeu();
+}
+function lehrNeu(){
+  if (typeof LEHR_ZEICHNE === "function") LEHR_ZEICHNE();
+  else { if (typeof S !== "undefined" && S && S.seite !== "lehrkraft") return; zeichne(false); }
+  const z = document.getElementById("lehr-inhalt") || document.getElementById("lehr-pass");
+  if (z) z.focus({ preventScroll:true });
+  window.scrollTo(0, 0);
+}
+const lehrZurueck = () => typeof LEHR_ZURUECK === "string" ? LEHR_ZURUECK : `<button type="button" class="btn" data-geh="start">‹ Zum Anfang</button>`;
+const lehrTuer = () => `<button type="button" class="lehr-tuer" data-geh="lehrkraft">Für Lehrkräfte</button>`;
+function lehrkraft(){
+  if (LEHR.html !== null) return `<div id="lehr-inhalt" tabindex="-1">${LEHR.html}${typeof lehrWerkzeuge === "function" ? lehrWerkzeuge() : ""}</div>
+  <div class="fuss lehr-fuss nodruck">${lehrZurueck()}<button type="button" class="btn" data-lehrzu>Lehrkraftbereich schließen</button></div>`;
+  const d = lehrDaten(), m = lehrMerk(), kopf = `<p class="zeit"><span class="nr">Für Lehrkräfte</span><span>mit Passwort geschützt</span></p><h1>Lehrkraftbereich</h1>`;
+  if (d && m && m.salt === d.salt && lehrKrypto() && !LEHR.versucht) { LEHR.versucht = true; lehrStill(m, d); }
+  if (LEHR.laeuft) return `<div class="lehr-schloss">${kopf}<p class="lead" role="status">Der Bereich wird geöffnet …</p></div>`;
+  const geht = d && lehrKrypto();
+  return `<div class="lehr-schloss">${kopf}
+  <p class="lead">Ablauf, Erwartungen und Hinweise zur Stunde. Der Bereich ist verschlüsselt und öffnet nur mit dem Passwort.</p>
+  ${geht ? `<form class="lehr-form" data-lehrform novalidate>
+    <label for="lehr-pass">Passwort</label>
+    <input id="lehr-pass" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" aria-describedby="lehr-hilfe lehr-meldung">
+    <button type="submit" class="btn primary lehr-knopf">Öffnen</button>
+    <p id="lehr-meldung" role="status" aria-live="polite"></p>
+  </form>
+  <p class="hinweis" id="lehr-hilfe">Das Passwort wird nur auf diesem Gerät geprüft und nicht übertragen. Groß- und Kleinschreibung zählen.</p>`
+  : `<p class="hinweis" role="status">${d ? "Dieser Browser kann den Bereich hier nicht öffnen. Öffne die Seite über https oder in einem aktuellen Browser." : "Für diese Seite ist kein Text für Lehrkräfte hinterlegt."}</p>`}
+  <div class="fuss lehr-fuss">${lehrZurueck()}</div></div>`;
+}
+document.addEventListener("submit", async ev => {
+  const f = ev.target.closest && ev.target.closest("[data-lehrform]"); if (!f) return;
+  ev.preventDefault(); if (LEHR.laeuft) return;
+  const ein = f.querySelector("input"), kn = f.querySelector("button"), m = document.getElementById("lehr-meldung");
+  if (!ein.value.trim()) { m.textContent = "Bitte gib das Passwort ein."; ein.focus(); return; }
+  LEHR.laeuft = true; kn.disabled = true; m.textContent = "Wird geprüft …";
+  try { LEHR.html = await lehrMitPasswort(ein.value, lehrDaten()); LEHR.laeuft = false; lehrNeu(); }
+  catch(e) { LEHR.laeuft = false; if (document.contains(f)) { kn.disabled = false; m.textContent = "Das Passwort passt nicht."; ein.focus(); ein.select(); } }
+});
+document.addEventListener("click", ev => {
+  if (!(ev.target.closest && ev.target.closest("[data-lehrzu]"))) return;
+  LEHR.html = null; LEHR.versucht = false; lehrVergiss(); lehrNeu();
+});
+document.head.insertAdjacentHTML("beforeend", `<style id="lehr-stil">
+.lehr-form{display:grid;gap:.6rem;max-width:30rem;margin:1.4rem 0 1rem}
+.lehr-form label{font-weight:700}
+.lehr-form input{width:100%;min-height:48px;border:1.5px solid #77716A;border-radius:var(--r,.75rem);padding:.5rem .8rem;background:var(--surface2,#fff);color:var(--ink,#24221F);font:inherit;margin:0}
+.lehr-form .lehr-knopf{justify-self:start}
+:where(.lehr-knopf){min-height:48px;padding:.6rem 1.2rem;font:inherit;font-weight:700;border-radius:.75rem;border:1px solid transparent;background:#9B402D;color:#FFFAF2;cursor:pointer}
+:where(.lehr-fuss .btn){min-height:48px;padding:.6rem 1.2rem;font:inherit;font-weight:700;border-radius:.75rem;border:1px solid #77716A;background:#FFFDF8;color:#24221F;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+#lehr-meldung{min-height:1.5em;margin:0;font-weight:700;color:var(--red,#9B402D)}
+:where(.lehr-schloss .zeit){display:flex;gap:.8rem;flex-wrap:wrap;font-weight:700}
+:where(.lehr-fuss){display:flex;gap:1rem;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-top:2.2rem;padding-top:1.3rem;border-top:1px solid #D5CEC3}
+#lehr-inhalt:focus{outline:none}
+.lehr-tuer{margin-left:auto;min-height:44px;padding:.3rem .2rem;border:0;background:none;font:inherit;color:inherit;text-decoration:underline;text-underline-offset:.2em;cursor:pointer}
+</style>`);
+/* ===== Ende Lehrkraft-Schloss ===== */
 /* ===== Ost-West-Konflikt: Orientierungsrahmen. 16 Ereigniskarten und Glossar nach M28 „Unser Glossar: Der Ost-West-Konflikt“ (Unterrichtsheft, Karten und Texte der Lehrkraft). ===== */
 const LEITFRAGE = "Welchen Einfluss hatten Ideologien, Machtinteressen und Handlungsspielräume (Agency) der Akteure auf den Verlauf des Ost-West-Konflikts – und wie wird dieser Konflikt heute in verschiedenen Ländern erinnert?";
 const PHASEN = [
@@ -869,7 +960,7 @@ function karteHtml(k, o = {}){
 /* Kopf mit Rückweg zur Einheit */
 function kopf(){
   const hub = L.hub;
-  document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div>${hub ? `<a class="pill" href="../index.html">← GGK-Labor</a>` : `<a class="pill" href="index.html">← Einheit</a>`}<button class="pill" data-geh="lehrkraft">Für Lehrkräfte</button>`;
+  document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div>${hub ? `<a class="pill" href="../index.html">← GGK-Labor</a>` : `<a class="pill" href="index.html">← Einheit</a>`}`;
   const a = idx(S.seite);
   document.getElementById("weg").innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
 }
@@ -1130,18 +1221,7 @@ function merk(){
 }
 
 /* ---------- Für Lehrkräfte ---------- */
-function lehrkraft(){
-  const c = L.lk, s = meine();
-  return `<div class="lk"><p class="zeit"><span class="nr">Für Lehrkräfte</span><span>nicht geschützt</span></p><h1>Stunde ${stundeNr()} · ${esc(L.titel)}</h1>
-  <p class="lead">Heft: ${esc(s[3])} · Bildungsplan: ${esc(s[5])} · Karten: ${s[4].map(id => esc(karte(id).titel)).join(", ") || "keine"}</p>
-  <h2 class="abschnitt">Ablauf (90 Minuten)</h2><div class="matrix-wrap"><table><thead><tr><th>Zeit</th><th>Phase</th><th>Sozialform</th><th>Was passiert</th></tr></thead><tbody>${c.ablauf.map(a => `<tr><td class="n">${esc(a[0])}</td><td><b>${esc(a[1])}</b></td><td>${esc(a[2])}</td><td>${esc(a[3])}</td></tr>`).join("")}</tbody></table></div>
-  <h2 class="abschnitt">Denkhandlung und Muster</h2><ul>${c.muster.map(x => `<li>${x}</li>`).join("")}</ul>
-  <h2 class="abschnitt">Erwartungen</h2><ul>${c.erwartung.map(x => `<li>${x}</li>`).join("")}</ul>
-  <h2 class="abschnitt">Abweichungen vom Heft</h2><ul>${c.heft.map(x => `<li>${x}</li>`).join("")}</ul>
-  <h2 class="abschnitt">Nur du kannst das</h2><ul>${c.nurdu.concat(["iPad in Safari hoch und quer, Beamer, VoiceOver, Moodle.", "Bildnachweise klären: Die Bilder stammen aus dem Heft und liegen auf deine Verantwortung im öffentlichen Repository."]).map(x => `<li>${x}</li>`).join("")}</ul>
-  <p class="hinweis" style="margin-top:1rem">Speicherschlüssel <code>${esc(L.key)}</code>. „Verorten und vernetzen“ schreibt zusätzlich in den Speicher der Einheit (<code>${OWK_KEY}</code>). „Eingaben löschen“ auf dieser Seite löscht nur die Stunde; Verbindungen und roter Faden löschst du in der Übersicht der Einheit.</p></div>
-  ${weiter("start", "Zum Anfang der Stunde")}`;
-}
+/* Der Text liegt verschlüsselt in lk/ (Klartext nicht im Repository). Anzeige und Schloss: src/lk-schloss.js. */
 /* ---------- Reihen (Muster 4): Schritte durch Antippen in eine Reihenfolge bringen ----------
    schritte = Texte in der richtigen Reihenfolge; misch = Reihenfolge der Anzeige (Indizes) */
 function reihe(id, schritte, misch, tipp){
@@ -1253,11 +1333,6 @@ L.merk = { frage:"Wer ist schuld am Ost-West-Konflikt?", kern:"1947 erklären be
   zeit:[["12. März 1947", "Truman-Doktrin"],["Juni 1947", "Ankündigung des Marshallplans"],["Sept. 1947", "Kominform, Zwei-Lager-Theorie"],["1949", "RGW und NATO"],["1955", "Warschauer Pakt"]],
   werkzeug:"<b>Perspektive prüfen:</b> Wer spricht? Zu wem? Wie beschreibt er sich selbst, wie den Gegner? Welche Wörter benutzen beide – und was meinen sie damit?",
   mein:[["Was die beiden Reden gemeinsam haben", "spiegel"],["Wer ist schuld? Meine Begründung", () => (S.wahl.schuld || {}).zu ? SCHULD[S.wahl.schuld.o][0] + " – " + (S.wahl.schuld.grund || "") : ""],["Ziel des Westblocks / des Ostblocks", () => [S.ziel.w, S.ziel.o].filter(Boolean).join(" / ")]] };
-L.lk = { ablauf:[["0–8", "Abruf, Vorgeschichte", "allein", "Potsdam und die beiden Begriffe aus dem Kopf."],["8–26", "Truman", "allein", "Zwei Stifte: eigene Seite, Gegenseite. Aufgaben 1 und 2 aus M31."],["26–41", "Shdanow", "allein", "Dieselben Stifte, Aufgabe 3 aus M31 erweitert."],["41–56", "Spiegelbild", "zu zweit, Plenum", "Markierungen nebeneinander; Schuldfrage mit drei Deutungen."],["56–70", "Blöcke", "zu zweit", "M31.1 lesen, Schema ausfüllen."],["70–78", "Landkarte", "allein", "Perspektivität."],["78–90", "Verorten und vernetzen", "allein", "Karten 2, 3 und 4."]],
-  muster:["Denkhandlung: vergleichen und beurteilen.", "Muster 11 (Markieren mit zwei Stiften) für beide Reden, Muster 2 (Einfachwahl mit Erklärung je Option) für die Schuldfrage und die Landkarte, Muster 3 (Zuordnen) für das Schema aus M31.1.", "Mehrwert gegenüber Papier: Die Markierungen beider Reden stehen danach automatisch nebeneinander – das Spiegelbild wird sichtbar."],
-  erwartung:["Truman, eigene Seite: frei von Zwang, Wille der Mehrheit, freie Wahlen. Gegenseite: totalitäre Regierungsformen, Terror, Zensur, manipulierte Wahlen.", "Shdanow, eigene Seite: gerechter demokratischer Frieden, Länder der neuen Demokratie. Gegenseite: imperialistisches Joch, Sabotage der zweiten Front, Missachtung der sowjetischen Interessen in Potsdam.", "Schema: Marshallplan – RGW; NATO – Warschauer Pakt."],
-  heft:["Aufgabe 3 (Vorwürfe Shdanows markieren) ist auf beide Reden ausgeweitet und um das Selbstbild ergänzt.", "Die Schuldfrage aus dem Schaubild in M31.1 ist mit drei Deutungen der Geschichtswissenschaft unterlegt (traditionell, revisionistisch, postrevisionistisch). Die Zuordnung der Stufen bitte prüfen.", "Im Text zum Marshallplan fehlt im Heft ein Wort („Krediten, die nur zu … zurückbezahlt werden mussten“); die Lücke ist mit […] markiert.", "Die Karikatur Kennedy/Chruschtschow aus M31.1 steht bei Stunde 6 (Kuba-Krise), weil sie 1962 zeigt.", "Die Porträtreihe in M31.1 (Wilson, Stalin, Churchill, Chruschtschow, Kennedy) ist nicht übernommen."],
-  nurdu:["Entscheiden, ob Truman und Shdanow arbeitsteilig gelesen werden (spart etwa zehn Minuten)."] };
 stundeStart();
 </script>
 </body>
