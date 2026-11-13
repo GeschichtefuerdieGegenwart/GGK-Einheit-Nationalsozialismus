@@ -154,3 +154,5 @@ main.breit:has(.zraster.gross){max-width:78rem}
 .dia .nachweis{display:block;color:var(--muted);font-size:.8rem;margin-top:.2rem}
 @media print{.dia{display:none}}
 .tabeng table{font-size:.8rem}.tabeng th,.tabeng td{padding:.25rem .3rem}
+/* Rückwege im Kopf der Stunden: Einheit und GGK-Labor */
+.heim{display:inline-flex;gap:.5rem;flex-wrap:wrap}

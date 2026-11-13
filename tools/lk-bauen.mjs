@@ -4,9 +4,8 @@
 //          LK_PASS='neues Passwort' node tools/lk-bauen.mjs --neu    (neues Salz, alles neu – nach einem Passwortwechsel)
 // AES-GCM 256, Schlüssel per PBKDF2-SHA-256 (600 000 Runden). Ein gemeinsames Salz für alle Dateien, damit ein
 // einmal eingegebenes Passwort in derselben Browser-Sitzung alle Module öffnet; je Datei ein eigener Zufallswert (IV).
-// Das Passwort steht nur in der Umgebungsvariablen. privat/ steht in .gitignore. M19 und M20 haben ein eigenes,
-// älteres Verfahren (tools/lk-verschluesseln.mjs).
-// Danach: python3 tools/bau_m25_m27.py && python3 tools/bau_ost_west.py && python3 tools/lk_einsetzen.py
+// Das Passwort steht nur in der Umgebungsvariablen. privat/ steht in .gitignore.
+// Danach: python3 tools/bau_m25_m27.py && python3 tools/bau_ost_west.py && python3 tools/lk_einsetzen.py   (M18, M19, M20, M21–M23)
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } from "node:fs";
 const args = process.argv.slice(2), PRUEFEN = args.includes("--pruefen"), NEU = args.includes("--neu");
 const QUELLE = "privat/lk", ZIEL = "lk", ITER = 600000;
