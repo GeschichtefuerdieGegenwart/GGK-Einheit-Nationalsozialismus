@@ -31,10 +31,10 @@ function karteHtml(k, o = {}){
     ${o.ohneBild ? "" : `<figure class="bild ebild"><img src="media/owk-karte-${String(k.nr).padStart(2, "0")}.jpg" alt="${esc(k.bild[1])}" loading="lazy" onerror="bildFehlt(this)"><figcaption>${esc(k.bild[0])}<span class="nachweis">Bild aus dem Unterrichtsheft, M28. Nachweis offen.</span></figcaption></figure>`}
   </article>`;
 }
-/* Kopf mit Rückweg zur Einheit */
+/* Kopf mit Rückweg: Stunden zur Einheit und direkt ins GGK-Labor, die Einheit ins GGK-Labor */
 function kopf(){
   const hub = L.hub;
-  document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div>${hub ? `<a class="pill" href="../index.html">← GGK-Labor</a>` : `<a class="pill" href="index.html">← Einheit</a>`}<button class="pill" data-geh="lehrkraft">Für Lehrkräfte</button>`;
+  document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div>${hub ? `<a class="pill" href="../index.html">← GGK-Labor</a>` : `<span class="heim"><a class="pill" href="index.html">← Einheit</a><a class="pill" href="../index.html">GGK-Labor</a></span>`}`;
   const a = idx(S.seite);
   document.getElementById("weg").innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
 }

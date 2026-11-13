@@ -266,34 +266,7 @@ function zusammenfassung(){
   ${weiter("start", "Zur Startseite")}`;
 }
 
-function lehrkraft(){
-  return `<div class="lk"><p class="zeit"><span class="nr">Für Lehrkräfte</span><span>nicht geschützt</span></p><h1>M27 · Hinweise</h1>
-  <p class="lead">Grundlage ist dein Heft, M27: zentrale Frage, Artikel von Nils Sandrisser mit Erkenntnissen und größter Überraschung (10 Min.), Hypothese zu zweit (5 Min.), Eurozentrismus mit Weltkarte und Definition (5 Min.), Extra Adichie, Lernaufgabe Strukturbild in zwei Fassungen (15 Min.).</p>
-  <h2 class="abschnitt">Was das Gerät hier leistet</h2>
-  <ul><li><b>Das eigene Bild sichtbar machen:</b> Drei Orte, Beginn und Ende des Krieges – festgelegt vor dem Lesen. Die Seite zeigt sie als Punkte auf einer Weltkarte und zählt: wie viele in Europa?</li><li><b>Vorher neben nachher:</b> Die Orte aus dem Artikel kommen als Dreiecke dazu. Der Abstand ist der Gesprächsanlass.</li><li><b>Die Karte drehen:</b> Süden oben, Pazifik in der Mitte – dieselben Punkte wandern mit. Das ersetzt das Poster im Heft (Bildrechte) und ist die eine Bewegung der Stunde; vorher steht eine Frage.</li><li><b>Strukturbild zum Legen:</b> 14 Karten, Rückmeldung je Feld erst nach dem Prüfen, zwei Hilfen, danach die Pfeile erklären. Die Lösung erscheint erst auf der Zusammenfassung.</li><li><b>Landkarten-Moment</b> und ein eigener Absatz „fürs Schulbuch“ als Produkt.</li></ul>
-  <p>Papier bleibt besser für: den Artikel (Heft) und das Vorlesen im Plenum.</p>
-  <h2 class="abschnitt">Ablauf (90 Minuten)</h2>
-  <div class="matrix-wrap"><table><thead><tr><th>Zeit</th><th>Phase</th><th>Sozialform</th><th>Hinweis</th></tr></thead><tbody>
-  <tr><td class="n">0–10</td><td>Dein Bild vom Krieg</td><td>allein, dann Beamer</td><td>4 Min. festlegen; eine Karte am Beamer zeigen und zählen lassen</td></tr>
-  <tr><td class="n">10–30</td><td>Der Artikel</td><td>allein, mit Heft</td><td>Lesen 10, Erkenntnisse 5, Orte und Jahre 5</td></tr>
-  <tr><td class="n">30–48</td><td>Eurozentrismus</td><td>zu zweit, allein</td><td>Hypothese 5, Karte 6, Definition und Erklärung 7</td></tr>
-  <tr><td class="n">48–70</td><td>Strukturbild</td><td>frei wählbar</td><td>Legen 15, Pfeile 5; ein Bild am Beamer besprechen</td></tr>
-  <tr><td class="n">70–78</td><td>Landkarte</td><td>allein</td><td>Perspektivität, Standortgebundenheit</td></tr>
-  <tr><td class="n">78–90</td><td>Was fehlt?</td><td>allein, Plenum</td><td>Absatz 6, Vorlesen 6</td></tr></tbody></table></div>
-  <p class="hinweis">Zeitdiagnose bei 150 Wörtern pro Minute (gemessen): Der Artikel im Heft hat rund 970 Wörter – 6 bis 7 Minuten, mit Markieren 10. Die Seite selbst hat rund 1.600 Wörter Lesetext (gut 10 Minuten). Mit Schreiben, Legen und Plenum füllt das 90 Minuten ohne Puffer.</p>
-  <h2 class="abschnitt">Kürzungen zur Auswahl</h2>
-  <ul><li><b>K1 · Einzelstunde (45 Min.):</b> Dein Bild (6) · Artikel als Hausaufgabe vorab, im Unterricht nur Orte und Jahre (8) · Karte und Begriff (10) · Strukturbild mit Hilfe 2 (15) · Plenum (6).</li><li><b>K2</b> Landkarten-Moment gemeinsam am Beamer: 4 Minuten frei.</li><li><b>K3</b> Absatz fürs Schulbuch als Hausaufgabe: 6 Minuten frei.</li></ul>
-  <h2 class="abschnitt">Abweichungen vom Heft</h2>
-  <ul><li>Anrede „du“ (Heft: „Sie“).</li><li><b>Artikel als Lesepult:</b> Der Artikel aus dem Heft steht links, die eigene Weltkarte rechts (bleibt beim Lesen stehen). Zwölf Orte sind im Text markiert; antippen setzt sie als Dreieck auf die Karte, die Kurzinfo erscheint darunter. Die beiden Fotos stehen an ihrer Stelle im Text. Der Text liegt in <code>texte/m27-artikel.js</code> – nur im Moodle-Paket, nicht im öffentlichen Repository, weil er dort vollständig und wörtlich steht (Entscheidung 11.11.2026); fehlt die Datei, verweist die Seite aufs Heft und zeigt die Ortsliste. Korrigiert: fehlender Punkt im Heft („… Massaker unter der Zivilbevölkerung an. Rössel ist …“).</li><li>Zwei Fotos aus dem Heft (Soldaten 1944; „Vermessung“ 1940, Stadtarchiv Münster) im Moodle-Paket unter <code>media/</code> (§ 60a UrhG) und auf deinen Wunsch (11.11.2026) auch im öffentlichen Repository. Die „Vermessung“ erscheint erst nach Hinweis und Tippen, mit der Frage nach dem Blick der Täter. Nachweise: <code>M27_Bildliste.html</code>.</li><li>Das Poster der Upside-down-Weltkarte (interkart.de, Produktfoto mit Wasserzeichen) ist nicht übernommen; die drehbare Karte aus gemeinfreien Daten (Natural Earth) ersetzt es.</li><li>Im Strukturbild sind die Felder vorgegeben (zweite Fassung im Heft). Die freie Fassung bleibt auf Papier möglich.</li><li>Die Zuordnung „Schwarze haben nicht für Frankreich gekämpft“ → Denken ist als falsche Vorstellung gekennzeichnet.</li><li>Schreibweise „Schwarze Soldaten“ mit großem S als Selbstbezeichnung – bitte nach deiner Linie anpassen.</li><li>Ergänzt: 2. September 1945 (Kapitulation Japans) als Gegenstück zum 8. Mai.</li><li>Einstufungen im Landkarten-Moment (zentral: Perspektivität, Standortgebundenheit) sind ein Vorschlag von Claude. Wortlaut aus der Landkarte 2.1.</li></ul>
-  <h2 class="abschnitt">Vor dem Einsatz prüfen</h2>
-  <ul><li>Die Kurzsätze zu den zwölf Orten gegen den Artikel im Heft lesen.</li><li>Buch: Rheinisches JournalistInnenbüro (Hg.): Unsere Opfer zählen nicht. Die Dritte Welt im Zweiten Weltkrieg, bpb-Schriftenreihe Bd. 10408, Bonn 2014.</li><li>Auswahl der Jahre zum Kriegsbeginn (1931, 1935, 1937, 1939, 1941): 1931 und 1941 stehen nicht im Artikel; sie sind als weitere mögliche Antworten gedacht.</li></ul>
-  <h2 class="abschnitt">Nur du kannst das</h2>
-  <ul><li>Lernende mit Familiengeschichte in ehemaligen Kolonien oder mit Rassismuserfahrung im Blick behalten; niemand muss „für eine Gruppe“ sprechen.</li><li>Den Abschnitt zu erzwungener Prostitution vorab ankündigen.</li><li>iPad in Safari hoch und quer, Beamer, VoiceOver, Moodle.</li></ul>
-  <h2 class="abschnitt">Nach der Stunde</h2>
-  <div class="matrix-wrap"><table><thead><tr><th>Beobachtung</th><th>Notiz</th></tr></thead><tbody><tr><td>Wie viele der drei ersten Orte lagen in Europa (grob, im Kurs)?</td><td></td></tr><tr><td>Hat das Drehen der Karte ein Gespräch ausgelöst – oder war es nur ein Effekt?</td><td></td></tr><tr><td>Wo hakte das Strukturbild (Selbstkonzept? Denken/Fühlen/Handeln)?</td><td></td></tr><tr><td>Zeit: Wo wurde es eng?</td><td></td></tr></tbody></table></div>
-  <p class="hinweis" style="margin-top:1rem">Speicherschlüssel <code>${L.key}</code>. Eingaben bleiben im Browser des Geräts.</p></div>
-  ${weiter("start", "Zur Startseite")}`;
-}
+/* Für Lehrkräfte: Der Text liegt verschlüsselt in lk/ (Klartext nicht im Repository). Anzeige und Schloss: src/lk-schloss.js. */
 
 AKTION.bildfest = (t, ev) => { S.bildzu = true; speichere(); zeichneBehalte(); if (ev.detail !== 0) neu(document.getElementById("bildauf"), "neu"); };
 AKTION.art = t => { const k = t.dataset.w; if (S.art[k]) delete S.art[k]; else { S.art[k] = 1; S.artLetzt = k; } speichere(); zeichneBehalte(); };

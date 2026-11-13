@@ -209,33 +209,7 @@ function zusammenfassung(){
   ${weiter("start", "Zur Startseite")}`;
 }
 
-function lehrkraft(){
-  return `<div class="lk"><p class="zeit"><span class="nr">Für Lehrkräfte</span><span>nicht geschützt</span></p><h1>M26 · Hinweise</h1>
-  <p class="lead">Grundlage ist dein Heft, M26: zentrale Frage, BND-Text mit vier Fragen (15 Min.), fünf Gruppen mit vier Fragen (25 Min.), Plenum mit Vergleich, Ursachen und Bewertung (20 Min.). Die Seite übernimmt diese drei Arbeitsaufträge und ihre Zeiten.</p>
-  <h2 class="abschnitt">Was das Gerät hier leistet</h2>
-  <ul><li><b>Schätzen vor dem Lesen:</b> eigene Zahl neben Gehlens „ein Prozent“ und den 10 bis 20 Prozent der Studie, als Punktefeld. Der Abstand ist die Frage der Stunde.</li><li><b>Steckbrief statt Folien:</b> Die vier Fragen der Gruppe werden direkt zur Präsentation am Beamer (ein Gerät je Gruppe, keine Übertragung zwischen Geräten). Zusätzlich: stärkster Beleg und seine Herkunft.</li><li><b>Vergleichstafel beim Zuhören:</b> Jede*r stuft alle sechs Bereiche ein; daraus entsteht das eigene Profil für Frage a) des Plenums.</li><li><b>Landkarte 2.4.3:</b> fünf Sätze aus dem BND-Text als Sachanalyse, Sachurteil oder Werturteil einordnen – vor dem eigenen Urteil.</li><li><b>Skala mit Marke vom Anfang</b> und <b>Stimmkarte</b> für die Abstimmung.</li></ul>
-  <p>Papier bleibt besser für: den BND-Text (Heft) und die Diskussion im Plenum.</p>
-  <h2 class="abschnitt">Ablauf (90 Minuten)</h2>
-  <div class="matrix-wrap"><table><thead><tr><th>Zeit</th><th>Phase</th><th>Sozialform</th><th>Hinweis</th></tr></thead><tbody>
-  <tr><td class="n">0–6</td><td>Schätzen</td><td>allein</td><td>zwei Festlegungen, dann drei Punktefelder am Beamer besprechen</td></tr>
-  <tr><td class="n">6–21</td><td>Der BND</td><td>allein, mit Heft</td><td>Arbeitsauftrag 1; Vergleich erst nach vier Antworten</td></tr>
-  <tr><td class="n">21–46</td><td>Eure Gruppe</td><td>fünf Gruppen</td><td>Arbeitsauftrag 2; ein Gerät je Gruppe für den Steckbrief</td></tr>
-  <tr><td class="n">46–71</td><td>Vergleich</td><td>Plenum</td><td>5 × 5 Minuten; alle füllen die Vergleichstafel</td></tr>
-  <tr><td class="n">71–90</td><td>Urteil</td><td>allein, zu zweit, Plenum</td><td>Sortieren 6, Gründe 4, Urteil 5, Abstimmung und Gespräch 4</td></tr></tbody></table></div>
-  <p class="hinweis">Zeitdiagnose bei 150 Wörtern pro Minute (gemessen): Die Seite hat rund 1.600 Wörter Lesetext (gut 10 Minuten, die Hälfte davon auf der Seite „Urteil“), der BND-Text im Heft rund 340 Wörter (gut 2 Minuten). Eng wird es bei den Präsentationen und am Schluss: Für „Urteil“ sind 19 Minuten knapp – K2 oder K3 einplanen.</p>
-  <h2 class="abschnitt">Kürzungen zur Auswahl</h2>
-  <ul><li><b>K1</b> Präsentationen auf 4 Minuten begrenzen: 5 Minuten frei für das Plenum.</li><li><b>K2</b> Sortieraufgabe (Landkarte 2.4.3) gemeinsam am Beamer mit zwei statt fünf Sätzen: 4 Minuten frei.</li><li><b>K3</b> Urteilstext als Hausaufgabe; im Unterricht nur Skala, Abstimmung, Gespräch: 5 Minuten frei.</li><li><b>K4</b> Zwei Doppelstunden: Gruppenarbeit und Präsentationen in der ersten, Vergleich und Urteil in der zweiten.</li></ul>
-  <h2 class="abschnitt">Abweichungen vom Heft</h2>
-  <ul><li>Anrede „du“/„ihr“ (Heft: gemischt mit „Sie“).</li><li><b>BND-Text als Akte:</b> Der Text aus dem Heft steht in deinen sieben Abschnitten als Karten (Studie mit Punktefeld, Personalakten Schreiber und Grauer, Globke und Adenauer, die „vier Lügen“ als vier Felder, Bilanz), daneben die vier Fragen. Nach den Antworten erscheint mit dem Vergleich das Schaubild „Kette des Wegsehens“ (Modell). Der Text liegt in <code>texte/m26-bnd.js</code>, auf deine Freigabe (11.11.2026) auch im öffentlichen Repository: Es ist deine eigene Fassung aus dem Heft mit kurzen, belegten Zitaten aus tagesschau.de; fehlt die Datei, verweist die Seite aufs Heft.</li><li>„Digitale Präsentation“: Der Steckbrief ist die Präsentation. Wer lieber Folien baut, kann das weiterhin tun.</li><li>Neu: Herkunft des stärksten Belegs. Grund: Die Infoseite „NS-Kontinuitäten“ enthält prüfbedürftige Angaben (im Tresor vermerkt: Landgericht München 1951 und die Urteile gegen die Weiße Rose).</li><li>Plenumsfragen a) bis c) sind auf „Vergleich“ und „Urteil“ verteilt.</li><li>Das Foto im Heft (Teppich mit dem Bundesadler und dem Schriftzug des BND) ist nicht übernommen: Es hat keine Aufgabe in der Stunde und zeigt ein Hoheitszeichen.</li></ul>
-  <h2 class="abschnitt">Vor dem Einsatz prüfen</h2>
-  <ul><li>Die Zahlen und Zitate zum BND stammen aus dem Heft (dort nach tagesschau.de, 10.10.2022). Den Artikel konnte Claude nicht selbst abrufen. Bitte am Original prüfen: Worauf beziehen sich die „10 bis 20 Prozent“ genau (welcher Zeitraum, welche Gruppe)? Stimmen die Zitate von Sälter und Gehlen wörtlich?</li><li>Studie: Gerhard Sälter, NS-Kontinuitäten im BND. Rekrutierung, Diskurse, Vernetzungen (2022).</li><li>Infoseite: Angaben ohne belastbare Quelle (teils Wikipedia, YouTube) markieren oder ersetzen.</li><li>Der Link zur Infoseite führt in der Arbeitsphase aus der Lernseite heraus. Das ist gewollt, aber die einzige Stelle.</li></ul>
-  <h2 class="abschnitt">Nur du kannst das</h2>
-  <ul><li>AirPlay und Beamer im Raum testen; iPad in Safari hoch und quer; Moodle.</li><li>Im Gespräch auf den Unterschied achten: Mitgliedschaft in der NSDAP ist nicht dasselbe wie Beteiligung an Verbrechen.</li><li>Beutelsbacher Konsens bei Frage c): „Ja“, „Nein“ und „Ja, aber“ sind vertretbar, wenn der Maßstab genannt wird.</li></ul>
-  <h2 class="abschnitt">Nach der Stunde</h2>
-  <div class="matrix-wrap"><table><thead><tr><th>Beobachtung</th><th>Notiz</th></tr></thead><tbody><tr><td>Hat der Steckbrief als Präsentation am Beamer funktioniert (Lesbarkeit, Zeit)?</td><td></td></tr><tr><td>Wurde die Vergleichstafel beim Zuhören wirklich gefüllt?</td><td></td></tr><tr><td>Welche Sätze wurden bei Sach- und Werturteil verwechselt?</td><td></td></tr><tr><td>Hat sich die Position gegenüber dem Anfang bewegt?</td><td></td></tr></tbody></table></div>
-  <p class="hinweis" style="margin-top:1rem">Speicherschlüssel <code>${L.key}</code>. Eingaben bleiben im Browser des Geräts.</p></div>
-  ${weiter("start", "Zur Startseite")}`;
-}
+/* Für Lehrkräfte: Der Text liegt verschlüsselt in lk/ (Klartext nicht im Repository). Anzeige und Schloss: src/lk-schloss.js. */
 
 AKTION.schaetzfest = (t, ev) => { S.schaetz.zu = true; speichere(); zeichneBehalte(); if (ev.detail !== 0) neu(document.getElementById("schaetzauf"), "neu"); };
 AKTION.stufe = t => { const b = t.dataset.b, w = +t.dataset.w; if (!S.tafel[b]) S.tafel[b] = {}; S.tafel[b].s = S.tafel[b].s === w ? 0 : w; speichere(); zeichneBehalte(); };

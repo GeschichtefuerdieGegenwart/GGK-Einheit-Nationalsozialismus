@@ -13,8 +13,9 @@ ST = {
 def bau(k):
     datei, titel, desc, extra = ST[k]
     css = (H/'basis.css').read_text('utf-8') + (H/'kern.css').read_text('utf-8') + ((H/f'{k}.css').read_text('utf-8') if (H/f'{k}.css').exists() else '')
-    js = (H/'kern.js').read_text('utf-8') + ''.join((H/e).read_text('utf-8') for e in extra) + (H/f'{k}.js').read_text('utf-8')
+    js = (H/'kern.js').read_text('utf-8') + (REPO/'src'/'lk-schloss.js').read_text('utf-8') + ''.join((H/e).read_text('utf-8') for e in extra) + (H/f'{k}.js').read_text('utf-8')
     assert '</script' not in js
+    lehr = (REPO/'lk'/f'{k}.enc.json').read_text('utf-8').strip()
     texte = {'m26':'\n<script src="texte/m26-bnd.js"></script>','m27':'\n<script src="texte/m27-artikel.js"></script>'}.get(k,'')
     html = f'''<!doctype html>
 <html lang="de">
@@ -33,6 +34,7 @@ def bau(k):
 <main id="main" tabindex="-1"></main>
 <div id="ueber"></div>
 <noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft „Geschichte aktuell 1“ ({k.upper()}).</p></noscript>
+<script type="application/json" id="lehr-daten">{lehr}</script>
 <script src="assets/gegenwart/bundle.js"></script>{texte}
 <script>
 {js}</script>
