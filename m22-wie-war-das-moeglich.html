@@ -494,22 +494,163 @@ svg.linien .zieh{animation:zieh var(--reveal) var(--ease) both}
   .zf .raster3{font-size:8pt}
   .zf .raster3 div{padding:.35rem .5rem}
 }
+/* ===== Arbeitsblatt-Rahmen (Fassung 4.0, 13.11.2026): Register links auf altem Papier, ein Auftrag je Seite ===== */
+:root{--ab-reg:15rem;--ab-kopf:3.7rem}
+.kopf-in{max-width:none}
+.weg{display:none}
+.ab-rahmen{display:grid;grid-template-columns:var(--ab-reg) minmax(0,1fr);align-items:start}
+.ab-reg{position:sticky;top:var(--ab-kopf);height:calc(100dvh - var(--ab-kopf));overflow-y:auto;padding:.8rem .55rem 1rem .7rem;border-right:1px solid #A39270;color:#24221F;background-color:#E2D4B4;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='k'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .30  0 0 0 0 .21  0 0 0 0 .09  0 0 0 .6 -.17'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23k)'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .55' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36  0 0 0 0 .26  0 0 0 0 .12  0 0 0 .5 -.14'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.007' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42  0 0 0 0 .30  0 0 0 0 .13  0 0 0 .5 -.14'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E"),repeating-linear-gradient(90deg, rgba(90,70,30,.06) 0 1px, transparent 1px 27px),linear-gradient(90deg, rgba(120,95,45,.16), rgba(120,95,45,0) 18%, rgba(120,95,45,0) 86%, rgba(90,70,30,.14));background-size:360px 360px,720px 360px,900px 900px,auto,auto}
+.ab-regtitel{font-size:.8rem;font-weight:700;color:#463F33;margin:0 0 .35rem .5rem}
+.ab-reg ol{list-style:none;display:grid;gap:0}
+.ab-reg ol button{display:flex;gap:.55rem;align-items:center;width:100%;text-align:left;border:2px solid transparent;background:none;border-radius:.45rem;padding:.16rem .45rem;min-height:48px;color:inherit;line-height:1.2;font:inherit}
+.ab-reg ol button[aria-current]{background:var(--kuli-hi);border-color:var(--kuli)}
+.ab-nr{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:1.9rem;height:1.9rem;border-radius:999px;border:2px solid currentColor;font-family:var(--display);font-weight:600;font-size:1rem;line-height:1;background:var(--surface2)}
+.ab-reg b{display:block;font-size:.95rem;line-height:1.2}
+.ab-reg small{display:block;font-size:.78rem;color:#463F33;line-height:1.25}
+.ab-st{display:block;font-size:.78rem;font-weight:700;color:#463F33;line-height:1.25}
+.ab-reg .fertig .ab-nr{background:var(--green);border-color:var(--green);color:var(--surface2)}
+.ab-reg .fertig .ab-st{color:#24503D}
+.ab-reg .hier .ab-nr,.ab-reg .hier .ab-st{color:var(--kuli)}
+.ab-reg .ansage .ab-nr,.ab-reg .ansage .ab-st{color:#623D05}
+#main{max-width:none;margin:1rem 1.2rem 1.4rem;padding:.8rem 1.9rem 1rem;background:var(--surface2);border:1px solid var(--line);border-radius:.4rem;min-height:calc(100dvh - var(--ab-kopf) - 2.4rem);display:flex;flex-direction:column}
+#main.dashboard{max-width:none;padding:1.15rem 1.2rem 1.1rem}
+.ab-zeile{display:flex;justify-content:space-between;gap:1rem;font-size:.8rem;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:.3rem;margin-bottom:.6rem}
+.ab-h{display:flex;align-items:center;gap:.7rem;font-size:clamp(1.45rem,1.2rem + .8vw,1.75rem);margin:0 0 .15rem}
+.ab-h .ab-nr{width:2.25rem;height:2.25rem;font-size:1.2rem;background:var(--ink);border-color:var(--ink);color:var(--surface2)}
+.ab-meta{margin:0 0 .5rem 2.95rem;font-size:.9rem;font-weight:700;color:var(--red)}
+.ab-marke{margin-left:.6rem;padding:.15rem .6rem;border-radius:.3rem;background:var(--marker);color:var(--ink);font-size:.82rem}
+.ab-teil{max-width:52rem}
+#main.dashboard .ab-teil,#main.breit .ab-teil{max-width:none}
+.ab-teil > .auftrag:first-child,.ab-teil > .band:first-child{margin-top:.3rem}
+.ab-fuss{margin-top:auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.6rem .8rem}
+.ab-fuss::before{content:"";grid-column:1/-1;border-top:1px solid var(--line);margin-top:.9rem}
+.ab-fuss > :first-child{justify-self:start}.ab-fuss > :last-child{justify-self:end}
+.ab-tabs{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:center}
+.ab-tabs button{min-height:44px;padding:.3rem .8rem;border-radius:999px;border:1px solid #8B857A;background:var(--surface2);color:var(--ink);font:inherit;font-size:.85rem;font-weight:700}
+.ab-tabs button[aria-current]{background:var(--ink);border-color:var(--ink);color:var(--surface2)}
+.ab-zu{max-width:36rem;margin:2.2rem auto 1rem;text-align:center;display:grid;gap:.9rem;justify-items:center}
+.ab-zu-t{font-family:var(--display);font-weight:600;font-size:1.5rem;line-height:1.25}
+.ab-zu .loesch-frage{text-align:left}
+.ab-zwei{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:1.6rem;align-items:start}
+.ab-zwei.gleich{grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin:1rem 0}
+.ab-zwei h3{font-family:var(--body);font-size:.95rem;margin-bottom:.3rem}
+.ab-zwei ul{padding-left:1.2rem;display:grid;gap:.3rem}
+.ab-zentral{font-size:.9rem;font-weight:700;color:var(--red);margin-top:.6rem}
+.ab-unter{color:var(--muted);margin:0 0 .5rem}
+.ka-aufgabe{border-left:4px solid var(--ink);padding:.1rem 0 .1rem .9rem;margin:0 0 1rem;max-width:46rem;font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.35}
+.gliederung{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin:.3rem 0 .9rem}
+.haken{display:flex;align-items:center;gap:.6rem;min-height:44px;margin:.6rem 0;font-weight:400}
+.haken input{width:1.4rem;height:1.4rem;flex:0 0 auto}
+.ka-inhalt{display:grid;gap:.35rem;margin:.7rem 0}
+#schreibblatt{display:none}
+@media (max-width:899px){
+  .ab-rahmen{display:block}
+  .ab-reg{position:static;height:auto;border-right:0;border-bottom:1px solid #A39270;padding:.45rem .6rem;overflow-x:auto}
+  .ab-regtitel{display:none}
+  .ab-reg ol{display:flex;gap:.2rem}
+  .ab-reg li{flex:0 0 auto}
+  .ab-reg small,.ab-reg button:not([aria-current]) b,.ab-reg button:not([aria-current]) .ab-st{display:none}
+  .ab-reg button{padding:.2rem .3rem}
+  #main{margin:.6rem .6rem 1rem;padding:1rem 1rem .9rem}
+  .ab-zwei,.ab-zwei.gleich,.gliederung{grid-template-columns:1fr}
+  .ab-fuss{grid-template-columns:1fr 1fr}.ab-tabs{grid-column:1/-1;grid-row:1}
+}
+@media (min-width:900px){
+  /* Querformat: Seiten sollen möglichst auf einen Bildschirm passen */
+  .buehne{height:min(calc((100vw - var(--ab-reg) - 5.2rem) * 9 / 16),calc(100dvh - 255px));min-height:400px}
+  #main{font-size:1rem;line-height:1.5}
+  #main h1:not(.ab-h){font-size:2.3rem;margin:.2rem 0 .3rem}
+  #main .leitfrage{font-size:1.35rem;margin-bottom:.5rem}
+  #main .lead{font-size:1.05rem;margin-bottom:.6rem}
+  #main h2.abschnitt{font-size:1.2rem;margin:.9rem 0 .35rem}
+  #main .auftrag{padding:.65rem 1rem;margin:.6rem 0 .7rem}
+  #main .auftrag h3{font-size:1.05rem;margin-bottom:.15rem}
+  #main .band{min-height:0;margin-bottom:.7rem}
+  #main .band.mit{min-height:8.5rem}
+  #main .merksatz{font-size:1.1rem;padding:.4rem 0;margin:.7rem 0}
+  #main .belastend{margin:.6rem 0;padding:.5rem .9rem}
+  #main .menschen{grid-template-columns:repeat(5,minmax(0,1fr));gap:.6rem;margin-top:.4rem}
+  #main .mensch .foto{aspect-ratio:auto;height:7.2rem}
+  #main .mensch .mt{padding:.5rem .6rem .6rem}
+  #main .mensch h3{font-size:.98rem}
+  #main .mensch p{font-size:.84rem;line-height:1.4}
+  #main .mensch .q{font-size:.7rem}
+  #main .phasen{grid-template-columns:repeat(4,minmax(0,1fr));gap:.6rem;margin-top:.5rem}
+  #main .phase{padding:.65rem .75rem}
+  #main .wer-tat{margin:.2rem 0 .2rem}
+  #main .frage-gross{padding:.9rem 1.2rem;margin:.4rem 0 .6rem}
+  #main .moder{grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}
+  #main .moder .schritt{padding:.65rem .85rem;grid-template-columns:2rem minmax(0,1fr);gap:.6rem}
+  #main .moder .schritt .n{font-size:1.5rem}
+  #main .moder .schritt h3{font-size:1.05rem}
+  #main .prinzipien{grid-template-columns:repeat(4,minmax(0,1fr))}
+  #main .dreh{margin-top:.5rem}
+  #main textarea{min-height:4rem}
+  #main .band:not(.mit){display:none}                      /* Text steht schon im Auftrag darunter */
+  #main .mensch .foto{height:4.8rem}
+  #main .mensch p{line-height:1.33}
+  #main .mensch .mt{gap:.15rem}
+  #main .moder{gap:.45rem}
+  #main .moder .schritt{padding:.5rem .8rem}
+  #main .moder .schritt p{line-height:1.4}
+  #modell + .satz{margin-top:.3rem}
+  #main .dreh .optionen{grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}
+  #main h1:not(.ab-h){font-size:2.05rem}
+  #main .modell{gap:.3rem;margin-top:.4rem}
+  #modell .fak > div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 6.5rem;gap:.7rem;align-items:center}
+  #modell .fak label .u{display:inline;margin-left:.4rem}
+  #modell .fak{min-height:48px}
+  #main .runden{margin-top:.5rem}
+  #main .runden div{padding:.5rem .8rem}
+  #main .empfehlung{margin-top:.6rem;padding:.55rem .9rem}
+  #main .regeln{margin-top:.3rem}
+  .ab-rahmen.schmal{--ab-reg:3.9rem}
+  .ab-rahmen.schmal .ab-regtitel,.ab-rahmen.schmal .ab-reg ol button > span:last-child{display:none}
+  .ab-rahmen.schmal .ab-reg{padding:.8rem .35rem}
+  .ab-rahmen.schmal .ab-reg ol button{justify-content:center;padding:.28rem 0}
+  #main.dashboard .ab-zeile,#main.dashboard .ab-meta{display:none}
+  #main.dashboard .ab-h{font-size:1.35rem;margin-bottom:.5rem}
+  #main.dashboard .buehne{height:min(calc((100vw - var(--ab-reg) - 5.2rem) * 9 / 16),calc(100dvh - 17rem));min-height:400px}
+  #main.dashboard .dash-fuss{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:.2rem 1rem;align-items:center;margin-top:.45rem}
+  #main.dashboard .fortschritt{padding:.4rem .8rem;font-size:.9rem}
+  .ab-rahmen:not(.schmal) ~ .urheberzeile{display:none}
+}
+.ab-c{font-size:.7rem;line-height:1.3;color:#463F33;margin-top:.3rem}
+.ab-reg .loesch{margin-top:.5rem;padding-top:.45rem;border-top:1px solid #A39270;font-size:.82rem;color:#463F33;display:flex;flex-wrap:wrap;gap:.2rem .7rem;align-items:center}
+.ab-reg .loesch-frage{flex:1 0 100%}
+.ab-reg .loesch .btn{min-height:44px;padding:.35rem .8rem;font-size:.85rem}
+.ab-reg .lehr-tuer{margin-left:0}
+#main:focus{outline:none}
+@media print{
+  .ab-reg,.ab-zeile,.ab-h,.ab-meta,.ab-fuss{display:none!important}
+  .ab-rahmen{display:block}
+  #main{margin:0;padding:0;border:0;min-height:0;display:block;background:#fff}
+  .ab-teil{max-width:none}
+  body.druck-sb .ab-teil > *:not(#schreibblatt){display:none!important}
+  body.druck-sb #schreibblatt{display:block}
+  #schreibblatt h2{font-size:14pt;margin:0 0 .3rem}
+  #schreibblatt .ka-aufgabe{font-size:11.5pt;margin:.4rem 0 .6rem}
+  #schreibblatt .linien{height:8mm;border-bottom:1px solid #999}
+  #schreibblatt .gl3{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm}
+}
 </style>
 </head>
 <body>
 <header class="kopf"><div class="kopf-in" id="kopf"></div><nav class="weg" id="weg" aria-label="Lernweg"></nav></header>
-<main id="main" tabindex="-1"></main>
+<div class="ab-rahmen"><nav class="ab-reg" id="reg" aria-label="Alle Arbeitsaufträge"></nav><main id="main" tabindex="-1"></main></div>
 <div id="ueber"></div>
 <noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft (M22).</p></noscript>
-<script type="application/json" id="lehr-daten">{"v":2,"alg":"AES-GCM-256/PBKDF2-SHA256","iter":600000,"salt":"S2AE0Ck1PuvFDIipEmJzCg==","iv":"nhYY0rWGzWZrJfGe","ct":"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"}</script>
+<script type="application/json" id="lehr-daten">{"v":2,"alg":"AES-GCM-256/PBKDF2-SHA256","iter":600000,"salt":"S2AE0Ck1PuvFDIipEmJzCg==","iv":"5xLjr58KHBQLIoZX","ct":"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"}</script>
 <script>
 "use strict";
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const KEY = "ggk-m22-taeter:v3"; // v3 seit 08.11.2026: Dashboard (ansicht, filter, gelesen) und Landkarten-Moment (lk, lkauf); alte Stände aus v2 werden übernommen
 const lade = () => { try { return JSON.parse(localStorage.getItem(KEY)) || JSON.parse(localStorage.getItem("ggk-m22-taeter:v2")) || {}; } catch(e) { return {}; } };
-let S = Object.assign({ seite:"start", x:{text:"", zu:false, zeit:""}, neu:"", af:{}, afo:{}, z:{}, zum:{}, y:null, ai:0, hier:-1, akte:"", stufe:{}, karte:{}, gew:{}, gewok:{}, treffer:0, versuche:0, paare:{}, notiz:{}, modell:{person:1,situation:1,weltbild:1,apparat:1,vorteil:1}, grund:"", pos:50, klasse:[], beamer:false, moder:0, erz:"", abruf:{}, ansicht:"frage", filter:null, gelesen:{}, lk:{vermutung:"", prinzip:null, grund:"", ok:false}, lkauf:"" }, lade());
+let S = Object.assign({ seite:"start", x:{text:"", zu:false, zeit:""}, neu:"", af:{}, afo:{}, z:{}, zum:{}, y:null, ai:0, hier:-1, akte:"", stufe:{}, karte:{}, gew:{}, gewok:{}, treffer:0, versuche:0, paare:{}, notiz:{}, modell:{person:1,situation:1,weltbild:1,apparat:1,vorteil:1}, grund:"", pos:50, klasse:[], beamer:false, moder:0, erz:"", abruf:{}, ansicht:"frage", filter:null, gelesen:{}, lk:{vermutung:"", prinzip:null, grund:"", ok:false}, lkauf:"", frei:{}, teil:{}, durch:{}, gl:["","",""], hand:false, krit:false }, lade());
 if (!S.lk) S.lk = {vermutung:"", prinzip:null, grund:"", ok:false}; if (!S.gelesen) S.gelesen = {}; if (!S.ansicht) S.ansicht = "frage"; if (S.lkauf === undefined) S.lkauf = "";
-const speichere = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
+if (!S.frei) S.frei = {}; if (!S.teil) S.teil = {}; if (!S.durch) S.durch = {}; if (!Array.isArray(S.gl)) S.gl = ["","",""];
+let REGT = null;
+const speichere = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} clearTimeout(REGT); REGT = setTimeout(() => { if (typeof register === "function") register(); }, 200); };
 const ruhig = () => { try { return matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e) { return false; } };
 const neu = (el, k) => { if (!el) return; el.classList.remove(k); void el.offsetWidth; if (!ruhig()) el.classList.add(k); };
 const LABOR = /github\.io$/.test(location.hostname) ? "index.html" : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
@@ -716,49 +857,101 @@ const PAARE = [
 ];
 
 /* ---------- Bausteine ---------- */
-const zeitKopf = id => { const s = SEITEN[idx(id)]; return `<p class="zeit"><span class="nr">${esc(s[1])}</span><span>${esc(s[2])}</span></p>`; };
-const weiter = (nach, text, o = {}) => `<div class="fuss"><span class="hinweis">${o.hinweis || "Dein Stand wird nur auf diesem Gerät gespeichert."}</span><button class="btn primary" data-geh="${nach}" ${o.aus ? "disabled" : ""}>${esc(text)} ›</button></div>`;
+const zeitKopf = () => "";   // seit Fassung 4.0 steht der Auftrag im Blattkopf (blatt())
+const weiter = () => "";     // seit Fassung 4.0 führt der Fuß des Blatts weiter (blatt())
 function auftrag(form, titel, text){ return `<div class="auftrag"><span class="form">${esc(form)}</span><h3>${esc(titel)}</h3><p>${text}</p></div>`; }
 const balken = (k, v) => `<div class="balken b-${k}"><b style="--w:${(v+1)/5}"></b></div>`;
 
 function kopf(){
-  document.getElementById("kopf").innerHTML = `${MARK}<div class="titel">M22 · Wie war das möglich?<small>„Große Verbrechen brauchen keine Monster!“</small></div><a class="pill" href="${LABOR}">← GGK-Labor</a>`;
-  const a = idx(S.seite);
-  document.getElementById("weg").innerHTML = SEITEN.slice(1).map((s, i) => {
-    const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : "");
-    return `<button class="${cls}" data-geh="${s[0]}"${k===a?' aria-current="step"':""}><b>${esc(s[2] || "Zum Abheften")}</b>${esc(s[1])}</button>`;
-  }).join("");
+  document.getElementById("kopf").innerHTML = `${MARK}<div class="titel">M22 · „Große Verbrechen brauchen keine Monster!“<small>Arbeitsblatt · davor M21 · danach M23</small></div><a class="pill" href="${LABOR}">← GGK-Labor</a>`;
+  document.documentElement.style.setProperty("--ab-kopf", document.querySelector(".kopf").offsetHeight + "px");
+  register(true);
+}
+
+/* ---------- Arbeitsblatt-Rahmen (Fassung 4.0, 13.11.2026) ----------
+   Zehn Arbeitsaufträge, links als Register. Freigabe: offen · auf Ansage (Knopf mit Rückfrage) · nach deiner Antwort.
+   Lange Aufträge sind in Seiten geteilt (4a, 4b …): Die Seitenfunktionen setzen dazu Marken <!--teil:Name-->. */
+const AUF = [
+  { id:"einstieg", nr:"1", kurz:"Es geht um Menschen", name:"Es geht um Menschen", form:"Plenum, dann allein", min:8, frei:"offen" },
+  { id:"fakten", nr:"2", kurz:"Faktencheck", name:"Drei Sätze im Faktencheck", form:"Alle", min:7, frei:"offen" },
+  { id:"jozefow", nr:"3", kurz:"Der Fall Józefów", name:"Der Fall Józefów, 13. Juli 1942", form:"Plenum", min:9, frei:"ansage", gleich:"Ein Fall für alle. Am 13. Juli 1942 kamen etwa 500 Hamburger Polizisten in ein Dorf im besetzten Polen." },
+  { id:"akte", nr:"4", kurz:"Zwei Erklärungen", name:"Zwei Erklärungen untersuchen", form:"Allein oder zu zweit", min:20, frei:"ansage", gleich:"Sechs Versuche der Forschung, das zu erklären. Du untersuchst mindestens zwei." },
+  { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Woher kommen die Unterschiede?", form:"Allein", min:6, frei:"antwort", nach:"akte", fehlt:"Schreib erst zwei Erklärungskarten in Auftrag 4." },
+  { id:"markt", nr:"5", kurz:"Marktplatz", name:"Marktplatz und Tischmodell", form:"Tischgruppe", min:10, frei:"ansage", gleich:"Du erklärst deine Erklärung an einem Stand und besuchst andere. Zuletzt baut eure Tischgruppe ein Modell." },
+  { id:"diskussion", nr:"6", kurz:"Diskussion", name:"Diskussion", form:"Plenum · iPad zu", min:7, frei:"ansage", gleich:"Die Klasse diskutiert, geführt am Beamer: Welche Erklärungen ergänzen sich, welche widersprechen sich?" },
+  { id:"schreiben", nr:"7", kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein", min:15, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:"Du schreibst eine Erklärung – so, wie sie in der Klassenarbeit verlangt wird." },
+  { id:"rueckblick", nr:"8", kurz:"Rückblick", name:"Rückblick: Was denkst du jetzt?", form:"Allein, dann Plenum", min:3, frei:"antwort", nach:"schreiben", fehlt:"Schreib erst deinen Text in Auftrag 7." },
+  { id:"zusammenfassung", nr:"Z", kurz:"Zusammenfassung", name:"Zusammenfassung", form:"Zum Abheften", min:5, frei:"antwort", nach:"schreiben", fehlt:"Die Zusammenfassung enthält die Erklärungen. Sie öffnet sich nach deinem Text in Auftrag 7." },
+];
+const AUFI = id => AUF.findIndex(a => a.id === id);
+const SCHMAL = () => S.seite === "akte" && offen("akte");   // die Übersicht braucht die Breite
+const QUER = () => { try { return matchMedia("(min-width:900px)").matches; } catch(e) { return true; } };
+const woerter = s => (String(s || "").trim().match(/\S+/g) || []).length;
+const schreibFertig = () => !!S.hand || woerter(S.erz) >= 60;
+const ERLEDIGT = { einstieg: () => !!S.x.zu, fakten: () => FLOSKELN.every(f => S.zum[f.id]), jozefow: () => S.y !== null, akte: () => fertigeAkten().length >= 2, landkarte: () => !!S.lk.ok,
+  markt: () => (S.grund || "").trim().length >= 10, schreiben: schreibFertig, rueckblick: () => (S.neu || "").trim().length >= 10 };
+const erledigt = id => !!(ERLEDIGT[id] && ERLEDIGT[id]()) || !!S.durch[id];
+const offen = id => { const a = AUF[AUFI(id)]; return !a || a.frei === "offen" || !!S.frei[id] || (a.frei === "antwort" && !!ERLEDIGT[a.nach]()); };
+function register(immer){
+  const r = document.getElementById("reg"), lf = document.getElementById("loesch-frage"); if (!r || (!immer && (r.contains(document.activeElement) || (lf && !lf.hidden && r.contains(lf))))) return;
+  const sl = r.scrollLeft, st = r.scrollTop;
+  r.innerHTML = `<p class="ab-regtitel">Dieses Blatt · 90 Minuten</p><ol>${AUF.map(a => { const hier = a.id === S.seite;
+    const [wort, kl] = hier ? ["du bist hier","hier"] : erledigt(a.id) ? ["fertig","fertig"] : offen(a.id) ? ["offen","offen"] : a.frei === "ansage" ? ["öffnet auf Ansage","ansage"] : ["öffnet nach deiner Antwort","antwort"];
+    return `<li><button data-geh="${a.id}" class="${kl}"${hier ? ' aria-current="step"' : ""} aria-label="Auftrag ${a.nr}: ${esc(a.kurz)}, ${esc(a.form)}, ${a.min} Minuten, ${wort}"><span class="ab-nr" aria-hidden="true">${a.nr}</span><span><b>${esc(a.kurz)}</b><small>${esc(a.form)} · ${a.min} Min.</small><span class="ab-st">${wort}</span></span></button></li>`; }).join("")}</ol>`;
+  if (QUER() && !SCHMAL()) r.insertAdjacentHTML("beforeend", loeschBereich() + `<p class="ab-c">${esc((document.querySelector(".urheberzeile") || {}).textContent || "")}</p>`);
+  r.scrollLeft = sl; r.scrollTop = st;
+}
+function teileVon(html){
+  html = html.replace(/<h1[^>]*>[\s\S]*?<\/h1>/, "");
+  const st = html.split(/<!--teil:([^>]+)-->/);
+  if (st.length === 1) return [{ name:"", html }];
+  const teile = []; for (let i = 1; i < st.length; i += 2) teile.push({ name: st[i], html: (i === 1 ? st[0] : "") + st[i + 1] });
+  return teile;
+}
+function zuSeite(a){
+  const ans = a.frei === "ansage";
+  return `<div class="ab-zu"><p class="ab-zu-t">${ans ? "Dieser Auftrag öffnet auf Ansage." : "Dieser Auftrag öffnet nach deiner Antwort."}</p>
+  <p>${esc(ans ? "Darum geht es gleich: " + a.gleich : a.fehlt)}</p>
+  ${ans ? "" : `<button class="btn dunkel" data-geh="${a.nach}">Zu Auftrag ${AUF[AUFI(a.nach)].nr}</button>`}
+  <button class="btn${ans ? " dunkel" : ""}" data-freifrage aria-expanded="false">${ans ? "Unsere Lehrkraft hat freigegeben" : "Auf Ansage trotzdem öffnen"}</button>
+  <div id="ab-frage" hidden class="loesch-frage"><p><b>Hat eure Lehrkraft Auftrag ${a.nr} freigegeben?</b></p><div class="reihe"><button class="btn primary" data-frei="${a.id}">Ja, öffnen</button><button class="btn" data-frei="">Nein, noch nicht</button></div></div></div>`;
+}
+const BUCHST = "abcdefg";
+const blattzeile = () => `<div class="ab-zeile"><span>GGK · Nationalsozialismus</span><span>M22 · Arbeitsblatt</span><span>Datum: ${new Date().toLocaleDateString("de-DE")}</span></div>`;
+function blatt(a){
+  const zu = !offen(a.id), teile = zu ? [{ name:"", html: zuSeite(a) }] : teileVon(SEITE_FN[a.id]());
+  const n = teile.length, i = Math.max(0, Math.min(n - 1, S.teil[a.id] || 0)), ai = AUFI(a.id); S.teil[a.id] = i;
+  const davor = i > 0 ? { t: a.nr + BUCHST[i - 1] + " " + teile[i - 1].name, teil: i - 1 } : ai > 0 ? { t: AUF[ai - 1].nr + " " + AUF[ai - 1].kurz, geh: AUF[ai - 1].id, ende: 1 } : { t: "Deckblatt", geh: "start" };
+  const danach = i < n - 1 ? { t: a.nr + BUCHST[i + 1] + " " + teile[i + 1].name, teil: i + 1 } : ai < AUF.length - 1 ? { t: AUF[ai + 1].nr + " " + AUF[ai + 1].kurz, geh: AUF[ai + 1].id } : null;
+  return `<h1 class="ab-h"><span class="ab-nr" aria-hidden="true">${a.nr}</span><span>Arbeitsauftrag ${a.nr}${n > 1 ? BUCHST[i] : ""}: ${esc(a.name)}</span></h1>
+  <p class="ab-meta">${esc(a.form)} · ${a.min} Minuten${a.marke ? `<span class="ab-marke">${esc(a.marke)}</span>` : ""}</p>
+  ${teile.map((x, k) => `<section class="ab-teil"${k === i ? "" : " hidden"}>${x.html}</section>`).join("")}
+  <div class="ab-fuss nodruck"><button class="btn" ${davor.geh ? `data-geh="${davor.geh}"${davor.ende ? ' data-ende="1"' : ""}` : `data-teil="${davor.teil}"`}>‹ ${esc(davor.t)}</button>
+  ${n > 1 ? `<div class="ab-tabs" role="group" aria-label="Seiten dieses Auftrags">${teile.map((x, k) => `<button data-teil="${k}"${k === i ? ' aria-current="page"' : ""}>${BUCHST[k]} ${esc(x.name)}</button>`).join("")}</div>` : "<span></span>"}
+  ${danach ? `<button class="btn primary" ${danach.geh ? `data-geh="${danach.geh}" data-durch="${a.id}"` : `data-teil="${danach.teil}"`}>${esc(danach.t)} ›</button>` : `<a class="btn" href="${LABOR}">Zum GGK-Labor</a>`}</div>`;
 }
 
 /* ---------- Seiten ---------- */
 function start(){
   return `<p class="zeit"><span class="nr">GGK · M22</span><span>Doppelstunde, 90 Minuten</span></p>
   <h1>„Große Verbrechen brauchen keine Monster!“</h1>
-  <p class="leitfrage">Wie war das möglich? Wer wurde zum Täter, wer zur Täterin?</p>
-  ${band("levinson", "Es geht um Menschen", "Zalman Levinson, 9 Jahre", "In M21 hast du ihn kennengelernt. Heute fragst du nach den Menschen, die seinen Tod möglich machten.")}
-  <p class="lead">Die Täter waren keine Monster. Das ist das Ergebnis von siebzig Jahren Forschung, und es ist das Beunruhigende daran. In dieser Stunde prüfst du die üblichen Erklärungen, untersuchst einen Fall und arbeitest dich in eine Erklärung der Forschung ein.</p>
+  <p class="ab-zentral">Zentrale Frage</p><p class="leitfrage">Wie war das möglich? Wer wurde zum Täter, wer zur Täterin?</p>
+  <div class="ab-zwei gleich"><div><h3>Darum geht es</h3><p>In M21 ging es um die Menschen, die ermordet wurden. Heute fragst du nach denen, die die Morde möglich machten. Die Täter waren keine Monster. Das ist das Ergebnis von siebzig Jahren Forschung, und es ist das Beunruhigende daran.</p>
+  <p style="margin-top:.5rem">Du prüfst drei Sätze, untersuchst einen Fall und vergleichst Erklärungen der Forschung. Am Ende schreibst du eine Erklärung – so, wie sie in der Klassenarbeit verlangt wird.</p></div>
+  <div><h3>So arbeitest du mit diesem Blatt</h3><ul><li>Links stehen alle Arbeitsaufträge. Du siehst immer, wo du bist und was noch kommt.</li><li>Jeder Auftrag hat eine eigene Seite. Lange Aufträge sind geteilt: 1a, 1b, 1c.</li><li>Manche Aufträge öffnen sich erst nach deiner Antwort, manche auf Ansage deiner Lehrkraft.</li><li>Am Ende steht die Zusammenfassung auf zwei Seiten zum Abheften.</li></ul></div></div>
   <div class="belastend"><b>Hinweis:</b> In dieser Stunde geht es um Massenmord. Die Texte beschreiben ihn knapp und ohne Einzelheiten der Gewalt. Es gibt keine Bilder von Gewalt. Wenn dich etwas belastet, sprich mit deiner Lehrkraft.</div>
-  <div class="karte"><h3>So läuft die Stunde</h3><ol style="padding-left:1.3rem;margin-top:.4rem;display:grid;gap:.25rem">
-  <li>Es geht um Menschen. Du schreibst deine erste Antwort und versiegelst sie.</li>
-  <li>Drei bekannte Sätze kommen in den Faktencheck.</li>
-  <li>Ein Fall für alle: Józefów, 13. Juli 1942.</li>
-  <li>Sechs Versuche, das zu erklären, auf einer Übersicht. Du bearbeitest mindestens zwei.</li>
-  <li>Ein Blick auf die kognitive Landkarte: Woher kommen die Unterschiede?</li>
-  <li>Auf dem Marktplatz tauschst du dich aus und baust ein Erklärungsmodell.</li>
-  <li>Die Klasse diskutiert, geführt am Beamer.</li>
-  <li>Du öffnest dein Siegel: Was denkst du jetzt?</li></ol></div>
   <p class="merksatz">Erklären heißt nicht entschuldigen.</p>
-  ${weiter("einstieg","Los geht’s")}`;
+  <div class="ab-fuss nodruck"><span></span><span></span><button class="btn primary" data-geh="einstieg">Arbeitsauftrag 1 beginnen ›</button></div>`;
 }
 
 function einstieg(){
   const x = S.x;
   return `${zeitKopf("einstieg")}<h1>Es geht um Menschen</h1>
-  <p class="lead">Fünf Menschen aus M21. Jede Zahl der Shoah steht für Menschen wie sie.</p>
+  <!--teil:Fünf Menschen--><p class="lead">Fünf Menschen aus M21. Jede Zahl der Shoah steht für Menschen wie sie.</p>
   <div class="menschen">${MENSCHEN.map(m => { const b = m.bild && BILDER[m.bild] && !FEHLT.has(m.bild);
     return `<article class="mensch"><div class="foto">${b ? `<img src="${BILDER[m.bild].datei}" alt="${esc(BILDER[m.bild].alt)}" loading="lazy" data-bild="${m.bild}" onerror="this.closest('.foto').innerHTML='<span class=leer>kein Foto</span>'">` : `<span class="leer">kein gesichertes Foto</span>`}</div>
     <div class="mt"><h3>${esc(m.name)}</h3><span class="ort">${esc(m.ort)}</span><p>${esc(m.text)}</p><span class="q">${b ? esc(BILDER[m.bild].unter) + " · " : ""}${esc(m.q)}</span></div></article>`; }).join("")}</div>
-  <p class="wer-tat">Wer tat das?</p>
+  <!--teil:Wer war beteiligt?--><p class="wer-tat">Wer tat das?</p>
   <p class="lead" style="text-align:center">Ab Phase 2 waren an jeder Phase der Verfolgung Menschen beteiligt, die sie ausführten.</p>
   ${auftrag("Plenum · 3 Minuten","Wer war beteiligt?","Schreib zu jeder Phase deine Vermutung auf: Welche Menschen, Berufe oder Behörden waren beteiligt? Dann deckt ihr gemeinsam auf.")}
   <div class="phasen">${PHASEN.map((p, i) => `<div class="phase"><span class="nrph">${esc(p.n)}</span><h3>${esc(p.h)}</h3>
@@ -766,11 +959,11 @@ function einstieg(){
     <div class="reihe"><button class="btn" data-afo="${i}" aria-expanded="${!!S.afo[i]}">${S.afo[i] ? "Zuklappen" : "Aufdecken"}</button></div>
     <div class="wer" id="afw${i}"${S.afo[i] ? "" : " hidden"}><ul>${p.wer.map(w => `<li>${esc(w)}</li>`).join("")}</ul></div></div>`).join("")}</div>
   <p class="quelle">${PQUELLE}</p>
-  ${auftrag("Allein · 5 Minuten","Deine erste Antwort","Warum war die Shoah möglich? Schreib zwei oder drei Sätze, so wie du es jetzt denkst. Danach versiegelst du deine Antwort. Du öffnest sie erst am Ende der Stunde.")}
+  <!--teil:Erste Antwort-->${auftrag("Allein · 5 Minuten","Deine erste Antwort","Warum war die Shoah möglich? Schreib zwei oder drei Sätze, so wie du es jetzt denkst. Danach versiegelst du deine Antwort. Du öffnest sie erst am Ende der Stunde.")}
   <div class="umschlag${x.zu ? " zu" : ""}" id="umschlag">
     <div class="brief"><label for="xtext">Meine erste Antwort</label><textarea id="xtext" data-feld="xtext" rows="4">${esc(x.text)}</textarea>
       <div class="reihe"><button class="btn dunkel" data-siegeln ${x.text.trim().length < 10 ? "disabled" : ""}>Versiegeln</button><span class="hinweis" id="xhinweis">${x.text.trim().length < 10 ? "Schreib mindestens einen Satz." : ""}</span></div></div>
-    <div class="siegel"><span class="stempel">ver&shy;siegelt<br>${esc(x.zeit)}</span><p>Deine Antwort ist versiegelt. Du öffnest sie in Schritt 8.</p></div>
+    <div class="siegel"><span class="stempel">ver&shy;siegelt<br>${esc(x.zeit)}</span><p>Deine Antwort ist versiegelt. Du öffnest sie in Auftrag 8.</p></div>
   </div>
   ${weiter("fakten","Zum Faktencheck")}`;
 }
@@ -778,9 +971,9 @@ function einstieg(){
 function fakten(){
   return `${zeitKopf("fakten")}<h1>Drei Sätze im Faktencheck</h1>
   ${band(null, "Input 1 · Lehrkraft und alle", "„Das waren doch …“", "Drei Sätze, die man oft hört, wenn es um die Täter geht. Prüfe sie: erst schätzen, dann umdrehen.")}
-  ${auftrag("Input · 10 Minuten","Erst schätzen, dann umdrehen","Wähle bei jeder Karte deine Schätzung. Die Karte dreht sich erst danach. Auf der Rückseite stehen der Befund und eine neue Frage.")}
+  ${auftrag("Alle · 7 Minuten","Erst schätzen, dann umdrehen","Wähle bei jeder Karte deine Schätzung. Die Karte dreht sich erst danach. Auf der Rückseite stehen der Befund und eine neue Frage.")}
   ${FLOSKELN.map((f, i) => { const w = S.z[f.id], um = !!S.zum[f.id];
-    return `<div class="dreh${um ? " um" : ""}" id="dreh-${f.id}"><div class="dreh-in">
+    return `<!--teil:Satz ${i+1}--><div class="dreh${um ? " um" : ""}" id="dreh-${f.id}"><div class="dreh-in">
       <div class="seite vorne"><p class="kartennr">Karte ${i+1} von 3</p><p class="floskel">${esc(f.satz)}</p><p style="margin-top:.7rem">${esc(f.frage)}</p>
         <div class="optionen" role="group" aria-label="Deine Schätzung">${f.opt.map((o, j) => `<button data-z="${f.id}" data-o="${j}" aria-pressed="${w === j}">${esc(o)}</button>`).join("")}</div>
         <div class="reihe"><button class="btn dunkel" data-dreh="${f.id}" ${w === undefined ? "disabled" : ""}>Umdrehen</button></div></div>
@@ -794,7 +987,7 @@ function fakten(){
 
 function jozefow(){
   return `${zeitKopf("jozefow")}<h1>Józefów, 13. Juli 1942</h1>
-  ${band("jozefow", "Input 2 · Ein Fall für alle", "Ein Dorf im besetzten Polen", "Heute steht hier ein Gedenkstein. Am 13. Juli 1942 kamen etwa 500 Hamburger Polizisten in dieses Dorf.")}
+  <!--teil:Der Fall-->${band("jozefow", "Input 2 · Ein Fall für alle", "Ein Dorf im besetzten Polen", "Heute steht hier ein Gedenkstein. Am 13. Juli 1942 kamen etwa 500 Hamburger Polizisten in dieses Dorf.")}
   <div class="belastend"><b>Hinweis:</b> Hier geht es um einen Massenmord. Die Karten beschreiben ihn knapp.</div>
   <div class="input-kopf"><b>Input · 6 Karten · am Beamer, später zum Nachblättern</b><button class="btn" data-beamer aria-pressed="${!!S.beamer}">Beamer: ${S.beamer ? "an" : "aus"}</button></div>
   <div id="stapel" class="${S.beamer ? "beamer" : ""}">
@@ -803,7 +996,7 @@ function jozefow(){
   <button class="btn" data-hier>Hier waren wir</button><span class="hiertext" id="hiertext" aria-live="polite">${S.hier >= 0 ? "Im Unterricht bis Karte " + (S.hier + 1) : ""}</span></div>
   </div>
   <p class="quelle">${JQUELLE}</p>
-  ${auftrag("Plenum · 3 Minuten · iPad zu","Was passt nicht mehr?","Welche Erklärung aus deiner ersten Antwort passt nicht zum Fall Józefów? Und was überrascht dich am meisten?")}
+  <!--teil:Im Plenum-->${auftrag("Plenum · 3 Minuten · iPad zu","Was passt nicht mehr?","Welche Erklärung aus deiner ersten Antwort passt nicht zum Fall Józefów? Und was überrascht dich am meisten?")}
   ${weiter("akte","Zu den Akten")}`;
 }
 function yFeld(){
@@ -899,7 +1092,7 @@ function akte(){
   <div class="dash-kopf">${zeitKopf("akte")}<div class="umschalter" role="tablist" aria-label="Ansicht der Übersicht">${[["frage","Frage und Ebenen"],["vergleich","Vergleich"],["zeit","Zeitachse"]].map(([k, t]) => `<button role="tab" data-ansicht="${k}" aria-selected="${(S.ansicht || "frage") === k}">${t}</button>`).join("")}</div><span class="hinweis">Tippe auf eine Ansicht; deine Eingaben bleiben.</span><button class="btn klein" type="button" data-film><span aria-hidden="true">▶</span> Film: So geht’s</button></div>
   <div class="buehne${a ? " offen " + (SPALTE_R.includes(a.s) && (S.ansicht || "frage") === "frage" ? "links" : "rechts") : ""}" id="buehne"><div class="dash" id="dash">${(S.ansicht || "frage") === "vergleich" ? dashVergleich() : (S.ansicht || "frage") === "zeit" ? dashZeit() : dashFrage()}</div>
   <aside class="panel" id="panel" role="region" aria-label="Erklärung" ${a ? "" : "hidden"}>${a ? deckel(a, S.stufe[a.s] || 1, S.karte[a.s] || {}) : ""}</aside></div>
-  <div class="dash-fuss"><p class="fortschritt${n >= 2 ? " ok" : ""}" id="fortschritt" aria-live="polite">${n >= 2 ? `✓ ${n} Erklärungskarten. Der Marktplatz ist frei.` : `${n} von 2 Erklärungskarten. Mindestens zwei Erklärungen, eine aus einer anderen Ebene; eine Karte zählt, wenn These und Erklärung stehen.`}</p><p class="modellhinweis">Fünf Ebenen und Gewichtungen sind ein Modell der Lehrkraft zum Ordnen der Erklärungen, keine Forschungseinteilung und keine Messwerte.</p></div>
+  <div class="dash-fuss"><p class="fortschritt${n >= 2 ? " ok" : ""}" id="fortschritt" aria-live="polite">${n >= 2 ? `✓ ${n} Erklärungskarten. Auftrag L (Landkarte) ist frei.` : `${n} von 2 Erklärungskarten. Mindestens zwei Erklärungen, eine aus einer anderen Ebene; eine Karte zählt, wenn These und Erklärung stehen.`}</p><p class="modellhinweis">Fünf Ebenen und Gewichtungen sind ein Modell der Lehrkraft zum Ordnen der Erklärungen, keine Forschungseinteilung und keine Messwerte.</p></div>
   ${weiter("landkarte","Zum Landkarten-Moment", { aus: n < 2, hinweis: n < 2 ? "Erst zwei Erklärungskarten, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert." })}`;
 }
 function deckel(a, st, k){
@@ -972,11 +1165,11 @@ const STUFENWORT = { zentral:"Zentral.", teils:"Auch begründbar.", kaum:"Passt 
 function landkarte(){
   const l = S.lk, frei = l.vermutung.trim().length >= 10, p = PRINZIPIEN.find(x => x.id === l.prinzip);
   return `${zeitKopf("landkarte")}<h1>Woher kommen die Unterschiede?</h1>
-  <p class="frage-gross"><span class="f1">Sechs Erklärungen für dieselbe Tat. Woher kommen die Unterschiede?</span></p>
+  <!--teil:Vermuten--><p class="frage-gross"><span class="f1">Sechs Erklärungen für dieselbe Tat. Woher kommen die Unterschiede?</span></p>
   ${auftrag("Allein · 2 Minuten","Erst vermuten","Schreib einen Satz: Warum kommen die Forscher*innen zu verschiedenen Antworten auf dieselbe Frage?")}
   <label for="lk-vermutung">Meine Vermutung</label><textarea id="lk-vermutung" data-lk="vermutung" rows="2" placeholder="Die Forscher*innen kommen zu verschiedenen Antworten, weil …">${esc(l.vermutung)}</textarea>
   <p class="hinweis" id="lk-hinweis">${frei ? "Gut. Jetzt die Landkarte öffnen, dann unten ein Prinzip wählen." : "Schreib mindestens einen Satz. Danach öffnet sich die Landkarte."}</p>
-  <div id="lk-teil2" class="${frei ? "" : "gesperrt"}">
+  <!--teil:Prinzip wählen--><div id="lk-teil2" class="${frei ? "" : "gesperrt"}">
   ${auftrag("Allein · 4 Minuten","Dann die Landkarte","Öffne „Was ist Geschichte?“ in der kognitiven Landkarte. Sie öffnet sich in einem neuen Tab, deine Eingaben hier bleiben. Lies die acht Merkmale. Wähle das Prinzip, das die Unterschiede am besten erklärt, und begründe in einem Satz.")}
   <p><a class="btn dunkel" id="lk-link" href="${LK}2-1" target="_blank" rel="noopener" ${frei ? "" : 'aria-disabled="true" tabindex="-1"'}>Landkarte öffnen: 2.1 Die Gemeinsamkeiten einer jeden Geschichte ↗</a></p>
   <div class="prinzipien" role="group" aria-label="Prinzip wählen">${PRINZIPIEN.map(x => `<button data-prinzip="${x.id}" aria-pressed="${l.prinzip === x.id}" class="${l.ok && l.prinzip === x.id ? x.stufe : ""}" ${(!frei || l.ok) ? "disabled" : ""}><b>${esc(x.n)}</b><small>${esc(x.k)}</small></button>`).join("")}</div>
@@ -984,7 +1177,7 @@ function landkarte(){
   <div class="reihe"><button class="btn dunkel" data-lkpruef ${(!frei || !l.prinzip || l.grund.trim().length < 10 || l.ok) ? "disabled" : ""}>Prüfen</button>${l.ok ? `<button class="btn" data-lkneu>Noch einmal</button>` : ""}<span class="hinweis">Rückmeldung in drei Stufen: zentral · auch begründbar · passt kaum.</span></div>
   <div id="lk-fb" aria-live="polite">${l.ok && p ? `<div class="rm ${p.stufe === "zentral" ? "trifft" : p.stufe === "teils" ? "teils" : "nicht"}"><b>${STUFENWORT[p.stufe]}</b> ${esc(p.fb)} <a href="${LK}${p.id}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a></div>` : ""}</div>
   </div>
-  <div class="trift"><b>Brücke zur Triftigkeit.</b> Mehrere Perspektiven heißt nicht, dass jede Erklärung gleich gut ist. Die Landkarte prüft Geschichten dreifach: <i>empirisch</i> (Stimmen die Tatsachen?), <i>narrativ</i> (Ist der Zusammenhang schlüssig?), <i>normativ</i> (Sind die Wertungen begründet?). Beispiel Goldhagen: Die Kritik trifft vor allem die empirische Triftigkeit – eine einzige Ursache (Mommsen: „notwendig, aber keineswegs hinreichend“) und keine Vergleiche mit dem Antisemitismus in anderen Ländern. <a href="${LK}2-2" target="_blank" rel="noopener">Landkarte 2.2 Triftigkeit ↗</a></div>
+  <!--teil:Triftigkeit--><div class="trift"><b>Brücke zur Triftigkeit.</b> Mehrere Perspektiven heißt nicht, dass jede Erklärung gleich gut ist. Die Landkarte prüft Geschichten dreifach: <i>empirisch</i> (Stimmen die Tatsachen?), <i>narrativ</i> (Ist der Zusammenhang schlüssig?), <i>normativ</i> (Sind die Wertungen begründet?). Beispiel Goldhagen: Die Kritik trifft vor allem die empirische Triftigkeit – eine einzige Ursache (Mommsen: „notwendig, aber keineswegs hinreichend“) und keine Vergleiche mit dem Antisemitismus in anderen Ländern. <a href="${LK}2-2" target="_blank" rel="noopener">Landkarte 2.2 Triftigkeit ↗</a></div>
   <p class="hinweis" style="margin-top:.9rem"><b>Perspektivität</b> (Landkarte 2.1.2): ${esc(PERSPEKTIVITAET)} Leitfrage: Wer erzählt, und mit welcher Weltanschauung und welchen Interessen?</p>
   ${weiter("markt","Zum Marktplatz")}`;
 }
@@ -992,30 +1185,31 @@ function landkarte(){
 function markt(){
   const meine = fertigeAkten(), emp = fehlendeEbene();
   return `${zeitKopf("markt")}<h1>Marktplatz der Erklärungen</h1>
-  ${band(null, "Austausch", "Die Thesen ins Gespräch bringen", "Zuerst prüfst du drei Streitpaare. Dann erklärst du deine Erklärung an einem Stand und besuchst andere. Zuletzt baut eure Tischgruppe ein Modell.")}
-  <h2 class="abschnitt">Drei Streitpaare</h2>
+  <!--teil:Am Stand-->${band(null, "Austausch", "Die Thesen ins Gespräch bringen", "Du erklärst deine Erklärung an einem Stand und besuchst andere. Zuletzt baut eure Tischgruppe ein Modell.")}
+  ${emp ? `<div class="empfehlung"><b>Empfehlung für deinen Besuch:</b> In deinen Akten fehlt die Ebene <b>${EB[emp.e]}</b>. Besuche einen Stand von ${emp.akten.map(a => `Akte ${a.s} (${esc(a.name)})`).join(" oder ")}.</div>` : `<div class="empfehlung"><b>Deine Akten decken alle fünf Ebenen ab.</b> Besuche den Stand, der dir am meisten widerspricht.</div>`}
+  <h2 class="abschnitt">Eine Runde am Stand</h2>
+  ${auftrag("Marktplatz · eine Runde, 5 Minuten","Erklären und besuchen","<b>Am Stand:</b> Öffne „Meinen Stand zeigen“ und erkläre deine Akte in einer Minute: These, was sie an Józefów erklärt, was nicht. <b>Beim Besuch:</b> Zwei Stände. Frag nach: „Was erklärt ihr nicht?“ Notiere These und Grenze.")}
+  <div class="runden"><div><b>Am Stand</b><br>Wer eine Karte zu Erklärung A, C oder E hat, steht am Stand.</div><div><b>Besuch</b><br>Alle anderen besuchen zwei Stände.</div></div>
+  <div class="reihe"><button class="btn" data-uhr>Uhr: 5 Minuten</button><span class="uhr" id="uhr" aria-live="off">5:00</span></div>
+  <div class="reihe">${meine.length ? meine.map(a => `<button class="btn dunkel" data-stand="${a.s}">Meinen Stand zeigen (Akte ${a.s})</button>`).join("") : `<span class="hinweis">Erst in Auftrag 4 eine Erklärungskarte schreiben, dann kannst du deinen Stand zeigen.</span>`}</div>
+  <!--teil:Notizen--><h2 class="abschnitt">Meine Notizen vom Marktplatz</h2>
+  ${AKTEN.filter(x => !karteFertig(x.s)).map(x => { const n = S.notiz[x.s] || {};
+    return `<details class="notiz"${n.these || n.grenze ? " open" : ""}><summary style="cursor:pointer;min-height:40px;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap"><b>Akte ${x.s} · ${esc(x.name)}</b> ${x.e.map(e => `<span class="ebene e-${e}">${EB[e]}</span>`).join("")}</summary>
+    <div class="feldgruppe"><div><label for="n-${x.s}-t">These</label><input type="text" id="n-${x.s}-t" data-notiz="${x.s}" data-n="these" value="${esc(n.these)}"></div>
+    <div><label for="n-${x.s}-g">Grenze: Was erklärt sie nicht?</label><input type="text" id="n-${x.s}-g" data-notiz="${x.s}" data-n="grenze" value="${esc(n.grenze)}"></div></div></details>`; }).join("")}
+  <!--teil:Tischmodell--><h2 class="abschnitt">Euer Erklärungsmodell</h2>
+  ${auftrag("Tischgruppe · 4 Minuten · ein iPad","Gewichtungen verteilen","Zurück am Tisch sitzen Expertinnen und Experten verschiedener Akten. Verteilt die Gewichtungen für den Fall Józefów. Für die wichtigste schreibt ihr eine Begründung. Eure Lehrkraft trägt euer Modell am Beamer ein.")}
+  <div class="modell" id="modell">${EBENEN.map(([k, n, u]) => `<div class="fak"><label for="m-${k}">${n}<span class="u">${u.split(":")[0]}</span></label><div><input type="range" id="m-${k}" data-modell="${k}" min="0" max="4" value="${S.modell[k]}" aria-valuetext="${STUFE[S.modell[k]]}">${balken(k, S.modell[k])}<span class="wert" id="mw-${k}">${STUFE[S.modell[k]]}</span></div></div>`).join("")}</div>
+  <p class="satz" id="msatz" aria-live="polite">${modellSatz(S.modell)}</p>
+  <label for="mgrund" style="margin-top:.9rem">Begründung für die wichtigste Gewichtung</label><textarea id="mgrund" data-feld="grund" rows="2" placeholder="Am wichtigsten ist für uns …, weil in Józefów …">${esc(S.grund)}</textarea>
+  <!--teil:Zusatz--><h2 class="abschnitt">Zusatz: drei Streitpaare</h2>
+  <p class="hinweis"><b>Für Schnelle – oder als Hausaufgabe.</b> In der Stunde ist dafür keine Zeit eingeplant.</p>
   <p class="hinweis">Forschung ist ein Streit. Entscheide bei jedem Paar, was der Fall Józefów eher stützt. Die Rückmeldung ist gestuft: zentral · auch begründbar · passt kaum.</p>
   ${PAARE.map(p => { const w = S.paare[p.id];
     return `<div class="paar"><h3>${esc(p.titel)}</h3><div class="vs"><div class="s"><b>${esc(p.links.wer)}</b>${esc(p.links.t)}</div><span class="g">gegen</span><div class="s"><b>${esc(p.rechts.wer)}</b>${esc(p.rechts.t)}</div></div>
     <p><b>${esc(p.frage)}</b></p>
     <div class="optionen" role="group" aria-label="${esc(p.frage)}">${p.opt.map((o, j) => `<button data-paar="${p.id}" data-o="${j}" aria-pressed="${w === j}" class="${w !== undefined ? o[1] : ""}" ${w !== undefined ? "disabled" : ""}>${esc(o[0])}${w !== undefined ? `<span class="fb"><b>${o[1] === "zentral" ? "Zentral." : o[1] === "teils" ? "Auch begründbar." : "Passt kaum."}</b> ${esc(o[2])}</span>` : ""}</button>`).join("")}</div>
     ${w !== undefined ? `<div class="reihe"><button class="btn" data-paarneu="${p.id}">Noch einmal</button></div>` : ""}</div>`; }).join("")}
-  ${emp ? `<div class="empfehlung"><b>Empfehlung für deinen Besuch:</b> In deinen Akten fehlt die Ebene <b>${EB[emp.e]}</b>. Besuche einen Stand von ${emp.akten.map(a => `Akte ${a.s} (${esc(a.name)})`).join(" oder ")}.</div>` : `<div class="empfehlung"><b>Deine Akten decken alle fünf Ebenen ab.</b> Besuche den Stand, der dir am meisten widerspricht.</div>`}
-  <h2 class="abschnitt">Zwei Runden am Stand</h2>
-  ${auftrag("Marktplatz · 2 Runden à 5 Minuten","Erklären und besuchen","<b>Am Stand:</b> Öffne „Meinen Stand zeigen“ und erkläre deine Akte in einer Minute: These, was sie an Józefów erklärt, was nicht. <b>Beim Besuch:</b> Zwei Stände. Frag nach: „Was erklärt ihr nicht?“ Notiere These und Grenze.")}
-  <div class="runden"><div><b>Runde 1</b><br>Akten A, C, E stehen am Stand.<br>B, D, F besuchen.</div><div><b>Runde 2</b><br>Akten B, D, F stehen am Stand.<br>A, C, E besuchen.</div></div>
-  <div class="reihe"><button class="btn" data-uhr>Uhr: 5 Minuten</button><span class="uhr" id="uhr" aria-live="off">5:00</span></div>
-  <div class="reihe">${meine.length ? meine.map(a => `<button class="btn dunkel" data-stand="${a.s}">Meinen Stand zeigen (Akte ${a.s})</button>`).join("") : `<span class="hinweis">Erst in Schritt 4 eine Erklärungskarte schreiben, dann kannst du deinen Stand zeigen.</span>`}</div>
-  <h2 class="abschnitt">Meine Notizen vom Marktplatz</h2>
-  ${AKTEN.filter(x => !karteFertig(x.s)).map(x => { const n = S.notiz[x.s] || {};
-    return `<details class="notiz"${n.these || n.grenze ? " open" : ""}><summary style="cursor:pointer;min-height:40px;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap"><b>Akte ${x.s} · ${esc(x.name)}</b> ${x.e.map(e => `<span class="ebene e-${e}">${EB[e]}</span>`).join("")}</summary>
-    <div class="feldgruppe"><div><label for="n-${x.s}-t">These</label><input type="text" id="n-${x.s}-t" data-notiz="${x.s}" data-n="these" value="${esc(n.these)}"></div>
-    <div><label for="n-${x.s}-g">Grenze: Was erklärt sie nicht?</label><input type="text" id="n-${x.s}-g" data-notiz="${x.s}" data-n="grenze" value="${esc(n.grenze)}"></div></div></details>`; }).join("")}
-  <h2 class="abschnitt">Euer Erklärungsmodell</h2>
-  ${auftrag("Tischgruppe · 4 Minuten · ein iPad","Gewichtungen verteilen","Zurück am Tisch sitzen Expertinnen und Experten verschiedener Akten. Verteilt die Gewichtungen für den Fall Józefów. Für die wichtigste schreibt ihr eine Begründung. Eure Lehrkraft trägt euer Modell am Beamer ein.")}
-  <div class="modell" id="modell">${EBENEN.map(([k, n, u]) => `<div class="fak"><label for="m-${k}">${n}<span class="u">${u.split(":")[0]}</span></label><div><input type="range" id="m-${k}" data-modell="${k}" min="0" max="4" value="${S.modell[k]}" aria-valuetext="${STUFE[S.modell[k]]}">${balken(k, S.modell[k])}<span class="wert" id="mw-${k}">${STUFE[S.modell[k]]}</span></div></div>`).join("")}</div>
-  <p class="satz" id="msatz" aria-live="polite">${modellSatz(S.modell)}</p>
-  <label for="mgrund" style="margin-top:.9rem">Begründung für die wichtigste Gewichtung</label><textarea id="mgrund" data-feld="grund" rows="2" placeholder="Am wichtigsten ist für uns …, weil in Józefów …">${esc(S.grund)}</textarea>
   ${weiter("diskussion","Zur Diskussion")}`;
 }
 function modellSatz(m){
@@ -1026,19 +1220,19 @@ function modellSatz(m){
 
 /* ---------- Diskussion, geführt am Beamer (AL) ---------- */
 const MODER = [
-  { h:"Die Modelle der Tische", t:"Jede Gruppe nennt in einem Satz ihre stärkste Gewichtung und die Begründung.", f:"Begründet eure Gewichtungen.", min:3 },
-  { h:"Der Streitpunkt", t:"Die Seite zeigt, wo die Tische am weitesten auseinanderliegen. Die beiden Tische an den Enden beginnen.", f:"Warum gewichtet ihr diese Ebene so verschieden?", min:3 },
+  { h:"Die Modelle der Tische", t:"Jede Gruppe nennt in einem Satz ihre stärkste Gewichtung und die Begründung.", f:"Begründet eure Gewichtungen.", min:2 },
+  { h:"Der Streitpunkt", t:"Die Seite zeigt, wo die Tische am weitesten auseinanderliegen. Die beiden Tische an den Enden beginnen.", f:"Warum gewichtet ihr diese Ebene so verschieden?", min:2 },
   { h:"Ergänzen oder widersprechen?", t:"Nehmt zwei Akten aus eurer Gruppe und prüft sie am Fall Józefów.", f:"Welche Erklärungen ergänzen sich, welche widersprechen sich?", min:2 },
-  { h:"Ganz normale Männer", t:"Brownings Titel ist das Ergebnis der Forschung. Was folgt daraus?", f:"Entlastet „ganz normal“ die Täter, oder belastet es uns alle?", min:2 },
+  { h:"Ganz normale Männer", t:"Brownings Titel ist das Ergebnis der Forschung. Was folgt daraus?", f:"Entlastet „ganz normal“ die Täter, oder belastet es uns alle?", min:1 },
 ];
 const REGELN = ["Wir kritisieren Argumente, nicht Personen.","Wer etwas behauptet, begründet es mit einer Akte oder dem Fall.","Wir trennen, was belegt ist und was wir deuten.","Niemand muss sagen, was er oder sie selbst getan hätte.","Wir lassen ausreden und beziehen uns auf das, was gesagt wurde.","Die Würde der Opfer steht nicht zur Debatte."];
 function diskussion(){
-  return `${zeitKopf("diskussion")}<h1>Welche Erklärungen ergänzen sich, welche widersprechen sich?</h1>
-  ${band(null, "Plenum · geführt am Beamer", "Vier Schritte, zehn Minuten", "Die Lehrkraft führt am Beamer durch die Schritte. Die iPads bleiben zu.")}
-  ${auftrag("Plenum · 10 Minuten · iPad zu","Diskutieren","Begründet eure Gewichtungen mit euren Akten und dem Fall. Hört zu, fragt nach, widersprecht mit Argumenten.")}
+  return `${zeitKopf("diskussion")}<h1>Diskussion</h1><p class="leitfrage">Welche Erklärungen ergänzen sich, welche widersprechen sich?</p>
+  ${band(null, "Plenum · geführt am Beamer", "Vier Schritte, sieben Minuten", "Die Lehrkraft führt am Beamer durch die Schritte. Die iPads bleiben zu.")}
+  <!--teil:Vier Schritte-->${auftrag("Plenum · 7 Minuten · iPad zu","Diskutieren","Begründet eure Gewichtungen mit euren Akten und dem Fall. Hört zu, fragt nach, widersprecht mit Argumenten.")}
   <div class="moder">${MODER.map((m, i) => `<div class="schritt${S.moder === i ? " akt" : ""}"><span class="n">${i+1}</span><div><h3>${esc(m.h)}</h3><p>${esc(m.t)}</p><p class="frage-m"><i>${esc(m.f)}</i></p></div></div>`).join("")}</div>
   <div class="reihe nodruck"><button class="btn dunkel" data-moderation>Moderation am Beamer</button><button class="btn" data-klasse>Modelle der Klasse</button></div>
-  <h2 class="abschnitt">Gesprächsregeln</h2><ol class="regeln" style="padding-left:1.2rem">${REGELN.map(r => `<li>${esc(r)}</li>`).join("")}</ol>
+  <!--teil:Regeln--><h2 class="abschnitt">Gesprächsregeln</h2><ol class="regeln" style="padding-left:1.2rem">${REGELN.map(r => `<li>${esc(r)}</li>`).join("")}</ol>
   <p class="merksatz">Erklären heißt nicht entschuldigen.</p>
   ${weiter("rueckblick","Zum Rückblick")}`;
 }
@@ -1057,13 +1251,13 @@ function moderAnsicht(){
 function rueckblick(){
   const x = S.x, pos = +S.pos;
   return `${zeitKopf("rueckblick")}<h1>Was denkst du jetzt?</h1>
-  ${auftrag("Allein · 3 Minuten","Siegel öffnen","Öffne deine erste Antwort. Schreib daneben, wie du die Frage jetzt beantwortest. Was ist geblieben, was hat sich geändert?")}
-  ${x.text.trim() ? (x.zu ? `<div class="umschlag zu"><div class="siegel"><span class="stempel">ver&shy;siegelt<br>${esc(x.zeit)}</span><p>Deine erste Antwort wartet hier.</p><button class="btn dunkel" data-oeffnen>Siegel öffnen</button></div></div>` : "") : `<p class="hinweis">In Schritt 1 hast du keine erste Antwort geschrieben. Schreib trotzdem auf, was du jetzt denkst.</p>`}
+  <!--teil:Siegel öffnen-->${auftrag("Allein · 2 Minuten","Siegel öffnen","Öffne deine erste Antwort und vergleiche sie mit deinem Text aus Auftrag 7. Schreib in einem Satz: Was ist geblieben, was hat sich geändert?")}
+  ${x.text.trim() ? (x.zu ? `<div class="umschlag zu"><div class="siegel"><span class="stempel">ver&shy;siegelt<br>${esc(x.zeit)}</span><p>Deine erste Antwort wartet hier.</p><button class="btn dunkel" data-oeffnen>Siegel öffnen</button></div></div>` : "") : `<p class="hinweis">In Auftrag 1 hast du keine erste Antwort geschrieben. Schreib trotzdem auf, was du jetzt denkst.</p>`}
   <div class="vergleich2" id="vergleich"${x.zu && x.text.trim() ? " hidden" : ""}>
     <div class="alt"><b>Meine erste Antwort</b><p>${esc(x.text) || "–"}</p></div>
-    <div><label for="xneu">Meine Antwort jetzt</label><textarea id="xneu" data-feld="neu" rows="4">${esc(S.neu)}</textarea></div>
+    <div><label for="xneu">Was geblieben ist, was sich geändert hat</label><textarea id="xneu" data-feld="neu" rows="3">${esc(S.neu)}</textarea></div>
   </div>
-  ${auftrag("Allein, dann Plenum · 2 Minuten","Person oder Umstände?","Woran liegt es vor allem, ob ein Mensch zum Täter wird? Setz den Regler und begründe in einem Satz.")}
+  <!--teil:Person oder Umstände?-->${auftrag("Allein, dann Plenum · 1 Minute","Person oder Umstände?","Woran liegt es vor allem, ob ein Mensch zum Täter wird? Setz den Regler und begründe in einem Satz.")}
   <div class="pole"><span>Vor allem an der Person</span><span style="text-align:right">Vor allem an den Umständen</span></div>
   <label for="pos" class="sr">Deine Position zwischen Person und Umständen</label>
   <input type="range" id="pos" data-pos min="0" max="100" step="5" value="${pos}">
@@ -1071,6 +1265,45 @@ function rueckblick(){
   <div class="karte" style="margin-top:1.4rem"><h3>Weiter in M23</h3><p>Die Versuche, einen „Tätertyp“ zu finden, gelten als gescheitert. Wenn es keine Monster brauchte, was brauchte es dann? In M23 untersuchst du die Gesellschaft: Warum überlebten in Dänemark fast alle Jüdinnen und Juden?</p></div>
   ${weiter("zusammenfassung","Zur Zusammenfassung")}`;
 }
+/* ---------- Auftrag 7 · Schreibauftrag wie in der Klassenarbeit (Aufgabe C2 der Klassenarbeit Nr. 2, 2025/26; dort »M24«, hier M22) ---------- */
+const KA_AUFGABE = `Hannah Arendt prägte den Begriff der „Banalität des Bösen“, Christopher Browning sprach von „ganz normalen Männern“. <b>Erklären Sie</b> mithilfe der Konzepte aus M22, warum Menschen im Zweiten Weltkrieg zu Täter*innen werden konnten.`;
+const KA_STUFEN = [["Grundlegend","Du nennst Schlagworte wie „Banalität des Bösen“ oder „Gruppendruck“, erklärst sie aber kaum."],["Sicher","Die Grundidee eines Konzepts ist klar. Arendt und Browning gehen noch durcheinander."],["Souverän","Du stellst ein Konzept richtig dar und überträgst es auf das Verhalten der Täter*innen."]];
+const KA_INHALT = [["Arendt, „Banalität des Bösen“:","Eichmann als Beispiel – kein Dämon, sondern ein pflichtbewusster Beamter, der nicht nachdenkt. Gedankenlosigkeit, Routine, Karriere. Täter sehen sich als „Rädchen im Getriebe“."],
+  ["Browning, „Ganz normale Männer“:","Die Reservisten des Polizeibataillons 101 waren durchschnittliche Männer, keine Sadisten. Gruppendruck, Gehorsam, Gewöhnung. Aussteigen war möglich, wurde aber selten genutzt."],
+  ["Beide:","Das Bild vom „Monster“ reicht nicht. Soziale Umstände und Strukturen sind entscheidend. „Ich würde niemals …“ ist deshalb ein gefährlicher Satz."]];
+const kaRaster = () => `<div class="raster3">${KA_STUFEN.map(([s, x]) => `<div><b>${s}</b>${esc(x)}</div>`).join("")}</div>`;
+function schreiben(){
+  const w = woerter(S.erz), fertig = schreibFertig();
+  return `<p class="ab-unter">So steht die Aufgabe in der Klassenarbeit. Dort gibt es 10 Punkte und höchstens eine Seite.</p>
+  <blockquote class="ka-aufgabe">${KA_AUFGABE}</blockquote>
+  <div class="ab-zwei"><div>
+    <p><b>Erst gliedern.</b> Drei Stichpunkte, bevor du schreibst:</p>
+    <div class="gliederung">${[0,1,2].map(i => `<input type="text" data-gl="${i}" aria-label="Stichpunkt ${i+1}" placeholder="${i+1}" value="${esc(S.gl[i] || "")}">`).join("")}</div>
+    <label for="erz">Dein Text · etwa 120 Wörter</label><textarea id="erz" data-feld="erz" rows="8">${esc(S.erz)}</textarea>
+    <p class="hinweis" id="erz-zahl" aria-live="polite">${w} von etwa 120 Wörtern</p>
+  </div><div>
+    <p><b>Lieber von Hand?</b> Öffne das Schreibblatt, sichere es als PDF und schreib mit dem Stift.</p>
+    <div class="reihe"><button class="btn" data-schreibblatt>Schreibblatt für den Stift</button></div>
+    <label class="haken"><input type="checkbox" data-hand ${S.hand ? "checked" : ""}> Ich habe von Hand geschrieben.</label>
+    <div class="reihe"><button class="btn dunkel" data-krit ${fertig ? "" : "disabled"} aria-expanded="${!!(S.krit && fertig)}">Kriterien zum Abgleich</button></div>
+    <p class="hinweis" id="krit-hinweis">${fertig ? "" : "Die Kriterien öffnen sich nach deinem Text: ab etwa 60 Wörtern oder wenn du von Hand geschrieben hast."}</p>
+  </div></div>
+  <div id="krit" ${S.krit && fertig ? "" : "hidden"}><h2 class="abschnitt">Kriterien zum Abgleich</h2>
+    <p class="hinweis">Lies deinen Text noch einmal. Wo stehst du? Die Seite vergibt keine Punkte.</p>${kaRaster()}
+    <div class="ka-inhalt"><p><b>Das kann in deinem Text stehen</b> (ein Konzept genügt):</p>${KA_INHALT.map(([a, b]) => `<p><b>${esc(a)}</b> ${esc(b)}</p>`).join("")}</div></div>
+  <div id="schreibblatt" aria-hidden="true"><p class="zeit"><span class="nr">M22 · Schreibblatt</span><span>Name: ______________ · Datum: __________</span></p>
+    <h2>Schreibauftrag wie in der Klassenarbeit</h2><blockquote class="ka-aufgabe">${KA_AUFGABE}</blockquote>
+    <p><b>Erst gliedern.</b> Drei Stichpunkte:</p><div class="gl3"><div class="linien"></div><div class="linien"></div><div class="linien"></div></div>
+    <p style="margin-top:5mm"><b>Mein Text</b> (etwa eine halbe Seite)</p>${'<div class="linien"></div>'.repeat(20)}</div>`;
+}
+function schreibStand(){
+  const z = document.getElementById("erz-zahl"); if (!z) return;
+  const f = schreibFertig(), k = document.querySelector("[data-krit]"), h = document.getElementById("krit-hinweis");
+  z.textContent = woerter(S.erz) + " von etwa 120 Wörtern"; if (k) k.disabled = !f;
+  if (h) h.textContent = f ? "" : "Die Kriterien öffnen sich nach deinem Text: ab etwa 60 Wörtern oder wenn du von Hand geschrieben hast.";
+  if (!f) { const kr = document.getElementById("krit"); if (kr) kr.hidden = true; }
+}
+
 const posSatz = v => v < 35 ? "Du neigst zur Person: Charakter, Erziehung und eigenes Denken entscheiden." : v > 65 ? "Du neigst zu den Umständen: Gruppe, Befehle, Normen und Apparat entscheiden." : "Du stehst in der Mitte: Person und Umstände wirken zusammen.";
 
 /* ---------- Zusammenfassung mit Erzählaufgabe und Abrufübung ---------- */
@@ -1094,6 +1327,7 @@ function zusammenfassung(){
   return `<div class="zf"><p class="zeit"><span class="nr">M22 · Zusammenfassung</span><span>zwei Seiten A4</span></p>
   <h1>„Große Verbrechen brauchen keine Monster!“</h1><p class="leitfrage">Wie war das möglich? Wer wurde zum Täter, wer zur Täterin?</p>
   <div class="reihe nodruck"><button class="btn dunkel" data-drucken>Drucken oder als PDF sichern</button></div>
+  <h2 class="zf-teil">Das musst du wissen</h2>
   <h2>1 · Drei Sätze, die nicht stimmen</h2>
   <div class="tab-wrap"><table><tbody>
   <tr><td><b>„Ein paar Verrückte.“</b></td><td>200.000 bis 250.000 deutsche und österreichische Täter*innen; keine einheitliche krankhafte Persönlichkeit.</td></tr>
@@ -1108,11 +1342,11 @@ function zusammenfassung(){
     <span>${a.e.map(e => `<span class="ebene e-${e}">${EB[e]}</span>`).join("")}</span><span class="th">${esc(a.kurz.these)}</span><span class="gr"><b>Grenze:</b> ${esc(a.kurz.grenze)}</span></div>`; }).join("")}</div>
   <p class="merksatz">Erklären heißt nicht entschuldigen.</p>
   <div class="seitenumbruch"></div>
-  <h2>4 · Deine Erklärung in zehn Sätzen</h2>
-  <p>Warum traten in Józefów so wenige heraus, und warum traten überhaupt welche heraus? Schreib eine Erklärung in etwa zehn Sätzen. Verbinde mindestens drei Ansätze und sag, wo sie sich ergänzen oder widersprechen. Ende mit einem Satz dazu, was das heute heißt.</p>
-  <div class="satzanfaenge nodruck" aria-label="Satzanfänge">${ANFAENGE.map(s => `<button data-anfang="${esc(s)}">${esc(s)}</button>`).join("")}</div>
-  <label for="erz" class="sr">Deine Erklärung</label><textarea id="erz" data-feld="erz" rows="9" placeholder="Am Morgen des 13. Juli 1942 …">${esc(S.erz)}</textarea>
-  <div class="raster3"><div><b>Grundlegend</b>Nennt den Fall richtig und zwei Ansätze mit je einer These.</div><div><b>Sicher</b>Verbindet drei Ansätze mit dem Fall und zeigt eine Grenze.</div><div><b>Souverän</b>Zeigt, wo Ansätze sich widersprechen, wägt ab und zieht eine Folgerung für heute.</div></div>
+  <h2 class="zf-teil">Das musst du können</h2>
+  <h2>4 · So wird gefragt: Erklären wie in der Klassenarbeit</h2>
+  <p class="ka-aufgabe">${KA_AUFGABE}</p>
+  <label for="erz" class="sr">Dein Text</label><textarea id="erz" data-feld="erz" rows="9" placeholder="${S.hand ? "Von Hand geschrieben – siehe Schreibblatt." : "Dein Text aus Auftrag 7"}">${esc(S.erz)}</textarea>
+  ${kaRaster()}
   <h2>4b · Mit der Landkarte</h2>
   <p>Geh auf die kognitive Landkarte und schau dir die epistemologischen Prinzipien an (<a href="${LK}2-1" target="_blank" rel="noopener">Landkarte 2.1</a>). Welches Prinzip zeigt sich in dieser Stunde besonders? Erkläre damit, warum die Forschung sechs verschiedene Antworten auf die Frage „Wie war das möglich?“ gibt – und warum trotzdem nicht jede Antwort gleich gut ist.</p>
   <label for="lk-auf" class="sr">Deine Antwort mit der Landkarte</label><textarea id="lk-auf" data-feld="lkauf" rows="4" placeholder="In dieser Stunde zeigt sich besonders das Prinzip …">${esc(S.lkauf)}</textarea>
@@ -1127,7 +1361,7 @@ function zusammenfassung(){
   <p class="satz">${Object.keys(S.abruf).length ? `Richtig: ${ABRUF.filter((q, i) => S.abruf[i] === q.r).length} von ${Object.keys(S.abruf).length} beantworteten Fragen.` : ""}</p></div>
   <p class="quelle">Quellen: Browning 1993; Kitterman 1988; bpb-Lexikon „Befehlsnotstand“; Bajohr 2013; Nationalfonds Österreich (Ertl); Adorno 1950/1966; Arendt 1964; Stangneth 2011; Goldhagen 1996; Milgram 1963; Haslam/Reicher 2012; Bauman 1992; Welzer 2005. Fotos: siehe Bildliste im Moodle-Kurs.</p>
   </div>
-  <div class="fuss"><button class="btn" data-geh="rueckblick">‹ Zum Rückblick</button><a class="btn" href="${LABOR}">Zum GGK-Labor</a></div>`;
+  `;
 }
 
 /* ---------- Für Lehrkräfte: Text verschlüsselt im Datenblock lehr-daten; Schloss aus src/lk-schloss.js (python3 tools/lk_einsetzen.py) ---------- */
@@ -1221,7 +1455,10 @@ document.head.insertAdjacentHTML("beforeend", `<style id="lehr-stil">
 /* LEHR-SCHLOSS:ENDE */
 /* Beamer-Werkzeuge der Lehrkraft: erscheinen erst im geöffneten Bereich. Sie enthalten keine Lösungen. */
 function lehrWerkzeuge(){
-  return `<h2 class="abschnitt">Beamer-Werkzeuge</h2>
+  return `<h2 class="abschnitt">Freigabe</h2>
+  <p>Für das Gerät am Beamer: alle Aufträge auf einmal öffnen. Auf den iPads tippen die Schüler*innen selbst auf „Unsere Lehrkraft hat freigegeben“, wenn du es ansagst.</p>
+  <div class="reihe"><button class="btn" data-allefrei>Alle Aufträge auf diesem Gerät freigeben</button></div>
+  <h2 class="abschnitt">Beamer-Werkzeuge</h2>
   <div class="reihe"><button class="btn dunkel" data-moderation>Moderation am Beamer</button></div>
   <h2 class="abschnitt">Modelle der Tischgruppen</h2>
   <p>Trag die Gewichtungen jeder Tischgruppe ein. Gruppen ohne Eintrag erscheinen nicht. Keine Namen, keine Rangfolge.</p>
@@ -1274,7 +1511,7 @@ window.addEventListener("message", e => { if (e.data === "m22-film-zu" && docume
 const schliesse = () => { clearInterval(UHR); document.getElementById("ueber").innerHTML = ""; if (FILM_VON && document.contains(FILM_VON)) FILM_VON.focus({ preventScroll:true }); FILM_VON = null; };
 
 /* ---------- Zeichnen ---------- */
-const SEITE_FN = { start, einstieg, fakten, jozefow, akte, landkarte, markt, diskussion, rueckblick, zusammenfassung, lehrkraft };
+const SEITE_FN = { start, einstieg, fakten, jozefow, akte, landkarte, markt, diskussion, schreiben, rueckblick, zusammenfassung, lehrkraft };
 function loeschBereich(){
   return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button>${S.seite === "lehrkraft" ? "" : lehrTuer()}
   <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> Antworten, Siegel, Erklärungskarten, Gewichtungen, Landkarte, Notizen, Modell und Position werden auf diesem Gerät entfernt.</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div></div>`;
@@ -1282,13 +1519,15 @@ function loeschBereich(){
 let LETZTE_SEITE = null;
 function zeichne(fokus){
   if (!SEITE_FN[S.seite]) S.seite = "start";
+  document.querySelector(".ab-rahmen").classList.toggle("schmal", SCHMAL());
   kopf();
   const m = document.getElementById("main");
   m.classList.toggle("breit", S.seite === "lehrkraft" || S.seite === "zusammenfassung");
   m.classList.toggle("dashboard", S.seite === "akte");
-  m.innerHTML = SEITE_FN[S.seite]() + loeschBereich();
+  const auf = AUF[AUFI(S.seite)];
+  m.innerHTML = blattzeile() + (auf ? blatt(auf) : SEITE_FN[S.seite]()) + (QUER() && !SCHMAL() ? "" : loeschBereich());
   m.querySelectorAll("[data-vt]").forEach(b => b.style.viewTransitionName = b.dataset.vt);
-  if (S.seite === "jozefow") stapelStart();
+  if (S.seite === "jozefow" && offen("jozefow")) stapelStart();
   if (LETZTE_SEITE !== S.seite) { const b = document.getElementById("band"); if (b && b.classList.contains("mit")) neu(b, "neu"); }
   LETZTE_SEITE = S.seite;
   if (fokus) { m.focus({ preventScroll:true }); window.scrollTo(0, 0); }
@@ -1325,7 +1564,13 @@ function uhrStart(min){
 document.addEventListener("click", ev => {
   const t = ev.target.closest("button, [data-geh]"); if (!t) return;
   const d = t.dataset, tast = ev.detail === 0;
-  if (d.geh) { ev.preventDefault(); clearInterval(UHR); geh(d.geh); return; }
+  if (d.teil !== undefined) { S.teil[S.seite] = +d.teil; speichere(); clearInterval(UHR); zeichne(true); return; }
+  if ("freifrage" in d) { const f = document.getElementById("ab-frage"); f.hidden = false; t.setAttribute("aria-expanded", "true"); f.querySelector("button").focus(); return; }
+  if (d.frei !== undefined) { if (d.frei) { S.frei[d.frei] = true; speichere(); zeichne(true); } else { document.getElementById("ab-frage").hidden = true; document.querySelector("[data-freifrage]").focus(); } return; }
+  if ("allefrei" in d) { AUF.forEach(a => { S.frei[a.id] = true; }); speichere(); t.textContent = "Alle Aufträge sind auf diesem Gerät freigegeben"; t.disabled = true; register(true); return; }
+  if ("krit" in d) { S.krit = !S.krit; speichere(); document.getElementById("krit").hidden = !S.krit; t.setAttribute("aria-expanded", S.krit); return; }
+  if ("schreibblatt" in d) { document.body.classList.add("druck-sb"); window.print(); return; }
+  if (d.geh) { ev.preventDefault(); clearInterval(UHR); if (d.durch && offen(d.durch)) S.durch[d.durch] = true; if (d.ende) S.teil[d.geh] = 99; geh(d.geh); return; }
   if ("loeschfrage" in d) { const f = document.getElementById("loesch-frage"); f.hidden = false; f.querySelector("button").focus(); return; }
   if (d.loeschen === "nein") { document.getElementById("loesch-frage").hidden = true; return; }
   if (d.loeschen === "ja") { try { localStorage.removeItem(KEY); } catch(e) {} location.reload(); return; }
@@ -1373,7 +1618,8 @@ document.addEventListener("input", ev => {
   if (d.feld === "xtext") { S.x.text = t.value; speichere(); const ok = t.value.trim().length >= 10; document.querySelector("[data-siegeln]").disabled = !ok; document.getElementById("xhinweis").textContent = ok ? "" : "Schreib mindestens einen Satz."; return; }
   if (d.feld === "neu") { S.neu = t.value; speichere(); return; }
   if (d.feld === "grund") { S.grund = t.value; speichere(); return; }
-  if (d.feld === "erz") { S.erz = t.value; speichere(); return; }
+  if (d.feld === "erz") { S.erz = t.value; speichere(); schreibStand(); return; }
+  if (d.gl !== undefined) { S.gl[+d.gl] = t.value; speichere(); return; }
   if (d.feld === "lkauf") { S.lkauf = t.value; speichere(); return; }
   if (d.lk) { S.lk[d.lk] = t.value; speichere(); lkStand(); return; }
   if (d.karteFeld) { const a = S.akte; S.karte[a] = S.karte[a] || {}; S.karte[a][d.karteFeld] = t.value; speichere(); aktenStand(); return; }
@@ -1384,9 +1630,8 @@ document.addEventListener("input", ev => {
   if (t.id === "yregler") { const v = +t.value; document.getElementById("ywert").textContent = v; document.querySelectorAll("#yfeld i").forEach((p, i) => p.classList.toggle("schaetz", i < v)); return; }
 });
 function aktenStand(){
-  const n = fertigeAkten().length, f = document.getElementById("fortschritt"), w = document.querySelector("[data-geh='landkarte'].primary");
-  if (f) { f.classList.toggle("ok", n >= 2); f.textContent = n >= 2 ? `✓ ${n} Erklärungskarten. Der Marktplatz ist frei.` : `${n} von 2 Erklärungskarten. Mindestens zwei Erklärungen, eine aus einer anderen Ebene; eine Karte zählt, wenn These und Erklärung stehen.`; }
-  if (w) { w.disabled = n < 2; w.previousElementSibling.textContent = n < 2 ? "Erst zwei Erklärungskarten, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert."; }
+  const n = fertigeAkten().length, f = document.getElementById("fortschritt");
+  if (f) { f.classList.toggle("ok", n >= 2); f.textContent = n >= 2 ? `✓ ${n} Erklärungskarten. Auftrag L (Landkarte) ist frei.` : `${n} von 2 Erklärungskarten. Mindestens zwei Erklärungen, eine aus einer anderen Ebene; eine Karte zählt, wenn These und Erklärung stehen.`; }
   document.querySelectorAll("#dash .akte").forEach(b => { const s = b.dataset.akte, ok = karteFertig(s), sp = b.querySelector(".fs span:nth-child(2)"); if (sp) { sp.classList.toggle("ok", ok); sp.textContent = (ok ? "✓ " : "") + "Karte"; } });
 }
 function lkStand(){ // Landkarten-Moment: Felder freigeben, ohne neu zu zeichnen (Fokus bleibt im Feld)
@@ -1400,6 +1645,7 @@ function lkStand(){ // Landkarten-Moment: Felder freigeben, ohne neu zu zeichnen
 const wechsel = fn => { if (document.startViewTransition && !ruhig()) document.startViewTransition(fn); else fn(); }; // View Transitions mit Rückfall (signatur-design v7)
 function schliessePanel(){ const s = S.akte; S.akte = null; speichere(); const p = document.getElementById("panel"); if (p) p.classList.add("schliesst"); zeichne(); const k = document.querySelector(`#dash [data-akte="${s}"]`); if (k) k.focus({ preventScroll:true }); }
 document.addEventListener("change", ev => {
+  if ("hand" in ev.target.dataset) { S.hand = ev.target.checked; speichere(); schreibStand(); return; }
   const t = ev.target, d = t.dataset;
   if (d.kl !== undefined) { const g = +d.kl; S.klasse[g] = S.klasse[g] || {}; if (t.value === "") delete S.klasse[g][d.k]; else S.klasse[g][d.k] = +t.value; speichere(); }
 });
@@ -1409,6 +1655,9 @@ document.addEventListener("keydown", ev => {
   if (ev.target.id === "spur" && (ev.key === "ArrowRight" || ev.key === "ArrowLeft")) { ev.preventDefault(); blaettern(aktKarte() + (ev.key === "ArrowRight" ? 1 : -1), true); }
 });
 
+window.addEventListener("afterprint", () => document.body.classList.remove("druck-sb"));
+let WARQUER = QUER();
+window.addEventListener("resize", () => { document.documentElement.style.setProperty("--ab-kopf", document.querySelector(".kopf").offsetHeight + "px"); if (QUER() !== WARQUER) { WARQUER = QUER(); zeichne(false); } });
 zeichne();
 </script>
   <p class="urheberzeile" style="font-size:1rem;opacity:.72;margin-top:1.5rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p>
