@@ -1,23 +1,25 @@
 # Arbeitsstand · Blatt-Standard für alle Module und Kapitel Weimarer Republik
 
-## Stand am 17.11.2026, 12:50 Uhr (Zwischenhalt)
+## Stand am 17.11.2026, 15:30 Uhr
 
 Branch `blatt-standard-und-weimar`, alles gepusht. Nichts ist zusammengeführt.
 
 **Fertig gebaut und im Browser geprüft (Chromium, 1180 × 820, `file://`; Zusammenfassung je 2 Seiten A4, Schreibblatt je 1 Seite):**
 
 - Blatt-Rahmen im gemeinsamen Kern (`src/m25-m27/blatt.js`, `blatt.css`), Grundgerüst Weimar (`src/weimar/weimar.js`, `weimar.css`), Bauwerkzeug `tools/bau_weimar.py`, Rauchtest `tools/pruef/blatt_rauch.py`.
-- Weimar als Arbeitsblätter: M1, M2, M3, M4, M5, M6, M7, M7.1, M8 (mit M8.1), M9, M10, M11 – je mit Register, Landkarten-Auftrag, Schreibauftrag, Zusammenfassung und verschlüsseltem Lehrkraftbereich (`lk/w-m*.enc.json`).
-- Wahldaten 1919–1933 mit Quelle in `weimar.js` (`W_WAHLEN`).
+- **Kapitel Weimar vollständig:** M1 bis M14.2 (16 Arbeitsblätter) und die Kapitelübersicht `weimar/index.html` – je mit Register, Landkarten-Auftrag, Schreibauftrag, Zusammenfassung und verschlüsseltem Lehrkraftbereich (`lk/w-*.enc.json`).
+- Startseite mit Kapitel 1 (16 Module in Leiste und Regal).
+- Wahldaten 1919–1933 mit Quelle in `weimar.js` (`W_WAHLEN`); Bausteine Halbrund, Linien, Stimmungskurve, Rechnen, Karten zum Anstreichen.
+- Moodle-Paket: `tools/bau_moodle_paket.py` (braucht die geklonten eigenen Seiten: `--apps <Ordner>`) und `tools/pruef/paket_pruef.py`. Ein erster Zwischenstand ging am 17.11. an Mario.
 
 **Noch offen, in dieser Reihenfolge:**
 
-1. M12, M13, M14, M14.2; Kapitelübersicht `weimar/index.html` (`src/weimar/hub.js` fehlt noch).
-2. M15 und M24 als Module im NS-Kapitel.
-3. Startseite mit Weimar-Kapitel; Werkzeug `tools/bau_moodle_paket.py` und erste Moodle-ZIP.
-4. Blatt-Standard auf M16, M17, M25–M27 und Ost-West übertragen. Achtung: `kern.js` braucht jetzt `blatt.js`; `tools/bau_m25_m27.py` und `tools/bau_ost_west.py` binden es noch nicht ein – diese Seiten vorher nicht neu bauen.
-5. Blatt-Standard auf M18–M21, M23 (von Hand gebaute Seiten).
-6. Gesamtprüfung (weitere Breiten, alte Prüfungen), Abschluss-ZIP, Bericht, Pull Request.
+1. M15 und M24 als Module im NS-Kapitel (Wurzel, `src/m25-m27/`).
+2. Blatt-Standard auf M16, M17, M25–M27 und Ost-West übertragen. Achtung: `kern.js` braucht jetzt `blatt.js`; `tools/bau_m25_m27.py` und `tools/bau_ost_west.py` binden es noch nicht ein – diese Seiten vorher nicht neu bauen.
+3. Blatt-Standard auf M18–M21, M23 (von Hand gebaute Seiten).
+4. Gesamtprüfung (weitere Breiten, alte Prüfungen), Abschluss-ZIP, Bericht, Pull Request.
+
+Moodle-Material, das nicht im Repository liegt, entsteht so neu: `python3 tools/weimar_bilder.py <Heft.pdf>`, `python3 tools/texte_aus_heft.py <Heft.pdf>`, `python3 tools/owk_texte.py <Heft.pdf>` (danach `git checkout src/ost-west/quellen.js`). Links mit Schlüssel stehen in `privat/moodle-links.json`.
 
 **Nicht gelaufen:** andere Breiten als 1180 px, echtes iPad, Stift, VoiceOver, Moodle-Upload, Zeitdiagnose mit 150 Wörtern pro Minute.
 

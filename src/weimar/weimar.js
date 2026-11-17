@@ -154,6 +154,30 @@ function halbrund(titel, werte, nachweis, o = {}){
   return `<figure class="w-halbrund ${o.schmal ? "schmal" : ""}"><figcaption class="kennung">${esc(titel)}</figcaption><div class="hr-in"><svg viewBox="0 0 340 176" role="img" aria-label="${esc(titel)}: ${werte.map(w => `${w[0]} ${komma(w[1])} Prozent`).join(", ")}">${seg}${o.mitte ? `<text x="${cx}" y="${cy - 26}" text-anchor="middle" class="hr-m">${esc(o.mitte)}</text>` : ""}${o.mitte2 ? `<text x="${cx}" y="${cy - 6}" text-anchor="middle" class="hr-m2">${esc(o.mitte2)}</text>` : ""}</svg>
   <ul class="hr-leg">${werte.map(w => `<li><span style="background:${w[2]}"></span><b>${esc(w[0])}</b><i>${komma(w[1])} %</i>${w[3] ? `<small>${esc(w[3])}</small>` : ""}</li>`).join("")}</ul></div><p class="quelle">${nachweis}</p></figure>`;
 }
+/* ---------- Linien: Entwicklung über mehrere Zeitpunkte (eigene Grafik) mit Zahlentabelle. reihen = [[Name, [Werte], Farbe]] ---------- */
+function linien(titel, xs, reihen, nachweis, o = {}){
+  const W = 640, H = 300, l = 38, r = 132, ob = 14, un = 34, max = o.max || 45, komma = z => String(z).replace(".", ",");
+  const x = i => l + (W - l - r) * i / (xs.length - 1), y = v => ob + (H - ob - un) * (1 - v / max);
+  let gitter = ""; for (let g = 0; g <= max; g += 10) gitter += `<line x1="${l}" x2="${W - r}" y1="${y(g)}" y2="${y(g)}" stroke="#6B655B" stroke-width="${g ? .6 : 1.4}"/><text x="${l - 6}" y="${y(g) + 4}" text-anchor="end" class="li-a">${g}</text>`;
+  const achse = xs.map((n, i) => `<text x="${x(i)}" y="${H - 12}" text-anchor="middle" class="li-a">${esc(n)}</text>`).join("");
+  /* Namen am rechten Rand: mindestens 15 Einheiten Abstand */
+  const ende = reihen.map((q, k) => ({ k, y:y(q[1][q[1].length - 1]) })).sort((a, b) => a.y - b.y); for (let i = 1; i < ende.length; i++) if (ende[i].y - ende[i - 1].y < 15) ende[i].y = ende[i - 1].y + 15;
+  const ly = {}; ende.forEach(e => { ly[e.k] = e.y; });
+  const kurven = reihen.map((q, k) => `<polyline points="${q[1].map((v, i) => x(i).toFixed(1) + "," + y(v).toFixed(1)).join(" ")}" fill="none" stroke="${q[2]}" stroke-width="${q[3] ? 4.5 : 2.6}" stroke-linejoin="round"/>${q[1].map((v, i) => `<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="${q[3] ? 5 : 3.6}" fill="${q[2]}" stroke="#211D12" stroke-width="1"/>`).join("")}<text x="${W - r + 10}" y="${(ly[k] + 4).toFixed(1)}" class="li-n" fill="${q[2]}">${esc(q[0])} ${komma(q[1][q[1].length - 1])}</text>`).join("");
+  return `<figure class="w-linien"><figcaption class="kennung">${esc(titel)}</figcaption><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(titel)}. Die Zahlen stehen in der Tabelle darunter.">${gitter}${achse}${kurven}</svg>
+  <div class="matrix-wrap"><table class="li-tab"><thead><tr><th scope="col">Stimmen in Prozent</th>${xs.map(n => `<th scope="col">${esc(n)}</th>`).join("")}</tr></thead><tbody>${reihen.map(q => `<tr><th scope="row"><span style="background:${q[2]}"></span>${esc(q[0])}</th>${q[1].map(v => `<td>${komma(v)}</td>`).join("")}</tr>`).join("")}</tbody></table></div><p class="quelle">${nachweis}</p></figure>`;
+}
+/* ---------- Stimmungskurve: je Station ein Wert von 1 bis 5; die gewählten Felder verbindet eine Linie. Stand: S[pfad][i] ---------- */
+function kurve(pfad, stationen, o = {}){
+  const st = hol(pfad) || {}, n = stationen.length, pts = stationen.map((s, i) => st[i] ? [(i + .5) / n * 600, (5 - st[i] + .5) / 5 * 250] : null);
+  const stuecke = []; let lauf = []; pts.forEach(q => { if (q) lauf.push(q.map(z => z.toFixed(1)).join(",")); else { if (lauf.length > 1) stuecke.push(lauf); lauf = []; } }); if (lauf.length > 1) stuecke.push(lauf);
+  return `<div class="w-kurve" style="--n:${n}"><div class="ku-achse" aria-hidden="true"><span>${esc(o.oben || "sehr gute Stimmung")}</span><span>${esc(o.unten || "sehr schlechte Stimmung")}</span></div>
+  <div class="ku-feld">${stationen.map((s, i) => `<div class="ku-sp" role="group" aria-label="${esc(s[0])}">${[5,4,3,2,1].map(v => `<button type="button" data-akt="kurve" data-p="${pfad}.${i}" data-w="${v}" aria-pressed="${st[i] === v}" aria-label="${esc(s[0])}: ${v} von 5">${v}</button>`).join("")}</div>`).join("")}
+  <svg viewBox="0 0 600 250" preserveAspectRatio="none" aria-hidden="true">${stuecke.map(q => `<polyline points="${q.join(" ")}" fill="none" stroke="#9B402D" stroke-width="4" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>`).join("")}</svg></div>
+  <ol class="ku-namen">${stationen.map(s => `<li><b>${esc(s[0])}</b><span>${esc(s[1])}</span></li>`).join("")}</ol></div>`;
+}
+AKTION.kurve = t => { setz(t.dataset.p, +t.dataset.w); zeichneBehalte(); };
+const kurveVoll = (pfad, n) => { const st = hol(pfad) || {}; return Array.from({ length:n }, (_, i) => st[i]).every(Boolean); };
 /* ---------- Rechnen mit Rückmeldung: erst die eigene Zahl, dann die Erklärung (Muster 1). Stand: S[pfad] = { v, ok } ---------- */
 function rechne(pfad, frage, soll, o = {}){
   const st = hol(pfad) || {}, ok = st.ok, id = "re-" + pfad.replace(/\W/g, "-");
