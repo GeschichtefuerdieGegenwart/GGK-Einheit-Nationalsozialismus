@@ -9,13 +9,14 @@ const setz = (p, v) => { const k = p.split("."); let o = S; for (let i = 0; i < 
 const woerter = t => String(t || "").trim().split(/\s+/).filter(Boolean).length;
 const ruhig = () => { try { return !!S.ruhig || matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e) { return !!S.ruhig; } };
 const neu = (el, k) => { if (!el) return; el.classList.remove(k); void el.offsetWidth; if (!ruhig()) el.classList.add(k); };
-const LABOR = /github\.io$/.test(location.hostname) ? "index.html" : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
+/* Rückweg zur Übersicht. Seiten in Unterordnern setzen vor dem Kern window.GGK_ZURUECK = "../index.html". */
+const LABOR = /github\.io$/.test(location.hostname) ? (typeof window.GGK_ZURUECK === "string" ? window.GGK_ZURUECK : "index.html") : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
 const LK = "https://geschichtefuerdiegegenwart.github.io/kognitive-Landkarte-des-Geschichtsunterrichts/#s-";
 const idx = id => Math.max(0, L.seiten.findIndex(s => s[0] === id));
 
 /* ---------- Bausteine für Seiten ---------- */
-const zeitKopf = id => { const s = L.seiten[idx(id)]; return `<p class="zeit"><span class="nr">${esc(s[1])}</span><span>${esc(s[2])}</span></p>`; };
-const weiter = (nach, text, o = {}) => `<div class="fuss"><span class="hinweis">${o.hinweis || "Dein Stand wird nur auf diesem Gerät gespeichert."}</span><button class="btn primary" data-geh="${nach}">${esc(text)} ›</button></div>`;
+const zeitKopf = id => { if (BLATT_AN) return ""; const s = L.seiten[idx(id)]; return `<p class="zeit"><span class="nr">${esc(s[1])}</span><span>${esc(s[2])}</span></p>`; };
+const weiter = (nach, text, o = {}) => BLATT_AN ? "" : `<div class="fuss"><span class="hinweis">${o.hinweis || "Dein Stand wird nur auf diesem Gerät gespeichert."}</span><button class="btn primary" data-geh="${nach}">${esc(text)} ›</button></div>`;
 const auftrag = (form, titel, text) => `<div class="auftrag"><span class="form">${esc(form)}</span><h3>${esc(titel)}</h3><p>${text}</p></div>`;
 const belastend = text => `<p class="belastend"><b>Hinweis vorab.</b> ${text}</p>`;
 const status = (art, text) => `<span class="status ${art}">${esc(text)}</span>`;
@@ -71,7 +72,7 @@ const STUFENWORT = { zentral:"zentral", begruendbar:"auch begründbar", kaum:"pa
 function gWahl(id, frage, optionen, o = {}){
   const st = (S.wahl || {})[id] || {}, zu = !!st.zu;
   return `<div class="g"><div class="g-wahl" data-g="wahl" data-mind="${o.mind ?? 8}" data-id="${id}" ${zu ? 'data-zu=""' : ""}>
-  <fieldset><legend>${frage}</legend>${optionen.map((op, i) => `<label class="g-option" data-urteil="${op[1]}" data-grund="${esc(op[2])}"><input type="radio" name="w-${id}" value="${i}" ${st.o === i ? "checked" : ""} ${zu ? "disabled" : ""}><span>${esc(op[0])}<span class="g-option__urteil">${STUFENWORT[op[1]]} – ${esc(op[2])}</span></span></label>`).join("")}</fieldset>
+  <fieldset><legend>${frage}</legend>${optionen.map((op, i) => `<label class="g-option" data-urteil="${op[1]}" data-grund="${esc(op[2])}"><input type="radio" name="w-${id}" value="${i}" ${st.o === i ? "checked" : ""} ${zu ? "disabled" : ""}><span>${esc(op[0])}<span class="g-option__urteil">${(o.worte || STUFENWORT)[op[1]]} – ${esc(op[2])}</span></span></label>`).join("")}</fieldset>
   ${o.ohneGrund ? "" : `<label>Begründung in einem Satz<textarea data-grund-feld rows="2" ${zu ? "readonly" : ""} placeholder="${esc(o.platz || "Ich wähle das, weil …")}">${esc(st.grund || "")}</textarea></label>`}
   <div class="g-wahl__fuss"><button type="button" class="g-knopf g-knopf--primaer" data-g-festlegen ${zu ? "disabled" : ""}>Festlegen</button><span class="g-stempel" ${zu ? "" : "hidden"}>Festgelegt</span>${zu ? `<button type="button" class="btn nodruck" data-neu-wahl="${id}">Noch einmal</button>` : ""}<span class="sr" aria-live="polite"></span></div>
   </div></div>`;
@@ -134,8 +135,8 @@ function tafelZu(){ const u = document.getElementById("ueber"); if (!u.innerHTML
 /* ---------- Kopf, Löschen, Zeichnen ---------- */
 function kopf(){
   document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div><a class="pill" href="${LABOR}">← GGK-Labor</a>`;
-  const a = idx(S.seite);
-  document.getElementById("weg").innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
+  const a = idx(S.seite), weg = document.getElementById("weg");
+  if (weg) weg.innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
 }
 function loeschBereich(){
   return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button><label class="g-schalter" style="font-family:var(--body)"><input type="checkbox" role="switch" data-bewegung ${S.ruhig ? "checked" : ""}> Weniger Bewegung</label><span>Alles bleibt auf diesem Gerät. Nichts wird übertragen.</span>${S.seite === "lehrkraft" ? "" : lehrTuer()}
@@ -148,7 +149,13 @@ function zeichne(fokus){
   kopf();
   const m = document.getElementById("main");
   m.classList.toggle("breit", (L.breit || []).includes(S.seite));
-  m.innerHTML = SEITE_FN[S.seite]() + loeschBereich();
+  if (BLATT()) {
+    const rahmen = document.querySelector(".ab-rahmen"), auf = AUF(S.seite), schmal = SCHMAL();
+    if (rahmen) rahmen.classList.toggle("schmal", schmal);
+    m.classList.toggle("deckblatt", !auf);
+    m.innerHTML = blattzeile() + (auf ? blatt(auf) : SEITE_FN[S.seite]()) + (QUER() && !schmal ? "" : loeschBereich());
+    register(true);
+  } else m.innerHTML = SEITE_FN[S.seite]() + loeschBereich();
   window.Gegenwart && Gegenwart.init(m);
   nachInit();
   if (fokus) { m.focus({ preventScroll:true }); window.scrollTo(0, 0); }
@@ -166,7 +173,9 @@ function nachEingabe(pfad){
   document.querySelectorAll("[data-vergleich]").forEach(b => { const ok = b.dataset.bed.split(",").every(p => String(hol(p) || "").trim().length >= +b.dataset.min); b.disabled = !ok; const h = document.querySelector(`[data-vergleichhinweis="${b.dataset.vergleich}"]`); if (h) h.textContent = ok ? "" : "Erst deine Antworten, dann der Vergleich."; });
   if (pfad === "lk.vermutung") { const frei = S.lk.vermutung.trim().length >= 10, t = document.getElementById("lk-teil2"); if (t && t.classList.contains("gesperrt") === frei) zeichneBehalte(); }
   if (pfad === "lk.grund") { const b = document.querySelector("[data-lkpruef]"); if (b) b.disabled = !(S.lk.prinzip && S.lk.grund.trim().length >= 10 && !S.lk.ok); }
+  if (pfad.indexOf("sa.") === 0) schreibStand();
   if (typeof L.nachEingabe === "function") L.nachEingabe(pfad);
+  if (BLATT()) register();
 }
 /* Neu zeichnen, aber Scrollstand und Fokus (samt Cursor) behalten. */
 function zeichneBehalte(){
@@ -177,16 +186,20 @@ function zeichneBehalte(){
 
 function kernStart(){
   const d = L.init(), g = lade();
-  S = Object.assign({ seite:"start", ruhig:false, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false } }, d);
+  S = Object.assign({ seite:"start", ruhig:false, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false }, frei:{}, durch:{}, wk:{}, sa:{ gl:["","",""], text:"", hand:false, krit:false } }, d);
   Object.keys(g).forEach(k => { S[k] = (S[k] && typeof S[k] === "object" && !Array.isArray(S[k]) && g[k] && typeof g[k] === "object" && !Array.isArray(g[k])) ? Object.assign({}, S[k], g[k]) : g[k]; });
   const h = location.hash.replace("#", ""); if (h && SEITE_FN[h]) S.seite = h;
   zeichne(false);
 }
 
 document.addEventListener("click", ev => {
-  const t = ev.target.closest("[data-geh],[data-mark],[data-stift],[data-satz],[data-vergleich],[data-prinzip],[data-lkpruef],[data-lkneu],[data-stimme],[data-stimmkarte],[data-tafelzu],[data-loeschfrage],[data-loeschen],[data-g-festlegen],[data-neu-wahl],[data-akt],[data-drucken]");
+  const t = ev.target.closest("[data-geh],[data-mark],[data-stift],[data-satz],[data-vergleich],[data-prinzip],[data-lkpruef],[data-lkneu],[data-stimme],[data-stimmkarte],[data-tafelzu],[data-loeschfrage],[data-loeschen],[data-g-festlegen],[data-neu-wahl],[data-akt],[data-drucken],[data-freifrage],[data-frei],[data-schreibblatt],[data-krit]");
   if (!t) return;
-  if (t.dataset.geh) return geh(t.dataset.geh);
+  if (t.dataset.geh) { if (t.dataset.durch) { if (!S.durch) S.durch = {}; S.durch[t.dataset.durch] = true; } return geh(t.dataset.geh); }
+  if (t.hasAttribute("data-freifrage")) { const f = document.getElementById("ab-frage"); f.hidden = false; t.setAttribute("aria-expanded", "true"); f.querySelector("button").focus(); return; }
+  if (t.dataset.frei !== undefined) { if (t.dataset.frei) { if (!S.frei) S.frei = {}; S.frei[t.dataset.frei] = true; speichere(); zeichne(true); } else { document.getElementById("ab-frage").hidden = true; const k = document.querySelector("[data-freifrage]"); k.setAttribute("aria-expanded", "false"); k.focus(); } return; }
+  if (t.hasAttribute("data-schreibblatt")) { document.body.classList.add("druck-sb"); window.print(); return; }
+  if (t.hasAttribute("data-krit")) { if (!schreibFertig()) return; S.sa.krit = !S.sa.krit; speichere(); const k = document.getElementById("krit"); k.hidden = !S.sa.krit; t.setAttribute("aria-expanded", String(S.sa.krit)); if (S.sa.krit) { neu(k, "neu"); k.scrollIntoView({ block:"nearest", behavior: ruhig() ? "auto" : "smooth" }); } return; }
   if (t.dataset.mark) return markiere(t);
   if (t.dataset.stift) { const [id, s] = t.dataset.stift.split(":"); setz("stift." + id, s); t.parentElement.querySelectorAll(".g-stift").forEach(b => b.setAttribute("aria-pressed", String(b === t))); return; }
   if (t.dataset.satz) { const f = document.getElementById(t.dataset.satz); if (!f) return; f.value = (f.value.trim() ? f.value.replace(/\s*$/, "") + " " : "") + t.dataset.text + " "; setz(f.dataset.f, f.value); nachEingabe(f.dataset.f); f.focus(); return; }
@@ -202,9 +215,9 @@ document.addEventListener("click", ev => {
   if (t.hasAttribute("data-g-festlegen")) { const w = t.closest(".g-wahl[data-id]"); if (!w) return; const gew = w.querySelector("input:checked"), ta = w.querySelector("textarea"); if (!gew) return; setz("wahl." + w.dataset.id, { o:+gew.value, grund: ta ? ta.value : "", zu:true }); setTimeout(() => { zeichneBehalte(); if (typeof L.nachWahl === "function") L.nachWahl(w.dataset.id); }, ruhig() ? 0 : 420); return; }
   if (t.dataset.neuWahl) { setz("wahl." + t.dataset.neuWahl, {}); return zeichneBehalte(); }
   if (t.hasAttribute("data-drucken")) return window.print();
-  if (t.dataset.akt && AKTION[t.dataset.akt]) return AKTION[t.dataset.akt](t, ev);
+  if (t.dataset.akt && AKTION[t.dataset.akt]) { AKTION[t.dataset.akt](t, ev); if (BLATT()) register(); return; }
 });
-function kernStartLeer(r){ S = {}; const d = L.init(); S = Object.assign({ seite:"start", ruhig:r, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false } }, d); speichere(); zeichne(true); }
+function kernStartLeer(r){ S = {}; const d = L.init(); S = Object.assign({ seite:"start", ruhig:r, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false }, frei:{}, durch:{}, wk:{}, sa:{ gl:["","",""], text:"", hand:false, krit:false } }, d); speichere(); zeichne(true); }
 function markiere(t){
   const [id, i] = t.dataset.mark.split(":"), st = (S.stift || {})[id] || "a";
   if (!S.mark[id]) S.mark[id] = {};
@@ -215,6 +228,7 @@ function markiere(t){
   if (!hat && window.Gegenwart && st === "a") Gegenwart.bewegen(t, [{ backgroundSize:"0% 100%" }, { backgroundSize:"100% 100%" }], { dauer:260 });
   document.querySelectorAll("[data-belege]").forEach(b => { const ids = b.dataset.belege.split(","); if (!ids.includes(id)) return; QUELLEN[ids[0]].stifte.forEach(s => { const sp = b.querySelector(".sp." + s[0]); const alt = sp.querySelector("ul,.leer"); if (alt) alt.outerHTML = belegListe(ids, s[0]); }); });
   if (typeof L.nachMark === "function") L.nachMark(id);
+  if (BLATT()) register();
 }
 document.addEventListener("keydown", ev => {
   if (ev.key === "Escape") return tafelZu();
@@ -228,6 +242,7 @@ document.addEventListener("input", ev => {
 });
 document.addEventListener("change", ev => {
   const t = ev.target;
+  if (t.hasAttribute && t.hasAttribute("data-hand")) { S.sa.hand = t.checked; speichere(); schreibStand(); if (BLATT()) register(); return; }
   if (t.hasAttribute && t.hasAttribute("data-bewegung")) { S.ruhig = t.checked; speichere(); if (S.ruhig) document.documentElement.setAttribute("data-bewegung", "weniger"); else document.documentElement.removeAttribute("data-bewegung"); return; }
   if (t.tagName === "SELECT" && t.dataset.f) { setz(t.dataset.f, t.value); nachEingabe(t.dataset.f); if (t.dataset.neu !== undefined) zeichneBehalte(); return; }
   const w = t.closest && t.closest(".g-wahl"); if (w) pruefeWahl(w);

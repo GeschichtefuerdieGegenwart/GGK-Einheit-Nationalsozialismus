@@ -1,0 +1,79 @@
+/* ===== Kapitel »Weimarer Republik«: eigene Teile. Kapitelfarbe Gold (wie auf der Startseite), nur auf dunklem Grund. ===== */
+:root{--w-gold:#E0B74A}
+.pill.kapitel{background:transparent;border-color:var(--line);font-weight:400}
+.w-band figure{overflow:hidden;min-height:17rem}
+.w-band .w-jahr{position:absolute;inset:0;display:grid;place-items:center;background:
+  radial-gradient(120% 90% at 80% 10%, rgba(224,183,74,.16), transparent 60%),
+  repeating-linear-gradient(90deg, rgba(255,250,242,.035) 0 1px, transparent 1px 34px), #1B1A17}
+.w-band .w-jahr span{font-family:var(--display);font-weight:600;font-size:clamp(4rem,2rem + 9vw,9.5rem);line-height:.9;letter-spacing:-.03em;color:var(--w-gold);text-align:center;padding:0 1rem;border-bottom:3px solid rgba(224,183,74,.55);padding-bottom:.12em}
+.w-band figure img{position:absolute;inset:0}
+.w-band figure.ohne figcaption{display:none}
+.w-band figcaption span{opacity:.85}
+.w-band .bt .ob{color:var(--w-gold)}
+.w-zeit.klein{gap:.3rem;margin:.6rem 0 0}
+.w-zeit.klein li{padding:.35rem .4rem .45rem;font-size:.78rem;border-radius:.45rem}
+.w-zeit.klein li b{font-size:.86rem;line-height:1.15}
+.w-zeit.klein .w-zt{font-weight:400;font-size:.76rem;line-height:1.2}
+.w-zeit.klein li::before{left:.5rem}
+.w-wo{margin:0 0 1.4rem;padding:.8rem 1rem .9rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg)}
+.w-wo .w-zeit li{hyphens:auto;overflow-wrap:anywhere}
+.kopfpaar{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);background:var(--dunkel);border-radius:var(--r-lg);overflow:hidden;margin:0 0 1.2rem}
+.kopfpaar.ohne{grid-template-columns:1fr}
+.kopfpaar > .auftrag{margin:0;border-radius:0;background:none;display:flex;flex-direction:column;justify-content:center;padding:1.4rem 1.6rem}
+.kopfpaar figure{margin:0;position:relative;min-height:15rem;background:#2A2824}
+.kopfpaar figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.kopfpaar figcaption{position:absolute;left:0;right:0;bottom:0;padding:.45rem .8rem;font-size:.75rem;line-height:1.35;color:#E6DFD2;background:linear-gradient(transparent,rgba(27,26,23,.88))}
+.kopfpaar figcaption span{opacity:.85}
+.w-vs .qblatt{border:0;padding:0;background:none;margin:0 0 .8rem}
+.w-vs .g-stifte{flex-direction:row;flex-wrap:wrap}
+.w-faden{margin-top:1rem;border-left:4px solid var(--kuli);padding:.2rem 0 .2rem .8rem}
+.w-fadenfeld,.w-kgfeld{max-width:62rem;margin-bottom:1.2rem}
+.w-zitat{margin:1rem 0;max-width:62rem}
+.w-zitat blockquote{font-size:clamp(1.15rem,1rem + .5vw,1.4rem);line-height:1.4;padding:1rem 1.3rem;margin:.3rem 0 0}
+.w-zitat blockquote .wer{font-size:.88rem;margin-top:.6rem}
+.w-zitat.rot blockquote{border-left-color:var(--red);background:var(--red-hi)}
+.qblatt.lese{max-width:62rem}
+.qblatt.lese .qtext p{font-size:1.05rem;line-height:1.6}
+.qblatt.lese.spalten .qtext{columns:2;column-gap:2rem}
+.qblatt.lese.spalten .qtext p{break-inside:avoid;margin-bottom:.6rem}
+.w-balken{margin:1rem 0;max-width:46rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1rem 1.2rem}
+.w-bz{display:grid;gap:.4rem;margin-top:.6rem}
+.w-bzeile{display:grid;grid-template-columns:8.5rem minmax(0,1fr) 4.2rem;gap:.6rem;align-items:center;font-size:.98rem}
+.w-bn{font-weight:700}
+.w-bb{display:block;height:1.35rem;background:var(--offset);border-radius:.25rem;overflow:hidden}
+.w-bb span{display:block;height:100%;border-radius:.25rem}
+.w-bw{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+/* Personen- und Positionskarten groß */
+.w-person{display:grid;grid-template-columns:minmax(0,1fr);gap:.4rem}
+.w-person .rolle{font-weight:700;color:var(--red);font-size:.92rem}
+.w-kopfzeile{display:flex;gap:.8rem;align-items:baseline;flex-wrap:wrap;margin-bottom:.4rem}
+.w-kopfzeile h3{margin:0}
+.w-liste2{padding-left:1.15rem;display:grid;gap:.3rem;margin:.4rem 0}
+.w-vs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.2rem;margin:1rem 0}
+.w-vs > div{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem;border-top:6px solid var(--ink)}
+.w-vs > div.rot{border-top-color:var(--red)}
+.w-vs > div.blau{border-top-color:var(--kuli)}
+.w-vs h3{font-size:1.3rem;margin-bottom:.35rem}
+.w-rolle{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem 1.2rem;margin:1rem 0;max-width:62rem}
+.w-rolle .voll{grid-column:1/-1}
+.w-milieus{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin:.8rem 0}
+.w-milieus button{display:grid;gap:.2rem;text-align:left;padding:.8rem 1rem;border:1.5px solid #8B857A;border-radius:var(--r-lg);background:var(--surface);color:var(--ink);font:inherit;min-height:5.2rem;align-content:start}
+.w-milieus button b{font-family:var(--display);font-size:1.15rem}
+.w-milieus button small{font-size:.88rem;color:var(--muted);line-height:1.3}
+.w-milieus button[aria-pressed=true]{border-color:var(--ink);background:var(--gold-hi);box-shadow:4px 4px 0 0 var(--offset)}
+.w-stufe{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:.5rem;align-items:end;margin:1rem 0}
+.w-wahrfalsch{display:grid;gap:.7rem;max-width:62rem;margin:1rem 0}
+.w-wf{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.4rem 1rem;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.7rem 1rem}
+.w-wf p{font-weight:700}
+.w-wf .w-wfk{display:flex;gap:.4rem}
+.w-wf .w-wfk button{min-height:48px;min-width:5.2rem;border:1.5px solid #8B857A;border-radius:.6rem;background:var(--surface2);font:inherit;font-weight:700;color:var(--ink)}
+.w-wf .w-wfk button[aria-pressed=true]{background:var(--ink);color:var(--inverse);border-color:var(--ink)}
+.w-wf .rm{grid-column:1/-1;margin:0}
+@media (max-width:899px){
+  .kopfpaar{grid-template-columns:1fr}
+  .w-vs,.w-rolle,.w-milieus{grid-template-columns:1fr}
+  .qblatt.lese.spalten .qtext{columns:1}
+  .w-bzeile{grid-template-columns:6rem minmax(0,1fr) 3.6rem}
+  .w-wf{grid-template-columns:1fr}
+}
+@media print{.w-band,.w-film{display:none}}

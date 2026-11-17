@@ -5,3 +5,8 @@ texte/m27-artikel.js
 # Ost-West: Artikel der bpb (M41) im vollen Wortlaut und Schulbuchseiten (M42–M44): nur im Moodle-Paket
 ost-west/texte/owk-m41.js
 ost-west/media/owk-scan-*.jpg
+# Kapitel Weimar, M15, M24: Bilder aus dem Heft und fremde Texte im vollen Wortlaut – nur im Moodle-Paket
+weimar/media/heft-*.jpg
+weimar/texte/
+media/m15-heft-*.jpg
+media/m24-heft-*.jpg
