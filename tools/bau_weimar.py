@@ -8,7 +8,7 @@ K = REPO/'src'/'m25-m27'; H = REPO/'src'/'weimar'; ZIEL = REPO/'weimar'
 # Stundenfolge aus weimar.js lesen: ["m01","M1","Titel","datei.html","a"]
 MODULE = re.findall(r'\["(m\d+)","(M[\d.]+)","([^"]+)","([^"]+\.html)","([a-d])"\]', (H/'weimar.js').read_text('utf-8'))
 # Fremde Texte im vollen Wortlaut: nur im Moodle-Paket (weimar/texte/, in .gitignore)
-TEXTE = {'m03': ['m03-tagesspiegel.js'], 'm06': ['m06-kershaw.js'], 'm14': ['m14-quellen.js']}
+TEXTE = {}
 SCHALE = '''<!doctype html>
 <html lang="de">
 <head>

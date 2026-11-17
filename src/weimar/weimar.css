@@ -103,3 +103,17 @@
 .w-cf .rm{margin:.5rem 0 0}
 .w-cf .rm .btn{min-height:44px;padding:.3rem .8rem;font-size:.9rem;margin-top:.3rem}
 @media (max-width:899px){.w-check{grid-template-columns:1fr}}
+/* Auf einem Bild zeichnen */
+.w-zk{margin:1rem 0}
+.w-zk .g-stifte{align-items:center}
+.w-zk .g-stifte .btn{min-height:44px;padding:.35rem .8rem;font-size:.9rem}
+.w-zk-b{position:relative;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;background:#EFEAE0;margin-top:.5rem;line-height:0}
+.w-zk-b img{display:block;width:100%;height:auto}
+.w-zk-b canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+/* Karten zum Auswählen (mehrere) */
+.w-punkte{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem .8rem;margin:1rem 0}
+.w-punkte button{display:grid;grid-template-columns:2.1rem minmax(0,1fr);gap:.6rem;align-items:start;text-align:left;border:1.5px solid #8B857A;border-radius:.7rem;background:var(--surface);padding:.55rem .8rem;font:inherit;color:var(--ink);min-height:52px}
+.w-punkte button b{font-family:var(--display);font-size:1.15rem;color:var(--red)}
+.w-punkte button[aria-pressed=true]{background:var(--gold-hi);border-color:var(--ink);box-shadow:3px 3px 0 0 var(--offset)}
+.w-punkte button[disabled]{opacity:.5}
+@media (max-width:899px){.w-punkte{grid-template-columns:1fr}}

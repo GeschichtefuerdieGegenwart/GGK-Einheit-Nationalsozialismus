@@ -75,6 +75,7 @@ function weimarStart(){
   L.kapitel = "Weimarer Republik"; L.seiten = [["start","",""]].concat(L.blatt.map(a => [a.id, a.min + " Min.", a.kurz]));
   const init0 = L.init; L.init = () => Object.assign({ faden:(wLade().faden[L.wid] || ""), kg:(wLade().kg[L.wid] || "") }, init0 ? init0() : {});
   const ne0 = L.nachEingabe; L.nachEingabe = p => { if (p === "faden") wSchreib(u => { u.faden[L.wid] = S.faden; }); if (p === "kg") wSchreib(u => { u.kg[L.wid] = S.kg; }); if (ne0) ne0(p); };
+  const ni0 = L.nachInit; L.nachInit = () => { zkInit(); if (ni0) ni0(); };
   kernStart();
 }
 /* Kopf: Rückweg zur Übersicht und zum Kapitel */
@@ -106,3 +107,36 @@ function check(pfad, fragen){
 const checkFertig = (pfad, n) => { const st = hol(pfad) || {}; for (let i = 0; i < n; i++) if (st[i] == null) return false; return true; };
 AKTION.check = t => { setz(`${t.dataset.p}.${t.dataset.i}`, +t.dataset.w); zeichneBehalte(); };
 AKTION.checkneu = t => { setz(`${t.dataset.p}.${t.dataset.i}`, null); zeichneBehalte(); };
+
+/* ---------- Auf einem Bild zeichnen (Stift oder Finger): Linien liegen als Zahlen im Stand, nichts wird übertragen.
+   pfad → S[pfad] = [{ s:Stift, p:[[x,y] …] }] mit x, y zwischen 0 und 1 · stifte = [[id, Farbe, Name]] ---------- */
+function zeichenKarte(pfad, b, stifte){
+  const st = hol(pfad + "Stift") || stifte[0][0], n = (hol(pfad) || []).length;
+  return `<div class="w-zk" data-zk="${pfad}" data-stifte="${esc(JSON.stringify(stifte))}">
+  <div class="g-stifte nodruck" role="group" aria-label="Stift wählen">${stifte.map(s => `<button type="button" class="g-stift" data-akt="setz" data-p="${pfad}Stift" data-w="${s[0]}" aria-pressed="${st === s[0]}"><span class="z" aria-hidden="true" style="color:${s[1]}">▬</span>${esc(s[2])}</button>`).join("")}
+  <button type="button" class="btn" data-akt="zkzurueck" data-p="${pfad}" ${n ? "" : "disabled"}>Letzte Linie zurück</button><button type="button" class="btn" data-akt="zkleer" data-p="${pfad}" ${n ? "" : "disabled"}>Alles löschen</button></div>
+  <div class="w-zk-b"><img src="media/${b.datei}" alt="${esc(b.alt)}" onerror="zkFehlt(this)"><canvas data-zkc="${pfad}" aria-label="Zeichenfläche über der Karte. Mit Stift oder Finger Linien ziehen."></canvas></div>
+  <p class="quelle">${b.text || ""} ${b.nachweis || ""}</p>
+  <p class="hinweis" data-zkh hidden>${b.fehlt || "Dieses Bild liegt nur im Moodle-Paket. Nimm die Karte im Heft und zeichne dort."}</p></div>`;
+}
+function zkFehlt(img){ const w = img.closest(".w-zk"); w.querySelector(".w-zk-b").hidden = true; w.querySelector(".g-stifte").hidden = true; w.querySelector("[data-zkh]").hidden = false; }
+function zkMale(c){
+  const pfad = c.dataset.zkc, w = c.closest(".w-zk"), img = w.querySelector("img"); if (!img || !img.naturalWidth) return;
+  const r = img.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1); c.width = Math.round(r.width * dpr); c.height = Math.round(r.height * dpr);
+  const x = c.getContext("2d"), farbe = Object.fromEntries(JSON.parse(w.dataset.stifte).map(s => [s[0], s[1]]));
+  x.lineCap = "round"; x.lineJoin = "round"; x.lineWidth = 4 * dpr;
+  (hol(pfad) || []).forEach(l => { if (!l.p.length) return; x.strokeStyle = farbe[l.s] || "#24221F"; x.beginPath(); l.p.forEach((q, i) => { const px = q[0] * c.width, py = q[1] * c.height; if (i) x.lineTo(px, py); else x.moveTo(px, py); }); if (l.p.length === 1) x.lineTo(l.p[0][0] * c.width + .1, l.p[0][1] * c.height); x.stroke(); });
+}
+function zkInit(){
+  document.querySelectorAll("canvas[data-zkc]").forEach(c => { const img = c.closest(".w-zk").querySelector("img"); if (img.complete) zkMale(c); else img.addEventListener("load", () => zkMale(c), { once:true }); });
+}
+let ZK = null;
+document.addEventListener("pointerdown", ev => { const c = ev.target.closest && ev.target.closest("canvas[data-zkc]"); if (!c) return; ev.preventDefault(); c.setPointerCapture(ev.pointerId);
+  const r = c.getBoundingClientRect(), pfad = c.dataset.zkc, l = (hol(pfad) || []).slice(); ZK = { c, pfad, l, akt:{ s:hol(pfad + "Stift") || JSON.parse(c.closest(".w-zk").dataset.stifte)[0][0], p:[[+((ev.clientX - r.left) / r.width).toFixed(4), +((ev.clientY - r.top) / r.height).toFixed(4)]] } }; l.push(ZK.akt); });
+document.addEventListener("pointermove", ev => { if (!ZK) return; const r = ZK.c.getBoundingClientRect(), q = [+((ev.clientX - r.left) / r.width).toFixed(4), +((ev.clientY - r.top) / r.height).toFixed(4)], v = ZK.akt.p[ZK.akt.p.length - 1];
+  if (Math.abs(q[0] - v[0]) + Math.abs(q[1] - v[1]) < .004) return; ZK.akt.p.push(q); S[ZK.pfad] = ZK.l; zkMale(ZK.c); });
+const zkEnde = () => { if (!ZK) return; setz(ZK.pfad, ZK.l); ZK.c.closest(".w-zk").querySelectorAll('[data-akt="zkzurueck"],[data-akt="zkleer"]').forEach(b => { b.disabled = false; }); ZK = null; if (typeof L.nachEingabe === "function") L.nachEingabe("zk"); if (BLATT()) register(); };
+document.addEventListener("pointerup", zkEnde); document.addEventListener("pointercancel", zkEnde);
+AKTION.zkzurueck = t => { const l = (hol(t.dataset.p) || []).slice(0, -1); setz(t.dataset.p, l); zeichneBehalte(); };
+AKTION.zkleer = t => { setz(t.dataset.p, []); zeichneBehalte(); };
+window.addEventListener("resize", () => document.querySelectorAll("canvas[data-zkc]").forEach(zkMale));

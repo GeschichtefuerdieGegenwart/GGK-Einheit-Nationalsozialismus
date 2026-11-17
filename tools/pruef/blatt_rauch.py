@@ -9,7 +9,7 @@ ap = argparse.ArgumentParser(); ap.add_argument('seite'); ap.add_argument('--bre
 ap.add_argument('--fotos'); ap.add_argument('--stand'); ap.add_argument('--nur'); ap.add_argument('--pdf', action='store_true'); a = ap.parse_args()
 URL = pathlib.Path(a.seite).resolve().as_uri()
 async def main():
-    fehler, fremd, ok, bad = [], [], 0, []
+    fehler, fremd, ok, bad, fehlend = [], [], 0, [], []
     def pr(bed, text):
         nonlocal ok
         if bed: ok += 1
@@ -17,7 +17,7 @@ async def main():
     async with async_playwright() as p:
         b = await p.chromium.launch(); ctx = await b.new_context(viewport={'width': a.breite, 'height': a.hoehe}, device_scale_factor=1)
         pg = await ctx.new_page()
-        pg.on('console', lambda m: fehler.append(m.text) if m.type == 'error' else None)
+        pg.on('console', lambda m: (fehlend if 'ERR_FILE_NOT_FOUND' in m.text else fehler).append(m.text) if m.type == 'error' else None)
         pg.on('pageerror', lambda e: fehler.append('pageerror: ' + str(e)))
         pg.on('request', lambda r: fremd.append(r.url) if not r.url.startswith(('file:', 'data:', 'about:', 'blob:')) else None)
         await pg.goto(URL)
@@ -65,5 +65,6 @@ async def main():
         await b.close()
     print(f"{pathlib.Path(a.seite).name} @ {a.breite}x{a.hoehe}: {ok} bestanden, {len(bad)} offen"); [print('  –', x) for x in bad]
     print('  Seitenhöhen:', masse)
+    if fehlend: print(f'  Hinweis: {len(fehlend)} Datei(en) nicht gefunden (Bilder oder Texte, die nur im Moodle-Paket liegen).')
     return 1 if bad else 0
 sys.exit(asyncio.run(main()))
