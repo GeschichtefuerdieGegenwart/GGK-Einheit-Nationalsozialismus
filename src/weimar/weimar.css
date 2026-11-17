@@ -174,3 +174,6 @@
 /* Vier Bewertungen nebeneinander */
 .w-vier{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem 1.6rem;margin:.8rem 0}
 @media (max-width:899px){ .w-vier{grid-template-columns:1fr} }
+/* Rechte Spalte bleibt stehen, während links ein langer Text gelesen wird */
+.klebt{position:sticky;top:5rem;align-self:start}
+@media (max-width:899px){ .klebt{position:static} }

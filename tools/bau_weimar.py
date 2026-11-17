@@ -35,7 +35,7 @@ SCHALE = '''<!doctype html>
 '''
 BLATT = '<div class="ab-rahmen"><aside class="ab-reg" id="reg" aria-label="Aufträge dieses Blatts"></aside><main id="main" tabindex="-1"></main></div>'
 def gebaut():
-    return [m[0] for m in MODULE if (H/f'{m[0]}.js').exists()]
+    return [m[0] for m in MODULE if (H/f'{m[0]}.js').exists()]  # mNN-daten.js gehört zur Stunde und zählt nicht eigens
 def css(extra=''):
     return (K/'basis.css').read_text('utf-8').replace('url(assets/', 'url(../assets/') + (K/'kern.css').read_text('utf-8') + (K/'blatt.css').read_text('utf-8') + (H/'weimar.css').read_text('utf-8') + extra
 def lehr(k):
@@ -57,7 +57,7 @@ def bau(k):
                              css=css((H/'hub.css').read_text('utf-8')), rumpf='<main id="main" tabindex="-1"></main>', lehr=lehr('hub'), tx='', js=js)
         (ZIEL/'index.html').write_text(html, 'utf-8'); print('index.html', len(html)); return
     m = next(x for x in MODULE if x[0] == k)
-    teile = [K/'kern.js', K/'blatt.js', REPO/'src'/'lk-schloss.js', H/'weimar.js', H/f'{k}.js']
+    teile = [K/'kern.js', K/'blatt.js', REPO/'src'/'lk-schloss.js', H/'weimar.js'] + ([H/f'{k}-daten.js'] if (H/f'{k}-daten.js').exists() else []) + [H/f'{k}.js']
     js = kopfjs() + ''.join(p.read_text('utf-8') for p in teile)
     assert '</script' not in js, k
     extra = (H/f'{k}.css').read_text('utf-8') if (H/f'{k}.css').exists() else ''

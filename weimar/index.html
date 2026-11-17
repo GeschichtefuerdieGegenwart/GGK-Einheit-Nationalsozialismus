@@ -718,6 +718,9 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 /* Vier Bewertungen nebeneinander */
 .w-vier{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem 1.6rem;margin:.8rem 0}
 @media (max-width:899px){ .w-vier{grid-template-columns:1fr} }
+/* Rechte Spalte bleibt stehen, während links ein langer Text gelesen wird */
+.klebt{position:sticky;top:5rem;align-self:start}
+@media (max-width:899px){ .klebt{position:static} }
 /* ===== Kapitelübersicht Weimar ===== */
 main.breit{max-width:74rem}
 .h-kopf{background:#211D12;color:#F4F1EA;border-radius:var(--r-lg);padding:clamp(1.4rem,3vw,2.4rem) clamp(1.2rem,3vw,2.4rem) 1.4rem;border-top:8px solid #E0B74A;background-image:linear-gradient(120deg,#211D12 55%,#3A2F14)}
@@ -781,8 +784,8 @@ a.h-karte:hover,a.h-karte:focus-visible{transform:translateY(-3px);box-shadow:0 
 <script src="../assets/gegenwart/bundle.js"></script>
 <script>
 window.GGK_ZURUECK = "../index.html";
-window.W_GEBAUT = ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m071", "m08", "m09", "m10", "m11", "m12"];
-window.W_DAUER = {"m01": 90, "m02": 45, "m03": 90, "m04": 45, "m05": 90, "m06": 105, "m07": 90, "m071": 45, "m08": 90, "m09": 45, "m10": 60, "m11": 180, "m12": 90};
+window.W_GEBAUT = ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m071", "m08", "m09", "m10", "m11", "m12", "m13"];
+window.W_DAUER = {"m01": 90, "m02": 45, "m03": 90, "m04": 45, "m05": 90, "m06": 105, "m07": 90, "m071": 45, "m08": 90, "m09": 45, "m10": 60, "m11": 180, "m12": 90, "m13": 90};
 "use strict";
 /* ===== Gemeinsamer Kern M25–M27. Jede Stunde definiert danach L (Einstellungen), ihre Daten, SEITE_FN und ruft kernStart(). ===== */
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
