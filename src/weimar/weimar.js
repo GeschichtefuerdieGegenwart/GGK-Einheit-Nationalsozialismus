@@ -108,6 +108,10 @@ const checkFertig = (pfad, n) => { const st = hol(pfad) || {}; for (let i = 0; i
 AKTION.check = t => { setz(`${t.dataset.p}.${t.dataset.i}`, +t.dataset.w); zeichneBehalte(); };
 AKTION.checkneu = t => { setz(`${t.dataset.p}.${t.dataset.i}`, null); zeichneBehalte(); };
 
+/* ---------- Mehrfachauswahl: Karten mit dem Marker anstreichen (Heft: »Markieren Sie die überzeugenden Überlegungen mit gelb«) ---------- */
+const mehrWahl = (pfad, eintraege, o = {}) => `<div class="w-mw k${o.spalten || 3}" role="group" aria-label="${esc(o.titel || "Karten markieren")}">${eintraege.map(e => { const an = !!hol(`${pfad}.${e.id}`); return `<button type="button" data-akt="mw" data-p="${pfad}.${e.id}" aria-pressed="${an}">${e.kopf ? `<span class="kennung">${esc(e.kopf)}</span>` : ""}<b>${esc(e.titel)}</b><span class="w-mwt">${e.text}</span><span class="w-mws">${an ? "✓ " + esc(o.an || "markiert") : esc(o.aus || "antippen zum Markieren")}</span></button>`; }).join("")}</div>`;
+const mwZahl = pfad => Object.values(hol(pfad) || {}).filter(Boolean).length;
+AKTION.mw = t => { setz(t.dataset.p, !hol(t.dataset.p)); zeichneBehalte(); };
 /* ---------- Auf einem Bild zeichnen (Stift oder Finger): Linien liegen als Zahlen im Stand, nichts wird übertragen.
    pfad → S[pfad] = [{ s:Stift, p:[[x,y] …] }] mit x, y zwischen 0 und 1 · stifte = [[id, Farbe, Name]] ---------- */
 function zeichenKarte(pfad, b, stifte){
