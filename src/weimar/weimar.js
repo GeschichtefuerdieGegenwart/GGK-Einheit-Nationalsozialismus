@@ -57,6 +57,8 @@ function deckblatt(){
 }
 /* Auftrag und Bild als ein Kopf (Muster aus M22 4.1). Fehlt das Bild, bleibt der Auftrag allein stehen. */
 const kopfpaar = (auftragHtml, b) => `<div class="kopfpaar">${auftragHtml}<figure><img src="media/${b.datei}" alt="${esc(b.alt)}" loading="lazy" onerror="this.closest('.kopfpaar').classList.add('ohne');this.closest('figure').remove()"><figcaption>${b.text} <span>${b.nachweis}</span></figcaption></figure></div>`;
+/* Links, die nur im Moodle-Paket stehen (Pinnwände, Umfragen mit Schlüssel im Link): Das Paket-Werkzeug schreibt window.W_LINKS in die Seite; öffentlich fehlt der Eintrag. */
+const wLink = k => (window.W_LINKS || {})[k] || null;
 /* Roter Faden: ein Satz am Ende jeder Stunde; er wandert in die Übersicht des Kapitels und aufs Deckblatt der nächsten Stunde. */
 const fadenFeld = () => `<div class="w-fadenfeld nodruck">${auftrag("Allein · 2 Minuten", "Ein Satz für den roten Faden", "Die Leitfrage dieses Abschnitts: " + esc(W_BLOCK[L.block][2]) + " Was trägt diese Stunde zur Antwort bei?")}
   ${textfeld("faden", "Mein Satz", { rows:2, zaehl:false, anfaenge:L.fadenAnf || ["Diese Stunde zeigt, dass", "Für die Leitfrage heißt das:"] })}</div>`;
@@ -136,7 +138,7 @@ function halbrund(titel, werte, nachweis, o = {}){
   const seg = werte.map(w => { const a1 = a0 - Math.PI * w[1] / sum, A = pt(R, a0), B = pt(R, a1), C = pt(r, a1), D = pt(r, a0), M = pt((R + r) / 2, (a0 + a1) / 2);
     const d = `M${A[0]} ${A[1]}A${R} ${R} 0 0 1 ${B[0]} ${B[1]}L${C[0]} ${C[1]}A${r} ${r} 0 0 0 ${D[0]} ${D[1]}Z`; a0 = a1;
     return `<path d="${d}" fill="${w[2]}" stroke="#FBF8F1" stroke-width="2"/>` + (w[1] / sum > .07 ? `<text x="${M[0]}" y="${+M[1] + 5}" text-anchor="middle" class="hr-z">${komma(w[1])}</text>` : ""); }).join("");
-  return `<figure class="w-halbrund"><figcaption class="kennung">${esc(titel)}</figcaption><div class="hr-in"><svg viewBox="0 0 340 176" role="img" aria-label="${esc(titel)}: ${werte.map(w => `${w[0]} ${komma(w[1])} Prozent`).join(", ")}">${seg}${o.mitte ? `<text x="${cx}" y="${cy - 26}" text-anchor="middle" class="hr-m">${esc(o.mitte)}</text>` : ""}${o.mitte2 ? `<text x="${cx}" y="${cy - 6}" text-anchor="middle" class="hr-m2">${esc(o.mitte2)}</text>` : ""}</svg>
+  return `<figure class="w-halbrund ${o.schmal ? "schmal" : ""}"><figcaption class="kennung">${esc(titel)}</figcaption><div class="hr-in"><svg viewBox="0 0 340 176" role="img" aria-label="${esc(titel)}: ${werte.map(w => `${w[0]} ${komma(w[1])} Prozent`).join(", ")}">${seg}${o.mitte ? `<text x="${cx}" y="${cy - 26}" text-anchor="middle" class="hr-m">${esc(o.mitte)}</text>` : ""}${o.mitte2 ? `<text x="${cx}" y="${cy - 6}" text-anchor="middle" class="hr-m2">${esc(o.mitte2)}</text>` : ""}</svg>
   <ul class="hr-leg">${werte.map(w => `<li><span style="background:${w[2]}"></span><b>${esc(w[0])}</b><i>${komma(w[1])} %</i>${w[3] ? `<small>${esc(w[3])}</small>` : ""}</li>`).join("")}</ul></div><p class="quelle">${nachweis}</p></figure>`;
 }
 /* ---------- Rechnen mit Rückmeldung: erst die eigene Zahl, dann die Erklärung (Muster 1). Stand: S[pfad] = { v, ok } ---------- */

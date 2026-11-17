@@ -137,6 +137,7 @@
 .w-zeit li b{font-family:var(--display);font-size:1.05rem}
 .w-zeit .w-zt{font-weight:700}
 .w-zeit .w-zx{color:var(--muted);font-size:.85rem}
+.w-zeit li.rot{border-top:4px solid var(--red)}
 .w-zeit li.hier{border-color:var(--red);background:var(--red-hi)}
 .w-zeit li.hier::before{background:var(--red);border-color:var(--red)}
 .w-zeit li.da{opacity:.8}

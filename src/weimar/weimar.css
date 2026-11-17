@@ -153,9 +153,24 @@
 .w-halbrund .hr-leg i{font-style:normal;font-variant-numeric:tabular-nums;text-align:right}
 .w-halbrund .hr-leg small{color:#DCD5CA;font-size:.84rem}
 .w-halbrund .quelle{color:#C9C1B4;margin-top:.6rem}
+/* Halbrund in halber Breite: Bogen oben, Legende darunter in zwei Spalten */
+.w-halbrund.schmal .hr-in{grid-template-columns:1fr;gap:.6rem}
+.w-halbrund.schmal svg{max-width:22rem;margin:0 auto}
+.w-halbrund.schmal .hr-leg{grid-template-columns:1fr 1fr;gap:.25rem 1.2rem}
+.w-halbrund.schmal .hr-leg li{grid-template-columns:1rem minmax(0,1fr) auto;font-size:.92rem}
+.w-halbrund.schmal .hr-leg small{display:none}
 /* Rechnen mit Rückmeldung */
 .w-rechne{margin:.9rem 0}
 .w-rechne label{display:block;font-weight:700;margin-bottom:.3rem}
 .w-rechne input{width:7rem;min-height:44px;font:inherit;font-size:1.15rem;padding:.3rem .6rem;border:1.5px solid #8B857A;border-radius:var(--r-md, 8px);background:var(--surface);color:var(--ink);text-align:right}
 .w-rechne .w-re-e{font-weight:700}
 @media (max-width:899px){ .w-halbrund .hr-in{grid-template-columns:1fr} }
+/* Wirkungskette: Kästen mit Pfeilen (Ursache → Folge) */
+.w-kette{list-style:none;display:flex;flex-wrap:wrap;gap:.6rem 1.7rem;margin:1rem 0;padding:0}
+.w-kette li{position:relative;flex:1 1 9.5rem;background:var(--surface);border:1px solid var(--border);border-left:6px solid var(--ink);border-radius:var(--r-lg);padding:.6rem .8rem;font-size:.93rem;line-height:1.35}
+.w-kette li b{display:block;font-family:var(--display);font-size:1.03rem;line-height:1.2;margin-bottom:.15rem}
+.w-kette li:not(:last-child)::after{content:"→";position:absolute;right:-1.3rem;top:50%;transform:translateY(-50%);font-weight:700;font-size:1.2rem;color:var(--red)}
+.w-kette li.rot{border-left-color:var(--red)}.w-kette li.blau{border-left-color:var(--kuli)}
+/* Vier Bewertungen nebeneinander */
+.w-vier{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem 1.6rem;margin:.8rem 0}
+@media (max-width:899px){ .w-vier{grid-template-columns:1fr} }
