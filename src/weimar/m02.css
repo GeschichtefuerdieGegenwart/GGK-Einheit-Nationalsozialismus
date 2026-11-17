@@ -1,0 +1,12 @@
+/* M2: acht Länder als Felder (Modell, keine Landkarte) */
+.w-kacheln{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:repeat(6,minmax(3.4rem,auto));gap:.45rem;margin:.8rem 0;background:#DCE5F0;border-radius:var(--r-lg);padding:.8rem}
+.w-kacheln button{display:grid;align-content:center;justify-items:center;gap:.1rem;border:2px solid #8B857A;border-radius:.7rem;background:var(--surface2);color:var(--ink);font:inherit;padding:.3rem .4rem;line-height:1.15;text-align:center;min-height:48px}
+.w-kacheln button b{font-size:.92rem;hyphens:auto;overflow-wrap:anywhere}
+.w-kacheln button span{font-size:1.2rem;min-height:1.3rem}
+.w-kacheln .b-e{background:var(--kuli-hi);border-color:var(--kuli)}
+.w-kacheln .b-m{background:var(--red-hi);border-color:var(--red)}
+.w-kacheln .b-n{background:var(--slate-hi);border-color:var(--slate)}
+.w-kacheln button.zentral{box-shadow:0 0 0 3px var(--green)}
+.w-kacheln button.teils{box-shadow:0 0 0 3px var(--gold)}
+.w-kacheln button.kaum{box-shadow:0 0 0 3px var(--red);border-style:dashed}
+.w-kacheln button[disabled]{opacity:1;cursor:default}

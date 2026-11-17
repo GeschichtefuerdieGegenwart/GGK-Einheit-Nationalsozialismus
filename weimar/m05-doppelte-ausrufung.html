@@ -613,6 +613,32 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
   .w-wf{grid-template-columns:1fr}
 }
 @media print{.w-band,.w-film{display:none}}
+/* Rangordnung als Stufenbild (Modell, keine Größenverhältnisse) */
+.w-pyramide{display:grid;gap:.3rem;justify-items:center;margin:1rem 0 .4rem}
+.w-pyramide div{background:var(--ink);color:var(--inverse);border-radius:.4rem;padding:.5rem .8rem;text-align:center;font-weight:700;font-size:.98rem;line-height:1.25}
+.w-pyramide div small{display:block;font-weight:400;font-size:.82rem;color:#DCD5CA}
+.w-pyramide div:nth-child(1){width:34%;background:var(--red)}
+.w-pyramide div:nth-child(2){width:50%}
+.w-pyramide div:nth-child(3){width:66%;background:var(--slate)}
+.w-pyramide div:nth-child(4){width:84%;background:var(--green)}
+.w-pyramide div:nth-child(5){width:100%;background:var(--gold)}
+.w-schritte{list-style:none;display:grid;grid-template-columns:repeat(var(--n,4),minmax(0,1fr));gap:.7rem;margin:1rem 0;counter-reset:s}
+.w-schritte li{counter-increment:s;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:.9rem 1rem;position:relative;font-size:1rem}
+.w-schritte li::before{content:counter(s);display:inline-flex;align-items:center;justify-content:center;width:1.7rem;height:1.7rem;border-radius:999px;background:var(--ink);color:var(--inverse);font-family:var(--display);font-weight:600;margin-bottom:.35rem}
+.w-schritte li b{display:block;font-family:var(--display);font-size:1.1rem;line-height:1.2;margin-bottom:.2rem}
+@media (max-width:899px){.w-schritte{grid-template-columns:1fr}.w-pyramide div{width:100%!important}}
+/* Wissens-Check */
+.w-check{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem 1.4rem;margin:1rem 0}
+.w-cf{border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface);padding:.8rem 1rem 1rem;min-width:0}
+.w-cf legend{font-weight:700;padding:0 .3rem;font-size:1rem}
+.w-cf .w-nr{display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;border-radius:999px;background:var(--ink);color:var(--inverse);font-size:.85rem;margin-right:.2rem}
+.w-co{display:grid;gap:.4rem;margin-top:.3rem}
+.w-co button{min-height:48px;text-align:left;border:1.5px solid #8B857A;border-radius:.6rem;background:var(--surface2);padding:.45rem .8rem;font:inherit;color:var(--ink)}
+.w-co button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--inverse)}
+.w-co button[disabled]:not([aria-pressed=true]){opacity:.55}
+.w-cf .rm{margin:.5rem 0 0}
+.w-cf .rm .btn{min-height:44px;padding:.3rem .8rem;font-size:.9rem;margin-top:.3rem}
+@media (max-width:899px){.w-check{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -624,7 +650,7 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 <script src="../assets/gegenwart/bundle.js"></script>
 <script>
 window.GGK_ZURUECK = "../index.html";
-window.W_GEBAUT = ["m05"];
+window.W_GEBAUT = ["m01", "m02", "m04", "m05"];
 "use strict";
 /* ===== Gemeinsamer Kern M25–M27. Jede Stunde definiert danach L (Einstellungen), ihre Daten, SEITE_FN und ruft kernStart(). ===== */
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -1282,6 +1308,18 @@ const wfFertig = (pfad, n) => { const st = hol(pfad) || {}; for (let i = 0; i < 
 AKTION.wf = t => { setz(`${t.dataset.p}.${t.dataset.i}`, t.dataset.w); zeichneBehalte(); };
 AKTION.wfneu = t => { setz(`${t.dataset.p}.${t.dataset.i}`, null); zeichneBehalte(); };
 const lang = (p, n = 10) => String(hol(p) || "").trim().length >= n;
+
+/* ---------- Wissens-Check mit Erklärung je Antwort (Muster 2): Die erste Antwort zählt, jede Antwort bekommt ihre eigene Erklärung. Keine Punkte.
+   fragen = [[Frage, [[Antwort, richtig, Erklärung], …], Abschnitt zum Nachlesen]] · Stand: S[pfad][i] = Index der gewählten Antwort ---------- */
+function check(pfad, fragen){
+  const st = hol(pfad) || {};
+  return `<div class="w-check">${fragen.map((f, i) => { const v = st[i], gew = v == null ? null : f[1][v];
+    return `<fieldset class="w-cf"><legend><span class="w-nr">${i + 1}</span> ${esc(f[0])}</legend><div class="w-co">${f[1].map((o, k) => `<button type="button" data-akt="check" data-p="${pfad}" data-i="${i}" data-w="${k}" aria-pressed="${v === k}" ${v == null ? "" : "disabled"}>${esc(o[0])}</button>`).join("")}</div>
+    <div aria-live="polite">${gew ? `<div class="rm ${gew[1] ? "zentral" : "kaum"}"><b>${gew[1] ? "Stimmt." : "Noch nicht."}</b> ${esc(gew[2])}${gew[1] ? "" : ` <span class="hinweis">Lies noch einmal: ${esc(f[2])}.</span> <button type="button" class="btn" data-akt="checkneu" data-p="${pfad}" data-i="${i}">Noch einmal</button>`}</div>` : ""}</div></fieldset>`; }).join("")}</div>`;
+}
+const checkFertig = (pfad, n) => { const st = hol(pfad) || {}; for (let i = 0; i < n; i++) if (st[i] == null) return false; return true; };
+AKTION.check = t => { setz(`${t.dataset.p}.${t.dataset.i}`, +t.dataset.w); zeichneBehalte(); };
+AKTION.checkneu = t => { setz(`${t.dataset.p}.${t.dataset.i}`, null); zeichneBehalte(); };
 /* ===== M5 · Die doppelte Ausrufung der Republik (Heft „Geschichte aktuell 1“, M5, M5.1–M5.3) ===== */
 const L = {
   wid:"m05", key:"ggk-w-m05:v1", nr:"M5", titel:"Die doppelte Ausrufung der Republik", unter:"Novemberrevolution 1918 · Welche Republik?", dauer:90, block:"b",
