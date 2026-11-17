@@ -1,0 +1,52 @@
+/* ===== Kapitelübersicht Weimar ===== */
+main.breit{max-width:74rem}
+.h-kopf{background:#211D12;color:#F4F1EA;border-radius:var(--r-lg);padding:clamp(1.4rem,3vw,2.4rem) clamp(1.2rem,3vw,2.4rem) 1.4rem;border-top:8px solid #E0B74A;background-image:linear-gradient(120deg,#211D12 55%,#3A2F14)}
+.h-kopf .kennung{color:#F0D58A}
+.h-kopf h1{font-family:var(--display);font-size:clamp(2.6rem,6vw,4.4rem);line-height:1;margin:.2rem 0 .4rem;color:#fff;letter-spacing:-.01em}
+.h-kopf .h-unter{font-size:1.2rem;max-width:44rem;color:#E6DFD0;margin:0 0 1.2rem}
+.h-kopf .w-zeit::before{border-top-color:#E0B74A}
+.h-kopf .w-zeit li{background:#2C2616;border-color:#5A4B22;color:#F4F1EA}
+.h-kopf .w-zeit li::before{background:#211D12;border-color:#E0B74A}
+.h-kopf .w-zeit .w-zx{color:#D9D0BC}
+.h-nav{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.2rem 0 0}
+.h-nav a{display:inline-flex;align-items:center;min-height:44px;padding:.3rem .9rem;border:1px solid #7A6A3A;border-radius:99px;color:#F4F1EA;text-decoration:none;font-size:.95rem}
+.h-nav a:hover,.h-nav a:focus-visible{background:#E0B74A;color:#211D12;border-color:#E0B74A}
+.h-block{margin:2.6rem 0 0;padding-top:1.6rem;border-top:3px solid var(--ink)}
+.h-bkopf{display:flex;gap:1rem;align-items:center}
+.h-bnr{flex:none;display:grid;place-items:center;width:3.4rem;height:3.4rem;border-radius:999px;background:var(--ink);color:#F0D58A;font-family:var(--display);font-size:1.9rem;font-weight:700}
+.h-bkopf h2{font-family:var(--display);font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.15;margin:0}
+.h-bkopf .kennung{margin:0 0 .15rem}
+.h-leit{font-family:var(--display);font-size:clamp(1.35rem,2.4vw,1.8rem);line-height:1.25;margin:1rem 0 .5rem;padding-left:1rem;border-left:6px solid #E0B74A;max-width:56rem}
+.h-schl{font-size:.95rem;color:var(--muted);margin:0 0 1.1rem}
+.h-karten{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem}
+.h-karte{display:grid;gap:.25rem;align-content:start;height:100%;min-height:9.2rem;padding:.9rem 1rem 1rem;background-color:#F3E8C8;background-image:url(../assets/papier-weimar.jpg);background-size:cover;background-blend-mode:multiply;border:1px solid #BFAE78;border-radius:var(--r-lg);color:#2A2110;text-decoration:none;box-shadow:0 2px 0 #0002;transition:transform .15s ease,box-shadow .15s ease}
+a.h-karte:hover,a.h-karte:focus-visible{transform:translateY(-3px);box-shadow:0 8px 18px #0003}
+.h-karte .h-nr{font-family:var(--display);font-weight:700;font-size:1.5rem;line-height:1;color:#7A5200}
+.h-karte b{font-family:var(--display);font-size:1.08rem;line-height:1.22;hyphens:auto}
+.h-karte .h-meta{font-size:.84rem;color:#5B4A1E;margin-top:auto}
+.h-karte .h-stand{justify-self:start;font-size:.8rem;font-weight:700;padding:.1rem .55rem;border-radius:99px;background:#fff9;border:1px solid #7A5200;color:#4A3600}
+.h-karte .h-stand.fertig{background:#2A2110;color:#F0D58A;border-color:#2A2110}
+.h-karte.leer{opacity:.62;border-style:dashed;box-shadow:none}
+.h-faden{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.6rem;margin-top:1.3rem;padding:1.1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg)}
+.h-faden ul{margin:.4rem 0 0;padding:0;list-style:none;display:grid;gap:.45rem}
+.h-faden li{font-size:.98rem;line-height:1.4;padding-left:.8rem;border-left:3px solid var(--red)}
+.h-faden li b{font-family:var(--display);margin-right:.3rem}
+.h-kg{margin:3rem 0 0;padding:clamp(1.2rem,3vw,2.2rem);border-radius:var(--r-lg);background-color:#F3E8C8;background-image:url(../assets/papier-weimar.jpg);background-size:cover;background-blend-mode:multiply;color:#2A2110;border:1px solid #BFAE78}
+.h-kg .kennung{color:#7A5200}
+.h-kg h2{font-family:var(--display);font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.1;margin:.2rem 0 .4rem}
+.h-kgkopf p{max-width:46rem;margin:0 0 1.1rem}
+.h-kgraster{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem}
+.h-kgraster li{display:grid;gap:.3rem;align-content:start;padding:.8rem .9rem;background:#FFFDF6E6;border:1px solid #BFAE78;border-radius:.7rem;font-size:.9rem;line-height:1.4}
+.h-kgraster li b{font-family:var(--display);font-size:1.05rem;line-height:1.2;hyphens:auto}
+.h-kgraster li.offen{background:transparent;border-style:dashed;color:#5B4A1E}
+.h-kgraster li.mein{border:2px solid #2A2110;background:#fff}
+.h-kgraster li i{font-size:.8rem;color:#7A5200;font-style:normal;font-weight:700}
+.h-kg .quelle{color:#5B4A1E;margin-top:.8rem}
+.h-sichern{margin:2.6rem 0 0}
+.h-datei{position:relative;overflow:hidden;cursor:pointer}
+.h-datei input{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0}
+.h-datei:focus-within{outline:3px solid var(--kuli);outline-offset:2px}
+@media (max-width:1023px){ .h-karten,.h-kgraster{grid-template-columns:repeat(2,minmax(0,1fr))} .h-faden{grid-template-columns:1fr} }
+@media (max-width:560px){ .h-karten,.h-kgraster{grid-template-columns:1fr} }
+@media (prefers-reduced-motion:reduce){ .h-karte{transition:none} a.h-karte:hover{transform:none} }
+@media print{ .h-kopf,.h-karte,.h-kg{background:#fff !important;color:#000;border-color:#999} .h-kopf h1,.h-kopf .h-unter,.h-kopf .kennung{color:#000} .h-nav,.h-sichern{display:none} .h-karten{grid-template-columns:repeat(4,1fr)} .h-block{break-inside:avoid-page} }

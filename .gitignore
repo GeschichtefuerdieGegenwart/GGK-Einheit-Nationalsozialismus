@@ -10,3 +10,5 @@ weimar/media/heft-*.jpg
 weimar/texte/
 media/m15-heft-*.jpg
 media/m24-heft-*.jpg
+# Moodle-Pakete (werden mit tools/bau_moodle_paket.py gebaut)
+dist/

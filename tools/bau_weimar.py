@@ -41,8 +41,14 @@ def css(extra=''):
 def lehr(k):
     p = REPO/'lk'/f'w-{k}.enc.json'
     return p.read_text('utf-8').strip() if p.exists() else 'null'
+def dauer():
+    d = {}
+    for k in gebaut():
+        m = re.search(r'dauer:(\d+)', (H/f'{k}.js').read_text('utf-8'))
+        if m: d[k] = int(m.group(1))
+    return d
 def kopfjs():
-    return 'window.GGK_ZURUECK = "../index.html";\nwindow.W_GEBAUT = ' + json.dumps(gebaut()) + ';\n'
+    return 'window.GGK_ZURUECK = "../index.html";\nwindow.W_GEBAUT = ' + json.dumps(gebaut()) + ';\nwindow.W_DAUER = ' + json.dumps(dauer()) + ';\n'
 def bau(k):
     if k == 'hub':
         js = kopfjs() + ''.join(p.read_text('utf-8') for p in (K/'kern.js', K/'blatt.js', REPO/'src'/'lk-schloss.js', H/'weimar.js', H/'hub.js'))

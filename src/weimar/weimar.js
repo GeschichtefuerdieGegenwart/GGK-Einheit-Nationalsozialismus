@@ -59,6 +59,19 @@ function deckblatt(){
 const kopfpaar = (auftragHtml, b) => `<div class="kopfpaar">${auftragHtml}<figure><img src="media/${b.datei}" alt="${esc(b.alt)}" loading="lazy" onerror="this.closest('.kopfpaar').classList.add('ohne');this.closest('figure').remove()"><figcaption>${b.text} <span>${b.nachweis}</span></figcaption></figure></div>`;
 /* Links, die nur im Moodle-Paket stehen (Pinnwände, Umfragen mit Schlüssel im Link): Das Paket-Werkzeug schreibt window.W_LINKS in die Seite; öffentlich fehlt der Eintrag. */
 const wLink = k => (window.W_LINKS || {})[k] || null;
+/* Acht Einträge nach dem Heft, M8.1. Verweise auf die Stunden nach der heutigen Zählung. */
+const W_KG8 = [
+  { id:"trauma", titel:"Kriegstrauma", m:"M1, M2", text:"Die Schrecken und Entbehrungen des Ersten Weltkriegs haben Millionen von Soldaten für ihr Leben gezeichnet und Hass auf die Sieger verbreitet. Stichwort: „Kriegszitterer“. Der Krieg war ein industrielles Töten." },
+  { id:"dolch", titel:"Dolchstoßlegende", m:"M4", text:"„Im Felde unbesiegt“: Durch Propaganda wurde der Bevölkerung über Jahre der nahe Sieg versprochen. Die Oberste Heeresleitung – die selbst den Waffenstillstand wollte – schob die Schuld an der Niederlage Demokrat*innen und Jüdinnen und Juden zu." },
+  { id:"selbst", titel:"Selbstbestimmungsrecht der Völker", m:"M6", text:"Der Nationalismus hat sich als „Ersatzreligion“ auf der höchsten politischen Ebene durchgesetzt. Damit gehen dauernde Konflikte einher: Wer gehört zur Nation, wer nicht? Welches Land gehört „uns“?" },
+  { id:"diktat", titel:"Versailles als „Diktatfrieden“", m:"M7", text:"Große Gebietsverluste, Reparationen, Kriegsschuld (so wurde Artikel 231 verstanden), nur noch 100.000 Soldaten. Viele empfinden das als Kränkung ihres früheren Selbstbilds." },
+  { id:"staat", titel:"Gegner der Demokratie im Staatsdienst", m:"", text:"In Polizei, Behörden und Gerichten der neuen Republik arbeiten überwiegend dieselben Menschen wie in der Kaiserzeit. Viele sind konservativ, der Monarchie treu und der Demokratie gegenüber skeptisch bis feindlich." },
+  { id:"doppelt", titel:"Doppelte Ausrufung der Republik", m:"M5", text:"Am 9. November 1918 rufen Scheidemann und Liebknecht zwei verschiedene Republiken aus. Die Republik entsteht im Streit. Neu sind das Wahlrecht für Frauen und das niedrigere Wahlalter." },
+  { id:"eugenik", titel:"Eugenik und „Rassenkunde“", m:"Auftrag 4", text:"Eine Idee aus dem 19. Jahrhundert (Ideengeschichte): Menschen werden nach einem angeblichen „Wert“ eingeteilt. Dazu recherchierst du in Auftrag 4." },
+  { id:"justiz", titel:"„Auf dem rechten Auge blind“", m:"M10", text:"Die Justiz beurteilt Straftaten deutlich milder, wenn sie von Rechten verübt werden. Stichwort: Attentate auf Politiker." },
+];
+/* Das Raster aus M8.1 wächst weiter: In diesen Stunden schreiben die Lernenden je einen Eintrag (Speicher der Einheit, kg[wid]). */
+const W_KGNEU = [["m10","Gewalt auf den Straßen, Morde an Politikern"],["m11","Krisenjahr 1923"],["m12","Die Goldenen Zwanziger"],["m14","Weltwirtschaftskrise 1929"],["m142","Verhalten der NSDAP"]];
 /* Roter Faden: ein Satz am Ende jeder Stunde; er wandert in die Übersicht des Kapitels und aufs Deckblatt der nächsten Stunde. */
 const fadenFeld = () => `<div class="w-fadenfeld nodruck">${auftrag("Allein · 2 Minuten", "Ein Satz für den roten Faden", "Die Leitfrage dieses Abschnitts: " + esc(W_BLOCK[L.block][2]) + " Was trägt diese Stunde zur Antwort bei?")}
   ${textfeld("faden", "Mein Satz", { rows:2, zaehl:false, anfaenge:L.fadenAnf || ["Diese Stunde zeigt, dass", "Für die Leitfrage heißt das:"] })}</div>`;
@@ -82,7 +95,7 @@ function weimarStart(){
 }
 /* Kopf: Rückweg zur Übersicht und zum Kapitel */
 const kopf0 = kopf;
-kopf = function(){ kopf0(); const k = document.getElementById("kopf"), p = k.querySelector(".pill"); if (p) p.insertAdjacentHTML("beforebegin", `<a class="pill kapitel" href="index.html">Kapitel Weimar</a>`); };
+kopf = function(){ kopf0(); const k = document.getElementById("kopf"), p = k.querySelector(".pill"); if (p && !L.hub) p.insertAdjacentHTML("beforebegin", `<a class="pill kapitel" href="index.html">Kapitel Weimar</a>`); };
 
 /* ---------- Wahr oder falsch – mit Erklärung je Antwort (Muster 2). aussagen = [[Text, richtig:true|false|null, Erklärung bei „wahr“, Erklärung bei „falsch“]]
    richtig = null heißt: Die Aussage lässt sich nicht mit einem Wort beantworten; beide Antworten bekommen eine einordnende Rückmeldung. ---------- */

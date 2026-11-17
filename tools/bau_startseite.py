@@ -28,6 +28,20 @@ NS = [('M16', 'Einstieg in die Einheit', 'Was macht den Menschen zum Menschen?',
  ('M25', '1945', 'Kriegsende 1945: Leben in Ruinen und der Umgang mit Schuld – nach dem Modul von Offene Geschichte', ['Der Krieg ist vorbei', 'Überleben in Ruinen', 'Im Angesicht des Verbrechens', 'Verantwortung', 'Landkarte'], 'm25-leben-in-ruinen.html', 'media/m25-weimar-frauen-1945.jpg'),
  ('M26', 'nach 1945', 'Ende gut, alles gut? Kontinuitäten des Nationalsozialismus in der Bundesrepublik', ['Schätzen', 'Der BND', 'Eure Gruppe', 'Vergleich', 'Urteil'], 'm26-kontinuitaeten.html', 'media/m26-heft-bnd.jpg'),
  ('M27', 'Rückblick: 1939–1945, weltweit', 'Die Vergessenen! Eine Globalgeschichte des Zweiten Weltkriegs', ['Dein Bild vom Krieg', 'Der Artikel', 'Eurozentrismus', 'Strukturbild', 'Landkarte'], 'm27-die-vergessenen.html', 'media/m27-afrikanische-soldaten-1944.jpg')]
+# Kapitel 1: Weimarer Republik. Stundenfolge, Titel und Dateien stehen in src/weimar/weimar.js; hier nur Zeit, Kurztitel, Merkdatum und Bild.
+# Bilder aus dem Heft liegen nur im Moodle-Paket; fehlt die Datei, zeigt die Karte das Nummernfeld. Gezeigt wird nur, was schon gebaut ist.
+import re
+W_ALLE = re.findall(r'\["(m\d+)","(M[\d.]+)","([^"]+)","([^"]+\.html)","([a-d])"\]', (R/'src'/'weimar'/'weimar.js').read_text('utf-8'))
+W_ZEIT = {'M1': '1917', 'M2': '1914', 'M3': '1915', 'M4': 'Nov. 1918', 'M5': '9. Nov. 1918', 'M6': '1919', 'M7': '1919', 'M7.1': 'Rückblick: 1914', 'M8': 'um 1919', 'M9': 'Jan. 1919', 'M10': '1918–1922', 'M11': '1923', 'M12': '1924–1929', 'M13': '1920er-Jahre', 'M14': '1929–1933', 'M14.2': '1930–1933'}
+W_KURZ = {'M1': 'Mein Leben im Jahr 1917', 'M2': 'Der Ausbruch des Ersten Weltkriegs', 'M3': 'Standortgebundenheit: Wer erzählt Geschichte?', 'M4': 'Matrosenaufstand und Kriegsende', 'M5': 'Die doppelte Ausrufung der Republik', 'M6': 'Die Pariser Friedenskonferenz', 'M7': 'Versailler Vertrag: deutsche und globale Sicht', 'M7.1': 'Wer trägt die Schuld am Krieg?', 'M8': 'Das kollektive Gedächtnis', 'M9': 'Die Wahlen 1919', 'M10': 'Die Saat der Gewalt', 'M11': 'Das Krisenjahr 1923', 'M12': 'Die Goldenen Zwanziger', 'M13': 'Zwei Leben einer Zeit', 'M14': 'Warum scheitert Weimar?', 'M14.2': 'Verfassung und Präsidialkabinette'}
+W_MERK = {'M2': ('1914', 'Der Erste Weltkrieg beginnt'), 'M5': ('9. Nov. 1918', 'Ausrufung der Republik'), 'M7': ('28. Juni 1919', 'Versailler Vertrag'), 'M9': ('11. Aug. 1919', 'Weimarer Verfassung'), 'M11': ('1923', 'Krisenjahr: Inflation, Hitlerputsch'), 'M12': ('1924–1929', 'Jahre der Stabilisierung'), 'M14': ('Okt. 1929', 'Beginn der Weltwirtschaftskrise')}
+W_BILD = {'M2': 'heft-m02-karte-europa', 'M4': 'heft-m04-matrosen', 'M5': 'heft-m05-berlin-november-1918', 'M6': 'heft-m06-friedenskonferenz', 'M12': 'heft-m12-zwanziger', 'M13': 'heft-m13-drei-frauen', 'M14': 'heft-m14-arbeitslose-1931', 'M14.2': 'heft-m14-verfassung'}
+def w_schritte(wid):
+    q = (R/'src'/'weimar'/f'{wid}.js')
+    if not q.exists(): return []
+    return [k for i, k in re.findall(r'\{ id:"(\w+)", nr:"[^"]+", kurz:"([^"]+)"', q.read_text('utf-8')) if i not in ('schreiben', 'zusammenfassung')][:6]
+WM = [(nr, W_ZEIT[nr], titel, w_schritte(wid), 'weimar/' + datei, f'weimar/media/{W_BILD[nr]}.jpg' if nr in W_BILD else '', wid) for wid, nr, titel, datei, block in W_ALLE if (R/'weimar'/datei).exists()]
+W_NR = {m[0] for m in WM}
 WZ = [('Zeitraster', '16 Ereignisse im Überblick', 'raster'), ('Ordnen', 'Was kam wann?', 'ordnen'), ('Vernetzen', 'Ereignisse verbinden', 'netz'), ('Glossar', 'Begriffe nachschlagen', 'glossar'), ('Roter Faden', 'Deine Antwort auf die Leitfrage', 'faden')]
 ST = [(1, 'Potsdam, 1945', 'Die „Stunde Null“ – Was wird jetzt mit Deutschland?', ['Die Lage', 'Vorhersagen', 'Das Potsdamer Abkommen'], 's1-stunde-null.html', 'owk-s1-potsdam'),
  (2, '1947', 'Kommunismus gegen Kapitalismus: Truman-Doktrin und Zwei-Lager-Theorie', ['Truman', 'Shdanow', 'Spiegelbild', 'Blockbildung'], 's2-ideologien.html', 'owk-s2-marshallplan'),
@@ -39,6 +53,7 @@ ST = [(1, 'Potsdam, 1945', 'Die „Stunde Null“ – Was wird jetzt mit Deutsch
  (8, '1970–1972', 'Wandel durch Annäherung: die Ostverträge', ['Die Verträge', 'Die Debatte'], 's8-ostpolitik.html', 'owk-s8-demo'),
  (9, '1985–1991', 'Das Ende der DDR und des Ost-West-Konflikts', ['Vier Blickwinkel', 'Moskau', 'Herbst 1989'], 's9-ende.html', 'owk-s9-trabi')]
 KEYS = {'M16': 'ggk-m16-mensch', 'M17': 'ggk-m17-leben', 'M18': 'ggklabor:', 'M19': 'ggk-m19-appeasement', 'M20': 'ggk-m20-dilemmata', 'M21': 'ggk-m21-menschen', 'M22': 'ggk-m22-taeter', 'M23': 'ggk-m23-gesellschaft', 'M25': 'ggk-m25-ruinen', 'M26': 'ggk-m26-kontinuitaeten', 'M27': 'ggk-m27-vergessene'}
+KEYS.update({m[0]: f'ggk-w-{m[6]}:' for m in WM})
 # Kurztitel für die Übersicht (die vollen Titel stehen in der Ordnung nach Prinzip und in den Modulen)
 KURZ = {'M16': 'Was macht den Menschen zum Menschen?', 'M17': 'Leben in der NS-Diktatur: Ausgrenzung 1933–1939', 'M18': 'Die fünf Säulen der NS-Ideologie', 'M19': 'Appeasement: Frieden oder Krieg?', 'M20': 'Der Verlauf des Zweiten Weltkriegs. Der Krieg und seine Dilemmata.', 'M27': 'Globalgeschichte des Zweiten Weltkriegs', 'M21': 'Die Shoa: Es geht um Menschen', 'M22': 'Wie war das möglich? Täterforschung', 'M23': 'Die Shoa im Ländervergleich', 'M25': 'Kriegsende 1945 – nach dem Modul von Offene Geschichte', 'M26': 'NS-Kontinuitäten in der Bundesrepublik',
  1: '„Stunde Null“ und Potsdamer Abkommen', 2: 'Truman-Doktrin und Zwei-Lager-Theorie', 3: 'Berlin-Blockade und sowjetische Zone', 4: 'Doppelte Staatsgründung', 5: 'Westbindung der Bundesrepublik', 6: 'Flucht aus der DDR und Mauerbau', 7: 'Der 17. Juni 1953 im Schulbuch', 8: 'Ostverträge', 9: 'Ende der DDR und des Ost-West-Konflikts'}
@@ -46,23 +61,28 @@ KURZ = {'M16': 'Was macht den Menschen zum Menschen?', 'M17': 'Leben in der NS-D
 SPALTEN = {'weimar': [('9. Nov. 1918', 'Ausrufung der Republik', None), ('11. Aug. 1919', 'Weimarer Verfassung', None), ('1923', 'Krisenjahr: Inflation, Hitlerputsch', None), ('Okt. 1929', 'Beginn der Weltwirtschaftskrise', None)],
  'ns': [(None, None, 'M16'), ('30. Jan. 1933', 'Hitler wird Reichskanzler', 'M17'), ('15. Sept. 1935', 'Nürnberger Gesetze', 'M18'), ('9. Nov. 1938', 'Novemberpogrome', 'M19'), ('1. Sept. 1939', 'Überfall auf Polen', 'M20'), ('22. Juni 1941', 'Überfall auf die Sowjetunion', 'M21'), (None, None, 'M22'), (None, None, 'M23'), ('8. Mai 1945', 'Bedingungslose Kapitulation', 'M25'), (None, None, 'M26'), (None, None, 'M27')],
  'ostwest': [('2. Aug. 1945', 'Potsdamer Abkommen', 1), ('12. März 1947', 'Truman-Doktrin', 2), ('24. Juni 1948', 'Beginn der Berlin-Blockade', 3), ('1949', 'Zwei deutsche Staaten', 4), (None, None, 5), ('17. Juni 1953', 'Aufstand in der DDR', None), ('13. Aug. 1961', 'Bau der Berliner Mauer', 6), (None, None, 7), (None, None, 8), ('9. Nov. 1989', 'Öffnung der Mauer', 9), ('3. Okt. 1990', 'Deutsche Einheit', None)]}
+KURZ.update(W_KURZ)
+SPALTEN['weimar'] = [(W_MERK.get(nr, (None, None))[0], W_MERK.get(nr, (None, None))[1], nr if nr in W_NR else None) for wid, nr, titel, datei, block in W_ALLE if nr in W_NR or nr in W_MERK]
 # Zweite Ordnung: Prinzipien der kognitiven Landkarte -> Module (aus den Landkarten-Seiten der Module abgelesen)
-PRINZIP = [('2-1-1', 'Retrospektivität', 'Wir betrachten die Vergangenheit immer im Nachhinein, aus der Gegenwart heraus.', ['M19', 'M20', 1, 8]),
+PRINZIP = [('2-1-1', 'Retrospektivität', 'Wir betrachten die Vergangenheit immer im Nachhinein, aus der Gegenwart heraus.', ['M5', 'M9', 'M19', 'M20', 1, 8]),
  ('2-1-2', 'Perspektivität', 'Jede Betrachtung erfolgt aus einer Sichtweise, geprägt von Überzeugungen, Interessen und Erfahrungen.', ['M17', 'M27', 'M22', 'M25', 2]),
  ('2-1-3', 'Partikularität', 'Historische Erkenntnisse sind immer nur Ausschnitte der gesamten Vergangenheit.', []),
  ('2-1-4', 'Selektivität', 'Wer Geschichte erzählt, wählt aus: Welche Quellen, Ereignisse und Personen sind wichtig?', [5]),
  ('2-1-5', 'Partialität', 'Quellen zeigen immer nur einen Teil der Vergangenheit, und nur ein Teil der Quellen ist erhalten.', [6]),
  ('2-1-6', 'Narrativität', 'Geschichte gibt es nur als Erzählung.', [3, 9]),
  ('2-1-7', 'Konstruktivität', 'Geschichte wird nicht gefunden, sondern zusammengesetzt. Aus denselben Fakten können verschiedene Geschichten entstehen.', [7]),
- ('2-1-8', 'Standortgebundenheit', 'Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Kontext geprägt, oft unbewusst.', ['M27', 4])]
+ ('2-1-8', 'Standortgebundenheit', 'Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Kontext geprägt, oft unbewusst.', ['M3', 'M7.1', 'M27', 4])]
+# Weimar-Module, deren Landkarten-Auftrag einen anderen Teil der Landkarte nutzt (Wozu Geschichte?, Formen, Auswirkungen)
+W_ANDERS = ['M1', 'M2', 'M4', 'M6', 'M7', 'M8', 'M10', 'M11', 'M12', 'M13', 'M14', 'M14.2']
 OFFEN = ['M16', 'M18', 'M21', 'M23', 'M26']
-MOD = {m[0]: (m[2], m[4]) for m in NS}; MOD.update({m[0]: (m[2], 'ost-west/' + m[4]) for m in ST})
+MOD = {m[0]: (m[2], m[4]) for m in NS}; MOD.update({m[0]: (m[2], 'ost-west/' + m[4]) for m in ST}); MOD.update({m[0]: (m[2], m[4]) for m in WM})
 # Nummer im Heft (steht im Titel). Die Reihenfolge der Karten ist die Nummernfolge; eine zweite Zählung gibt es nicht.
 HEFTNR = {1: 'M29/M30', 2: 'M31', 3: 'M32/M33', 4: 'M34', 5: 'M35/M36', 6: 'M36–M39', 7: 'M40', 8: 'M41', 9: 'M42–M44'}
-HEFTNR.update({m[0]: m[0] for m in NS})
+HEFTNR.update({m[0]: m[0] for m in NS}); HEFTNR.update({m[0]: m[0] for m in WM})
 INFO = {m[0]: (m[1], m[4], m[5], KEYS[m[0]], '') for m in NS}
+INFO.update({m[0]: (m[1], m[4], m[5], KEYS[m[0]], '') for m in WM})
 INFO.update({m[0]: (m[1], 'ost-west/' + m[4], f'ost-west/media/{m[5]}.jpg', f'ggk-owk-s{m[0]}', f's{m[0]}') for m in ST})
-ZAHLWORT = {1: 'ein', 2: 'zwei', 3: 'drei', 4: 'vier', 5: 'fünf', 6: 'sechs', 7: 'sieben', 8: 'acht', 9: 'neun', 10: 'zehn', 11: 'elf', 12: 'zwölf'}
+ZAHLWORT = {1: 'ein', 2: 'zwei', 3: 'drei', 4: 'vier', 5: 'fünf', 6: 'sechs', 7: 'sieben', 8: 'acht', 9: 'neun', 10: 'zehn', 11: 'elf', 12: 'zwölf', 13: 'dreizehn', 14: 'vierzehn', 15: 'fünfzehn', 16: 'sechzehn', 17: 'siebzehn', 18: 'achtzehn'}
 def karte(nr):
     """Eine Papierkarte: Bildfeld (oder Nummernfeld), Zeile »Nummer · Zeit«, Kurztitel. Alle Karten sind gleich groß."""
     zeit, ziel, bild, key, faden = INFO[nr]
@@ -95,7 +115,7 @@ def regal(ep, name):
         daten = (f' id="k-{HEFTNR[m].replace(chr(47), chr(45))}" data-nr="{HEFTNR[m]}" data-zeit="{e(INFO[m][0])}" data-lang="{e(MOD[m][0])}" data-schritte="{e(" · ".join(SCHRITTE[m]))}"' if m else '')
         z += f'<li class="{kl}"{daten}>{merk}{karte(m) if m else ""}</li>'
     return f'<ol class="regal" aria-label="{name}: Merkdaten und Module in der Reihenfolge des Unterrichts">{z}</ol>'
-SCHRITTE = {m[0]: m[3] for m in NS + ST}
+SCHRITTE = {m[0]: m[3] for m in NS + ST}; SCHRITTE.update({m[0]: m[3] for m in WM})
 def fenster(wort):
     """Das Fenster der Lupe: die gewählte Karte in groß, auf demselben Papier. Leeres Gerüst; das Skript füllt es aus den Angaben im Regal."""
     zeile = lambda kl, w: f'<li class="{kl}"><span class="fw">{w}</span><b></b><span class="fe"></span></li>'
@@ -119,13 +139,17 @@ def kapitel(ep, ziffer, name, jahre, satz, bilder, zusatz='', wort=''):
             f'<div class="kkopf"><div class="ktitel"><span class="ziffer" aria-hidden="true">{ziffer}</span><div><h2 id="h-{ep}">{name}</h2><p class="jahre">{jahre}</p></div></div>'
             f'<p class="satz">{satz}</p>{wahl}{TIPP.format(was="das Modul" if wort == "Modul" else "die Stunde") if wort else ""}</div>{leiste(ep)}{fenster(wort) if wort else ""}{regal(ep, name)}{zusatz}</div></section>')
 wz = '<p class="werkzeuge"><b>Werkzeuge für alle neun Stunden:</b>' + ''.join(f'<a href="ost-west/index.html#{a}">{e(n)}</a>' for n, w, a in WZ) + '</p>'
-zeit_html = (kapitel('weimar', 1, 'Weimarer Republik', '1918 – 1933', 'Die erste deutsche Demokratie.', [], '<p class="leer">Die Module zu diesem Kapitel entstehen gerade. Die Merkdaten stehen schon da.</p>')
+w_fehlt = [nr for wid, nr, titel, datei, block in W_ALLE if nr not in W_NR]
+w_zusatz = ('<p class="werkzeuge"><b>Für das ganze Kapitel:</b><a href="weimar/index.html">Kapitelübersicht</a><a href="weimar/index.html#h-kg">Kollektives Gedächtnis</a><a href="weimar/index.html#h-sichern">Lernspur sichern</a></p>'
+ + (f'<p class="leer">{" · ".join(w_fehlt)} entstehen gerade.</p>' if w_fehlt else ''))
+zeit_html = (kapitel('weimar', 1, 'Weimarer Republik', f'1914 – 1933 · {ZAHLWORT[len(WM)]} Module', 'Vom Ersten Weltkrieg zur ersten deutschen Demokratie – und die Frage, was Demokratien daran hindert, sich selbst zu verteidigen.', [], w_zusatz, 'Modul')
  + kapitel('ns', 2, 'Nationalsozialismus', f'1933 – 1945 und die Folgen · {ZAHLWORT[len(NS)]} Module', 'Ideologie, Krieg und Menschheitsverbrechen – und die Frage, wer mitgemacht hat und was danach daraus wurde.', NS_BILDER, wort='Modul')
  + kapitel('ostwest', 3, 'Ost-West-Konflikt', f'1945 – 1991 · {ZAHLWORT[len(ST)]} Stunden', 'Welchen Einfluss hatten Ideologien, Machtinteressen und Handlungsspielräume der Akteure – und wie wird dieser Konflikt heute erinnert?', OW_BILDER, wz, 'Stunde'))
 def mlink(nr):
-    t, z = MOD[nr]; ep = 'ostwest' if isinstance(nr, int) else 'ns'
+    t, z = MOD[nr]; ep = 'ostwest' if isinstance(nr, int) else ('weimar' if nr in W_NR else 'ns')
     return f'<li><a href="{z}" data-ep="{ep}"><span class="pnr">{HEFTNR[nr]}</span>{e(t)}</a></li>'
-prinzip_html = ''.join(f'<article class="prinzip"><h3><a href="{LK}#s-{i}">{e(n)}</a></h3><p>{e(t)}</p>' + (f'<ul>{"".join(mlink(m) for m in ms)}</ul>' if ms else '<p class="keins">Noch kein Modul, das dieses Prinzip in den Mittelpunkt stellt.</p>') + '</article>' for i, n, t, ms in PRINZIP)
+prinzip_html = ''.join(f'<article class="prinzip"><h3><a href="{LK}#s-{i}">{e(n)}</a></h3><p>{e(t)}</p>' + (f'<ul>{"".join(mlink(m) for m in ms if m in MOD)}</ul>' if [m for m in ms if m in MOD] else '<p class="keins">Noch kein Modul, das dieses Prinzip in den Mittelpunkt stellt.</p>') + '</article>' for i, n, t, ms in PRINZIP)
+prinzip_html += (f'<article class="prinzip"><h3><a href="{LK}">Andere Teile der Landkarte</a></h3><p>Diese Module arbeiten mit „Wozu Geschichte?“, den Formen der Geschichtsschreibung oder den Auswirkungen von Geschichte.</p><ul>{"".join(mlink(m) for m in W_ANDERS if m in MOD)}</ul></article>' if [m for m in W_ANDERS if m in MOD] else '')
 prinzip_html += f'<article class="prinzip offen"><h3>Noch nicht zugeordnet</h3><p>Diese Module haben noch keinen eigenen Landkarten-Moment.</p><ul>{"".join(mlink(m) for m in OFFEN)}</ul></article>'
 CSS = """@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Regular.woff2) format("woff2");font-weight:400;font-display:swap}

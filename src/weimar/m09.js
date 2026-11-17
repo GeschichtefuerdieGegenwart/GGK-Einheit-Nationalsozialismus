@@ -36,7 +36,6 @@ const HF = [
   { id:"ident", titel:"Nationale Identität und Gesellschaft", frage:"Wie kann der gesellschaftliche Zusammenhalt gestärkt werden?" },
   { id:"unruhe", titel:"Revolutionäre Bewegungen und Unruhen", frage:"Wie kann die Republik gegen Aufstände geschützt werden?" },
 ];
-const APP = "https://geschichtefuerdiegegenwart.github.io/";
 /* Wahl zur Nationalversammlung, 19. Januar 1919, Stimmen in Prozent – Zahlen aus dem Schaubild des Hefts (M9) */
 const WAHL19 = [["USPD", 7.6, "#C4622D", "links von der SPD"], ["SPD", 37.9, "#B23A2E", "stärkste Partei"], ["DDP", 18.5, "#E0B74A", "linksliberal"], ["Zentrum", 19.7, "#6E6A62", "katholisch"], ["DVP", 4.4, "#4F7FB5", "rechtsliberal"], ["DNVP", 10.3, "#2F4B6E", "nationalkonservativ"], ["Sonstige", 1.6, "#A8A195", ""]];
 
@@ -50,14 +49,14 @@ function lage(){
 }
 function wahlomat(){
   return `${auftrag("Frei wählbar · 10 Minuten", "Wofür wärst du gewesen?", "Stell dich den Herausforderungen der Zeit und nimm Stellung. Der Wahl-O-Mat 1919 zeigt dir, welche Partei am ehesten zu deinen Antworten gepasst hätte. Notiere danach dein Ergebnis.")}
-  ${filmKarte({ art:"Interaktive Seite", dauer:"10 Fragen · etwa 5 Minuten", titel:"Wahl-O-Mat 1919", text:"Du beantwortest zehn Fragen mit den Augen der Zeit. Die Zuordnung zu den Parteien ist vereinfacht.", nachweis:"Eigene Seite des Kurses; Link aus dem Unterrichtsheft, M9.", url:APP + "Wahl-o-Mat-1919/", wo:"geschichtefuerdiegegenwart.github.io", knopf:"Wahl-O-Mat öffnen" })}
+  ${filmKarte({ art:"Interaktive Seite", dauer:"10 Fragen · etwa 5 Minuten", titel:"Wahl-O-Mat 1919", text:"Du beantwortest zehn Fragen mit den Augen der Zeit. Die Zuordnung zu den Parteien ist vereinfacht.", nachweis:"Eigene Seite des Kurses; Link aus dem Unterrichtsheft, M9.", url:"https://geschichtefuerdiegegenwart.github.io/Wahl-o-Mat-1919/", wo:"geschichtefuerdiegegenwart.github.io", knopf:"Wahl-O-Mat öffnen" })}
   <div class="trift"><b>Hinweis:</b> Zur Wahl im Januar 1919 traten sechs Parteien an. Die KPD boykottierte die Wahl, die NSDAP gab es noch nicht. Beide kommen im Wahl-O-Mat trotzdem vor, damit du ihre Kernbotschaften kennenlernst. Das ist ahistorisch.</div>
   <div class="ab-zwei gleich" style="margin-top:1rem"><div>${eingabe("partei", "Meine Partei laut Wahl-O-Mat", "zum Beispiel: DDP")}</div>
   <div>${textfeld("passt", "Passt das zu meiner Antwort aus Auftrag 1? Was überrascht mich?", { rows:2, zaehl:false })}</div></div>`;
 }
 function partei(){
   return `${auftrag("Frei wählbar · 5 Minuten", "Wofür steht deine Partei?", "Informiere dich über deine Partei – und über eine zweite, die ganz anders denkt. Halte in Stichpunkten fest, wofür deine Partei steht.")}
-  ${filmKarte({ art:"Interaktive Seite", dauer:"etwa 5 Minuten", titel:"Überblick über die Parteien der Weimarer Republik", text:"Ziele, Wählerschaft und Rolle der Parteien – mit Parteienvergleich.", nachweis:"Eigene Seite des Kurses; Link aus dem Unterrichtsheft, M9.", url:APP + "Parteien-1919/", wo:"geschichtefuerdiegegenwart.github.io", knopf:"Parteien öffnen" })}
+  ${filmKarte({ art:"Interaktive Seite", dauer:"etwa 5 Minuten", titel:"Überblick über die Parteien der Weimarer Republik", text:"Ziele, Wählerschaft und Rolle der Parteien – mit Parteienvergleich.", nachweis:"Eigene Seite des Kurses; Link aus dem Unterrichtsheft, M9.", url:"https://geschichtefuerdiegegenwart.github.io/Parteien-1919/", wo:"geschichtefuerdiegegenwart.github.io", knopf:"Parteien öffnen" })}
   ${textfeld("steht", `Wofür steht ${S.partei ? "die Partei „" + esc(S.partei) + "“" : "meine Partei"}?`, { rows:4, zaehl:false, anfaenge:["Sie fordert", "Gewählt wird sie vor allem von", "Zur Republik steht sie so:"] })}`;
 }
 function ergebnis(){
@@ -67,7 +66,7 @@ function ergebnis(){
   <div class="ab-zwei gleich"><div>${rechne("re1", "SPD, Zentrum und DDP tragen die Republik (später „Weimarer Koalition“). Wie viel Prozent haben sie zusammen?", 76.1, { ja:"76,1 Prozent – gut drei Viertel der Stimmen gehen an Parteien, die die Republik tragen.", nein:"Zähl 37,9 und 19,7 und 18,5 zusammen." })}</div>
   <div>${rechne("re2", "DNVP und DVP stehen der Republik 1919 ablehnend oder fern. Wie viel Prozent haben sie zusammen?", 14.7, { ja:"14,7 Prozent. Die DNVP lehnt die Republik ab; die rechtsliberale DVP steht ihr 1919 noch fern.", nein:"Zähl 10,3 und 4,4 zusammen." })}</div></div>
   <div class="${r ? "" : "gesperrt"}">
-  ${filmKarte({ art:"Interaktive Seite", dauer:"etwa 15 Minuten", titel:"Die Gesellschaft der Weimarer Republik 1919", text:"Wer lebte wie? Wer hatte welche Interessen – und wen wählte man deshalb? Tippe auf ein Milieu in der Pyramide.", nachweis:"Eigene Seite des Kurses; Link aus dem Unterrichtsheft, M9. Die Prozentangaben zu den Milieus sind Näherungen.", url:APP + "Die-Gesellschaft-der-Weimarer-Republik-1919/", wo:"geschichtefuerdiegegenwart.github.io", knopf:"Milieus öffnen" })}
+  ${filmKarte({ art:"Interaktive Seite", dauer:"etwa 15 Minuten", titel:"Die Gesellschaft der Weimarer Republik 1919", text:"Wer lebte wie? Wer hatte welche Interessen – und wen wählte man deshalb? Tippe auf ein Milieu in der Pyramide.", nachweis:"Eigene Seite des Kurses; Link aus dem Unterrichtsheft, M9. Die Prozentangaben zu den Milieus sind Näherungen.", url:"https://geschichtefuerdiegegenwart.github.io/Die-Gesellschaft-der-Weimarer-Republik-1919/", wo:"geschichtefuerdiegegenwart.github.io", knopf:"Milieus öffnen" })}
   <div class="ab-zwei gleich"><div>${textfeld("milieus", "Welche Milieus haben sich 1919 durchgesetzt?", { rows:3, zaehl:false, anfaenge:["Durchgesetzt haben sich", "Sie wählten vor allem"] })}</div>
   <div>${textfeld("werte", "Welche Werte vertreten diese Milieus?", { rows:3, zaehl:false, anfaenge:["Wichtig ist ihnen", "Von der Republik erwarten sie"] })}</div></div>
   ${vergleich("mvgl", ["milieus","werte"], 10, "Mit Stichpunkten vergleichen", `<div class="w-karten k3"><article class="w-kk rot"><h3>SPD</h3><p>vor allem die Industriearbeiterschaft: soziale Gerechtigkeit, Arbeiterrechte, parlamentarische Demokratie.</p></article><article class="w-kk"><h3>Zentrum</h3><p>das katholische Milieu quer durch die Schichten: Schutz der Kirche, sozialer Ausgleich, Stabilität.</p></article><article class="w-kk blau"><h3>DDP</h3><p>liberales Bürgertum: Grundrechte, Verfassung, eine weltoffene demokratische Gesellschaft.</p></article></div><p class="quelle">Stichpunkte nach den Seiten „Parteien 1919“ und „Wahl-O-Mat 1919“ des Kurses. Prüfe an der Seite zu den Milieus.</p>`)}</div>`;

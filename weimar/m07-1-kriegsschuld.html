@@ -397,6 +397,12 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 .w-t{font-family:var(--display);font-weight:600;font-size:1.2rem;line-height:1.2}
 .w-u{font-size:.9rem;color:var(--muted);line-height:1.3}
 .w-st{font-size:.85rem;font-weight:700;color:var(--green)}
+/* Viele Einträge (ab etwa sieben): Liste in zwei Spalten, die Karte bleibt beim Rollen stehen */
+.w-wahl.viele{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.w-wahl.viele .w-liste{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.w-wahl.viele .w-liste > button{padding:.6rem .7rem;min-height:4.8rem;min-width:0}
+.w-wahl.viele .w-liste .w-t{font-size:1.02rem;hyphens:auto;overflow-wrap:anywhere}
+.w-wahl.viele .w-karte{position:sticky;top:5rem}
 .w-karte{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem 1.8rem 1.4rem;min-height:24rem;font-size:1.08rem}
 .w-karte:focus{outline:none}
 .w-karte > h3{font-size:clamp(1.5rem,1.2rem + 1vw,2rem);margin-bottom:.5rem}
@@ -446,6 +452,7 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 .w-zeit li b{font-family:var(--display);font-size:1.05rem}
 .w-zeit .w-zt{font-weight:700}
 .w-zeit .w-zx{color:var(--muted);font-size:.85rem}
+.w-zeit li.rot{border-top:4px solid var(--red)}
 .w-zeit li.hier{border-color:var(--red);background:var(--red-hi)}
 .w-zeit li.hier::before{background:var(--red);border-color:var(--red)}
 .w-zeit li.da{opacity:.8}
@@ -492,7 +499,8 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
   .ab-reg button{padding:.2rem .3rem}
   .ab-rahmen > #main{margin:.6rem .6rem 1rem;padding:1rem 1rem .9rem}
   .ab-zwei,.ab-zwei.gleich,.ab-zwei.schmalrechts,.gliederung,.deck,.w-wahl,.lk-wahl .prinzipien,.w-karten.k2,.w-karten.k3,.w-karten.k4{grid-template-columns:1fr}
-  .w-liste{display:flex;overflow-x:auto;gap:.4rem;padding-bottom:.3rem}
+  .w-liste,.w-wahl.viele .w-liste{display:flex;overflow-x:auto;gap:.4rem;padding-bottom:.3rem}
+  .w-wahl.viele .w-karte{position:static}
   .w-liste > button{flex:0 0 auto;min-height:48px;padding:.4rem .8rem;width:auto}
   .w-liste .w-u{display:none}
   .w-zeit{grid-template-columns:1fr;padding:0 0 0 1.2rem}
@@ -655,7 +663,7 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 @media (max-width:899px){.w-punkte{grid-template-columns:1fr}}
 /* Mehrfachauswahl: Karten anstreichen */
 .w-mw{display:grid;gap:.8rem;margin:1rem 0}
-.w-mw.k2{grid-template-columns:repeat(2,minmax(0,1fr))}.w-mw.k3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.w-mw.k2{grid-template-columns:repeat(2,minmax(0,1fr))}.w-mw.k3{grid-template-columns:repeat(3,minmax(0,1fr))}.w-mw.k4{grid-template-columns:repeat(4,minmax(0,1fr))}
 .w-mw button{display:grid;gap:.35rem;align-content:start;text-align:left;padding:1rem 1.1rem;border:1.5px solid #8B857A;border-radius:var(--r-lg);background:var(--surface);color:var(--ink);font:inherit;min-height:44px}
 .w-mw button b{font-family:var(--display);font-size:1.18rem;line-height:1.2}
 .w-mw .w-mwt{font-size:.97rem;line-height:1.45}
@@ -667,7 +675,49 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 /* Steckbrief über einer These: Wer, wann, wo */
 .w-steck{display:flex;flex-wrap:wrap;gap:.4rem .5rem;margin:.2rem 0 .8rem;padding:0;list-style:none}
 .w-steck li{font-size:.88rem;padding:.2rem .65rem;border:1px solid var(--border);border-radius:99px;background:var(--bg)}
-@media (max-width:899px){ .w-mw.k2,.w-mw.k3{grid-template-columns:1fr} }
+@media (max-width:899px){ .w-mw.k2,.w-mw.k3,.w-mw.k4{grid-template-columns:1fr} }
+/* Stufenmodell (M8.1 »Aufstieg der NSDAP verstehen«): Stufen steigen nach rechts; schmal untereinander */
+.w-treppe{list-style:none;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:.5rem;margin:1.2rem 0 .4rem;padding:0;align-items:end}
+.w-treppe li{display:grid;gap:.25rem;align-content:start;padding:.8rem .8rem 1rem;border:1px solid var(--border);border-top:6px solid var(--ink);border-radius:var(--r-lg);background:var(--surface);min-height:calc(7.6rem + var(--i) * 2.2rem)}
+.w-treppe li b{font-family:var(--display);font-size:1.04rem;line-height:1.2;hyphens:auto}
+.w-treppe li span{font-size:.87rem;line-height:1.4}
+.w-treppe li:nth-child(1){border-top-color:var(--kuli)}.w-treppe li:nth-child(2){border-top-color:#C4622D}.w-treppe li:nth-child(3){border-top-color:#E0B74A}.w-treppe li:nth-child(4){border-top-color:#7A5C1E}.w-treppe li:nth-child(5){border-top-color:var(--red)}
+@media (max-width:899px){ .w-treppe{grid-template-columns:1fr} .w-treppe li{min-height:0} }
+/* Halbrund: Wahlergebnis als Bogen mit Legende */
+.w-halbrund{margin:1rem 0;background:var(--dunkel);color:var(--inverse);border-radius:var(--r-lg);padding:1.1rem 1.4rem 1rem}
+.w-halbrund .kennung{color:var(--marker)}
+.w-halbrund .hr-in{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.4rem;align-items:center;margin-top:.4rem}
+.w-halbrund svg{width:100%;height:auto;display:block}
+.w-halbrund .hr-z{font:700 13px var(--body, sans-serif);fill:#fff;paint-order:stroke;stroke:#1F1D1A;stroke-width:3px;stroke-linejoin:round}
+.w-halbrund .hr-m{font:700 12px var(--body, sans-serif);fill:#DCD5CA;letter-spacing:.04em}
+.w-halbrund .hr-m2{font:700 22px var(--display, serif);fill:#fff}
+.w-halbrund .hr-leg{list-style:none;margin:0;padding:0;display:grid;gap:.3rem}
+.w-halbrund .hr-leg li{display:grid;grid-template-columns:1rem 5.2rem 4.2rem minmax(0,1fr);gap:.5rem;align-items:baseline;font-size:.98rem}
+.w-halbrund .hr-leg span{width:1rem;height:1rem;border-radius:3px;align-self:center;border:1px solid #fff5}
+.w-halbrund .hr-leg i{font-style:normal;font-variant-numeric:tabular-nums;text-align:right}
+.w-halbrund .hr-leg small{color:#DCD5CA;font-size:.84rem}
+.w-halbrund .quelle{color:#C9C1B4;margin-top:.6rem}
+/* Halbrund in halber Breite: Bogen oben, Legende darunter in zwei Spalten */
+.w-halbrund.schmal .hr-in{grid-template-columns:1fr;gap:.6rem}
+.w-halbrund.schmal svg{max-width:22rem;margin:0 auto}
+.w-halbrund.schmal .hr-leg{grid-template-columns:1fr 1fr;gap:.25rem 1.2rem}
+.w-halbrund.schmal .hr-leg li{grid-template-columns:1rem minmax(0,1fr) auto;font-size:.92rem}
+.w-halbrund.schmal .hr-leg small{display:none}
+/* Rechnen mit Rückmeldung */
+.w-rechne{margin:.9rem 0}
+.w-rechne label{display:block;font-weight:700;margin-bottom:.3rem}
+.w-rechne input{width:7rem;min-height:44px;font:inherit;font-size:1.15rem;padding:.3rem .6rem;border:1.5px solid #8B857A;border-radius:var(--r-md, 8px);background:var(--surface);color:var(--ink);text-align:right}
+.w-rechne .w-re-e{font-weight:700}
+@media (max-width:899px){ .w-halbrund .hr-in{grid-template-columns:1fr} }
+/* Wirkungskette: Kästen mit Pfeilen (Ursache → Folge) */
+.w-kette{list-style:none;display:flex;flex-wrap:wrap;gap:.6rem 1.7rem;margin:1rem 0;padding:0}
+.w-kette li{position:relative;flex:1 1 9.5rem;background:var(--surface);border:1px solid var(--border);border-left:6px solid var(--ink);border-radius:var(--r-lg);padding:.6rem .8rem;font-size:.93rem;line-height:1.35}
+.w-kette li b{display:block;font-family:var(--display);font-size:1.03rem;line-height:1.2;margin-bottom:.15rem}
+.w-kette li:not(:last-child)::after{content:"→";position:absolute;right:-1.3rem;top:50%;transform:translateY(-50%);font-weight:700;font-size:1.2rem;color:var(--red)}
+.w-kette li.rot{border-left-color:var(--red)}.w-kette li.blau{border-left-color:var(--kuli)}
+/* Vier Bewertungen nebeneinander */
+.w-vier{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem 1.6rem;margin:.8rem 0}
+@media (max-width:899px){ .w-vier{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -679,7 +729,8 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 <script src="../assets/gegenwart/bundle.js"></script>
 <script>
 window.GGK_ZURUECK = "../index.html";
-window.W_GEBAUT = ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m071"];
+window.W_GEBAUT = ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m071", "m08", "m09", "m10", "m11"];
+window.W_DAUER = {"m01": 90, "m02": 45, "m03": 90, "m04": 45, "m05": 90, "m06": 105, "m07": 90, "m071": 45, "m08": 90, "m09": 45, "m10": 60, "m11": 180};
 "use strict";
 /* ===== Gemeinsamer Kern M25–M27. Jede Stunde definiert danach L (Einstellungen), ihre Daten, SEITE_FN und ruft kernStart(). ===== */
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -1300,6 +1351,21 @@ function deckblatt(){
 }
 /* Auftrag und Bild als ein Kopf (Muster aus M22 4.1). Fehlt das Bild, bleibt der Auftrag allein stehen. */
 const kopfpaar = (auftragHtml, b) => `<div class="kopfpaar">${auftragHtml}<figure><img src="media/${b.datei}" alt="${esc(b.alt)}" loading="lazy" onerror="this.closest('.kopfpaar').classList.add('ohne');this.closest('figure').remove()"><figcaption>${b.text} <span>${b.nachweis}</span></figcaption></figure></div>`;
+/* Links, die nur im Moodle-Paket stehen (Pinnwände, Umfragen mit Schlüssel im Link): Das Paket-Werkzeug schreibt window.W_LINKS in die Seite; öffentlich fehlt der Eintrag. */
+const wLink = k => (window.W_LINKS || {})[k] || null;
+/* Acht Einträge nach dem Heft, M8.1. Verweise auf die Stunden nach der heutigen Zählung. */
+const W_KG8 = [
+  { id:"trauma", titel:"Kriegstrauma", m:"M1, M2", text:"Die Schrecken und Entbehrungen des Ersten Weltkriegs haben Millionen von Soldaten für ihr Leben gezeichnet und Hass auf die Sieger verbreitet. Stichwort: „Kriegszitterer“. Der Krieg war ein industrielles Töten." },
+  { id:"dolch", titel:"Dolchstoßlegende", m:"M4", text:"„Im Felde unbesiegt“: Durch Propaganda wurde der Bevölkerung über Jahre der nahe Sieg versprochen. Die Oberste Heeresleitung – die selbst den Waffenstillstand wollte – schob die Schuld an der Niederlage Demokrat*innen und Jüdinnen und Juden zu." },
+  { id:"selbst", titel:"Selbstbestimmungsrecht der Völker", m:"M6", text:"Der Nationalismus hat sich als „Ersatzreligion“ auf der höchsten politischen Ebene durchgesetzt. Damit gehen dauernde Konflikte einher: Wer gehört zur Nation, wer nicht? Welches Land gehört „uns“?" },
+  { id:"diktat", titel:"Versailles als „Diktatfrieden“", m:"M7", text:"Große Gebietsverluste, Reparationen, Kriegsschuld (so wurde Artikel 231 verstanden), nur noch 100.000 Soldaten. Viele empfinden das als Kränkung ihres früheren Selbstbilds." },
+  { id:"staat", titel:"Gegner der Demokratie im Staatsdienst", m:"", text:"In Polizei, Behörden und Gerichten der neuen Republik arbeiten überwiegend dieselben Menschen wie in der Kaiserzeit. Viele sind konservativ, der Monarchie treu und der Demokratie gegenüber skeptisch bis feindlich." },
+  { id:"doppelt", titel:"Doppelte Ausrufung der Republik", m:"M5", text:"Am 9. November 1918 rufen Scheidemann und Liebknecht zwei verschiedene Republiken aus. Die Republik entsteht im Streit. Neu sind das Wahlrecht für Frauen und das niedrigere Wahlalter." },
+  { id:"eugenik", titel:"Eugenik und „Rassenkunde“", m:"Auftrag 4", text:"Eine Idee aus dem 19. Jahrhundert (Ideengeschichte): Menschen werden nach einem angeblichen „Wert“ eingeteilt. Dazu recherchierst du in Auftrag 4." },
+  { id:"justiz", titel:"„Auf dem rechten Auge blind“", m:"M10", text:"Die Justiz beurteilt Straftaten deutlich milder, wenn sie von Rechten verübt werden. Stichwort: Attentate auf Politiker." },
+];
+/* Das Raster aus M8.1 wächst weiter: In diesen Stunden schreiben die Lernenden je einen Eintrag (Speicher der Einheit, kg[wid]). */
+const W_KGNEU = [["m10","Gewalt auf den Straßen, Morde an Politikern"],["m11","Krisenjahr 1923"],["m12","Die Goldenen Zwanziger"],["m14","Weltwirtschaftskrise 1929"],["m142","Verhalten der NSDAP"]];
 /* Roter Faden: ein Satz am Ende jeder Stunde; er wandert in die Übersicht des Kapitels und aufs Deckblatt der nächsten Stunde. */
 const fadenFeld = () => `<div class="w-fadenfeld nodruck">${auftrag("Allein · 2 Minuten", "Ein Satz für den roten Faden", "Die Leitfrage dieses Abschnitts: " + esc(W_BLOCK[L.block][2]) + " Was trägt diese Stunde zur Antwort bei?")}
   ${textfeld("faden", "Mein Satz", { rows:2, zaehl:false, anfaenge:L.fadenAnf || ["Diese Stunde zeigt, dass", "Für die Leitfrage heißt das:"] })}</div>`;
@@ -1323,7 +1389,7 @@ function weimarStart(){
 }
 /* Kopf: Rückweg zur Übersicht und zum Kapitel */
 const kopf0 = kopf;
-kopf = function(){ kopf0(); const k = document.getElementById("kopf"), p = k.querySelector(".pill"); if (p) p.insertAdjacentHTML("beforebegin", `<a class="pill kapitel" href="index.html">Kapitel Weimar</a>`); };
+kopf = function(){ kopf0(); const k = document.getElementById("kopf"), p = k.querySelector(".pill"); if (p && !L.hub) p.insertAdjacentHTML("beforebegin", `<a class="pill kapitel" href="index.html">Kapitel Weimar</a>`); };
 
 /* ---------- Wahr oder falsch – mit Erklärung je Antwort (Muster 2). aussagen = [[Text, richtig:true|false|null, Erklärung bei „wahr“, Erklärung bei „falsch“]]
    richtig = null heißt: Die Aussage lässt sich nicht mit einem Wort beantworten; beide Antworten bekommen eine einordnende Rückmeldung. ---------- */
@@ -1355,6 +1421,41 @@ AKTION.checkneu = t => { setz(`${t.dataset.p}.${t.dataset.i}`, null); zeichneBeh
 const mehrWahl = (pfad, eintraege, o = {}) => `<div class="w-mw k${o.spalten || 3}" role="group" aria-label="${esc(o.titel || "Karten markieren")}">${eintraege.map(e => { const an = !!hol(`${pfad}.${e.id}`); return `<button type="button" data-akt="mw" data-p="${pfad}.${e.id}" aria-pressed="${an}">${e.kopf ? `<span class="kennung">${esc(e.kopf)}</span>` : ""}<b>${esc(e.titel)}</b><span class="w-mwt">${e.text}</span><span class="w-mws">${an ? "✓ " + esc(o.an || "markiert") : esc(o.aus || "antippen zum Markieren")}</span></button>`; }).join("")}</div>`;
 const mwZahl = pfad => Object.values(hol(pfad) || {}).filter(Boolean).length;
 AKTION.mw = t => { setz(t.dataset.p, !hol(t.dataset.p)); zeichneBehalte(); };
+/* ---------- Wahlen 1919–1933: gültige Stimmen in Tausend. Quelle: Konrad-Adenauer-Stiftung, »Wahlen zum Reichstag in der Weimarer Republik 1919–1933« (kas.de, Geschichte der CDU; abgerufen 17.11.2026).
+   Die Anteile sind daraus berechnet. KPD und USPD stehen dort in einer Zeile. Reihenfolge der Werte wie W_PARTEI. ---------- */
+const W_PARTEI = [["links","KPD · USPD","#8E1F1F"],["spd","SPD","#B23A2E"],["ddp","DDP","#E0B74A"],["z","Zentrum","#6E6A62"],["bvp","BVP","#8C8579"],["dvp","DVP","#4F7FB5"],["dnvp","DNVP","#2F4B6E"],["ns","NSDAP","#5A3A1E"],["sonst","Sonstige","#B9B2A6"]];
+const W_WAHLEN = {
+  "1919":{ datum:"19. Januar 1919", bet:83.0, v:[2317,11509,5642,5980,0,1346,3121,0,485], namen:{ links:"USPD" } },
+  "1920":{ datum:"6. Juni 1920", bet:79.1, v:[5637,6104,2334,3845,1239,3919,4249,0,869], namen:{ links:"USPD · KPD" } },
+  "1924a":{ datum:"4. Mai 1924", bet:77.4, v:[3928,6009,1655,3914,947,2694,5696,1918,2520], namen:{ ns:"Völkische · NS" } },
+  "1924b":{ datum:"7. Dezember 1924", bet:78.8, v:[2808,7881,1920,4119,1134,3049,6206,907,2266], namen:{ ns:"NS-Freiheitsbewegung" } },
+  "1928":{ datum:"20. Mai 1928", bet:75.6, v:[3286,9153,1506,3712,946,2680,4382,810,4278], namen:{ links:"KPD" } },
+  "1930":{ datum:"14. September 1930", bet:82.0, v:[4604,8578,1322,4128,1059,1578,2458,6410,4834], namen:{ links:"KPD", ddp:"DStP" } },
+  "1932a":{ datum:"31. Juli 1932", bet:84.0, v:[5283,7960,372,4589,1193,436,2177,13746,1126], namen:{ links:"KPD", ddp:"DStP" } },
+  "1932b":{ datum:"6. November 1932", bet:80.6, v:[5980,7248,337,4231,1095,662,2959,11737,1222], namen:{ links:"KPD", ddp:"DStP" } },
+  "1933":{ datum:"5. März 1933", bet:88.7, v:[4848,7182,334,4425,1074,432,3137,17277,634], namen:{ links:"KPD", ddp:"DStP", dnvp:"DNVP (Kampffront)" } },
+};
+const W_WAHLQ = "Stimmenanteile berechnet aus den Stimmenzahlen bei der Konrad-Adenauer-Stiftung, „Wahlen zum Reichstag in der Weimarer Republik 1919–1933“ (kas.de). KPD und USPD sind dort zusammengezählt. Eigene Grafik.";
+const wahlAnteil = (k, id) => { const w = W_WAHLEN[k], sum = w.v.reduce((a, b) => a + b, 0); return Math.round(w.v[W_PARTEI.findIndex(p => p[0] === id)] / sum * 1000) / 10; };
+const wahlWerte = k => { const w = W_WAHLEN[k]; return W_PARTEI.map(p => [(w.namen || {})[p[0]] || p[1], wahlAnteil(k, p[0]), p[2], ""]).filter(x => x[1] > 0); };
+/* ---------- Halbrund: Stimmenanteile als Bogen (eigene Grafik). werte = [[Name, Prozent, Farbe, Zusatz?]], von links nach rechts ---------- */
+function halbrund(titel, werte, nachweis, o = {}){
+  const sum = werte.reduce((a, w) => a + w[1], 0), R = 150, r = 80, cx = 170, cy = 166, komma = z => String(z).replace(".", ","); let a0 = Math.PI;
+  const pt = (rad, a) => [(cx + rad * Math.cos(a)).toFixed(1), (cy - rad * Math.sin(a)).toFixed(1)];
+  const seg = werte.map(w => { const a1 = a0 - Math.PI * w[1] / sum, A = pt(R, a0), B = pt(R, a1), C = pt(r, a1), D = pt(r, a0), M = pt((R + r) / 2, (a0 + a1) / 2);
+    const d = `M${A[0]} ${A[1]}A${R} ${R} 0 0 1 ${B[0]} ${B[1]}L${C[0]} ${C[1]}A${r} ${r} 0 0 0 ${D[0]} ${D[1]}Z`; a0 = a1;
+    return `<path d="${d}" fill="${w[2]}" stroke="#FBF8F1" stroke-width="2"/>` + (w[1] / sum > .07 ? `<text x="${M[0]}" y="${+M[1] + 5}" text-anchor="middle" class="hr-z">${komma(w[1])}</text>` : ""); }).join("");
+  return `<figure class="w-halbrund ${o.schmal ? "schmal" : ""}"><figcaption class="kennung">${esc(titel)}</figcaption><div class="hr-in"><svg viewBox="0 0 340 176" role="img" aria-label="${esc(titel)}: ${werte.map(w => `${w[0]} ${komma(w[1])} Prozent`).join(", ")}">${seg}${o.mitte ? `<text x="${cx}" y="${cy - 26}" text-anchor="middle" class="hr-m">${esc(o.mitte)}</text>` : ""}${o.mitte2 ? `<text x="${cx}" y="${cy - 6}" text-anchor="middle" class="hr-m2">${esc(o.mitte2)}</text>` : ""}</svg>
+  <ul class="hr-leg">${werte.map(w => `<li><span style="background:${w[2]}"></span><b>${esc(w[0])}</b><i>${komma(w[1])} %</i>${w[3] ? `<small>${esc(w[3])}</small>` : ""}</li>`).join("")}</ul></div><p class="quelle">${nachweis}</p></figure>`;
+}
+/* ---------- Rechnen mit Rückmeldung: erst die eigene Zahl, dann die Erklärung (Muster 1). Stand: S[pfad] = { v, ok } ---------- */
+function rechne(pfad, frage, soll, o = {}){
+  const st = hol(pfad) || {}, ok = st.ok, id = "re-" + pfad.replace(/\W/g, "-");
+  return `<div class="w-rechne"><label for="${id}">${esc(frage)}</label><div class="reihe"><input id="${id}" type="text" inputmode="decimal" data-f="${pfad}.v" value="${esc(st.v || "")}" placeholder="Zahl" autocomplete="off" ${ok === true ? "readonly" : ""}><span class="w-re-e">${esc(o.einheit || "%")}</span><button type="button" class="btn dunkel" data-akt="rechne" data-p="${pfad}" data-soll="${soll}" data-tol="${o.tol ?? .15}" ${ok === true ? "disabled" : ""}>Prüfen</button></div>
+  <div aria-live="polite">${ok === true ? `<div class="rm zentral"><b>Stimmt.</b> ${esc(o.ja || "")}</div>` : ok === false ? `<div class="rm kaum"><b>Noch nicht.</b> ${esc(o.nein || "Rechne noch einmal nach.")}</div>` : ""}</div></div>`;
+}
+AKTION.rechne = t => { const p = t.dataset.p, v = parseFloat(String((hol(p) || {}).v || "").replace(",", ".").replace(/[^\d.\-]/g, "")); setz(p + ".ok", !isNaN(v) && Math.abs(v - +t.dataset.soll) <= +t.dataset.tol); zeichneBehalte(); };
+const rechneOk = p => (hol(p) || {}).ok === true;
 /* ---------- Auf einem Bild zeichnen (Stift oder Finger): Linien liegen als Zahlen im Stand, nichts wird übertragen.
    pfad → S[pfad] = [{ s:Stift, p:[[x,y] …] }] mit x, y zwischen 0 und 1 · stifte = [[id, Farbe, Name]] ---------- */
 function zeichenKarte(pfad, b, stifte){
