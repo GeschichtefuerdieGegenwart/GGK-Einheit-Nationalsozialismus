@@ -82,6 +82,12 @@
 .w-t{font-family:var(--display);font-weight:600;font-size:1.2rem;line-height:1.2}
 .w-u{font-size:.9rem;color:var(--muted);line-height:1.3}
 .w-st{font-size:.85rem;font-weight:700;color:var(--green)}
+/* Viele Einträge (ab etwa sieben): Liste in zwei Spalten, die Karte bleibt beim Rollen stehen */
+.w-wahl.viele{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.w-wahl.viele .w-liste{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.w-wahl.viele .w-liste > button{padding:.6rem .7rem;min-height:4.8rem;min-width:0}
+.w-wahl.viele .w-liste .w-t{font-size:1.02rem;hyphens:auto;overflow-wrap:anywhere}
+.w-wahl.viele .w-karte{position:sticky;top:5rem}
 .w-karte{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem 1.8rem 1.4rem;min-height:24rem;font-size:1.08rem}
 .w-karte:focus{outline:none}
 .w-karte > h3{font-size:clamp(1.5rem,1.2rem + 1vw,2rem);margin-bottom:.5rem}
@@ -177,7 +183,8 @@
   .ab-reg button{padding:.2rem .3rem}
   .ab-rahmen > #main{margin:.6rem .6rem 1rem;padding:1rem 1rem .9rem}
   .ab-zwei,.ab-zwei.gleich,.ab-zwei.schmalrechts,.gliederung,.deck,.w-wahl,.lk-wahl .prinzipien,.w-karten.k2,.w-karten.k3,.w-karten.k4{grid-template-columns:1fr}
-  .w-liste{display:flex;overflow-x:auto;gap:.4rem;padding-bottom:.3rem}
+  .w-liste,.w-wahl.viele .w-liste{display:flex;overflow-x:auto;gap:.4rem;padding-bottom:.3rem}
+  .w-wahl.viele .w-karte{position:static}
   .w-liste > button{flex:0 0 auto;min-height:48px;padding:.4rem .8rem;width:auto}
   .w-liste .w-u{display:none}
   .w-zeit{grid-template-columns:1fr;padding:0 0 0 1.2rem}

@@ -1,0 +1,1538 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>M8 Das kollektive Gedächtnis – Identität und Erinnerung</title>
+<meta name="description" content="GGK M8: Das kollektive Gedächtnis – Identität und Erinnerung. Arbeitsblatt mit Register, Schreibauftrag im Format der Klassenarbeit und Zusammenfassung auf zwei Seiten.">
+<link rel="stylesheet" href="../assets/gegenwart/bundle.css">
+<style>
+
+/* Schriften lokal im Repository (SIL Open Font License) */
+@font-face{font-family:"Fraunces";src:url(../assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
+@font-face{font-family:"Fraunces";src:url(../assets/fonts/Fraunces72pt-SemiBoldItalic.woff) format("woff");font-weight:600;font-style:italic;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(../assets/fonts/AtkinsonHyperlegible-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(../assets/fonts/AtkinsonHyperlegible-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(../assets/fonts/AtkinsonHyperlegible-Italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+/* Bewusst nur hell (Beamer, Druck), wie M18–M22. Farben und Formen aus dem Designsystem GGK-Labor.
+   Die Bausteine von »Gegenwart« (assets/gegenwart/) laufen über Tokens – hier auf die Farben des GGK-Labors gesetzt. */
+:root{
+  color-scheme:light;
+  --bg:#F3EFE7; --surface:#FAF8F3; --surface2:#FFFDF8; --offset:#E9E2D7; --line:#D5CEC3; --border:rgba(36,34,31,.14);
+  --ink:#24221F; --muted:#5F5C56; --faint:#6A655E; --inverse:#FFFAF2; --dunkel:#1B1A17;
+  --red:#9B402D; --red-hi:#EAD7CF; --green:#2E5A47; --green-hi:#D6E4DC; --gold:#7D5C12; --gold-hi:#EEE2BF;
+  --kuli:#1E4FB5; --kuli-hi:#DCE5F7; --slate:#4B4F57; --slate-hi:#DFE1E5; --marker:#F3D54E;
+  /* Säulenfarben (sechs, aus der GGK-Palette abgeleitet) */
+  --s-inst:#2E5A47; --s-kult:#7D5C12; --s-sozi:#1E4FB5; --s-geo:#4B6F8F; --s-pol:#9B402D; --s-takt:#4B4F57;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:.75rem; --r-lg:1rem; --ease:cubic-bezier(.23,1,.32,1);
+  /* Gegenwart-Tokens → GGK-Labor */
+  --grund:var(--bg); --flaeche:var(--surface); --karton:var(--offset); --text:var(--ink); --leise:var(--muted); --stahl:#8F887D; --linie:var(--line);
+  --petrol:var(--green); --petrol-hi:var(--green-hi); --auf-petrol:var(--inverse);
+  --honig:var(--gold); --honig-hi:var(--gold-hi); --honigplatte:var(--gold-hi); --auf-honig:var(--ink);
+  --ueberdruck:var(--slate); --auf-ueberdruck:var(--inverse);
+  --oxid:var(--red); --oxid-hi:var(--red-hi);
+  --erfolg:var(--green); --erfolg-hi:var(--green-hi); --warnung:var(--gold); --warnung-hi:var(--gold-hi); --fehler:var(--red); --fehler-hi:var(--red-hi);
+  --font-display:var(--display); --font-stimme:var(--display); --font-text:var(--body);
+  --radius-sm:.6rem; --radius-md:.75rem; --radius-pill:999px; --radius-none:0;
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:20px; --space-6:28px;
+  --knopf-hoehe:48px; --tablet-ziel:56px; --platte:6px 6px 0 0 var(--karton); --platte-knopf:4px 4px 0 0 var(--karton); --fokus-innen:inset 0 0 0 2px var(--grund);
+  --dauer-druck:100ms; --dauer-schnell:140ms; --dauer-mittel:220ms; --dauer-langsam:300ms; --dauer-staffel:30ms; --dauer-wende:460ms; --dauer-aufdecken:420ms; --dauer-reihe:440ms; --dauer-aus:150ms;
+  --kurve-aus:cubic-bezier(.23,1,.32,1); --kurve-beidseits:cubic-bezier(.77,0,.175,1); --kurve-feder:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+button,input,select,textarea,[tabindex]{scroll-margin-top:140px}
+html{-webkit-text-size-adjust:none;text-size-adjust:none;overflow-x:clip}
+body{min-height:100dvh;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:clamp(1rem,.95rem + .25vw,1.125rem);line-height:1.58;-webkit-font-smoothing:antialiased;overflow-x:clip}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.14;text-wrap:balance}
+p,li{text-wrap:pretty}
+a{color:var(--red)}
+:focus-visible{outline:3px solid var(--kuli);outline-offset:3px;border-radius:.35rem}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}}
+html[data-bewegung=weniger] *,html[data-bewegung=weniger] *::before,html[data-bewegung=weniger] *::after{animation:none!important;transition-duration:1ms!important}
+@keyframes auf{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+.g{background:transparent;font-size:inherit;line-height:inherit}
+.g .g-frage{font-size:clamp(1.2rem,1.05rem + .7vw,1.5rem)}
+.g .g-knopf{min-height:48px}
+.g-wahl legend{font-weight:700;font-family:var(--body);font-style:normal;font-size:1.05rem}
+.g .g-option span{font-weight:700}
+.g .g-option__urteil{font-weight:400;font-style:normal;font-size:.95rem;padding:0;border:0;min-height:0;background:transparent;box-shadow:none}
+.g .g-option span span::before,.g .g-option span span::after{display:none!important}
+.g .g-balken__zeile{grid-template-columns:minmax(6.5rem,10rem) 1fr 4.2rem}
+.g .g-schieber{max-width:none}
+.g .g-schieber>label{display:grid;gap:.2rem}.g .g-schieber input[type=range]{width:100%;accent-color:var(--kuli);height:32px}
+.g .g-schieber__buehne{aspect-ratio:auto;min-height:14rem}
+.g .g-schieber__vor,.g .g-schieber__nach{padding:2.6rem 1.2rem 1.2rem}
+.g .g-schieber__vor p,.g .g-schieber__nach p{font-size:.98rem}
+.g .g-schieber__vor .zahl,.g .g-schieber__nach .zahl{font:600 2.2rem/1 var(--display)}
+.g .g-zeit{padding-top:34px}
+@media (max-width:640px){.g .g-zeit{grid-auto-flow:row;grid-auto-columns:auto;gap:var(--space-3)}.g .g-zeit::before{display:none}}
+.g .g-schalter input{margin:0}
+
+/* Kopf mit Lernweg */
+.kopf{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--border);padding-top:env(safe-area-inset-top,0px)}
+.kopf-in{max-width:1100px;margin:auto;padding:.55rem max(1.25rem,env(safe-area-inset-right,0px)) .55rem max(1.25rem,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:.6rem .9rem;flex-wrap:wrap}
+.mark{width:32px;height:32px;flex:0 0 auto}
+.titel{font-weight:700;line-height:1.2;margin-right:auto}.titel small{display:block;color:var(--muted);font-weight:400;font-size:.82rem}
+.pill{border:1px solid var(--border);background:var(--surface2);border-radius:999px;padding:.45rem 1rem;font-weight:700;min-height:44px;display:inline-flex;align-items:center;text-decoration:none;color:var(--ink)}
+.weg{max-width:1100px;margin:auto;padding:0 1.25rem .6rem;display:flex;gap:.35rem;overflow-x:auto;scrollbar-width:none}
+.weg button{flex:1 0 auto;min-width:7.4rem;border:0;border-top:3px solid var(--line);background:transparent;text-align:left;padding:.45rem .5rem .2rem;color:var(--faint);font-size:.85rem;line-height:1.25;min-height:48px}
+.weg button b{display:block;color:inherit;font-size:.78rem}
+.weg button.da{color:var(--muted);border-top-color:var(--muted)}
+.weg button.akt{color:var(--ink);border-top-color:var(--red)}
+
+main{max-width:46rem;margin:auto;padding:clamp(1.5rem,4vw,3rem) max(1.25rem,env(safe-area-inset-right,0px)) 5rem max(1.25rem,env(safe-area-inset-left,0px))}
+main.breit{max-width:62rem}
+.zeit{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;color:var(--red);font-weight:700;font-size:.95rem}
+.zeit .nr{font-family:var(--display);font-size:1.1rem}
+h1{font-size:clamp(2rem,1.4rem + 2.4vw,3.1rem);margin:.5rem 0 .7rem}
+.leitfrage{font-family:var(--display);font-style:italic;font-weight:600;font-size:clamp(1.35rem,1.1rem + .9vw,1.8rem);color:var(--muted);margin-bottom:1.4rem}
+.lead{font-size:clamp(1.1rem,1rem + .5vw,1.28rem);color:var(--muted);margin-bottom:1.4rem}
+h2.abschnitt{font-size:1.45rem;margin:2.2rem 0 .7rem}
+h3.klein{font-size:1.15rem;margin:1.4rem 0 .4rem}
+p+p{margin-top:.7rem}
+.auftrag{background:var(--ink);color:var(--inverse);border-radius:var(--r-lg);padding:1.2rem 1.4rem;margin:1.5rem 0 1.1rem}
+.auftrag h3{font-size:1.2rem;margin-bottom:.35rem}
+.auftrag p{color:#DCD5CA}
+.auftrag .form{display:inline-block;font-weight:700;color:var(--marker);font-size:.9rem;margin-bottom:.2rem}
+.hinweis{font-size:.9rem;color:var(--muted)}
+.belastend{border-left:6px solid var(--gold);background:var(--gold-hi);padding:.75rem 1rem;border-radius:0 .5rem .5rem 0;margin:1rem 0}
+.merksatz{font-family:var(--display);font-weight:600;font-size:1.25rem;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);padding:.7rem 0;margin:1.4rem 0;text-align:center}
+.btn{min-height:48px;border:1px solid var(--border);border-radius:var(--r);padding:.6rem 1.2rem;background:var(--surface2);font-weight:700;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.4rem}
+.btn:hover{background:var(--offset)}
+.btn.primary{background:var(--red);color:var(--inverse);border-color:transparent}
+.btn.primary:hover{background:#86361f}
+.btn.dunkel{background:var(--ink);color:var(--inverse);border-color:transparent}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn:active{transform:scale(.97)}
+.reihe{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-top:.8rem}
+.fuss{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-top:1px solid var(--line);margin-top:2.2rem;padding-top:1.3rem;flex-wrap:wrap}
+label{font-weight:700;display:block}
+textarea{width:100%;min-height:5rem;border:1.5px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;background:var(--surface2);resize:vertical;margin-top:.35rem}
+.feldgruppe{display:grid;gap:1rem;margin-top:1rem}
+.karte{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
+.karte+.karte{margin-top:1rem}
+.kennung{font-weight:700;color:var(--red);font-size:.88rem;margin-bottom:.3rem}
+.quelle{font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.4}
+.quelle a{color:var(--muted)}
+blockquote{margin:.8rem 0;padding:.7rem 1rem;border-left:5px solid var(--kuli);background:var(--kuli-hi);border-radius:0 .5rem .5rem 0;font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.35}
+blockquote .wer{display:block;font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--muted);margin-top:.35rem}
+details.hilfe{margin-top:.8rem;border:1.5px dashed var(--line);border-radius:.6rem;padding:.4rem .8rem}
+details.hilfe summary{cursor:pointer;font-weight:700;min-height:40px;display:flex;align-items:center}
+details.hilfe p{margin:.3rem 0 .4rem}
+.status{display:inline-block;font-size:.78rem;font-weight:700;padding:.1rem .5rem;border-radius:.35rem;background:var(--slate-hi);color:var(--slate);margin-right:.3rem}
+.status.beleg{background:var(--green-hi);color:var(--green)}
+.status.modell{background:var(--gold-hi);color:var(--gold)}
+.aufdeck{margin-top:1rem;background:var(--offset);border-radius:var(--r-lg);padding:1rem 1.2rem}
+.aufdeck.neu{animation:auf 360ms var(--ease) both}
+.zwei{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+@media (max-width:640px){.zwei{grid-template-columns:1fr}}
+.zwei .alt{background:var(--offset);border-radius:.6rem;padding:.8rem 1rem;min-width:0}
+
+.band{position:relative;background:var(--dunkel);color:var(--inverse);border-radius:var(--r-lg);overflow:hidden;margin:0 0 1.6rem;min-height:9rem;display:grid;grid-template-columns:minmax(0,1fr)}
+.band.mit{grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:15rem}
+@media (max-width:640px){.band.mit{grid-template-columns:1fr}}
+.band .bt{padding:1.3rem 1.4rem;display:flex;flex-direction:column;justify-content:center;gap:.4rem}
+.band .bt .ob{font-size:.85rem;font-weight:700;color:#C9BFAE;letter-spacing:.02em}
+.band .bt h2{font-size:clamp(1.5rem,1.2rem + 1.4vw,2.2rem);color:var(--inverse)}
+.band .bt p{color:#DCD5CA}
+.band figure{margin:0;position:relative;min-height:12rem;background:#2A2824}
+.band figure img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:.92}
+.band.neu figure img{animation:band-ein 650ms var(--ease) both}
+@keyframes band-ein{from{opacity:0;transform:translateX(4%) scale(1.03)}to{opacity:.92;transform:none}}
+.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:.45rem .8rem;font-size:.75rem;line-height:1.35;color:#E6DFD2;background:linear-gradient(transparent,rgba(27,26,23,.85))}
+.band figcaption b{color:var(--inverse)}
+.urt{font-size:.95rem}.urt+.urt{margin-top:.3rem}
+.urt.zentral b{color:var(--green)}.urt.begruendbar b{color:var(--gold)}.urt.kaum b{color:var(--red)}
+.matrix-wrap{overflow-x:auto;margin-top:1rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%}
+th,td{padding:.55rem .7rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.92rem}
+th{background:var(--offset)}
+tr:last-child td{border-bottom:0}
+td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* Produkt */
+.raster3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.6rem;font-size:.88rem}
+@media (max-width:640px){.raster3{grid-template-columns:1fr}}
+.raster3 div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .7rem}
+.raster3 b{display:block;margin-bottom:.2rem}
+.satzanfaenge{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem}
+.satzanfaenge button{min-height:44px;border:1.5px solid var(--border);background:var(--surface2);border-radius:.5rem;padding:.3rem .7rem;font-size:.9rem}
+.pole{display:flex;justify-content:space-between;gap:1rem;font-weight:700;font-size:.95rem;margin-top:.6rem}
+.pole span{max-width:46%}
+
+/* Löschen */
+.loesch{margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.92rem;color:var(--muted);display:flex;gap:.9rem;flex-wrap:wrap;align-items:center}
+.loesch-frage{margin-top:.6rem;border:2px solid var(--red);border-radius:.7rem;padding:.8rem 1rem;background:var(--red-hi);color:var(--ink);flex:1 0 100%}
+/* ===== Gemeinsamer Kern M25–M27 (Ergänzungen zum Stand von M23) ===== */
+.band{margin-top:.2rem}
+.ziele{padding-left:1.2rem;display:grid;gap:.3rem;margin:.6rem 0}
+.ablauf{list-style:none;display:grid;gap:.35rem;margin:.8rem 0 0}
+.ablauf li{display:grid;grid-template-columns:5.6rem 1fr;gap:.8rem;border-top:1px solid var(--line);padding-top:.35rem}
+.ablauf li b{color:var(--red);font-variant-numeric:tabular-nums}
+.auflage{border-left:6px solid var(--green);background:var(--green-hi);padding:.8rem 1rem;border-radius:0 .6rem .6rem 0;margin:1rem 0}
+.auflage.neu,.rm.neu{animation:auf 360ms var(--ease) both}
+.rm{border-left:6px solid var(--stahl);background:var(--surface);padding:.7rem 1rem;border-radius:0 .6rem .6rem 0;margin:.7rem 0;font-size:.97rem}
+.rm.zentral{border-left-color:var(--green)}.rm.teils{border-left-color:var(--gold)}.rm.kaum{border-left-color:var(--red)}
+.rm b.sw{display:block}
+.gesperrt{opacity:.45}
+.zaehl{font-size:.88rem;color:var(--muted);margin-top:.25rem;font-variant-numeric:tabular-nums}
+textarea,input[type=text],select{color:var(--kuli)}
+input[type=text],select{width:100%;min-height:48px;border:1.5px solid var(--border);border-radius:var(--r);padding:.5rem .8rem;background:var(--surface2);margin-top:.3rem}
+textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
+.felder2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:700px){.felder2{grid-template-columns:1fr}}
+
+/* Quelle zum Markieren (Gegenwart: Markierung) – Sätze sind die Einheiten */
+.qwerk{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:1.2rem;align-items:start;margin-top:1rem}
+@media (max-width:860px){.qwerk{grid-template-columns:1fr}}
+.qblatt{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
+.qblatt h3{font-size:1.12rem;margin-bottom:.15rem}
+.qblatt .qkopf{font-size:.92rem;color:var(--muted);margin-bottom:.7rem}
+.qblatt .qtext p{margin:.55rem 0;line-height:1.75;font-size:1.06rem}
+.qblatt .qtag{font-weight:700;color:var(--red);font-size:.9rem;margin-right:.3rem}
+.qblatt .g-wort{padding:.08em 0;-webkit-tap-highlight-color:transparent}
+.qblatt .g-wort:focus-visible{outline:3px solid var(--kuli);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){.qblatt .g-wort:hover{background:var(--offset)}}
+.qblatt .g-stifte{margin:.2rem 0 .8rem;position:sticky;top:112px;background:var(--surface2);padding:.35rem 0;z-index:2}
+.g-stift .z{font-size:.8em;margin-right:.25rem}
+.qreiter{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1rem}
+.qreiter button{min-height:44px;border:1.5px solid var(--border);border-bottom-width:3px;background:var(--surface);border-radius:.6rem .6rem 0 0;padding:.4rem .9rem;font-weight:700}
+.qreiter button[aria-selected=true]{background:var(--surface2);border-bottom-color:var(--red)}
+.belege{display:grid;gap:.8rem}
+.belege .sp{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;min-height:5.5rem}
+.belege .sp h4{font-family:var(--body);font-size:.95rem;margin-bottom:.3rem}
+.belege .sp ul{list-style:none;display:grid;gap:.3rem;font-size:.92rem}
+.belege .sp li{border-left:4px solid var(--marker);padding-left:.5rem;line-height:1.35}
+.belege .sp.b li{border-left:4px dotted var(--kuli)}
+.belege .leer{color:var(--faint);font-size:.9rem}
+
+/* Wörter wählen */
+.woerter{display:flex;gap:.45rem;flex-wrap:wrap;margin:.8rem 0}
+.woerter button{min-height:44px;padding:.35rem .9rem;border-radius:.6rem;border:2px solid var(--stahl);background:var(--surface2);font-weight:700}
+.woerter button[aria-pressed=true]{border-color:var(--kuli);background:var(--kuli-hi);color:var(--ink)}
+.woerter button[disabled]{opacity:.5}
+.wgrp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin-top:.6rem}
+@media (max-width:760px){.wgrp{grid-template-columns:1fr}}
+.wgrp div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .8rem;font-size:.93rem}
+.wgrp b{display:block;margin-bottom:.2rem}
+.wgrp .dein{font-weight:700;color:var(--kuli)}
+
+/* Landkarten-Moment */
+.prinzipien{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;margin:.9rem 0}
+@media (max-width:860px){.prinzipien{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.prinzipien{grid-template-columns:1fr}}
+.prinzipien button{text-align:left;border:2px solid var(--stahl);background:var(--surface2);border-radius:.7rem;padding:.55rem .7rem;min-height:56px;display:grid;gap:.15rem;align-content:start}
+.prinzipien button small{font-size:.82rem;color:var(--muted);line-height:1.3}
+.prinzipien button[aria-pressed=true]{border-color:var(--kuli);box-shadow:inset 0 0 0 1px var(--kuli)}
+.prinzipien button.zentral{border-left:6px solid var(--green)}.prinzipien button.teils{border-left:6px solid var(--gold)}.prinzipien button.kaum{border-left:6px solid var(--red)}
+.prinzipien button[disabled]{opacity:.6}.prinzipien button[disabled][aria-pressed=true]{opacity:1}
+.trift{margin-top:1.2rem;border:1.5px dashed var(--stahl);border-radius:.7rem;padding:.8rem 1rem;font-size:.96rem}
+
+/* Stimmkarte und Beamer-Tafel */
+#ueber:empty{display:none}
+.tafel-voll{position:fixed;inset:0;z-index:60;background:var(--dunkel);color:var(--inverse);display:grid;grid-template-rows:auto 1fr;padding:max(1rem,env(safe-area-inset-top,0px)) 1.4rem 1.4rem;overflow:auto}
+.tafel-voll .tk{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.tafel-voll .tk .btn{background:transparent;color:var(--inverse);border-color:#6b665d}
+.tafel-voll .mitte{display:grid;place-content:center;text-align:center;gap:1rem}
+.tafel-voll .buchstabe{font:600 clamp(8rem,34vw,20rem)/.9 var(--display)}
+.tafel-voll .wort{font:600 clamp(1.6rem,5vw,3.4rem)/1.15 var(--display)}
+.tafel-voll.hell{background:var(--bg);color:var(--ink)}
+.tafel-voll.hell .tk .btn{color:var(--ink);border-color:var(--stahl)}
+.folie{width:min(100%,calc((100vh - 6.5rem)*16/9));aspect-ratio:16/9;margin:auto;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:clamp(1rem,2.6vw,2.4rem);display:grid;grid-template-rows:auto 1fr auto;gap:.8rem;text-align:left;overflow:hidden}
+.folie h2{font-size:clamp(1.4rem,3vw,2.5rem)}
+.folie .vier{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 1.4rem;align-content:start;font-size:clamp(.85rem,1.45vw,1.25rem);line-height:1.35}
+.folie .vier b{display:block;color:var(--red);font-size:.85em}
+.folie .vier p{color:var(--kuli);white-space:pre-wrap;overflow-wrap:anywhere}
+.folie .fq{font-size:clamp(.75rem,1.1vw,1rem);color:var(--muted)}
+@media (max-width:700px){.folie{aspect-ratio:auto}.folie .vier{grid-template-columns:1fr}}
+.stimmwahl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.8rem}
+@media (max-width:640px){.stimmwahl{grid-template-columns:1fr}}
+.stimmwahl button{min-height:64px;border:2px solid var(--stahl);border-radius:.8rem;background:var(--surface2);font-weight:700;padding:.5rem .8rem;display:grid;gap:.1rem;text-align:left}
+.stimmwahl button b{font:600 1.5rem/1 var(--display)}
+.stimmwahl button[aria-pressed=true]{border-color:var(--green);box-shadow:inset 0 0 0 2px var(--green);background:var(--green-hi)}
+
+/* Zeitleiste klein (Zusammenfassung) */
+.zl{list-style:none;display:grid;gap:.25rem;margin-top:.4rem}
+.zl li{display:grid;grid-template-columns:7.2rem 1fr;gap:.7rem;font-size:.95rem;border-top:1px solid var(--line);padding-top:.25rem}
+.zl li b{font-variant-numeric:tabular-nums}
+.begriffe{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem;margin-top:.4rem}
+.begriffe div{font-size:.95rem;border-left:4px solid var(--line);padding-left:.6rem}
+@media (max-width:640px){.begriffe{grid-template-columns:1fr}}
+.mein{color:var(--kuli);white-space:pre-wrap;overflow-wrap:anywhere}
+.mein.leer{color:var(--faint);font-style:italic}
+.zf .werk{background:var(--gold-hi);border-radius:.6rem;padding:.6rem .9rem;margin-top:.5rem;font-size:.95rem}
+.zf h1{margin-top:0}
+.zf .seitenumbruch{margin-top:2rem;border-top:3px solid var(--ink);padding-top:1rem}
+.lk table{font-size:.92rem}
+.lk ul{padding-left:1.2rem;display:grid;gap:.4rem;margin-top:.4rem}
+
+@media print{
+  @page{size:A4;margin:12mm 13mm}
+  body{background:#fff;font-size:10pt;line-height:1.36}
+  .kopf,.fuss,.loesch,.nodruck,.reihe,#ueber{display:none!important}
+  main{max-width:none;padding:0}
+  .zf h1{font-size:18pt;margin:0 0 .15rem}
+  .zf .leitfrage{font-size:12pt;margin-bottom:.3rem}
+  .zf h2{font-size:12pt;margin:.55rem 0 .2rem;break-after:avoid}
+  .zf .merksatz{margin:.45rem 0;padding:.35rem 0;font-size:11pt}
+  .zf .begriffe div,.zf .zl li,.zf .werk{font-size:9pt}
+  .zf .karte{padding:.4rem .6rem;break-inside:avoid}
+  .zf .seitenumbruch{break-before:page;border-top:0;margin-top:0;padding-top:0}
+  .zf .mein{font-size:9.5pt}
+  .zf th,.zf td{padding:.2rem .4rem;font-size:8.6pt}
+  .auflage{background:#fff;border:1px solid #bbb;border-left:4px solid #555}
+  a{color:inherit;text-decoration:none}
+}
+
+/* Bilder */
+.bilder{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem;margin:1rem 0;align-items:start}
+.bild{margin:0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:.5rem}
+.bild img{display:block;width:100%;height:auto;border-radius:.5rem;filter:grayscale(1)}
+.bild figcaption{font-size:.9rem;line-height:1.4;margin:.45rem .2rem .1rem}
+.bild .nachweis{display:block;font-size:.8rem;color:var(--muted);margin-top:.2rem}
+.bild.klein{max-width:34rem}
+@media print{.bild,.bilder{display:none}}
+
+/* Lesepult: Text links, Arbeitsspalte rechts (bleibt beim Lesen stehen) */
+.lesepult{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:1.4rem;align-items:start;margin-top:1rem}
+.lesepult>aside{position:sticky;top:122px;padding-bottom:.4rem}
+.lesepult>aside.fragenspalte{position:static}
+@media (min-height:820px){.lesepult>aside.fragenspalte{position:sticky}}
+@media (max-width:900px){.lesepult{grid-template-columns:1fr}.lesepult>aside{position:static;max-height:none}}
+
+/* Rückmeldung je Option erst nach dem Festlegen (die Regel der Bausteine „.g-option span{display:grid}“ ist stärker als deren „display:none“) */
+.g .g-wahl:not([data-zu]) .g-option .g-option__urteil{display:none}
+
+/* Herkunftszeile (z. B. M25: nach Offene Geschichte) */
+.herkunft{font-size:.95rem;border-left:4px solid var(--kuli,#24221F);padding:.15rem 0 .15rem .7rem;margin:.6rem 0 1rem;max-width:68ch}
+.herkunft a{font-weight:700}
+/* ===== Blatt-Rahmen (Standard aus M22, Fassung 4.1): Register links auf altem Papier, ein Auftrag je Seite zum Scrollen =====
+   Nur das Register trägt Papier mit Maserung (reines CSS, keine Bilddatei); der Arbeitsbereich bleibt hell und ruhig. */
+:root{--ab-reg:15rem;--ab-kopf:3.7rem}
+.kopf-in{max-width:none}
+.ab-rahmen{display:grid;grid-template-columns:var(--ab-reg) minmax(0,1fr);align-items:start}
+.ab-reg{position:sticky;top:var(--ab-kopf);height:calc(100dvh - var(--ab-kopf));overflow-y:auto;padding:.8rem .55rem 1rem .7rem;border-right:1px solid #A39270;color:#24221F;background-color:#E2D4B4;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='k'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .30  0 0 0 0 .21  0 0 0 0 .09  0 0 0 .6 -.17'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23k)'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .55' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36  0 0 0 0 .26  0 0 0 0 .12  0 0 0 .5 -.14'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.007' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42  0 0 0 0 .30  0 0 0 0 .13  0 0 0 .5 -.14'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E"),repeating-linear-gradient(90deg, rgba(90,70,30,.06) 0 1px, transparent 1px 27px),linear-gradient(90deg, rgba(120,95,45,.16), rgba(120,95,45,0) 18%, rgba(120,95,45,0) 86%, rgba(90,70,30,.14));background-size:360px 360px,720px 360px,900px 900px,auto,auto}
+.ab-regtitel{font-size:.8rem;font-weight:700;color:#463F33;margin:0 0 .35rem .5rem}
+.ab-reg ol{list-style:none;display:grid;gap:0}
+.ab-reg ol button{display:flex;gap:.55rem;align-items:center;width:100%;text-align:left;border:2px solid transparent;background:none;border-radius:.45rem;padding:.16rem .45rem;min-height:48px;color:inherit;line-height:1.2;font:inherit}
+.ab-reg ol button[aria-current]{background:var(--kuli-hi);border-color:var(--kuli)}
+.ab-nr{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:1.9rem;height:1.9rem;border-radius:999px;border:2px solid currentColor;font-family:var(--display);font-weight:600;font-size:1rem;line-height:1;background:var(--surface2)}
+.ab-reg b{display:block;font-size:.95rem;line-height:1.2}
+.ab-reg small{display:block;font-size:.78rem;color:#463F33;line-height:1.25}
+.ab-st{display:block;font-size:.78rem;font-weight:700;color:#463F33;line-height:1.25}
+.ab-reg .fertig .ab-nr{background:var(--green);border-color:var(--green);color:var(--surface2)}
+.ab-reg .fertig .ab-st{color:#24503D}
+.ab-reg .hier .ab-nr,.ab-reg .hier .ab-st{color:var(--kuli)}
+.ab-reg .ansage .ab-nr,.ab-reg .ansage .ab-st{color:#623D05}
+.ab-rahmen > #main{max-width:none;margin:1rem 1.2rem 1.4rem;padding:.8rem 1.9rem 1rem;background:var(--surface2);border:1px solid var(--line);border-radius:.4rem;min-height:calc(100dvh - var(--ab-kopf) - 2.4rem);display:flex;flex-direction:column}
+.ab-rahmen > #main:focus{outline:none}
+.ab-zeile{display:flex;justify-content:space-between;gap:1rem;font-size:.8rem;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:.3rem;margin-bottom:.6rem}
+.ab-h{display:flex;align-items:center;gap:.7rem;font-size:clamp(1.45rem,1.2rem + .8vw,1.75rem);margin:0 0 .15rem}
+.ab-h .ab-nr{width:2.25rem;height:2.25rem;font-size:1.2rem;background:var(--ink);border-color:var(--ink);color:var(--surface2)}
+.ab-meta{margin:0 0 .7rem 2.95rem;font-size:.9rem;font-weight:700;color:var(--red)}
+.ab-marke{margin-left:.6rem;padding:.15rem .6rem;border-radius:.3rem;background:var(--marker);color:var(--ink);font-size:.82rem}
+.ab-teil{max-width:none;container-type:inline-size}
+.ab-teil > p,.ab-teil > ul,.ab-teil > ol,.ab-teil > .leitfrage,.ab-teil > .lead{max-width:62rem}
+.ab-teil > .auftrag:first-child,.ab-teil > .band:first-child{margin-top:.3rem}
+.ab-teil .leitfrage{margin-bottom:.9rem}
+.ab-fuss{margin-top:auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem .8rem}
+.ab-fuss::before{content:"";flex:0 0 100%;border-top:1px solid var(--line);margin-top:1.4rem}
+.ab-fuss > span:empty{display:none}
+.ab-fuss > :last-child{margin-left:auto}
+.ab-zu{max-width:36rem;margin:2.2rem auto 1rem;text-align:center;display:grid;gap:.9rem;justify-items:center}
+.ab-zu-t{font-family:var(--display);font-weight:600;font-size:1.5rem;line-height:1.25}
+.ab-zu .loesch-frage{text-align:left}
+.ab-zwei{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:1.6rem;align-items:start}
+.ab-zwei.gleich{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.ab-zwei.schmalrechts{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+.ab-zwei > div > .auftrag:first-child{margin-top:0}
+.ab-zwei h3{font-size:1.1rem;margin-bottom:.3rem}
+.ab-unter{color:var(--muted);margin:0 0 .7rem}
+.ab-ablauf li{grid-template-columns:2.2rem 1fr}
+.ab-ablauf li b{font-family:var(--display);font-size:1.05rem}
+.ab-ablauf small{display:block;color:var(--muted);font-size:.85rem}
+.gesperrt{opacity:.45;pointer-events:none}
+/* Schreibauftrag */
+.ka-aufgabe{border-left:4px solid var(--ink);background:none;border-radius:0;padding:.1rem 0 .1rem .9rem;margin:0 0 1rem;max-width:54rem;font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.35}
+.ka-aufgabe b{box-shadow:inset 0 -.38em 0 var(--marker)}
+.ka-aufgabe.klein{font-size:1rem;margin-bottom:.4rem}
+.ka-material{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1rem 1.2rem;font-size:1rem}
+.ka-material p + p{margin-top:.5rem}
+.ka-material .quelle{font-size:.82rem}
+.gliederung{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin:.3rem 0 .9rem}
+.haken{display:flex;align-items:center;gap:.6rem;min-height:44px;margin:.6rem 0;font-weight:400}
+.haken input{width:1.4rem;height:1.4rem;flex:0 0 auto}
+.ka-inhalt{display:grid;gap:.35rem;margin:.7rem 0;max-width:62rem}
+#schreibblatt{display:none}
+.ab-reg .loesch{margin-top:.5rem;padding-top:.45rem;border-top:1px solid #A39270;font-size:.82rem;color:#463F33;display:flex;flex-wrap:wrap;gap:.2rem .7rem;align-items:center}
+.ab-reg .loesch-frage{flex:1 0 100%}
+.ab-reg .loesch .btn{min-height:44px;padding:.35rem .8rem;font-size:.85rem}
+.ab-reg .loesch p{font-size:.72rem!important;line-height:1.3}
+.ab-reg .lehr-tuer{margin-left:0}
+
+/* ----- Deckblatt ----- */
+#main.deckblatt .band{margin-bottom:1.1rem}
+.deck{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.8rem;align-items:start;margin-top:.4rem}
+.deck h2.abschnitt{margin-top:.2rem;font-size:1.3rem}
+.deck .ziele{font-size:1.05rem;gap:.45rem}
+.deck-start{display:flex;justify-content:flex-end;margin-top:1.2rem}
+.deck-start .btn{min-height:56px;font-size:1.1rem;padding:.7rem 1.6rem}
+.band.gross{min-height:17rem}
+.band.gross.mit{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}
+.band.gross .bt h2{font-size:clamp(1.8rem,1.3rem + 1.8vw,2.7rem)}
+
+/* ----- Auswahl links, die eine Karte rechts ----- */
+.w-wahl{display:grid;grid-template-columns:minmax(14rem,1fr) minmax(0,2.3fr);gap:1.5rem;align-items:start;margin-top:1rem}
+.w-liste{display:grid;gap:.6rem}
+.w-liste > button{display:grid;gap:.15rem;text-align:left;width:100%;padding:.8rem 1.1rem;border:1.5px solid #8B857A;border-left-width:6px;border-radius:var(--r-lg);background:var(--surface);color:var(--ink);font:inherit;min-height:4.4rem;align-content:center}
+.w-liste > button[aria-pressed=true]{border-color:var(--ink);border-left-color:var(--red);background:var(--surface2);box-shadow:4px 4px 0 0 var(--offset)}
+.w-nr{font-size:.85rem;font-weight:700;color:var(--red)}
+.w-t{font-family:var(--display);font-weight:600;font-size:1.2rem;line-height:1.2}
+.w-u{font-size:.9rem;color:var(--muted);line-height:1.3}
+.w-st{font-size:.85rem;font-weight:700;color:var(--green)}
+/* Viele Einträge (ab etwa sieben): Liste in zwei Spalten, die Karte bleibt beim Rollen stehen */
+.w-wahl.viele{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.w-wahl.viele .w-liste{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.w-wahl.viele .w-liste > button{padding:.6rem .7rem;min-height:4.8rem;min-width:0}
+.w-wahl.viele .w-liste .w-t{font-size:1.02rem;hyphens:auto;overflow-wrap:anywhere}
+.w-wahl.viele .w-karte{position:sticky;top:5rem}
+.w-karte{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem 1.8rem 1.4rem;min-height:24rem;font-size:1.08rem}
+.w-karte:focus{outline:none}
+.w-karte > h3{font-size:clamp(1.5rem,1.2rem + 1vw,2rem);margin-bottom:.5rem}
+.w-karte p + p{margin-top:.6rem}
+.w-karte .w-bild{margin:0 0 1rem}
+.w-karte .zwei{margin-top:.8rem}
+.w-leer{color:var(--faint);font-style:italic}
+/* ----- Skala ----- */
+.w-skala{border:0;margin:1rem 0;max-width:46rem}
+.w-skala legend{font-weight:700;margin-bottom:.5rem}
+.w-stufen{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:.4rem}
+.w-stufen button{min-height:56px;border:1.5px solid #8B857A;background:var(--surface2);border-radius:.6rem;font-family:var(--display);font-weight:600;font-size:1.25rem;color:var(--ink)}
+.w-stufen button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--inverse)}
+/* ----- Erst erinnern ----- */
+.w-abruf{display:grid;gap:.9rem;max-width:54rem;margin-top:.8rem}
+.w-frage{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.4rem .7rem;align-items:end;border-left:4px solid var(--line);padding-left:.9rem}
+.w-frage label{grid-column:1/-1;font-weight:700}
+.w-frage .w-nr{display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;border-radius:999px;background:var(--ink);color:var(--inverse);font-size:.85rem;margin-right:.3rem}
+.w-frage input{margin:0}
+.w-loesung{grid-column:1/-1;font-size:1rem}
+.w-loesung:not(:empty){background:var(--green-hi);border-radius:.5rem;padding:.5rem .8rem}
+/* ----- Tabelle zum Ausfüllen ----- */
+.w-tab th[scope=row]{width:26%;background:var(--surface);font-size:.95rem}
+.w-tab td{padding:.3rem}
+.w-tab textarea{margin:0;min-height:3.6rem;border-radius:.5rem;font-size:.95rem;padding:.45rem .6rem}
+/* ----- Film ----- */
+.w-film{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 1.4rem;align-items:center;background:var(--dunkel);color:var(--inverse);border-radius:var(--r-lg);padding:1.2rem 1.4rem;margin:1rem 0;max-width:62rem}
+.w-film h3{font-size:1.35rem;color:var(--inverse);margin:.1rem 0 .3rem}
+.w-film p{color:#DCD5CA;font-size:.98rem}
+.w-film .kennung{color:var(--marker)}
+.w-film .quelle{color:#B9B1A4;margin-top:.3rem}
+.w-film .btn.dunkel{background:var(--marker);color:var(--ink);min-height:56px;font-size:1.05rem}
+.w-film .hinweis{grid-column:1/-1;color:#B9B1A4;margin:0}
+/* ----- Bild groß ----- */
+.w-bild{margin:1rem 0;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.w-bild img{display:block;width:100%;height:auto;max-height:34rem;object-fit:contain;background:#EFEAE0}
+.w-bild.hoch img{max-height:44rem}
+.w-bild.flach{max-width:54rem}
+.w-bild.flach img{max-height:19rem;object-fit:cover}
+.w-bild figcaption{padding:.55rem .9rem .65rem;font-size:.9rem;line-height:1.4}
+.w-bild .nachweis{display:block;font-size:.78rem;color:var(--muted);margin-top:.15rem}
+/* ----- Zeitleiste ----- */
+.w-zeit{list-style:none;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:.5rem;margin:1rem 0;position:relative;padding-top:1.1rem}
+.w-zeit::before{content:"";position:absolute;left:0;right:0;top:.35rem;border-top:3px solid var(--ink)}
+.w-zeit li{position:relative;display:grid;gap:.1rem;align-content:start;padding:.5rem .6rem .6rem;background:var(--surface);border:1px solid var(--border);border-radius:.6rem;font-size:.9rem;line-height:1.3}
+.w-zeit li::before{content:"";position:absolute;left:.8rem;top:-1.05rem;width:.8rem;height:.8rem;border-radius:999px;background:var(--surface2);border:3px solid var(--ink)}
+.w-zeit li b{font-family:var(--display);font-size:1.05rem}
+.w-zeit .w-zt{font-weight:700}
+.w-zeit .w-zx{color:var(--muted);font-size:.85rem}
+.w-zeit li.hier{border-color:var(--red);background:var(--red-hi)}
+.w-zeit li.hier::before{background:var(--red);border-color:var(--red)}
+.w-zeit li.da{opacity:.8}
+/* ----- Karten im Raster ----- */
+.w-karten{display:grid;gap:1rem;margin:1rem 0}
+.w-karten.k2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.w-karten.k3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.w-karten.k4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.w-kk{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1rem 1.2rem;border-top:5px solid var(--ink)}
+.w-kk h3{font-size:1.25rem;margin-bottom:.35rem}
+.w-kk ul{padding-left:1.1rem;display:grid;gap:.25rem;font-size:.98rem}
+.w-kk.rot{border-top-color:var(--red)}.w-kk.blau{border-top-color:var(--kuli)}.w-kk.gruen{border-top-color:var(--green)}.w-kk.gold{border-top-color:var(--gold)}.w-kk.grau{border-top-color:var(--slate)}
+/* ----- Das brauchst du ----- */
+.w-wissen{background:var(--gold-hi);border-radius:var(--r-lg);padding:1rem 1.2rem;margin:1rem 0;max-width:62rem}
+.w-wissen h3{font-size:1.15rem;margin-bottom:.3rem}
+.w-wissen ul{padding-left:1.1rem;display:grid;gap:.25rem}
+.w-wissen .kennung{color:var(--gold)}
+/* ----- Landkarte L ----- */
+.lk-wahl{margin-top:1.2rem}
+.lk-wahl .prinzipien{grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin-top:0}
+.lk-wahl .prinzipien button{padding:.8rem 1rem;display:grid;align-content:start}
+.lk-wahl .prinzipien button b{font-size:1.08rem}
+.lk-wahl .prinzipien button small{font-size:.9rem;margin-top:.15rem}
+.lk-wahl > label{margin-top:1rem}
+/* ----- Zusammenfassung in zwei Teilen ----- */
+.zf2{max-width:60rem}
+.zf2 .zf-teil{font-size:.8rem;font-weight:700;color:var(--red);margin:0}
+.zf2 .zf-seite{background:var(--surface);border:1px solid var(--border);border-radius:.4rem;padding:1.4rem 1.7rem 1.5rem;margin-bottom:1.2rem}
+.zf2 .zf-seite h1{font-size:clamp(1.6rem,1.3rem + 1vw,2.1rem);margin:.1rem 0 .4rem}
+.zf2 .zf-seite h2{font-size:1.15rem;margin:1.1rem 0 .35rem}
+.zf2 .seitenumbruch{margin-top:0;border-top:1px solid var(--border);padding-top:1.4rem}
+.zf2 .werk ol{padding-left:1.2rem;margin-top:.25rem}
+.zf2 .zf-sonst{margin-top:.9rem;font-size:.92rem;color:var(--muted)}
+.zf2 .raster3{margin-bottom:.4rem}
+.zf2 .karte{padding:.6rem .9rem;margin-top:.5rem}
+
+@media (max-width:899px){
+  .ab-rahmen{display:block}
+  .ab-reg{position:static;height:auto;border-right:0;border-bottom:1px solid #A39270;padding:.45rem .6rem;overflow-x:auto}
+  .ab-regtitel{display:none}
+  .ab-reg ol{display:flex;gap:.2rem}
+  .ab-reg li{flex:0 0 auto}
+  .ab-reg small,.ab-reg button:not([aria-current]) b,.ab-reg button:not([aria-current]) .ab-st{display:none}
+  .ab-reg button{padding:.2rem .3rem}
+  .ab-rahmen > #main{margin:.6rem .6rem 1rem;padding:1rem 1rem .9rem}
+  .ab-zwei,.ab-zwei.gleich,.ab-zwei.schmalrechts,.gliederung,.deck,.w-wahl,.lk-wahl .prinzipien,.w-karten.k2,.w-karten.k3,.w-karten.k4{grid-template-columns:1fr}
+  .w-liste,.w-wahl.viele .w-liste{display:flex;overflow-x:auto;gap:.4rem;padding-bottom:.3rem}
+  .w-wahl.viele .w-karte{position:static}
+  .w-liste > button{flex:0 0 auto;min-height:48px;padding:.4rem .8rem;width:auto}
+  .w-liste .w-u{display:none}
+  .w-zeit{grid-template-columns:1fr;padding:0 0 0 1.2rem}
+  .w-zeit::before{left:.35rem;right:auto;top:0;bottom:0;border-top:0;border-left:3px solid var(--ink)}
+  .w-zeit li::before{left:-1.25rem;top:.7rem}
+  .w-film{grid-template-columns:1fr}
+  .band.gross.mit{grid-template-columns:1fr}
+}
+@media (min-width:900px) and (max-width:1150px){
+  .w-karten.k4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .lk-wahl .prinzipien{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:900px){
+  .ab-rahmen.schmal{--ab-reg:3.9rem}
+  .ab-rahmen.schmal .ab-regtitel,.ab-rahmen.schmal .ab-reg ol button > span:last-child{display:none}
+  .ab-rahmen.schmal .ab-reg{padding:.8rem .35rem}
+  .ab-rahmen.schmal .ab-reg ol button{justify-content:center;padding:.28rem 0}
+}
+@media print{
+  .ab-reg,.ab-zeile,.ab-h,.ab-meta,.ab-fuss{display:none!important}
+  .ab-rahmen{display:block}
+  .ab-rahmen > #main{margin:0;padding:0;border:0;min-height:0;display:block;background:#fff}
+  .ab-teil{max-width:none}
+  body.druck-sb .ab-teil > *:not(#schreibblatt){display:none!important}
+  body.druck-sb #schreibblatt{display:block}
+  #schreibblatt h2{font-size:14pt;margin:0 0 .3rem}
+  #schreibblatt .ka-aufgabe{font-size:11.5pt;margin:.4rem 0 .6rem}
+  #schreibblatt .ka-material{font-size:9.5pt;padding:.3rem .6rem;margin-bottom:.4rem}
+  #schreibblatt .linien{height:8mm;border-bottom:1px solid #999}
+  #schreibblatt .gl3{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm}
+  .zf2{max-width:none}
+  .zf2 .zf-seite{border:0;padding:0;margin:0;background:none}
+  .zf2 .zf-seite h1{font-size:17pt;margin:0 0 .15rem}
+  .zf2 .zf-seite h2{font-size:11.5pt;margin:.5rem 0 .15rem;break-after:avoid}
+  .zf2 .zf-teil{font-size:8.5pt}
+  .zf2 .raster3{font-size:8.6pt;gap:.3rem}
+  .zf2 .raster3 div{padding:.3rem .45rem}
+  .zf2 .ka-aufgabe{font-size:10pt}
+  .zf2 p,.zf2 li{font-size:10pt}
+  .zf2 .seitenumbruch{break-before:page;border-top:0;padding-top:0}
+}
+/* ===== Kapitel »Weimarer Republik«: eigene Teile. Kapitelfarbe Gold (wie auf der Startseite), nur auf dunklem Grund. ===== */
+:root{--w-gold:#E0B74A}
+.pill.kapitel{background:transparent;border-color:var(--line);font-weight:400}
+.w-band figure{overflow:hidden;min-height:17rem}
+.w-band .w-jahr{position:absolute;inset:0;display:grid;place-items:center;background:
+  radial-gradient(120% 90% at 80% 10%, rgba(224,183,74,.16), transparent 60%),
+  repeating-linear-gradient(90deg, rgba(255,250,242,.035) 0 1px, transparent 1px 34px), #1B1A17}
+.w-band .w-jahr span{font-family:var(--display);font-weight:600;font-size:clamp(4rem,2rem + 9vw,9.5rem);line-height:.9;letter-spacing:-.03em;color:var(--w-gold);text-align:center;padding:0 1rem;border-bottom:3px solid rgba(224,183,74,.55);padding-bottom:.12em}
+.w-band figure img{position:absolute;inset:0}
+.w-band figure.ohne figcaption{display:none}
+.w-band figcaption span{opacity:.85}
+.w-band .bt .ob{color:var(--w-gold)}
+.w-zeit.klein{gap:.3rem;margin:.6rem 0 0}
+.w-zeit.klein li{padding:.35rem .4rem .45rem;font-size:.78rem;border-radius:.45rem}
+.w-zeit.klein li b{font-size:.86rem;line-height:1.15}
+.w-zeit.klein .w-zt{font-weight:400;font-size:.76rem;line-height:1.2}
+.w-zeit.klein li::before{left:.5rem}
+.w-wo{margin:0 0 1.4rem;padding:.8rem 1rem .9rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg)}
+.w-wo .w-zeit li{hyphens:auto;overflow-wrap:anywhere}
+.kopfpaar{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);background:var(--dunkel);border-radius:var(--r-lg);overflow:hidden;margin:0 0 1.2rem}
+.kopfpaar.ohne{grid-template-columns:1fr}
+.kopfpaar > .auftrag{margin:0;border-radius:0;background:none;display:flex;flex-direction:column;justify-content:center;padding:1.4rem 1.6rem}
+.kopfpaar figure{margin:0;position:relative;min-height:15rem;background:#2A2824}
+.kopfpaar figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.kopfpaar figcaption{position:absolute;left:0;right:0;bottom:0;padding:.45rem .8rem;font-size:.75rem;line-height:1.35;color:#E6DFD2;background:linear-gradient(transparent,rgba(27,26,23,.88))}
+.kopfpaar figcaption span{opacity:.85}
+.w-vs .qblatt{border:0;padding:0;background:none;margin:0 0 .8rem}
+.w-vs .g-stifte{flex-direction:row;flex-wrap:wrap}
+.w-faden{margin-top:1rem;border-left:4px solid var(--kuli);padding:.2rem 0 .2rem .8rem}
+.w-fadenfeld,.w-kgfeld{max-width:62rem;margin-bottom:1.2rem}
+.w-zitat{margin:1rem 0;max-width:62rem}
+.w-zitat blockquote{font-size:clamp(1.15rem,1rem + .5vw,1.4rem);line-height:1.4;padding:1rem 1.3rem;margin:.3rem 0 0}
+.w-zitat blockquote .wer{font-size:.88rem;margin-top:.6rem}
+.w-zitat.rot blockquote{border-left-color:var(--red);background:var(--red-hi)}
+.qblatt.lese{max-width:62rem}
+.qblatt.lese .qtext p{font-size:1.05rem;line-height:1.6}
+.qblatt.lese.spalten .qtext{columns:2;column-gap:2rem}
+.qblatt.lese.spalten .qtext p{break-inside:avoid;margin-bottom:.6rem}
+.w-balken{margin:1rem 0;max-width:46rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1rem 1.2rem}
+.w-bz{display:grid;gap:.4rem;margin-top:.6rem}
+.w-bzeile{display:grid;grid-template-columns:8.5rem minmax(0,1fr) 4.2rem;gap:.6rem;align-items:center;font-size:.98rem}
+.w-bn{font-weight:700}
+.w-bb{display:block;height:1.35rem;background:var(--offset);border-radius:.25rem;overflow:hidden}
+.w-bb span{display:block;height:100%;border-radius:.25rem}
+.w-bw{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+/* Personen- und Positionskarten groß */
+.w-person{display:grid;grid-template-columns:minmax(0,1fr);gap:.4rem}
+.w-person .rolle{font-weight:700;color:var(--red);font-size:.92rem}
+.w-kopfzeile{display:flex;gap:.8rem;align-items:baseline;flex-wrap:wrap;margin-bottom:.4rem}
+.w-kopfzeile h3{margin:0}
+.w-liste2{padding-left:1.15rem;display:grid;gap:.3rem;margin:.4rem 0}
+.w-vs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.2rem;margin:1rem 0}
+.w-vs > div{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem;border-top:6px solid var(--ink)}
+.w-vs > div.rot{border-top-color:var(--red)}
+.w-vs > div.blau{border-top-color:var(--kuli)}
+.w-vs h3{font-size:1.3rem;margin-bottom:.35rem}
+.w-rolle{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem 1.2rem;margin:1rem 0;max-width:62rem}
+.w-rolle .voll{grid-column:1/-1}
+.w-milieus{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin:.8rem 0}
+.w-milieus button{display:grid;gap:.2rem;text-align:left;padding:.8rem 1rem;border:1.5px solid #8B857A;border-radius:var(--r-lg);background:var(--surface);color:var(--ink);font:inherit;min-height:5.2rem;align-content:start}
+.w-milieus button b{font-family:var(--display);font-size:1.15rem}
+.w-milieus button small{font-size:.88rem;color:var(--muted);line-height:1.3}
+.w-milieus button[aria-pressed=true]{border-color:var(--ink);background:var(--gold-hi);box-shadow:4px 4px 0 0 var(--offset)}
+.w-stufe{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:.5rem;align-items:end;margin:1rem 0}
+.w-wahrfalsch{display:grid;gap:.7rem;max-width:62rem;margin:1rem 0}
+.w-wf{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.4rem 1rem;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.7rem 1rem}
+.w-wf p{font-weight:700}
+.w-wf .w-wfk{display:flex;gap:.4rem}
+.w-wf .w-wfk button{min-height:48px;min-width:5.2rem;border:1.5px solid #8B857A;border-radius:.6rem;background:var(--surface2);font:inherit;font-weight:700;color:var(--ink)}
+.w-wf .w-wfk button[aria-pressed=true]{background:var(--ink);color:var(--inverse);border-color:var(--ink)}
+.w-wf .rm{grid-column:1/-1;margin:0}
+@media (max-width:899px){
+  .kopfpaar{grid-template-columns:1fr}
+  .w-vs,.w-rolle,.w-milieus{grid-template-columns:1fr}
+  .qblatt.lese.spalten .qtext{columns:1}
+  .w-bzeile{grid-template-columns:6rem minmax(0,1fr) 3.6rem}
+  .w-wf{grid-template-columns:1fr}
+}
+@media print{.w-band,.w-film{display:none}}
+/* Rangordnung als Stufenbild (Modell, keine Größenverhältnisse) */
+.w-pyramide{display:grid;gap:.3rem;justify-items:center;margin:1rem 0 .4rem}
+.w-pyramide div{background:var(--ink);color:var(--inverse);border-radius:.4rem;padding:.5rem .8rem;text-align:center;font-weight:700;font-size:.98rem;line-height:1.25}
+.w-pyramide div small{display:block;font-weight:400;font-size:.82rem;color:#DCD5CA}
+.w-pyramide div:nth-child(1){width:34%;background:var(--red)}
+.w-pyramide div:nth-child(2){width:50%}
+.w-pyramide div:nth-child(3){width:66%;background:var(--slate)}
+.w-pyramide div:nth-child(4){width:84%;background:var(--green)}
+.w-pyramide div:nth-child(5){width:100%;background:var(--gold)}
+.w-schritte{list-style:none;display:grid;grid-template-columns:repeat(var(--n,4),minmax(0,1fr));gap:.7rem;margin:1rem 0;counter-reset:s}
+.w-schritte li{counter-increment:s;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:.9rem 1rem;position:relative;font-size:1rem}
+.w-schritte li::before{content:counter(s);display:inline-flex;align-items:center;justify-content:center;width:1.7rem;height:1.7rem;border-radius:999px;background:var(--ink);color:var(--inverse);font-family:var(--display);font-weight:600;margin-bottom:.35rem}
+.w-schritte li b{display:block;font-family:var(--display);font-size:1.1rem;line-height:1.2;margin-bottom:.2rem}
+@media (max-width:899px){.w-schritte{grid-template-columns:1fr}.w-pyramide div{width:100%!important}}
+/* Wissens-Check */
+.w-check{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem 1.4rem;margin:1rem 0}
+.w-cf{border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface);padding:.8rem 1rem 1rem;min-width:0}
+.w-cf legend{font-weight:700;padding:0 .3rem;font-size:1rem}
+.w-cf .w-nr{display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;border-radius:999px;background:var(--ink);color:var(--inverse);font-size:.85rem;margin-right:.2rem}
+.w-co{display:grid;gap:.4rem;margin-top:.3rem}
+.w-co button{min-height:48px;text-align:left;border:1.5px solid #8B857A;border-radius:.6rem;background:var(--surface2);padding:.45rem .8rem;font:inherit;color:var(--ink)}
+.w-co button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--inverse)}
+.w-co button[disabled]:not([aria-pressed=true]){opacity:.55}
+.w-cf .rm{margin:.5rem 0 0}
+.w-cf .rm .btn{min-height:44px;padding:.3rem .8rem;font-size:.9rem;margin-top:.3rem}
+@media (max-width:899px){.w-check{grid-template-columns:1fr}}
+/* Auf einem Bild zeichnen */
+.w-zk{margin:1rem 0}
+.w-zk .g-stifte{align-items:center}
+.w-zk .g-stifte .btn{min-height:44px;padding:.35rem .8rem;font-size:.9rem}
+.w-zk-b{position:relative;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;background:#EFEAE0;margin-top:.5rem;line-height:0}
+.w-zk-b img{display:block;width:100%;height:auto}
+.w-zk-b canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+/* Karten zum Auswählen (mehrere) */
+.w-punkte{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem .8rem;margin:1rem 0}
+.w-punkte button{display:grid;grid-template-columns:2.1rem minmax(0,1fr);gap:.6rem;align-items:start;text-align:left;border:1.5px solid #8B857A;border-radius:.7rem;background:var(--surface);padding:.55rem .8rem;font:inherit;color:var(--ink);min-height:52px}
+.w-punkte button b{font-family:var(--display);font-size:1.15rem;color:var(--red)}
+.w-punkte button[aria-pressed=true]{background:var(--gold-hi);border-color:var(--ink);box-shadow:3px 3px 0 0 var(--offset)}
+.w-punkte button[disabled]{opacity:.5}
+@media (max-width:899px){.w-punkte{grid-template-columns:1fr}}
+/* Mehrfachauswahl: Karten anstreichen */
+.w-mw{display:grid;gap:.8rem;margin:1rem 0}
+.w-mw.k2{grid-template-columns:repeat(2,minmax(0,1fr))}.w-mw.k3{grid-template-columns:repeat(3,minmax(0,1fr))}.w-mw.k4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.w-mw button{display:grid;gap:.35rem;align-content:start;text-align:left;padding:1rem 1.1rem;border:1.5px solid #8B857A;border-radius:var(--r-lg);background:var(--surface);color:var(--ink);font:inherit;min-height:44px}
+.w-mw button b{font-family:var(--display);font-size:1.18rem;line-height:1.2}
+.w-mw .w-mwt{font-size:.97rem;line-height:1.45}
+.w-mw .w-mwt i{display:block;margin-top:.3rem;font-size:.86rem;color:var(--muted)}
+.w-mw .w-mws{font-size:.85rem;color:var(--muted);margin-top:.2rem}
+.w-mw button[aria-pressed=true]{border-color:var(--ink);background:var(--gold-hi);box-shadow:4px 4px 0 0 var(--offset)}
+.w-mw button[aria-pressed=true] .w-mws,.w-mw button[aria-pressed=true] .w-mwt i{color:var(--ink)}
+.w-mw button[aria-pressed=true] .w-mws{font-weight:700}
+/* Steckbrief über einer These: Wer, wann, wo */
+.w-steck{display:flex;flex-wrap:wrap;gap:.4rem .5rem;margin:.2rem 0 .8rem;padding:0;list-style:none}
+.w-steck li{font-size:.88rem;padding:.2rem .65rem;border:1px solid var(--border);border-radius:99px;background:var(--bg)}
+@media (max-width:899px){ .w-mw.k2,.w-mw.k3,.w-mw.k4{grid-template-columns:1fr} }
+/* Stufenmodell (M8.1 »Aufstieg der NSDAP verstehen«): Stufen steigen nach rechts; schmal untereinander */
+.w-treppe{list-style:none;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:.5rem;margin:1.2rem 0 .4rem;padding:0;align-items:end}
+.w-treppe li{display:grid;gap:.25rem;align-content:start;padding:.8rem .8rem 1rem;border:1px solid var(--border);border-top:6px solid var(--ink);border-radius:var(--r-lg);background:var(--surface);min-height:calc(7.6rem + var(--i) * 2.2rem)}
+.w-treppe li b{font-family:var(--display);font-size:1.04rem;line-height:1.2;hyphens:auto}
+.w-treppe li span{font-size:.87rem;line-height:1.4}
+.w-treppe li:nth-child(1){border-top-color:var(--kuli)}.w-treppe li:nth-child(2){border-top-color:#C4622D}.w-treppe li:nth-child(3){border-top-color:#E0B74A}.w-treppe li:nth-child(4){border-top-color:#7A5C1E}.w-treppe li:nth-child(5){border-top-color:var(--red)}
+@media (max-width:899px){ .w-treppe{grid-template-columns:1fr} .w-treppe li{min-height:0} }
+</style>
+</head>
+<body>
+<header class="kopf"><div class="kopf-in" id="kopf"></div></header>
+<div class="ab-rahmen"><aside class="ab-reg" id="reg" aria-label="Aufträge dieses Blatts"></aside><main id="main" tabindex="-1"></main></div>
+<div id="ueber"></div>
+<noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft „Geschichte aktuell 1“ (M1–M14).</p></noscript>
+<script type="application/json" id="lehr-daten">{"v":2,"alg":"AES-GCM-256/PBKDF2-SHA256","iter":600000,"salt":"S2AE0Ck1PuvFDIipEmJzCg==","iv":"J7/ToSmGP24a1n7h","ct":"Da7GMWriCC1RAsqtF0s9o4kjnnohghSTZ398X78qT/35GeyHUFi1VtIm9HwFshmnVqU6KjvKkW3qjijLvbnL4gNy0918BPE2j3Rhmjy1kzNKVl/L+nVxW2EHCxV1mCOsjOPnTCIcXw6cexezRIjth+XrJSOCPIouHAFjSNz2oWPmkusNYCFgrSxhxcY0mN0uP64OtKQIZu0iAAJ1mqKRDP4apJsVIZizduvHA966aB6z81oO/pepSPKjoKqMnXNXsLZdsgFUhfFQv3xOXf6sQsyAp896kMvPZ26jR51iBmfdYBvuy4n86z2bGHk5c0cHUWxmIZzhE5UVfhtNeAvUlMgY+HT3U3BpCn5j3CtVSMpuaUVvePiz4th0SVvo06UBGbScwrE4flug2csPwh2NcSQyEcXOTuA8E6yheusY9UBB0VVs8vqKuQpwXki9N9jWyZvnrF7/KIpe2SjPR/7fJPY/9gfCXPIdVWCw+427Me0YrrbZUZrxv0CJFd+NYM2dHjyN6vV2wiG6Q/cEDewb8csPcURHwivKGxtag4474T7AJQuelry9YUdE/ZPEpcx0Gn61kXk3DEJ+Obz1apALyG9GZHEeglNdqVakV37irgmuJ7GrIWL7aa0+m++LMJUgMOJYSWQcFHct7+MnjzPvQENuMEomSjfvggy0O+Rs9uGCRN0vPW21rZ12Ag3TLIODpUHp0OynIFuhM/7a/254DU0GAZZz2G2Wgnpmoaid/OKLHIZQD4Q2u744ghXucGkYm9X/5XMOtcR+Fr1NpkBOJevFHZLEgkAUFX+yI24RKD++Ra8cpvjR3R9p9cJgVa9sBLpDpvqYupKP4oozUE2Noou76DjAxl3/tqCxCp74RlrZftMUKJExRT08pEExxzwmLeov/4+B+hnPdEnIzeAaYQetVE7qKtduaFyMinlcYQl8IvZgoPQ7MGmS1JJepgIrjt2BRYyKq7ofaRYPr1Xc0hKWS4nmc+g2/ZiKvDMCdo+mrkz7rTDmdikSBQe1aLK1EOIaSpDELEBKFzGJiXhHFkVeLq2mswnl5S6Kyn0DRWYmErLLmeUb0jE4uLBwa2EhMMDRlBDD2guRJ014BkY8hl5MWzLrQvNbEida+PE2MqAQ/ajrfLLhTKIxbTC6x7JHqYfxgmQIAX+x07xaKFPLJHEHnb0e1Tbu8gf9WFzFuC/PQmLHvvwty8qIQ42SPdEIS8bU+nNK7P+parI8mCaj1MyAcOVvpaAsHYtRl3SSt9qge4EA0Ph/5jqTM20ki+UAhbn168TS/kZmaQ24il7FuspT9/liIjjK3fFhn/O9fRFpI8d/Q3jUXGQLb+SzcEKFsQXnmlifav4DJ20l0Pz99nQtPdgjpdeRBmddR1G1EZapddyUqTveMve0SRxqXqFd9p0pUT3RfyV+GOXnOxjL6q4ldEEBIk61DB1YGal//besTlGLyX2EtmPhtJBukuCT8W7hrHjb6Cc5zISTnQnNGhFzl/02J8vyFFTU/1B7vRMlawe183ApmM1dmdkDq6yGVaDokwUGcNQvgIUbiqcyhrjQFSjjvKL2IBsyO8w2zPrnoM9Id3pm6fKIm7/0sJTsgpk22ipuMrv/2+1B1xpXo3/OP07wY9tzBwrHDDR7knVxbstYiMJnBonW6Z6EGBgX8FlSuqp4oA8azq20Wl9eSKmSApR9SooGFVxHBIU5bRJJWgCrGe5NcQkb/bYuxSPLd/DyiwHgKVThPeBFv/AlAYyciu9XBGCeVhSUd93YInn4EfSxzXDVfVGpW+R3DuYwLBaFSRRkKC5cV0HaDb/xRu0zMJipqjd6Ok4jr4G16L78LKwKAeGTE80SgZsEAXSAnAim7zLfCDzhs3tZ88Bw2F+CZZih4qllo8vNzhKp/SqA4gDDTD+VhlJNfkQotEbf83bwtblOorpeuElnOnuXKK6eUjGrBCBI+Z+YqND65Blsg+6WC6YCtK7acbQVTg6KIbWm9Ez9JP3r1tfdOLnQa3BpL/R3+4gGw+iFWGaT4UCkY/haOei6iNYhhJ0CZgNbPj2cZbH0fbfiAMlEYmFXB4xgI6KFh5AIi42cS5FbKipET1y8JK9OnPPesMdJksVzJyOl/FwWC2GFOCE3XN07ZihBlcVmfAbzo9zPagzje5dewnEezUYc6ghsE1OD8jOE+7JoD2sfklFHkPsGakCF66utM1DDE3jX6md55uxeujmsHokE4pISSPmMXNIrZtuHEUIbOxIhnBkCXgfvUL8ECe1dEufyfvrMaLUhc0xUlwkdHeWpbsTiJNyzHc/ELDYXeQ0j/VgR42MnQJ1d6hBc5COIQkxb3SU9gR9E1S6Ha2HAtAXRN8L/8TWHOC/4AHNtSHFIa90Y3wRDae4u/iQct1KxXmN7kBnAKbX+CzSc5QhlL36F5Bk33fWihFqBgHaQQyBakMnWfUSAzr8zC6T1gdkQnjKg3qFZZSX3brGTXo6F7Ompcx7Ek7L8T/qFxfA7X0C42tz0R8P0q0gfsetOfTTmuv0Yo8SNrzO6kdyaVeE5v1oaS+SCEoqbcZ3L3nYiyzLgc+8SkNLoMQOdfCY/MB8+8PaxciqZcj5Az4ihPe5ar7YIxNOsbH9pT8fhBq7tQUEM+FlNw6FaW6xEnzvFH7rzsVgK7e67dOXvYgKbCxiS0lvyBV3ddakUOQGKCCkHKWTO/u+i+OXrAf8KqeJIZP9380u/567LZJr/JJG9WHz+WC5qc1CQwPB+Zzsrh89uurQZQAqbxxMsbrchVpnKZtot3Jy7yxjuHzvJm4UIVkd/1AJZJn3mzPUDeAhKUC6fHBKTrH+TVQiKFGyDyS1suCEMYGVaq74eNpkfVYhe7+WEMwoUpf+IUHu9Imd/VxQ+ZT1PSd3DSACNyURWMpnTyPmgDzdth21qLVdZk2PbeLaxMMSynFzc9fHIWWiC5lH0LkHkwpAwL6+DL8NBXwTet0jcFjybnxzbQBO2UYcFotwIYD/xTDaKV0UhvhLZj5GpzofekDukirIEFFxrLkYjvyTw6sxLJ+D0rsEJzGonRCdAO3WJpKlLhN+7up7PbDKhm9us21jLvghyq3A9VZGW10nqJIiQbomkkBxkWIF4FWIuR7d8wRh3SrmoMXemUhjHv4QxMYEHBmTzp2mThb3TwKgaZmoTWnwybqzGbRB9kjJ9Og1tEzp42jgGEFeumbuuI+cG+C4bfaFW+97JmBGCkQ6YSnga+LmLlEUUJQiHVnd5Rw0MvIfwtLt1xbByQavu1niAl7ru7cPRIVDiL1ZT3IaiYk+1wIBaPqnbwDBSY2CKKVf2WjCsM9efwCFiQMC01jbnVNpX7ueiAxpsSF3WE/xgXtsX0B/Wm17cVdNUxMsBCtXETokOC3AbIKH3M1JExH189ERafyZ/Dat6URDLCop/ITv++aazX9y5KkFe1r6RKV0aI6WDkagjrSeWrUt6wyHRPa7zWXyjLgEuQQVDWw9CRFYSBizrHvLF4XGvgyn4AZqqJw2EB87MEbOycCQOIUGupJs99IlAMRy2nV1hkh/fTi855QK12MQ5AveD0jQIdDn4hZ/y7+1RNdZArJwtBJFSjvO/7/FGY6JZDCZxGEQAmBcj2uuZ+CpZ2h3kW8KYvHt7rSHvL7Dn6CcAPXvUhxiyFUTu6autLymTw9rOM2vKI8jAhX/4YCZpD1coRmMwp2NX5bjpWLb0ixrnvMwrrQ2YSQEdpIk57Qfb5f1GJj4lnoSNu00VXTD8oHMsrGl07isBd3ype4VMtU/41j6XxkrJjTpKKsZRam9dOFeb2z9clgWsNhtsoRtNDDhissAlvS8SEfROgM5igAh89o1oeUc858+akZoe8hOW8AqzLg4ZS5STGasVsbEKq43ntwfRED435D5BS8quNdaARMc/s32TZlN5XUzA8k1e5JInxEiGohZ5aTgJ2zJvHeCjQRNeVZElMYfjAByUXfj5RP8pXt/M6CUxlPqfBJPI6no3qWgtPLWHbGQM8LCfu2O8qvSuJk2WJl9Q2ackNANwY/HqPcTuWdkVgl8COG2f30PGnB3PSGyxECBB4ibY8QugylPoi5oB4hNx1gUElEVj7K2mrLcxe2JA5iMz5N8BbWyPCY8G5OXu43SG/TSDC8WiwAvZEjUVRB537Zn0SXyKlqXFy4f20tO8dXmUyXSxXsTyw/I/SbpQZVr6RJvhvnTROqChF2Lv386yuNBTaKnZyv6LJxR6Lm7OZFyvxyN0eZqqRafz2pX+HMUGc1wMSuWmas5uVFQQ98dAGcSYN6767ludQqUiGmtc7APncOFWyuH85WPhRgf5+tQKCxuKvNfxG29kH0ktFtP0LyGVC5Mix5WCSaTROzsgkNfltWTQ3Ro2p4jXKHMxu16YoD9ir0fWyzidOZjFglWhQQaDnzKPDy8VyROKqOwMx25f0fDhO7Nbo9eC/jM6V+wINAU26kj0STmYF7zSWSVindrBLbwmGat8koUN4c2Yb8NDuouGeT1CWLO59BwM0hr+Zs9jJ1nxO2OZjB2n4SJkoj3Dw/L0ASd47T5fGTZCbtocrLjhoJD67RZ188sW1hS542dcns7MqsLTuO68cDVj49lV/dcKz9eAqiilPPQpQV9qyEigRQgnSMS+sutcOF7jCZ0n8Ds+e2EFrvFf3cqCZ71sq/r7fr+GHY6CgJA6VnVt9hLVZOJxpCknrABcbKCZ7zgQro9L09PRV3fR0cFSOZTfWK159zlQ9dFU6tutROrX1YdUWaL/yjfCCA4uu2SaA2IZz69pN6xXjgT7/yIJnVdb38aETtJQeplPL3fo1FiNa6KtO9nlV9NlodhHS8zcEJp8vKmWB0WJkg1SeTAth4mgAAU73VZjreDqAx68PCpG2tOapLtPfXeNs13UriVZrC4vs9+EdRFpktYBfqFE5qwW771WUmQspp2wwWEeVY2ZAQgAMqPxYj8oVKRMwBEmzr9HyC0iQkCJ9T4qSr51wwC67+WxqVH7exrrx27aevGJ3WM8J2hRiECCqrbelFvtianFZYLYNsJESBAn1C8I7cEkrgaWYmy/XDVdCNmNz881iCtIU4jrAuFAhwHpMHiA7qLYnp8wCzRD99/Z+F15yw8+hudmHaYuzh/jrDZBkE3ifnK7X2jkCJ+A+WWZnka7Ty1rWmS2QbHlV/36EROsKArZFvAfCgv2TCSilSUM70BwiCFRBKksV+2b5DIv3TWlLQe8je4uV0nY6uO1Zz4/CZ9ZxbF1SeVDVwO1aoPye8JbCXwurskoFKbmMTItcAAjE0od7m963UTRZBWjnGdbu6h+mRxFTW9jAb3g04N+HRL3Ckb/X266EmJdi5XI5B9xVpAnG1DQfv3nYq6Tui3Ry6id5psAh9L+izLHiMZnebst6tRNU0KLOG6i7G6gyPksX8Kixi4S+yzDu60ykHOVpOFvDots/Osrq0iexWBl6GH03Fdfza4pec85os8yIJWn6uM80O+XZuRA7MwV32rBpfhPudlehhuzw0QdvM4ctGRQxWzcTjXjDqYWNHwytBZG9oAZRBVrIZRTBYvUyc1qLLPO"}</script>
+<script src="../assets/gegenwart/bundle.js"></script>
+<script>
+window.GGK_ZURUECK = "../index.html";
+window.W_GEBAUT = ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m071", "m08"];
+"use strict";
+/* ===== Gemeinsamer Kern M25–M27. Jede Stunde definiert danach L (Einstellungen), ihre Daten, SEITE_FN und ruft kernStart(). ===== */
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let S = {};
+const lade = () => { try { return JSON.parse(localStorage.getItem(L.key)) || {}; } catch(e) { return {}; } };
+const speichere = () => { try { localStorage.setItem(L.key, JSON.stringify(S)); } catch(e) {} };
+const hol = p => p.split(".").reduce((o, k) => (o == null ? undefined : o[k]), S);
+const setz = (p, v) => { const k = p.split("."); let o = S; for (let i = 0; i < k.length - 1; i++) { if (o[k[i]] == null || typeof o[k[i]] !== "object") o[k[i]] = {}; o = o[k[i]]; } o[k[k.length - 1]] = v; speichere(); };
+const woerter = t => String(t || "").trim().split(/\s+/).filter(Boolean).length;
+const ruhig = () => { try { return !!S.ruhig || matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e) { return !!S.ruhig; } };
+const neu = (el, k) => { if (!el) return; el.classList.remove(k); void el.offsetWidth; if (!ruhig()) el.classList.add(k); };
+/* Rückweg zur Übersicht. Seiten in Unterordnern setzen vor dem Kern window.GGK_ZURUECK = "../index.html". */
+const LABOR = /github\.io$/.test(location.hostname) ? (typeof window.GGK_ZURUECK === "string" ? window.GGK_ZURUECK : "index.html") : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
+const LK = "https://geschichtefuerdiegegenwart.github.io/kognitive-Landkarte-des-Geschichtsunterrichts/#s-";
+const idx = id => Math.max(0, L.seiten.findIndex(s => s[0] === id));
+
+/* ---------- Bausteine für Seiten ---------- */
+const zeitKopf = id => { if (BLATT_AN) return ""; const s = L.seiten[idx(id)]; return `<p class="zeit"><span class="nr">${esc(s[1])}</span><span>${esc(s[2])}</span></p>`; };
+const weiter = (nach, text, o = {}) => BLATT_AN ? "" : `<div class="fuss"><span class="hinweis">${o.hinweis || "Dein Stand wird nur auf diesem Gerät gespeichert."}</span><button class="btn primary" data-geh="${nach}">${esc(text)} ›</button></div>`;
+const auftrag = (form, titel, text) => `<div class="auftrag"><span class="form">${esc(form)}</span><h3>${esc(titel)}</h3><p>${text}</p></div>`;
+const belastend = text => `<p class="belastend"><b>Hinweis vorab.</b> ${text}</p>`;
+const status = (art, text) => `<span class="status ${art}">${esc(text)}</span>`;
+const band = (ob, titel, text) => `<div class="band"><div class="bt"><span class="ob">${esc(ob)}</span><h2>${esc(titel)}</h2><p>${text}</p></div></div>`;
+const hilfe = (titel, html) => `<details class="hilfe"><summary>${esc(titel)}</summary>${html}</details>`;
+
+/* Textfeld mit Satzanfängen und Wortzähler (Gegenwart: Textfeld). pfad = Ort in S. */
+function textfeld(pfad, label, o = {}){
+  const v = hol(pfad) || "", id = "f-" + pfad.replace(/\W/g, "-");
+  return `<div class="tf"><label for="${id}">${label}</label>
+  <textarea id="${id}" data-f="${pfad}" rows="${o.rows || 3}" placeholder="${esc(o.platz || "")}">${esc(v)}</textarea>
+  ${o.anfaenge ? `<div class="satzanfaenge nodruck" role="group" aria-label="Satzanfänge">${o.anfaenge.map(a => `<button type="button" data-satz="${id}" data-text="${esc(a)}">${esc(a)} …</button>`).join("")}</div>` : ""}
+  ${o.zaehl === false ? "" : `<p class="zaehl" data-zaehl="${pfad}">${woerter(v)} Wörter${o.ziel ? " · " + esc(o.ziel) : ""}</p>`}</div>`;
+}
+const eingabe = (pfad, label, platz = "") => { const id = "f-" + pfad.replace(/\W/g, "-"); return `<div><label for="${id}">${label}</label><input type="text" id="${id}" data-f="${pfad}" value="${esc(hol(pfad) || "")}" placeholder="${esc(platz)}" autocomplete="off"></div>`; };
+/* Kriterienraster: erscheint, sobald das Feld pfad mindestens min Wörter hat (P6: Vergleich erst nach dem eigenen Text). */
+function raster(pfad, min, titel, zeilen){
+  const da = woerter(hol(pfad)) >= min;
+  return `<div data-raster="${pfad}" data-min="${min}" ${da ? "" : "hidden"}><h3 class="klein">${esc(titel)}</h3><div class="matrix-wrap"><table><thead><tr><th>Prüfe deinen Text</th><th>Grundlegend</th><th>Sicher</th><th>Souverän</th></tr></thead><tbody>${zeilen.map(z => `<tr><td><b>${esc(z[0])}</b></td><td>${esc(z[1])}</td><td>${esc(z[2])}</td><td>${esc(z[3])}</td></tr>`).join("")}</tbody></table></div></div>
+  <p class="hinweis" data-rasterhinweis="${pfad}" ${da ? "hidden" : ""}>Ab ${min} Wörtern erscheint ein Raster, mit dem du deinen Text selbst prüfst.</p>`;
+}
+/* Vergleich, der erst nach eigenen Antworten erscheint: bed = Liste von Pfaden, die gefüllt sein müssen. */
+function vergleich(id, bed, min, titel, html){
+  const ok = bed.every(p => String(hol(p) || "").trim().length >= min), offen = !!(S.offen || {})[id];
+  return `<div class="reihe nodruck"><button type="button" class="btn dunkel" data-vergleich="${id}" data-bed="${bed.join(",")}" data-min="${min}" data-titel="${esc(titel)}" ${ok ? "" : "disabled"}>${offen ? "Vergleich ausblenden" : esc(titel)}</button><span class="hinweis" data-vergleichhinweis="${id}">${ok ? "" : "Erst deine Antworten, dann der Vergleich."}</span></div>
+  <div class="auflage" id="vgl-${id}" ${offen && ok ? "" : "hidden"}>${html}</div>`;
+}
+
+/* ---------- Quelle zum Markieren (Muster 11; Gegenwart: Markierung, zwei Stifte) ----------
+   QUELLEN[id] = { titel, kopf, abs:[[tag|null, [Sätze…]], …], nachweis, stifte:[[ "a", Zeichen, Name ], [ "b", Zeichen, Name ]] }
+   Stand: S.mark[id] = { "0": "a", "3": "b" }, S.stift[id] = "a" */
+const STIFTKLASSE = { a:"g-mark g-mark--beleg", b:"g-mark g-mark--gedanke" };
+function quelle(id){
+  const q = QUELLEN[id], m = (S.mark || {})[id] || {}, st = (S.stift || {})[id] || "a"; let n = 0;
+  const text = q.abs.map(([tag, saetze]) => `<p>${tag ? `<span class="qtag">${esc(tag)}</span>` : ""}${saetze.map(s => { const i = n++; return `<span class="g-wort ${m[i] ? STIFTKLASSE[m[i]] : ""}" role="button" tabindex="0" aria-pressed="${!!m[i]}" data-mark="${id}:${i}">${esc(s)}</span>`; }).join(" ")}</p>`).join("");
+  return `<div class="qblatt g" data-quelle="${id}"><h3>${esc(q.titel)}</h3><p class="qkopf">${q.kopf}</p>
+  <div class="g-stifte nodruck" role="group" aria-label="Stift wählen">${q.stifte.map(s => `<button type="button" class="g-stift" data-stift="${id}:${s[0]}" aria-pressed="${st === s[0]}"><span class="z" aria-hidden="true">${s[1]}</span>${esc(s[2])}</button>`).join("")}</div>
+  <div class="qtext">${text}</div><p class="quelle">${q.nachweis}</p></div>`;
+}
+const saetze = id => QUELLEN[id].abs.flatMap(a => a[1]);
+function belegListe(ids, stift){
+  const li = ids.flatMap(id => { const m = (S.mark || {})[id] || {}, s = saetze(id); return Object.keys(m).filter(i => m[i] === stift).sort((a, b) => a - b).map(i => `<li>${esc(s[i])} <span class="hinweis">(${esc(QUELLEN[id].kurz)})</span></li>`); });
+  return li.length ? `<ul>${li.join("")}</ul>` : `<p class="leer">Noch nichts markiert.</p>`;
+}
+function belege(ids, o = {}){
+  const st = QUELLEN[ids[0]].stifte;
+  return `<div class="belege" data-belege="${ids.join(",")}">${st.map(s => `<div class="sp ${s[0]}"><h4><span aria-hidden="true">${s[1]}</span> ${esc(o["t" + s[0]] || s[2])}</h4>${belegListe(ids, s[0])}</div>`).join("")}</div>`;
+}
+const markZahl = ids => ids.reduce((n, id) => n + Object.keys((S.mark || {})[id] || {}).length, 0);
+
+/* ---------- Wahl mit Erklärung je Option (Muster 2; Gegenwart: Wahl) ---------- */
+const STUFENWORT = { zentral:"zentral", begruendbar:"auch begründbar", kaum:"passt kaum" };
+function gWahl(id, frage, optionen, o = {}){
+  const st = (S.wahl || {})[id] || {}, zu = !!st.zu;
+  return `<div class="g"><div class="g-wahl" data-g="wahl" data-mind="${o.mind ?? 8}" data-id="${id}" ${zu ? 'data-zu=""' : ""}>
+  <fieldset><legend>${frage}</legend>${optionen.map((op, i) => `<label class="g-option" data-urteil="${op[1]}" data-grund="${esc(op[2])}"><input type="radio" name="w-${id}" value="${i}" ${st.o === i ? "checked" : ""} ${zu ? "disabled" : ""}><span>${esc(op[0])}<span class="g-option__urteil">${(o.worte || STUFENWORT)[op[1]]} – ${esc(op[2])}</span></span></label>`).join("")}</fieldset>
+  ${o.ohneGrund ? "" : `<label>Begründung in einem Satz<textarea data-grund-feld rows="2" ${zu ? "readonly" : ""} placeholder="${esc(o.platz || "Ich wähle das, weil …")}">${esc(st.grund || "")}</textarea></label>`}
+  <div class="g-wahl__fuss"><button type="button" class="g-knopf g-knopf--primaer" data-g-festlegen ${zu ? "disabled" : ""}>Festlegen</button><span class="g-stempel" ${zu ? "" : "hidden"}>Festgelegt</span>${zu ? `<button type="button" class="btn nodruck" data-neu-wahl="${id}">Noch einmal</button>` : ""}<span class="sr" aria-live="polite"></span></div>
+  </div></div>`;
+}
+function pruefeWahl(w){
+  if (w.hasAttribute("data-zu")) return;
+  const gew = w.querySelector("input:checked"), ta = w.querySelector("textarea"), f = w.querySelector("[data-g-festlegen]");
+  if (f) f.disabled = !gew || (ta && ta.value.trim().length < 8);
+}
+
+/* ---------- Landkarten-Moment (Muster AT aus M22). Namen und Kurzerklärungen wörtlich aus der kognitiven Landkarte, Abschnitt 2.1. ---------- */
+const PRINZIP = {
+  "2-1-1": ["Retrospektivität", "Wir betrachten die Vergangenheit immer im Nachhinein (ex post), also aus der Gegenwart heraus."],
+  "2-1-2": ["Perspektivität", "Jede Betrachtung erfolgt aus einer bestimmten Sichtweise, geprägt von Überzeugungen, Interessen und Erfahrungen."],
+  "2-1-3": ["Partikularität", "Historische Erkenntnisse sind immer nur Ausschnitte der gesamten Vergangenheit."],
+  "2-1-4": ["Selektivität", "Wer Geschichte erzählt, wählt aus: Welche Quellen, Ereignisse und Personen sind für die eigene Frage wichtig?"],
+  "2-1-5": ["Partialität", "Quellen zeigen immer nur einen Teil der Vergangenheit, und nur ein Teil der Quellen ist überhaupt erhalten."],
+  "2-1-6": ["Narrativität", "Geschichte gibt es nur als Erzählung."],
+  "2-1-7": ["Konstruktivität", "Geschichte wird nicht „gefunden“, sondern aktiv zusammengesetzt. Deshalb können aus denselben Fakten unterschiedliche Geschichten entstehen."],
+  "2-1-8": ["Standortgebundenheit", "Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Gesamtkontext geprägt, oft unbewusst."],
+};
+const LKSTUFE = { zentral:"Zentral.", teils:"Auch begründbar.", kaum:"Passt kaum." };
+/* cfg = { seite, frage, lead, platz, folge:[Name, Kurzerklärung] (Eintrag 2.1.9), urteil:{ id:[stufe, text] }, bruecke } */
+function landkarte(cfg){
+  const l = S.lk, frei = l.vermutung.trim().length >= 10;
+  const liste = Object.keys(PRINZIP).map(id => ({ id, n:PRINZIP[id][0], k:PRINZIP[id][1] })).concat([{ id:"2-1-9", n:cfg.folge[0], k:cfg.folge[1] }]);
+  const p = liste.find(x => x.id === l.prinzip), u = p ? cfg.urteil[p.id] : null;
+  return `${zeitKopf(cfg.seite)}<h1>${esc(cfg.titel)}</h1>
+  <p class="leitfrage">${esc(cfg.frage)}</p>
+  ${auftrag("Allein · 2 Minuten", "Erst vermuten", cfg.lead)}
+  ${textfeld("lk.vermutung", "Meine Vermutung", { rows:2, platz:cfg.platz, zaehl:false })}
+  <p class="hinweis" id="lk-hinweis">${frei ? "Gut. Jetzt die Landkarte öffnen, dann unten ein Prinzip wählen." : "Schreib mindestens einen Satz. Danach geht es weiter."}</p>
+  <div id="lk-teil2" class="${frei ? "" : "gesperrt"}">
+  ${auftrag("Allein · 4 Minuten", "Dann die Landkarte", "Öffne „Was ist Geschichte?“ in der kognitiven Landkarte. Sie öffnet sich in einem neuen Tab, deine Eingaben hier bleiben. Wähle das Prinzip, das hier am besten passt, und begründe in einem Satz.")}
+  <p><a class="btn dunkel" id="lk-link" href="${LK}2-1" target="_blank" rel="noopener" ${frei ? "" : 'aria-disabled="true" tabindex="-1"'}>Landkarte öffnen: 2.1 Die Gemeinsamkeiten einer jeden Geschichte ↗</a></p>
+  <div class="prinzipien" role="group" aria-label="Prinzip wählen">${liste.map(x => `<button type="button" data-prinzip="${x.id}" aria-pressed="${l.prinzip === x.id}" class="${l.ok && l.prinzip === x.id ? cfg.urteil[x.id][0] : ""}" ${(!frei || l.ok) ? "disabled" : ""}><b>${esc(x.n)}</b><small>${esc(x.k)}</small></button>`).join("")}</div>
+  <label for="lk-grund">Meine Begründung</label><textarea id="lk-grund" data-f="lk.grund" rows="2" placeholder="Dieses Prinzip passt hier, weil …" ${(!frei || !l.prinzip || l.ok) ? "disabled" : ""}>${esc(l.grund)}</textarea>
+  <div class="reihe"><button type="button" class="btn dunkel" data-lkpruef ${(!frei || !l.prinzip || l.grund.trim().length < 10 || l.ok) ? "disabled" : ""}>Prüfen</button>${l.ok ? `<button type="button" class="btn" data-lkneu>Noch einmal</button>` : ""}<span class="hinweis">Rückmeldung in drei Stufen: zentral · auch begründbar · passt kaum.</span></div>
+  <div id="lk-fb" aria-live="polite">${l.ok && u ? `<div class="rm ${u[0]}"><b>${LKSTUFE[u[0]]}</b> ${esc(u[1])} <a href="${LK}${p.id}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a></div>` : ""}</div>
+  </div>
+  ${cfg.bruecke ? `<div class="trift">${cfg.bruecke}</div>` : ""}
+  ${weiter(cfg.nach[0], cfg.nach[1])}`;
+}
+
+/* ---------- Stimmkarte (Muster 12; Gegenwart: Stimmkarte): groß am Gerät, hochhalten, Lehrkraft zählt ---------- */
+function stimmkarte(pfad, optionen){
+  const v = hol(pfad);
+  return `<div class="stimmwahl" role="group" aria-label="Stimme wählen">${optionen.map(o => `<button type="button" data-stimme="${pfad}" data-wert="${o[0]}" aria-pressed="${v === o[0]}"><b>${o[0]}</b>${esc(o[1])}</button>`).join("")}</div>
+  <div class="reihe nodruck"><button type="button" class="btn dunkel" data-stimmkarte="${pfad}" data-opt="${esc(JSON.stringify(optionen))}" ${v ? "" : "disabled"}>Stimmkarte groß zeigen</button><span class="hinweis">Auf Ansage: iPad hochhalten. Die Lehrkraft zählt. Es wird nichts übertragen.</span></div>`;
+}
+let TAFEL_ZURUECK = null;
+function tafel(html, o = {}){
+  TAFEL_ZURUECK = document.activeElement;
+  const u = document.getElementById("ueber");
+  u.innerHTML = `<div class="tafel-voll ${o.hell ? "hell" : ""}" role="dialog" aria-modal="true" aria-label="${esc(o.titel || "Ansicht für den Beamer")}"><div class="tk"><b>${esc(o.titel || "")}</b><button type="button" class="btn" data-tafelzu>Schließen</button></div><div class="mitte">${html}</div></div>`;
+  u.querySelector("[data-tafelzu]").focus();
+}
+function tafelZu(){ const u = document.getElementById("ueber"); if (!u.innerHTML) return; u.innerHTML = ""; if (TAFEL_ZURUECK && document.contains(TAFEL_ZURUECK)) TAFEL_ZURUECK.focus(); }
+
+/* ---------- Kopf, Löschen, Zeichnen ---------- */
+function kopf(){
+  document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div><a class="pill" href="${LABOR}">← GGK-Labor</a>`;
+  const a = idx(S.seite), weg = document.getElementById("weg");
+  if (weg) weg.innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
+}
+function loeschBereich(){
+  return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button><label class="g-schalter" style="font-family:var(--body)"><input type="checkbox" role="switch" data-bewegung ${S.ruhig ? "checked" : ""}> Weniger Bewegung</label><span>Alles bleibt auf diesem Gerät. Nichts wird übertragen.</span>${S.seite === "lehrkraft" ? "" : lehrTuer()}
+  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> ${esc(L.loesch)}</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div>
+  ${L.herkunft ? `<p class="herkunft" style="flex:1 0 100%;margin:0">${L.herkunft}</p>` : ""}<p style="flex:1 0 100%;font-size:.85rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p></div>`;
+}
+function zeichne(fokus){
+  if (!SEITE_FN[S.seite]) S.seite = "start";
+  if (S.ruhig) document.documentElement.setAttribute("data-bewegung", "weniger"); else document.documentElement.removeAttribute("data-bewegung");
+  kopf();
+  const m = document.getElementById("main");
+  m.classList.toggle("breit", (L.breit || []).includes(S.seite));
+  if (BLATT()) {
+    const rahmen = document.querySelector(".ab-rahmen"), auf = AUF(S.seite), schmal = SCHMAL();
+    if (rahmen) rahmen.classList.toggle("schmal", schmal);
+    m.classList.toggle("deckblatt", !auf);
+    m.innerHTML = blattzeile() + (auf ? blatt(auf) : SEITE_FN[S.seite]()) + (QUER() && !schmal ? "" : loeschBereich());
+    register(true);
+  } else m.innerHTML = SEITE_FN[S.seite]() + loeschBereich();
+  window.Gegenwart && Gegenwart.init(m);
+  nachInit();
+  if (fokus) { m.focus({ preventScroll:true }); window.scrollTo(0, 0); }
+}
+function nachInit(){
+  document.querySelectorAll(".g-wahl[data-id]").forEach(w => { pruefeWahl(w); const st = (S.wahl || {})[w.dataset.id] || {}; if (st.zu) { w.querySelectorAll("input").forEach(i => { i.disabled = true; }); const f = w.querySelector("[data-g-festlegen]"); if (f) f.disabled = true; } });
+  if (typeof L.nachInit === "function") L.nachInit();
+}
+function geh(id){ S.seite = id; speichere(); tafelZu(); zeichne(true); }
+/* Nach einer Texteingabe: Zähler, Raster und Freigaben nachführen, ohne neu zu zeichnen (Fokus und Scrollstand bleiben). */
+function nachEingabe(pfad){
+  const z = document.querySelector(`[data-zaehl="${pfad}"]`); if (z) z.textContent = z.textContent.replace(/^\d+/, woerter(hol(pfad)));
+  const r = document.querySelector(`[data-raster="${pfad}"]`);
+  if (r) { const da = woerter(hol(pfad)) >= +r.dataset.min, war = !r.hidden; r.hidden = !da; const h = document.querySelector(`[data-rasterhinweis="${pfad}"]`); if (h) h.hidden = da; if (da && !war) neu(r, "neu"); }
+  document.querySelectorAll("[data-vergleich]").forEach(b => { const ok = b.dataset.bed.split(",").every(p => String(hol(p) || "").trim().length >= +b.dataset.min); b.disabled = !ok; const h = document.querySelector(`[data-vergleichhinweis="${b.dataset.vergleich}"]`); if (h) h.textContent = ok ? "" : "Erst deine Antworten, dann der Vergleich."; });
+  if (pfad === "lk.vermutung") { const frei = S.lk.vermutung.trim().length >= 10, t = document.getElementById("lk-teil2"); if (t && t.classList.contains("gesperrt") === frei) zeichneBehalte(); }
+  if (pfad === "lk.grund") { const b = document.querySelector("[data-lkpruef]"); if (b) b.disabled = !(S.lk.prinzip && S.lk.grund.trim().length >= 10 && !S.lk.ok); }
+  if (pfad.indexOf("sa.") === 0) schreibStand();
+  if (typeof L.nachEingabe === "function") L.nachEingabe(pfad);
+  if (BLATT()) register();
+}
+/* Neu zeichnen, aber Scrollstand und Fokus (samt Cursor) behalten. */
+function zeichneBehalte(){
+  const y = window.scrollY, a = document.activeElement, id = a && a.id, pos = a && typeof a.selectionStart === "number" ? a.selectionStart : null;
+  zeichne(false); window.scrollTo(0, y);
+  if (id) { const e = document.getElementById(id); if (e) { e.focus({ preventScroll:true }); if (pos !== null && e.setSelectionRange) { try { e.setSelectionRange(pos, pos); } catch(err) {} } } }
+}
+
+function kernStart(){
+  const d = L.init(), g = lade();
+  S = Object.assign({ seite:"start", ruhig:false, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false }, frei:{}, durch:{}, wk:{}, sa:{ gl:["","",""], text:"", hand:false, krit:false } }, d);
+  Object.keys(g).forEach(k => { S[k] = (S[k] && typeof S[k] === "object" && !Array.isArray(S[k]) && g[k] && typeof g[k] === "object" && !Array.isArray(g[k])) ? Object.assign({}, S[k], g[k]) : g[k]; });
+  const h = location.hash.replace("#", ""); if (h && SEITE_FN[h]) S.seite = h;
+  zeichne(false);
+}
+
+document.addEventListener("click", ev => {
+  const t = ev.target.closest("[data-geh],[data-mark],[data-stift],[data-satz],[data-vergleich],[data-prinzip],[data-lkpruef],[data-lkneu],[data-stimme],[data-stimmkarte],[data-tafelzu],[data-loeschfrage],[data-loeschen],[data-g-festlegen],[data-neu-wahl],[data-akt],[data-drucken],[data-freifrage],[data-frei],[data-schreibblatt],[data-krit]");
+  if (!t) return;
+  if (t.dataset.geh) { if (t.dataset.durch) { if (!S.durch) S.durch = {}; S.durch[t.dataset.durch] = true; } return geh(t.dataset.geh); }
+  if (t.hasAttribute("data-freifrage")) { const f = document.getElementById("ab-frage"); f.hidden = false; t.setAttribute("aria-expanded", "true"); f.querySelector("button").focus(); return; }
+  if (t.dataset.frei !== undefined) { if (t.dataset.frei) { if (!S.frei) S.frei = {}; S.frei[t.dataset.frei] = true; speichere(); zeichne(true); } else { document.getElementById("ab-frage").hidden = true; const k = document.querySelector("[data-freifrage]"); k.setAttribute("aria-expanded", "false"); k.focus(); } return; }
+  if (t.hasAttribute("data-schreibblatt")) { document.body.classList.add("druck-sb"); window.print(); return; }
+  if (t.hasAttribute("data-krit")) { if (!schreibFertig()) return; S.sa.krit = !S.sa.krit; speichere(); const k = document.getElementById("krit"); k.hidden = !S.sa.krit; t.setAttribute("aria-expanded", String(S.sa.krit)); if (S.sa.krit) { neu(k, "neu"); k.scrollIntoView({ block:"nearest", behavior: ruhig() ? "auto" : "smooth" }); } return; }
+  if (t.dataset.mark) return markiere(t);
+  if (t.dataset.stift) { const [id, s] = t.dataset.stift.split(":"); setz("stift." + id, s); t.parentElement.querySelectorAll(".g-stift").forEach(b => b.setAttribute("aria-pressed", String(b === t))); return; }
+  if (t.dataset.satz) { const f = document.getElementById(t.dataset.satz); if (!f) return; f.value = (f.value.trim() ? f.value.replace(/\s*$/, "") + " " : "") + t.dataset.text + " "; setz(f.dataset.f, f.value); nachEingabe(f.dataset.f); f.focus(); return; }
+  if (t.dataset.vergleich) { const id = t.dataset.vergleich; setz("offen." + id, !(S.offen || {})[id]); const v = document.getElementById("vgl-" + id); v.hidden = !S.offen[id]; t.textContent = S.offen[id] ? "Vergleich ausblenden" : (t.dataset.titel || "Vergleich zeigen"); if (S.offen[id] && ev.detail !== 0) neu(v, "neu"); return; }
+  if (t.dataset.prinzip) { S.lk.prinzip = t.dataset.prinzip; speichere(); return zeichneBehalte(); }
+  if (t.hasAttribute("data-lkpruef")) { S.lk.ok = true; speichere(); zeichneBehalte(); if (ev.detail !== 0) neu(document.querySelector("#lk-fb .rm"), "neu"); return; }
+  if (t.hasAttribute("data-lkneu")) { S.lk.ok = false; S.lk.prinzip = null; S.lk.grund = ""; speichere(); return zeichneBehalte(); }
+  if (t.dataset.stimme) { setz(t.dataset.stimme, t.dataset.wert); return zeichneBehalte(); }
+  if (t.dataset.stimmkarte) { const o = JSON.parse(t.dataset.opt).find(x => x[0] === hol(t.dataset.stimmkarte)); if (o) tafel(`<div class="buchstabe">${esc(o[0])}</div><div class="wort">${esc(o[1])}</div>`, { titel:"Meine Stimme" }); return; }
+  if (t.hasAttribute("data-tafelzu")) return tafelZu();
+  if (t.hasAttribute("data-loeschfrage")) { const f = document.getElementById("loesch-frage"); f.hidden = false; f.querySelector("button").focus(); return; }
+  if (t.dataset.loeschen) { if (t.dataset.loeschen === "ja") { try { localStorage.removeItem(L.key); } catch(e) {} const r = S.ruhig; kernStartLeer(r); } else { document.getElementById("loesch-frage").hidden = true; } return; }
+  if (t.hasAttribute("data-g-festlegen")) { const w = t.closest(".g-wahl[data-id]"); if (!w) return; const gew = w.querySelector("input:checked"), ta = w.querySelector("textarea"); if (!gew) return; setz("wahl." + w.dataset.id, { o:+gew.value, grund: ta ? ta.value : "", zu:true }); setTimeout(() => { zeichneBehalte(); if (typeof L.nachWahl === "function") L.nachWahl(w.dataset.id); }, ruhig() ? 0 : 420); return; }
+  if (t.dataset.neuWahl) { setz("wahl." + t.dataset.neuWahl, {}); return zeichneBehalte(); }
+  if (t.hasAttribute("data-drucken")) return window.print();
+  if (t.dataset.akt && AKTION[t.dataset.akt]) { AKTION[t.dataset.akt](t, ev); if (BLATT()) register(); return; }
+});
+function kernStartLeer(r){ S = {}; const d = L.init(); S = Object.assign({ seite:"start", ruhig:r, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false }, frei:{}, durch:{}, wk:{}, sa:{ gl:["","",""], text:"", hand:false, krit:false } }, d); speichere(); zeichne(true); }
+function markiere(t){
+  const [id, i] = t.dataset.mark.split(":"), st = (S.stift || {})[id] || "a";
+  if (!S.mark[id]) S.mark[id] = {};
+  const hat = S.mark[id][i] === st;
+  if (hat) delete S.mark[id][i]; else S.mark[id][i] = st;
+  speichere();
+  t.className = "g-wort " + (hat ? "" : STIFTKLASSE[st]); t.setAttribute("aria-pressed", String(!hat));
+  if (!hat && window.Gegenwart && st === "a") Gegenwart.bewegen(t, [{ backgroundSize:"0% 100%" }, { backgroundSize:"100% 100%" }], { dauer:260 });
+  document.querySelectorAll("[data-belege]").forEach(b => { const ids = b.dataset.belege.split(","); if (!ids.includes(id)) return; QUELLEN[ids[0]].stifte.forEach(s => { const sp = b.querySelector(".sp." + s[0]); const alt = sp.querySelector("ul,.leer"); if (alt) alt.outerHTML = belegListe(ids, s[0]); }); });
+  if (typeof L.nachMark === "function") L.nachMark(id);
+  if (BLATT()) register();
+}
+document.addEventListener("keydown", ev => {
+  if (ev.key === "Escape") return tafelZu();
+  const t = ev.target.closest && ev.target.closest("[data-mark]");
+  if (t && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); markiere(t); }
+});
+document.addEventListener("input", ev => {
+  const t = ev.target;
+  if (t.dataset && t.dataset.f) { setz(t.dataset.f, t.type === "range" ? +t.value : t.value); nachEingabe(t.dataset.f); return; }
+  if (t.hasAttribute && t.hasAttribute("data-grund-feld")) { const w = t.closest(".g-wahl"); if (w) pruefeWahl(w); }
+});
+document.addEventListener("change", ev => {
+  const t = ev.target;
+  if (t.hasAttribute && t.hasAttribute("data-hand")) { S.sa.hand = t.checked; speichere(); schreibStand(); if (BLATT()) register(); return; }
+  if (t.hasAttribute && t.hasAttribute("data-bewegung")) { S.ruhig = t.checked; speichere(); if (S.ruhig) document.documentElement.setAttribute("data-bewegung", "weniger"); else document.documentElement.removeAttribute("data-bewegung"); return; }
+  if (t.tagName === "SELECT" && t.dataset.f) { setz(t.dataset.f, t.value); nachEingabe(t.dataset.f); if (t.dataset.neu !== undefined) zeichneBehalte(); return; }
+  const w = t.closest && t.closest(".g-wahl"); if (w) pruefeWahl(w);
+});
+/* ---------- Bilder (Muster aus M21–M23): Dateien liegen nur im Moodle-Paket unter media/. Fehlt eine Datei, verschwindet die Figur ohne Lücke. ---------- */
+function foto(b, o = {}){
+  return `<figure class="bild ${o.klein ? "klein" : ""}" data-bildgruppe="${o.gruppe || ""}"><img src="media/${b.datei}" alt="${esc(b.alt)}" loading="lazy" onerror="bildFehlt(this)"><figcaption>${b.text}<span class="nachweis">${b.nachweis}</span></figcaption></figure>`;
+}
+function bildFehlt(img){
+  const f = img.closest("figure"), g = f && f.dataset.bildgruppe; if (!f) return; f.remove();
+  if (g) { const rest = document.querySelectorAll(`figure[data-bildgruppe="${g}"]`).length, h = document.querySelector(`[data-bildhinweis="${g}"]`); if (!rest && h) h.hidden = false; }
+}
+const AKTION = {
+  /* data-akt="setz" data-p="pfad" data-w="wert": Wert setzen und neu zeichnen */
+  setz(t){ let w = t.dataset.w; if (w === "true") w = true; else if (w === "false") w = false; setz(t.dataset.p, w); zeichneBehalte(); },
+};
+/* ===== Blatt-Rahmen (Standard aus M22, Fassung 4.1) =====
+   Ein Modul ist ein Arbeitsblatt: links das Register mit allen Arbeitsaufträgen und ihrem Stand, rechts genau ein Auftrag (eine Seite zum Scrollen).
+   L.blatt   = [{ id, nr, kurz, name, form, min, frei:"offen"|"ansage"|"antwort", nach, fehlt, gleich, marke, kopf }]
+   L.erledigt = { id: () => wahr, wenn der Auftrag bearbeitet ist }
+   L.schmal  = [ids]  – Aufträge, die die ganze Breite brauchen (Register wird zur Nummernleiste)
+   L.kapitel = "Weimarer Republik" · L.dauer = 90
+   L.schreib = Schreibauftrag im Format der Klassenarbeit · L.zf = Zusammenfassung in zwei Teilen (wissen / können) */
+let BLATT_AN = false;   // wahr, während eine Auftragsseite gebaut wird: zeitKopf() und weiter() liefern dann nichts, der Rahmen trägt Kopf und Fuß
+const BLATT = () => Array.isArray(L.blatt);
+const AUFI = id => BLATT() ? L.blatt.findIndex(a => a.id === id) : -1;
+const AUF = id => L.blatt[AUFI(id)];
+const QUER = () => { try { return matchMedia("(min-width:900px)").matches; } catch(e) { return true; } };
+const probe = f => { try { return !!(f && f()); } catch(e) { return false; } };
+const beantwortet = id => { const f = (L.erledigt || {})[id]; return f ? probe(f) : !!(S.durch || {})[id]; };
+const erledigt = id => probe((L.erledigt || {})[id]) || !!(S.durch || {})[id];
+const offen = id => { const a = AUF(id); if (!a || !a.frei || a.frei === "offen" || (S.frei || {})[id]) return true; return a.frei === "antwort" && beantwortet(a.nach); };
+const SCHMAL = () => BLATT() && (L.schmal || []).includes(S.seite) && offen(S.seite);
+
+function register(immer){
+  const r = document.getElementById("reg"); if (!r || !BLATT()) return;
+  const lf = document.getElementById("loesch-frage");
+  if (!immer && (r.contains(document.activeElement) || (lf && !lf.hidden && r.contains(lf)))) return;
+  const sl = r.scrollLeft, st = r.scrollTop;
+  r.innerHTML = `<p class="ab-regtitel">Dieses Blatt · ${L.dauer || 90} Minuten</p><ol>${L.blatt.map(a => { const hier = a.id === S.seite;
+    const [wort, kl] = hier ? ["du bist hier","hier"] : erledigt(a.id) ? ["fertig","fertig"] : offen(a.id) ? ["offen","offen"] : a.frei === "ansage" ? ["öffnet auf Ansage","ansage"] : ["öffnet nach deiner Antwort","antwort"];
+    return `<li><button type="button" data-geh="${a.id}" class="${kl}"${hier ? ' aria-current="step"' : ""} aria-label="Auftrag ${a.nr}: ${esc(a.kurz)}, ${esc(a.form)}, ${a.min} Minuten, ${wort}"><span class="ab-nr" aria-hidden="true">${a.nr}</span><span><b>${esc(a.kurz)}</b><small>${esc(a.form)} · ${a.min} Min.</small><span class="ab-st">${wort}</span></span></button></li>`; }).join("")}</ol>`;
+  if (QUER() && !SCHMAL()) r.insertAdjacentHTML("beforeend", loeschBereich());
+  r.scrollLeft = sl; r.scrollTop = st;
+}
+function zuSeite(a){
+  const ans = a.frei === "ansage", nach = ans ? null : AUF(a.nach);
+  return `<div class="ab-zu"><p class="ab-zu-t">${ans ? "Dieser Auftrag öffnet auf Ansage." : "Dieser Auftrag öffnet nach deiner Antwort."}</p>
+  <p>${esc(ans ? "Darum geht es gleich: " + (a.gleich || a.name) : (a.fehlt || "Bearbeite erst den Auftrag davor."))}</p>
+  ${nach ? `<button type="button" class="btn dunkel" data-geh="${nach.id}">Zu Auftrag ${nach.nr}</button>` : ""}
+  <button type="button" class="btn${ans ? " dunkel" : ""}" data-freifrage aria-expanded="false">${ans ? "Unsere Lehrkraft hat freigegeben" : "Auf Ansage trotzdem öffnen"}</button>
+  <div id="ab-frage" hidden class="loesch-frage"><p><b>Hat eure Lehrkraft Auftrag ${a.nr} freigegeben?</b></p><div class="reihe"><button type="button" class="btn primary" data-frei="${a.id}">Ja, öffnen</button><button type="button" class="btn" data-frei="">Nein, noch nicht</button></div></div></div>`;
+}
+const blattzeile = () => `<div class="ab-zeile"><span>GGK · ${esc(L.kapitel || "")}</span><span>${esc(L.nr)} · Arbeitsblatt</span><span>Datum: ${new Date().toLocaleDateString("de-DE")}</span></div>`;
+function blatt(a){
+  const zu = !offen(a.id), ai = AUFI(a.id);
+  let html; BLATT_AN = true;
+  try { html = zu ? zuSeite(a) : String(SEITE_FN[a.id]()).replace(/^\s*(<p class="zeit">[\s\S]*?<\/p>)?\s*<h1[^>]*>[\s\S]*?<\/h1>/, ""); } finally { BLATT_AN = false; }
+  const davor = ai > 0 ? L.blatt[ai - 1] : null, danach = ai < L.blatt.length - 1 ? L.blatt[ai + 1] : null;
+  return `<h1 class="ab-h"><span class="ab-nr" aria-hidden="true">${a.nr}</span><span>${esc(a.kopf || "Arbeitsauftrag " + a.nr)}: ${esc(a.name)}</span></h1>
+  <p class="ab-meta">${esc(a.form)} · ${a.min} Minuten${a.marke ? `<span class="ab-marke">${esc(a.marke)}</span>` : ""}</p>
+  <section class="ab-teil">${html}</section>
+  <div class="ab-fuss nodruck"><button type="button" class="btn" data-geh="${davor ? davor.id : "start"}">‹ ${davor ? esc(davor.nr + " " + davor.kurz) : "Deckblatt"}</button><span></span>
+  ${danach ? `<button type="button" class="btn primary" data-geh="${danach.id}"${zu ? "" : ` data-durch="${a.id}"`}>${esc(danach.nr + " " + danach.kurz)} ›</button>` : `<a class="btn primary" href="${LABOR}">Zur Übersicht</a>`}</div>`;
+}
+/* Ablauf fürs Deckblatt: die Aufträge als Liste */
+const blattAblauf = () => `<ol class="ablauf ab-ablauf">${L.blatt.map(a => `<li><b>${a.nr}</b><span>${esc(a.name)} <small>${esc(a.form)} · ${a.min} Min.${a.frei === "ansage" ? " · auf Ansage" : ""}</small></span></li>`).join("")}</ol>`;
+
+/* ---------- Auswahl links, die eine Karte rechts (Muster aus M22 4.1) ----------
+   eintraege = [{ id, nr, titel, unter, html, fertig }] · Stand: S.wk[gruppe] = id */
+function wahlKarte(gruppe, eintraege, o = {}){
+  const akt = (S.wk || {})[gruppe] || (o.leer ? null : eintraege[0].id), e = eintraege.find(x => x.id === akt);
+  return `<div class="w-wahl ${o.klasse || ""}" data-wahlgruppe="${gruppe}">
+  <div class="w-liste" role="group" aria-label="${esc(o.titel || "Auswahl")}">${eintraege.map(x => `<button type="button" data-akt="wk" data-p="${gruppe}" data-w="${x.id}" aria-pressed="${x.id === akt}" class="${x.fertig ? "um" : ""}">${x.nr ? `<span class="w-nr">${esc(x.nr)}</span>` : ""}<span class="w-t">${esc(x.titel)}</span>${x.unter ? `<span class="w-u">${esc(x.unter)}</span>` : ""}${x.fertig ? `<span class="w-st">✓ ${esc(typeof x.fertig === "string" ? x.fertig : "bearbeitet")}</span>` : ""}</button>`).join("")}</div>
+  <div class="w-karte" id="wk-${gruppe}" tabindex="-1" aria-live="polite">${e ? e.html : `<p class="w-leer">${esc(o.leer)}</p>`}</div></div>`;
+}
+/* ---------- Skala: sich festlegen auf einer Linie (Meinungslinie, Bewertung 1–5) ---------- */
+function skala(pfad, frage, n, links, rechts, o = {}){
+  const v = hol(pfad), von = o.von ?? 1;
+  return `<fieldset class="w-skala"><legend>${frage}</legend><div class="w-stufen" style="--n:${n}">${Array.from({ length:n }, (_, i) => i + von).map(i => `<button type="button" data-akt="skala" data-p="${pfad}" data-w="${i}" aria-pressed="${v === i}" aria-label="${i} von ${n + von - 1}">${i}</button>`).join("")}</div><div class="pole"><span>${esc(links)}</span><span>${esc(rechts)}</span></div></fieldset>`;
+}
+/* ---------- Erst erinnern (P2): Frage – eigene Antwort im Kopf oder im Feld – dann aufdecken ---------- */
+function abrufen(pfad, fragen){
+  const a = hol(pfad) || {};
+  return `<div class="w-abruf">${fragen.map((f, i) => { const auf = !!(a.auf || {})[i], t = (a.t || {})[i] || "";
+    return `<div class="w-frage"><label for="ab-${pfad}-${i}"><span class="w-nr">${i + 1}</span> ${esc(f[0])}</label><input type="text" id="ab-${pfad}-${i}" data-f="${pfad}.t.${i}" value="${esc(t)}" placeholder="Stichwort genügt" autocomplete="off" ${auf ? "readonly" : ""}>
+    <button type="button" class="btn" data-akt="abrufauf" data-p="${pfad}" data-w="${i}" ${auf ? "disabled" : ""}>${auf ? "Aufgedeckt" : "Aufdecken"}</button>
+    <div class="w-loesung" aria-live="polite">${auf ? `<b>Das gehört dazu:</b> ${f[1]}` : ""}</div></div>`; }).join("")}</div>`;
+}
+/* ---------- Tabelle zum Ausfüllen: kopf = [Spalten], zeilen = [Zeilentitel] ---------- */
+function tabelle(pfad, kopf, zeilen, o = {}){
+  return `<div class="matrix-wrap w-tab"><table><thead><tr>${kopf.map(k => `<th scope="col">${esc(k)}</th>`).join("")}</tr></thead><tbody>${zeilen.map((z, r) => `<tr><th scope="row">${z}</th>${kopf.slice(1).map((k, c) => `<td><textarea data-f="${pfad}.${r}.${c}" rows="${o.rows || 2}" aria-label="${esc(String(z).replace(/<[^>]+>/g, ""))}: ${esc(k)}" placeholder="${esc((o.platz || [])[c] || "")}">${esc(hol(`${pfad}.${r}.${c}`) || "")}</textarea></td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+}
+const tabelleVoll = (pfad, zeilen, spalten, min = 3) => { for (let r = 0; r < zeilen; r++) for (let c = 0; c < spalten; c++) if (String(hol(`${pfad}.${r}.${c}`) || "").trim().length < min) return false; return true; };
+/* ---------- Film oder Seite außerhalb: öffnet erst auf eigenes Tippen in einem neuen Tab (nichts wird vorab geladen) ---------- */
+function filmKarte(v){
+  return `<div class="w-film"><div class="w-film-t"><span class="kennung">${esc(v.art || "Film")}${v.dauer ? " · " + esc(v.dauer) : ""}</span><h3>${esc(v.titel)}</h3><p>${v.text || ""}</p><p class="quelle">${v.nachweis || ""}</p></div>
+  <a class="btn dunkel" href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.knopf || "Film öffnen")} ↗</a><p class="hinweis">Öffnet in einem neuen Tab bei ${esc(v.wo)}. Deine Eingaben hier bleiben.</p></div>`;
+}
+/* ---------- Großes Bild mit Nachweis; fehlt die Datei (öffentliche Fassung), verschwindet die Figur ---------- */
+function bild(b, o = {}){
+  return `<figure class="w-bild ${o.klasse || ""}" data-bildgruppe="${o.gruppe || ""}"><img src="${b.pfad || "media/"}${b.datei}" alt="${esc(b.alt)}" loading="lazy" onerror="bildFehlt(this)"><figcaption>${b.text || ""}<span class="nachweis">${b.nachweis || "Bild aus dem Unterrichtsheft. Nachweis offen."}</span></figcaption></figure>`;
+}
+/* ---------- Zeitleiste (Orientierung): punkte = [[datum, titel, text, klasse]] ---------- */
+const zeitleiste = (punkte, o = {}) => `<ol class="w-zeit ${o.klasse || ""}" style="--n:${punkte.length}">${punkte.map(p => `<li class="${p[3] || ""}"><b>${esc(p[0])}</b><span class="w-zt">${esc(p[1])}</span>${p[2] ? `<span class="w-zx">${esc(p[2])}</span>` : ""}</li>`).join("")}</ol>`;
+/* ---------- Karten im Raster (Personen, Parteien, Positionen) ---------- */
+const karten = (liste, o = {}) => `<div class="w-karten k${o.spalten || 3}">${liste.map(k => `<article class="w-kk ${k.klasse || ""}">${k.kopf ? `<p class="kennung">${esc(k.kopf)}</p>` : ""}<h3>${esc(k.titel)}</h3>${k.html || ""}</article>`).join("")}</div>`;
+/* ---------- Kasten »Das brauchst du« (Erklärung direkt an der Aufgabe, wortgleich mit der Zusammenfassung) ---------- */
+const wissen = (titel, html) => `<aside class="w-wissen"><p class="kennung">Das brauchst du</p><h3>${esc(titel)}</h3>${html}</aside>`;
+
+/* ---------- Landkarte als fester Auftrag L: erst vermuten, dann einen Eintrag der kognitiven Landkarte wählen und begründen ----------
+   Namen und Erklärungen wörtlich aus der kognitiven Landkarte (Repository kognitive-Landkarte-des-Geschichtsunterrichts, Stand 17.11.2026). */
+const LKTEIL = {
+  wozu:{ anker:"1-0", titel:"1 Wozu Geschichte?", liste:[
+    ["1-1","Resilienz gegen Manipulation","Wenn du weißt, wie Propaganda in der Vergangenheit funktioniert hat und wie Geschichten gebaut werden, erkennst du leichter, mit welchen Absichten dir heute etwas erzählt wird."],
+    ["1-2","Anthropologische Konstanten","Geschichte zeigt wiederkehrende Muster menschlichen Verhaltens, zum Beispiel wie Menschen in Krisen reagieren, wie Gruppen sich abgrenzen oder wie Macht gesichert wird."],
+    ["1-3","Verständnis der Gegenwart","Wir befragen die Vergangenheit mit unseren heutigen Fragen, und ihre Antworten helfen uns, unsere Gegenwart zu verstehen."],
+    ["1-4","Lernen aus der Vergangenheit","Kann man aus Geschichte lernen? Situationen wiederholen sich nie genau."],
+    ["1-5","Kulturelles Bewusstsein","Wer sich mit anderen Zeiten und Kulturen beschäftigt, erkennt auch, dass die eigene Lebensweise nicht selbstverständlich ist."],
+    ["1-6","Identitätsbildung","Geschichte stiftet Identität, für Einzelne wie für Gruppen und Nationen. Aber Identitäten sind gemacht."],
+    ["1-7","Kritisches Denken","Quellen kritisch prüfen: Wer hat sie verfasst? Wann, wozu, für wen? Was kann eine Quelle wissen und was nicht?"],
+    ["1-8","Demokratisches Bewusstsein","Wer versteht, wie Demokratien entstanden sind und wie sie gescheitert sind, kann sich besser an der Demokratie beteiligen."],
+    ["1-9","Verständnis globaler Zusammenhänge","Globalgeschichte hilft, Entwicklungen zu verstehen, die an keiner Grenze haltmachen."],
+    ["1-10","Inspiration und Motivation","Geschichten von Mut, Widerstand und sozialem Wandel können motivieren, sich selbst einzusetzen."]] },
+  trift:{ anker:"2-2", titel:"2.2 Die Unterschiede: Triftigkeitsprüfungen", liste:[
+    ["2-2-1","Empirische Triftigkeit","Stimmen die Tatsachen? Eine Geschichte ist empirisch triftig, wenn die behaupteten Fakten durch Quellen belegt und mit dem Forschungsstand vereinbar sind."],
+    ["2-2-2","Normative Triftigkeit","Sind die Wertungen begründet? Normativ triftig ist eine Geschichte, wenn ihre Wertungen offengelegt und durch begründbare, allgemein zustimmungsfähige Normen gedeckt sind."],
+    ["2-2-3","Narrative Triftigkeit","Ist der Zusammenhang schlüssig? Ursache und Folge, Kontinuität und Wandel müssen begründet sein, nicht nur behauptet."]] },
+  formen:{ anker:"2-3", titel:"2.3 Formen von Geschichte", liste:[
+    ["2-3-1","Ideengeschichte","untersucht, wie philosophische, religiöse und politische Ideen entstehen, sich verbreiten und verändern."],
+    ["2-3-2","Nationalgeschichte","stellt die Geschichte eines Landes oder einer Nation in den Mittelpunkt."],
+    ["2-3-4","Globalgeschichte","untersucht Prozesse, die über nationale Grenzen hinausgehen: Handel, Migration, Imperien, Krankheiten, Wissen."],
+    ["2-3-5","Postkoloniale Geschichte","untersucht die Folgen des Kolonialismus für Kolonisierte und Kolonialmächte."],
+    ["2-3-6","Mikrogeschichte","untersucht kleine Einheiten wie ein Dorf, eine Familie oder eine einzelne Person sehr genau, um daran größere Zusammenhänge sichtbar zu machen."],
+    ["2-3-7","Sozialgeschichte","untersucht gesellschaftliche Strukturen und Prozesse: Klassen, Schichten, soziale Bewegungen, Lebensbedingungen."],
+    ["2-3-8","Ereignisgeschichte","erzählt einzelne Ereignisse wie Schlachten, Verträge oder Revolutionen und ihre unmittelbaren Ursachen und Folgen."],
+    ["2-3-9","Kulturgeschichte","untersucht Deutungen, Symbole, Rituale, Kunst und Alltagspraktiken: Wie haben Menschen ihre Welt wahrgenommen und ihr Sinn gegeben?"]] },
+  wirkung:{ anker:"3-1", titel:"3.1 Analyseinstrumente", liste:[
+    ["3-1-1","Kollektives Gedächtnis","Auch wenn wir uns als Einzelne erinnern, geschieht das immer in „sozialen Rahmen“ wie Familie, Religion, Klasse oder Nation (Maurice Halbwachs, 1925)."],
+    ["3-1-2","Public History","alle Formen, in denen Geschichte außerhalb von Schule und Universität dargestellt wird: in Museen, Gedenkstätten, Filmen, Serien, Computerspielen, Podcasts, Social Media."],
+    ["3-1-3","Geschichtspolitik","der bewusste Versuch politischer Akteure, Geschichte für ihre Ziele zu nutzen: durch Gesetze, Gedenktage, Denkmäler, Lehrpläne, Reden oder das Löschen von Erinnerung."],
+    ["3-1-4","Erinnerungskultur","der Oberbegriff für alle Formen, in denen eine Gesellschaft bewusst an Vergangenes erinnert: Denkmäler, Gedenktage, Rituale, Museen, Straßennamen, Schulbücher."],
+    ["3-1-5","Agency (Handlungsspielraum)","fragt, inwieweit Menschen oder Gruppen in historischen Situationen eigenständig handeln, Entscheidungen treffen und Entwicklungen beeinflussen konnten."],
+    ["3-1-6","Kritische Medienkompetenz","verbindet die historischen Prüfwerkzeuge (Quellenkritik, Triftigkeiten) mit Strategien, die Faktenchecker*innen nutzen."]] },
+};
+LKTEIL.prinzip = { anker:"2-1", titel:"2.1 Die Gemeinsamkeiten einer jeden Geschichte", liste:Object.keys(PRINZIP).map(id => [id, PRINZIP[id][0], PRINZIP[id][1]]).concat([["2-1-9","Multiperspektivität als Folge","Weil jede Geschichte an einen Standort gebunden ist, braucht man mehrere Perspektiven, um ihr näherzukommen."]]) };
+/* cfg = { teil:"prinzip"|"wozu"|"trift"|"formen"|"wirkung", frage, lead, platz, heft (Frage aus dem Heft, wörtlich), urteil:{ id:[stufe,text] }, sonst:[stufe,text], bruecke } */
+function landkarteL(cfg){
+  const T = LKTEIL[cfg.teil || "prinzip"], l = S.lk, frei = l.vermutung.trim().length >= 10;
+  const p = T.liste.find(x => x[0] === l.prinzip), u = p ? (cfg.urteil[p[0]] || cfg.sonst || ["kaum", "Dieser Eintrag trifft den Kern der Stunde kaum. Lies deine Vermutung noch einmal und vergleiche sie mit den Erklärungen."]) : null;
+  return `<p class="leitfrage">${esc(cfg.frage)}</p>
+  ${cfg.heft ? `<p class="ab-unter">Im Heft steht dazu unter „Geschichtstheorie: Die Meta-Ebene“: ${esc(cfg.heft)}</p>` : ""}
+  <div class="ab-zwei gleich"><div>
+  ${auftrag("Allein · 2 Minuten", "Erst vermuten", cfg.lead)}
+  ${textfeld("lk.vermutung", "Meine Vermutung", { rows:3, platz:cfg.platz, zaehl:false })}
+  <p class="hinweis" id="lk-hinweis">${frei ? "Gut. Jetzt die Landkarte öffnen, dann rechts einen Eintrag wählen." : "Schreib mindestens einen Satz. Danach geht es weiter."}</p>
+  </div><div id="lk-teil2" class="${frei ? "" : "gesperrt"}">
+  ${auftrag("Allein · 4 Minuten", "Dann die Landkarte", `Öffne „${esc(T.titel)}“ in der kognitiven Landkarte. Sie öffnet sich in einem neuen Tab, deine Eingaben hier bleiben. Wähle unten den Eintrag, der hier am besten passt, und begründe in einem Satz.`)}
+  <p><a class="btn dunkel" id="lk-link" href="${LK}${T.anker}" target="_blank" rel="noopener" ${frei ? "" : 'aria-disabled="true" tabindex="-1"'}>Landkarte öffnen: ${esc(T.titel)} ↗</a></p>
+  </div></div>
+  <div class="lk-wahl ${frei ? "" : "gesperrt"}"><div class="prinzipien" role="group" aria-label="Eintrag der Landkarte wählen">${T.liste.map(x => `<button type="button" data-prinzip="${x[0]}" aria-pressed="${l.prinzip === x[0]}" class="${l.ok && l.prinzip === x[0] ? u[0] : ""}" ${(!frei || l.ok) ? "disabled" : ""}><b>${esc(x[1])}</b><small>${esc(x[2])}</small></button>`).join("")}</div>
+  <label for="lk-grund">Meine Begründung</label><textarea id="lk-grund" data-f="lk.grund" rows="2" placeholder="Dieser Eintrag passt hier, weil …" ${(!frei || !l.prinzip || l.ok) ? "disabled" : ""}>${esc(l.grund)}</textarea>
+  <div class="reihe"><button type="button" class="btn dunkel" data-lkpruef ${(!frei || !l.prinzip || l.grund.trim().length < 10 || l.ok) ? "disabled" : ""}>Prüfen</button>${l.ok ? `<button type="button" class="btn" data-lkneu>Noch einmal</button>` : ""}<span class="hinweis">Rückmeldung in drei Stufen: zentral · auch begründbar · passt kaum.</span></div>
+  <div id="lk-fb" aria-live="polite">${l.ok && u ? `<div class="rm ${u[0]}"><b>${LKSTUFE[u[0]]}</b> ${esc(u[1])} <a href="${LK}${p[0]}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a></div>` : ""}</div></div>
+  ${cfg.bruecke ? `<div class="trift">${cfg.bruecke}</div>` : ""}`;
+}
+
+/* ---------- Schreibauftrag im Format der Klassenarbeit (Standard aus M22, Auftrag 7) ----------
+   L.schreib = { vor, aufgabe (HTML, Sie-Form mit <b>Operator</b>), material (HTML, optional), woerter:130, min:60, stufen:[[Name,Text]×3], inhaltKopf, inhalt:[[Kopf,Text]] } · Stand: S.sa */
+const schreibFertig = () => !!S.sa.hand || woerter(S.sa.text) >= (L.schreib.min || 60);
+const kaRaster = () => `<div class="raster3">${L.schreib.stufen.map(([s, x]) => `<div><b>${esc(s)}</b>${esc(x)}</div>`).join("")}</div>`;
+function schreibauftrag(){
+  const c = L.schreib, w = woerter(S.sa.text), fertig = schreibFertig(), ziel = c.woerter || 130;
+  const schreibteil = `<p><b>Erst gliedern.</b> Drei Stichpunkte, bevor du schreibst:</p>
+    <div class="gliederung">${[0,1,2].map(i => `<input type="text" data-f="sa.gl.${i}" aria-label="Stichpunkt ${i + 1}" placeholder="${i + 1}" value="${esc(S.sa.gl[i] || "")}" autocomplete="off">`).join("")}</div>
+    <label for="sa-text">Dein Text · etwa ${ziel} Wörter</label><textarea id="sa-text" data-f="sa.text" rows="${c.material ? 9 : 8}">${esc(S.sa.text)}</textarea>
+    <p class="hinweis" id="sa-zahl" aria-live="polite">${w} von etwa ${ziel} Wörtern</p>`;
+  const handteil = `<p><b>Lieber von Hand?</b> Öffne das Schreibblatt, sichere es als PDF und schreib mit dem Stift.</p>
+    <div class="reihe"><button type="button" class="btn" data-schreibblatt>Schreibblatt für den Stift</button></div>
+    <label class="haken"><input type="checkbox" data-hand ${S.sa.hand ? "checked" : ""}> Ich habe von Hand geschrieben.</label>
+    <div class="reihe"><button type="button" class="btn dunkel" data-krit ${fertig ? "" : "disabled"} aria-expanded="${!!(S.sa.krit && fertig)}">Kriterien zum Abgleich</button></div>
+    <p class="hinweis" id="krit-hinweis">${fertig ? "" : `Die Kriterien öffnen sich nach deinem Text: ab etwa ${c.min || 60} Wörtern oder wenn du von Hand geschrieben hast.`}</p>`;
+  return `<p class="ab-unter">${c.vor || "So kann die Aufgabe in der Klassenarbeit stehen. Dort gibt es dafür etwa 10 Punkte und höchstens eine Seite."}</p>
+  <blockquote class="ka-aufgabe">${c.aufgabe}</blockquote>
+  ${c.material ? `<div class="ab-zwei gleich"><div class="ka-material"><p class="kennung">Material</p>${c.material}</div><div>${schreibteil}${handteil}</div></div>` : `<div class="ab-zwei"><div>${schreibteil}</div><div>${handteil}</div></div>`}
+  <div id="krit" ${S.sa.krit && fertig ? "" : "hidden"}><h2 class="abschnitt">Kriterien zum Abgleich</h2>
+    <p class="hinweis">Lies deinen Text noch einmal. Wo stehst du? Die Seite vergibt keine Punkte.</p>${kaRaster()}
+    <div class="ka-inhalt"><p><b>${esc(c.inhaltKopf || "Das kann in deinem Text stehen")}</b></p>${c.inhalt.map(([a, b]) => `<p><b>${esc(a)}</b> ${esc(b)}</p>`).join("")}</div></div>
+  <div id="schreibblatt" aria-hidden="true"><p class="zeit"><span class="nr">${esc(L.nr)} · Schreibblatt</span><span>Name: ______________ · Datum: __________</span></p>
+    <h2>Schreibauftrag wie in der Klassenarbeit</h2><blockquote class="ka-aufgabe">${c.aufgabe}</blockquote>${c.material ? `<div class="ka-material">${c.material}</div>` : ""}
+    <p><b>Erst gliedern.</b> Drei Stichpunkte:</p><div class="gl3"><div class="linien"></div><div class="linien"></div><div class="linien"></div></div>
+    <p style="margin-top:5mm"><b>Mein Text</b> (etwa eine halbe Seite)</p>${'<div class="linien"></div>'.repeat(c.material ? 14 : 20)}</div>`;
+}
+function schreibStand(){
+  const z = document.getElementById("sa-zahl"); if (!z) return;
+  const c = L.schreib, f = schreibFertig(), k = document.querySelector("[data-krit]"), h = document.getElementById("krit-hinweis");
+  z.textContent = woerter(S.sa.text) + " von etwa " + (c.woerter || 130) + " Wörtern"; if (k) k.disabled = !f;
+  if (h) h.textContent = f ? "" : `Die Kriterien öffnen sich nach deinem Text: ab etwa ${c.min || 60} Wörtern oder wenn du von Hand geschrieben hast.`;
+  if (!f) { const kr = document.getElementById("krit"); if (kr) kr.hidden = true; }
+}
+
+/* ---------- Zusammenfassung: höchstens zwei Seiten A4 in zwei Teilen ----------
+   L.zf = { frage, kern, begriffe:[[Begriff,Erklärung]], abfolge:{ titel, punkte:[[Datum,Text]] }, zahlen:[[Zahl,Text]] (optional),
+            lk:{ name, satz, beispiel }, werkzeug:{ titel, schritte:[3] }, sonst:"…", mein:[[Titel, Pfad|Funktion]] } */
+function zusammen(){
+  const c = L.zf, s = L.schreib, m = (t, leer = "noch offen") => `<p class="mein ${String(t || "").trim() ? "" : "leer"}">${esc(String(t || "").trim() || leer)}</p>`;
+  const meinText = S.sa.text.trim() ? S.sa.text : (S.sa.hand ? "Von Hand geschrieben – siehe Schreibblatt." : "");
+  return `<div class="zf zf2"><div class="reihe nodruck" style="margin:0 0 1rem"><button type="button" class="btn dunkel" data-drucken>Drucken oder als PDF sichern</button><span class="hinweis">Zwei Seiten A4. In GoodNotes ablegen.</span></div>
+  <section class="zf-seite"><p class="zf-teil">${esc(L.nr)} · ${esc(L.titel)} · Seite 1</p><h1>Das musst du wissen</h1>
+  <p class="leitfrage">${esc(c.frage)}</p><p class="merksatz">${esc(c.kern)}</p>
+  <h2>Begriffe</h2><div class="begriffe">${c.begriffe.map(b => `<div><b>${esc(b[0])}:</b> ${esc(b[1])}</div>`).join("")}</div>
+  <h2>${esc(c.abfolge.titel)}</h2><ol class="zl">${c.abfolge.punkte.map(z => `<li><b>${esc(z[0])}</b><span>${esc(z[1])}</span></li>`).join("")}</ol>
+  ${c.zahlen ? `<h2>Daten und Zahlen</h2><ul class="zl">${c.zahlen.map(z => `<li><b>${esc(z[0])}</b><span>${esc(z[1])}</span></li>`).join("")}</ul>` : ""}</section>
+  <section class="zf-seite seitenumbruch"><p class="zf-teil">${esc(L.nr)} · ${esc(L.titel)} · Seite 2</p><h1>Das musst du können</h1>
+  <h2>Landkarte: ${esc(c.lk.name)}</h2><p>${esc(c.lk.satz)}</p><p><b>Beispiel aus der Stunde:</b> ${esc(c.lk.beispiel)}</p>
+  <div class="werk"><b>Denkwerkzeug: ${esc(c.werkzeug.titel)}</b><ol>${c.werkzeug.schritte.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>
+  <h2>So wird gefragt</h2><blockquote class="ka-aufgabe klein">${s.aufgabe}</blockquote>
+  <h2>Mein Text</h2>${m(meinText, "noch offen – Schreibauftrag")}
+  ${kaRaster()}
+  ${(c.mein || []).length ? `<h2>Meine Ergebnisse</h2>${c.mein.map(x => `<div class="karte"><b>${esc(x[0])}</b>${m(typeof x[1] === "function" ? x[1]() : hol(x[1]))}</div>`).join("")}` : ""}
+  ${c.sonst ? `<p class="zf-sonst"><b>Was sonst Thema war:</b> ${esc(c.sonst)}</p>` : ""}</section></div>`;
+}
+
+/* ---------- Aktionen des Rahmens ---------- */
+AKTION.wk = t => { if (!S.wk) S.wk = {}; S.wk[t.dataset.p] = t.dataset.w; speichere(); zeichneBehalte(); const k = document.getElementById("wk-" + t.dataset.p); if (k) { k.focus({ preventScroll:true }); const r = k.getBoundingClientRect(); if (r.top < 70 || r.top > innerHeight * .6) window.scrollBy({ top:r.top - 90, behavior: ruhig() ? "auto" : "smooth" }); } };
+AKTION.skala = t => { setz(t.dataset.p, +t.dataset.w); zeichneBehalte(); };
+AKTION.abrufauf = t => { setz(`${t.dataset.p}.auf.${t.dataset.w}`, true); zeichneBehalte(); };
+window.addEventListener("afterprint", () => document.body.classList.remove("druck-sb"));
+let BREIT_ALT = null;
+window.addEventListener("resize", () => { if (!BLATT()) return; const q = QUER(); if (q !== BREIT_ALT) { BREIT_ALT = q; const a = document.activeElement; if (!a || !/^(TEXTAREA|INPUT|SELECT)$/.test(a.tagName)) zeichneBehalte(); } });
+/* ===== Lehrkraft-Schloss · Quelle: src/lk-schloss.js – nur dort ändern =====
+   Der Text für Lehrkräfte steht verschlüsselt auf dieser Seite (Datenblock mit der id lehr-daten): AES-GCM 256,
+   Schlüssel per PBKDF2-SHA-256 (600 000 Runden) aus dem Passwort. Weder Passwort noch Klartext stehen im Repository.
+   Nach dem Öffnen bleibt der abgeleitete Schlüssel bis zum Schließen des Tabs im sessionStorage, damit andere
+   Module ohne neue Eingabe öffnen. »Lehrkraftbereich schließen« entfernt ihn. Nichts wird übertragen. */
+const LEHR_ORT = "ggk-lehr:schluessel";
+const LEHR = { html:null, laeuft:false, versucht:false };
+const lehrB = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const lehrT = u => btoa(String.fromCharCode.apply(null, u));
+const lehrKrypto = () => !!(window.crypto && crypto.subtle);
+function lehrDaten(){ try { return JSON.parse(document.getElementById("lehr-daten").textContent); } catch(e) { return null; } }
+function lehrMerk(){ try { return JSON.parse(sessionStorage.getItem(LEHR_ORT) || "null"); } catch(e) { return null; } }
+function lehrVergiss(){ try { sessionStorage.removeItem(LEHR_ORT); } catch(e) {} }
+async function lehrAuf(roh, d){
+  const key = await crypto.subtle.importKey("raw", roh, "AES-GCM", false, ["decrypt"]);
+  return new TextDecoder().decode(await crypto.subtle.decrypt({ name:"AES-GCM", iv:lehrB(d.iv) }, key, lehrB(d.ct)));
+}
+async function lehrMitPasswort(pass, d){
+  const klar = pass.normalize("NFC").trim().replace(/\s+/g, " ");
+  const km = await crypto.subtle.importKey("raw", new TextEncoder().encode(klar), "PBKDF2", false, ["deriveBits"]);
+  const roh = new Uint8Array(await crypto.subtle.deriveBits({ name:"PBKDF2", salt:lehrB(d.salt), iterations:d.iter, hash:"SHA-256" }, km, 256));
+  const html = await lehrAuf(roh, d);
+  try { sessionStorage.setItem(LEHR_ORT, JSON.stringify({ salt:d.salt, k:lehrT(roh) })); } catch(e) {}
+  return html;
+}
+/* Mit dem Schlüssel aus dieser Sitzung öffnen (ohne neue Eingabe). */
+async function lehrStill(m, d){
+  LEHR.laeuft = true;
+  try { LEHR.html = await lehrAuf(lehrB(m.k), d); } catch(e) { lehrVergiss(); }
+  LEHR.laeuft = false; lehrNeu();
+}
+function lehrNeu(){
+  if (typeof LEHR_ZEICHNE === "function") LEHR_ZEICHNE();
+  else { if (typeof S !== "undefined" && S && S.seite !== "lehrkraft") return; zeichne(false); }
+  const z = document.getElementById("lehr-inhalt") || document.getElementById("lehr-pass");
+  if (z) z.focus({ preventScroll:true });
+  window.scrollTo(0, 0);
+}
+const lehrZurueck = () => typeof LEHR_ZURUECK === "string" ? LEHR_ZURUECK : `<button type="button" class="btn" data-geh="start">‹ Zum Anfang</button>`;
+const lehrTuer = () => `<button type="button" class="lehr-tuer" data-geh="lehrkraft">Für Lehrkräfte</button>`;
+function lehrkraft(){
+  if (LEHR.html !== null) return `<div id="lehr-inhalt" tabindex="-1">${LEHR.html}${typeof lehrWerkzeuge === "function" ? lehrWerkzeuge() : ""}</div>
+  <div class="fuss lehr-fuss nodruck">${lehrZurueck()}<button type="button" class="btn" data-lehrzu>Lehrkraftbereich schließen</button></div>`;
+  const d = lehrDaten(), m = lehrMerk(), kopf = `<p class="zeit"><span class="nr">Für Lehrkräfte</span><span>mit Passwort geschützt</span></p><h1>Lehrkraftbereich</h1>`;
+  if (d && m && m.salt === d.salt && lehrKrypto() && !LEHR.versucht) { LEHR.versucht = true; lehrStill(m, d); }
+  if (LEHR.laeuft) return `<div class="lehr-schloss">${kopf}<p class="lead" role="status">Der Bereich wird geöffnet …</p></div>`;
+  const geht = d && lehrKrypto();
+  return `<div class="lehr-schloss">${kopf}
+  <p class="lead">Ablauf, Erwartungen und Hinweise zur Stunde. Der Bereich ist verschlüsselt und öffnet nur mit dem Passwort.</p>
+  ${geht ? `<form class="lehr-form" data-lehrform novalidate>
+    <label for="lehr-pass">Passwort</label>
+    <input id="lehr-pass" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" aria-describedby="lehr-hilfe lehr-meldung">
+    <button type="submit" class="btn primary lehr-knopf">Öffnen</button>
+    <p id="lehr-meldung" role="status" aria-live="polite"></p>
+  </form>
+  <p class="hinweis" id="lehr-hilfe">Das Passwort wird nur auf diesem Gerät geprüft und nicht übertragen. Groß- und Kleinschreibung zählen.</p>`
+  : `<p class="hinweis" role="status">${d ? "Dieser Browser kann den Bereich hier nicht öffnen. Öffne die Seite über https oder in einem aktuellen Browser." : "Für diese Seite ist kein Text für Lehrkräfte hinterlegt."}</p>`}
+  <div class="fuss lehr-fuss">${lehrZurueck()}</div></div>`;
+}
+document.addEventListener("submit", async ev => {
+  const f = ev.target.closest && ev.target.closest("[data-lehrform]"); if (!f) return;
+  ev.preventDefault(); if (LEHR.laeuft) return;
+  const ein = f.querySelector("input"), kn = f.querySelector("button"), m = document.getElementById("lehr-meldung");
+  if (!ein.value.trim()) { m.textContent = "Bitte gib das Passwort ein."; ein.focus(); return; }
+  LEHR.laeuft = true; kn.disabled = true; m.textContent = "Wird geprüft …";
+  try { LEHR.html = await lehrMitPasswort(ein.value, lehrDaten()); LEHR.laeuft = false; lehrNeu(); }
+  catch(e) { LEHR.laeuft = false; if (document.contains(f)) { kn.disabled = false; m.textContent = "Das Passwort passt nicht."; ein.focus(); ein.select(); } }
+});
+document.addEventListener("click", ev => {
+  if (!(ev.target.closest && ev.target.closest("[data-lehrzu]"))) return;
+  LEHR.html = null; LEHR.versucht = false; lehrVergiss(); lehrNeu();
+});
+document.head.insertAdjacentHTML("beforeend", `<style id="lehr-stil">
+.lehr-form{display:grid;gap:.6rem;max-width:30rem;margin:1.4rem 0 1rem}
+.lehr-form label{font-weight:700}
+.lehr-form input{width:100%;min-height:48px;border:1.5px solid #77716A;border-radius:var(--r,.75rem);padding:.5rem .8rem;background:var(--surface2,#fff);color:var(--ink,#24221F);font:inherit;margin:0}
+.lehr-form .lehr-knopf{justify-self:start}
+:where(.lehr-knopf){min-height:48px;padding:.6rem 1.2rem;font:inherit;font-weight:700;border-radius:.75rem;border:1px solid transparent;background:#9B402D;color:#FFFAF2;cursor:pointer}
+:where(.lehr-fuss .btn){min-height:48px;padding:.6rem 1.2rem;font:inherit;font-weight:700;border-radius:.75rem;border:1px solid #77716A;background:#FFFDF8;color:#24221F;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+#lehr-meldung{min-height:1.5em;margin:0;font-weight:700;color:var(--red,#9B402D)}
+:where(.lehr-schloss .zeit){display:flex;gap:.8rem;flex-wrap:wrap;font-weight:700}
+:where(.lehr-fuss){display:flex;gap:1rem;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-top:2.2rem;padding-top:1.3rem;border-top:1px solid #D5CEC3}
+#lehr-inhalt:focus{outline:none}
+.lehr-tuer{margin-left:auto;min-height:44px;padding:.3rem .2rem;border:0;background:none;font:inherit;color:inherit;text-decoration:underline;text-underline-offset:.2em;cursor:pointer}
+</style>`);
+/* ===== Ende Lehrkraft-Schloss ===== */
+/* ===== Kapitel »Weimarer Republik« (Heft „Geschichte aktuell 1“, M1–M14): gemeinsame Teile jeder Stunde =====
+   Jede Stunde setzt L = { wid, key, nr, titel, unter, mark, dauer, block, hier, frage, satz, ziele, blatt, erledigt, schreib, zf, init } und ruft am Ende weimarStart(). */
+const W_KEY = "ggk-weimar:v1";
+const wLade = () => { try { return Object.assign({ faden:{}, kg:{} }, JSON.parse(localStorage.getItem(W_KEY)) || {}); } catch(e) { return { faden:{}, kg:{} }; } };
+const wSchreib = f => { const u = wLade(); f(u); try { localStorage.setItem(W_KEY, JSON.stringify(u)); } catch(e) {} };
+/* Vier Blöcke mit Leitsatz – Titel und Leitsätze wörtlich aus dem digitalen Inhaltsverzeichnis des Kurses (Inhaltsverzeichnis-GGK). */
+const W_BLOCK = {
+  a:["Einstieg und Erster Weltkrieg – Standortgebundenheit", "ca. 1914–1918", "Wie entstand der Erste Weltkrieg – und wie beeinflusst unser Standort, was wir davon erzählen?"],
+  b:["Novemberrevolution und Gründung der Weimarer Republik", "1918–1919", "Warum scheiterte die Revolution – und was sagt das über die Fragilität von Demokratie?"],
+  c:["Versailler Vertrag und internationale Neuordnung", "1919", "War Versailles ein gerechter Frieden – oder die Ursache des nächsten Krieges?"],
+  d:["Kollektives Gedächtnis und Weimarer Republik – Krisenjahre", "1919–1933", "Was hindert Demokratien daran, sich selbst zu verteidigen – damals wie heute?"],
+};
+/* Stundenfolge des Kapitels: [wid, Nummer, Titel, Datei, Block] */
+const W_MODULE = [
+  ["m01","M1","Mein Leben im Jahr 1917 – Was hätte ich gedacht?","m01-mein-leben-1917.html","a"],
+  ["m02","M2","Der Ausbruch des Ersten Weltkriegs","m02-ausbruch-erster-weltkrieg.html","a"],
+  ["m03","M3","Standortgebundenheit: der Völkermord an den Armenier*innen","m03-standortgebundenheit.html","a"],
+  ["m04","M4","Der Krieg ist verloren! Die Matrosen meutern!","m04-novemberrevolution.html","b"],
+  ["m05","M5","Die doppelte Ausrufung der Republik","m05-doppelte-ausrufung.html","b"],
+  ["m06","M6","Die Versailler Friedenskonferenz","m06-friedenskonferenz.html","c"],
+  ["m07","M7","Der Versailler Vertrag aus „deutscher“ Perspektive","m07-versailler-vertrag.html","c"],
+  ["m071","M7.1","Wer trägt die Schuld am Ersten Weltkrieg?","m07-1-kriegsschuld.html","c"],
+  ["m08","M8","Das kollektive Gedächtnis – Identität und Erinnerung","m08-kollektives-gedaechtnis.html","d"],
+  ["m09","M9","Wohin soll die Reise gehen? Die Wahlen 1919","m09-wahlen-1919.html","d"],
+  ["m10","M10","Die Saat der Gewalt 1918–1922","m10-saat-der-gewalt.html","d"],
+  ["m11","M11","Das Krisenjahr 1923 und seine Konsequenzen","m11-krisenjahr-1923.html","d"],
+  ["m12","M12","Stabilisierungsjahre: Die Goldenen Zwanziger","m12-goldene-zwanziger.html","d"],
+  ["m13","M13","Zwei Leben einer Zeit","m13-zwei-leben.html","d"],
+  ["m14","M14","Warum scheitert Weimar? Die Weltwirtschaftskrise","m14-warum-scheitert-weimar.html","d"],
+  ["m142","M14.2","Warum scheitert Weimar? Verfassung und Präsidialkabinette","m14-2-verfassung-praesidialkabinette.html","d"],
+];
+/* Ankerdaten des Kapitels (Orientierungswissen) */
+const W_ANKER = [["1914","Der Erste Weltkrieg beginnt"],["9. Nov. 1918","Ausrufung der Republik"],["28. Juni 1919","Versailler Vertrag"],["11. Aug. 1919","Weimarer Verfassung"],["1923","Krisenjahr"],["1924–1929","Jahre der Stabilisierung"],["Okt. 1929","Weltwirtschaftskrise"],["30. Jan. 1933","Hitler wird Reichskanzler"]];
+const wMod = id => W_MODULE.find(m => m[0] === (id || L.wid));
+const wNachbar = d => W_MODULE[W_MODULE.findIndex(m => m[0] === L.wid) + d];
+const wGebaut = id => (window.W_GEBAUT || []).includes(id);
+/* Bild im Kopfband: Liegt die Datei nicht vor (öffentliche Fassung), bleibt die Jahreszahl als Zeichen stehen. */
+const wBand = c => `<div class="band gross mit w-band"><div class="bt"><span class="ob">${esc(L.nr)} · ${esc(c.dauer)}</span><h2>${esc(L.titel)}</h2><p>${c.satz}</p></div>
+  <figure><div class="w-jahr" aria-hidden="true"><span>${esc(c.jahr)}</span></div>${c.bild ? `<img src="media/${c.bild.datei}" alt="${esc(c.bild.alt)}" onerror="this.closest('figure').classList.add('ohne');this.remove()"><figcaption>${c.bild.text} <span>${c.bild.nachweis}</span></figcaption>` : ""}</figure></div>`;
+/* Deckblatt: Kopfband, Leitfrage, Ziele, Ablauf, »Wo wir stehen«, roter Faden bisher */
+function deckblatt(){
+  const c = L.deck, b = W_BLOCK[L.block], u = wLade(), vor = wNachbar(-1), faden = vor ? u.faden[vor[0]] : "";
+  return `${wBand(c)}
+  <p class="leitfrage">${esc(L.frage)}</p>
+  ${c.belastend ? belastend(c.belastend) : ""}
+  <section class="w-wo" aria-label="Wo wir stehen"><p class="kennung">Wo wir stehen · ${esc(b[0])} (${esc(b[1])})</p>
+  ${zeitleiste(W_ANKER.map((a, i) => [a[0], a[1], "", (c.hier || []).includes(i) ? "hier" : ""]), { klasse:"klein" })}
+  <p class="hinweis">Leitfrage dieses Abschnitts: ${esc(b[2])}</p></section>
+  <div class="deck"><div>
+    <h2 class="abschnitt">Am Ende kannst du</h2><ul class="ziele">${c.ziele.map(z => `<li>${esc(z)}</li>`).join("")}</ul>
+    ${faden ? `<div class="w-faden"><p class="kennung">Dein roter Faden aus ${esc(vor[1])}</p><p class="mein">${esc(faden)}</p></div>` : ""}
+  </div><div>
+    <h2 class="abschnitt">So läuft dieses Blatt</h2>${blattAblauf()}
+    <p class="hinweis" style="margin-top:.7rem">Links steht das Register mit allen Aufträgen. Manche öffnen erst auf Ansage oder nach deiner Antwort. Dein Stand bleibt auf diesem Gerät; sichere am Ende die Zusammenfassung als PDF.</p>
+    <div class="deck-start"><button type="button" class="btn primary" data-geh="${L.blatt[0].id}">Mit Auftrag ${L.blatt[0].nr} beginnen ›</button></div>
+  </div></div>`;
+}
+/* Auftrag und Bild als ein Kopf (Muster aus M22 4.1). Fehlt das Bild, bleibt der Auftrag allein stehen. */
+const kopfpaar = (auftragHtml, b) => `<div class="kopfpaar">${auftragHtml}<figure><img src="media/${b.datei}" alt="${esc(b.alt)}" loading="lazy" onerror="this.closest('.kopfpaar').classList.add('ohne');this.closest('figure').remove()"><figcaption>${b.text} <span>${b.nachweis}</span></figcaption></figure></div>`;
+/* Roter Faden: ein Satz am Ende jeder Stunde; er wandert in die Übersicht des Kapitels und aufs Deckblatt der nächsten Stunde. */
+const fadenFeld = () => `<div class="w-fadenfeld nodruck">${auftrag("Allein · 2 Minuten", "Ein Satz für den roten Faden", "Die Leitfrage dieses Abschnitts: " + esc(W_BLOCK[L.block][2]) + " Was trägt diese Stunde zur Antwort bei?")}
+  ${textfeld("faden", "Mein Satz", { rows:2, zaehl:false, anfaenge:L.fadenAnf || ["Diese Stunde zeigt, dass", "Für die Leitfrage heißt das:"] })}</div>`;
+/* Eintrag ins »kollektive Gedächtnis der Weimarer Republik« (Raster aus M8.1, wächst von M8 bis M14) */
+const kgFeld = (titel, text) => `<div class="w-kgfeld">${auftrag("Allein · 3 Minuten", "Eintrag ins kollektive Gedächtnis der Republik", text || "Was aus dieser Stunde bleibt im Gedächtnis der Menschen von damals – und wie wirkt es weiter? Zwei bis drei Stichpunkte für das Raster aus M8.1.")}
+  ${textfeld("kg", titel, { rows:3, zaehl:false })}</div>`;
+/* Text aus dem Heft als Leseblatt; Absätze als Liste */
+const leseblatt = (titel, abs, nachweis, o = {}) => `<div class="qblatt lese ${o.klasse || ""}"><h3>${esc(titel)}</h3><div class="qtext">${abs.map(a => Array.isArray(a) ? `<p><span class="qtag">${esc(a[0])}</span>${a[1]}</p>` : `<p>${a}</p>`).join("")}</div><p class="quelle">${nachweis}</p></div>`;
+/* Wortlautquelle (Rede, Vertrag) groß gesetzt */
+const zitat = (kopf, text, wer) => `<figure class="w-zitat"><figcaption class="kennung">${kopf}</figcaption><blockquote>${text}<span class="wer">${wer}</span></blockquote></figure>`;
+/* Balken für Wahlergebnisse (eigene Grafik aus den Zahlen der Tabelle im Heft, M14) */
+const balken = (titel, werte, nachweis) => { const max = Math.max.apply(null, werte.map(w => w[1]));
+  return `<figure class="w-balken"><figcaption><b>${esc(titel)}</b></figcaption><div class="w-bz" role="list">${werte.map(w => `<div class="w-bzeile" role="listitem"><span class="w-bn">${esc(w[0])}</span><span class="w-bb"><span style="width:${(w[1] / max * 100).toFixed(1)}%;background:${w[2] || "var(--ink)"}"></span></span><span class="w-bw">${String(w[1]).replace(".", ",")} %</span></div>`).join("")}</div><p class="quelle">${nachweis}</p></figure>`; };
+
+function weimarStart(){
+  L.kapitel = "Weimarer Republik"; L.seiten = [["start","",""]].concat(L.blatt.map(a => [a.id, a.min + " Min.", a.kurz]));
+  const init0 = L.init; L.init = () => Object.assign({ faden:(wLade().faden[L.wid] || ""), kg:(wLade().kg[L.wid] || "") }, init0 ? init0() : {});
+  const ne0 = L.nachEingabe; L.nachEingabe = p => { if (p === "faden") wSchreib(u => { u.faden[L.wid] = S.faden; }); if (p === "kg") wSchreib(u => { u.kg[L.wid] = S.kg; }); if (ne0) ne0(p); };
+  const ni0 = L.nachInit; L.nachInit = () => { zkInit(); if (ni0) ni0(); };
+  kernStart();
+}
+/* Kopf: Rückweg zur Übersicht und zum Kapitel */
+const kopf0 = kopf;
+kopf = function(){ kopf0(); const k = document.getElementById("kopf"), p = k.querySelector(".pill"); if (p) p.insertAdjacentHTML("beforebegin", `<a class="pill kapitel" href="index.html">Kapitel Weimar</a>`); };
+
+/* ---------- Wahr oder falsch – mit Erklärung je Antwort (Muster 2). aussagen = [[Text, richtig:true|false|null, Erklärung bei „wahr“, Erklärung bei „falsch“]]
+   richtig = null heißt: Die Aussage lässt sich nicht mit einem Wort beantworten; beide Antworten bekommen eine einordnende Rückmeldung. ---------- */
+function wahrFalsch(pfad, aussagen){
+  const st = hol(pfad) || {};
+  return `<div class="w-wahrfalsch">${aussagen.map((a, i) => { const v = st[i], r = a[1];
+    const stufe = v == null ? "" : (r === null ? "teils" : ((v === "w") === r ? "zentral" : "kaum")), wort = { zentral:"Stimmt.", kaum:"Noch nicht.", teils:"Genauer hinsehen." }[stufe];
+    return `<div class="w-wf"><p>${esc(a[0])}</p><div class="w-wfk" role="group" aria-label="Wahr oder falsch"><button type="button" data-akt="wf" data-p="${pfad}" data-i="${i}" data-w="w" aria-pressed="${v === "w"}" ${v ? "disabled" : ""}>Wahr</button><button type="button" data-akt="wf" data-p="${pfad}" data-i="${i}" data-w="f" aria-pressed="${v === "f"}" ${v ? "disabled" : ""}>Falsch</button>${v ? `<button type="button" class="btn" data-akt="wfneu" data-p="${pfad}" data-i="${i}" style="min-width:0">Noch einmal</button>` : ""}</div>
+    <div aria-live="polite" style="grid-column:1/-1">${v ? `<div class="rm ${stufe}"><b>${wort}</b> ${esc(v === "w" ? a[2] : a[3])}</div>` : ""}</div></div>`; }).join("")}</div>`;
+}
+const wfFertig = (pfad, n) => { const st = hol(pfad) || {}; for (let i = 0; i < n; i++) if (!st[i]) return false; return true; };
+AKTION.wf = t => { setz(`${t.dataset.p}.${t.dataset.i}`, t.dataset.w); zeichneBehalte(); };
+AKTION.wfneu = t => { setz(`${t.dataset.p}.${t.dataset.i}`, null); zeichneBehalte(); };
+const lang = (p, n = 10) => String(hol(p) || "").trim().length >= n;
+
+/* ---------- Wissens-Check mit Erklärung je Antwort (Muster 2): Die erste Antwort zählt, jede Antwort bekommt ihre eigene Erklärung. Keine Punkte.
+   fragen = [[Frage, [[Antwort, richtig, Erklärung], …], Abschnitt zum Nachlesen]] · Stand: S[pfad][i] = Index der gewählten Antwort ---------- */
+function check(pfad, fragen){
+  const st = hol(pfad) || {};
+  return `<div class="w-check">${fragen.map((f, i) => { const v = st[i], gew = v == null ? null : f[1][v];
+    return `<fieldset class="w-cf"><legend><span class="w-nr">${i + 1}</span> ${esc(f[0])}</legend><div class="w-co">${f[1].map((o, k) => `<button type="button" data-akt="check" data-p="${pfad}" data-i="${i}" data-w="${k}" aria-pressed="${v === k}" ${v == null ? "" : "disabled"}>${esc(o[0])}</button>`).join("")}</div>
+    <div aria-live="polite">${gew ? `<div class="rm ${gew[1] ? "zentral" : "kaum"}"><b>${gew[1] ? "Stimmt." : "Noch nicht."}</b> ${esc(gew[2])}${gew[1] ? "" : ` <span class="hinweis">Lies noch einmal: ${esc(f[2])}.</span> <button type="button" class="btn" data-akt="checkneu" data-p="${pfad}" data-i="${i}">Noch einmal</button>`}</div>` : ""}</div></fieldset>`; }).join("")}</div>`;
+}
+const checkFertig = (pfad, n) => { const st = hol(pfad) || {}; for (let i = 0; i < n; i++) if (st[i] == null) return false; return true; };
+AKTION.check = t => { setz(`${t.dataset.p}.${t.dataset.i}`, +t.dataset.w); zeichneBehalte(); };
+AKTION.checkneu = t => { setz(`${t.dataset.p}.${t.dataset.i}`, null); zeichneBehalte(); };
+
+/* ---------- Mehrfachauswahl: Karten mit dem Marker anstreichen (Heft: »Markieren Sie die überzeugenden Überlegungen mit gelb«) ---------- */
+const mehrWahl = (pfad, eintraege, o = {}) => `<div class="w-mw k${o.spalten || 3}" role="group" aria-label="${esc(o.titel || "Karten markieren")}">${eintraege.map(e => { const an = !!hol(`${pfad}.${e.id}`); return `<button type="button" data-akt="mw" data-p="${pfad}.${e.id}" aria-pressed="${an}">${e.kopf ? `<span class="kennung">${esc(e.kopf)}</span>` : ""}<b>${esc(e.titel)}</b><span class="w-mwt">${e.text}</span><span class="w-mws">${an ? "✓ " + esc(o.an || "markiert") : esc(o.aus || "antippen zum Markieren")}</span></button>`; }).join("")}</div>`;
+const mwZahl = pfad => Object.values(hol(pfad) || {}).filter(Boolean).length;
+AKTION.mw = t => { setz(t.dataset.p, !hol(t.dataset.p)); zeichneBehalte(); };
+/* ---------- Auf einem Bild zeichnen (Stift oder Finger): Linien liegen als Zahlen im Stand, nichts wird übertragen.
+   pfad → S[pfad] = [{ s:Stift, p:[[x,y] …] }] mit x, y zwischen 0 und 1 · stifte = [[id, Farbe, Name]] ---------- */
+function zeichenKarte(pfad, b, stifte){
+  const st = hol(pfad + "Stift") || stifte[0][0], n = (hol(pfad) || []).length;
+  return `<div class="w-zk" data-zk="${pfad}" data-stifte="${esc(JSON.stringify(stifte))}">
+  <div class="g-stifte nodruck" role="group" aria-label="Stift wählen">${stifte.map(s => `<button type="button" class="g-stift" data-akt="setz" data-p="${pfad}Stift" data-w="${s[0]}" aria-pressed="${st === s[0]}"><span class="z" aria-hidden="true" style="color:${s[1]}">▬</span>${esc(s[2])}</button>`).join("")}
+  <button type="button" class="btn" data-akt="zkzurueck" data-p="${pfad}" ${n ? "" : "disabled"}>Letzte Linie zurück</button><button type="button" class="btn" data-akt="zkleer" data-p="${pfad}" ${n ? "" : "disabled"}>Alles löschen</button></div>
+  <div class="w-zk-b"><img src="media/${b.datei}" alt="${esc(b.alt)}" onerror="zkFehlt(this)"><canvas data-zkc="${pfad}" aria-label="Zeichenfläche über der Karte. Mit Stift oder Finger Linien ziehen."></canvas></div>
+  <p class="quelle">${b.text || ""} ${b.nachweis || ""}</p>
+  <p class="hinweis" data-zkh hidden>${b.fehlt || "Dieses Bild liegt nur im Moodle-Paket. Nimm die Karte im Heft und zeichne dort."}</p></div>`;
+}
+function zkFehlt(img){ const w = img.closest(".w-zk"); w.querySelector(".w-zk-b").hidden = true; w.querySelector(".g-stifte").hidden = true; w.querySelector("[data-zkh]").hidden = false; }
+function zkMale(c){
+  const pfad = c.dataset.zkc, w = c.closest(".w-zk"), img = w.querySelector("img"); if (!img || !img.naturalWidth) return;
+  const r = img.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1); c.width = Math.round(r.width * dpr); c.height = Math.round(r.height * dpr);
+  const x = c.getContext("2d"), farbe = Object.fromEntries(JSON.parse(w.dataset.stifte).map(s => [s[0], s[1]]));
+  x.lineCap = "round"; x.lineJoin = "round"; x.lineWidth = 4 * dpr;
+  (hol(pfad) || []).forEach(l => { if (!l.p.length) return; x.strokeStyle = farbe[l.s] || "#24221F"; x.beginPath(); l.p.forEach((q, i) => { const px = q[0] * c.width, py = q[1] * c.height; if (i) x.lineTo(px, py); else x.moveTo(px, py); }); if (l.p.length === 1) x.lineTo(l.p[0][0] * c.width + .1, l.p[0][1] * c.height); x.stroke(); });
+}
+function zkInit(){
+  document.querySelectorAll("canvas[data-zkc]").forEach(c => { const img = c.closest(".w-zk").querySelector("img"); if (img.complete) zkMale(c); else img.addEventListener("load", () => zkMale(c), { once:true }); });
+}
+let ZK = null;
+document.addEventListener("pointerdown", ev => { const c = ev.target.closest && ev.target.closest("canvas[data-zkc]"); if (!c) return; ev.preventDefault(); c.setPointerCapture(ev.pointerId);
+  const r = c.getBoundingClientRect(), pfad = c.dataset.zkc, l = (hol(pfad) || []).slice(); ZK = { c, pfad, l, akt:{ s:hol(pfad + "Stift") || JSON.parse(c.closest(".w-zk").dataset.stifte)[0][0], p:[[+((ev.clientX - r.left) / r.width).toFixed(4), +((ev.clientY - r.top) / r.height).toFixed(4)]] } }; l.push(ZK.akt); });
+document.addEventListener("pointermove", ev => { if (!ZK) return; const r = ZK.c.getBoundingClientRect(), q = [+((ev.clientX - r.left) / r.width).toFixed(4), +((ev.clientY - r.top) / r.height).toFixed(4)], v = ZK.akt.p[ZK.akt.p.length - 1];
+  if (Math.abs(q[0] - v[0]) + Math.abs(q[1] - v[1]) < .004) return; ZK.akt.p.push(q); S[ZK.pfad] = ZK.l; zkMale(ZK.c); });
+const zkEnde = () => { if (!ZK) return; setz(ZK.pfad, ZK.l); ZK.c.closest(".w-zk").querySelectorAll('[data-akt="zkzurueck"],[data-akt="zkleer"]').forEach(b => { b.disabled = false; }); ZK = null; if (typeof L.nachEingabe === "function") L.nachEingabe("zk"); if (BLATT()) register(); };
+document.addEventListener("pointerup", zkEnde); document.addEventListener("pointercancel", zkEnde);
+AKTION.zkzurueck = t => { const l = (hol(t.dataset.p) || []).slice(0, -1); setz(t.dataset.p, l); zeichneBehalte(); };
+AKTION.zkleer = t => { setz(t.dataset.p, []); zeichneBehalte(); };
+window.addEventListener("resize", () => document.querySelectorAll("canvas[data-zkc]").forEach(zkMale));
+/* ===== M8 · Das kollektive Gedächtnis – Identität und Erinnerung · mit M8.1 Das kollektive Gedächtnis der Weimarer Republik (Heft „Geschichte aktuell 1“) ===== */
+const L = {
+  wid:"m08", key:"ggk-w-m08:v1", nr:"M8", titel:"Das kollektive Gedächtnis – Identität und Erinnerung", unter:"… und was 1919 in den Köpfen der Menschen vorgeht (M8.1)", dauer:90, block:"d",
+  /* Zeichen der Stunde: ein Kopf, in dem sich Erinnerungen verbinden */
+  mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 4a11 11 0 0 0-7 19.5V30h14v-6.5A11 11 0 0 0 17 4z" fill="none" stroke="#24221F" stroke-width="2.4" stroke-linejoin="round"/><path d="M12 14l5-4 5 5-4 4z" fill="none" stroke="#24221F" stroke-width="1.6"/><circle cx="12" cy="14" r="2" fill="#9B402D"/><circle cx="17" cy="10" r="2" fill="#E0B74A"/><circle cx="22" cy="15" r="2" fill="#9B402D"/><circle cx="18" cy="19" r="2" fill="#24221F"/></svg>`,
+  frage:"Was geht 1919 in den Köpfen der Menschen vor – und warum belastet das die junge Republik?",
+  deck:{ dauer:"Doppelstunde · 90 Minuten", jahr:"1919", hier:[2, 3],
+    satz:"Der Krieg ist vorbei, aber nicht in den Köpfen. Was eine Gesellschaft erinnert und wie sie es deutet, bestimmt, wie sie handelt.",
+    belastend:"In Auftrag 4 geht es um Eugenik: die Vorstellung, Menschen nach einem angeblichen „Wert“ einzuteilen. Das kann belasten. Du darfst jederzeit aussetzen und mit deiner Lehrkraft sprechen.",
+    ziele:["individuelles und kollektives Gedächtnis unterscheiden und erklären, wie gemeinsame Erinnerung Identität stiftet,", "acht Erfahrungen und Deutungen nennen, die das Denken vieler Menschen in der frühen Republik prägen,", "erläutern, wie das kollektive Gedächtnis politisches Handeln lenkt."] },
+  blatt:[
+    { id:"erinnern", nr:"1", kurz:"Ich und wir", name:"Erst überlegen: Ich erinnere mich, wir erinnern uns", form:"Allein, dann zu zweit", min:5, frei:"offen" },
+    { id:"theorie", nr:"2", kurz:"Theorie", name:"Wie Gruppen sich erinnern", form:"Allein", min:18, frei:"offen" },
+    { id:"republik", nr:"3", kurz:"In den Köpfen 1919", name:"Das kollektive Gedächtnis der Weimarer Republik", form:"Zu zweit", min:22, frei:"antwort", nach:"theorie", fehlt:"Bearbeite erst Auftrag 2." },
+    { id:"recherche", nr:"4", kurz:"Recherche", name:"Rechercheauftrag: Eugenik und „Rassenkunde“", form:"Allein oder zu zweit", min:10, frei:"ansage", gleich:"Ein Rechercheauftrag zu einer Idee aus dem 19. Jahrhundert, die später mörderische Folgen hatte. Deine Lehrkraft sagt, ob ihr ihn in der Stunde oder zu Hause bearbeitet." },
+    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Womit untersuchst du das?", form:"Allein", min:8, frei:"antwort", nach:"republik", fehlt:"Bearbeite erst Auftrag 3." },
+    { id:"schreiben", nr:"5", kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein", min:15, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:"Du erklärst den Begriff und wendest ihn auf die frühe Republik an." },
+    { id:"zusammenfassung", nr:"Z", kurz:"Zusammenfassung", name:"Zusammenfassung", form:"Zum Abheften", min:4, frei:"antwort", nach:"schreiben", fehlt:"Die Zusammenfassung öffnet sich nach deinem Text in Auftrag 5.", kopf:"Zum Abheften" },
+  ],
+  breit:["lehrkraft"],
+  loesch:"Deine Notizen, deine Antworten, deine Auswahl, deine Recherche, dein Text und dein Satz für den roten Faden werden auf diesem Gerät entfernt.",
+  init:() => ({ ich:"", wir:"", woher:"", ck:{}, top:{}, topgrund:"", r:{}, rq:"", meta:"" }),
+  erledigt:{
+    erinnern:() => lang("ich") && lang("wir") && lang("woher", 5), theorie:() => checkFertig("ck", 3),
+    republik:() => mwZahl("top") === 3 && lang("topgrund", 20), recherche:() => tabelleVoll("r", 3, 1, 8) && lang("rq", 5),
+    landkarte:() => !!S.lk.ok, schreiben:() => schreibFertig(),
+  },
+  fadenAnf:["Die Republik hat es von Anfang an schwer, weil in den Köpfen", "Eine Demokratie kann sich schwer verteidigen, wenn"],
+};
+/* Fünf Karten zur Theorie: nach dem Heft (M8) und der kognitiven Landkarte (3.1.1). Berichtigt: Der Begriff stammt von Maurice Halbwachs. */
+const THEORIE = [
+  { id:"ind", titel:"Individuelles Gedächtnis", kurz:"ich erinnere mich", text:"Persönliche Erinnerungen und Erfahrungen eines Menschen. Sie sind subjektiv und formen die persönliche Identität. Doch schon sie werden durch Gespräche, Fotos und Familienerzählungen geprägt.", bsp:"Eine Person erinnert sich an das Spielen im Garten ihrer Großeltern oder an den ersten Schultag." },
+  { id:"koll", titel:"Kollektives Gedächtnis", kurz:"wir erinnern uns", text:"Die gemeinsamen Erinnerungen einer Gruppe oder Gesellschaft. Es ist nicht einfach die Summe einzelner Erinnerungen, sondern entsteht durch Austausch. Erzählungen, Rituale, Symbole und Traditionen geben es weiter. Es ist beweglich: Es verändert sich mit den Bedürfnissen der Gegenwart.", bsp:"Eine Gemeinschaft, die den Zweiten Weltkrieg erlebt hat, teilt Erinnerungen an Krieg, Flucht und Wiederaufbau. Sie werden weitergegeben, zum Beispiel beim jährlichen Gedenken an das Kriegsende." },
+  { id:"ident", titel:"Wozu? Identität", kurz:"wer wir sind", text:"Das kollektive Gedächtnis hilft einer Gemeinschaft, sich selbst zu bestimmen, ihre Geschichte zu verstehen und ihre Werte zu bewahren. Gemeinsame Erinnerungen stiften Zusammenhalt.", bsp:"Der 9. November: 1918 Ausrufung der Republik, 1923 Hitlerputsch, 1938 Novemberpogrome, 1989 Mauerfall. An diesem Datum überlagern sich stolze und beschämende Erinnerungen." },
+  { id:"speicher", titel:"Speicher und Funktion", kurz:"was genutzt wird", text:"Die Kulturwissenschaftlerin Aleida Assmann unterscheidet: Das Speichergedächtnis ist das „Archiv“ aller überlieferten Spuren, auch des Ungenutzten und Vergessenen. Das Funktionsgedächtnis ist der Teil, den eine Gruppe aktiv nutzt, um sich ihrer Identität zu vergewissern und ihr Handeln zu begründen.", bsp:"Das erklärt, warum dasselbe Ereignis in verschiedenen Ländern ganz unterschiedlich wirkt." },
+  { id:"pol", titel:"Politische Dimension", kurz:"wem es nützt", text:"Kollektive Erinnerung kann Macht rechtfertigen und Gruppen in Bewegung bringen. Erinnerungen an historische Ereignisse können politisch eingesetzt werden, um bestimmte Erzählungen zu stärken oder infrage zu stellen.", bsp:"Die Erinnerung an die Friedliche Revolution von 1989 wird heute von sehr unterschiedlichen politischen Gruppen beansprucht." },
+];
+const FAELLE = [
+  ["In einem Stadtarchiv liegen Akten über einen Streik von 1920. In der Stadt spricht niemand mehr darüber.", [["Funktionsgedächtnis", false, "Zum Funktionsgedächtnis gehört nur, was eine Gruppe aktiv nutzt. Über den Streik spricht niemand."], ["Speichergedächtnis", true, "Die Spuren sind überliefert, werden aber nicht genutzt. Sie liegen im „Archiv“ – und könnten eines Tages wieder hervorgeholt werden."], ["Individuelles Gedächtnis", false, "Hier erinnert sich kein einzelner Mensch. Es geht um überlieferte Spuren, die niemand nutzt."]], "die Karte „Speicher und Funktion“"],
+  ["Jedes Jahr am selben Tag legt eine Stadt Kränze nieder. Die Schulen gestalten dazu eine Feier.", [["Individuelles Gedächtnis", false, "Die Feier gehört nicht einem Menschen allein. Eine ganze Stadt erinnert gemeinsam – mit einem Ritual."], ["Speichergedächtnis", false, "Was jedes Jahr gefeiert wird, liegt nicht ungenutzt im Archiv. Es wird aktiv erinnert."], ["Kollektives Gedächtnis", true, "Ein Ritual gibt Erinnerung in einer Gruppe weiter – auch an Menschen, die nicht dabei waren."]], "die Karte „Kollektives Gedächtnis“"],
+  ["Eine Partei wirbt im Wahlkampf mit dem Ruf von 1989: „Wir sind das Volk“.", [["Politische Dimension", true, "Die Erinnerung wird eingesetzt, um eigene Ziele zu begründen und Menschen zu gewinnen. Ob zu Recht, ist eine andere Frage."], ["Individuelles Gedächtnis", false, "Es geht nicht um die Erinnerung eines einzelnen Menschen, sondern um den Einsatz einer gemeinsamen Erinnerung in der Politik."], ["Speichergedächtnis", false, "Der Ruf liegt nicht vergessen im Archiv – er wird gerade benutzt."]], "die Karte „Politische Dimension“"],
+];
+/* Acht Einträge nach dem Heft, M8.1. Verweise auf die Stunden nach der heutigen Zählung. */
+const KG8 = [
+  { id:"trauma", titel:"Kriegstrauma", m:"M1, M2", text:"Die Schrecken und Entbehrungen des Ersten Weltkriegs haben Millionen von Soldaten für ihr Leben gezeichnet und Hass auf die Sieger verbreitet. Stichwort: „Kriegszitterer“. Der Krieg war ein industrielles Töten." },
+  { id:"dolch", titel:"Dolchstoßlegende", m:"M4", text:"„Im Felde unbesiegt“: Durch Propaganda wurde der Bevölkerung über Jahre der nahe Sieg versprochen. Die Oberste Heeresleitung – die selbst den Waffenstillstand wollte – schob die Schuld an der Niederlage Demokrat*innen und Jüdinnen und Juden zu." },
+  { id:"selbst", titel:"Selbstbestimmungsrecht der Völker", m:"M6", text:"Der Nationalismus hat sich als „Ersatzreligion“ auf der höchsten politischen Ebene durchgesetzt. Damit gehen dauernde Konflikte einher: Wer gehört zur Nation, wer nicht? Welches Land gehört „uns“?" },
+  { id:"diktat", titel:"Versailles als „Diktatfrieden“", m:"M7", text:"Große Gebietsverluste, Reparationen, Kriegsschuld (so wurde Artikel 231 verstanden), nur noch 100.000 Soldaten. Viele empfinden das als Kränkung ihres früheren Selbstbilds." },
+  { id:"staat", titel:"Gegner der Demokratie im Staatsdienst", m:"", text:"In Polizei, Behörden und Gerichten der neuen Republik arbeiten überwiegend dieselben Menschen wie in der Kaiserzeit. Viele sind konservativ, der Monarchie treu und der Demokratie gegenüber skeptisch bis feindlich." },
+  { id:"doppelt", titel:"Doppelte Ausrufung der Republik", m:"M5", text:"Am 9. November 1918 rufen Scheidemann und Liebknecht zwei verschiedene Republiken aus. Die Republik entsteht im Streit. Neu sind das Wahlrecht für Frauen und das niedrigere Wahlalter." },
+  { id:"eugenik", titel:"Eugenik und „Rassenkunde“", m:"Auftrag 4", text:"Eine Idee aus dem 19. Jahrhundert (Ideengeschichte): Menschen werden nach einem angeblichen „Wert“ eingeteilt. Dazu recherchierst du in Auftrag 4." },
+  { id:"justiz", titel:"„Auf dem rechten Auge blind“", m:"M10", text:"Die Justiz beurteilt Straftaten deutlich milder, wenn sie von Rechten verübt werden. Stichwort: Attentate auf Politiker." },
+];
+const TREPPE = [["Nachkriegsdebatten","Verschiedene politische Lager streiten über Deutschlands Zukunft nach dem Ersten Weltkrieg."],["Gesellschaftliche Spannungen","Zunehmende soziale Unruhen und wirtschaftliche Schwierigkeiten schaffen ein unsicheres Umfeld."],["Politische Zersplitterung","Extreme Gruppen nehmen zu, gemäßigte Parteien werden schwächer."],["Wachstum der NSDAP","Die NSDAP gewinnt an Einfluss und Unterstützung in der Gesellschaft."],["Machtübernahme","Die NSDAP erlangt die Kontrolle über die deutsche Regierung."]];
+
+function start(){ return deckblatt(); }
+function erinnern(){
+  return `${auftrag("Allein · 3 Minuten, dann zu zweit · 2 Minuten", "Ich erinnere mich, wir erinnern uns", "Notiere ein Ereignis, an das du dich selbst erinnerst. Notiere dann eines, an das sich „alle“ erinnern – auch du, obwohl du nicht dabei warst. Woher kennst du es? Tauscht euch danach zu zweit aus.")}
+  <div class="ab-zwei gleich"><div>${textfeld("ich", "Daran erinnere ich mich selbst", { rows:3, zaehl:false, platz:"ein Tag, ein Fest, ein Ort …" })}</div>
+  <div>${textfeld("wir", "Daran erinnern sich „alle“ – obwohl ich nicht dabei war", { rows:3, zaehl:false, platz:"ein Ereignis aus der Geschichte, der Familie, dem Verein …" })}</div></div>
+  ${textfeld("woher", "Woher kenne ich das zweite Ereignis?", { rows:2, zaehl:false, anfaenge:["Aus Erzählungen von", "Aus der Schule:", "Durch einen Gedenktag:", "Aus Filmen oder Bildern:"] })}`;
+}
+function theorie(){
+  return `${auftrag("Allein · 18 Minuten", "Wie Gruppen sich erinnern", "Lies die fünf Karten. Prüfe dann an drei Fällen, ob du die Begriffe anwenden kannst.")}
+  <p class="lead">Der Begriff kollektives Gedächtnis stammt von dem französischen Soziologen Maurice Halbwachs (1925). Die Kulturwissenschaftler*innen Jan und Aleida Assmann haben das Konzept seit den 1980er-Jahren weiterentwickelt.</p>
+  ${wahlKarte("th", THEORIE.map((t, i) => ({ id:t.id, nr:String(i + 1), titel:t.titel, unter:t.kurz, html:`<h3>${esc(t.titel)}</h3><p>${esc(t.text)}</p><div class="trift"><b>Beispiel:</b> ${esc(t.bsp)}</div>` })), { titel:"Karte wählen" })}
+  <p class="quelle">Nach dem Unterrichtsheft, M8, und der kognitiven Landkarte, 3.1.1.</p>
+  <h3 class="klein">Drei Fälle: Welcher Begriff passt?</h3>
+  ${check("ck", FAELLE)}
+  <p class="quelle">Die drei Fälle sind ausgedacht.</p>`;
+}
+function republik(){
+  const n = mwZahl("top");
+  return `${auftrag("Zu zweit · 22 Minuten", "Das kollektive Gedächtnis der Weimarer Republik", "Lest die acht Einträge. Sie zeigen, was um 1919 in den Köpfen vieler Menschen vorgeht. Wählt dann die drei Einträge, die die junge Republik eurer Meinung nach am stärksten belasten, und begründet eure Wahl.")}
+  <p class="lead">Um den Aufstieg des Nationalsozialismus zu verstehen, muss man die damalige Gesellschaft möglichst genau betrachten. Der Zweite Weltkrieg und die Shoah entstehen nicht aus dem Nichts. Trotzdem bleibt die Frage: Musste es so kommen? 1918 war nicht klar, wohin sich Deutschland entwickeln würde. Die NSDAP gibt es noch nicht. Sozialist*innen, Demokrat*innen und Monarchist*innen streiten um die Zukunft.</p>
+  <ol class="w-treppe" style="--n:${TREPPE.length}" aria-label="Stufenmodell: Aufstieg der NSDAP verstehen">${TREPPE.map((t, i) => `<li style="--i:${i}"><b>${esc(t[0])}</b><span>${esc(t[1])}</span></li>`).join("")}</ol>
+  <p class="quelle">Stufenmodell „Aufstieg der NSDAP verstehen“ nach dem Unterrichtsheft, M8.1. Ein Modell: Eine Treppe sieht zwangsläufig aus. Das war dieser Weg nicht.</p>
+  <h3 class="klein">Was in den Köpfen ist: acht Einträge</h3>
+  ${wahlKarte("kg8", KG8.map((e, i) => { const an = !!(S.top || {})[e.id]; return { id:e.id, nr:String(i + 1), titel:e.titel, unter:e.m ? "aus " + e.m : "neu", fertig:an ? "gewählt" : false,
+    html:`<h3>${esc(e.titel)}</h3><p>${esc(e.text)}</p><p class="quelle">Nach dem Unterrichtsheft, M8.1.</p><div class="reihe" style="margin-top:1.2rem"><button type="button" class="btn ${an ? "dunkel" : ""}" data-akt="mw" data-p="top.${e.id}" aria-pressed="${an}">${an ? "✓ Gehört zu unseren drei" : "Zu unseren drei stärksten Belastungen nehmen"}</button></div>` }; }), { titel:"Eintrag wählen", klasse:"viele" })}
+  <p class="hinweis" aria-live="polite"><b>Eure Auswahl:</b> ${n ? KG8.filter(e => (S.top || {})[e.id]).map(e => esc(e.titel)).join(" · ") : "noch nichts gewählt"} – ${n === 3 ? "drei gewählt." : n > 3 ? `das sind ${n}. Entscheidet euch für drei.` : `${n} von 3.`}</p>
+  ${textfeld("topgrund", "Unsere Begründung", { rows:3, zaehl:false, anfaenge:["Am stärksten belastet die Republik", "weil viele Menschen dadurch", "Zusammen bewirken diese drei, dass"] })}
+  <p class="hinweis">Das Blatt wächst weiter: Krisenjahr 1923 (M11) · Goldene Zwanziger (M12) · Saal- und Straßenschlachten (M10) · Weltwirtschaftskrise 1929 und Verhalten der NSDAP (M14). Du findest es in der Übersicht des Kapitels.</p>`;
+}
+function recherche(){
+  return `${belastend("Eugenik teilte Menschen nach einem angeblichen „Wert“ ein. Bei der Recherche stößt du auf Texte über Zwangssterilisation und Mord. Du musst nichts ansehen, was dich belastet.")}
+  ${auftrag("Allein oder zu zweit · 10 Minuten (oder als Hausaufgabe)", "Rechercheauftrag", "Recherchiere zu Eugenik und „Rassenkunde“. Beantworte die drei Fragen in Stichpunkten und notiere, woher deine Angaben stammen.")}
+  <div class="ab-zwei schmalrechts"><div>
+  ${tabelle("r", ["", "Meine Stichpunkte"], ["Was behauptete die Eugenik?", "Wo und wie wurde sie umgesetzt?", "Warum gehört sie ins Gedächtnis der Weimarer Republik?"], { rows:3 })}
+  ${textfeld("rq", "Meine Quellen (Seite, Verfasser*in, Datum des Abrufs)", { rows:2, zaehl:false })}</div>
+  <div>${wissen("Eugenik und „Rassenkunde“", `<p>Beide entstanden im 19. Jahrhundert. Die Idee: Menschen sollten nach ihrem angeblichen „Wert“ eingeteilt und wie Tiere „gezüchtet“ werden. Leben, das als „unwert“ galt, sollte verhindert oder ausgelöscht werden – durch Sterilisation und Mord. Solche Vorstellungen waren in vielen Ländern verbreitet, sehr stark in den USA. Stichwort: Sozialdarwinismus.</p><p><b>Heute ist klar:</b> Menschliche „Rassen“ gibt es nicht. Die „Rassenkunde“ gab Vorurteilen nur einen wissenschaftlichen Anstrich.</p><p class="quelle">Nach dem Unterrichtsheft, M8.1 (Rechercheauftrag).</p>`)}
+  <p class="hinweis"><b>Gute Startpunkte:</b> LeMO, das Online-Portal des Deutschen Historischen Museums, und die Bundeszentrale für politische Bildung. Prüfe bei jeder Seite: Wer hat sie verfasst – und wozu?</p></div></div>`;
+}
+function seiteLk(){
+  return landkarteL({ teil:"wirkung", frage:"Du fragst, was 1919 in den Köpfen der Menschen vorgeht. Welches Analyseinstrument der Landkarte benutzt du dabei?",
+    heft:"3. Auswirkungen von Geschichte: Inwiefern hilft uns die Theorie des kollektiven Gedächtnisses von Assmann, hist. Prozesse, Ereignisse und Entscheidung besser zu verstehen?",
+    lead:"Sieh dir die acht Einträge aus Auftrag 3 noch einmal an. Vermute: Was erklären sie, was eine bloße Liste von Ereignissen nicht erklärt?", platz:"Die Einträge erklären, warum …",
+    urteil:{
+      "3-1-1":["zentral","Du untersuchst die gemeinsamen Erinnerungen und Deutungen einer Gesellschaft: Kriegstrauma, „Dolchstoß“, „Diktatfrieden“. Nicht die Ereignisse „an sich“ treiben das Handeln an, sondern wie Menschen sie erinnern und deuten."],
+      "3-1-3":["teils","Bei der Dolchstoßlegende stimmt das: Die Oberste Heeresleitung setzte eine falsche Erzählung bewusst ein. Die meisten Einträge beschreiben aber, was viele Menschen erinnern und glauben. Dafür gibt es einen weiteren Begriff."],
+      "3-1-4":["teils","Erinnerungskultur meint das bewusste Erinnern einer Gesellschaft, etwa mit Denkmälern und Gedenktagen. Hier geht es grundlegender darum, welche Erfahrungen und Deutungen in den Köpfen sind."],
+      "3-1-5":["kaum","Agency fragt nach dem Handlungsspielraum einzelner Menschen oder Gruppen. Hier fragst du, was eine ganze Gesellschaft erinnert und glaubt."],
+    },
+    bruecke:`<b>Merke:</b> Wer historische Prozesse nur aus Tatsachen und Interessen erklärt, übersieht die Rahmen, in denen Menschen denken, fühlen und handeln.` })
+  + `<div class="ab-zwei gleich" style="margin-top:1.4rem"><div>${auftrag("Allein · 3 Minuten", "Die Frage des Hefts", "Inwiefern hilft die Theorie des kollektiven Gedächtnisses, historische Prozesse, Ereignisse und Entscheidungen besser zu verstehen? Antworte in zwei Sätzen.")}</div>
+  <div>${textfeld("meta", "Meine Antwort", { rows:3, zaehl:false, anfaenge:["Die Theorie hilft, weil sie zeigt, dass", "Zum Beispiel erklärt sie, warum"] })}
+  ${vergleich("metavgl", ["meta"], 20, "Mit vier Beiträgen vergleichen", `<div class="w-karten k2"><article class="w-kk"><h3>1 · Gedächtnis als Ursache</h3><p>Menschen handeln innerhalb gemeinsamer Erinnerungsrahmen. Diese lassen bestimmte Entscheidungen als berechtigt erscheinen.</p></article><article class="w-kk"><h3>2 · Auswahl</h3><p>Aus dem Archiv aller Tatsachen (Speichergedächtnis) nutzt eine Gesellschaft nur, was ihre Ziele in der Gegenwart stützt (Funktionsgedächtnis).</p></article><article class="w-kk"><h3>3 · Konflikte</h3><p>Täter-, Opfer- und Siegergedächtnis bestehen nebeneinander und sind oft unvereinbar. Beispiel in der Landkarte (4.4.2): der 9. Mai.</p></article><article class="w-kk"><h3>4 · Wandel</h3><p>Wenn sich das Gedächtnis verschiebt, ist das selbst ein historisches Ereignis. Beispiel in der Landkarte (4.4.4): die Rede Richard von Weizsäckers am 8. Mai 1985.</p></article></div><p class="quelle">Gekürzt nach dem Erwartungshorizont des Unterrichtsheftes, M8.</p>`)}</div></div>`;
+}
+L.schreib = {
+  vor:"So kann die Aufgabe in der Klassenarbeit stehen: Material, zwei Operatoren, höchstens eine Seite. Hier schreibst du eine halbe Seite.",
+  aufgabe:`<b>Erklären Sie</b> den Begriff „kollektives Gedächtnis“ und <b>erläutern Sie</b> an zwei Beispielen, wie das kollektive Gedächtnis die Weimarer Republik von Beginn an belastete.`,
+  material:`<p><b>M1 · Begriff:</b> Das kollektive Gedächtnis umfasst die gemeinsamen Erinnerungen einer Gruppe oder Gesellschaft. Es entsteht durch Austausch, wird durch Erzählungen, Rituale und Symbole weitergegeben und verändert sich mit den Bedürfnissen der Gegenwart.</p><p><b>M2 · Aus dem Raster M8.1:</b> Kriegstrauma · Dolchstoßlegende · Versailles als „Diktatfrieden“ · Gegner der Demokratie im Staatsdienst · eine Justiz, die „auf dem rechten Auge blind“ ist.</p><p class="quelle">Nach dem Unterrichtsheft, M8 und M8.1.</p>`,
+  woerter:140, min:60,
+  stufen:[["Grundlegend","Du erklärst den Begriff in eigenen Worten und nennst zwei Einträge aus dem Raster."],["Sicher","Du erklärst, wie gemeinsame Erinnerung entsteht und wirkt, und zeigst an zwei Beispielen, wie sie das Bild der Republik prägt."],["Souverän","Du unterscheidest Ereignis und Deutung (zum Beispiel Niederlage und „Dolchstoß“), zeigst die politische Nutzung der Erinnerung und erklärst, warum das eine Demokratie schwächt."]],
+  inhalt:[["Begriff:","gemeinsame Erinnerungen einer Gruppe; entsteht durch Austausch; weitergegeben durch Erzählungen, Rituale, Symbole; stiftet Identität; verändert sich; kann politisch genutzt werden."],
+    ["Beispiel Dolchstoßlegende:","Die Niederlage wird als „Verrat“ erinnert; die Schuld wird Demokrat*innen und Jüdinnen und Juden zugeschoben. Die Republik erscheint als Werk der „Schuldigen“."],
+    ["Beispiel „Diktatfrieden“:","Der Vertrag wird als Kränkung erinnert; die Republik wird dafür verantwortlich gemacht."],
+    ["Belastung:","Die Demokratie beginnt mit Deutungen, die sie abwerten; viele im Staatsdienst lehnen sie ab; Gewalt und Hass aus dem Krieg wirken weiter."]],
+};
+L.zf = {
+  frage:L.frage,
+  kern:"Menschen erinnern sich nicht nur allein, sondern in Gruppen. Dieses kollektive Gedächtnis stiftet Identität und lenkt das Handeln. In der frühen Weimarer Republik ist es von Kriegstrauma, Dolchstoßlegende und dem Bild des „Diktatfriedens“ geprägt. Das ist eine schwere Last für die Demokratie.",
+  begriffe:[["Individuelles Gedächtnis","persönliche Erinnerungen eines Menschen."],["Kollektives Gedächtnis","gemeinsame Erinnerungen einer Gruppe; weitergegeben durch Erzählungen, Rituale, Symbole (Maurice Halbwachs, 1925)."],["Speichergedächtnis","das „Archiv“ aller überlieferten Spuren, auch des Vergessenen."],["Funktionsgedächtnis","der Teil, den eine Gruppe aktiv nutzt, um ihr Handeln zu begründen (Aleida Assmann)."],["Dolchstoßlegende","falsche Erzählung: Nicht das Militär, sondern Demokrat*innen und Jüdinnen und Juden seien schuld an der Niederlage."],["Eugenik","Lehre des 19. Jahrhunderts, die Menschen nach einem angeblichen „Wert“ einteilte; Scheinwissenschaft."]],
+  abfolge:{ titel:"Was um 1919 in den Köpfen ist (M8.1)", punkte:[["Kriegstrauma","Millionen gezeichnete Soldaten; Hass auf die Sieger."],["Dolchstoß","„Im Felde unbesiegt“ – Schuld bei den Demokrat*innen."],["Nationalismus","Wer gehört zur Nation? Welches Land gehört „uns“?"],["„Diktatfrieden“","Versailles als Kränkung."],["Staatsdienst","Beamte und Richter aus der Kaiserzeit, oft Gegner der Republik."],["Gründung im Streit","zwei Republiken am 9. November 1918."],["Eugenik","Menschen nach „Wert“ eingeteilt."],["Justiz","„auf dem rechten Auge blind“."]] },
+  lk:{ name:"Kollektives Gedächtnis (3.1.1)", satz:"Auch wenn wir uns als Einzelne erinnern, geschieht das immer in „sozialen Rahmen“ wie Familie, Religion, Klasse oder Nation (Maurice Halbwachs, 1925).", beispiel:"Viele Deutsche erinnern 1918 nicht als militärische Niederlage, sondern als „Verrat“ – und handeln danach." },
+  werkzeug:{ titel:"Nach dem Gedächtnis einer Gesellschaft fragen", schritte:["Was erinnert die Gruppe – und was lässt sie weg?","Wie deutet sie es: als Sieg, Niederlage, Unrecht, Verrat?","Wozu dient die Erinnerung: Wer nutzt sie, und wofür?"] },
+  sonst:"das Stufenmodell „Aufstieg der NSDAP verstehen“ (Auftrag 3), der Rechercheauftrag zur Eugenik (Auftrag 4).",
+  mein:[["Unsere drei stärksten Belastungen", () => { const w = KG8.filter(e => (S.top || {})[e.id]).map(e => e.titel); return w.length ? `${w.join(" · ")}. ${S.topgrund}` : ""; }]],
+};
+function zusammenfassung(){ return fadenFeld() + zusammen(); }
+const SEITE_FN = { start, erinnern, theorie, republik, recherche, landkarte:seiteLk, schreiben:schreibauftrag, zusammenfassung, lehrkraft };
+weimarStart();
+</script>
+</body>
+</html>
