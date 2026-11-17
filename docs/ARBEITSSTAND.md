@@ -1,5 +1,26 @@
 # Arbeitsstand · Blatt-Standard für alle Module und Kapitel Weimarer Republik
 
+## Stand am 17.11.2026, 12:50 Uhr (Zwischenhalt)
+
+Branch `blatt-standard-und-weimar`, alles gepusht. Nichts ist zusammengeführt.
+
+**Fertig gebaut und im Browser geprüft (Chromium, 1180 × 820, `file://`; Zusammenfassung je 2 Seiten A4, Schreibblatt je 1 Seite):**
+
+- Blatt-Rahmen im gemeinsamen Kern (`src/m25-m27/blatt.js`, `blatt.css`), Grundgerüst Weimar (`src/weimar/weimar.js`, `weimar.css`), Bauwerkzeug `tools/bau_weimar.py`, Rauchtest `tools/pruef/blatt_rauch.py`.
+- Weimar als Arbeitsblätter: M1, M2, M3, M4, M5, M6, M7, M7.1, M8 (mit M8.1), M9, M10, M11 – je mit Register, Landkarten-Auftrag, Schreibauftrag, Zusammenfassung und verschlüsseltem Lehrkraftbereich (`lk/w-m*.enc.json`).
+- Wahldaten 1919–1933 mit Quelle in `weimar.js` (`W_WAHLEN`).
+
+**Noch offen, in dieser Reihenfolge:**
+
+1. M12, M13, M14, M14.2; Kapitelübersicht `weimar/index.html` (`src/weimar/hub.js` fehlt noch).
+2. M15 und M24 als Module im NS-Kapitel.
+3. Startseite mit Weimar-Kapitel; Werkzeug `tools/bau_moodle_paket.py` und erste Moodle-ZIP.
+4. Blatt-Standard auf M16, M17, M25–M27 und Ost-West übertragen. Achtung: `kern.js` braucht jetzt `blatt.js`; `tools/bau_m25_m27.py` und `tools/bau_ost_west.py` binden es noch nicht ein – diese Seiten vorher nicht neu bauen.
+5. Blatt-Standard auf M18–M21, M23 (von Hand gebaute Seiten).
+6. Gesamtprüfung (weitere Breiten, alte Prüfungen), Abschluss-ZIP, Bericht, Pull Request.
+
+**Nicht gelaufen:** andere Breiten als 1180 px, echtes iPad, Stift, VoiceOver, Moodle-Upload, Zeitdiagnose mit 150 Wörtern pro Minute.
+
 Branch `blatt-standard-und-weimar`. Auftrag vom 17.11.2026: Blatt-Standard aus M22 (Fassung 4.1) auf jedes Modul übertragen, alle Stunden zur Weimarer Republik (Heft M1–M15) neu bauen, alles als eine ZIP-Datei für Moodle. Zusammengeführt wird erst nach ausdrücklicher Freigabe.
 
 Diese Datei wird nach jedem Paket fortgeschrieben, damit eine Unterbrechung höchstens einen Schritt kostet.
