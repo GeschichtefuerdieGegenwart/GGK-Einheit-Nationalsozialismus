@@ -112,6 +112,41 @@ AKTION.checkneu = t => { setz(`${t.dataset.p}.${t.dataset.i}`, null); zeichneBeh
 const mehrWahl = (pfad, eintraege, o = {}) => `<div class="w-mw k${o.spalten || 3}" role="group" aria-label="${esc(o.titel || "Karten markieren")}">${eintraege.map(e => { const an = !!hol(`${pfad}.${e.id}`); return `<button type="button" data-akt="mw" data-p="${pfad}.${e.id}" aria-pressed="${an}">${e.kopf ? `<span class="kennung">${esc(e.kopf)}</span>` : ""}<b>${esc(e.titel)}</b><span class="w-mwt">${e.text}</span><span class="w-mws">${an ? "✓ " + esc(o.an || "markiert") : esc(o.aus || "antippen zum Markieren")}</span></button>`; }).join("")}</div>`;
 const mwZahl = pfad => Object.values(hol(pfad) || {}).filter(Boolean).length;
 AKTION.mw = t => { setz(t.dataset.p, !hol(t.dataset.p)); zeichneBehalte(); };
+/* ---------- Wahlen 1919–1933: gültige Stimmen in Tausend. Quelle: Konrad-Adenauer-Stiftung, »Wahlen zum Reichstag in der Weimarer Republik 1919–1933« (kas.de, Geschichte der CDU; abgerufen 17.11.2026).
+   Die Anteile sind daraus berechnet. KPD und USPD stehen dort in einer Zeile. Reihenfolge der Werte wie W_PARTEI. ---------- */
+const W_PARTEI = [["links","KPD · USPD","#8E1F1F"],["spd","SPD","#B23A2E"],["ddp","DDP","#E0B74A"],["z","Zentrum","#6E6A62"],["bvp","BVP","#8C8579"],["dvp","DVP","#4F7FB5"],["dnvp","DNVP","#2F4B6E"],["ns","NSDAP","#5A3A1E"],["sonst","Sonstige","#B9B2A6"]];
+const W_WAHLEN = {
+  "1919":{ datum:"19. Januar 1919", bet:83.0, v:[2317,11509,5642,5980,0,1346,3121,0,485], namen:{ links:"USPD" } },
+  "1920":{ datum:"6. Juni 1920", bet:79.1, v:[5637,6104,2334,3845,1239,3919,4249,0,869], namen:{ links:"USPD · KPD" } },
+  "1924a":{ datum:"4. Mai 1924", bet:77.4, v:[3928,6009,1655,3914,947,2694,5696,1918,2520], namen:{ ns:"Völkische · NS" } },
+  "1924b":{ datum:"7. Dezember 1924", bet:78.8, v:[2808,7881,1920,4119,1134,3049,6206,907,2266], namen:{ ns:"NS-Freiheitsbewegung" } },
+  "1928":{ datum:"20. Mai 1928", bet:75.6, v:[3286,9153,1506,3712,946,2680,4382,810,4278], namen:{ links:"KPD" } },
+  "1930":{ datum:"14. September 1930", bet:82.0, v:[4604,8578,1322,4128,1059,1578,2458,6410,4834], namen:{ links:"KPD", ddp:"DStP" } },
+  "1932a":{ datum:"31. Juli 1932", bet:84.0, v:[5283,7960,372,4589,1193,436,2177,13746,1126], namen:{ links:"KPD", ddp:"DStP" } },
+  "1932b":{ datum:"6. November 1932", bet:80.6, v:[5980,7248,337,4231,1095,662,2959,11737,1222], namen:{ links:"KPD", ddp:"DStP" } },
+  "1933":{ datum:"5. März 1933", bet:88.7, v:[4848,7182,334,4425,1074,432,3137,17277,634], namen:{ links:"KPD", ddp:"DStP", dnvp:"DNVP (Kampffront)" } },
+};
+const W_WAHLQ = "Stimmenanteile berechnet aus den Stimmenzahlen bei der Konrad-Adenauer-Stiftung, „Wahlen zum Reichstag in der Weimarer Republik 1919–1933“ (kas.de). KPD und USPD sind dort zusammengezählt. Eigene Grafik.";
+const wahlAnteil = (k, id) => { const w = W_WAHLEN[k], sum = w.v.reduce((a, b) => a + b, 0); return Math.round(w.v[W_PARTEI.findIndex(p => p[0] === id)] / sum * 1000) / 10; };
+const wahlWerte = k => { const w = W_WAHLEN[k]; return W_PARTEI.map(p => [(w.namen || {})[p[0]] || p[1], wahlAnteil(k, p[0]), p[2], ""]).filter(x => x[1] > 0); };
+/* ---------- Halbrund: Stimmenanteile als Bogen (eigene Grafik). werte = [[Name, Prozent, Farbe, Zusatz?]], von links nach rechts ---------- */
+function halbrund(titel, werte, nachweis, o = {}){
+  const sum = werte.reduce((a, w) => a + w[1], 0), R = 150, r = 80, cx = 170, cy = 166, komma = z => String(z).replace(".", ","); let a0 = Math.PI;
+  const pt = (rad, a) => [(cx + rad * Math.cos(a)).toFixed(1), (cy - rad * Math.sin(a)).toFixed(1)];
+  const seg = werte.map(w => { const a1 = a0 - Math.PI * w[1] / sum, A = pt(R, a0), B = pt(R, a1), C = pt(r, a1), D = pt(r, a0), M = pt((R + r) / 2, (a0 + a1) / 2);
+    const d = `M${A[0]} ${A[1]}A${R} ${R} 0 0 1 ${B[0]} ${B[1]}L${C[0]} ${C[1]}A${r} ${r} 0 0 0 ${D[0]} ${D[1]}Z`; a0 = a1;
+    return `<path d="${d}" fill="${w[2]}" stroke="#FBF8F1" stroke-width="2"/>` + (w[1] / sum > .07 ? `<text x="${M[0]}" y="${+M[1] + 5}" text-anchor="middle" class="hr-z">${komma(w[1])}</text>` : ""); }).join("");
+  return `<figure class="w-halbrund"><figcaption class="kennung">${esc(titel)}</figcaption><div class="hr-in"><svg viewBox="0 0 340 176" role="img" aria-label="${esc(titel)}: ${werte.map(w => `${w[0]} ${komma(w[1])} Prozent`).join(", ")}">${seg}${o.mitte ? `<text x="${cx}" y="${cy - 26}" text-anchor="middle" class="hr-m">${esc(o.mitte)}</text>` : ""}${o.mitte2 ? `<text x="${cx}" y="${cy - 6}" text-anchor="middle" class="hr-m2">${esc(o.mitte2)}</text>` : ""}</svg>
+  <ul class="hr-leg">${werte.map(w => `<li><span style="background:${w[2]}"></span><b>${esc(w[0])}</b><i>${komma(w[1])} %</i>${w[3] ? `<small>${esc(w[3])}</small>` : ""}</li>`).join("")}</ul></div><p class="quelle">${nachweis}</p></figure>`;
+}
+/* ---------- Rechnen mit Rückmeldung: erst die eigene Zahl, dann die Erklärung (Muster 1). Stand: S[pfad] = { v, ok } ---------- */
+function rechne(pfad, frage, soll, o = {}){
+  const st = hol(pfad) || {}, ok = st.ok, id = "re-" + pfad.replace(/\W/g, "-");
+  return `<div class="w-rechne"><label for="${id}">${esc(frage)}</label><div class="reihe"><input id="${id}" type="text" inputmode="decimal" data-f="${pfad}.v" value="${esc(st.v || "")}" placeholder="Zahl" autocomplete="off" ${ok === true ? "readonly" : ""}><span class="w-re-e">${esc(o.einheit || "%")}</span><button type="button" class="btn dunkel" data-akt="rechne" data-p="${pfad}" data-soll="${soll}" data-tol="${o.tol ?? .15}" ${ok === true ? "disabled" : ""}>Prüfen</button></div>
+  <div aria-live="polite">${ok === true ? `<div class="rm zentral"><b>Stimmt.</b> ${esc(o.ja || "")}</div>` : ok === false ? `<div class="rm kaum"><b>Noch nicht.</b> ${esc(o.nein || "Rechne noch einmal nach.")}</div>` : ""}</div></div>`;
+}
+AKTION.rechne = t => { const p = t.dataset.p, v = parseFloat(String((hol(p) || {}).v || "").replace(",", ".").replace(/[^\d.\-]/g, "")); setz(p + ".ok", !isNaN(v) && Math.abs(v - +t.dataset.soll) <= +t.dataset.tol); zeichneBehalte(); };
+const rechneOk = p => (hol(p) || {}).ok === true;
 /* ---------- Auf einem Bild zeichnen (Stift oder Finger): Linien liegen als Zahlen im Stand, nichts wird übertragen.
    pfad → S[pfad] = [{ s:Stift, p:[[x,y] …] }] mit x, y zwischen 0 und 1 · stifte = [[id, Farbe, Name]] ---------- */
 function zeichenKarte(pfad, b, stifte){
