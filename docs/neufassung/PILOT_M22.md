@@ -100,6 +100,7 @@ Es gibt keine »breiten« Seiten mehr. Nur in Auftrag 4 wird das Register zur Nu
 | Auftrag 4, Karten | Kennung, Name, Jahr, Frage in 11 bis 15 px, drei Marken | Bild, Name, »Erklärung A · Jahr«, Frage und der Stand in **einer** Zeile (»noch offen« · »✓ gelesen« · »✓ Karte« · »✓ geprüft«) – alles 16 px |
 | Auftrag 4, Rad | Name und Erklärung der Ebene im Feld (10 px) | nur der Name im Feld; die Erklärung der fünf Ebenen steht darunter. Marken in drei Stufen (gefüllt · grau · Rahmen) statt durchsichtig. Rad ab 1150 px Breite, darunter Liste |
 | Auftrag 4, Bühne | 16:9, füllt den Bildschirm | 32:21 auf dem Blatt; ein Tipp auf eine Erklärung holt sie ganz ins Bild; »Vergleich« ohne Scrollen im Scrollen |
+| Auftrag 4, Satz unter dem Rad | lag bei offenem Panel zum Teil unter dem Panel; »Bauman · Welzer setzt …« | steht bei offenem Panel in der freien Fläche zwischen Karten und Panel; solange die Erklärung nicht geprüft ist, steht dort »Lies die Erklärung im Panel. Mach dort den Gewichtungs-Check: Wo setzt sie an?«; Mehrzahl bei zwei Namen (»Bauman · Welzer setzen …«), auch in der Rückmeldung im Panel |
 | Auftrag 5 | Streitpaare »für Schnelle – oder als Hausaufgabe« | »für Schnelle – freiwillig« |
 | Auftrag 7 | Kriterien **und erwartete Inhalte** nach dem Text; Stichpunkte in schmalen Feldern | nur die Kriterien in drei Stufen; Stichpunkte in voller Breite; erwartete Inhalte stehen im Text für die Lehrkraft |
 | Lehrkraft | Bereich mit Passwort im Blatt, darin die Beamer-Werkzeuge | Seite **»Am Beamer«** (Freigabe, Moderation, Modelle der Tische – ohne Lösungen). Der Text für die Lehrkraft bleibt im öffentlichen Repository verschlüsselt in der Seite; im Paket für die Lernenden fehlt er ganz. |
@@ -130,7 +131,8 @@ Chromium über Playwright, per `file://`: `python3 tools/pruef/ab_pruef.py` (Rep
 | Schrift unter 16 px (auch Schaubilder, wirksame Größe) | keine |
 | Ziele unter 44 px | keine |
 | Textkontrast unter 4,5 : 1 (große Schrift 3 : 1) | keiner. Nicht messbar: Text auf Fotos und die helle Schrift auf dem dunklen Kreis des Rads (gerechnet 13,1 : 1) |
-| Übersicht in Auftrag 4 bei 1180 × 820 · 1180 × 712 · 1150 × 700 · 1280 × 720 · 1440 × 900 | sechs Karten ohne Überlauf · Linien enden an den Karten (Abweichung unter 6 von 1280 Einheiten) · nach einem Tipp auf eine Erklärung liegt die Bühne ganz unter der Kopfzeile im Bild |
+| Übersicht in Auftrag 4 bei 1180 × 820 · 1180 × 712 · 1150 × 700 · 1280 × 720 · 1440 × 900 | sechs Karten ohne Überlauf · Linien **beginnen** an den Karten (Abweichung unter 6 von 1280 Einheiten) · nach einem Tipp auf eine Erklärung liegt die Bühne ganz unter der Kopfzeile im Bild |
+| Übersicht bei offenem Panel (Erklärung C, F und B), dieselben fünf Größen | der Satz unter dem Rad steht frei: nicht unter dem Panel, nicht über Karte oder Feld, ganz in der Bühne. **Befund, nicht behoben:** Das Feld, an dem die offene Erklärung vor allem ansetzt, liegt bei C (Browning → Situation) zu 87 % und bei F (Bauman · Welzer → Apparat) zu 50 % unter dem Panel; dort endet die Linie unter dem Panel. In der Fassung 4.1 waren es 63 % und 29 % (nachgemessen). Bei A, B, D und E liegt das Feld frei. Siehe 5 und V8. |
 | Beamer: Unterkante des ersten Knopfs | 607 px von 720 px |
 | Animationen nach dem Laden · Fehler in der Konsole · Anfragen an fremde Server | 0 · 0 · 0 |
 | Stand nach Neuladen | bleibt |
@@ -159,11 +161,12 @@ Chromium über Playwright, per `file://`: `python3 tools/pruef/ab_pruef.py` (Rep
 
 1. **Moodle:** Das Paket ist entpackt geprüft, nicht in Moodle. Das kannst nur du.
 2. **Hochformat und ältere iPads:** Unter 1150 px Breite (iPad 9 quer, alle iPads hochkant) wird die Übersicht zur Liste, das Panel kommt von unten. Ob es in Safari am Fensterrand sitzt, zeigt nur das Gerät.
-3. **»Akte« oder »Erklärung«:** Auftrag 4 spricht von Erklärungen, Auftrag 5 und 6 noch von Akten (»Meinen Stand zeigen (Akte A)«). Siehe V6.
-4. **Öffentliches Labor:** Der Hefter verlinkt dort auch die zehn Blätter der früheren Fassung. Sie melden noch keinen Stand und führen noch zum GGK-Labor zurück. Die Startseite des Labors verlinkt den Hefter noch nicht.
-5. **Bildrechte:** unverändert – Fotos von Yad Vashem und das Familienfoto Willner sind für den Unterricht eingebunden (§ 60a UrhG), Entscheidung der Lehrkraft. Abbildung 20 im Heft ist ohne Angabe und nicht eingebaut.
-6. **Schreibblatt von Hand:** eine Seite mit 20 Linien. Vorder- und Rückseite?
-7. **Zeit:** 90 Minuten, geschätzt, nicht erprobt.
+3. **Auftrag 4, offenes Panel:** Das Panel liegt über der gegenüberliegenden Kartenspalte und über einem Teil des Rads – wie schon in 4.1, jetzt etwas mehr, weil das Blatt schmaler ist (Bühne 972 statt 1039 px). Bei Browning und bei Bauman · Welzer endet die Linie deshalb unter dem Panel. Der Satz darunter und die Marke »Ebene …« im Panel sagen dasselbe in Worten; nach »Schließen« ist das ganze Rad zu sehen. Vorschlag V8.
+4. **»Akte« oder »Erklärung«:** Auftrag 4 spricht von Erklärungen, Auftrag 5 und 6 noch von Akten (»Meinen Stand zeigen (Akte A)«). Siehe V6.
+5. **Öffentliches Labor:** Der Hefter verlinkt dort auch die zehn Blätter der früheren Fassung. Sie melden noch keinen Stand und führen noch zum GGK-Labor zurück. Die Startseite des Labors verlinkt den Hefter noch nicht.
+6. **Bildrechte:** unverändert – Fotos von Yad Vashem und das Familienfoto Willner sind für den Unterricht eingebunden (§ 60a UrhG), Entscheidung der Lehrkraft. Abbildung 20 im Heft ist ohne Angabe und nicht eingebaut.
+7. **Schreibblatt von Hand:** eine Seite mit 20 Linien. Vorder- und Rückseite?
+8. **Zeit:** 90 Minuten, geschätzt, nicht erprobt.
 
 ## 6 · Vorschläge zur Auswahl
 
@@ -175,8 +178,9 @@ Chromium über Playwright, per `file://`: `python3 tools/pruef/ab_pruef.py` (Rep
 | V5 | Abbildung 20 aus dem Heft (Nürnberger Prozesse) in Auftrag 2 | erst nach geklärter Fundstelle |
 | V6 | In Auftrag 5 und 6 »Erklärung« statt »Akte« schreiben, wie in Auftrag 4 | nicht geändert – dein Wortlaut |
 | V7 | Freigabe auf Ansage wieder mit Rückfrage (zwei Tipps, wie im Modul Motivation), falls zu viele vorblättern | nicht gebaut; jetzt ein Tipp |
+| V8 | **Auftrag 4, offenes Panel: das ganze Rad zeigen.** Ist das Panel offen, werden die drei sichtbaren Karten zu schmalen Kacheln (Bild, Buchstabe, Name, Stand – ohne Leitfrage), und das Rad rückt neben sie. Dann liegt das ganze Rad neben dem Panel frei, und jede Linie endet an einem sichtbaren Feld – auch in dem Moment, in dem die Linien nach dem Gewichtungs-Check erscheinen. Preis: Die Karten ändern beim Öffnen ihre Form, und der Erklärfilm muss an dieser Stelle noch einmal neu aufgenommen werden. Kleinere Lösung: das Rad um ein Feld drehen (Situation oben, Person links oben). Dann liegt bei allen sechs Erklärungen das wichtigste Feld frei; weitere Marken bleiben zum Teil verdeckt, und »Situation« stünde oben – das kann wie eine Gewichtung wirken. | nicht gebaut – deine Entscheidung |
 
-V3 (Erklärfilm) ist erledigt. Kürzungen für den Notfall (K1 bis K8) stehen im Text für die Lehrkraft. Still gekürzt wurde nichts.
+V3 (Erklärfilm) ist erledigt. Meine Empfehlung zu V8: die Kacheln. Kürzungen für den Notfall (K1 bis K8) stehen im Text für die Lehrkraft. Still gekürzt wurde nichts.
 
 ## 7 · Bildliste
 
@@ -199,7 +203,7 @@ V3 (Erklärfilm) ist erledigt. Kürzungen für den Notfall (K1 bis K8) stehen im
 - »Stand sichern« antippen, die Datei in der Dateien-App suchen und auf einem zweiten Gerät im Hefter laden.
 - Schreibblatt drucken → als PDF sichern → in GoodNotes öffnen.
 - Einmal hochkant: Auftrag 4 als Liste, das Panel von unten.
-- Entscheiden: V1, V4 bis V7, Schreibblatt, Bildrechte.
+- Entscheiden: V1, V4 bis V8, Schreibblatt, Bildrechte.
 - Nach der Stunde: Notiz nach »Vorlage – Nach der Stunde«.
 
 ## 9 · Fallstrick-Vorschläge für die Skills
@@ -212,6 +216,7 @@ Neu aus der Fassung 5.1:
 | `lernseite-bauen` | Werkzeuge hinter einem Klappfeld und Rückmeldungen in Fenstern kosten je Handlung zwei Tipps mehr; Rückfragen vor harmlosen Schritten ebenso. | Tipps je Handlung zählen (sichern, laden, freigeben, erste Antwort) und in den Bericht schreiben. Rückfrage nur vor dem Löschen. Die Festlegung löst die Auflösung selbst aus. |
 | `lernseite-bauen` | Die Prüfung lief mit einem Beispielstand ohne geprüfte Erklärungen; die Marken am Rad (halb durchsichtig, Kontrast rund 2,6 : 1) kamen deshalb nie ins Maß. | Der Beispielstand der Prüfung muss jeden Zustand enthalten, der erst nach einer Festlegung erscheint – auch Marken, Linien, Rückmeldungen. |
 | `signatur-design` | Stufen über Durchsichtigkeit (50 %, 75 %, 100 %) senken den Kontrast der Schrift auf der Marke. | Stufen als Form zeigen: gefüllt, grau, Rahmen – jede mit vollem Kontrast. |
+| `signatur-design` / `website-design-workflow` | »Linien enden am Ziel« wurde nur am Anfang der Linie gemessen (an der Karte). Ein Panel, das über dem Schaubild aufgeht, verdeckte das Ziel: bei einer von sechs Erklärungen zu 87 %. Aufgefallen ist es erst auf dem Bildschirmfoto für die Abgabe. | Für jeden Zustand (auch mit offenem Panel) messen, ob Anfang **und** Ziel jeder Linie sichtbar sind; den verdeckten Anteil in den Bericht schreiben. Jedes Bild, das abgegeben wird, vorher selbst ansehen. |
 | `schaubild-design` / `signatur-design` | Eine Bühne im festen Seitenverhältnis trägt Karten mit festem Text nur bei einer Breite; schmaler laufen sie über, und Linien mit festen Ankern enden daneben. | Seitenverhältnis so wählen, dass die Karten bei der kleinsten Breite passen; Anker aus derselben Geometrie rechnen und in der Prüfung gegen die echte Lage der Karten messen. |
 | `lernseite-bauen` | Eine Bildunterschrift auf dem Bild (Verlauf nach unten) ist nur an der dunkelsten Stelle lesbar; auf einer weißen Wand fiel sie aus, und sie verdeckte das Motiv. | Bildunterschrift unter das Bild. |
 | `film-regie` | Die kleinste Schrift von 16 px gilt für die Bühne 1280 × 720. Im Blatt war die Bühne auf 0,78 verkleinert: 12,5 px auf dem iPad. | Den Maßstab im Einsatz messen. Der Film füllt das Fenster (eine Bedienzeile, »Schließen« im Film); kleinste Schrift so wählen, dass sie im Einsatz 16 px erreicht (hier 18 px). |
@@ -234,6 +239,6 @@ Weiter gültig aus der Fassung 5.0:
 ## 10 · Was ich in den Tresor eintragen würde (geschrieben wird erst nach »Sichern«)
 
 **Stand-Notiz, Verlauf:** `18.11.2026 · Neufassung »Arbeitsblatt Geschichte«: Auswahl am ersten Stopp (Litfaßsäule · Archiv · Zwei Tinten; kein starres System). Pilot M22 in Fassung 5.0 gezeigt; Rückmeldung: Blatt exakt wie im Modul Motivation, weniger Klicks, Film neu. Fassung 5.1 gebaut und gemessen (Blatt 829 px wie im Vorbild; sichern, laden, freigeben mit je einem Tipp; Erklärfilm neu, 2:03 Minuten). Zwei Pakete für Moodle. Stopp vor der Übertragung.`
-**Stand-Notiz, offen:** Freigabe der Fassung 5.1 · Moodle-Test · Extra behalten? · »Akte« oder »Erklärung« · danach Übertragung: M23, M25, M26, M27, dann M16 bis M21.
+**Stand-Notiz, offen:** Freigabe der Fassung 5.1 · Moodle-Test · Extra behalten? · »Akte« oder »Erklärung« · offenes Panel verdeckt einen Teil des Rads (V8) · danach Übertragung: M23, M25, M26, M27, dann M16 bis M21.
 **Entscheidungen-Notiz:** die sechs Entscheidungen vom 18.11.2026, 18:31 Uhr, und die vier Antworten von 19:48 Uhr, mit Grund (wie in `ENTSCHEIDUNGEN.md`).
 **»Erfahrungen aus Erprobungen«:** nichts – es ist nichts erprobt.

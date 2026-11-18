@@ -134,6 +134,20 @@ async def main():
                 r = await pg.evaluate("(() => { const b = document.getElementById('buehne').getBoundingClientRect(); return [Math.round(b.top), Math.round(b.bottom), innerHeight, Math.round(document.querySelector('.kopf').getBoundingClientRect().bottom)]; })()")
                 ganz = r[0] >= r[3] - 1 and r[1] <= r[2] + 1
                 bericht.append(f"{nr} · Übersicht {w} × {h}: Bühne {m['buehne'][0]} × {m['buehne'][1]} px · {len(m['karten'])} Karten, davon mit Fehler {len(schlecht)}{' ' + str(schlecht) if schlecht else ''} · nach Tipp auf eine Karte liegt die Bühne von {r[0]} bis {r[1]} px (Kopf bis {r[3]}, Fenster {r[2]}): {'ganz im Bild' if ganz else 'nicht ganz im Bild'}")
+                # Panel offen: Der Satz unter dem Rad steht frei (nicht unter dem Panel, nicht über Karte oder Feld, in der Bühne).
+                # Dazu als Auskunft, kein Fehler: Liegt das Feld, an dem die offene Erklärung vor allem ansetzt, unter dem Panel?
+                satz = []; verdeckt = []
+                for k in 'CFB':
+                    await pg.evaluate("k => { if (S.akte) schliessePanel(); document.querySelector('#dash [data-akte=\"' + k + '\"]').click(); }", k); await pg.wait_for_timeout(650)
+                    s = await pg.evaluate("""(() => { const r = e => e.getBoundingClientRect(), sch = (a, b) => a.left < b.right - .5 && a.right > b.left + .5 && a.top < b.bottom - .5 && a.bottom > b.top + .5;
+                      const bu = r(document.getElementById('buehne')), sa = document.querySelector('#dash .rad-satz'), s = r(sa), p = r(document.getElementById('panel'));
+                      const a = AKTE(S.akte), ziel = EBENEN.reduce((m, [e]) => a.gew[e] > a.gew[m] ? e : m, 'person'), f = r(document.querySelector('#dash button[data-ebene="' + ziel + '"]'));
+                      return { panel: sch(s, p), karte: [...document.querySelectorAll('#dash .spalte .akte')].filter(x => !sch(r(x), p) && sch(r(x), s)).length,
+                        feld: [...document.querySelectorAll('#dash .ebfeld')].filter(x => sch(r(x), s)).length, drin: s.left >= bu.left && s.right <= bu.right && s.top >= bu.top && s.bottom <= bu.bottom + .5,
+                        ziel: EB[ziel], zielVerdeckt: geprueft(S.akte) ? Math.round(Math.max(0, Math.min(f.right, p.right) - Math.max(f.left, p.left)) / (f.right - f.left) * 100) : -1 }; })()""")
+                    if s['panel'] or s['karte'] or s['feld'] or not s['drin']: satz.append(f"{k}: {s}")
+                    if s['zielVerdeckt'] > 0: verdeckt.append(f"{k} ({s['ziel']} zu {s['zielVerdeckt']} %)")
+                bericht.append(f"{nr} · Übersicht {w} × {h}, Panel offen (C, F, B): Satz unter dem Rad {'steht frei' if not satz else 'FEHLER ' + str(satz)} · wichtigstes Feld unter dem Panel: {', '.join(verdeckt) or 'bei keiner'}")
                 await pg.evaluate("schliessePanel()"); await pg.wait_for_timeout(250)
             await pg.set_viewport_size({'width': 1180, 'height': 820})
             # Beamer-Ansicht und Hefter

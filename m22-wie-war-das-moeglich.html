@@ -966,6 +966,10 @@ h1{font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem)}
   .frage-kern b{font-size:1.45rem}
   .frage-kern span{margin-top:.3rem;line-height:1.2}
   .rad-satz{left:30%;right:30%;top:auto;bottom:1.2%;min-height:0}
+  /* Panel offen: Der Satz unter dem Rad steht in der freien Fläche zwischen den Karten und dem Panel – nie unter dem Panel.
+     Er darf bis an den unteren Rand der Bühne reichen (wie die Karten), damit er auch dreizeilig das Rad nicht berührt. */
+  #main.dashboard .buehne.offen.rechts .rad-satz{left:29.6%;right:44.2%;bottom:-3cqi}
+  #main.dashboard .buehne.offen.links .rad-satz{left:44.2%;right:29.6%;bottom:-3cqi}
   /* Vergleich: Die Tabelle steht ganz da, die Bühne wächst mit ihr (kein Scrollen im Scrollen) */
   #main.dashboard .buehne.a-vergleich{aspect-ratio:auto;width:100%}
   #main.dashboard .buehne.a-vergleich .dash{aspect-ratio:auto;margin:0;padding:1rem 1rem 1.2rem}
@@ -1639,7 +1643,7 @@ function dashFrage(){
     const marken = AKTEN.filter(a => geprueft(a.s) && a.gew[e[0]] >= 2).map(a => `<span class="marke m${a.gew[e[0]]}" title="${esc(a.name)}: ${STUFE[a.gew[e[0]]]}">${a.s}</span>`).join("");
     return `<button class="ebfeld" data-ebene="${e[0]}" aria-pressed="${S.filter === e[0]}" style="left:${(x/12.8).toFixed(2)}%;top:${(y/7.2).toFixed(2)}%"><b>${e[1]}</b><small>${esc(e[2])}</small><span class="marken" aria-label="geprüfte Erklärungen, die hier ansetzen">${marken}</span></button>`; }).join("")}</div>
   <div class="spalte r">${SPALTE_R.map(s => karteHTML(AKTE(s))).join("")}</div>
-  <p class="rad-satz" aria-live="polite">${S.filter ? `<b>${EB[S.filter]}:</b> ${AKTEN.filter(a => geprueft(a.s) && a.gew[S.filter] >= 2).length} geprüfte Erklärung${AKTEN.filter(a => geprueft(a.s) && a.gew[S.filter] >= 2).length === 1 ? "" : "en"} ${AKTEN.filter(a => geprueft(a.s) && a.gew[S.filter] >= 2).length === 1 ? "setzt" : "setzen"} hier an. ${AKTEN.some(a => geprueft(a.s)) ? "" : "Prüfe zuerst eine Erklärung."}` : sel ? `<b>${esc(sel.name)}</b> setzt vor allem bei <b>${EB[EBENEN.reduce((m, [k]) => sel.gew[k] > sel.gew[m] ? k : m, "person")]}</b> an.` : "Tippe auf eine Erklärung: Du liest sie im Panel und prüfst, wo sie ansetzt. Tippe auf ein Feld: Welche geprüften Erklärungen setzen dort an?"}</p>`;
+  <p class="rad-satz" aria-live="polite">${S.filter ? `<b>${EB[S.filter]}:</b> ${AKTEN.filter(a => geprueft(a.s) && a.gew[S.filter] >= 2).length} geprüfte Erklärung${AKTEN.filter(a => geprueft(a.s) && a.gew[S.filter] >= 2).length === 1 ? "" : "en"} ${AKTEN.filter(a => geprueft(a.s) && a.gew[S.filter] >= 2).length === 1 ? "setzt" : "setzen"} hier an. ${AKTEN.some(a => geprueft(a.s)) ? "" : "Prüfe zuerst eine Erklärung."}` : sel ? `<b>${esc(sel.name)}</b> ${sel.name.includes("·") ? "setzen" : "setzt"} vor allem bei <b>${EB[EBENEN.reduce((m, [k]) => sel.gew[k] > sel.gew[m] ? k : m, "person")]}</b> an.` : S.akte ? "Lies die Erklärung im Panel. Mach dort den Gewichtungs-Check: Wo setzt sie an?" : "Tippe auf eine Erklärung: Du liest sie im Panel und prüfst, wo sie ansetzt. Tippe auf ein Feld: Welche geprüften Erklärungen setzen dort an?"}</p>`;
 }
 function dashVergleich(){
   return `<p class="ring-text">Vergleich · die Ebene erscheint nach deinem Gewichtungs-Check</p><div class="ansicht tab-wrap"><table class="vgl"><thead><tr><th>Erklärung</th><th>Jahr</th><th>These</th><th>Ebene</th><th>Grenze</th></tr></thead><tbody>${AKTEN.map(a => `<tr><td><button class="akte zeile${passtFilter(a) ? "" : " gedimmt"}" data-akte="${a.s}" data-vt="akte-${a.s}" aria-pressed="${S.akte === a.s}"><span class="pf" aria-hidden="true">${a.s}</span><b>${esc(a.name)}</b></button></td><td>${esc(a.jahr)}</td><td>${esc(a.kurz.these)}</td><td class="eb-z">${geprueft(a.s) ? a.e.map(e => `<span class="ebene e-${e}">${EB[e]}</span>`).join("") : "<i>nach dem Check</i>"}</td><td>${esc(a.kurz.grenze)}</td></tr>`).join("")}</tbody></table></div>`;
@@ -1705,7 +1709,7 @@ function rueckmeldung(a, k, v){
 function gewSatz(a){
   const g = S.gew[a.s] || {}; const t = EBENEN.filter(([k]) => g[k] === a.gew[k]).length;
   const max = EBENEN.reduce((m, [k]) => a.gew[k] > a.gew[m] ? k : m, "person");
-  return `${t} von 5 Ebenen genau getroffen. ${esc(a.name)} setzt vor allem bei <b>${EB[max]}</b> an.`;
+  return `${t} von 5 Ebenen genau getroffen. ${esc(a.name)} ${a.name.includes("·") ? "setzen" : "setzt"} vor allem bei <b>${EB[max]}</b> an.`;
 }
 
 function fehlendeEbene(){

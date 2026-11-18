@@ -133,6 +133,10 @@ h1{font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem)}
   .frage-kern b{font-size:1.45rem}
   .frage-kern span{margin-top:.3rem;line-height:1.2}
   .rad-satz{left:30%;right:30%;top:auto;bottom:1.2%;min-height:0}
+  /* Panel offen: Der Satz unter dem Rad steht in der freien Fläche zwischen den Karten und dem Panel – nie unter dem Panel.
+     Er darf bis an den unteren Rand der Bühne reichen (wie die Karten), damit er auch dreizeilig das Rad nicht berührt. */
+  #main.dashboard .buehne.offen.rechts .rad-satz{left:29.6%;right:44.2%;bottom:-3cqi}
+  #main.dashboard .buehne.offen.links .rad-satz{left:44.2%;right:29.6%;bottom:-3cqi}
   /* Vergleich: Die Tabelle steht ganz da, die Bühne wächst mit ihr (kein Scrollen im Scrollen) */
   #main.dashboard .buehne.a-vergleich{aspect-ratio:auto;width:100%}
   #main.dashboard .buehne.a-vergleich .dash{aspect-ratio:auto;margin:0;padding:1rem 1rem 1.2rem}
@@ -373,6 +377,12 @@ einmal('<div class="buehne${a ? " offen " +', '<div class="buehne a-${S.ansicht 
 # Satz unter dem Rad: bei einer Erklärung in der Einzahl
 n_alt = s.count('} setzen hier an. ${'); assert n_alt == 1, n_alt
 einmal('} setzen hier an. ${', '} ${AKTEN.filter(a => geprueft(a.s) && a.gew[S.filter] >= 2).length === 1 ? "setzt" : "setzen"} hier an. ${')
+# Satz zur offenen Erklärung und Rückmeldung im Panel: Mehrzahl bei zwei Namen (»Bauman · Welzer setzen …«)
+einmal('<b>${esc(sel.name)}</b> setzt vor allem bei <b>', '<b>${esc(sel.name)}</b> ${sel.name.includes("·") ? "setzen" : "setzt"} vor allem bei <b>')
+einmal('Ebenen genau getroffen. ${esc(a.name)} setzt vor allem bei <b>', 'Ebenen genau getroffen. ${esc(a.name)} ${a.name.includes("·") ? "setzen" : "setzt"} vor allem bei <b>')
+# Panel offen, Erklärung noch nicht geprüft: ein kurzer Satz, der in die freie Fläche neben dem Panel passt (der lange Hinweis lag halb unter dem Panel)
+einmal(': "Tippe auf eine Erklärung: Du liest sie im Panel und prüfst, wo sie ansetzt. Tippe auf ein Feld: Welche geprüften Erklärungen setzen dort an?"}</p>`;',
+       ': S.akte ? "Lies die Erklärung im Panel. Mach dort den Gewichtungs-Check: Wo setzt sie an?" : "Tippe auf eine Erklärung: Du liest sie im Panel und prüfst, wo sie ansetzt. Tippe auf ein Feld: Welche geprüften Erklärungen setzen dort an?"}</p>`;')
 # Über der Bühne steht eine Zeile: drei Ansichten links, der Film rechts
 einmal('<span class="hinweis">Tippe auf eine Ansicht; deine Eingaben bleiben.</span>', '')
 # Tipp auf eine Erklärung: Die Bühne rückt ganz ins Bild (das Blatt beginnt wie jedes Blatt mit Blattkopf und Auftragskopf)

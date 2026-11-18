@@ -20,7 +20,7 @@ FILM, BLATT = ORDNER / 'm22-film-erklaerungen.html', ORDNER / 'm22-wie-war-das-m
 BILDER = pathlib.Path(sys.argv[sys.argv.index('--bilder') + 1]) if '--bilder' in sys.argv else None
 # Sätze des Films, die sich auf Wortlaut im Blatt stützen: Ändert sich das Blatt, schlägt die Prüfung an.
 BELEGE = ['Marktplatz · eine Runde, 5 Minuten', 'Wer eine Karte zu Erklärung A, C oder E hat, steht am Stand.', 'Alle anderen besuchen zwei Stände.',
-          'Tischgruppe · 4 Minuten · ein iPad', 'Auftrag L (Landkarte) ist frei', 'Richtig gelegen:', 'Ebenen genau getroffen', 'setzt vor allem bei',
+          'Tischgruppe · 4 Minuten · ein iPad', 'Auftrag L (Landkarte) ist frei', 'Richtig gelegen:', 'Ebenen genau getroffen', 'vor allem bei <b>',
           'Mindestens zwei Erklärungen, eine aus einer anderen Ebene', 'Ebene: nach deinem Gewichtungs-Check', 'Die These in einem Satz, in deinen Worten',
           'Was erklärt sie am Fall Józefów?', 'Was erklärt sie nicht?', 'Gewichtungs-Check: Wo setzt diese Erklärung an?', 'Erklären heißt nicht entschuldigen.',
           'Sechs Antworten, fünf Ebenen', '"Einstieg","Vertiefung","Kontroverse"', 'noch offen']

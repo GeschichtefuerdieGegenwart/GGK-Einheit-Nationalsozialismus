@@ -203,7 +203,8 @@ Seite A4 hoch, Ränder 14 mm, links 22 mm (Heftrand). Kopfzeile, Register, Werkz
 | Schrift unter 16 px (auch in Schaubildern, wirksame Größe) | keine |
 | Ziele unter 44 px | keine |
 | Textkontrast unter 4,5 : 1 (große Schrift 3 : 1) | keiner; nicht messbar: Text auf Fotos und die helle Schrift auf dem dunklen Kreis des Rads (Hell auf Tinte, 13,1 : 1) |
-| Übersicht bei 1180 × 820 · 1180 × 712 · 1150 × 700 · 1280 × 720 · 1440 × 900 | sechs Karten ohne Überlauf, Linien enden an den Karten, nach einem Tipp liegt die Bühne ganz im Bild |
+| Übersicht bei 1180 × 820 · 1180 × 712 · 1150 × 700 · 1280 × 720 · 1440 × 900 | sechs Karten ohne Überlauf, Linien beginnen an den Karten, nach einem Tipp liegt die Bühne ganz im Bild |
+| Übersicht bei offenem Panel (Erklärung C, F, B), dieselben Größen | der Satz unter dem Rad steht frei. **Befund:** Das wichtigste Feld der offenen Erklärung liegt bei C zu 87 % und bei F zu 50 % unter dem Panel (Fassung 4.1: 63 % und 29 %); bei A, B, D, E liegt es frei |
 | Beamer 1280 × 720: Unterkante des ersten Knopfs | 607 px von 720 px |
 | laufende Animationen nach dem Laden | 0 |
 | Anfragen an fremde Server · Fehler in der Konsole | 0 · 0 |
@@ -218,6 +219,7 @@ Nicht geprüft: Safari auf dem iPad, Stift und Tastatur, GoodNotes, VoiceOver, Z
 
 - **Übersicht in M22 unter 1150 px Breite:** Das Rad erscheint ab 1150 px (iPad 10 und 11 quer mit 1180 px, iPad Air, Beamer). Darunter wird die Übersicht zur Liste – auch auf älteren iPads mit 1080 px und im Hochformat.
 - **Hochformat und ältere Safari-Fassungen:** Das Panel der Übersicht kommt dort von unten und ist am Fenster verankert. Ob das in Safari auf dem iPad so steht, lässt sich nur am Gerät sehen.
+- **Offenes Panel in M22, Auftrag 4:** Das Panel verdeckt einen Teil des Rads; bei Browning und bei Bauman · Welzer endet die Linie unter dem Panel (Regel »Linien enden am Ziel« ist dort nicht erfüllt). Vorschlag V8 in `PILOT_M22.md`: Karten werden bei offenem Panel zu schmalen Kacheln, das Rad rückt daneben. Nicht gebaut, weil sich dabei Aussehen und Film ändern.
 - **»Akte« oder »Erklärung«:** Auftrag 4 spricht von Erklärungen, Auftrag 5 und 6 sprechen noch von Akten (»Meinen Stand zeigen (Akte A)«). Vorschlag: überall »Erklärung«. Marios Wortlaut – deshalb nicht still geändert.
 - Übertragung der gemeinsamen Schicht auf die Kerne der anderen Stunden (`src/m25-m27/blatt.css`, `src/weimar/`, `src/ost-west/`): dieselben Klassennamen, noch nicht eingesetzt.
 - Hefter für Weimar und Ost-West; im Hefter Lernzettel, Ich-kann-Liste, Operatoren.
