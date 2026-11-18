@@ -35,7 +35,7 @@ Am Musterblatt, Chromium, `file://`:
 - Beamer 1280 × 720: erster Knopf 551 px unter der Kopfzeile.
 - Nach dem Laden läuft keine Animation.
 - Druck als A4-PDF (ohne Hintergründe): Deckblatt 1 Seite · Schreibblatt getippt (144 Wörter) 1 · Schreibblatt leer 1 · Zusammenfassung 2 · Auftrag 1 (Weimar 2). Die Seiten habe ich angesehen.
-- Angesehen: 14 Bildschirmfotos (iPad quer und hoch, Telefon) und 12 Druckseiten.
+- Angesehen: 14 Bildschirmfotos (iPad quer und hoch, Telefon) und die Druckseiten in vier Durchgängen. Die Beamer-Größe ist gemessen, aber nicht als Foto angesehen.
 
 Beim Ansehen gefunden und behoben: doppelte Felder im Druck · Zusammenfassung brach mitten in der Spalte um · Nummernkreis druckte leer · beim Zeit-Ziehen verrieten gestrichelte Balken die Antwort · Register nahm hochkant ein Viertel des Bildschirms ein · Nummer überlappte hochkant die Überschrift · Überlauf der Tabellen am Telefon · einzeilige Felder nur 32 px hoch.
 

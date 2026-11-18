@@ -1,5 +1,26 @@
 # Arbeitsstand · Blatt-Standard für alle Module und Kapitel Weimarer Republik
 
+## Stand am 18.11.2026, Abend · Neufassung »Arbeitsblatt Geschichte«: Phase 1 und 2 fertig, Stopp
+
+Branch `neufassung-arbeitsblatt-geschichte` (abgezweigt von `blatt-standard-und-weimar`, Stand `ea6a695`), alles gepusht. **Keine Stunde, kein Kern und keine Startseite ist geändert.** Kein Pull Request, nichts zusammengeführt.
+
+**Auftrag vom 18.11., 17:12 Uhr:** die drei Einheiten grundlegend überarbeiten – Format des Psycho-Labors für alle Stunden, Bilder, je Einheit ein Paket für Moodle. Vorgehen mit zwei Stopps; der erste Stopp ist erreicht.
+
+**Erledigt (alles in `docs/neufassung/`):**
+
+- `PHASE1_INVENTAR.md` – A Psycho-Labor · B Tresor · C acht Skills · D Ist-Stand und Bildlücken · E Zuordnungstabelle · F Spannungen und Fragen
+- `DESIGN.md` – »Arbeitsblatt Geschichte« (Vorschlag)
+- `Musterblatt_Arbeitsblatt_Geschichte.html` – eine Datei, gebaut mit `python3 docs/neufassung/musterblatt/bau_muster.py`
+- `BERICHT_Phase1-2.md` – was geändert, geprüft und offen ist; Fallstrick-Vorschläge; Vorschau für den Tresor
+
+**Wartet auf Mario:** Farbrichtung je Einheit · feste Bausteine E, L, S, V, Z · was als »Lösung« ins Paket der Lehrkraft kommt · Bildregel und Weg zu den Titelbildern · Reihenfolge der Einheiten und Pilot (Vorschlag M26) · Zeit (Kürzen oder Hausaufgabe).
+
+**Danach (Phase 3, Pilot):** eine Stunde ganz im neuen Blatt, mit Bildliste, als Paket für Moodle und getrenntem Paket für die Lehrkraft. Dafür zuerst den gemeinsamen Kern bauen (ein Speicher je Einheit, Übernahme der alten Schlüssel, Datei sichern und laden) und den Hefter als Startdatei.
+
+**Nicht vergessen:** In dieser Werkbank lassen sich keine Bilder aus dem Netz laden. Die sechs Entscheidungen vom 18.11., 16:50 Uhr (NS und Ost-West) sind noch unbeantwortet.
+
+---
+
 ## Stand am 18.11.2026, Nachmittag · NS und Ost-West überarbeitet, ein Paket für alle drei Kapitel
 
 Branch `blatt-standard-und-weimar`, alles gepusht. Nichts ist zusammengeführt.
