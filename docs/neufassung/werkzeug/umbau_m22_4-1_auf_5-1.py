@@ -226,11 +226,11 @@ fn('register', r'''
 function register(immer){
   const r = document.getElementById("reg"), lf = document.getElementById("loesch-frage"); if (!r || (!immer && (r.contains(document.activeElement) || (lf && !lf.hidden && r.contains(lf))))) return;
   const sl = r.scrollLeft, st = r.scrollTop;
-  const zeile = (id, nr, kurz, unter, kl, label) => `<li><button data-geh="${id}" class="${kl}"${id === S.seite ? ' aria-current="step"' : ""} aria-label="${esc(label)}"><span class="ab-nr" aria-hidden="true">${nr}</span><span><b>${esc(kurz)}</b><span class="ab-st">${esc(unter)}</span></span></button></li>`;
+  const zeile = (id, nr, kurz, unter, kl, label, form) => `<li><button data-geh="${id}" class="${kl}"${id === S.seite ? ' aria-current="step"' : ""} aria-label="${esc(label)}"><span class="ab-nr" aria-hidden="true">${nr}</span><span><b>${esc(kurz)}</b>${form ? `<small class="ab-form">${esc(form)}</small>` : ""}<span class="ab-st">${esc(unter)}</span></span></button></li>`;
   r.innerHTML = `<p class="ab-regtitel">Dieses Blatt · 90 Minuten</p><ol>${zeile("start", "D", "Deckblatt", S.seite === "start" ? "du bist hier" : "Frage und Ablauf", "eckig", "Deckblatt: Zentrale Frage und Ablauf")}${AUF.map(a => { const hier = a.id === S.seite;
     const [wort, kl] = hier ? ["du bist hier","hier"] : erledigt(a.id) ? ["✓ fertig","fertig"] : offen(a.id) ? ["offen","offen"] : a.frei === "ansage" ? ["auf Ansage","ansage"] : ["nach Antwort","antwort"];
     const lang = { "auf Ansage":"öffnet auf Ansage", "nach Antwort":"öffnet nach deiner Antwort", "✓ fertig":"fertig" }[wort] || wort;
-    return zeile(a.id, a.nr, a.kurz, (a.extra ? "" : a.min + " Min. · ") + wort, kl + (a.extra ? " eckig" : ""), `${a.extra ? "Extra" : "Auftrag " + a.nr}: ${a.kurz}, ${a.form}${a.extra ? "" : ", " + a.min + " Minuten"}, ${lang}`); }).join("")}</ol>`;
+    return zeile(a.id, a.nr, a.kurz, lang === "fertig" ? "✓ fertig" : lang, kl + (a.extra ? " eckig" : ""), `${a.extra ? "Extra" : "Auftrag " + a.nr}: ${a.kurz}, ${a.form}${a.extra ? "" : ", " + a.min + " Minuten"}, ${lang}`, a.extra ? "außerhalb der 90 Minuten" : a.form.split(" · ")[0] + " · " + a.min + " Min."); }).join("")}</ol>`;
   if (QUER() && !SCHMAL()) r.insertAdjacentHTML("beforeend", werkzeuge());
   r.scrollLeft = sl; r.scrollTop = st;
 }
@@ -249,7 +249,7 @@ function start(){
   const b = BILDER.wald, da = b && !FEHLT.has("wald"), runden = AUF.filter(a => !a.extra);
   const naechst = runden.find(a => !erledigt(a.id)), begonnen = runden.some(a => erledigt(a.id));
   return `<div class="ab-deck"><div class="ab-deck__text">
-    <p class="ab-kicker">M22 · Blatt ${PLATZ.i} von ${PLATZ.n} im Hefter · davor ${PLATZ.davor.nr} · danach ${PLATZ.danach.nr} · 90 Minuten</p>
+    <p class="ab-kicker">Blatt ${PLATZ.i} von ${PLATZ.n} · nach ${PLATZ.davor.nr} · 90 Minuten</p>
     <h1>„Große Verbrechen brauchen keine Monster!“</h1>
     <p class="ab-zentral">Zentrale Frage</p>
     <p class="leitfrage">Wie war das möglich? Wer wurde zum Täter, wer zur Täterin?</p>
