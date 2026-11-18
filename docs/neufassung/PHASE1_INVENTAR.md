@@ -184,7 +184,7 @@ Gemessen am 18.11.2026 am Stand `ea6a695` (Branch `blatt-standard-und-weimar`): 
 | **NS, neuer Kern** | 5 (M16, M17, M25, M26, M27) | Kern `src/m25-m27` | ja | Leitfrage nicht im Kopf | **nein** (nur L und Schreibauftrag) | **nein, alles offen** | nein | nein | M16, M17 | 4 von 5 (M26: Blick am Urteil) | Zusammenfassung | nein |
 | **NS, von Hand gebaut** | 5 (M18, M19, M20, M21, M23) + je ein »Teil 2« | eigene Seiten, je anders | Teil 2: ja · Stunde: nein | – | Teil 2: ja | Teil 2: Ansage oder Codewort | nein | nein | in Teil 2 | in Teil 2 (M21 in der Stunde) | je anders | nein |
 | **NS, M22** | 1 | eigene Fassung 4.1 | ja | ja | ja | ja | nein | nein | ja | ja | Zusammenfassung | nein (zwei Verweise zum Herunterladen, kein Laden) |
-| **Ost-West** | 9 (Stunde 1–9 = M29–M44) | Kern `src/ost-west` | ja | Leitfrage nicht im Kopf | ja | **nein, alles offen** | nein | **ja, fester Auftrag** | 9 | 9 | **Merkseite** | nein |
+| **Ost-West** | 9 (Stunde 1–9 = M29–M44) | Kern `src/ost-west` | ja | Leitfrage nicht im Kopf | ja | **nein, alles offen** | ja, aber auf dem Deckblatt, nicht als eigener Auftrag | **ja, fester Auftrag** | 9 | 9 | **Merkseite** | nein |
 
 Dazu: Startseite `index.html`, Kapitelseiten `weimar/index.html` und `ost-west/index.html`, sechs Bildlisten. **M15 und M24 gibt es im Heft, aber nicht als Modul.**
 
@@ -194,7 +194,7 @@ Dazu: Startseite `index.html`, Kapitelseiten `weimar/index.html` und `ost-west/i
 2. **44 getrennte Speicherschlüssel.** Weimar und Ost-West haben zusätzlich einen Schlüssel für die Einheit (`ggk-weimar:v1`, `ggk-owk:v1`), NS nicht.
 3. **Dieselbe Sache heißt verschieden:** »Zusammenfassung« (Weimar, NS) und »Merkseite« (Ost-West); »roter Faden« (Weimar) und »Verorten« (Ost-West); »Stunde 3« (Ost-West) und »M17« (NS, Weimar).
 4. **Die NS-Einheit ist am uneinheitlichsten:** drei Bauarten in elf Stunden; fünf Stunden bestehen aus zwei Seiten (Stunde und Teil 2).
-5. **»Erst erinnern«** (Abruf ohne Heft) gibt es nur in Weimar, **»Verorten«** als Auftrag nur in Ost-West. Beides fordert die Lehrfunktion »Sichern und üben« und »Übertragen«.
+5. **»Erst erinnern«** (Abruf ohne Heft) gibt es als eigenen Auftrag nur in Weimar (9 von 16 Stunden); in Ost-West stehen Abruffragen auf dem Deckblatt; in NS fehlen sie. **»Verorten«** als Auftrag gibt es nur in Ost-West. Beides fordert die Lehrfunktion »Sichern und üben« und »Übertragen«.
 6. **Planzeiten über 90 Minuten:** M1 (105), M6 (104), M11 (158), M17 (108), Ost-West 2 (103), Ost-West 4 (99), Ost-West 6 (98). Ob das Doppelstunden mit Reserve oder zwei Stunden sind, weißt nur du. Gekürzt wird nichts ohne deine Auswahl (K-Listen im Pilot und bei der Übertragung).
 7. **Wortlaut der Landkarte:** Der »Blick« von M14.2 heißt »Politikgeschichte« – diesen Namen hat die Landkarte nicht (dort: Ereignisgeschichte, 2.3.8). In NS und Ost-West ist das am 18.11. schon berichtigt, in Weimar noch nicht.
 
@@ -288,7 +288,7 @@ Motivrichtungen für die acht Lücken (noch **keine** Bildangaben – Fundstelle
 | 3 Berlin-Blockade (M32/M33) | 2.1.6 Narrativität | Agency | Entscheiden vor dem Verlauf (7) – **da**; Ablauf in eine Reihe legen (4 · rückmelden) – **da** | Entscheidung mit dem Wissen von damals | Aufdecken |
 | 4 Doppelte Staatsgründung (M34) | 2.1.8 Standortgebundenheit | Perspektiven | Zwei Reden markieren mit Regel, Vergleichstabelle (11, 3) – **da** | mittel: Lange Reden bleiben auf Papier; am Gerät nur der Vergleich der Markierungen | – |
 | 5 Westbindung (M35/M36) | 2.1.4 Selektivität | Ereignis | Schritte reihen (4) – **da**; Urteilslinie vor und nach dem Streit (5 · messen) – **neu** | Die eigene Position vorher und nachher | Position verschieben |
-| 6 Flucht und Mauer (M36–M39) | 2.1.5 Partialität | Sozialgeschichte | Fluchtzahlen 1949–1961 ziehen (5 · variieren) – **neu**; Gründe ordnen – **da** | Spitzen und Tempo werden sichtbar; »Was zeigen Zahlen nicht?« | Zeit ziehen |
+| 6 Flucht und Mauer (M36–M39) | 2.1.5 Partialität | Sozialgeschichte | Schätzen, dann Diagramm und Tabelle der Fluchtzahlen; Regler »Und wenn es deine Stadt wäre?« mit Modellkritik (1, 5 · verdecken, variieren) – **da**; die Jahre 1949–1961 ziehen – **neu** | Spitzen und Tempo werden sichtbar; »Was zeigen Zahlen nicht?« | Zeit ziehen |
 | 7 Geschichte im Staatsdienst (M40) | 2.1.7 Konstruktivität | Geschichtspolitik | Zwei Schulbuchtexte, Herkunft verdeckt, Wertung markieren, aufdecken (8, 11 · verdecken) – **neu** | Die Texte werden als Quellen ihrer Staaten gelesen, bevor man weiß, woher sie sind | Quelle aufdecken |
 | 8 Ostverträge (M41) | 2.1.1 Retrospektivität | Ereignis | Debatte: Position vorher und nachher, Stimmkarte (12 · messen) – **neu** | Klassenbild als Gesprächsanlass | – |
 | 9 Ende der DDR (M42–M44) | 2.1.6 Narrativität | Erklären aus mehreren Ursachen | Vier Blickwinkel gewichten (5 · messen) – **neu**; Herbst 1989 reihen (4) – **da** | Mehrere Ursachen bekommen ein eigenes Gewicht; die Gewichte der Klasse unterscheiden sich | Gewichte verschieben |
