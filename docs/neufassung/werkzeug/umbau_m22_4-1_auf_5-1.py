@@ -66,6 +66,8 @@ NEU_CSS = r'''
 .band figure img{min-height:0}
 .band figcaption{position:static;font-size:1rem;background:#2A2824;padding:.5rem .8rem .6rem}
 .dash-kopf [data-film]{margin-left:auto}
+.tafel.filmtafel{padding:0;overflow:hidden}
+.filmtafel .filmrahmen{height:100vh;height:100dvh;min-height:0;margin:0}
 .dreh,.jz-karte{scroll-margin:calc(var(--ab-kopf) + 12px) 0 12px}
 .merksatz{border-color:var(--tinte)}
 .karte{border-color:var(--linie)}
@@ -85,6 +87,13 @@ h1{font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem)}
 .akte.empfohlen{border-style:dashed;border-color:var(--achtung)}
 .ebfeld{font-size:1.06rem}
 .ebfeld .marke{font-size:1rem}
+/* Marken am Rad: drei Stufen, jede mit vollem Kontrast – gefüllt = entscheidend, grau = sehr wichtig, Rahmen = wichtig (bisher über Durchsichtigkeit, zu blass) */
+.ebfeld .marke.m3{opacity:1;background:var(--leise)}
+.ebfeld .marke.m2{opacity:1;background:var(--blatt);color:var(--tinte);box-shadow:inset 0 0 0 2px var(--tinte)}
+@media (max-width:1149px){   /* in der Liste ist das gewählte Feld dunkel: Marken dort umgekehrt */
+  .ebfeld[aria-pressed=true] .marke.m3{background:var(--linie);color:var(--tinte)}
+  .ebfeld[aria-pressed=true] .marke.m2{background:transparent;color:var(--grund);box-shadow:inset 0 0 0 2px var(--grund)}
+}
 .ebfeld small{font-size:1rem}
 .frage-kern span{font-size:1rem}
 .rad-satz{font-size:1rem}
@@ -361,6 +370,9 @@ einmal('matchMedia("(min-width:900px)")', 'matchMedia("(min-width:981px)")')   #
 einmal('const y = [134, 360, 586][l >= 0 ? l : r]; return l >= 0 ? [340, y] : [940, y]; };', 'const y = [82, 360, 638][l >= 0 ? l : r]; return l >= 0 ? [365, y] : [915, y]; };')
 # Die Bühne kennt ihre Ansicht: Das Rad hat ein festes Format, die Tabelle wächst mit ihrem Inhalt, die Zeitachse nutzt die ganze Höhe
 einmal('<div class="buehne${a ? " offen " +', '<div class="buehne a-${S.ansicht || "frage"}${a ? " offen " +')
+# Satz unter dem Rad: bei einer Erklärung in der Einzahl
+n_alt = s.count('} setzen hier an. ${'); assert n_alt == 1, n_alt
+einmal('} setzen hier an. ${', '} ${AKTEN.filter(a => geprueft(a.s) && a.gew[S.filter] >= 2).length === 1 ? "setzt" : "setzen"} hier an. ${')
 # Über der Bühne steht eine Zeile: drei Ansichten links, der Film rechts
 einmal('<span class="hinweis">Tippe auf eine Ansicht; deine Eingaben bleiben.</span>', '')
 # Tipp auf eine Erklärung: Die Bühne rückt ganz ins Bild (das Blatt beginnt wie jedes Blatt mit Blattkopf und Auftragskopf)
@@ -372,8 +384,16 @@ einmal('<p class="hinweis"><b>Für Schnelle – oder als Hausaufgabe.</b> In der
        '<p class="hinweis"><b>Für Schnelle – freiwillig.</b> In der Stunde ist dafür keine Zeit eingeplant.</p>')
 einmal('Auf den iPads tippen die Schüler*innen selbst auf „Unsere Lehrkraft hat freigegeben“, wenn du es ansagst.',
        'Auf den iPads tippen die Schüler*innen selbst auf „Auftrag … öffnen“, wenn du es ansagst. Ein Tipp genügt.')
-einmal('Phase 4 im Film: Was du jetzt tust und wohin die Reise geht', 'Auftrag 4 im Film: So arbeitest du mit der Übersicht')
-einmal('title="Erklärfilm zu Phase 4, ohne Ton, zwei Minuten"', 'title="Erklärfilm zu Auftrag 4, ohne Ton"')
+# Der Film füllt das Fenster: So bleibt seine Schrift auf dem iPad lesbar. »Schließen« steht in der Bedienzeile des Films.
+fn('filmAnsicht', r'''
+function filmAnsicht(von){
+  FILM_VON = von || null;
+  document.getElementById("ueber").innerHTML = `<div class="tafel filmtafel" role="dialog" aria-modal="true" aria-label="Erklärfilm zu Auftrag 4: So arbeitest du mit der Übersicht">
+    <iframe class="filmrahmen" src="m22-film-erklaerungen.html?eingebettet" title="Erklärfilm zu Auftrag 4, ohne Ton"></iframe></div>`;
+  const f = document.querySelector("#ueber .filmrahmen");
+  f.addEventListener("load", () => { try { f.contentWindow.focus(); } catch (e) {} }); f.focus();
+}
+''')
 
 # Eingaben im Extra
 einmal('''document.addEventListener("input", ev => {
