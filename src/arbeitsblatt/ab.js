@@ -81,6 +81,19 @@
   function setzeBeamer(an) { if (an) root.setAttribute("data-ansicht", "beamer"); else root.removeAttribute("data-ansicht"); schreib("ggk-ansicht", an ? "beamer" : ""); }
   if (lies("ggk-ansicht") === "beamer") root.setAttribute("data-ansicht", "beamer");
 
+  /* ---------- Druck: Schreibfelder werden zu Text auf Linien (ein Feld druckt sonst nur seinen sichtbaren Ausschnitt) ---------- */
+  function vorDruck() {
+    nachDruck();
+    doc.querySelectorAll("main textarea").forEach(t => {
+      if (t.closest("[hidden]") || !t.getClientRects().length) return;
+      const d = doc.createElement("div"); d.className = "ab-druckfeld"; d.textContent = t.value;
+      d.style.setProperty("--zeilen", String(Math.max(2, +t.getAttribute("rows") || 2)));
+      t.insertAdjacentElement("afterend", d); t.classList.add("ab-druckweg");
+    });
+  }
+  function nachDruck() { doc.querySelectorAll(".ab-druckfeld").forEach(d => d.remove()); doc.querySelectorAll(".ab-druckweg").forEach(t => t.classList.remove("ab-druckweg")); }
+  window.addEventListener("beforeprint", vorDruck); window.addEventListener("afterprint", nachDruck);
+
   /* ---------- Werkzeuge: überall dieselben Knöpfe an derselben Stelle ---------- */
   let WERK_AUF = false;
   function werkzeuge(mitte, lizenz) {

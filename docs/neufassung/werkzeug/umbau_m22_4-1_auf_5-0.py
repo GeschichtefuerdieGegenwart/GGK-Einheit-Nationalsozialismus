@@ -73,9 +73,12 @@ h1{font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem)}
 #main.dashboard .ab-h{font-size:1.35rem;margin-bottom:.5rem}
 #main.dashboard .dash-fuss{margin-top:.6rem;display:grid;gap:.5rem}
 .fortschritt{font-size:1rem}
-.ring-text{font-size:1rem;text-transform:none;letter-spacing:0;color:var(--leise)}
+.ring-text,#main.dashboard .ring-text{font-size:1rem;text-transform:none;letter-spacing:0;color:var(--leise)}
+.akte.zeile{min-height:44px}
 .akte{font-size:1rem;border-width:2px;border-color:var(--stahl);border-radius:.3rem}
 .akte .j,.akte .fr,.akte .fs span,.akte .fs .emp{font-size:1em}
+.akte .pf{grid-row:1/3}
+.akte b{align-self:end}
 .akte .fs .emp{border-style:dashed;border-color:var(--achtung);color:var(--achtung);font-weight:700}
 .akte.empfohlen{border-style:dashed;border-color:var(--achtung)}
 .ebfeld{font-size:1.06rem}
@@ -134,8 +137,15 @@ h1{font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem)}
 .eingabe fieldset{border:2px solid var(--stahl);border-radius:.3rem}
 @media print{
   .ab-deck .ab-titelbild img{aspect-ratio:16/10}
-  .zf .ab-druckfeld{--zeile:1.7rem}
-  .zf .schau{grid-template-columns:58mm minmax(0,1fr)}
+  html[data-seite="zusammenfassung"]{font-size:9pt}
+  html[data-seite="zusammenfassung"] .ab-h,html[data-seite="zusammenfassung"] .ab-meta{display:none!important}
+  .zf .ab-druckfeld{--zeile:6.6mm}
+  .zf .schau{grid-template-columns:46mm minmax(0,1fr)}
+  html[data-seite="zusammenfassung"] .zf > .zeit{display:none}
+  .zf .merksatz{margin:.3rem 0;padding:.2rem 0;font-size:10.5pt}
+  .zf .ansaetze{gap:.3rem}
+  .zf .ans{padding:.3rem .45rem;font-size:8.2pt;line-height:1.27}
+  .zf h2{margin:.4rem 0 .15rem}
 }
 '''
 css = css.rstrip() + '\n' + NEU_CSS
@@ -223,6 +233,12 @@ einmal('''${kaRaster()}
        '''${kaRaster()}
     <p class="hinweis" style="margin-top:.6rem">Ein Konzept genügt. Was genau im Text stehen kann, besprecht ihr im Plenum.</p></div>''')
 
+# Druck von Auftrag 7: Aufgabe, Stichpunkte und Text – ohne Wortzähler, Schalter und Kriterien
+einmal('''<p class="hinweis" id="erz-zahl" aria-live="polite">''', '''<p class="hinweis nodruck" id="erz-zahl" aria-live="polite">''')
+einmal('''  </div><div>
+    <p><b>Lieber von Hand?</b>''', '''  </div><div class="nodruck">
+    <p><b>Lieber von Hand?</b>''')
+einmal('''<div id="krit" ${S.krit && fertig ? "" : "hidden"}>''', '''<div id="krit" class="nodruck" ${S.krit && fertig ? "" : "hidden"}>''')
 # Extra (freiwillig) und die Seite »Am Beamer« (bisher im Lehrkraftbereich; enthält keine Lösungen)
 a = s.index('/* ---------- Für Lehrkräfte: Text verschlüsselt im Datenblock lehr-daten')
 EXTRA = r'''/* ---------- Extra · freiwillig (Vorschlag vom 18.11.2026): hängt an einem Gespräch, am eigenen Rad und an einer Stelle aus diesem Blatt ---------- */
@@ -274,6 +290,7 @@ function werkzeuge(){
 fn('zeichne', r'''
 function zeichne(fokus){
   if (!SEITE_FN[S.seite]) S.seite = "start";
+  document.documentElement.setAttribute("data-seite", S.seite);   // für den Druck: die Zusammenfassung hat ihr eigenes Maß
   document.querySelector(".ab-rahmen").classList.toggle("schmal", SCHMAL());
   kopf();
   const m = document.getElementById("main"), auf = AUF[AUFI(S.seite)], auf_offen = !auf || offen(S.seite);
@@ -310,6 +327,7 @@ einmal('''<p class="modellhinweis">Fünf Ebenen und Gewichtungen sind ein Modell
 # aktenStand() zählte die Marken der Karte nach ihrer Stelle; mit der Marke »Empfehlung« davor stimmt die Stelle nicht mehr
 einmal('''sp = b.querySelector(".fs span:nth-child(2)"); if (sp) {''', '''sp = [...b.querySelectorAll(".fs span:not(.emp)")][1]; if (sp) {''')
 
+einmal('''<summary style="cursor:pointer;min-height:40px;display:flex;''', '''<summary style="cursor:pointer;min-height:44px;display:flex;''')
 # ---------------------------------------------------------------- Fußzeile der Datei
 einmal('''  <p class="urheberzeile" style="font-size:1rem;opacity:.72;margin-top:1.5rem">''', '''  <p class="urheberzeile">''')
 
