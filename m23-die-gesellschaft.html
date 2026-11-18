@@ -718,7 +718,7 @@ function zusammenfassung(){
   <div class="karte"><p>${esc(S.urteil) || "–"}</p></div>
   <h2>Abrufübung (für die nächste Stunde)</h2>
   ${ABRUFZ.map(a => gWahl("abrufz", a.id, esc(a.frage), a.optionen, { ohneGrund:true, mind:0 })).join("")}
-  </div>${weiter("start", "Zur Startseite")}`;
+  </div><p class="nodruck" style="margin:1rem 0 0"><a class="btn" href="m23-teil2.html">Teil 2: Landkarte und Schreibauftrag ›</a></p>${weiter("start", "Zur Startseite")}`;
 }
 
 /* ---------- Für Lehrkräfte: Text verschlüsselt im Datenblock lehr-daten; Schloss aus src/lk-schloss.js (python3 tools/lk_einsetzen.py) ---------- */

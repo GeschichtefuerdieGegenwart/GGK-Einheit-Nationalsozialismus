@@ -1,0 +1,4 @@
+/* Teil 2 zu den handgebauten Stunden: Codewort-Feld und Verweis auf die Stunde */
+.t2-tor .reihe{justify-content:center;gap:.6rem}
+.t2-tor input{max-width:16rem;min-height:48px;text-transform:uppercase;letter-spacing:.06em}
+.t2-zur{margin-top:.9rem}

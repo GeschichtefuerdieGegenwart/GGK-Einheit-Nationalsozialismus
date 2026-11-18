@@ -94,7 +94,7 @@ async def main():
             if z:
                 n = await seiten("geh('zusammenfassung')"); pr(n == 2, f'Zusammenfassung druckt {n} Seiten statt 2'); print('  Zusammenfassung:', n, 'Seite(n) A4')
             if await pg.evaluate("!!L.schreib"):
-                n = await seiten("(() => { geh((L.blatt.find(a => SEITE_FN[a.id] === schreibauftrag) || {}).id); document.body.classList.add('druck-sb'); })()"); pr(n == 1, f'Schreibblatt druckt {n} Seiten statt 1'); print('  Schreibblatt:', n, 'Seite(n) A4')
+                n = await seiten("(() => { geh((L.blatt.find(a => SEITE_FN[a.id] === schreibauftrag) || L.blatt.find(a => a.id === 'schreiben') || {}).id); document.body.classList.add('druck-sb'); })()"); pr(n == 1, f'Schreibblatt druckt {n} Seiten statt 1'); print('  Schreibblatt:', n, 'Seite(n) A4')
                 await pg.evaluate("document.body.classList.remove('druck-sb')")
         if a.privat:
             for pf in a.privat.split(','): await pg.evaluate("p => setz(p, 'PRIVATMARKE-XYZ')", pf)

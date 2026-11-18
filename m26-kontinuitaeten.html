@@ -931,7 +931,8 @@ const probe = f => { try { return !!(f && f()); } catch(e) { return false; } };
 const beantwortet = id => { const f = (L.erledigt || {})[id]; return f ? probe(f) : !!(S.durch || {})[id]; };
 const erledigt = id => probe((L.erledigt || {})[id]) || !!(S.durch || {})[id];
 /* Was schon einmal offen war (S.war) oder schon bearbeitet ist, bleibt offen: Eine neue Freigaberegel darf vorhandene Arbeit nicht verstecken. */
-const offen = id => { const a = AUF(id); if (!a || !a.frei || a.frei === "offen" || (S.frei || {})[id] || (S.war || {})[id] || probe((L.erledigt || {})[id])) return true; return a.frei === "antwort" && beantwortet(a.nach); };
+/* frei:"code" gehört zu Stunden mit Codewort (M19, M20): Der Auftrag öffnet erst, wenn L.torOffen() wahr ist – kein Öffnen auf Ansage. */
+const offen = id => { const a = AUF(id); if (a && a.frei === "code") return probe(L.torOffen); if (!a || !a.frei || a.frei === "offen" || (S.frei || {})[id] || (S.war || {})[id] || probe((L.erledigt || {})[id])) return true; return a.frei === "antwort" && beantwortet(a.nach); };
 const SCHMAL = () => BLATT() && (L.schmal || []).includes(S.seite) && offen(S.seite);
 
 function register(immer){
@@ -940,12 +941,13 @@ function register(immer){
   if (!immer && (r.contains(document.activeElement) || (lf && !lf.hidden && r.contains(lf)))) return;
   const sl = r.scrollLeft, st = r.scrollTop;
   r.innerHTML = `<p class="ab-regtitel">Dieses Blatt · ${L.dauer || 90} Minuten</p><ol>${L.blatt.map(a => { const hier = a.id === S.seite;
-    const [wort, kl] = hier ? ["du bist hier","hier"] : erledigt(a.id) ? ["fertig","fertig"] : offen(a.id) ? ["offen","offen"] : a.frei === "ansage" ? ["öffnet auf Ansage","ansage"] : ["öffnet nach deiner Antwort","antwort"];
+    const [wort, kl] = hier ? ["du bist hier","hier"] : erledigt(a.id) ? ["fertig","fertig"] : offen(a.id) ? ["offen","offen"] : a.frei === "ansage" ? ["öffnet auf Ansage","ansage"] : a.frei === "code" ? ["öffnet nach der Stunde","antwort"] : ["öffnet nach deiner Antwort","antwort"];
     return `<li><button type="button" data-geh="${a.id}" class="${kl}"${hier ? ' aria-current="step"' : ""} aria-label="Auftrag ${a.nr}: ${esc(a.kurz)}, ${esc(a.form)}, ${a.min} Minuten, ${wort}"><span class="ab-nr" aria-hidden="true">${a.nr}</span><span><b>${esc(a.kurz)}</b><small>${a.form ? esc(a.form) + " · " : ""}${a.min} Min.</small><span class="ab-st">${wort}</span></span></button></li>`; }).join("")}</ol>`;
   if (QUER() && !SCHMAL()) r.insertAdjacentHTML("beforeend", loeschBereich());
   r.scrollLeft = sl; r.scrollTop = st;
 }
 function zuSeite(a){
+  if (a.frei === "code") return L.torSeite ? L.torSeite(a) : "";
   const ans = a.frei === "ansage", nach = ans ? null : AUF(a.nach);
   return `<div class="ab-zu"><p class="ab-zu-t">${ans ? "Dieser Auftrag öffnet auf Ansage." : "Dieser Auftrag öffnet nach deiner Antwort."}</p>
   <p>${esc(ans ? "Darum geht es gleich: " + (a.gleich || a.name) : (a.fehlt || "Bearbeite erst den Auftrag davor."))}</p>
@@ -967,7 +969,7 @@ function blatt(a){
   ${danach ? `<button type="button" class="btn primary" data-geh="${danach.id}"${zu ? "" : ` data-durch="${a.id}"`}>${esc(danach.nr + " " + danach.kurz)} ›</button>` : `<a class="btn primary" href="${LABOR}">Zur Übersicht</a>`}</div>`;
 }
 /* Ablauf fürs Deckblatt: die Aufträge als Liste */
-const blattAblauf = () => `<ol class="ablauf ab-ablauf">${L.blatt.map(a => `<li><b>${a.nr}</b><span>${esc(a.name)} <small>${esc(a.form)} · ${a.min} Min.${a.frei === "ansage" ? " · auf Ansage" : ""}</small></span></li>`).join("")}</ol>`;
+const blattAblauf = () => `<ol class="ablauf ab-ablauf">${L.blatt.map(a => `<li><b>${a.nr}</b><span>${esc(a.name)} <small>${esc(a.form)} · ${a.min} Min.${a.frei === "ansage" ? " · auf Ansage" : a.frei === "code" ? " · nach der Stunde" : ""}</small></span></li>`).join("")}</ol>`;
 
 /* ---------- Auswahl links, die eine Karte rechts (Muster aus M22 4.1) ----------
    eintraege = [{ id, nr, titel, unter, html, fertig }] · Stand: S.wk[gruppe] = id */

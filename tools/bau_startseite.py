@@ -64,17 +64,20 @@ SPALTEN = {'weimar': [('9. Nov. 1918', 'Ausrufung der Republik', None), ('11. Au
 KURZ.update(W_KURZ)
 SPALTEN['weimar'] = [(W_MERK.get(nr, (None, None))[0], W_MERK.get(nr, (None, None))[1], nr if nr in W_NR else None) for wid, nr, titel, datei, block in W_ALLE if nr in W_NR or nr in W_MERK]
 # Zweite Ordnung: Prinzipien der kognitiven Landkarte -> Module (aus den Landkarten-Seiten der Module abgelesen)
-PRINZIP = [('2-1-1', 'Retrospektivität', 'Wir betrachten die Vergangenheit immer im Nachhinein, aus der Gegenwart heraus.', ['M5', 'M9', 'M10', 'M19', 'M20', 1, 8]),
+PRINZIP = [('2-1-1', 'Retrospektivität', 'Wir betrachten die Vergangenheit immer im Nachhinein, aus der Gegenwart heraus.', ['M5', 'M9', 'M10', ('M19', 'm19-teil2.html'), 'M20', 1, 8]),
  ('2-1-2', 'Perspektivität', 'Jede Betrachtung erfolgt aus einer Sichtweise, geprägt von Überzeugungen, Interessen und Erfahrungen.', ['M12', 'M17', 'M27', 'M22', 'M25', 2]),
  ('2-1-3', 'Partikularität', 'Historische Erkenntnisse sind immer nur Ausschnitte der gesamten Vergangenheit.', ['M4', 'M14']),
  ('2-1-4', 'Selektivität', 'Wer Geschichte erzählt, wählt aus: Welche Quellen, Ereignisse und Personen sind wichtig?', ['M4', 'M12', 5]),
  ('2-1-5', 'Partialität', 'Quellen zeigen immer nur einen Teil der Vergangenheit, und nur ein Teil der Quellen ist erhalten.', ['M14', 6]),
  ('2-1-6', 'Narrativität', 'Geschichte gibt es nur als Erzählung.', ['M10', 3, 9]),
- ('2-1-7', 'Konstruktivität', 'Geschichte wird nicht gefunden, sondern zusammengesetzt. Aus denselben Fakten können verschiedene Geschichten entstehen.', [7]),
+ ('2-1-7', 'Konstruktivität', 'Geschichte wird nicht gefunden, sondern zusammengesetzt. Aus denselben Fakten können verschiedene Geschichten entstehen.', [('M23', 'm23-teil2.html'), 7]),
  ('2-1-8', 'Standortgebundenheit', 'Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Kontext geprägt, oft unbewusst.', ['M3', 'M7.1', 'M27', 4])]
-# Weimar-Module, deren Landkarten-Auftrag einen anderen Teil der Landkarte nutzt (Wozu Geschichte?, Formen, Auswirkungen)
-W_ANDERS = ['M1', 'M2', 'M6', 'M7', 'M8', 'M11', 'M13', 'M14.2']
-OFFEN = ['M16', 'M18', 'M21', 'M23', 'M26']
+# Module, deren Landkarten-Auftrag einen anderen Teil der Landkarte nutzt (Wozu Geschichte?, Formen, Urteilen, Auswirkungen).
+# Ein Paar (Nummer, Datei) verweist auf Teil 2 des Moduls: Dort steht der Landkarten-Auftrag (seit 18.11.2026).
+W_ANDERS = ['M1', 'M2', 'M6', 'M7', 'M8', 'M11', 'M13', 'M14.2', 'M16', ('M18', 'm18-teil2.html'), ('M20', 'm20-teil2.html'), 'M21', 'M26']
+OFFEN = []
+# Teil 2 zu den handgebauten Stunden: Landkarte und Schreibauftrag im Blatt-Rahmen
+TEIL2 = {'M18': 'm18-teil2.html', 'M19': 'm19-teil2.html', 'M20': 'm20-teil2.html', 'M21': 'm21-teil2.html', 'M23': 'm23-teil2.html'}
 MOD = {m[0]: (m[2], m[4]) for m in NS}; MOD.update({m[0]: (m[2], 'ost-west/' + m[4]) for m in ST}); MOD.update({m[0]: (m[2], m[4]) for m in WM})
 # Nummer im Heft (steht im Titel). Die Reihenfolge der Karten ist die Nummernfolge; eine zweite Zählung gibt es nicht.
 HEFTNR = {1: 'M29/M30', 2: 'M31', 3: 'M32/M33', 4: 'M34', 5: 'M35/M36', 6: 'M36–M39', 7: 'M40', 8: 'M41', 9: 'M42–M44'}
@@ -112,7 +115,7 @@ def regal(ep, name):
     for d, w, m in SPALTEN[ep]:
         merk = f'<p class="merk"><b>{e(d)}</b> <span>{e(w)}</span></p>' if d else ''
         kl = 'sp' + (' anker' if d else '') + ('' if m else ' nurdatum')
-        daten = (f' id="k-{HEFTNR[m].replace(chr(47), chr(45))}" data-nr="{HEFTNR[m]}" data-zeit="{e(INFO[m][0])}" data-lang="{e(MOD[m][0])}" data-schritte="{e(" · ".join(SCHRITTE[m]))}"' if m else '')
+        daten = (f' id="k-{HEFTNR[m].replace(chr(47), chr(45))}" data-nr="{HEFTNR[m]}" data-zeit="{e(INFO[m][0])}" data-lang="{e(MOD[m][0])}" data-schritte="{e(" · ".join(SCHRITTE[m]))}"' + (f' data-teil2="{TEIL2[m]}" data-teil2t="Teil 2: {"Schreibauftrag" if m == "M21" else "Landkarte · Schreibauftrag"}"' if m in TEIL2 else '') if m else '')
         z += f'<li class="{kl}"{daten}>{merk}{karte(m) if m else ""}</li>'
     return f'<ol class="regal" aria-label="{name}: Merkdaten und Module in der Reihenfolge des Unterrichts">{z}</ol>'
 SCHRITTE = {m[0]: m[3] for m in NS + ST}; SCHRITTE.update({m[0]: m[3] for m in WM})
@@ -123,7 +126,7 @@ def fenster(wort):
             '<div class="fbild"><img alt="" hidden><span class="fnr" aria-hidden="true"></span></div>'
             f'<div class="ftext"><p class="fkopf"></p><h3></h3><p class="fschritte"><b>In {"diesem Modul" if wort == "Modul" else "dieser Stunde"}:</b> <span></span></p></div>'
             f'<div class="fnah"><p class="fl">Merkdaten in der Nähe</p><ol>{zeile("fdavor", "davor")}{zeile("fhier", "du bist hier")}{zeile("fdanach", "danach")}</ol></div>'
-            f'<div class="fknopf"><a class="auf" href="#">{wort} öffnen</a><button type="button" data-reise="-1">‹ früher</button><button type="button" data-reise="1">später ›</button>'
+            f'<div class="fknopf"><a class="auf" href="#">{wort} öffnen</a><a class="zwei" href="#" hidden>Teil 2: Landkarte · Schreibauftrag</a><button type="button" data-reise="-1">‹ früher</button><button type="button" data-reise="1">später ›</button>'
             '<button type="button" data-zu>Zurück zur Übersicht</button></div></div></div>')
 TIPP = '<p class="tipp" data-tipp hidden>Tippe auf eine Karte<span class="nurbreit"> oder auf einen Punkt der Leiste</span>: Du siehst, wo du in der Zeit bist, und öffnest von dort {was}.</p>'
 def kapitel(ep, ziffer, name, jahre, satz, bilder, zusatz='', wort=''):
@@ -146,11 +149,13 @@ zeit_html = (kapitel('weimar', 1, 'Weimarer Republik', f'1914 – 1933 · {ZAHLW
  + kapitel('ns', 2, 'Nationalsozialismus', f'1933 – 1945 und die Folgen · {ZAHLWORT[len(NS)]} Module', 'Ideologie, Krieg und Menschheitsverbrechen – und die Frage, wer mitgemacht hat und was danach daraus wurde.', NS_BILDER, wort='Modul')
  + kapitel('ostwest', 3, 'Ost-West-Konflikt', f'1945 – 1991 · {ZAHLWORT[len(ST)]} Stunden', 'Welchen Einfluss hatten Ideologien, Machtinteressen und Handlungsspielräume der Akteure – und wie wird dieser Konflikt heute erinnert?', OW_BILDER, wz, 'Stunde'))
 def mlink(nr):
+    zwei = ''
+    if isinstance(nr, tuple): nr, zwei = nr
     t, z = MOD[nr]; ep = 'ostwest' if isinstance(nr, int) else ('weimar' if nr in W_NR else 'ns')
-    return f'<li><a href="{z}" data-ep="{ep}"><span class="pnr">{HEFTNR[nr]}</span>{e(t)}</a></li>'
-prinzip_html = ''.join(f'<article class="prinzip"><h3><a href="{LK}#s-{i}">{e(n)}</a></h3><p>{e(t)}</p>' + (f'<ul>{"".join(mlink(m) for m in ms if m in MOD)}</ul>' if [m for m in ms if m in MOD] else '<p class="keins">Noch kein Modul, das dieses Prinzip in den Mittelpunkt stellt.</p>') + '</article>' for i, n, t, ms in PRINZIP)
-prinzip_html += (f'<article class="prinzip"><h3><a href="{LK}">Andere Teile der Landkarte</a></h3><p>Diese Module arbeiten mit „Wozu Geschichte?“, den Formen der Geschichtsschreibung oder den Auswirkungen von Geschichte.</p><ul>{"".join(mlink(m) for m in W_ANDERS if m in MOD)}</ul></article>' if [m for m in W_ANDERS if m in MOD] else '')
-prinzip_html += f'<article class="prinzip offen"><h3>Noch nicht zugeordnet</h3><p>Diese Module haben noch keinen eigenen Landkarten-Moment.</p><ul>{"".join(mlink(m) for m in OFFEN)}</ul></article>'
+    return f'<li><a href="{zwei or z}" data-ep="{ep}"><span class="pnr">{HEFTNR[nr]}{" · Teil 2" if zwei else ""}</span>{e(t)}</a></li>'
+prinzip_html = ''.join(f'<article class="prinzip"><h3><a href="{LK}#s-{i}">{e(n)}</a></h3><p>{e(t)}</p>' + (f'<ul>{"".join(mlink(m) for m in ms if (m[0] if isinstance(m, tuple) else m) in MOD)}</ul>' if [m for m in ms if (m[0] if isinstance(m, tuple) else m) in MOD] else '<p class="keins">Noch kein Modul, das dieses Prinzip in den Mittelpunkt stellt.</p>') + '</article>' for i, n, t, ms in PRINZIP)
+prinzip_html += (f'<article class="prinzip"><h3><a href="{LK}">Andere Teile der Landkarte</a></h3><p>Diese Module arbeiten mit „Wozu Geschichte?“, den Formen der Geschichtsschreibung, dem Urteilen oder den Auswirkungen von Geschichte.</p><ul>{"".join(mlink(m) for m in W_ANDERS if (m[0] if isinstance(m, tuple) else m) in MOD)}</ul></article>' if [m for m in W_ANDERS if (m[0] if isinstance(m, tuple) else m) in MOD] else '')
+if OFFEN: prinzip_html += f'<article class="prinzip offen"><h3>Noch nicht zugeordnet</h3><p>Diese Module haben noch keinen eigenen Landkarten-Moment.</p><ul>{"".join(mlink(m) for m in OFFEN)}</ul></article>'
 CSS = """@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
@@ -357,7 +362,7 @@ JS = """(function(){
     if (im) { fi.setAttribute("src", im.getAttribute("src")); fi.hidden = false; } else { fi.hidden = true; fi.removeAttribute("src"); }
     var fn = f.querySelector(".fnr"); fn.textContent = li.dataset.nr; fn.hidden = !!im;
     setz(".fdavor", merk(a)); setz(".fhier", [kopf, hier ? "An dieser Stelle der Leiste: " + hier[0] + " – " + hier[1] : ""]); setz(".fdanach", merk(b));
-    f.querySelector(".auf").setAttribute("href", k.getAttribute("href")); f.setAttribute("aria-label", li.dataset.nr + ": " + k.querySelector("b").textContent);
+    f.querySelector(".auf").setAttribute("href", k.getAttribute("href")); { const z2 = f.querySelector(".zwei"); if (z2) { z2.hidden = !li.dataset.teil2; if (li.dataset.teil2) { z2.setAttribute("href", li.dataset.teil2); z2.textContent = li.dataset.teil2t || z2.textContent; } } } f.setAttribute("aria-label", li.dataset.nr + ": " + k.querySelector("b").textContent);
     var mod = []; L.forEach(function(x, j){ if (x.dataset.nr) mod.push(j); }); var p = mod.indexOf(i);
     f.querySelector('[data-reise="-1"]').disabled = p <= 0; f.querySelector('[data-reise="1"]').disabled = p >= mod.length - 1;
     f.dataset.frueher = p > 0 ? mod[p - 1] : ""; f.dataset.spaeter = p < mod.length - 1 ? mod[p + 1] : "";
