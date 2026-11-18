@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Klartext der Lehrkraftbereiche zwischen dem Projekt (zwei Sammeldateien) und privat/lk/ hin- und hertragen.
+"""Klartext der Lehrkraftbereiche zwischen dem Projekt (drei Sammeldateien) und privat/lk/ hin- und hertragen.
 Der Klartext gehört nicht ins Repository: privat/ steht in .gitignore, die Sammeldateien liegen im Projekt »Geschichtsdidaktik«.
-  python3 tools/lk_buendel.py packen           → privat/Lehrkraftbereiche_Klartext_NS.html und …_Ost-West.html
+  python3 tools/lk_buendel.py packen           → privat/Lehrkraftbereiche_Klartext_NS.html, …_Ost-West.html und …_Weimar.html
   python3 tools/lk_buendel.py teilen <Datei …> → privat/lk/<schluessel>.html
 Danach: LK_PASS='…' node tools/lk-bauen.mjs"""
 import sys, pathlib, re
@@ -10,8 +10,9 @@ MARKE = '<!-- ===== DATEI: {} ===== -->'
 EIGEN = ('m19', 'm20')   # liegen als eigene Projektdokumente vor (M19_/M20_Lehrkraftbereich_Klartext.html) → von Hand nach privat/lk/m19.html, m20.html
 KOPF = '<!-- {}: Texte der Lehrkraftbereiche im Klartext. NICHT veröffentlichen, nicht ins Repository legen.\n     Je Abschnitt eine Datei für privat/lk/. Zurückholen: python3 tools/lk_buendel.py teilen <diese Datei>\n     Verschlüsseln: LK_PASS=… node tools/lk-bauen.mjs (das Passwort steht nirgends in einer Datei). -->\n'
 def packen():
-    for name, wahl in (('Lehrkraftbereiche_Klartext_NS.html', lambda k: not k.startswith('ow-')), ('Lehrkraftbereiche_Klartext_Ost-West.html', lambda k: k.startswith('ow-'))):
+    for name, wahl in (('Lehrkraftbereiche_Klartext_NS.html', lambda k: not k.startswith(('ow-', 'w-'))), ('Lehrkraftbereiche_Klartext_Ost-West.html', lambda k: k.startswith('ow-')), ('Lehrkraftbereiche_Klartext_Weimar.html', lambda k: k.startswith('w-'))):
         teile = [MARKE.format(p.name) + '\n' + p.read_text('utf-8').rstrip('\n') + '\n' for p in sorted(LK.glob('*.html')) if wahl(p.stem) and p.stem not in EIGEN]
+        if not teile: print(name, 'übersprungen: kein Klartext in privat/lk/'); continue   # nie eine Sammeldatei leer überschreiben
         (P/name).write_text(KOPF.format(name) + '\n'.join(teile), 'utf-8'); print(name, len(teile), 'Abschnitte')
 def teilen(dateien):
     LK.mkdir(parents=True, exist_ok=True)
