@@ -198,7 +198,7 @@ Dazu: Startseite `index.html`, Kapitelseiten `weimar/index.html` und `ost-west/i
 6. **Planzeiten über 90 Minuten:** M1 (105), M6 (104), M11 (158), M17 (108), Ost-West 2 (103), Ost-West 4 (99), Ost-West 6 (98). Ob das Doppelstunden mit Reserve oder zwei Stunden sind, weißt nur du. Gekürzt wird nichts ohne deine Auswahl (K-Listen im Pilot und bei der Übertragung).
 7. **Wortlaut der Landkarte:** Der »Blick« von M14.2 heißt »Politikgeschichte« – diesen Namen hat die Landkarte nicht (dort: Ereignisgeschichte, 2.3.8). In NS und Ost-West ist das am 18.11. schon berichtigt, in Weimar noch nicht.
 
-### D2 · Titelbilder: 8 Lücken, 20 ungeklärte Bilder, 8 geklärte
+### D2 · Titelbilder: 8 Lücken, 22 zu prüfen oder zu ersetzen, 6 geklärt
 
 Maßstab ist dein neuer Auftrag: nur frei lizenzierte oder gemeinfreie Bilder oder eigene Grafiken; unter jedem Bild Herkunft, Datum, Urheber, Lizenz.
 
@@ -296,8 +296,8 @@ Motivrichtungen für die acht Lücken (noch **keine** Bildangaben – Fundstelle
 ### E4 · Was die Tabelle zeigt
 
 - **Wo das Gerät am meisten kann:** verdecken und aufdecken (Retrospektivität, Standortgebundenheit) – in 14 von 36 Stunden. Das ist der fachliche Kern deines Konzepts und auf Papier nicht zu haben.
-- **Bewegung als Erkenntnis** schlage ich in 19 von 36 Stunden vor, in fünf Formen: Zeit ziehen (6) · Vorher–nachher (2) · Aufdecken (8) · Spielraum, Position oder Gewicht verschieben (6) · Zentrum verschieben (1). In 17 Stunden bleibt die Seite still.
-- **Ehrlich gering** ist der Gewinn in M7, M10, M14.2 und Ost-West 4. Dort trägt Film, Papier oder Gespräch die Stunde; das Blatt gibt nur Ordnung, Sicherung und den Platz im Hefter. Das ist ein gutes Ergebnis, kein Mangel.
+- **Bewegung als Erkenntnis** schlage ich in 21 von 36 Stunden vor, in fünf Formen: Zeit ziehen (6) · Vorher–nachher (2) · Aufdecken (8) · Spielraum, Position oder Gewicht verschieben (6) · Zentrum verschieben (1). Das sind 23 Stellen, weil M17 und M19 zwei Formen haben. In 15 Stunden bleibt die Seite still.
+- **Ehrlich gering oder nur mittel** ist der Gewinn in M7, M10, M14.2 und Ost-West 4. Dort trägt Film, Papier oder Gespräch die Stunde; das Blatt gibt nur Ordnung, Sicherung und den Platz im Hefter. Das ist ein gutes Ergebnis, kein Mangel.
 - **Kein Scrollytelling, kein Autoplay, kein sich aufbauender Text** (Begründung in Block C).
 - **Jede Stunde behält höchstens drei Muster und zwei Bewegungsformen.** M17 und M19 liegen an der Grenze (zwei Formen).
 - **Kontroversität (2.1.9) ist dünn besetzt:** nur M7.1, M22, M25. Die Ost-West-Einheit hat keine Stunde, die eine Forschungskontroverse trägt. Das ist eine fachliche Lücke, keine technische – ich nenne sie, ohne sie zu füllen.
