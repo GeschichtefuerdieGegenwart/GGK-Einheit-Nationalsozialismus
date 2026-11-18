@@ -1,6 +1,30 @@
 # Arbeitsstand · Blatt-Standard für alle Module und Kapitel Weimarer Republik
 
-## Stand am 18.11.2026 · Halt nach dem Kapitel Weimar
+## Stand am 18.11.2026, Nachmittag · NS und Ost-West überarbeitet, ein Paket für alle drei Kapitel
+
+Branch `blatt-standard-und-weimar`, alles gepusht. Nichts ist zusammengeführt.
+
+**Auftrag vom 18.11., 13:06 Uhr:** vier Vorschläge angenommen (sieben Leitfragen · Landkarten-Aufträge in M4, M10, M14, M7.1 · Linie »Umwelt oder Ich?« · Re-Konstruktion als Abschluss), Bild zu M12 zurück, Foto zu M3 einbauen; dann NS und Ost-West überarbeiten und **eine** Zip-Datei aus allem erstellen.
+
+**Erledigt:**
+
+- Weimar: Bild zu M12 wieder auf Startseite und Deckblatt; Foto zu M3 hinter Hinweis und eigenem Tipp (`bildNachTipp`).
+- Gemeinsamer Rahmen: Bausteine aus `weimar.js` nach `blatt.js` verlegt (Leitfrage als Linie, Abruf, Blick der Stunde, Bild nach Tipp, Adresse und »Weitermachen«); `L.blattAuto` baut das Register aus `L.seiten`; dritte Sperre `frei:"code"`; `gefragtBlock()` für eigene Zusammenfassungen.
+- Ost-West, Stunden 1–9: Blatt-Rahmen, je Stunde Schreibauftrag im Format der Klassenarbeit, Blick der Stunde, Sozialformen im Register; die Merkseite zeigt jetzt auch »So wird gefragt« und den eigenen Text.
+- NS, M16, M17, M25–M27: Blatt-Rahmen und Blick der Stunde; M16 mit neuem Landkarten-Auftrag (Wozu Geschichte?) und Schreibauftrag, M17 mit Schreibauftrag; M27 mit 44-px-Ortsmarken und lesbarer Begleitkarte.
+- NS, M18, M19, M20, M21, M23: je eine neue Seite `mNN-teil2.html` (Landkarte, Schreibauftrag, Blick). Die erprobten Stunden bleiben bis auf einen Verweis am Ende unverändert. M19 und M20: Teil 2 öffnet erst nach dem dritten Codewort (dieselbe Prüfsumme wie in der Stunde). M22 ist unverändert.
+- Startseite: Verweis auf Teil 2 im Fenster des Moduls; in der zweiten Ordnung ist kein Modul mehr »nicht zugeordnet«.
+- Lehrkraft-Texte: 19 Texte mit einem datierten Abschnitt ergänzt und neu verschlüsselt (alle 38 öffnen); Werkzeug `lk-bauen.mjs --holen` stellt fehlende Klartexte wieder her.
+
+**Gelaufen (Chromium, 1180 × 820, `file://`):** Rauchprüfung aller 35 Blätter (16 Weimar, 9 Ost-West, 5 NS im Kern, 5 Teil 2): 1823 Prüfungen bestanden, 0 offen · Zusammenfassung 2 Seiten auf allen 30 Blättern, die eine haben – auch mit 144 Wörtern im Schreibauftrag · Schreibblatt 1 Seite auf allen 32 · Tor von M19/M20: zu ohne Stand der Stunde, falsches Wort abgewiesen, mit Stand der Stunde offen · die fünf geänderten Stunden laden ohne Fehler · Startseite ohne Konsolenfehler und Querlauf · `weimar_pruef.py` 0 offen · Paketprüfung siehe Bericht.
+
+**Nicht gelaufen:** das richtige Codewort (kenne ich nicht) · andere Breiten, echtes iPad und Safari, Stift und Tastatur, GoodNotes, VoiceOver, Moodle-Upload, axe · keine Stunde ist erprobt.
+
+**Offen, wenn Mario es sagt:** M15 und M24 · Entscheidung, ob Teil 2 bleibt oder ob M18–M21 und M23 selbst in den Blatt-Rahmen umgebaut werden · Abschluss der Kapitel NS und Ost-West als Re-Konstruktion (gibt es bisher nur in Weimar) · Pull Request.
+
+Prüfen: `python3 tools/pruef/blatt_rauch.py <seite> --voll --pdf` (für `m19-teil2.html` und `m20-teil2.html` mit `--stand` und `{"tor":true}`). Bauen: `python3 tools/bau_weimar.py && python3 tools/bau_ost_west.py && python3 tools/bau_m25_m27.py && python3 tools/lk_einsetzen.py && python3 tools/bau_startseite.py`; Paket: `python3 tools/bau_moodle_paket.py --apps <Ordner mit den eigenen Seiten>`.
+
+## Stand am 18.11.2026, Mittag · Halt nach dem Kapitel Weimar
 
 Branch `blatt-standard-und-weimar`, alles gepusht (Stand `5222864` und folgende). Nichts ist zusammengeführt.
 

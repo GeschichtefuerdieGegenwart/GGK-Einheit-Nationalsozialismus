@@ -257,6 +257,7 @@ function zusammenfassung(){
   <ul class="zl"><li><b>30. Jan. 1933</b><span>Hitler wird Reichskanzler.</span></li><li><b>1. April 1933</b><span>Boykott jüdischer Geschäfte, Kanzleien und Praxen; nach einem Tag ausgesetzt.</span></li><li><b>7. April 1933</b><span>„Gesetz zur Wiederherstellung des Berufsbeamtentums“ mit dem „Arierparagraphen“.</span></li><li><b>15. Sept. 1935</b><span>Nürnberger Gesetze.</span></li><li><b>9./10. Nov. 1938</b><span>Novemberpogrom.</span></li><li><b>1. Sept. 1939</b><span>Überfall auf Polen: Der Zweite Weltkrieg beginnt.</span></li></ul>
   <div class="werk"><b>Denkwerkzeug: Drei Fragen zur Agency.</b> 1. Was konnte die Person tun? 2. Was hätte es sie gekostet? 3. Wer oder was bestimmte den Spielraum – Gesetze, Gewalt, andere Menschen?</div>
   <div class="werk" style="background:var(--kuli-hi)"><b>Sprache der Täter.</b> Wörter wie „arisch“, „Mischling“ oder „Rassenschande“ stehen in Anführungszeichen. Sie sagen, wie die Nationalsozialisten Menschen einteilten – nicht, wer diese Menschen waren.</div>
+  ${gefragtBlock()/* auf Seite 1: Dort ist Platz; Seite 2 bleibt wie erprobt */}
 
   <div class="seitenumbruch"><h2 style="margin-top:0">Meine Ergebnisse${S.rolle ? " · begleitet: " + N() + " (ausgedachter Fall)" : ""}</h2>
   <h2>1. April 1933: Boykott</h2>${m(Z().s1.denkt)}${m(wahl("boykott-" + RK(), [["These 1: Die Menschen kaufen weiter dort ein"],["These 2: Die Menschen trauen sich nicht vorbei"]]))}${m(Z().s1.nach)}

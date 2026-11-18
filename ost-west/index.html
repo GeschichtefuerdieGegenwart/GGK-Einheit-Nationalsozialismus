@@ -1225,6 +1225,10 @@ function zusammen(){
   ${c.sonst ? `<p class="zf-sonst"><b>Was sonst Thema war:</b> ${esc(c.sonst)}</p>` : ""}</section></div>`;
 }
 
+/* Für Zusammenfassungen, die eine Stunde selbst baut (M16, M17, Ost-West): die Aufgabe im Format der Klassenarbeit und der eigene Text. */
+const gefragtBlock = () => { if (!L.schreib) return ""; const t = S.sa && S.sa.text.trim() ? S.sa.text : (S.sa && S.sa.hand ? "Von Hand geschrieben – siehe Schreibblatt." : "");
+  return `<h2>So wird gefragt</h2><blockquote class="ka-aufgabe klein">${L.schreib.aufgabe}</blockquote><h2>Mein Text</h2><p class="mein ${t ? "" : "leer"}">${esc(t || "noch offen – Schreibauftrag")}</p>`; };
+
 /* ---------- Aktionen des Rahmens ---------- */
 AKTION.wk = t => { if (!S.wk) S.wk = {}; S.wk[t.dataset.p] = t.dataset.w; speichere(); zeichneBehalte(); const k = document.getElementById("wk-" + t.dataset.p); if (k) { k.focus({ preventScroll:true }); const r = k.getBoundingClientRect(); if (r.top < 70 || r.top > innerHeight * .6) window.scrollBy({ top:r.top - 90, behavior: ruhig() ? "auto" : "smooth" }); } };
 AKTION.skala = t => { setz(t.dataset.p, +t.dataset.w); zeichneBehalte(); };

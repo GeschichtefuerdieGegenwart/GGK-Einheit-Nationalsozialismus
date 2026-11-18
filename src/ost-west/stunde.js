@@ -58,6 +58,7 @@ function merk(){
   <h2>Mein Platz im Netz</h2>
   <div class="karte"><b>Verbindungen aus dieser Stunde</b>${eigene.length ? `<ul style="margin:.2rem 0 0;padding-left:1.1rem">${eigene.map(l => `<li><b>${esc(karte(l.a).titel)}</b> ${esc(artWort(l.art))} <b>${esc(karte(l.b).titel)}</b>: ${m(l.satz)}</li>`).join("")}</ul>` : `<br>${m("")}`}</div>
   <div class="karte"><b>Mein Satz für den roten Faden</b><br>${m(S.v.faden)}</div>
+  ${gefragtBlock()}
   <p class="hinweis">Leitfrage der Einheit: ${esc(LEITFRAGE)}</p></div></div>
   <div class="reihe nodruck"><button type="button" class="btn dunkel" data-drucken>Merkseite drucken oder als PDF sichern</button><a class="btn" href="index.html#raster">Zum Zeitraster der Einheit</a><span class="hinweis">Zwei Seiten A4.</span></div>
   ${weiter("start", "Zum Anfang der Stunde")}`;

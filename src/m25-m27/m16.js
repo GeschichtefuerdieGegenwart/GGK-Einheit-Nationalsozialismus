@@ -153,7 +153,7 @@ function zusammenfassung(){
   <h2>Was ist menschlich? Was macht einen guten Menschen aus?</h2>${m(S.w1.concat(S.w2).join(" · "))}
   <h2>Unsere Wörter und der Humanismus</h2>${m(S.hsatz)}
   <h2>Meine Werte</h2>${m(S.top.length ? "Meine drei Werte: " + S.top.join(", ") + "." : "")}${m(S.wsatz)}
-  <h2>Kann man seine Menschlichkeit verlieren?</h2>${m(st ? `Meine Stimme: ${st[1]}. ${S.wo}` : S.wo)}</div></div>
+  <h2>Kann man seine Menschlichkeit verlieren?</h2>${m(st ? `Meine Stimme: ${st[1]}. ${S.wo}` : S.wo)}${gefragtBlock()}</div></div>
   ${weiter("start", "Zur Startseite")}`;
 }
 

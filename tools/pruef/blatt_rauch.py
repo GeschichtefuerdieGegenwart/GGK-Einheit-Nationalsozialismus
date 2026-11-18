@@ -90,9 +90,9 @@ async def main():
                     await pg.pdf(path=f.name, format='A4', print_background=True)
                     n = int(re.search(r'Pages:\s+(\d+)', subprocess.run(['pdfinfo', f.name], capture_output=True, text=True).stdout).group(1))
                 await pg.emulate_media(media='screen'); return n
-            z = [x for x in auf if x['id'] == 'zusammenfassung']
+            z = [x for x in auf if x['id'] in ('zusammenfassung', 'merk')]
             if z:
-                n = await seiten("geh('zusammenfassung')"); pr(n == 2, f'Zusammenfassung druckt {n} Seiten statt 2'); print('  Zusammenfassung:', n, 'Seite(n) A4')
+                n = await seiten(f"geh('{z[0]['id']}')"); pr(n == 2, f'Zusammenfassung druckt {n} Seiten statt 2'); print('  Zusammenfassung:', n, 'Seite(n) A4')
             if await pg.evaluate("!!L.schreib"):
                 n = await seiten("(() => { geh((L.blatt.find(a => SEITE_FN[a.id] === schreibauftrag) || L.blatt.find(a => a.id === 'schreiben') || {}).id); document.body.classList.add('druck-sb'); })()"); pr(n == 1, f'Schreibblatt druckt {n} Seiten statt 1'); print('  Schreibblatt:', n, 'Seite(n) A4')
                 await pg.evaluate("document.body.classList.remove('druck-sb')")
