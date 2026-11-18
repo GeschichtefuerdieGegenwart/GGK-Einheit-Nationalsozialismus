@@ -1,6 +1,31 @@
 # Arbeitsstand · Blatt-Standard für alle Module und Kapitel Weimarer Republik
 
-## Stand am 18.11.2026, Abend · Neufassung »Arbeitsblatt Geschichte«: Phase 1 und 2 fertig, Stopp
+## Stand am 18.11.2026, später Abend · Neufassung »Arbeitsblatt Geschichte«: Phase 3 (Pilot M22) fertig, Stopp »Zeig sie mir«
+
+Branch `neufassung-arbeitsblatt-geschichte`, alles gepusht. Pull Request als Entwurf; **nichts zusammengeführt.**
+
+**Marios Auswahl (18.11., 18:31 Uhr, `docs/neufassung/ENTSCHEIDUNGEN.md`):** Weimar Litfaßsäule · NS Archiv · Ost-West Zwei Tinten · kein starres Baustein-System, Grundlage ist sein Material · Lehrkrafttext und erwartete Inhalte ins eigene Paket, Auflösungen der Entscheidungsstunden bleiben im Blatt · alle Bilder aus seinem Material erlaubt · M22 zuerst · keine Hausaufgaben, nur freiwillige Extras.
+
+**Gebaut:**
+
+- `src/arbeitsblatt/` – gemeinsame Schicht (`ab.css`, `ab.js`, `hefter.js`, `hefter.html`, `basis.css`); `tools/ab_einsetzen.py` setzt sie ein und baut die Hefter-Seiten
+- `m22-wie-war-das-moeglich.html` – Fassung 5.0 (Umbau nachvollziehbar in `docs/neufassung/werkzeug/umbau_m22_4-1_auf_5-0.py`; arbeitet auf der Fassung 4.1 aus dem Commit `de200e5`)
+- `hefter-nationalsozialismus.html` – Hefter der Einheit (im Paket `index.html`)
+- `tools/bau_einheit_paket.py` – zwei Pakete je Einheit (Lernende · Lehrkraft) mit Anleitung für Moodle
+- `tools/pruef/ab_pruef.py` – Prüfung im Browser, auch für ein entpacktes Paket
+- `M22_Bildliste.html` – neu mit Platz, Zweck und Status
+- `privat/lk/m22.html` (nicht im Repository) neu gefasst, `lk/m22.enc.json` neu verschlüsselt
+- `docs/neufassung/DESIGN.md` (gilt jetzt), `docs/neufassung/PILOT_M22.md` (Bericht)
+
+**So wird gebaut (Reihenfolge):** `python3 tools/ab_einsetzen.py` → `python3 tools/lk_einsetzen.py` → `python3 tools/bau_einheit_paket.py --einheit ns --nur M22 --apps <Ordner mit den Klonen>` → `python3 tools/pruef/ab_pruef.py` (Repository) und `python3 tools/pruef/ab_pruef.py <entpacktes Paket>`. Wer den Umbau von M22 wiederholt (`umbau_m22_4-1_auf_5-0.py`), muss danach `ab_einsetzen.py` **und** `lk_einsetzen.py` laufen lassen – sonst steht wieder der alte verschlüsselte Text in der Seite.
+
+**Wartet auf Mario (Stopp):** Pilot ansehen · Paket in Moodle testen · V1 bis V5 aus `PILOT_M22.md` (Extra, Rad auf schmalen iPads, Erklärfilm, Abrufübung in M23, Abbildung 20) · danach Freigabe für die Übertragung.
+
+**Danach (Phase 4, Übertragung):** NS-Einheit in der Reihenfolge des Unterrichts (M23, M25, M26, M27, dann M16 bis M21), je Stunde: Diagnose gegen das Heft, Schicht einsetzen, Deckblatt mit Titelbild, Bildliste, Meldung an den Hefter, Lehrkrafttext prüfen, Paket, Prüfung. Die Kerne (`src/m25-m27/blatt.css`, `src/weimar/`, `src/ost-west/`) tragen dieselben Klassennamen wie die Schicht; dort ersetzt die Schicht den Rahmen. Dann Weimar und Ost-West mit eigenen Heftern (`weimar/index.html` und `ost-west/index.html` gibt es schon als Übersichten).
+
+**Nicht vergessen:** Das Passwort der Lehrkraftbereiche steht nur im Chat. Token-Links stehen nur in `privat/moodle-links.json`. Bilder in Reserve stehen nicht in den Seiten. Der Erklärfilm zu M22 zeigt noch den Ablauf vor dem 13.11.
+
+## Stand am 18.11.2026, früher Abend · Neufassung »Arbeitsblatt Geschichte«: Phase 1 und 2 fertig, Stopp
 
 Branch `neufassung-arbeitsblatt-geschichte` (abgezweigt von `blatt-standard-und-weimar`, Stand `ea6a695`), alles gepusht. **Keine Stunde, kein Kern und keine Startseite ist geändert.** Kein Pull Request, nichts zusammengeführt.
 

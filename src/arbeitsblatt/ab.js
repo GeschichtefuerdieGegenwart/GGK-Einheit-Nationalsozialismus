@@ -27,6 +27,8 @@
     s[nr] = Object.assign(neu, { zeit: new Date().toISOString().slice(0, 10) }); s._zuletzt = nr; schreib(standKey(), JSON.stringify(s));
   }
 
+  function vergiss(nr) { const s = stand(); if (!(nr in s)) return; delete s[nr]; if (s._zuletzt === nr) delete s._zuletzt; schreib(standKey(), JSON.stringify(s)); }   // »Eingaben löschen« im Blatt: auch der Eintrag im Hefter geht
+
   /* ---------- Stand als Datei ---------- */
   function paket() {
     const e = E(), re = new RegExp(e.schluessel), daten = {};
@@ -124,6 +126,6 @@
     if ((ev.key === "Enter" || ev.key === " ") && ev.target.matches && ev.target.matches("label.btn")) { ev.preventDefault(); const i = ev.target.querySelector("input"); if (i) i.click(); }
   });
 
-  window.GGKBlatt = { platz, stand, melde, sichern, laden, werkzeuge, beamer, einheit: E, esc };
+  window.GGKBlatt = { platz, stand, melde, vergiss, sichern, laden, werkzeuge, beamer, einheit: E, esc };
 })();
 /* ===== Ende des gemeinsamen Kerns ===== */

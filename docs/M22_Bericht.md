@@ -1,3 +1,5 @@
+> **Hinweis (18.11.2026):** Dieser Bericht beschreibt die Fassungen 3.0 und 3.1. Seit dem 18.11.2026 gibt es auf dem Branch `neufassung-arbeitsblatt-geschichte` die **Fassung 5.0** als Pilot des Standards »Arbeitsblatt Geschichte« – Bericht: `docs/neufassung/PILOT_M22.md`. Inhalte, Reihenfolge und Speicher (`ggk-m22-taeter:v3`) sind gleich geblieben.
+
 # M22 · Bericht Fassung 3.0 – Dashboard und Landkarten-Moment
 
 Stand 08.11.2026 · Branch `m22-dashboard-landkarte` · Grundlage: Fassung 2.0 (PR #5–#8), Prompt „M22 Dashboard statt Klickstrecke, Landkarten-Moment“ (Fassung 2), Musterbuch Haltepunkt 2 (Artefakte „Musterbuch M22 Dashboard“ und „AM 2“), Auswahl der Lehrkraft: AM 2 (Rad mit ganzem Satz im Feld) + AP + AQ + AR b) + AT + AU; AN nicht, AO nur als Ansicht „Vergleich“, AS nicht (Streitpaare bleiben auf dem Marktplatz).

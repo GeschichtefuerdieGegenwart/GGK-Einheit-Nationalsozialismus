@@ -1036,6 +1036,8 @@ window.GGK_HEFTER = {
     s[nr] = Object.assign(neu, { zeit: new Date().toISOString().slice(0, 10) }); s._zuletzt = nr; schreib(standKey(), JSON.stringify(s));
   }
 
+  function vergiss(nr) { const s = stand(); if (!(nr in s)) return; delete s[nr]; if (s._zuletzt === nr) delete s._zuletzt; schreib(standKey(), JSON.stringify(s)); }   // »Eingaben löschen« im Blatt: auch der Eintrag im Hefter geht
+
   /* ---------- Stand als Datei ---------- */
   function paket() {
     const e = E(), re = new RegExp(e.schluessel), daten = {};
@@ -1133,7 +1135,7 @@ window.GGK_HEFTER = {
     if ((ev.key === "Enter" || ev.key === " ") && ev.target.matches && ev.target.matches("label.btn")) { ev.preventDefault(); const i = ev.target.querySelector("input"); if (i) i.click(); }
   });
 
-  window.GGKBlatt = { platz, stand, melde, sichern, laden, werkzeuge, beamer, einheit: E, esc };
+  window.GGKBlatt = { platz, stand, melde, vergiss, sichern, laden, werkzeuge, beamer, einheit: E, esc };
 })();
 /* ===== Ende des gemeinsamen Kerns ===== */
 /* AB-KERN:ENDE */
@@ -2078,7 +2080,7 @@ document.addEventListener("click", ev => {
   if (d.geh) { ev.preventDefault(); clearInterval(UHR); if (d.durch && offen(d.durch)) S.durch[d.durch] = true; if (d.ende) S.teil[d.geh] = 99; geh(d.geh); return; }
   if ("loeschfrage" in d) { const f = document.getElementById("loesch-frage"); f.hidden = false; f.querySelector("button").focus(); return; }
   if (d.loeschen === "nein") { document.getElementById("loesch-frage").hidden = true; return; }
-  if (d.loeschen === "ja") { try { localStorage.removeItem(KEY); } catch(e) {} location.reload(); return; }
+  if (d.loeschen === "ja") { try { localStorage.removeItem(KEY); } catch(e) {} GGKBlatt.vergiss("M22"); location.reload(); return; }
   if (d.afo !== undefined) { const i = d.afo; S.afo[i] = !S.afo[i]; speichere(); const w = document.getElementById("afw" + i); w.hidden = !S.afo[i]; t.textContent = S.afo[i] ? "Zuklappen" : "Aufdecken"; t.setAttribute("aria-expanded", S.afo[i]); if (S.afo[i] && !tast) neu(w, "neu"); return; }
   if ("siegeln" in d) { const v = document.getElementById("xtext").value; const z = new Date(); S.x = { text:v, zu:true, zeit:String(z.getHours()).padStart(2,"0") + ":" + String(z.getMinutes()).padStart(2,"0") }; speichere(); zeichne(); const u = document.getElementById("umschlag"); if (!tast) neu(u, "neu"); u.scrollIntoView({ block:"center", behavior: ruhig() || tast ? "auto" : "smooth" }); return; }
   if ("oeffnen" in d) { S.x.zu = false; speichere(); zeichne(); document.getElementById("xneu").focus(); return; }
@@ -2166,6 +2168,7 @@ window.addEventListener("afterprint", () => document.body.classList.remove("druc
 let WARQUER = QUER();
 window.addEventListener("resize", () => { document.documentElement.style.setProperty("--ab-kopf", document.querySelector(".kopf").offsetHeight + "px"); if (QUER() !== WARQUER) { WARQUER = QUER(); zeichne(false); } });
 zeichne();
+if (localStorage.getItem(KEY)) melde();   // Hefter abgleichen, falls schon gearbeitet wurde
 </script>
   <p class="urheberzeile">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p>
 </body>

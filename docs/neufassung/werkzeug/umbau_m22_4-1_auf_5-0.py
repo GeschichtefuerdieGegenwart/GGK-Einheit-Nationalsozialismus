@@ -346,6 +346,10 @@ einmal('''const letzte = { oben:-99, unten:-99 }; let h = "";''', '''const letzt
 einmal('''sp = b.querySelector(".fs span:nth-child(2)"); if (sp) {''', '''sp = [...b.querySelectorAll(".fs span:not(.emp)")][1]; if (sp) {''')
 
 einmal('''<summary style="cursor:pointer;min-height:40px;display:flex;''', '''<summary style="cursor:pointer;min-height:44px;display:flex;''')
+# »Eingaben löschen« nimmt auch den Eintrag im Hefter weg (Stand und Satz der Lernspur); beim Start gleicht das Blatt den Hefter ab
+einmal('''if (d.loeschen === "ja") { try { localStorage.removeItem(KEY); } catch(e) {} location.reload(); return; }''', '''if (d.loeschen === "ja") { try { localStorage.removeItem(KEY); } catch(e) {} GGKBlatt.vergiss("M22"); location.reload(); return; }''')
+assert s.rstrip().endswith('</html>') and s.count('zeichne();\n</script>') == 1
+s = s.replace('zeichne();\n</script>', 'zeichne();\nif (localStorage.getItem(KEY)) melde();   // Hefter abgleichen, falls schon gearbeitet wurde\n</script>')
 # ---------------------------------------------------------------- Fußzeile der Datei
 einmal('''  <p class="urheberzeile" style="font-size:1rem;opacity:.72;margin-top:1.5rem">''', '''  <p class="urheberzeile">''')
 
