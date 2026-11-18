@@ -1,0 +1,258 @@
+/* ===== Arbeitsblatt Geschichte · gemeinsame Schicht · Quelle: src/arbeitsblatt/ab.css – nur dort ändern =====
+   Eingesetzt mit tools/ab_einsetzen.py. Grundlage: docs/neufassung/DESIGN.md.
+   Bildwelt: der Hefter (Blatt, Reiter, Register, Rand, Linie). Zwei Tinten: Schreibschwarz und die Farbe der Einheit. */
+:root{
+  --grund:#F3EFE7; --blatt:#FDFBF6; --karton:#E9E2D7; --tinte:#24221F; --leise:#5A564F; --linie:#D5CEC3; --stahl:#857E73; --schreiblinie:#B9B2A6;
+  --ok:#2E5A47; --ok-hi:#D6E4DC; --achtung:#6E4F0A; --achtung-hi:#EEE2BF; --hell:#FFFAF2;
+  --platte:#A9BDD1; --tief:#2C4763; --hauch:#DFE7EF; --reg:#D4D6D5; --zwei:#2C4763;
+  --titel:"Fraunces",Georgia,"Times New Roman",serif; --text:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --a4:52.5rem; --zeile:2rem; --ab-reg:17rem; --ab-kopf:3.75rem; --kurve:cubic-bezier(.23,1,.32,1);
+  /* Die alten Namen der Seiten zeigen auf die neuen Rollen. So trägt jede Seite die Farbwelt ihrer Einheit. */
+  --bg:var(--grund); --surface:var(--blatt); --surface2:#FFFEFB; --offset:var(--karton); --line:var(--linie); --border:var(--stahl);
+  --ink:var(--tinte); --muted:var(--leise); --faint:var(--leise); --inverse:var(--hell); --dunkel:var(--tinte);
+  --red:var(--tief); --red-hi:var(--hauch); --kuli:var(--tief); --kuli-hi:var(--hauch); --marker:var(--platte);
+  --green:var(--ok); --green-hi:var(--ok-hi); --gold:var(--achtung); --gold-hi:var(--achtung-hi);
+  --display:var(--titel); --body:var(--text); --r:.3rem; --r-lg:.3rem; --ease:var(--kurve);
+}
+:root[data-einheit="weimar"]{--platte:#E3B94E;--tief:#6F4A00;--hauch:#F6EBC9;--reg:#E4D5A9;--zwei:#6F4A00}
+:root[data-einheit="ns"]{--platte:#A9BDD1;--tief:#2C4763;--hauch:#DFE7EF;--reg:#D4D6D5;--zwei:#2C4763}
+:root[data-einheit="ost-west"]{--platte:#A9C2F0;--tief:#173F86;--hauch:#DEE8F8;--reg:#D2DCE9;--zwei:#8A3A28}
+:root[data-ansicht="beamer"]{--grund:#FFFFFF;--blatt:#FFFFFF;--surface2:#FFFFFF;--karton:#E6E1D8;--tinte:#000000;--leise:#33302B;--linie:#B9B1A4;--stahl:#5C564D;--schreiblinie:#8E877B}
+
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:var(--grund);color:var(--tinte);font-variant-numeric:tabular-nums}
+a{color:var(--tief)}
+:focus-visible{outline:3px solid var(--tinte);outline-offset:2px;border-radius:.2rem}
+[hidden]{display:none!important}
+
+/* ---------- Knöpfe ---------- */
+.btn{min-height:48px;border:2px solid var(--tinte);border-radius:.3rem;padding:.4rem 1.1rem;background:var(--blatt);font-weight:700;color:var(--tinte);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.45rem;line-height:1.2;transition:transform 100ms var(--kurve)}
+.btn:hover{background:var(--karton)}
+.btn:active{transform:translate(2px,2px)}
+.btn.primary{background:var(--tinte);color:var(--hell);border-color:var(--tinte);box-shadow:4px 4px 0 0 var(--platte)}
+.btn.primary:hover{background:#000}
+.btn.primary:active{box-shadow:2px 2px 0 0 var(--platte)}
+.btn.dunkel{background:var(--tief);color:#fff;border-color:var(--tief)}
+.btn.dunkel:hover{background:var(--tinte);border-color:var(--tinte)}
+.btn.klein{min-height:44px;padding:.25rem .8rem;font-size:1rem}
+.btn[disabled],.btn[disabled]:hover{opacity:1;border-style:dashed;border-color:var(--stahl);color:var(--leise);background:transparent;box-shadow:none;cursor:not-allowed;transform:none}
+
+/* ---------- Felder: Linien zum Schreiben ---------- */
+textarea{display:block;width:100%;border:0;border-left:3px solid var(--platte);border-bottom:2px solid var(--stahl);border-radius:0;padding:0 .5rem;margin-top:.35rem;font-size:1.0625rem;line-height:var(--zeile);min-height:calc(var(--zeile) * 2);color:var(--tinte);resize:vertical;background-color:transparent;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--zeile) - 2px),var(--schreiblinie) calc(var(--zeile) - 2px),var(--schreiblinie) var(--zeile));background-attachment:local}
+input[type=text]{width:100%;min-height:2.75rem;border:0;border-left:3px solid var(--platte);border-bottom:2px solid var(--stahl);border-radius:0;padding:.2rem .5rem;background:transparent;margin-top:.35rem;color:var(--tinte)}
+select{min-height:44px;border:2px solid var(--stahl);border-radius:.3rem;background:var(--blatt);padding:0 .4rem;color:var(--tinte)}
+input[type=range]{accent-color:var(--tief)}
+input[type=checkbox]{accent-color:var(--tinte)}
+label{font-weight:700}
+
+/* ---------- Kopfzeile mit Reiter ---------- */
+.kopf{position:sticky;top:0;z-index:20;background:var(--grund);border-bottom:2px solid var(--tinte);padding-top:env(safe-area-inset-top,0px)}
+.kopf-in{max-width:none;margin:0;min-height:3.5rem;padding:.35rem max(16px,env(safe-area-inset-right,0px)) .35rem max(16px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:.9rem;flex-wrap:nowrap}
+.weg{display:none}
+.reiter{flex:none;display:inline-grid;place-items:center;min-width:3.4rem;padding:.2rem .6rem;background:var(--platte);color:var(--tinte);font:600 1.25rem/1.2 var(--titel);border-radius:.45rem .45rem 0 0;box-shadow:inset 0 -3px 0 0 var(--tinte)}
+.titel{min-width:0;flex:1;margin:0;font-weight:700;font-size:1.06rem;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.titel small{display:block;font-size:1rem;font-weight:400;line-height:1.3;color:var(--leise);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kopf .btn{flex:none;min-height:44px;padding:.3rem .9rem}
+
+/* ---------- Rahmen: Register links, Blatt rechts ---------- */
+.ab-rahmen{display:grid;grid-template-columns:var(--ab-reg) minmax(0,1fr);align-items:start}
+.ab-reg{position:sticky;top:var(--ab-kopf);height:calc(100vh - var(--ab-kopf));height:calc(100dvh - var(--ab-kopf));overflow-y:auto;padding:.7rem .55rem 1rem max(.6rem,env(safe-area-inset-left,0px));border-right:2px solid var(--tinte);color:var(--tinte);background-color:var(--reg);background-image:KORN;background-size:360px 360px,720px 360px;display:flex;flex-direction:column;gap:.4rem}
+.ab-regtitel{font-size:1rem;font-weight:700;color:#3D382F;margin:0 .35rem}
+.ab-reg ol{list-style:none;display:grid;gap:1px;margin:0;padding:0}
+.ab-reg ol button{display:grid;grid-template-columns:2.4rem minmax(0,1fr);gap:.55rem;align-items:center;width:100%;text-align:left;border:2px solid transparent;background:none;border-radius:.3rem;padding:.2rem .4rem;min-height:54px;color:inherit;line-height:1.25;font:inherit}
+.ab-nr{flex:0 0 auto;display:inline-grid;place-items:center;width:2.4rem;height:2.4rem;border-radius:50%;border:0;background:var(--blatt);box-shadow:inset 0 0 0 2px var(--tinte);font:600 1.15rem/1 var(--titel);color:var(--tinte)}
+.ab-reg b{display:block;font-size:1.02rem;line-height:1.25}
+.ab-st{display:block;font-size:1rem;font-weight:400;color:#3D382F;line-height:1.3}
+.ab-reg .fertig .ab-nr{background:var(--ok);color:var(--hell);box-shadow:none}
+.ab-reg .fertig .ab-st{color:#1F4433;font-weight:700}
+.ab-reg .ansage .ab-nr,.ab-reg .antwort .ab-nr{background:transparent;box-shadow:none;border:2px dashed #5C3F00}
+.ab-reg .antwort .ab-nr{border-color:var(--stahl)}
+.ab-reg .ansage .ab-st{color:#5C3F00;font-weight:700}
+.ab-reg ol button[aria-current]{background:var(--blatt);border-color:var(--tinte);box-shadow:4px 4px 0 0 var(--platte)}
+.ab-reg ol button[aria-current] .ab-nr{background:var(--tinte);color:var(--hell);box-shadow:none;border:0}
+.ab-reg ol button[aria-current] .ab-st{color:var(--tief);font-weight:700}
+@media (hover:hover) and (pointer:fine){.ab-reg ol button:hover{border-color:var(--stahl)}}
+.ab-reg .eckig .ab-nr{border-radius:.35rem}
+
+/* Werkzeuge: Stand sichern und laden, Ansicht */
+.ab-werk{margin-top:auto;padding-top:.5rem;border-top:2px solid rgba(36,34,31,.45);font-size:1rem}
+.ab-werk summary{min-height:44px;display:flex;align-items:center;gap:.4rem;font-weight:700;cursor:pointer;padding:0 .35rem;list-style:none}
+.ab-werk summary::-webkit-details-marker{display:none}
+.ab-werk summary::before{content:"＋";font-weight:700}
+.ab-werk[open] summary::before{content:"－"}
+.ab-werk__in{display:grid;gap:.45rem;padding:.3rem 0 .2rem}
+.ab-werk .btn{width:100%;min-height:44px;padding:.3rem .7rem;font-size:1rem;justify-content:flex-start;text-align:left}
+.ab-werk .haken{margin:0;padding:0 .35rem}
+.ab-werk .loesch-frage{padding:.7rem .8rem;border:2px solid var(--tinte);background:var(--blatt);box-shadow:4px 4px 0 0 var(--platte)}
+.ab-werk .loesch-frage .btn{width:auto}
+.ab-c{font-size:1rem;line-height:1.35;color:#3D382F;margin:.2rem .35rem 0}
+#main > .ab-werk{margin-top:1.4rem;border-top:2px solid var(--tinte)}
+#main > .ab-werk .ab-werk__in{grid-template-columns:repeat(auto-fit,minmax(14rem,1fr))}
+#main > .ab-werk .ab-c,#main > .ab-werk .loesch-frage{grid-column:1/-1}
+
+/* ---------- Das Blatt ---------- */
+#main{width:calc(100% - 2.4rem);max-width:var(--a4);margin:1.2rem auto 2.4rem;padding:1.2rem clamp(1.1rem,3vw,2.4rem) 1.4rem clamp(1.1rem,6vw,4.6rem);background:var(--blatt);border:1px solid var(--linie);border-radius:0;box-shadow:6px 6px 0 0 var(--karton);min-height:calc(100vh - var(--ab-kopf) - 3.6rem);min-height:calc(100dvh - var(--ab-kopf) - 3.6rem);display:flex;flex-direction:column}
+#main.breit{max-width:62rem;padding-left:clamp(1.1rem,3vw,2.4rem)}
+#main.weit,#main.dashboard{max-width:none;padding-left:clamp(1.1rem,3vw,2.2rem)}
+#main.dashboard{padding:1rem 1.1rem 1rem}
+#main:focus{outline:none}
+:root[data-ansicht="beamer"] #main{box-shadow:0 0 0 2px var(--linie)}
+.ab-zeile{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.15rem 1rem;font-size:1rem;line-height:1.35;color:var(--leise);border-bottom:2px solid var(--tinte);padding-bottom:.35rem;margin-bottom:1.1rem}
+.ab-zeile b{color:var(--tinte)}
+.ab-h{position:relative;display:flex;align-items:center;gap:.7rem;font-size:clamp(1.45rem,1.2rem + .8vw,1.8rem);margin:0 0 .2rem}
+.ab-h .ab-nr{width:2.7rem;height:2.7rem;font-size:1.35rem;background:var(--tinte);color:var(--hell);box-shadow:none}
+.ab-h.eckig .ab-nr{border-radius:.4rem;background:var(--platte);color:var(--tinte);box-shadow:inset 0 0 0 2px var(--tinte)}
+.ab-meta{margin:0 0 .8rem 3.4rem;font-size:1rem;font-weight:700;color:var(--tief)}
+.ab-marke{margin-left:.6rem;padding:.12rem .55rem;border-radius:.3rem;background:var(--platte);color:var(--tinte);font-size:1rem}
+@media (min-width:900px){   /* A4-Blätter: Die Nummer steht im Heftrand */
+  #main:not(.weit):not(.dashboard):not(.breit) .ab-h .ab-nr{position:absolute;left:-3.55rem;top:-.15rem}
+  #main:not(.weit):not(.dashboard):not(.breit) .ab-meta{margin-left:0}
+}
+.ab-teil{max-width:none;container-type:inline-size}
+.ab-teil > .auftrag:first-child,.ab-teil > .band:first-child{margin-top:.3rem}
+.ab-fuss{margin-top:auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem .8rem}
+.ab-fuss::before{content:"";flex:0 0 100%;border-top:1px solid var(--linie);margin-top:1.1rem}
+.ab-fuss > span:empty{display:none}
+.ab-fuss > :last-child{margin-left:auto}
+.ab-zu{max-width:36rem;margin:2rem auto 1rem;padding:1.4rem 1.2rem 1.5rem;border:2px dashed var(--stahl);border-radius:.3rem;text-align:center;display:grid;gap:.9rem;justify-items:center}
+.ab-zu-t{font-family:var(--titel);font-weight:600;font-size:1.5rem;line-height:1.25}
+.ab-zu .loesch-frage{text-align:left}
+.loesch-frage{border:2px solid var(--tinte);background:var(--blatt);box-shadow:4px 4px 0 0 var(--platte);border-radius:.3rem;padding:.8rem 1rem}
+.ab-zwei{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:1.6rem;align-items:start}
+.ab-zwei.gleich{grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin:1rem 0}
+.ab-zwei h3{font-family:var(--text);font-size:1.02rem;margin-bottom:.3rem}
+.ab-zwei ul{padding-left:1.2rem;display:grid;gap:.3rem}
+.ab-unter{color:var(--leise);margin:0 0 .6rem}
+
+/* Kästen: Auftrag (dunkel) · Material (Karton, Linie in der Farbe der Einheit) · Hinweis */
+.auftrag{background:var(--tinte);color:var(--hell);border-radius:.3rem;padding:.9rem 1.1rem;margin:1.2rem 0 1rem}
+.auftrag .form{color:var(--platte);font-size:1rem;font-weight:700}
+.auftrag p{color:#EDE7DC}
+blockquote{background:var(--karton);border-left:4px solid var(--tief);border-radius:0}
+.quelle,.hinweis{font-size:1rem;line-height:1.4;color:var(--leise)}
+.quelle a{color:var(--leise)}
+#main a:not(.btn){display:inline-block;padding:.7rem 0;margin:-.7rem 0}   /* Links im Text: Zielfläche 44 px, ohne die Zeile zu verschieben */
+
+/* ---------- Deckblatt ---------- */
+.ab-deck{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.2rem 2rem;align-items:start}
+.ab-deck__kopf{display:grid;gap:.7rem;justify-items:start}
+.ab-deck .reiter{font-size:1.5rem;padding:.25rem .8rem}
+.ab-deck h1{font-size:clamp(1.8rem,1.4rem + 1.5vw,2.5rem);line-height:1.1;margin:0}
+.ab-zentral{font-size:1rem;font-weight:700;color:var(--leise);margin:0}
+.ab-deck .leitfrage{font:italic 600 clamp(1.3rem,1.1rem + .9vw,1.7rem)/1.25 var(--titel);color:var(--tief);margin:0;max-width:30ch}
+.ab-platz{font-size:1rem;line-height:1.4;margin:0;padding:.45rem .7rem;background:var(--hauch);border-left:4px solid var(--tief)}
+.ab-titelbild{margin:0}
+.ab-titelbild img,.ab-titelbild svg{display:block;width:100%;height:auto;border:2px solid var(--tinte);background:var(--hauch)}
+.ab-titelbild figcaption{font-size:1rem;line-height:1.4;color:var(--leise);margin-top:.4rem}
+.ab-deck__unten{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.2rem 2rem;align-items:start}
+.ab-deck__unten h2{font-size:1.25rem;margin:0 0 .4rem}
+.ab-ablauf{width:100%;border-collapse:collapse;font-size:1rem}
+.ab-ablauf td{padding:.24rem .3rem;border-bottom:1px solid var(--linie);vertical-align:top;line-height:1.35}
+.ab-ablauf td:first-child{width:2.2rem;font:600 1.05rem/1.3 var(--titel)}
+.ab-ablauf td:last-child{text-align:right;white-space:nowrap}
+.ab-ablauf .form{display:block;color:var(--leise)}
+.ab-ablauf tr:last-child td{border-bottom:0;font-weight:700;border-top:2px solid var(--tinte)}
+
+/* ---------- Schreibauftrag und Extra ---------- */
+.ka-aufgabe{background:var(--blatt);border:2px solid var(--tinte);border-radius:.3rem;box-shadow:5px 5px 0 0 var(--platte);padding:.8rem 1rem;margin:0 0 1.2rem;font-family:var(--titel);font-weight:600;font-size:1.12rem;line-height:1.35}
+.gliederung{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin:.3rem 0 .9rem}
+.haken{display:flex;align-items:center;gap:.6rem;min-height:44px;margin:.6rem 0;font-weight:400}
+.haken input{width:1.5rem;height:1.5rem;flex:0 0 auto}
+#schreibblatt{display:none}
+.ab-frei{display:inline-block;padding:.12rem .55rem;border:2px dashed var(--tief);border-radius:.3rem;color:var(--tief);font-weight:700;font-size:1rem}
+.ab-schritte{list-style:none;margin:0;padding:0;display:grid;gap:1.1rem;counter-reset:schritt}
+.ab-schritte > li{counter-increment:schritt;display:grid;gap:.2rem}
+.ab-schritte > li > label{font-weight:400}
+.ab-schritte > li > label::before{content:counter(schritt) " · ";font-weight:700}
+
+/* ---------- Hefter (Startdatei) ---------- */
+.hefter{max-width:76rem;margin:0 auto;padding:1.6rem max(16px,env(safe-area-inset-right,0px)) 3.5rem max(16px,env(safe-area-inset-left,0px));display:grid;gap:1.8rem}
+.hefter > section{min-width:0}
+.hefter__kopf{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:1.2rem 2.4rem;align-items:start}
+.hefter__kopf > div{display:grid;gap:.7rem;justify-items:start}
+.hefter h1{font-size:clamp(2rem,1.5rem + 2vw,2.9rem);line-height:1.08;margin:0}
+.hefter h2{font-size:1.5rem;border-top:2px solid var(--tinte);padding-top:1rem;margin:0 0 .7rem}
+.hefter p{max-width:68ch}
+.hefter .leitfrage{font:italic 600 clamp(1.25rem,1.1rem + .8vw,1.6rem)/1.25 var(--titel);color:var(--tief);margin:0}
+.blaetter{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(19rem,1fr));gap:.8rem}
+.blaetter li{margin:0;min-width:0}
+.blaetter .bl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.2rem .8rem;align-items:start;height:100%;padding:.6rem .8rem .75rem;background:var(--blatt);border:1px solid var(--linie);border-top:3px solid var(--tinte);color:var(--tinte);text-decoration:none}
+.blaetter a.bl:hover{background:var(--hauch)}
+.blaetter .bl[data-hier]{border:2px solid var(--tinte);border-top-width:3px;box-shadow:5px 5px 0 0 var(--platte)}
+.blaetter .reiter{font-size:1.05rem;min-width:3rem;grid-row:1 / span 3}
+.blaetter b{display:block;line-height:1.3}
+.blaetter small{display:block;font-size:1rem;line-height:1.35;color:var(--leise)}
+.blaetter .stand{font-weight:700;color:var(--tinte)}
+.blaetter .stand.fertig{color:#1F4433}
+.blaetter .bl.fehlt{border-style:dashed;border-color:var(--stahl);border-top:3px dashed var(--stahl);background:transparent;color:var(--leise)}
+.spur{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
+.spur li{display:grid;grid-template-columns:4rem minmax(0,1fr);gap:.8rem;padding:.5rem .7rem;background:var(--hauch);border-left:4px solid var(--tief);margin:0}
+.spur b{font-family:var(--titel);font-weight:600}
+.hefter .reihe{display:flex;flex-wrap:wrap;gap:.6rem .8rem;align-items:center;margin:0}
+
+/* ---------- Fenster für den Stand als Datei oder Text ---------- */
+.ab-fenster{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:rgba(36,34,31,.55)}
+.ab-fenster__blatt{width:min(40rem,100%);max-height:90vh;overflow:auto;background:var(--blatt);border:2px solid var(--tinte);box-shadow:8px 8px 0 0 var(--platte);padding:1.2rem 1.3rem 1.3rem;display:grid;gap:.8rem}
+.ab-fenster h2{font-size:1.4rem;margin:0}
+.ab-fenster p{margin:0}
+.ab-fenster textarea{min-height:7rem;margin:0;font:400 1rem/1.4 ui-monospace,Menlo,Consolas,monospace;border:2px solid var(--stahl);padding:.4rem;background:var(--hell);background-image:none}
+.ab-fenster .reihe{display:flex;flex-wrap:wrap;gap:.6rem .8rem;align-items:center;margin:0}
+.ab-fenster .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* ---------- Schmal: iPad hoch und Telefon ---------- */
+@media (max-width:899px){
+  .ab-rahmen{display:block}
+  .ab-reg{position:static;height:auto;border-right:0;border-bottom:2px solid var(--tinte);padding:.45rem max(16px,env(safe-area-inset-right,0px)) .45rem max(16px,env(safe-area-inset-left,0px));overflow:visible;display:block}
+  .ab-regtitel{display:none}
+  .ab-reg ol{display:flex;gap:.3rem;overflow-x:auto;padding-bottom:.3rem}
+  .ab-reg li{flex:0 0 auto}
+  .ab-reg ol button{grid-template-columns:2.4rem;min-height:48px;padding:.2rem}
+  .ab-reg ol button > span:last-child{display:none}
+  .ab-reg ol button[aria-current]{grid-template-columns:2.4rem auto;padding-right:.6rem}
+  .ab-reg ol button[aria-current] > span:last-child{display:block}
+  .ab-reg ol button[aria-current] .ab-st{display:none}
+  #main{width:calc(100% - 32px);margin:.8rem auto 1.4rem;padding:1rem 1rem 1rem;box-shadow:4px 4px 0 0 var(--karton)}
+  .ab-meta{margin-left:0}
+  .ab-zwei,.ab-zwei.gleich,.gliederung,.ab-deck,.ab-deck__unten,.hefter__kopf{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:30rem){.titel small{display:none}}
+@media (min-width:900px){
+  .ab-rahmen.schmal{--ab-reg:4.1rem}
+  .ab-rahmen.schmal .ab-regtitel,.ab-rahmen.schmal .ab-reg ol button > span:last-child,.ab-rahmen.schmal .ab-reg .ab-werk{display:none}
+  .ab-rahmen.schmal .ab-reg{padding:.7rem .4rem}
+  .ab-rahmen.schmal .ab-reg ol button{grid-template-columns:2.4rem;justify-content:center;padding:.2rem 0;min-height:50px}
+}
+
+/* ---------- Druck: jedes Blatt DIN A4, links der Heftrand ---------- */
+@page{size:A4;margin:14mm 14mm 14mm 22mm}
+@media print{
+  html{font-size:11pt}
+  body{background:#fff}
+  .kopf,.ab-reg,.ab-fuss,.ab-werk,.ab-fenster,.nodruck,.urheberzeile{display:none!important}
+  .ab-rahmen{display:block}
+  #main{width:auto;max-width:none;margin:0;padding:0;border:0;box-shadow:none;min-height:0;display:block;background:#fff}
+  .ab-zeile{display:flex!important;font-size:9.5pt;margin-bottom:4mm;padding-bottom:1.5mm;border-bottom:1pt solid #000}
+  .ab-h .ab-nr{position:static!important;width:9mm;height:9mm;font-size:13pt;background:#fff!important;color:#000!important;border:1.5pt solid #000;box-shadow:none!important}
+  .ab-meta{margin-left:0}
+  .ab-teil{max-width:none}
+  .btn{display:none!important}
+  .auftrag{background:#fff;color:#000;border:1.5pt solid #000}
+  .auftrag p,.auftrag .form,.auftrag h3{color:#000}
+  .ab-platz,.reiter,blockquote,.ka-aufgabe{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .ka-aufgabe{box-shadow:none}
+  .ab-deck{gap:.7rem 1.4rem}
+  .ab-deck h1{font-size:20pt}
+  .ab-deck .leitfrage{font-size:13pt}
+  .ab-ablauf td{padding:.1rem .3rem}
+  .ab-ablauf .form{display:inline}
+  .ab-ablauf .form::before{content:" · "}
+  textarea{border-left:2pt solid #999;border-bottom:1pt solid #666;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  a{color:inherit;text-decoration:none}
+  body.druck-sb .ab-teil > *:not(#schreibblatt),body.druck-sb .ab-h,body.druck-sb .ab-meta{display:none!important}
+  body.druck-sb #schreibblatt{display:block}
+  #schreibblatt h2{font-size:14pt;margin:0 0 .3rem}
+  #schreibblatt .ka-aufgabe{font-size:11.5pt;margin:.4rem 0 .6rem}
+  #schreibblatt .linien{height:8.6mm;border-bottom:.8pt solid #555}
+  #schreibblatt .gl3{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm}
+}
+/* ===== Ende der gemeinsamen Schicht ===== */

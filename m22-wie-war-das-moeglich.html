@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" data-einheit="ns">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>M22 Wie war das möglich?</title>
-<meta name="description" content="GGK M22: „Große Verbrechen brauchen keine Monster!“ – Wer wurde zum Täter? Es geht um Menschen, Faktencheck, der Fall Józefów 1942, sechs Akten der Forschung mit Rückmeldung, Marktplatz, geführte Diskussion, Zusammenfassung.">
+<meta name="description" content="GGK M22, Arbeitsblatt 7 von 11 im Hefter Nationalsozialismus: „Große Verbrechen brauchen keine Monster!“ – Wie war das möglich? Faktencheck, der Fall Józefów 1942, sechs Erklärungen der Forschung, Landkarte, Marktplatz, Diskussion, Schreibauftrag, Zusammenfassung.">
 <style>
 /* Schriften lokal im Repository (SIL Open Font License) – keine Verbindung zu Google */
 @font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
@@ -13,7 +13,7 @@
 @font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
-/* Bewusst nur hell (Beamer, Druck), wie M18–M20. Farben aus dem GGK-Labor. Bildbänder dunkel auf heller Seite. */
+/* Bewusst nur hell (Beamer, Druck). Seit Fassung 5.0 kommen Farben, Rahmen und Blatt aus der gemeinsamen Schicht »Arbeitsblatt Geschichte« (unten, zwischen den Marken AB-STIL). */
 :root{
   color-scheme:light;
   --bg:#F3EFE7; --surface:#FAF8F3; --surface2:#FFFDF8; --offset:#E9E2D7; --line:#D5CEC3; --border:rgba(36,34,31,.14);
@@ -32,7 +32,7 @@ button{cursor:pointer}
 h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.14;text-wrap:balance}
 p,li{text-wrap:pretty}
 a{color:var(--red)}
-:focus-visible{outline:3px solid var(--kuli);outline-offset:3px;border-radius:.35rem}
+:focus-visible{outline:3px solid var(--kuli);outline-offset:3px;border-radius:.3rem}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}}
 @keyframes auf{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -42,17 +42,17 @@ a{color:var(--red)}
 .kopf{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--border);padding-top:env(safe-area-inset-top,0px)}
 .kopf-in{max-width:1100px;margin:auto;padding:.55rem max(1.25rem,env(safe-area-inset-right,0px)) .55rem max(1.25rem,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:.6rem .9rem;flex-wrap:wrap}
 .mark{width:32px;height:32px;flex:0 0 auto}
-.titel{font-weight:700;line-height:1.2;margin-right:auto}.titel small{display:block;color:var(--muted);font-weight:400;font-size:.82rem}
+.titel{font-weight:700;line-height:1.2;margin-right:auto}.titel small{display:block;color:var(--muted);font-weight:400;font-size:1rem}
 .pill{border:1px solid var(--border);background:var(--surface2);border-radius:999px;padding:.45rem 1rem;font-weight:700;min-height:44px;display:inline-flex;align-items:center;text-decoration:none;color:var(--ink)}
 .weg{max-width:1100px;margin:auto;padding:0 1.25rem .6rem;display:flex;gap:.35rem;overflow-x:auto;scrollbar-width:none}
-.weg button{flex:1 0 auto;min-width:7.4rem;border:0;border-top:3px solid var(--line);background:transparent;text-align:left;padding:.45rem .5rem .2rem;color:var(--faint);font-size:.85rem;line-height:1.25;min-height:48px}
-.weg button b{display:block;color:inherit;font-size:.78rem}
+.weg button{flex:1 0 auto;min-width:7.4rem;border:0;border-top:3px solid var(--line);background:transparent;text-align:left;padding:.45rem .5rem .2rem;color:var(--faint);font-size:1rem;line-height:1.25;min-height:48px}
+.weg button b{display:block;color:inherit;font-size:1rem}
 .weg button.da{color:var(--muted);border-top-color:var(--muted)}
 .weg button.akt{color:var(--ink);border-top-color:var(--red)}
 
 main{max-width:46rem;margin:auto;padding:clamp(1.5rem,4vw,3rem) max(1.25rem,env(safe-area-inset-right,0px)) 5rem max(1.25rem,env(safe-area-inset-left,0px))}
 main.breit{max-width:62rem}
-.zeit{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;color:var(--red);font-weight:700;font-size:.95rem}
+.zeit{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;color:var(--red);font-weight:700;font-size:1rem}
 .zeit .nr{font-family:var(--display);font-size:1.1rem}
 h1{font-size:clamp(2rem,1.4rem + 2.4vw,3.1rem);margin:.5rem 0 .7rem}
 .leitfrage{font-family:var(--display);font-style:italic;font-weight:600;font-size:clamp(1.35rem,1.1rem + .9vw,1.8rem);color:var(--muted);margin-bottom:1.4rem}
@@ -62,9 +62,9 @@ p+p{margin-top:.7rem}
 .auftrag{background:var(--ink);color:var(--inverse);border-radius:var(--r-lg);padding:1.2rem 1.4rem;margin:1.5rem 0 1.1rem}
 .auftrag h3{font-size:1.2rem;margin-bottom:.35rem}
 .auftrag p{color:#DCD5CA}
-.auftrag .form{display:inline-block;font-weight:700;color:var(--marker);font-size:.9rem;margin-bottom:.2rem}
-.hinweis{font-size:.9rem;color:var(--muted)}
-.belastend{border-left:6px solid var(--gold);background:var(--gold-hi);padding:.75rem 1rem;border-radius:0 .5rem .5rem 0;margin:1rem 0}
+.auftrag .form{display:inline-block;font-weight:700;color:var(--marker);font-size:1rem;margin-bottom:.2rem}
+.hinweis{font-size:1rem;color:var(--muted)}
+.belastend{border-left:6px solid var(--gold);background:var(--gold-hi);padding:.75rem 1rem;border-radius:0 .3rem .3rem 0;margin:1rem 0}
 .merksatz{font-family:var(--display);font-weight:600;font-size:1.25rem;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);padding:.7rem 0;margin:1.4rem 0;text-align:center}
 .btn{min-height:48px;border:1px solid var(--border);border-radius:var(--r);padding:.6rem 1.2rem;background:var(--surface2);font-weight:700;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.4rem}
 .btn:hover{background:var(--offset)}
@@ -77,19 +77,19 @@ p+p{margin-top:.7rem}
 .fuss{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-top:1px solid var(--line);margin-top:2.2rem;padding-top:1.3rem;flex-wrap:wrap}
 label{font-weight:700;display:block}
 textarea{width:100%;min-height:5rem;border:1.5px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;background:var(--surface2);resize:vertical;margin-top:.35rem}
-input[type=text]{width:100%;min-height:48px;border:1.5px solid var(--border);border-radius:.6rem;padding:.5rem .8rem;background:var(--surface2);margin-top:.35rem}
+input[type=text]{width:100%;min-height:48px;border:1.5px solid var(--border);border-radius:.3rem;padding:.5rem .8rem;background:var(--surface2);margin-top:.35rem}
 input[type=range]{width:100%;min-height:44px;accent-color:var(--ink)}
 .feldgruppe{display:grid;gap:1rem;margin-top:1rem}
 .karte{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.3rem}
 .karte+.karte{margin-top:1rem}
-.quelle{font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.4}
+.quelle{font-size:1rem;color:var(--muted);margin-top:.6rem;line-height:1.4}
 .quelle a{color:var(--muted)}
-blockquote{margin:.8rem 0;padding:.7rem 1rem;border-left:5px solid var(--kuli);background:var(--kuli-hi);border-radius:0 .5rem .5rem 0;font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.35}
-blockquote .wer{display:block;font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--muted);margin-top:.35rem}
-details.hilfe{margin-top:.8rem;border:1.5px dashed var(--line);border-radius:.6rem;padding:.4rem .8rem}
+blockquote{margin:.8rem 0;padding:.7rem 1rem;border-left:5px solid var(--kuli);background:var(--kuli-hi);border-radius:0 .3rem .3rem 0;font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.35}
+blockquote .wer{display:block;font-family:var(--body);font-weight:400;font-size:1rem;color:var(--muted);margin-top:.35rem}
+details.hilfe{margin-top:.8rem;border:1.5px dashed var(--line);border-radius:.3rem;padding:.4rem .8rem}
 details.hilfe summary{cursor:pointer;font-weight:700;min-height:40px;display:flex;align-items:center}
 details.hilfe p{margin:.3rem 0 .4rem}
-.ebene{font-size:.85rem;font-weight:700;padding:.1rem .55rem;border-radius:.35rem;display:inline-block;margin-right:.3rem}
+.ebene{font-size:1rem;font-weight:700;padding:.1rem .55rem;border-radius:.3rem;display:inline-block;margin-right:.3rem}
 .e-person{background:var(--kuli-hi);color:var(--kuli)} .e-situation{background:var(--green-hi);color:var(--green)}
 .e-weltbild{background:var(--red-hi);color:var(--red)} .e-apparat{background:var(--slate-hi);color:var(--slate)}
 .e-vorteil{background:var(--gold-hi);color:var(--gold)}
@@ -99,48 +99,48 @@ details.hilfe p{margin:.3rem 0 .4rem}
 .band.mit{grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:15rem}
 @media (max-width:640px){.band.mit{grid-template-columns:1fr}}
 .band .bt{padding:1.3rem 1.4rem;display:flex;flex-direction:column;justify-content:center;gap:.4rem}
-.band .bt .ob{font-size:.85rem;font-weight:700;color:#C9BFAE;letter-spacing:.02em}
+.band .bt .ob{font-size:1rem;font-weight:700;color:#C9BFAE;letter-spacing:.02em}
 .band .bt h2{font-size:clamp(1.5rem,1.2rem + 1.4vw,2.2rem);color:var(--inverse)}
 .band .bt p{color:#DCD5CA}
 .band figure{margin:0;position:relative;min-height:12rem;background:#2A2824}
 .band figure img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 25%;opacity:.92}
 .band.neu figure img{animation:band-ein 650ms var(--ease) both}
 @keyframes band-ein{from{opacity:0;transform:translateX(4%) scale(1.03)}to{opacity:.92;transform:none}}
-.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:.45rem .8rem;font-size:.75rem;line-height:1.35;color:#E6DFD2;background:linear-gradient(transparent,rgba(27,26,23,.85))}
+.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:.45rem .8rem;font-size:1rem;line-height:1.35;color:#E6DFD2;background:linear-gradient(transparent,rgba(27,26,23,.85))}
 .band figcaption b{color:var(--inverse)}
-.band .taeter{position:absolute;top:.6rem;left:.6rem;background:var(--red);color:var(--inverse);font-size:.75rem;font-weight:700;padding:.15rem .5rem;border-radius:.3rem}
+.band .taeter{position:absolute;top:.6rem;left:.6rem;background:var(--red);color:var(--inverse);font-size:1rem;font-weight:700;padding:.15rem .5rem;border-radius:.3rem}
 
 /* Menschen (Einstieg) */
 .menschen{display:grid;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));gap:1rem;margin-top:1rem}
 .mensch{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column}
-.mensch .foto{aspect-ratio:4/3;background:var(--offset);display:grid;place-items:center;color:var(--muted);font-size:.85rem;text-align:center;padding:.6rem;overflow:hidden}
+.mensch .foto{aspect-ratio:4/3;background:var(--offset);display:grid;place-items:center;color:var(--muted);font-size:1rem;text-align:center;padding:.6rem;overflow:hidden}
 .mensch .foto img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
 .mensch .foto .leer{font-family:var(--display);font-style:italic}
 .mensch .mt{padding:.8rem .9rem 1rem;display:grid;gap:.25rem}
 .mensch h3{font-size:1.1rem}
-.mensch .ort{font-size:.85rem;color:var(--muted)}
-.mensch p{font-size:.95rem}
-.mensch .q{font-size:.75rem;color:var(--muted);margin-top:.3rem;line-height:1.3}
+.mensch .ort{font-size:1rem;color:var(--muted)}
+.mensch p{font-size:1rem}
+.mensch .q{font-size:1rem;color:var(--muted);margin-top:.3rem;line-height:1.3}
 .wer-tat{font-family:var(--display);font-weight:600;font-size:clamp(1.4rem,1.1rem + 1.3vw,2rem);margin:1.8rem 0 .4rem;text-align:center}
 
 /* X · Versiegelte erste Antwort */
 .umschlag .siegel{display:none;align-items:center;gap:1rem;background:var(--offset);border:2px dashed var(--muted);border-radius:var(--r);padding:1rem 1.1rem;margin-top:.6rem}
 .umschlag.zu .siegel{display:flex}
 .umschlag.zu .brief{display:none}
-.stempel{flex:0 0 auto;display:inline-grid;place-items:center;width:4.6rem;height:4.6rem;border-radius:50%;border:3px solid var(--red);color:var(--red);font-weight:700;font-size:.78rem;text-align:center;line-height:1.15;transform:rotate(-8deg)}
+.stempel{flex:0 0 auto;display:inline-grid;place-items:center;width:4.6rem;height:4.6rem;border-radius:50%;border:3px solid var(--red);color:var(--red);font-weight:700;font-size:1rem;text-align:center;line-height:1.15;transform:rotate(-8deg)}
 .umschlag.neu .stempel{animation:stempel 320ms var(--ease) both}
 .umschlag.neu .siegel{animation:auf 380ms var(--ease) both}
 @keyframes stempel{from{transform:rotate(-8deg) scale(1.35);opacity:0}to{transform:rotate(-8deg) scale(1);opacity:1}}
 .vergleich2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
 @media (max-width:640px){.vergleich2{grid-template-columns:1fr}}
-.vergleich2 .alt{background:var(--offset);border-radius:.6rem;padding:.8rem 1rem;min-width:0}
+.vergleich2 .alt{background:var(--offset);border-radius:.3rem;padding:.8rem 1rem;min-width:0}
 .vergleich2 .alt p{overflow-wrap:anywhere;margin-top:.3rem}
 
 /* AF · Phasen */
 .phasen{display:grid;gap:.8rem;margin-top:1rem}
 .phase{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1rem 1.1rem}
 .phase h3{font-size:1.15rem}
-.phase .nrph{font-weight:700;color:var(--red);font-size:.85rem}
+.phase .nrph{font-weight:700;color:var(--red);font-size:1rem}
 .phase .wer{margin-top:.7rem;padding-top:.7rem;border-top:1px solid var(--line)}
 .phase .wer.neu{animation:auf 260ms var(--ease) both}
 .phase ul{padding-left:1.2rem;display:grid;gap:.25rem}
@@ -156,21 +156,21 @@ details.hilfe p{margin:.3rem 0 .4rem}
 .dreh.um .hinten{visibility:visible!important}
 @media (prefers-reduced-motion:reduce){.dreh-in{transition:none}.dreh.um .dreh-in{transform:none}.dreh .hinten{transform:none}.dreh.um .vorne{display:none}.dreh .hinten[hidden]{display:none!important}}
 .floskel{font-family:var(--display);font-size:clamp(1.35rem,1.1rem + 1vw,1.7rem);font-style:italic;line-height:1.2}
-.kartennr{font-weight:700;color:var(--red);font-size:.88rem;margin-bottom:.3rem}
+.kartennr{font-weight:700;color:var(--red);font-size:1rem;margin-bottom:.3rem}
 .optionen{display:grid;gap:.45rem;margin-top:.8rem}
-.optionen button{min-height:48px;text-align:left;padding:.55rem .9rem;border-radius:.6rem;border:1.5px solid var(--border);background:var(--surface2);font-weight:700}
+.optionen button{min-height:48px;text-align:left;padding:.55rem .9rem;border-radius:.3rem;border:1.5px solid var(--border);background:var(--surface2);font-weight:700}
 .optionen button[aria-pressed=true]{border-color:var(--kuli);background:var(--kuli-hi)}
 .optionen button.zentral{border-color:var(--green);background:var(--green-hi)}
 .optionen button.teils{border-color:var(--gold);background:var(--gold-hi)}
 .optionen button.kaum{border-color:var(--red)}
-.optionen .fb{display:block;font-weight:400;font-size:.9rem;color:var(--muted);margin-top:.3rem}
+.optionen .fb{display:block;font-weight:400;font-size:1rem;color:var(--muted);margin-top:.3rem}
 
 /* AI · Input-Karten mit Y (seit 4.1 als Liste links und Karte rechts, siehe .jz) */
-.ikarte .kn{font-weight:700;color:var(--red);font-size:.88rem}
+.ikarte .kn{font-weight:700;color:var(--red);font-size:1rem}
 .ikarte h3{font-size:1.4rem}
-.ikarte figure{margin:.2rem 0;border-radius:.6rem;overflow:hidden;background:var(--offset)}
+.ikarte figure{margin:.2rem 0;border-radius:.3rem;overflow:hidden;background:var(--offset)}
 .ikarte figure img{display:block;width:100%;max-height:16rem;object-fit:cover}
-.ikarte figcaption{font-size:.78rem;color:var(--muted);padding:.4rem .6rem;line-height:1.3}
+.ikarte figcaption{font-size:1rem;color:var(--muted);padding:.4rem .6rem;line-height:1.3}
 .feld{display:grid;grid-template-columns:repeat(25,1fr);gap:3px;max-width:30rem;margin-top:.4rem}
 .feld i{display:block;aspect-ratio:1;border-radius:50%;background:var(--line)}
 .feld i.schaetz{box-shadow:inset 0 0 0 2px var(--kuli)}
@@ -185,85 +185,85 @@ details.hilfe p{margin:.3rem 0 .4rem}
 .frage-gross .f2{margin-top:.6rem;color:#DCD5CA;font-size:clamp(1rem,.95rem + .4vw,1.2rem)}
 .ebenen{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.5rem;margin:1rem 0 .4rem}
 @media (max-width:700px){.ebenen{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.ebenen div{border-radius:.7rem;padding:.7rem .7rem .8rem;min-width:0}
+.ebenen div{border-radius:.3rem;padding:.7rem .7rem .8rem;min-width:0}
 .ebenen b{display:block;font-family:var(--display);font-size:1.1rem}
-.ebenen span{display:block;font-size:.85rem;line-height:1.35;margin-top:.2rem}
+.ebenen span{display:block;font-size:1rem;line-height:1.35;margin-top:.2rem}
 .ebenen .eb-person{background:var(--kuli-hi);color:var(--kuli)} .ebenen .eb-situation{background:var(--green-hi);color:var(--green)}
 .ebenen .eb-weltbild{background:var(--red-hi);color:var(--red)} .ebenen .eb-apparat{background:var(--slate-hi);color:var(--slate)} .ebenen .eb-vorteil{background:var(--gold-hi);color:var(--gold)}
-.modellhinweis{font-size:.82rem;color:var(--muted)}
+.modellhinweis{font-size:1rem;color:var(--muted)}
 .versuche{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:.9rem;margin-top:1rem}
 .versuch{display:grid;grid-template-columns:4.6rem minmax(0,1fr);gap:.8rem;align-items:start;text-align:left;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:.8rem .9rem;min-height:44px;transition:transform 220ms var(--ease)}
 .versuch[aria-pressed=true]{border-color:var(--ink);background:var(--surface2);box-shadow:inset 0 0 0 1.5px var(--ink)}
-.versuch .pf{width:4.6rem;aspect-ratio:1;border-radius:.6rem;overflow:hidden;background:var(--offset);display:grid;place-items:center;font-family:var(--display);font-size:1.6rem;color:var(--muted)}
+.versuch .pf{width:4.6rem;aspect-ratio:1;border-radius:.3rem;overflow:hidden;background:var(--offset);display:grid;place-items:center;font-family:var(--display);font-size:1.6rem;color:var(--muted)}
 .versuch .pf img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block}
 .versuch .vt{display:grid;gap:.15rem;min-width:0}
 .versuch .vt b{font-size:1.05rem;line-height:1.2}
-.versuch .vt .j{font-size:.82rem;color:var(--muted)}
-.versuch .vt .fr{font-size:.9rem}
-.versuch .fertig{font-size:.8rem;font-weight:700;color:var(--green)}
-.fortschritt{margin-top:1rem;padding:.7rem 1rem;border-radius:.6rem;background:var(--offset);font-weight:700}
+.versuch .vt .j{font-size:1rem;color:var(--muted)}
+.versuch .vt .fr{font-size:1rem}
+.versuch .fertig{font-size:1rem;font-weight:700;color:var(--green)}
+.fortschritt{margin-top:1rem;padding:.7rem 1rem;border-radius:.3rem;background:var(--offset);font-weight:700}
 .fortschritt.ok{background:var(--green-hi);color:var(--green)}
 .deckel{margin-top:1.2rem;background:var(--surface);border:2px solid var(--ink);border-radius:var(--r-lg);padding:1.1rem 1.2rem}
 .deckel.neu{animation:auf 260ms var(--ease) both}
-.sig{font-weight:700;color:var(--muted);font-size:.9rem}
-.portraet{float:right;width:7rem;margin:0 0 .6rem 1rem;border-radius:.6rem;overflow:hidden;background:var(--offset)}
+.sig{font-weight:700;color:var(--muted);font-size:1rem}
+.portraet{float:right;width:7rem;margin:0 0 .6rem 1rem;border-radius:.3rem;overflow:hidden;background:var(--offset)}
 .portraet img{display:block;width:100%;aspect-ratio:1;object-fit:cover;object-position:center 15%}
-.portraet figcaption{font-size:.7rem;color:var(--muted);padding:.25rem .3rem;line-height:1.25}
+.portraet figcaption{font-size:1rem;color:var(--muted);padding:.25rem .3rem;line-height:1.25}
 @media (max-width:520px){.portraet{width:5.5rem}}
 
 /* AB · Lesestufen */
 .stufen{display:inline-flex;border:2px solid var(--ink);border-radius:999px;overflow:hidden;margin-top:1rem;max-width:100%}
 .stufen button{min-height:44px;padding:.4rem 1rem;border:0;background:transparent;font-weight:700;white-space:nowrap}
-@media (max-width:420px){.stufen button{padding:.4rem .65rem;font-size:.95rem}}
+@media (max-width:420px){.stufen button{padding:.4rem .65rem;font-size:1rem}}
 .stufen button[aria-pressed=true]{background:var(--ink);color:var(--inverse)}
 .stext{margin-top:1rem;display:grid;gap:.8rem;clear:both}
 .stext .neu{animation:auf 220ms var(--ease) both}
-.stufenkopf{font-weight:700;color:var(--red);font-size:.9rem;margin-top:.4rem}
+.stufenkopf{font-weight:700;color:var(--red);font-size:1rem;margin-top:.4rem}
 
 /* AC / AD / AK · Gewichtung, Rückmeldung */
 .modell{display:grid;gap:.9rem;margin-top:.8rem}
 .fak{display:grid;grid-template-columns:9rem minmax(0,1fr);gap:.2rem .9rem;align-items:center}
 @media (max-width:520px){.fak{grid-template-columns:1fr}}
-.fak .u{display:block;font-weight:400;font-size:.85rem;color:var(--muted)}
+.fak .u{display:block;font-weight:400;font-size:1rem;color:var(--muted)}
 .balken{height:1.1rem;background:var(--offset);border-radius:.3rem;overflow:hidden}
 .balken b{display:block;height:100%;width:100%;transform-origin:left center;transform:scaleX(var(--w,0));transition:transform 240ms var(--ease);border-radius:.3rem}
 .b-person b{background:var(--kuli)} .b-situation b{background:var(--green)} .b-weltbild b{background:var(--red)} .b-apparat b{background:var(--slate)} .b-vorteil b{background:var(--gold)}
-.wert{font-size:.9rem;color:var(--muted)}
+.wert{font-size:1rem;color:var(--muted)}
 .satz{font-weight:700;margin-top:.9rem}
-.rm{margin-top:.4rem;padding:.55rem .8rem;border-radius:.5rem;font-size:.92rem;line-height:1.4;animation:auf 220ms var(--ease) both}
+.rm{margin-top:.4rem;padding:.55rem .8rem;border-radius:.3rem;font-size:1rem;line-height:1.4;animation:auf 220ms var(--ease) both}
 .rm.trifft{background:var(--green-hi);border-left:4px solid var(--green)}
 .rm.teils{background:var(--gold-hi);border-left:4px solid var(--gold)}
 .rm.nicht{background:var(--red-hi);border-left:4px solid var(--red)}
 .zaehler{display:inline-flex;align-items:center;gap:.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:999px;padding:.35rem .9rem;font-weight:700;font-variant-numeric:tabular-nums}
 .gruppen{display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:.9rem;margin-top:1rem}
-.gruppe{background:var(--surface);border:1px solid var(--border);border-radius:.7rem;padding:.8rem .9rem}
+.gruppe{background:var(--surface);border:1px solid var(--border);border-radius:.3rem;padding:.8rem .9rem}
 .gruppe h4{font-size:1.05rem;margin-bottom:.4rem}
-.mini{display:grid;grid-template-columns:5.8rem minmax(0,1fr);gap:.3rem .5rem;align-items:center;font-size:.88rem}
+.mini{display:grid;grid-template-columns:5.8rem minmax(0,1fr);gap:.3rem .5rem;align-items:center;font-size:1rem}
 .mini .balken{height:.75rem}
-.streit{margin-top:1rem;padding:.9rem 1.1rem;border:2px solid var(--red);border-radius:.7rem;background:var(--red-hi)}
+.streit{margin-top:1rem;padding:.9rem 1.1rem;border:2px solid var(--red);border-radius:.3rem;background:var(--red-hi)}
 .eingabe{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:.9rem;margin-top:1rem}
-.eingabe fieldset{border:1px solid var(--border);border-radius:.7rem;padding:.6rem .8rem;background:var(--surface)}
+.eingabe fieldset{border:1px solid var(--border);border-radius:.3rem;padding:.6rem .8rem;background:var(--surface)}
 .eingabe legend{font-weight:700;padding:0 .3rem}
 .eingabe .z{display:grid;grid-template-columns:6rem minmax(0,1fr);gap:.4rem;align-items:center;margin:.25rem 0}
-.eingabe select{min-height:44px;border:1.5px solid var(--border);border-radius:.5rem;background:var(--surface2);padding:0 .4rem}
+.eingabe select{min-height:44px;border:1.5px solid var(--border);border-radius:.3rem;background:var(--surface2);padding:0 .4rem}
 
 /* Streitpaare */
 .paar{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1rem 1.2rem;margin-top:1rem}
 .paar .vs{display:grid;grid-template-columns:1fr auto 1fr;gap:.6rem;align-items:center;margin:.5rem 0}
 @media (max-width:560px){.paar .vs{grid-template-columns:1fr}}
-.paar .vs .s{background:var(--offset);border-radius:.6rem;padding:.6rem .8rem;font-size:.95rem}
+.paar .vs .s{background:var(--offset);border-radius:.3rem;padding:.6rem .8rem;font-size:1rem}
 .paar .vs .s b{display:block}
 .paar .vs .g{font-family:var(--display);font-style:italic;color:var(--muted);text-align:center}
-.empfehlung{margin-top:1.2rem;padding:.9rem 1.1rem;border-radius:.7rem;background:var(--kuli-hi);border-left:5px solid var(--kuli)}
+.empfehlung{margin-top:1.2rem;padding:.9rem 1.1rem;border-radius:.3rem;background:var(--kuli-hi);border-left:5px solid var(--kuli)}
 
 /* AH · Position */
-.pole{display:flex;justify-content:space-between;gap:1rem;font-weight:700;font-size:.95rem;margin-top:1rem}
+.pole{display:flex;justify-content:space-between;gap:1rem;font-weight:700;font-size:1rem;margin-top:1rem}
 .pole span{max-width:46%}
 
 /* Marktplatz, Moderation, Vollbilder */
 .runden{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1rem}
 @media (max-width:560px){.runden{grid-template-columns:1fr}}
-.runden div{background:var(--surface);border:1px solid var(--border);border-radius:.7rem;padding:.8rem 1rem}
+.runden div{background:var(--surface);border:1px solid var(--border);border-radius:.3rem;padding:.8rem 1rem}
 .uhr{font-family:var(--display);font-size:2rem;font-variant-numeric:tabular-nums}
 .stand,.tafel{position:fixed;inset:0;z-index:60;background:var(--bg);overflow:auto;padding:max(1.2rem,env(safe-area-inset-top,0px)) max(1.5rem,env(safe-area-inset-right,0px)) 2rem max(1.5rem,env(safe-area-inset-left,0px))}
 .stand{background:var(--surface2)}
@@ -272,7 +272,7 @@ details.hilfe p{margin:.3rem 0 .4rem}
 .stand h2,.tafel h2{font-size:clamp(1.6rem,1.2rem + 1.6vw,2.4rem)}
 .stand dl{display:grid;gap:1rem;font-size:clamp(1.1rem,1rem + .5vw,1.4rem);margin-top:1rem}
 .stand dt{font-weight:700;color:var(--red);font-size:.9em}
-.notiz{border:1px solid var(--border);border-radius:.7rem;padding:.8rem 1rem;background:var(--surface)}
+.notiz{border:1px solid var(--border);border-radius:.3rem;padding:.8rem 1rem;background:var(--surface)}
 .notiz+.notiz{margin-top:.8rem}
 .moder{display:grid;gap:1rem}
 .moder .schritt{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1rem 1.2rem;display:grid;grid-template-columns:3.2rem minmax(0,1fr);gap:.8rem;align-items:start}
@@ -282,43 +282,43 @@ details.hilfe p{margin:.3rem 0 .4rem}
 .tafel .moder .schritt{font-size:1.2rem}
 .tafel .moder .schritt h3{font-size:1.7rem}
 .tafel .moder .schritt .frage-m{font-family:var(--display);font-style:italic;font-size:1.6rem;margin-top:.3rem}
-.regeln{columns:2;column-gap:1.5rem;font-size:.95rem;margin-top:.6rem}
+.regeln{columns:2;column-gap:1.5rem;font-size:1rem;margin-top:.6rem}
 @media (max-width:640px){.regeln{columns:1}}
 .regeln li{break-inside:avoid;margin-bottom:.3rem}
 
 /* Tabellen */
 .tab-wrap{overflow-x:auto;margin-top:1rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface)}
 table{border-collapse:collapse;width:100%}
-th,td{padding:.55rem .7rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.95rem}
+th,td{padding:.55rem .7rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:1rem}
 th{background:var(--offset)}
 tr:last-child td{border-bottom:0}
 td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
 
 /* Löschen */
-.loesch{margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.92rem;color:var(--muted)}
-.loesch-frage{margin-top:.6rem;border:2px solid var(--red);border-radius:.7rem;padding:.8rem 1rem;background:var(--red-hi);color:var(--ink)}
+.loesch{margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem;font-size:1rem;color:var(--muted)}
+.loesch-frage{margin-top:.6rem;border:2px solid var(--red);border-radius:.3rem;padding:.8rem 1rem;background:var(--red-hi);color:var(--ink)}
 
 /* Zusammenfassung */
 .zf h2{font-size:1.25rem;margin:1.2rem 0 .4rem}
 .zf .ansaetze{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin-top:.6rem}
 @media (max-width:760px){.zf .ansaetze{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:480px){.zf .ansaetze{grid-template-columns:1fr}}
-.zf .ans{background:var(--surface);border:1px solid var(--border);border-radius:.7rem;padding:.7rem .8rem;display:grid;gap:.25rem;font-size:.9rem;line-height:1.35;min-width:0}
+.zf .ans{background:var(--surface);border:1px solid var(--border);border-radius:.3rem;padding:.7rem .8rem;display:grid;gap:.25rem;font-size:1rem;line-height:1.35;min-width:0}
 .zf .ans .ak{display:flex;gap:.6rem;align-items:center}
-.zf .ans .ak .pf{width:3rem;height:3rem;border-radius:.5rem;overflow:hidden;background:var(--offset);flex:0 0 auto}
+.zf .ans .ak .pf{width:3rem;height:3rem;border-radius:.3rem;overflow:hidden;background:var(--offset);flex:0 0 auto}
 .zf .ans .ak .pf img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block}
 .zf .ans .ak b{font-family:var(--display);font-size:1.05rem;line-height:1.15}
-.zf .ans .ak small{display:block;color:var(--muted);font-size:.8rem}
+.zf .ans .ak small{display:block;color:var(--muted);font-size:1rem}
 .zf .ans .th{font-weight:700}
 .zf .ans .gr{color:var(--muted)}
 .zf .zw{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
 @media (max-width:640px){.zf .zw{grid-template-columns:1fr}}
-.raster3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.6rem;font-size:.88rem}
+.raster3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-top:.6rem;font-size:1rem}
 @media (max-width:640px){.raster3{grid-template-columns:1fr}}
-.raster3 div{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem .7rem}
+.raster3 div{background:var(--surface);border:1px solid var(--border);border-radius:.3rem;padding:.6rem .7rem}
 .raster3 b{display:block;margin-bottom:.2rem}
 .satzanfaenge{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem}
-.satzanfaenge button{min-height:40px;border:1.5px solid var(--border);background:var(--surface2);border-radius:.5rem;padding:.3rem .7rem;font-size:.9rem}
+.satzanfaenge button{min-height:40px;border:1.5px solid var(--border);background:var(--surface2);border-radius:.3rem;padding:.3rem .7rem;font-size:1rem}
 .abruf .optionen{margin-top:.5rem}
 
 /* AM 2 · Dashboard (Frage im Zentrum, Rad der fünf Ebenen, sechs Erklärungen) · Dauern: Panel 320 ms (übergang), schließt 150 ms (exit); Linien 360 ms (reveal), Staffel 30 ms; Marken und Stand 150 ms (fast) */
@@ -338,7 +338,7 @@ main.dashboard{max-width:min(76rem,100vw - 2.5rem);padding-top:.8rem;padding-bot
 .ring-text{position:absolute;left:50%;top:1.6%;transform:translateX(-50%);font-size:clamp(.55rem,1cqi,.85rem);color:var(--faint);white-space:nowrap;letter-spacing:.04em;text-transform:uppercase;font-weight:700;margin:0}
 .spalte{position:absolute;top:3%;bottom:3%;width:21%;display:grid;grid-template-rows:1fr 1fr 1fr;gap:2.5%}
 .spalte.l{left:2.5%}.spalte.r{right:2.5%}
-.akte{position:relative;min-width:0;background:var(--surface2);border:1.5px solid var(--border);border-radius:.7rem;padding:.55em .7em .5em;text-align:left;display:grid;grid-template-columns:2.4em minmax(0,1fr);gap:.15em .5em;align-items:start;align-content:start;font-size:clamp(.7rem,1.3cqi,1rem);transition:border-color var(--fast) var(--ease),opacity 210ms var(--ease);color:var(--ink)}
+.akte{position:relative;min-width:0;background:var(--surface2);border:1.5px solid var(--border);border-radius:.3rem;padding:.55em .7em .5em;text-align:left;display:grid;grid-template-columns:2.4em minmax(0,1fr);gap:.15em .5em;align-items:start;align-content:start;font-size:clamp(.7rem,1.3cqi,1rem);transition:border-color var(--fast) var(--ease),opacity 210ms var(--ease);color:var(--ink)}
 .akte .nr{grid-column:1/-1;grid-row:1;font-size:.75em;color:var(--red);font-weight:700;letter-spacing:.03em;text-transform:uppercase;display:flex;gap:.5em;align-items:center}
 .akte .nr .emp{background:var(--gold-hi);color:var(--gold);border-radius:.3em;padding:0 .4em;text-transform:none;letter-spacing:0}
 .akte .pf{grid-row:2/4;width:2.4em;height:2.4em;border-radius:.4em;background:var(--offset);display:grid;place-items:center;font-family:var(--display);font-size:1.2em;color:var(--muted);overflow:hidden}
@@ -402,12 +402,12 @@ svg.linien .zieh{animation:zieh var(--reveal) var(--ease) both}
 .ebene.verdeckt{background:var(--offset);color:var(--faint);font-style:italic;font-weight:400}
 .panel .portraet{width:5.5rem}
 .panel .fak{grid-template-columns:7.5rem minmax(0,1fr)}
-.btn.klein{min-height:44px;padding:.25rem .8rem;font-size:.9rem}
+.btn.klein{min-height:44px;padding:.25rem .8rem;font-size:1rem}
 .dash-fuss{margin-top:.7rem;display:grid;gap:.3rem}
 .dash-fuss .fortschritt{margin:0}
 ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation-duration:320ms;animation-timing-function:var(--ease)}
 @media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
-@media (max-width:820px){ /* iPad hoch und Telefon: Liste statt Bühne, Panel von unten */
+@media (max-width:1149px){ /* iPad hoch und Telefon: Liste statt Bühne, Panel von unten */
   main.dashboard{max-width:46rem}
   .buehne{height:auto;min-height:0}
   .buehne .dash{aspect-ratio:auto;transform:none!important;padding:.8rem;display:grid;gap:.6rem}
@@ -415,22 +415,22 @@ svg.linien .zieh{animation:zieh var(--reveal) var(--ease) both}
   .spalte{position:static;width:auto;display:grid;grid-template-rows:none;gap:.5rem}
   .akte{font-size:1rem}
   svg.rad,svg.linien{display:none}
-  .frage-kern{position:static;transform:none;width:auto;height:auto;background:var(--dunkel);border-radius:.8rem;padding:1rem;font-size:1rem;pointer-events:auto}
+  .frage-kern{position:static;transform:none;width:auto;height:auto;background:var(--dunkel);border-radius:.3rem;padding:1rem;font-size:1rem;pointer-events:auto}
   .ebfelder{display:grid;gap:.5rem}
-  .ebfeld{position:static;transform:none;width:auto;background:var(--surface2);border:1.5px solid var(--border);border-left:.5rem solid var(--eb,var(--line));text-align:left;font-size:.95rem;padding:.5rem .7rem}
+  .ebfeld{position:static;transform:none;width:auto;background:var(--surface2);border:1.5px solid var(--border);border-left:.5rem solid var(--eb,var(--line));text-align:left;font-size:1rem;padding:.5rem .7rem}
   .ebfeld[data-ebene=person]{--eb:var(--e-person)} .ebfeld[data-ebene=situation]{--eb:var(--e-situation)} .ebfeld[data-ebene=weltbild]{--eb:var(--e-weltbild)} .ebfeld[data-ebene=apparat]{--eb:var(--e-apparat)} .ebfeld[data-ebene=vorteil]{--eb:var(--e-vorteil)}
   .ebfeld[aria-pressed=true]{background:var(--ink);color:var(--inverse)}
   .ebfeld[aria-pressed=true] .marke{background:var(--inverse);color:var(--ink)}
   .ebfeld .marken{justify-content:flex-start}
-  .rad-satz{position:static;font-size:.95rem}
-  .ansicht{position:static;font-size:.95rem}
+  .rad-satz{position:static;font-size:1rem}
+  .ansicht{position:static;font-size:1rem}
   .ansicht.zeitachse{min-height:24rem;position:relative;overflow:visible}
-  .zeitachse .akte{position:absolute;width:30%;font-size:.8rem}
+  .zeitachse .akte{position:absolute;width:30%;font-size:1rem}
   .zeitachse-fuss{position:static}
-  .panel,.buehne.links .panel{position:fixed;left:0;right:0;bottom:0;top:auto;width:auto;min-width:0;max-height:82vh;border:0;border-top:2px solid var(--ink);border-radius:1rem 1rem 0 0;transform:translateY(104%);padding-bottom:calc(1.4rem + env(safe-area-inset-bottom,0px));z-index:30}
+  .panel,.buehne.links .panel{position:fixed;left:0;right:0;bottom:0;top:auto;width:auto;min-width:0;max-height:82vh;border:0;border-top:2px solid var(--ink);border-radius:.3rem .3rem 0 0;transform:translateY(104%);padding-bottom:calc(1.4rem + env(safe-area-inset-bottom,0px));z-index:30}
   .buehne.offen .panel,.buehne.offen.links .panel{transform:none}
 }
-@media (min-width:821px){.ebfeld:not([aria-pressed=true]) b{color:var(--ink)} .ebfeld[aria-pressed=true] b,.ebfeld[aria-pressed=true] small{color:var(--ink)}}
+@media (min-width:1150px){.ebfeld:not([aria-pressed=true]) b{color:var(--ink)} .ebfeld[aria-pressed=true] b,.ebfeld[aria-pressed=true] small{color:var(--ink)}}
 
 /* AT · Landkarten-Moment */
 .frage-gross .f1{font-size:clamp(1.4rem,1.1rem + 1.6vw,2.2rem)}
@@ -438,22 +438,22 @@ svg.linien .zieh{animation:zieh var(--reveal) var(--ease) both}
 #lk-teil2.gesperrt a.btn{pointer-events:none}
 .prinzipien{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.5rem;margin-top:.6rem}
 .prinzipien+label{margin-top:1rem}
-.prinzipien button{text-align:left;border:1.5px solid var(--border);border-radius:.6rem;background:var(--surface2);padding:.6rem .8rem;min-height:48px;transition:border-color var(--fast) var(--ease);color:var(--ink)}
+.prinzipien button{text-align:left;border:1.5px solid var(--border);border-radius:.3rem;background:var(--surface2);padding:.6rem .8rem;min-height:48px;transition:border-color var(--fast) var(--ease);color:var(--ink)}
 .prinzipien button b{display:block}
-.prinzipien button small{color:var(--muted);font-size:.85rem;line-height:1.3;display:block}
+.prinzipien button small{color:var(--muted);font-size:1rem;line-height:1.3;display:block}
 .prinzipien button[aria-pressed=true]{border-color:var(--red);background:var(--red-hi)}
 .prinzipien button.zentral{border-color:var(--green);background:var(--green-hi)}
 .prinzipien button.teils{border-color:var(--gold);background:var(--gold-hi)}
 .prinzipien button.kaum{border-color:var(--line);background:var(--surface);color:var(--muted)}
 .prinzipien button[disabled]{cursor:default}
-.trift{margin-top:1.2rem;border:1.5px solid var(--gold);border-radius:.6rem;padding:.8rem 1rem;background:var(--gold-hi)}
+.trift{margin-top:1.2rem;border:1.5px solid var(--gold);border-radius:.3rem;padding:.8rem 1rem;background:var(--gold-hi)}
 .trift b{font-family:var(--display)}
 
 /* Zusammenfassung: Rad als Schaubild, Kasten Landkarte */
 .zf .schau{display:grid;grid-template-columns:11rem minmax(0,1fr);gap:.8rem;align-items:center;margin-top:.5rem}
 @media (max-width:560px){.zf .schau{grid-template-columns:1fr}}
 .zf .schau svg{width:100%;height:auto;display:block}
-.zf .lk-kasten{background:var(--surface);border:1.5px solid var(--kuli);border-radius:.7rem;padding:.6rem .8rem;font-size:.9rem;line-height:1.4}
+.zf .lk-kasten{background:var(--surface);border:1.5px solid var(--kuli);border-radius:.3rem;padding:.6rem .8rem;font-size:1rem;line-height:1.4}
 .zf .lk-kasten b{font-family:var(--display)}
 
 @media print{
@@ -479,96 +479,6 @@ svg.linien .zieh{animation:zieh var(--reveal) var(--ease) both}
   .zf .raster3{font-size:8pt}
   .zf .raster3 div{padding:.35rem .5rem}
 }
-/* ===== Arbeitsblatt-Rahmen (Fassung 4.0, 13.11.2026): Register links auf altem Papier, ein Auftrag je Seite ===== */
-:root{--ab-reg:15rem;--ab-kopf:3.7rem}
-.kopf-in{max-width:none}
-.weg{display:none}
-.ab-rahmen{display:grid;grid-template-columns:var(--ab-reg) minmax(0,1fr);align-items:start}
-.ab-reg{position:sticky;top:var(--ab-kopf);height:calc(100dvh - var(--ab-kopf));overflow-y:auto;padding:.8rem .55rem 1rem .7rem;border-right:1px solid #A39270;color:#24221F;background-color:#E2D4B4;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='k'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .30  0 0 0 0 .21  0 0 0 0 .09  0 0 0 .6 -.17'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23k)'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .55' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36  0 0 0 0 .26  0 0 0 0 .12  0 0 0 .5 -.14'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.007' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42  0 0 0 0 .30  0 0 0 0 .13  0 0 0 .5 -.14'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E"),repeating-linear-gradient(90deg, rgba(90,70,30,.06) 0 1px, transparent 1px 27px),linear-gradient(90deg, rgba(120,95,45,.16), rgba(120,95,45,0) 18%, rgba(120,95,45,0) 86%, rgba(90,70,30,.14));background-size:360px 360px,720px 360px,900px 900px,auto,auto}
-.ab-regtitel{font-size:.8rem;font-weight:700;color:#463F33;margin:0 0 .35rem .5rem}
-.ab-reg ol{list-style:none;display:grid;gap:0}
-.ab-reg ol button{display:flex;gap:.55rem;align-items:center;width:100%;text-align:left;border:2px solid transparent;background:none;border-radius:.45rem;padding:.16rem .45rem;min-height:48px;color:inherit;line-height:1.2;font:inherit}
-.ab-reg ol button[aria-current]{background:var(--kuli-hi);border-color:var(--kuli)}
-.ab-nr{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:1.9rem;height:1.9rem;border-radius:999px;border:2px solid currentColor;font-family:var(--display);font-weight:600;font-size:1rem;line-height:1;background:var(--surface2)}
-.ab-reg b{display:block;font-size:.95rem;line-height:1.2}
-.ab-reg small{display:block;font-size:.78rem;color:#463F33;line-height:1.25}
-.ab-st{display:block;font-size:.78rem;font-weight:700;color:#463F33;line-height:1.25}
-.ab-reg .fertig .ab-nr{background:var(--green);border-color:var(--green);color:var(--surface2)}
-.ab-reg .fertig .ab-st{color:#24503D}
-.ab-reg .hier .ab-nr,.ab-reg .hier .ab-st{color:var(--kuli)}
-.ab-reg .ansage .ab-nr,.ab-reg .ansage .ab-st{color:#623D05}
-#main{max-width:none;margin:1rem 1.2rem 1.4rem;padding:.8rem 1.9rem 1rem;background:var(--surface2);border:1px solid var(--line);border-radius:.4rem;min-height:calc(100dvh - var(--ab-kopf) - 2.4rem);display:flex;flex-direction:column}
-#main.dashboard{max-width:none;padding:1.15rem 1.2rem 1.1rem}
-.ab-zeile{display:flex;justify-content:space-between;gap:1rem;font-size:.8rem;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:.3rem;margin-bottom:.6rem}
-.ab-h{display:flex;align-items:center;gap:.7rem;font-size:clamp(1.45rem,1.2rem + .8vw,1.75rem);margin:0 0 .15rem}
-.ab-h .ab-nr{width:2.25rem;height:2.25rem;font-size:1.2rem;background:var(--ink);border-color:var(--ink);color:var(--surface2)}
-.ab-meta{margin:0 0 .5rem 2.95rem;font-size:.9rem;font-weight:700;color:var(--red)}
-.ab-marke{margin-left:.6rem;padding:.15rem .6rem;border-radius:.3rem;background:var(--marker);color:var(--ink);font-size:.82rem}
-.ab-teil{max-width:none;container-type:inline-size}
-#main.breit .ab-teil{max-width:64rem}
-.ab-teil > .auftrag:first-child,.ab-teil > .band:first-child{margin-top:.3rem}
-.ab-fuss{margin-top:auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem .8rem}
-.ab-fuss::before{content:"";flex:0 0 100%;border-top:1px solid var(--line);margin-top:.9rem}
-.ab-fuss > span:empty{display:none}
-.ab-fuss > :last-child{margin-left:auto}
-.ab-tabs{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:center}
-.ab-tabs button{min-height:44px;padding:.3rem .8rem;border-radius:999px;border:1px solid #8B857A;background:var(--surface2);color:var(--ink);font:inherit;font-size:.85rem;font-weight:700}
-.ab-tabs button[aria-current]{background:var(--ink);border-color:var(--ink);color:var(--surface2)}
-.ab-zu{max-width:36rem;margin:2.2rem auto 1rem;text-align:center;display:grid;gap:.9rem;justify-items:center}
-.ab-zu-t{font-family:var(--display);font-weight:600;font-size:1.5rem;line-height:1.25}
-.ab-zu .loesch-frage{text-align:left}
-.ab-zwei{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:1.6rem;align-items:start}
-.ab-zwei.gleich{grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin:1rem 0}
-.ab-zwei h3{font-family:var(--body);font-size:.95rem;margin-bottom:.3rem}
-.ab-zwei ul{padding-left:1.2rem;display:grid;gap:.3rem}
-.ab-zentral{font-size:.9rem;font-weight:700;color:var(--red);margin-top:.6rem}
-.ab-unter{color:var(--muted);margin:0 0 .5rem}
-.ka-aufgabe{border-left:4px solid var(--ink);padding:.1rem 0 .1rem .9rem;margin:0 0 1rem;max-width:46rem;font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.35}
-.gliederung{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin:.3rem 0 .9rem}
-.haken{display:flex;align-items:center;gap:.6rem;min-height:44px;margin:.6rem 0;font-weight:400}
-.haken input{width:1.4rem;height:1.4rem;flex:0 0 auto}
-.ka-inhalt{display:grid;gap:.35rem;margin:.7rem 0}
-#schreibblatt{display:none}
-@media (max-width:899px){
-  .ab-rahmen{display:block}
-  .ab-reg{position:static;height:auto;border-right:0;border-bottom:1px solid #A39270;padding:.45rem .6rem;overflow-x:auto}
-  .ab-regtitel{display:none}
-  .ab-reg ol{display:flex;gap:.2rem}
-  .ab-reg li{flex:0 0 auto}
-  .ab-reg small,.ab-reg button:not([aria-current]) b,.ab-reg button:not([aria-current]) .ab-st{display:none}
-  .ab-reg button{padding:.2rem .3rem}
-  #main{margin:.6rem .6rem 1rem;padding:1rem 1rem .9rem}
-  .ab-zwei,.ab-zwei.gleich,.gliederung{grid-template-columns:1fr}
-}
-@media (min-width:900px){
-  .ab-rahmen.schmal{--ab-reg:3.9rem}
-  .ab-rahmen.schmal .ab-regtitel,.ab-rahmen.schmal .ab-reg ol button > span:last-child{display:none}
-  .ab-rahmen.schmal .ab-reg{padding:.8rem .35rem}
-  .ab-rahmen.schmal .ab-reg ol button{justify-content:center;padding:.28rem 0}
-  #main.dashboard .ab-zeile,#main.dashboard .ab-meta{display:none}
-  #main.dashboard .ab-h{font-size:1.35rem;margin-bottom:.5rem}
-  #main.dashboard .dash-fuss{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:.2rem 1rem;align-items:center;margin-top:.45rem}
-  #main.dashboard .fortschritt{padding:.4rem .8rem;font-size:.9rem}
-  .ab-rahmen:not(.schmal) ~ .urheberzeile{display:none}
-}
-.ab-c{font-size:.7rem;line-height:1.3;color:#463F33;margin-top:.3rem}
-.ab-reg .loesch{margin-top:.5rem;padding-top:.45rem;border-top:1px solid #A39270;font-size:.82rem;color:#463F33;display:flex;flex-wrap:wrap;gap:.2rem .7rem;align-items:center}
-.ab-reg .loesch-frage{flex:1 0 100%}
-.ab-reg .loesch .btn{min-height:44px;padding:.35rem .8rem;font-size:.85rem}
-.ab-reg .lehr-tuer{margin-left:0}
-#main:focus{outline:none}
-@media print{
-  .ab-reg,.ab-zeile,.ab-h,.ab-meta,.ab-fuss{display:none!important}
-  .ab-rahmen{display:block}
-  #main{margin:0;padding:0;border:0;min-height:0;display:block;background:#fff}
-  .ab-teil{max-width:none}
-  body.druck-sb .ab-teil > *:not(#schreibblatt){display:none!important}
-  body.druck-sb #schreibblatt{display:block}
-  #schreibblatt h2{font-size:14pt;margin:0 0 .3rem}
-  #schreibblatt .ka-aufgabe{font-size:11.5pt;margin:.4rem 0 .6rem}
-  #schreibblatt .linien{height:8mm;border-bottom:1px solid #999}
-  #schreibblatt .gl3{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm}
-}
 /* ===== Fassung 4.1 (16.11.2026): ein Auftrag = eine Seite zum Scrollen; die Fläche neben dem Register wird genutzt ===== */
 .ab-teil .lead{max-width:60rem}
 .ab-teil > .auftrag:first-child{margin-top:.2rem}
@@ -579,18 +489,18 @@ svg.linien .zieh{animation:zieh var(--reveal) var(--ease) both}
 .ab-teil .mensch .foto .leer{padding:1rem}
 .ab-teil .mensch .mt{padding:1rem 1.1rem 1.2rem;gap:.3rem}
 .ab-teil .mensch h3{font-size:1.3rem}
-.ab-teil .mensch .ort{font-size:.95rem}
+.ab-teil .mensch .ort{font-size:1rem}
 .ab-teil .mensch p{font-size:1rem;line-height:1.5}
-.ab-teil .mensch .q{font-size:.8rem}
+.ab-teil .mensch .q{font-size:1rem}
 .ab-teil .phasen{grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
 /* Auswahl links, Karte rechts (Auftrag 2 und 3) */
 .fc{display:grid;grid-template-columns:minmax(15rem,1fr) minmax(0,2.1fr);gap:1.6rem;align-items:start;margin-top:1.1rem}
 .fc-wahl{display:grid;gap:.7rem}
 .fc-wahl > button{display:grid;gap:.25rem;text-align:left;width:100%;padding:1rem 1.2rem;border:1.5px solid #8B857A;border-left-width:6px;border-radius:var(--r-lg);background:var(--surface);color:var(--ink);font:inherit;min-height:6rem;align-content:center}
 .fc-wahl > button[aria-pressed=true]{border-color:var(--ink);border-left-color:var(--red);background:var(--surface2)}
-.fc-nr{font-size:.88rem;font-weight:700;color:var(--red)}
+.fc-nr{font-size:1rem;font-weight:700;color:var(--red)}
 .fc-wahl .floskel{font-size:1.3rem}
-.fc-st{font-size:.88rem;font-weight:700;color:var(--muted)}
+.fc-st{font-size:1rem;font-weight:700;color:var(--muted)}
 .fc-wahl > button.um .fc-st{color:var(--green)}
 .fc-karte .dreh{margin-top:0}
 .fc-karte .dreh .seite{min-height:26rem;padding:1.7rem 2.1rem}
@@ -600,7 +510,7 @@ svg.linien .zieh{animation:zieh var(--reveal) var(--ease) both}
 .fc-karte .optionen{grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin-top:1.2rem}
 .fc-karte .optionen button{min-height:64px;font-size:1.08rem}
 .fc-karte .hinten p{font-size:1.12rem;max-width:64ch}
-.fc-karte .hinten .quelle{font-size:.88rem}
+.fc-karte .hinten .quelle{font-size:1rem}
 .fc-weiter{margin-top:.9rem;display:flex;justify-content:flex-end}
 /* Auftrag 3: Józefów */
 .jz .fc-wahl > button{min-height:58px;padding:.65rem 1rem;grid-template-columns:auto minmax(0,1fr);column-gap:.8rem;align-items:baseline}
@@ -608,7 +518,7 @@ svg.linien .zieh{animation:zieh var(--reveal) var(--ease) both}
 .jz .fc-wahl > button.hier{border-left-color:var(--green)}
 .jz .fc-st{grid-column:1/-1;color:var(--green)}
 .jz-werk{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.7rem}
-.jz-werk .btn{font-size:.92rem;padding:.4rem .75rem;min-height:44px}
+.jz-werk .btn{font-size:1rem;padding:.4rem .75rem;min-height:44px}
 .jz-karte{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.7rem 2rem 1.3rem;display:flex;flex-direction:column;gap:.8rem;min-height:29rem;font-size:1.12rem}
 .jz-karte:focus{outline:none}
 .jz-karte h3{font-size:2.1rem}
@@ -637,7 +547,7 @@ svg.linien .zieh{animation:zieh var(--reveal) var(--ease) both}
 .lk-wahl .prinzipien{grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin-top:0}
 .lk-wahl .prinzipien button{padding:.8rem 1rem;display:grid;align-content:start}
 .lk-wahl .prinzipien button b{font-size:1.08rem}
-.lk-wahl .prinzipien button small{font-size:.9rem;margin-top:.15rem}
+.lk-wahl .prinzipien button small{font-size:1rem;margin-top:.15rem}
 .lk-oeffnen{display:grid;gap:.6rem;align-content:center}
 .lk-oeffnen .btn{width:100%;justify-content:center;text-align:center;min-height:64px}
 #lk-teil2{margin-top:1.4rem}
@@ -646,7 +556,7 @@ svg.linien .zieh{animation:zieh var(--reveal) var(--ease) both}
 #modell .fak > div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 7rem;gap:.8rem;align-items:center}
 /* Auftrag 4: die Übersicht füllt die Breite, die Erklärungen werden größer */
 #main.dashboard .buehne{height:auto;aspect-ratio:16/9;min-height:0}
-@media (min-width:821px){   /* die sechs Erklärungen breiter und größer; der Rand der Bühne wird genutzt */
+@media (min-width:1150px){   /* die sechs Erklärungen breiter und größer; der Rand der Bühne wird genutzt */
   #main.dashboard .spalte{width:25.5%;top:2.5%;bottom:2.5%;gap:2%}
   #main.dashboard .spalte.l{left:1%}
   #main.dashboard .spalte.r{right:1%}
@@ -683,6 +593,362 @@ svg.linien .zieh{animation:zieh var(--reveal) var(--ease) both}
   .fc-karte .optionen{grid-template-columns:1fr}
   .fc-karte .dreh .seite,.jz-karte{min-height:0;padding:1.2rem 1.2rem}
 }
+
+/* AB-STIL:ANFANG */
+/* ===== Arbeitsblatt Geschichte · gemeinsame Schicht · Quelle: src/arbeitsblatt/ab.css – nur dort ändern =====
+   Eingesetzt mit tools/ab_einsetzen.py. Grundlage: docs/neufassung/DESIGN.md.
+   Bildwelt: der Hefter (Blatt, Reiter, Register, Rand, Linie). Zwei Tinten: Schreibschwarz und die Farbe der Einheit. */
+:root{
+  --grund:#F3EFE7; --blatt:#FDFBF6; --karton:#E9E2D7; --tinte:#24221F; --leise:#5A564F; --linie:#D5CEC3; --stahl:#857E73; --schreiblinie:#B9B2A6;
+  --ok:#2E5A47; --ok-hi:#D6E4DC; --achtung:#6E4F0A; --achtung-hi:#EEE2BF; --hell:#FFFAF2;
+  --platte:#A9BDD1; --tief:#2C4763; --hauch:#DFE7EF; --reg:#D4D6D5; --zwei:#2C4763;
+  --titel:"Fraunces",Georgia,"Times New Roman",serif; --text:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --a4:52.5rem; --zeile:2rem; --ab-reg:17rem; --ab-kopf:3.75rem; --kurve:cubic-bezier(.23,1,.32,1);
+  /* Die alten Namen der Seiten zeigen auf die neuen Rollen. So trägt jede Seite die Farbwelt ihrer Einheit. */
+  --bg:var(--grund); --surface:var(--blatt); --surface2:#FFFEFB; --offset:var(--karton); --line:var(--linie); --border:var(--stahl);
+  --ink:var(--tinte); --muted:var(--leise); --faint:var(--leise); --inverse:var(--hell); --dunkel:var(--tinte);
+  --red:var(--tief); --red-hi:var(--hauch); --kuli:var(--tief); --kuli-hi:var(--hauch); --marker:var(--platte);
+  --green:var(--ok); --green-hi:var(--ok-hi); --gold:var(--achtung); --gold-hi:var(--achtung-hi);
+  --display:var(--titel); --body:var(--text); --r:.3rem; --r-lg:.3rem; --ease:var(--kurve);
+}
+:root[data-einheit="weimar"]{--platte:#E3B94E;--tief:#6F4A00;--hauch:#F6EBC9;--reg:#E4D5A9;--zwei:#6F4A00}
+:root[data-einheit="ns"]{--platte:#A9BDD1;--tief:#2C4763;--hauch:#DFE7EF;--reg:#D4D6D5;--zwei:#2C4763}
+:root[data-einheit="ost-west"]{--platte:#A9C2F0;--tief:#173F86;--hauch:#DEE8F8;--reg:#D2DCE9;--zwei:#8A3A28}
+:root[data-ansicht="beamer"]{--grund:#FFFFFF;--blatt:#FFFFFF;--surface2:#FFFFFF;--karton:#E6E1D8;--tinte:#000000;--leise:#33302B;--linie:#B9B1A4;--stahl:#5C564D;--schreiblinie:#8E877B}
+
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:var(--grund);color:var(--tinte);font-variant-numeric:tabular-nums}
+a{color:var(--tief)}
+:focus-visible{outline:3px solid var(--tinte);outline-offset:2px;border-radius:.2rem}
+[hidden]{display:none!important}
+
+/* ---------- Knöpfe ---------- */
+.btn{min-height:48px;border:2px solid var(--tinte);border-radius:.3rem;padding:.4rem 1.1rem;background:var(--blatt);font-weight:700;color:var(--tinte);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.45rem;line-height:1.2;transition:transform 100ms var(--kurve)}
+.btn:hover{background:var(--karton)}
+.btn:active{transform:translate(2px,2px)}
+.btn.primary{background:var(--tinte);color:var(--hell);border-color:var(--tinte);box-shadow:4px 4px 0 0 var(--platte)}
+.btn.primary:hover{background:#000}
+.btn.primary:active{box-shadow:2px 2px 0 0 var(--platte)}
+.btn.dunkel{background:var(--tief);color:#fff;border-color:var(--tief)}
+.btn.dunkel:hover{background:var(--tinte);border-color:var(--tinte)}
+.btn.klein{min-height:44px;padding:.25rem .8rem;font-size:1rem}
+.btn[disabled],.btn[disabled]:hover{opacity:1;border-style:dashed;border-color:var(--stahl);color:var(--leise);background:transparent;box-shadow:none;cursor:not-allowed;transform:none}
+
+/* ---------- Felder: Linien zum Schreiben ---------- */
+textarea{display:block;width:100%;border:0;border-left:3px solid var(--platte);border-bottom:2px solid var(--stahl);border-radius:0;padding:0 .5rem;margin-top:.35rem;font-size:1.0625rem;line-height:var(--zeile);min-height:calc(var(--zeile) * 2);color:var(--tinte);resize:vertical;background-color:transparent;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--zeile) - 2px),var(--schreiblinie) calc(var(--zeile) - 2px),var(--schreiblinie) var(--zeile));background-attachment:local}
+input[type=text]{width:100%;min-height:2.75rem;border:0;border-left:3px solid var(--platte);border-bottom:2px solid var(--stahl);border-radius:0;padding:.2rem .5rem;background:transparent;margin-top:.35rem;color:var(--tinte)}
+select{min-height:44px;border:2px solid var(--stahl);border-radius:.3rem;background:var(--blatt);padding:0 .4rem;color:var(--tinte)}
+input[type=range]{accent-color:var(--tief)}
+input[type=checkbox]{accent-color:var(--tinte)}
+label{font-weight:700}
+
+/* ---------- Kopfzeile mit Reiter ---------- */
+.kopf{position:sticky;top:0;z-index:20;background:var(--grund);border-bottom:2px solid var(--tinte);padding-top:env(safe-area-inset-top,0px)}
+.kopf-in{max-width:none;margin:0;min-height:3.5rem;padding:.35rem max(16px,env(safe-area-inset-right,0px)) .35rem max(16px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:.9rem;flex-wrap:nowrap}
+.weg{display:none}
+.reiter{flex:none;display:inline-grid;place-items:center;min-width:3.4rem;padding:.2rem .6rem;background:var(--platte);color:var(--tinte);font:600 1.25rem/1.2 var(--titel);border-radius:.45rem .45rem 0 0;box-shadow:inset 0 -3px 0 0 var(--tinte)}
+.titel{min-width:0;flex:1;margin:0;font-weight:700;font-size:1.06rem;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.titel small{display:block;font-size:1rem;font-weight:400;line-height:1.3;color:var(--leise);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kopf .btn{flex:none;min-height:44px;padding:.3rem .9rem}
+
+/* ---------- Rahmen: Register links, Blatt rechts ---------- */
+.ab-rahmen{display:grid;grid-template-columns:var(--ab-reg) minmax(0,1fr);align-items:start}
+.ab-reg{position:sticky;top:var(--ab-kopf);height:calc(100vh - var(--ab-kopf));height:calc(100dvh - var(--ab-kopf));overflow-y:auto;padding:.7rem .55rem 1rem max(.6rem,env(safe-area-inset-left,0px));border-right:2px solid var(--tinte);color:var(--tinte);background-color:var(--reg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='k'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .17  0 0 0 0 .15  0 0 0 0 .12  0 0 0 .42 -.13'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23k)'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='720' height='360'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .55' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .20  0 0 0 0 .18  0 0 0 0 .15  0 0 0 .38 -.12'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");background-size:360px 360px,720px 360px;display:flex;flex-direction:column;gap:.4rem}
+.ab-regtitel{font-size:1rem;font-weight:700;color:#3D382F;margin:0 .35rem}
+.ab-reg ol{list-style:none;display:grid;gap:1px;margin:0;padding:0}
+.ab-reg ol button{display:grid;grid-template-columns:2.4rem minmax(0,1fr);gap:.55rem;align-items:center;width:100%;text-align:left;border:2px solid transparent;background:none;border-radius:.3rem;padding:.2rem .4rem;min-height:54px;color:inherit;line-height:1.25;font:inherit}
+.ab-nr{flex:0 0 auto;display:inline-grid;place-items:center;width:2.4rem;height:2.4rem;border-radius:50%;border:0;background:var(--blatt);box-shadow:inset 0 0 0 2px var(--tinte);font:600 1.15rem/1 var(--titel);color:var(--tinte)}
+.ab-reg b{display:block;font-size:1.02rem;line-height:1.25}
+.ab-st{display:block;font-size:1rem;font-weight:400;color:#3D382F;line-height:1.3}
+.ab-reg .fertig .ab-nr{background:var(--ok);color:var(--hell);box-shadow:none}
+.ab-reg .fertig .ab-st{color:#1F4433;font-weight:700}
+.ab-reg .ansage .ab-nr,.ab-reg .antwort .ab-nr{background:transparent;box-shadow:none;border:2px dashed #5C3F00}
+.ab-reg .antwort .ab-nr{border-color:var(--stahl)}
+.ab-reg .ansage .ab-st{color:#5C3F00;font-weight:700}
+.ab-reg ol button[aria-current]{background:var(--blatt);border-color:var(--tinte);box-shadow:4px 4px 0 0 var(--platte)}
+.ab-reg ol button[aria-current] .ab-nr{background:var(--tinte);color:var(--hell);box-shadow:none;border:0}
+.ab-reg ol button[aria-current] .ab-st{color:var(--tief);font-weight:700}
+@media (hover:hover) and (pointer:fine){.ab-reg ol button:hover{border-color:var(--stahl)}}
+.ab-reg .eckig .ab-nr{border-radius:.35rem}
+
+/* Werkzeuge: Stand sichern und laden, Ansicht */
+.ab-werk{margin-top:auto;padding-top:.5rem;border-top:2px solid rgba(36,34,31,.45);font-size:1rem}
+.ab-werk summary{min-height:44px;display:flex;align-items:center;gap:.4rem;font-weight:700;cursor:pointer;padding:0 .35rem;list-style:none}
+.ab-werk summary::-webkit-details-marker{display:none}
+.ab-werk summary::before{content:"＋";font-weight:700}
+.ab-werk[open] summary::before{content:"－"}
+.ab-werk__in{display:grid;gap:.45rem;padding:.3rem 0 .2rem}
+.ab-werk .btn{width:100%;min-height:44px;padding:.3rem .7rem;font-size:1rem;justify-content:flex-start;text-align:left}
+.ab-werk .haken{margin:0;padding:0 .35rem}
+.ab-werk .loesch-frage{padding:.7rem .8rem;border:2px solid var(--tinte);background:var(--blatt);box-shadow:4px 4px 0 0 var(--platte)}
+.ab-werk .loesch-frage .btn{width:auto}
+.ab-c{font-size:1rem;line-height:1.35;color:#3D382F;margin:.2rem .35rem 0}
+#main > .ab-werk{margin-top:1.4rem;border-top:2px solid var(--tinte)}
+#main > .ab-werk .ab-werk__in{grid-template-columns:repeat(auto-fit,minmax(14rem,1fr))}
+#main > .ab-werk .ab-c,#main > .ab-werk .loesch-frage{grid-column:1/-1}
+
+/* ---------- Das Blatt ---------- */
+#main{width:calc(100% - 2.4rem);max-width:var(--a4);margin:1.2rem auto 2.4rem;padding:1.2rem clamp(1.1rem,3vw,2.4rem) 1.4rem clamp(1.1rem,6vw,4.6rem);background:var(--blatt);border:1px solid var(--linie);border-radius:0;box-shadow:6px 6px 0 0 var(--karton);min-height:calc(100vh - var(--ab-kopf) - 3.6rem);min-height:calc(100dvh - var(--ab-kopf) - 3.6rem);display:flex;flex-direction:column}
+#main.breit{max-width:62rem;padding-left:clamp(1.1rem,3vw,2.4rem)}
+#main.weit,#main.dashboard{max-width:none;padding-left:clamp(1.1rem,3vw,2.2rem)}
+#main.dashboard{padding:1rem 1.1rem 1rem}
+#main:focus{outline:none}
+:root[data-ansicht="beamer"] #main{box-shadow:0 0 0 2px var(--linie)}
+.ab-zeile{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.15rem 1rem;font-size:1rem;line-height:1.35;color:var(--leise);border-bottom:2px solid var(--tinte);padding-bottom:.35rem;margin-bottom:1.1rem}
+.ab-zeile b{color:var(--tinte)}
+.ab-h{position:relative;display:flex;align-items:center;gap:.7rem;font-size:clamp(1.45rem,1.2rem + .8vw,1.8rem);margin:0 0 .2rem}
+.ab-h .ab-nr{width:2.7rem;height:2.7rem;font-size:1.35rem;background:var(--tinte);color:var(--hell);box-shadow:none}
+.ab-h.eckig .ab-nr{border-radius:.4rem;background:var(--platte);color:var(--tinte);box-shadow:inset 0 0 0 2px var(--tinte)}
+.ab-meta{margin:0 0 .8rem 3.4rem;font-size:1rem;font-weight:700;color:var(--tief)}
+.ab-marke{margin-left:.6rem;padding:.12rem .55rem;border-radius:.3rem;background:var(--platte);color:var(--tinte);font-size:1rem}
+@media (min-width:900px){   /* A4-Blätter: Die Nummer steht im Heftrand */
+  #main:not(.weit):not(.dashboard):not(.breit) .ab-h .ab-nr{position:absolute;left:-3.55rem;top:-.15rem}
+  #main:not(.weit):not(.dashboard):not(.breit) .ab-meta{margin-left:0}
+}
+.ab-teil{max-width:none;container-type:inline-size}
+.ab-teil > .auftrag:first-child,.ab-teil > .band:first-child{margin-top:.3rem}
+.ab-fuss{margin-top:auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem .8rem}
+.ab-fuss::before{content:"";flex:0 0 100%;border-top:1px solid var(--linie);margin-top:1.1rem}
+.ab-fuss > span:empty{display:none}
+.ab-fuss > :last-child{margin-left:auto}
+.ab-zu{max-width:36rem;margin:2rem auto 1rem;padding:1.4rem 1.2rem 1.5rem;border:2px dashed var(--stahl);border-radius:.3rem;text-align:center;display:grid;gap:.9rem;justify-items:center}
+.ab-zu-t{font-family:var(--titel);font-weight:600;font-size:1.5rem;line-height:1.25}
+.ab-zu .loesch-frage{text-align:left}
+.loesch-frage{border:2px solid var(--tinte);background:var(--blatt);box-shadow:4px 4px 0 0 var(--platte);border-radius:.3rem;padding:.8rem 1rem}
+.ab-zwei{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:1.6rem;align-items:start}
+.ab-zwei.gleich{grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin:1rem 0}
+.ab-zwei h3{font-family:var(--text);font-size:1.02rem;margin-bottom:.3rem}
+.ab-zwei ul{padding-left:1.2rem;display:grid;gap:.3rem}
+.ab-unter{color:var(--leise);margin:0 0 .6rem}
+
+/* Kästen: Auftrag (dunkel) · Material (Karton, Linie in der Farbe der Einheit) · Hinweis */
+.auftrag{background:var(--tinte);color:var(--hell);border-radius:.3rem;padding:.9rem 1.1rem;margin:1.2rem 0 1rem}
+.auftrag .form{color:var(--platte);font-size:1rem;font-weight:700}
+.auftrag p{color:#EDE7DC}
+blockquote{background:var(--karton);border-left:4px solid var(--tief);border-radius:0}
+.quelle,.hinweis{font-size:1rem;line-height:1.4;color:var(--leise)}
+.quelle a{color:var(--leise)}
+#main a:not(.btn){display:inline-block;padding:.7rem 0;margin:-.7rem 0}   /* Links im Text: Zielfläche 44 px, ohne die Zeile zu verschieben */
+
+/* ---------- Deckblatt ---------- */
+.ab-deck{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.2rem 2rem;align-items:start}
+.ab-deck__kopf{display:grid;gap:.7rem;justify-items:start}
+.ab-deck .reiter{font-size:1.5rem;padding:.25rem .8rem}
+.ab-deck h1{font-size:clamp(1.8rem,1.4rem + 1.5vw,2.5rem);line-height:1.1;margin:0}
+.ab-zentral{font-size:1rem;font-weight:700;color:var(--leise);margin:0}
+.ab-deck .leitfrage{font:italic 600 clamp(1.3rem,1.1rem + .9vw,1.7rem)/1.25 var(--titel);color:var(--tief);margin:0;max-width:30ch}
+.ab-platz{font-size:1rem;line-height:1.4;margin:0;padding:.45rem .7rem;background:var(--hauch);border-left:4px solid var(--tief)}
+.ab-titelbild{margin:0}
+.ab-titelbild img,.ab-titelbild svg{display:block;width:100%;height:auto;border:2px solid var(--tinte);background:var(--hauch)}
+.ab-titelbild figcaption{font-size:1rem;line-height:1.4;color:var(--leise);margin-top:.4rem}
+.ab-deck__unten{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.2rem 2rem;align-items:start}
+.ab-deck__unten h2{font-size:1.25rem;margin:0 0 .4rem}
+.ab-ablauf{width:100%;border-collapse:collapse;font-size:1rem}
+.ab-ablauf td{padding:.24rem .3rem;border-bottom:1px solid var(--linie);vertical-align:top;line-height:1.35}
+.ab-ablauf td:first-child{width:2.2rem;font:600 1.05rem/1.3 var(--titel)}
+.ab-ablauf td:last-child{text-align:right;white-space:nowrap}
+.ab-ablauf .form{display:block;color:var(--leise)}
+.ab-ablauf tr:last-child td{border-bottom:0;font-weight:700;border-top:2px solid var(--tinte)}
+
+/* ---------- Schreibauftrag und Extra ---------- */
+.ka-aufgabe{background:var(--blatt);border:2px solid var(--tinte);border-radius:.3rem;box-shadow:5px 5px 0 0 var(--platte);padding:.8rem 1rem;margin:0 0 1.2rem;font-family:var(--titel);font-weight:600;font-size:1.12rem;line-height:1.35}
+.gliederung{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin:.3rem 0 .9rem}
+.haken{display:flex;align-items:center;gap:.6rem;min-height:44px;margin:.6rem 0;font-weight:400}
+.haken input{width:1.5rem;height:1.5rem;flex:0 0 auto}
+#schreibblatt{display:none}
+.ab-frei{display:inline-block;padding:.12rem .55rem;border:2px dashed var(--tief);border-radius:.3rem;color:var(--tief);font-weight:700;font-size:1rem}
+.ab-schritte{list-style:none;margin:0;padding:0;display:grid;gap:1.1rem;counter-reset:schritt}
+.ab-schritte > li{counter-increment:schritt;display:grid;gap:.2rem}
+.ab-schritte > li > label{font-weight:400}
+.ab-schritte > li > label::before{content:counter(schritt) " · ";font-weight:700}
+
+/* ---------- Hefter (Startdatei) ---------- */
+.hefter{max-width:76rem;margin:0 auto;padding:1.6rem max(16px,env(safe-area-inset-right,0px)) 3.5rem max(16px,env(safe-area-inset-left,0px));display:grid;gap:1.8rem}
+.hefter > section{min-width:0}
+.hefter__kopf{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:1.2rem 2.4rem;align-items:start}
+.hefter__kopf > div{display:grid;gap:.7rem;justify-items:start}
+.hefter h1{font-size:clamp(2rem,1.5rem + 2vw,2.9rem);line-height:1.08;margin:0}
+.hefter h2{font-size:1.5rem;border-top:2px solid var(--tinte);padding-top:1rem;margin:0 0 .7rem}
+.hefter p{max-width:68ch}
+.hefter .leitfrage{font:italic 600 clamp(1.25rem,1.1rem + .8vw,1.6rem)/1.25 var(--titel);color:var(--tief);margin:0}
+.blaetter{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(19rem,1fr));gap:.8rem}
+.blaetter li{margin:0;min-width:0}
+.blaetter .bl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.2rem .8rem;align-items:start;height:100%;padding:.6rem .8rem .75rem;background:var(--blatt);border:1px solid var(--linie);border-top:3px solid var(--tinte);color:var(--tinte);text-decoration:none}
+.blaetter a.bl:hover{background:var(--hauch)}
+.blaetter .bl[data-hier]{border:2px solid var(--tinte);border-top-width:3px;box-shadow:5px 5px 0 0 var(--platte)}
+.blaetter .reiter{font-size:1.05rem;min-width:3rem;grid-row:1 / span 3}
+.blaetter b{display:block;line-height:1.3}
+.blaetter small{display:block;font-size:1rem;line-height:1.35;color:var(--leise)}
+.blaetter .stand{font-weight:700;color:var(--tinte)}
+.blaetter .stand.fertig{color:#1F4433}
+.blaetter .bl.fehlt{border-style:dashed;border-color:var(--stahl);border-top:3px dashed var(--stahl);background:transparent;color:var(--leise)}
+.spur{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
+.spur li{display:grid;grid-template-columns:4rem minmax(0,1fr);gap:.8rem;padding:.5rem .7rem;background:var(--hauch);border-left:4px solid var(--tief);margin:0}
+.spur b{font-family:var(--titel);font-weight:600}
+.hefter .reihe{display:flex;flex-wrap:wrap;gap:.6rem .8rem;align-items:center;margin:0}
+
+/* ---------- Fenster für den Stand als Datei oder Text ---------- */
+.ab-fenster{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:rgba(36,34,31,.55)}
+.ab-fenster__blatt{width:min(40rem,100%);max-height:90vh;overflow:auto;background:var(--blatt);border:2px solid var(--tinte);box-shadow:8px 8px 0 0 var(--platte);padding:1.2rem 1.3rem 1.3rem;display:grid;gap:.8rem}
+.ab-fenster h2{font-size:1.4rem;margin:0}
+.ab-fenster p{margin:0}
+.ab-fenster textarea{min-height:7rem;margin:0;font:400 1rem/1.4 ui-monospace,Menlo,Consolas,monospace;border:2px solid var(--stahl);padding:.4rem;background:var(--hell);background-image:none}
+.ab-fenster .reihe{display:flex;flex-wrap:wrap;gap:.6rem .8rem;align-items:center;margin:0}
+.ab-fenster .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* ---------- Schmal: iPad hoch und Telefon ---------- */
+@media (max-width:899px){
+  .ab-rahmen{display:block}
+  .ab-reg{position:static;height:auto;border-right:0;border-bottom:2px solid var(--tinte);padding:.45rem max(16px,env(safe-area-inset-right,0px)) .45rem max(16px,env(safe-area-inset-left,0px));overflow:visible;display:block}
+  .ab-regtitel{display:none}
+  .ab-reg ol{display:flex;gap:.3rem;overflow-x:auto;padding-bottom:.3rem}
+  .ab-reg li{flex:0 0 auto}
+  .ab-reg ol button{grid-template-columns:2.4rem;min-height:48px;padding:.2rem}
+  .ab-reg ol button > span:last-child{display:none}
+  .ab-reg ol button[aria-current]{grid-template-columns:2.4rem auto;padding-right:.6rem}
+  .ab-reg ol button[aria-current] > span:last-child{display:block}
+  .ab-reg ol button[aria-current] .ab-st{display:none}
+  #main{width:calc(100% - 32px);margin:.8rem auto 1.4rem;padding:1rem 1rem 1rem;box-shadow:4px 4px 0 0 var(--karton)}
+  .ab-meta{margin-left:0}
+  .ab-zwei,.ab-zwei.gleich,.gliederung,.ab-deck,.ab-deck__unten,.hefter__kopf{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:30rem){.titel small{display:none}}
+@media (min-width:900px){
+  .ab-rahmen.schmal{--ab-reg:4.1rem}
+  .ab-rahmen.schmal .ab-regtitel,.ab-rahmen.schmal .ab-reg ol button > span:last-child,.ab-rahmen.schmal .ab-reg .ab-werk{display:none}
+  .ab-rahmen.schmal .ab-reg{padding:.7rem .4rem}
+  .ab-rahmen.schmal .ab-reg ol button{grid-template-columns:2.4rem;justify-content:center;padding:.2rem 0;min-height:50px}
+}
+
+/* ---------- Druck: jedes Blatt DIN A4, links der Heftrand ---------- */
+@page{size:A4;margin:14mm 14mm 14mm 22mm}
+@media print{
+  html{font-size:11pt}
+  body{background:#fff}
+  .kopf,.ab-reg,.ab-fuss,.ab-werk,.ab-fenster,.nodruck,.urheberzeile{display:none!important}
+  .ab-rahmen{display:block}
+  #main{width:auto;max-width:none;margin:0;padding:0;border:0;box-shadow:none;min-height:0;display:block;background:#fff}
+  .ab-zeile{display:flex!important;font-size:9.5pt;margin-bottom:4mm;padding-bottom:1.5mm;border-bottom:1pt solid #000}
+  .ab-h .ab-nr{position:static!important;width:9mm;height:9mm;font-size:13pt;background:#fff!important;color:#000!important;border:1.5pt solid #000;box-shadow:none!important}
+  .ab-meta{margin-left:0}
+  .ab-teil{max-width:none}
+  .btn{display:none!important}
+  .auftrag{background:#fff;color:#000;border:1.5pt solid #000}
+  .auftrag p,.auftrag .form,.auftrag h3{color:#000}
+  .ab-platz,.reiter,blockquote,.ka-aufgabe{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .ka-aufgabe{box-shadow:none}
+  .ab-deck{gap:.7rem 1.4rem}
+  .ab-deck h1{font-size:20pt}
+  .ab-deck .leitfrage{font-size:13pt}
+  .ab-ablauf td{padding:.1rem .3rem}
+  .ab-ablauf .form{display:inline}
+  .ab-ablauf .form::before{content:" · "}
+  textarea{border-left:2pt solid #999;border-bottom:1pt solid #666;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  a{color:inherit;text-decoration:none}
+  body.druck-sb .ab-teil > *:not(#schreibblatt),body.druck-sb .ab-h,body.druck-sb .ab-meta{display:none!important}
+  body.druck-sb #schreibblatt{display:block}
+  #schreibblatt h2{font-size:14pt;margin:0 0 .3rem}
+  #schreibblatt .ka-aufgabe{font-size:11.5pt;margin:.4rem 0 .6rem}
+  #schreibblatt .linien{height:8.6mm;border-bottom:.8pt solid #555}
+  #schreibblatt .gl3{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm}
+}
+/* ===== Ende der gemeinsamen Schicht ===== */
+/* AB-STIL:ENDE */
+/* ===== Fassung 5.0 (18.11.2026): Arbeitsblatt Geschichte · Farbwelt Archiv · nichts unter 16 px ===== */
+/* Fünf Ebenen (Modell der Lehrkraft): eigene Kennfarben, immer mit Wort. Rot entfällt; »Weltbild« trägt Pflaume. */
+:root{--e-person:#1E4FB5;--e-person-hi:#DCE5F7;--e-situation:var(--ok);--e-weltbild:#6A3B6E;--e-weltbild-hi:#EADFEB;--e-apparat:var(--slate);--e-vorteil:var(--achtung);--fast:150ms;--uebergang:300ms}
+.e-person,.ebenen .eb-person{color:var(--e-person);background:var(--e-person-hi)}
+.e-weltbild,.ebenen .eb-weltbild{color:var(--e-weltbild);background:var(--e-weltbild-hi)}
+.b-person b{background:var(--e-person)}
+.b-weltbild b{background:var(--e-weltbild)}
+/* Rückmeldung in drei Stufen: Wort und Linie (durchgezogen · gestrichelt · gepunktet), kein Rot */
+.optionen button{border-width:2px}
+.optionen button.teils,.prinzipien button.teils{border-style:dashed}
+.optionen button.kaum,.prinzipien button.kaum{border-style:dotted;border-color:var(--stahl)}
+.rm.teils{border-left-style:dashed}
+.rm.nicht{background:var(--karton);border-left:4px dotted var(--tinte)}
+.streit{border:2px solid var(--tinte);background:var(--hauch)}
+.umschalter [role=tab],.stufen{border-radius:.3rem}
+.umschalter [role=tab]{border:2px solid var(--tinte)}
+.stempel{width:5.6rem;height:5.6rem;border-color:var(--tief);color:var(--tief)}
+.band .taeter{background:var(--tinte)}
+.band figcaption{font-size:1rem}
+.merksatz{border-color:var(--tinte)}
+.karte{border-color:var(--linie)}
+h1{font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem)}
+.zeit{color:var(--tief)}
+.urheberzeile{font-size:1rem;color:var(--leise);margin:0 1.2rem 1.2rem}
+.ab-rahmen:not(.schmal) ~ .urheberzeile{display:none}
+@media (max-width:899px){.ab-rahmen:not(.schmal) ~ .urheberzeile{display:none}}
+/* Auftrag 4 · Übersicht: Die Karten tragen Name, Kennung und Frage in 16 px. Das Rad zeigt nur die Namen der Ebenen; ihre Erklärung steht darunter. */
+#main.dashboard .ab-zeile,#main.dashboard .ab-meta{display:none}
+#main.dashboard .ab-h{font-size:1.35rem;margin-bottom:.5rem}
+#main.dashboard .dash-fuss{margin-top:.6rem;display:grid;gap:.5rem}
+.fortschritt{font-size:1rem}
+.ring-text{font-size:1rem;text-transform:none;letter-spacing:0;color:var(--leise)}
+.akte{font-size:1rem;border-width:2px;border-color:var(--stahl);border-radius:.3rem}
+.akte .j,.akte .fr,.akte .fs span,.akte .fs .emp{font-size:1em}
+.akte .fs .emp{border-style:dashed;border-color:var(--achtung);color:var(--achtung);font-weight:700}
+.akte.empfohlen{border-style:dashed;border-color:var(--achtung)}
+.ebfeld{font-size:1.06rem}
+.ebfeld .marke{font-size:1rem}
+.ebfeld small{font-size:1rem}
+.frage-kern span{font-size:1rem}
+.rad-satz{font-size:1rem}
+.ansicht{font-size:1rem}
+.zeitachse .jahr,.zeitachse .dekade,.zeitachse-fuss{font-size:1rem}
+.ebenen-legende{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.5rem;margin:0;padding:0}
+.ebenen-legende li{padding:.4rem .6rem;border-left:5px solid var(--eb);background:var(--blatt);font-size:1rem;line-height:1.35}
+.ebenen-legende b{display:block}
+.ebenen-legende [data-ebene=person]{--eb:var(--e-person)}
+.ebenen-legende [data-ebene=situation]{--eb:var(--e-situation)}
+.ebenen-legende [data-ebene=weltbild]{--eb:var(--e-weltbild)}
+.ebenen-legende [data-ebene=apparat]{--eb:var(--e-apparat)}
+.ebenen-legende [data-ebene=vorteil]{--eb:var(--e-vorteil)}
+.modellhinweis{font-size:1rem;color:var(--leise);margin:0}
+@media (min-width:1150px){
+  #main.dashboard .spalte{width:26%}
+  #main.dashboard .spalte .akte{font-size:1rem;grid-template-columns:3.3rem minmax(0,1fr);gap:.05rem .7rem;padding:.5rem .75rem;align-content:center}
+  #main.dashboard .spalte .akte .pf{grid-row:1/3;width:3.3rem;height:3.3rem;font-size:1.2rem;border-radius:.3rem}
+  #main.dashboard .spalte .akte b{font-size:1.28rem;align-self:end}
+  #main.dashboard .spalte .akte .j{align-self:start}
+  #main.dashboard .spalte .akte .fr{font-size:1rem;line-height:1.3;margin-top:.3rem}
+  #main.dashboard .spalte .akte .fs{margin-top:.3rem}
+  #main.dashboard .spalte .akte .fs span{font-size:1rem;padding:0 .4rem}
+  .ebfeld small{display:none}
+  .ebfeld{width:13%}
+  .frage-kern{font-size:1rem;width:16.5%;height:29.3%;padding:.4rem}
+  .frage-kern b{font-size:1.45rem}
+  .frage-kern span{margin-top:.3rem;line-height:1.2}
+  .rad-satz{left:28%;right:28%;top:auto;bottom:1.2%;min-height:0}
+}
+@media (max-width:1149px){
+  #main.dashboard .buehne{aspect-ratio:auto;overflow:visible}
+  .ebfeld,.zeitachse .akte{font-size:1rem}
+  .ebenen-legende{display:none}
+}
+@media (min-width:821px) and (max-width:1149px){   /* zwischen Hochformat und Rad: die sechs Karten in zwei Spalten */
+  .buehne .dash{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
+  .buehne .dash > .ring-text,.buehne .dash > .frage-kern,.buehne .dash > .ebfelder,.buehne .dash > .rad-satz,.buehne .dash > .ansicht{grid-column:1/-1}
+  .buehne .dash > .spalte.l{grid-column:1;grid-row:3}
+  .buehne .dash > .spalte.r{grid-column:2;grid-row:3}
+  .ebfelder{grid-template-columns:repeat(5,minmax(0,1fr))}
+}
+.panel .portraet{width:8.5rem}
+.portraet figcaption{overflow-wrap:anywhere;hyphens:auto}
+#main summary{min-height:44px}
+/* Zusammenfassung: Das Rad ist so groß, dass seine Beschriftung 16 px erreicht (im Druck rund 9 pt) */
+.zf .schau{grid-template-columns:minmax(0,19rem) minmax(0,1fr)}
+/* Deckblatt, Extra, Am Beamer */
+.ab-deck .ab-titelbild img{aspect-ratio:5/4;object-fit:cover;object-position:center 40%}
+.ab-deck .belastend,.ab-deck .merksatz{grid-column:1/-1;margin:0}
+.ab-deck ul{padding-left:1.2rem;display:grid;gap:.25rem}
+.eingabe fieldset{border:2px solid var(--stahl);border-radius:.3rem}
+@media print{
+  .ab-deck .ab-titelbild img{aspect-ratio:16/10}
+  .zf .ab-druckfeld{--zeile:1.7rem}
+  .zf .schau{grid-template-columns:58mm minmax(0,1fr)}
+}
 </style>
 </head>
 <body>
@@ -693,18 +959,160 @@ svg.linien .zieh{animation:zieh var(--reveal) var(--ease) both}
 <script type="application/json" id="lehr-daten">{"v":2,"alg":"AES-GCM-256/PBKDF2-SHA256","iter":600000,"salt":"S2AE0Ck1PuvFDIipEmJzCg==","iv":"A2MztNGIjW08Od2S","ct":"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"}</script>
 <script>
 "use strict";
+/* AB-KERN:ANFANG */
+/* ===== Arbeitsblatt Geschichte · die Hefter · Quelle: src/arbeitsblatt/hefter.js – nur dort ändern =====
+   Je Einheit: Name, Startdatei, Muster der Speicherschlüssel und die Blätter in der Reihenfolge des Hefts.
+   Titel wie auf der Startseite (tools/bau_startseite.py). Weimar und Ost-West kommen mit der Übertragung dazu. */
+window.GGK_HEFTER = {
+  ns: {
+    name: "Nationalsozialismus", start: "hefter-nationalsozialismus.html",
+    frage: "Was macht den Menschen zum Menschen?", frageOrt: "Mit dieser Frage beginnt die Einheit in M16.",
+    schluessel: "^(ggk-m(1[6-9]|2[0-7])[-:]|ggklabor:|ggk-hefter-ns:)",
+    blaetter: [
+      { nr: "M16", titel: "Was macht den Menschen zum Menschen?", kurz: "Was macht den Menschen zum Menschen?", datei: "m16-was-macht-den-menschen.html" },
+      { nr: "M17", titel: "Mein Leben in der NS-Diktatur I – Ausgrenzung 1933 bis 1939 aus zwei Blickwinkeln", kurz: "Leben in der NS-Diktatur", datei: "m17-leben-in-der-diktatur.html" },
+      { nr: "M18", titel: "Die fünf Säulen der NS-Ideologie", kurz: "Die fünf Säulen der NS-Ideologie", datei: "ns-ideologie.html" },
+      { nr: "M19", titel: "Appeasement-Politik – der Weg zum Frieden oder in den Zweiten Weltkrieg?", kurz: "Appeasement-Politik", datei: "appeasement.html" },
+      { nr: "M20", titel: "Der Verlauf des Zweiten Weltkriegs. Der Krieg und seine Dilemmata.", kurz: "Der Krieg und seine Dilemmata", datei: "m20-dilemmata.html" },
+      { nr: "M21", titel: "Es geht um Menschen – Shoa oder Holocaust?", kurz: "Es geht um Menschen", datei: "m21-es-geht-um-menschen.html" },
+      { nr: "M22", titel: "„Große Verbrechen brauchen keine Monster!“ – Wie war das möglich?", kurz: "Wie war das möglich?", datei: "m22-wie-war-das-moeglich.html" },
+      { nr: "M23", titel: "Die Gesellschaft, in der ich leb(t)e? – Die Shoa im Ländervergleich", kurz: "Die Shoa im Ländervergleich", datei: "m23-die-gesellschaft.html" },
+      { nr: "M25", titel: "Kriegsende 1945: Leben in Ruinen und der Umgang mit Schuld", kurz: "Kriegsende 1945", datei: "m25-leben-in-ruinen.html" },
+      { nr: "M26", titel: "Ende gut, alles gut? Kontinuitäten des Nationalsozialismus in der Bundesrepublik", kurz: "Kontinuitäten in der Bundesrepublik", datei: "m26-kontinuitaeten.html" },
+      { nr: "M27", titel: "Die Vergessenen! Eine Globalgeschichte des Zweiten Weltkriegs", kurz: "Die Vergessenen", datei: "m27-die-vergessenen.html" }
+    ]
+  }
+};
+/* ===== Arbeitsblatt Geschichte · gemeinsamer Kern · Quelle: src/arbeitsblatt/ab.js – nur dort ändern =====
+   Platz im Hefter · Stand an den Hefter melden · Stand als Datei sichern und laden (Text als Rückfall) · Ansicht für den Beamer.
+   Alles bleibt im Browser oder in der Datei: keine Anmeldung, kein Server, keine Namen. */
+(function () {
+  "use strict";
+  const doc = document, root = doc.documentElement;
+  const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const H = window.GGK_HEFTER || {};
+  const einheit = () => root.getAttribute("data-einheit") || "";
+  const E = () => H[einheit()] || null;
+  const lies = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+  const schreib = (k, v) => { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } };
+  const standKey = () => "ggk-hefter-" + einheit() + ":v1";
+
+  /* Platz im Hefter: »Blatt 7 von 11«, davor und danach */
+  function platz(nr) {
+    const e = E(); if (!e) return null;
+    const i = e.blaetter.findIndex(b => b.nr === nr); if (i < 0) return null;
+    return { i: i + 1, n: e.blaetter.length, blatt: e.blaetter[i], davor: e.blaetter[i - 1] || null, danach: e.blaetter[i + 1] || null, name: e.name, start: e.start };
+  }
+  /* Jedes Blatt meldet dem Hefter nur: wie viele Aufträge fertig sind und – wenn vorhanden – den eigenen Satz zum Schluss. */
+  function stand() { try { return JSON.parse(lies(standKey()) || "{}") || {}; } catch (e) { return {}; } }
+  function melde(nr, d) {
+    if (!E()) return; const s = stand(), alt = JSON.stringify(s[nr] || null);
+    const neu = { fertig: d.fertig | 0, von: d.von | 0, satz: String(d.satz || "").slice(0, 400) };
+    if (JSON.stringify(Object.assign({}, s[nr], neu)) === alt) return;
+    s[nr] = Object.assign(neu, { zeit: new Date().toISOString().slice(0, 10) }); s._zuletzt = nr; schreib(standKey(), JSON.stringify(s));
+  }
+
+  /* ---------- Stand als Datei ---------- */
+  function paket() {
+    const e = E(), re = new RegExp(e.schluessel), daten = {};
+    try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (re.test(k)) daten[k] = localStorage.getItem(k); } } catch (x) {}
+    return JSON.stringify({ art: "ggk-hefter", einheit: einheit(), name: e.name, version: 1, datum: new Date().toISOString(), daten: daten });
+  }
+  const dateiname = () => "Hefter-" + E().name.replace(/[^A-Za-zÄÖÜäöüß]+/g, "-") + "_" + new Date().toISOString().slice(0, 10) + ".json";
+  let VON = null;
+  function fenster(html) {
+    let f = doc.getElementById("ab-fenster");
+    if (!f) { f = doc.createElement("div"); f.id = "ab-fenster"; f.className = "ab-fenster nodruck"; doc.body.appendChild(f); }
+    if (f.hidden !== false || !f.innerHTML) VON = doc.activeElement;
+    f.innerHTML = '<div class="ab-fenster__blatt" role="dialog" aria-modal="true" aria-labelledby="ab-fenster-t">' + html + "</div>"; f.hidden = false;
+    const k = f.querySelector("[data-fokus]") || f.querySelector("button,textarea,input"); if (k) k.focus();
+  }
+  function fensterZu() { const f = doc.getElementById("ab-fenster"); if (f) { f.hidden = true; f.innerHTML = ""; } if (VON && doc.contains(VON)) VON.focus(); VON = null; }
+  function sichern() {
+    if (!E()) return;
+    const text = paket(), name = dateiname(); let weg = true;
+    try { const a = doc.createElement("a"); a.href = URL.createObjectURL(new Blob([text], { type: "application/json" })); a.download = name; doc.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
+    catch (e) { weg = false; }
+    fenster('<h2 id="ab-fenster-t">' + (weg ? "Stand gesichert" : "Stand als Text") + "</h2><p>" +
+      (weg ? "Die Datei <b>" + esc(name) + "</b> liegt jetzt bei deinen Downloads. Leg sie in deinen Ordner für Geschichte. Auf einem anderen Gerät lädst du sie mit „Stand aus Datei laden“."
+           : "Hier lässt sich gerade keine Datei sichern. Kopiere den Text und sichere ihn in einer Notiz.") + "</p>" +
+      '<p class="hinweis">Keine Datei angekommen? Dann kopiere den Text. Er enthält dasselbe.</p>' +
+      '<textarea readonly id="ab-standtext" aria-label="Stand als Text">' + esc(text) + "</textarea>" +
+      '<div class="reihe"><button type="button" class="btn" data-ab="kopieren">Text kopieren</button><button type="button" class="btn primary" data-ab="zu" data-fokus>Fertig</button><span class="hinweis" id="ab-kopiert" role="status"></span></div>');
+  }
+  function laden() {
+    if (!E()) return;
+    fenster('<h2 id="ab-fenster-t">Stand laden</h2><p>Wähle die Datei, die du gesichert hast. Sie heißt „Hefter-' + esc(E().name) + '_…“. Was in der Datei steht, ersetzt den Stand dieser Blätter auf diesem Gerät.</p>' +
+      '<div class="reihe"><label class="btn" data-fokus tabindex="0">Datei wählen<input type="file" accept="application/json,.json,text/plain" class="sr" id="ab-dateiwahl"></label></div>' +
+      '<label for="ab-ladetext">… oder den gesicherten Text hier einfügen</label><textarea id="ab-ladetext"></textarea>' +
+      '<p class="hinweis" id="ab-lademeld" role="status" aria-live="polite"></p>' +
+      '<div class="reihe"><button type="button" class="btn primary" data-ab="text-laden">Text laden</button><button type="button" class="btn" data-ab="zu">Abbrechen</button></div>');
+  }
+  function uebernehmen(text) {
+    const m = doc.getElementById("ab-lademeld"), e = E();
+    try {
+      const j = JSON.parse(text);
+      if (!j || j.art !== "ggk-hefter" || !j.daten || typeof j.daten !== "object") throw 0;
+      if (j.einheit !== einheit()) { if (m) m.textContent = "Diese Datei gehört zum Hefter „" + (j.name || j.einheit) + "“. Hier ist der Hefter „" + e.name + "“."; return false; }
+      const re = new RegExp(e.schluessel); let n = 0;
+      Object.keys(j.daten).forEach(k => { if (re.test(k) && typeof j.daten[k] === "string" && schreib(k, j.daten[k])) n++; });
+      if (!n) throw 0;
+      location.reload(); return true;
+    } catch (x) { if (m) m.textContent = "Das passt nicht. Wähle die Datei, die mit „Hefter-“ beginnt und auf „.json“ endet."; return false; }
+  }
+
+  /* ---------- Ansicht für den Beamer (gilt für alle Blätter auf diesem Gerät) ---------- */
+  const beamer = () => root.getAttribute("data-ansicht") === "beamer";
+  function setzeBeamer(an) { if (an) root.setAttribute("data-ansicht", "beamer"); else root.removeAttribute("data-ansicht"); schreib("ggk-ansicht", an ? "beamer" : ""); }
+  if (lies("ggk-ansicht") === "beamer") root.setAttribute("data-ansicht", "beamer");
+
+  /* ---------- Werkzeuge: überall dieselben Knöpfe an derselben Stelle ---------- */
+  let WERK_AUF = false;
+  function werkzeuge(mitte, lizenz) {
+    return '<details class="ab-werk nodruck"' + (WERK_AUF ? " open" : "") + '><summary>Sichern · Laden · Ansicht</summary><div class="ab-werk__in">' +
+      '<button type="button" class="btn" data-ab="sichern">Stand als Datei sichern</button>' +
+      '<button type="button" class="btn" data-ab="laden">Stand aus Datei laden</button>' + (mitte || "") +
+      '<label class="haken"><input type="checkbox" data-ab="beamer"' + (beamer() ? " checked" : "") + "> Ansicht für den Beamer</label>" +
+      (lizenz ? '<p class="ab-c">' + esc(lizenz) + "</p>" : "") + "</div></details>";
+  }
+  doc.addEventListener("toggle", ev => { const t = ev.target; if (t && t.classList && t.classList.contains("ab-werk")) WERK_AUF = t.open; }, true);
+  doc.addEventListener("click", ev => {
+    const t = ev.target.closest && ev.target.closest("[data-ab]"); if (!t) return;
+    const a = t.getAttribute("data-ab");
+    if (a === "sichern") sichern();
+    else if (a === "laden") laden();
+    else if (a === "zu") fensterZu();
+    else if (a === "kopieren") { const ta = doc.getElementById("ab-standtext"), s = doc.getElementById("ab-kopiert"); ta.select(); let ok = false; try { ok = doc.execCommand("copy"); } catch (e) {} if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ta.value).then(() => { s.textContent = "Kopiert."; }, () => { s.textContent = ok ? "Kopiert." : "Markiere den Text und kopiere ihn von Hand."; }); else s.textContent = ok ? "Kopiert." : "Markiere den Text und kopiere ihn von Hand."; }
+    else if (a === "text-laden") uebernehmen((doc.getElementById("ab-ladetext") || {}).value || "");
+  });
+  doc.addEventListener("change", ev => {
+    const t = ev.target; if (!t) return;
+    if (t.getAttribute && t.getAttribute("data-ab") === "beamer") { setzeBeamer(t.checked); doc.dispatchEvent(new Event("ab:ansicht")); return; }
+    if (t.id === "ab-dateiwahl" && t.files && t.files[0]) { const r = new FileReader(); r.onload = () => uebernehmen(String(r.result || "")); r.onerror = () => uebernehmen(""); r.readAsText(t.files[0]); }
+  });
+  doc.addEventListener("keydown", ev => {
+    const f = doc.getElementById("ab-fenster"); if (!f || f.hidden) return;
+    if (ev.key === "Escape") { fensterZu(); return; }
+    if ((ev.key === "Enter" || ev.key === " ") && ev.target.matches && ev.target.matches("label.btn")) { ev.preventDefault(); const i = ev.target.querySelector("input"); if (i) i.click(); }
+  });
+
+  window.GGKBlatt = { platz, stand, melde, sichern, laden, werkzeuge, beamer, einheit: E, esc };
+})();
+/* ===== Ende des gemeinsamen Kerns ===== */
+/* AB-KERN:ENDE */
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const KEY = "ggk-m22-taeter:v3"; // v3 seit 08.11.2026: Dashboard (ansicht, filter, gelesen) und Landkarten-Moment (lk, lkauf); alte Stände aus v2 werden übernommen
 const lade = () => { try { return JSON.parse(localStorage.getItem(KEY)) || JSON.parse(localStorage.getItem("ggk-m22-taeter:v2")) || {}; } catch(e) { return {}; } };
-let S = Object.assign({ seite:"start", x:{text:"", zu:false, zeit:""}, neu:"", af:{}, afo:{}, z:{}, zum:{}, y:null, ai:0, hier:-1, akte:"", stufe:{}, karte:{}, gew:{}, gewok:{}, treffer:0, versuche:0, paare:{}, notiz:{}, modell:{person:1,situation:1,weltbild:1,apparat:1,vorteil:1}, grund:"", pos:50, klasse:[], beamer:false, moder:0, erz:"", abruf:{}, ansicht:"frage", filter:null, gelesen:{}, lk:{vermutung:"", prinzip:null, grund:"", ok:false}, lkauf:"", fz:0, frei:{}, teil:{}, durch:{}, gl:["","",""], hand:false, krit:false }, lade());
+let S = Object.assign({ seite:"start", x:{text:"", zu:false, zeit:""}, neu:"", af:{}, afo:{}, z:{}, zum:{}, y:null, ai:0, hier:-1, akte:"", stufe:{}, karte:{}, gew:{}, gewok:{}, treffer:0, versuche:0, paare:{}, notiz:{}, modell:{person:1,situation:1,weltbild:1,apparat:1,vorteil:1}, grund:"", pos:50, klasse:[], beamer:false, moder:0, erz:"", abruf:{}, ansicht:"frage", filter:null, gelesen:{}, lk:{vermutung:"", prinzip:null, grund:"", ok:false}, lkauf:"", fz:0, frei:{}, teil:{}, durch:{}, gl:["","",""], hand:false, krit:false, ex:{} }, lade());
 if (!S.lk) S.lk = {vermutung:"", prinzip:null, grund:"", ok:false}; if (!S.gelesen) S.gelesen = {}; if (!S.ansicht) S.ansicht = "frage"; if (S.lkauf === undefined) S.lkauf = "";
-if (!S.frei) S.frei = {}; if (!S.teil) S.teil = {}; if (!S.durch) S.durch = {}; if (!Array.isArray(S.gl)) S.gl = ["","",""];
+if (!S.frei) S.frei = {}; if (!S.teil) S.teil = {}; if (!S.durch) S.durch = {}; if (!Array.isArray(S.gl)) S.gl = ["","",""]; if (!S.ex) S.ex = {};
 let REGT = null;
-const speichere = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} clearTimeout(REGT); REGT = setTimeout(() => { if (typeof register === "function") register(); }, 200); };
+const melde = () => { try { const zaehlt = AUF.filter(a => !a.extra); GGKBlatt.melde("M22", { fertig: zaehlt.filter(a => erledigt(a.id)).length, von: zaehlt.length, satz: (S.neu || "").trim() }); } catch(e) {} };
+const speichere = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} clearTimeout(REGT); REGT = setTimeout(() => { melde(); if (typeof register === "function") register(); }, 200); };
 const ruhig = () => { try { return matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e) { return false; } };
 const neu = (el, k) => { if (!el) return; el.classList.remove(k); void el.offsetWidth; if (!ruhig()) el.classList.add(k); };
-const LABOR = /github\.io$/.test(location.hostname) ? "index.html" : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
-const MARK = `<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="5" y="4" width="24" height="26" rx="3" fill="none" stroke="#24221F" stroke-width="2.4"/><rect x="9" y="10" width="16" height="3" rx="1.5" fill="#9B402D"/><rect x="9" y="16" width="12" height="3" rx="1.5" fill="#24221F"/><rect x="9" y="22" width="14" height="3" rx="1.5" fill="#24221F"/></svg>`;
+const HEFTER = "hefter-nationalsozialismus.html";   // Startdatei des Hefters; im Moodle-Paket heißt sie index.html
+const PLATZ = GGKBlatt.platz("M22");                // Blatt 7 von 11, davor M21, danach M23
 
 /* ---------- Bilder: nur im Moodle-Paket (media/). Fehlt eine Datei, verschwindet die Abbildung ohne Lücke. ---------- */
 const BILDER = {
@@ -913,7 +1321,7 @@ function auftrag(form, titel, text){ return `<div class="auftrag"><span class="f
 const balken = (k, v) => `<div class="balken b-${k}"><b style="--w:${(v+1)/5}"></b></div>`;
 
 function kopf(){
-  document.getElementById("kopf").innerHTML = `${MARK}<div class="titel">M22 · „Große Verbrechen brauchen keine Monster!“<small>Arbeitsblatt · davor M21 · danach M23</small></div><a class="pill" href="${LABOR}">← GGK-Labor</a>`;
+  document.getElementById("kopf").innerHTML = `<span class="reiter">M22</span><div class="titel">„Große Verbrechen brauchen keine Monster!“<small>Hefter ${esc(PLATZ.name)} · Arbeitsblatt ${PLATZ.i} von ${PLATZ.n}</small></div><a class="btn" href="${HEFTER}">← Hefter</a>`;
   document.documentElement.style.setProperty("--ab-kopf", document.querySelector(".kopf").offsetHeight + "px");
   register(true);
 }
@@ -922,16 +1330,17 @@ function kopf(){
    Zehn Arbeitsaufträge, links als Register. Freigabe: offen · auf Ansage (Knopf mit Rückfrage) · nach deiner Antwort.
    Lange Aufträge sind in Seiten geteilt (4a, 4b …): Die Seitenfunktionen setzen dazu Marken <!--teil:Name-->. */
 const AUF = [
-  { id:"einstieg", nr:"1", kurz:"Es geht um Menschen", name:"Es geht um Menschen", form:"Plenum, dann allein", min:8, frei:"offen" },
-  { id:"fakten", nr:"2", kurz:"Faktencheck", name:"Drei Sätze im Faktencheck", form:"Alle", min:7, frei:"offen" },
-  { id:"jozefow", nr:"3", kurz:"Der Fall Józefów", name:"Der Fall Józefów, 13. Juli 1942", form:"Plenum", min:9, frei:"ansage", gleich:"Ein Fall für alle. Am 13. Juli 1942 kamen etwa 500 Hamburger Polizisten in ein Dorf im besetzten Polen." },
-  { id:"akte", nr:"4", kurz:"Zwei Erklärungen", name:"Zwei Erklärungen untersuchen", form:"Allein oder zu zweit", min:20, frei:"ansage", gleich:"Sechs Versuche der Forschung, das zu erklären. Du untersuchst mindestens zwei." },
-  { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Woher kommen die Unterschiede?", form:"Allein", min:6, frei:"antwort", nach:"akte", fehlt:"Schreib erst zwei Erklärungskarten in Auftrag 4." },
-  { id:"markt", nr:"5", kurz:"Marktplatz", name:"Marktplatz und Tischmodell", form:"Tischgruppe", min:10, frei:"ansage", gleich:"Du erklärst deine Erklärung an einem Stand und besuchst andere. Zuletzt baut eure Tischgruppe ein Modell." },
-  { id:"diskussion", nr:"6", kurz:"Diskussion", name:"Diskussion", form:"Plenum · iPad zu", min:7, frei:"ansage", gleich:"Die Klasse diskutiert, geführt am Beamer: Welche Erklärungen ergänzen sich, welche widersprechen sich?" },
+  { weit:true, id:"einstieg", nr:"1", kurz:"Es geht um Menschen", name:"Es geht um Menschen", form:"Plenum, dann allein", min:8, frei:"offen" },
+  { weit:true, id:"fakten", nr:"2", kurz:"Faktencheck", name:"Drei Sätze im Faktencheck", form:"Alle", min:7, frei:"offen" },
+  { weit:true, id:"jozefow", nr:"3", kurz:"Der Fall Józefów", name:"Der Fall Józefów, 13. Juli 1942", form:"Plenum", min:9, frei:"ansage", gleich:"Ein Fall für alle. Am 13. Juli 1942 kamen etwa 500 Hamburger Polizisten in ein Dorf im besetzten Polen." },
+  { weit:true, id:"akte", nr:"4", kurz:"Zwei Erklärungen", name:"Zwei Erklärungen untersuchen", form:"Allein oder zu zweit", min:20, frei:"ansage", gleich:"Sechs Versuche der Forschung, das zu erklären. Du untersuchst mindestens zwei." },
+  { weit:true, id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Woher kommen die Unterschiede?", form:"Allein", min:6, frei:"antwort", nach:"akte", fehlt:"Schreib erst zwei Erklärungskarten in Auftrag 4." },
+  { weit:true, id:"markt", nr:"5", kurz:"Marktplatz", name:"Marktplatz und Tischmodell", form:"Tischgruppe", min:10, frei:"ansage", gleich:"Du erklärst deine Erklärung an einem Stand und besuchst andere. Zuletzt baut eure Tischgruppe ein Modell." },
+  { weit:true, id:"diskussion", nr:"6", kurz:"Diskussion", name:"Diskussion", form:"Plenum · iPad zu", min:7, frei:"ansage", gleich:"Die Klasse diskutiert, geführt am Beamer: Welche Erklärungen ergänzen sich, welche widersprechen sich?" },
   { id:"schreiben", nr:"7", kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein", min:15, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:"Du schreibst eine Erklärung – so, wie sie in der Klassenarbeit verlangt wird." },
   { id:"rueckblick", nr:"8", kurz:"Rückblick", name:"Rückblick: Was denkst du jetzt?", form:"Allein, dann Plenum", min:3, frei:"antwort", nach:"schreiben", fehlt:"Schreib erst deinen Text in Auftrag 7." },
   { id:"zusammenfassung", nr:"Z", kurz:"Zusammenfassung", name:"Zusammenfassung", form:"Zum Abheften", min:5, frei:"antwort", nach:"schreiben", fehlt:"Die Zusammenfassung enthält die Erklärungen. Sie öffnet sich nach deinem Text in Auftrag 7." },
+  { id:"extra", nr:"＋", kurz:"Extra · freiwillig", name:"Extra: Ein Gespräch über einen Satz", form:"Freiwillig · außerhalb der 90 Minuten", min:0, frei:"antwort", nach:"schreiben", fehlt:"Das Extra öffnet sich nach deinem Text in Auftrag 7.", extra:true },
 ];
 const AUFI = id => AUF.findIndex(a => a.id === id);
 const SCHMAL = () => S.seite === "akte" && offen("akte");   // die Übersicht braucht die Breite
@@ -939,16 +1348,17 @@ const QUER = () => { try { return matchMedia("(min-width:900px)").matches; } cat
 const woerter = s => (String(s || "").trim().match(/\S+/g) || []).length;
 const schreibFertig = () => !!S.hand || woerter(S.erz) >= 60;
 const ERLEDIGT = { einstieg: () => !!S.x.zu, fakten: () => FLOSKELN.every(f => S.zum[f.id]), jozefow: () => S.y !== null, akte: () => fertigeAkten().length >= 2, landkarte: () => !!S.lk.ok,
-  markt: () => (S.grund || "").trim().length >= 10, schreiben: schreibFertig, rueckblick: () => (S.neu || "").trim().length >= 10 };
+  markt: () => (S.grund || "").trim().length >= 10, schreiben: schreibFertig, rueckblick: () => (S.neu || "").trim().length >= 10, extra: () => (S.ex.u || "").trim().length >= 10 };
 const erledigt = id => !!(ERLEDIGT[id] && ERLEDIGT[id]()) || !!S.durch[id];
 const offen = id => { const a = AUF[AUFI(id)]; return !a || a.frei === "offen" || !!S.frei[id] || (a.frei === "antwort" && !!ERLEDIGT[a.nach]()); };
 function register(immer){
   const r = document.getElementById("reg"), lf = document.getElementById("loesch-frage"); if (!r || (!immer && (r.contains(document.activeElement) || (lf && !lf.hidden && r.contains(lf))))) return;
   const sl = r.scrollLeft, st = r.scrollTop;
-  r.innerHTML = `<p class="ab-regtitel">Dieses Blatt · 90 Minuten</p><ol>${AUF.map(a => { const hier = a.id === S.seite;
-    const [wort, kl] = hier ? ["du bist hier","hier"] : erledigt(a.id) ? ["fertig","fertig"] : offen(a.id) ? ["offen","offen"] : a.frei === "ansage" ? ["öffnet auf Ansage","ansage"] : ["öffnet nach deiner Antwort","antwort"];
-    return `<li><button data-geh="${a.id}" class="${kl}"${hier ? ' aria-current="step"' : ""} aria-label="Auftrag ${a.nr}: ${esc(a.kurz)}, ${esc(a.form)}, ${a.min} Minuten, ${wort}"><span class="ab-nr" aria-hidden="true">${a.nr}</span><span><b>${esc(a.kurz)}</b><small>${esc(a.form)} · ${a.min} Min.</small><span class="ab-st">${wort}</span></span></button></li>`; }).join("")}</ol>`;
-  if (QUER() && !SCHMAL()) r.insertAdjacentHTML("beforeend", loeschBereich() + `<p class="ab-c">${esc((document.querySelector(".urheberzeile") || {}).textContent || "")}</p>`);
+  const zeile = (id, nr, kurz, unter, kl, label) => `<li><button data-geh="${id}" class="${kl}"${id === S.seite ? ' aria-current="step"' : ""} aria-label="${esc(label)}"><span class="ab-nr" aria-hidden="true">${nr}</span><span><b>${esc(kurz)}</b><span class="ab-st">${esc(unter)}</span></span></button></li>`;
+  r.innerHTML = `<p class="ab-regtitel">Dieses Blatt · 90 Minuten</p><ol>${zeile("start", "D", "Deckblatt", S.seite === "start" ? "du bist hier" : "Frage und Ablauf", "eckig", "Deckblatt: Zentrale Frage und Ablauf")}${AUF.map(a => { const hier = a.id === S.seite;
+    const [wort, kl] = hier ? ["du bist hier","hier"] : erledigt(a.id) ? ["✓ fertig","fertig"] : offen(a.id) ? ["offen","offen"] : a.frei === "ansage" ? ["auf Ansage","ansage"] : ["nach deiner Antwort","antwort"];
+    return zeile(a.id, a.nr, a.kurz, (a.extra ? "" : a.min + " Min. · ") + wort, kl + (a.extra ? " eckig" : ""), `${a.extra ? "Extra" : "Auftrag " + a.nr}: ${a.kurz}, ${a.form}${a.extra ? "" : ", " + a.min + " Minuten"}, ${wort}`); }).join("")}</ol>`;
+  if (QUER() && !SCHMAL()) r.insertAdjacentHTML("beforeend", werkzeuge());
   r.scrollLeft = sl; r.scrollTop = st;
 }
 function teileVon(html){   // seit 4.1: ein Auftrag ist eine Seite zum Scrollen; frühere Seitenmarken werden entfernt
@@ -963,31 +1373,36 @@ function zuSeite(a){
   <div id="ab-frage" hidden class="loesch-frage"><p><b>Hat eure Lehrkraft Auftrag ${a.nr} freigegeben?</b></p><div class="reihe"><button class="btn primary" data-frei="${a.id}">Ja, öffnen</button><button class="btn" data-frei="">Nein, noch nicht</button></div></div></div>`;
 }
 const BUCHST = "abcdefg";
-const blattzeile = () => `<div class="ab-zeile"><span>GGK · Nationalsozialismus</span><span>M22 · Arbeitsblatt</span><span>Datum: ${new Date().toLocaleDateString("de-DE")}</span></div>`;
+const blattzeile = () => `<div class="ab-zeile"><span>GGK · ${esc(PLATZ.name)}</span><span><b>M22</b> · Blatt ${PLATZ.i} von ${PLATZ.n} im Hefter</span><span>Datum: ${new Date().toLocaleDateString("de-DE")}</span></div>`;
 function blatt(a){
   const zu = !offen(a.id), teile = zu ? [{ name:"", html: zuSeite(a) }] : teileVon(SEITE_FN[a.id]());
   const n = teile.length, i = Math.max(0, Math.min(n - 1, S.teil[a.id] || 0)), ai = AUFI(a.id); S.teil[a.id] = i;
   const davor = i > 0 ? { t: a.nr + BUCHST[i - 1] + " " + teile[i - 1].name, teil: i - 1 } : ai > 0 ? { t: AUF[ai - 1].nr + " " + AUF[ai - 1].kurz, geh: AUF[ai - 1].id, ende: 1 } : { t: "Deckblatt", geh: "start" };
   const danach = i < n - 1 ? { t: a.nr + BUCHST[i + 1] + " " + teile[i + 1].name, teil: i + 1 } : ai < AUF.length - 1 ? { t: AUF[ai + 1].nr + " " + AUF[ai + 1].kurz, geh: AUF[ai + 1].id } : null;
-  return `<h1 class="ab-h"><span class="ab-nr" aria-hidden="true">${a.nr}</span><span>Arbeitsauftrag ${a.nr}${n > 1 ? BUCHST[i] : ""}: ${esc(a.name)}</span></h1>
-  <p class="ab-meta">${esc(a.form)} · ${a.min} Minuten${a.marke ? `<span class="ab-marke">${esc(a.marke)}</span>` : ""}</p>
+  return `<h1 class="ab-h${a.extra ? " eckig" : ""}"><span class="ab-nr" aria-hidden="true">${a.nr}</span><span>${a.extra ? "" : `Arbeitsauftrag ${a.nr}${n > 1 ? BUCHST[i] : ""}: `}${esc(a.name)}</span></h1>
+  <p class="ab-meta">${esc(a.form)}${a.extra ? "" : ` · ${a.min} Minuten`}${a.marke ? `<span class="ab-marke">${esc(a.marke)}</span>` : ""}</p>
   ${teile.map((x, k) => `<section class="ab-teil"${k === i ? "" : " hidden"}>${x.html}</section>`).join("")}
   <div class="ab-fuss nodruck"><button class="btn" ${davor.geh ? `data-geh="${davor.geh}"${davor.ende ? ' data-ende="1"' : ""}` : `data-teil="${davor.teil}"`}>‹ ${esc(davor.t)}</button>
   ${n > 1 ? `<div class="ab-tabs" role="group" aria-label="Seiten dieses Auftrags">${teile.map((x, k) => `<button data-teil="${k}"${k === i ? ' aria-current="page"' : ""}>${BUCHST[k]} ${esc(x.name)}</button>`).join("")}</div>` : "<span></span>"}
-  ${danach ? `<button class="btn primary" ${danach.geh ? `data-geh="${danach.geh}" data-durch="${a.id}"` : `data-teil="${danach.teil}"`}>${esc(danach.t)} ›</button>` : `<a class="btn" href="${LABOR}">Zum GGK-Labor</a>`}</div>`;
+  ${danach ? `<button class="btn primary" ${danach.geh ? `data-geh="${danach.geh}" data-durch="${a.id}"` : `data-teil="${danach.teil}"`}>${esc(danach.t)} ›</button>` : `<a class="btn" href="${HEFTER}">Zum Hefter</a>`}</div>`;
 }
 
 /* ---------- Seiten ---------- */
 function start(){
-  return `<p class="zeit"><span class="nr">GGK · M22</span><span>Doppelstunde, 90 Minuten</span></p>
-  <h1>„Große Verbrechen brauchen keine Monster!“</h1>
-  <p class="ab-zentral">Zentrale Frage</p><p class="leitfrage">Wie war das möglich? Wer wurde zum Täter, wer zur Täterin?</p>
-  <div class="ab-zwei gleich"><div><h3>Darum geht es</h3><p>In M21 ging es um die Menschen, die ermordet wurden. Heute fragst du nach denen, die die Morde möglich machten. Die Täter waren keine Monster. Das ist das Ergebnis von siebzig Jahren Forschung, und es ist das Beunruhigende daran.</p>
-  <p style="margin-top:.5rem">Du prüfst drei Sätze, untersuchst einen Fall und vergleichst Erklärungen der Forschung. Am Ende schreibst du eine Erklärung – so, wie sie in der Klassenarbeit verlangt wird.</p></div>
-  <div><h3>So arbeitest du mit diesem Blatt</h3><ul><li>Links stehen alle Arbeitsaufträge. Du siehst immer, wo du bist und was noch kommt.</li><li>Jeder Auftrag hat eine eigene Seite. Du scrollst von oben nach unten.</li><li>Manche Aufträge öffnen sich erst nach deiner Antwort, manche auf Ansage deiner Lehrkraft.</li><li>Am Ende steht die Zusammenfassung auf zwei Seiten zum Abheften.</li></ul></div></div>
+  const b = BILDER.wald, da = b && !FEHLT.has("wald"), runden = AUF.filter(a => !a.extra);
+  return `<div class="ab-deck"><div class="ab-deck__kopf"><span class="reiter">M22</span>
+    <h1>„Große Verbrechen brauchen keine Monster!“</h1>
+    <div><p class="ab-zentral">Zentrale Frage</p><p class="leitfrage">Wie war das möglich? Wer wurde zum Täter, wer zur Täterin?</p></div>
+    <p class="ab-platz"><b>Platz im Hefter:</b> Blatt ${PLATZ.i} von ${PLATZ.n}<br>davor: ${PLATZ.davor.nr} ${esc(PLATZ.davor.kurz)}<br>danach: ${PLATZ.danach.nr} ${esc(PLATZ.danach.kurz)}</p>
+    <div class="reihe nodruck" style="margin-top:0"><button class="btn primary" data-geh="einstieg">Arbeitsauftrag 1 beginnen ›</button></div></div>
+  ${da ? `<figure class="ab-titelbild"><img src="${b.datei}" alt="${esc(b.alt)}" width="1000" height="1248" data-bild="wald" onerror="bildFehlt(this)"><figcaption>${esc(b.unter)}. ${esc(b.quelle)}.</figcaption></figure>` : "<span></span>"}
+  <div class="ab-deck__unten"><div><h2>Darum geht es</h2><p>In M21 ging es um die Menschen, die ermordet wurden. Heute fragst du nach denen, die die Morde möglich machten. Die Täter waren keine Monster. Das ist das Ergebnis von siebzig Jahren Forschung, und es ist das Beunruhigende daran.</p>
+    <p>Du prüfst drei Sätze, untersuchst einen Fall und vergleichst Erklärungen der Forschung. Am Ende schreibst du eine Erklärung – so, wie sie in der Klassenarbeit verlangt wird.</p>
+    <h2 style="margin-top:1rem">So arbeitest du mit diesem Blatt</h2><ul><li>Links stehen alle Arbeitsaufträge. Du siehst immer, wo du bist und was noch kommt.</li><li>Jeder Auftrag hat eine eigene Seite. Du scrollst von oben nach unten.</li><li>Manche Aufträge öffnen sich erst nach deiner Antwort, manche auf Ansage deiner Lehrkraft.</li><li>Am Ende sicherst du deinen Stand als Datei. So geht nichts verloren, auch wenn du das Gerät wechselst.</li></ul></div>
+  <div><h2>So läuft dieses Blatt</h2><table class="ab-ablauf"><tbody>${runden.map(a => `<tr><td>${a.nr}</td><td>${esc(a.name)}<span class="form">${esc(a.form)}</span></td><td>${a.min} Min.</td></tr>`).join("")}<tr><td></td><td>zusammen</td><td>${runden.reduce((n, a) => n + a.min, 0)} Min.</td></tr></tbody></table>
+    <p class="hinweis" style="margin-top:.5rem">Dazu ein Extra: freiwillig und außerhalb der 90 Minuten.</p></div></div>
   <div class="belastend"><b>Hinweis:</b> In dieser Stunde geht es um Massenmord. Die Texte beschreiben ihn knapp und ohne Einzelheiten der Gewalt. Es gibt keine Bilder von Gewalt. Wenn dich etwas belastet, sprich mit deiner Lehrkraft.</div>
-  <p class="merksatz">Erklären heißt nicht entschuldigen.</p>
-  <div class="ab-fuss nodruck"><span></span><span></span><button class="btn primary" data-geh="einstieg">Arbeitsauftrag 1 beginnen ›</button></div>`;
+  <p class="merksatz">Erklären heißt nicht entschuldigen.</p></div>`;
 }
 
 function einstieg(){
@@ -1076,11 +1491,10 @@ function karteHTML(a, extra = ""){
   const b = BILDER[a.bild] && !FEHLT.has(a.bild), ok = geprueft(a.s), gesch = karteFertig(a.s), gel = !!S.gelesen[a.s];
   const emp = EMPF() === a.s;
   return `<button class="akte${passtFilter(a) ? "" : " gedimmt"}${emp ? " empfohlen" : ""}" data-akte="${a.s}" aria-pressed="${S.akte === a.s}" style="${extra}" data-vt="akte-${a.s}" aria-label="Erklärung ${a.s}: ${esc(a.name)}${emp ? ", Empfehlung" : ""}">
-    <span class="nr">Erklärung ${a.s}${emp ? ` <span class="emp">Empfehlung</span>` : ""}</span>
     <span class="pf" aria-hidden="true">${b ? `<img src="${BILDER[a.bild].datei}" alt="" data-bild="${a.bild}" onerror="this.parentNode.textContent='${a.s}'">` : a.s}</span>
-    <b>${esc(a.name)}</b><span class="j">${esc(a.jahr)}${ok ? " · " + ebenenNachCheck(a) : ""}</span>
+    <b>${esc(a.name)}</b><span class="j">Erklärung ${a.s} · ${esc(a.jahr)}</span>
     <span class="fr">${esc(a.frage)}</span>
-    <span class="fs" aria-label="Stand"><span class="${gel ? "ok" : ""}">${gel ? "✓ " : ""}gelesen</span><span class="${gesch ? "ok" : ""}">${gesch ? "✓ " : ""}Karte</span><span class="${ok ? "ok" : ""}">${ok ? "✓ " : ""}geprüft</span></span></button>`;
+    <span class="fs" aria-label="Stand">${emp ? `<span class="emp">Empfehlung</span>` : ""}<span class="${gel ? "ok" : ""}">${gel ? "✓ " : ""}gelesen</span><span class="${gesch ? "ok" : ""}">${gesch ? "✓ " : ""}Karte</span><span class="${ok ? "ok" : ""}">${ok ? "✓ " : ""}geprüft</span></span></button>`;
 }
 /* Empfehlung: nach der ersten fertigen Karte eine Akte aus einer anderen Ebene; zeigt auf die Karte statt auf eine neue Seite */
 function EMPF(){
@@ -1114,8 +1528,7 @@ let FRISCH = null; // Akte, deren Linien gerade frisch erscheinen (der eine gro�
 
 function dashFrage(){
   const sel = S.akte && geprueft(S.akte) ? AKTE(S.akte) : null;
-  return `<p class="ring-text">Sechs Erklärungen der Forschung · fünf Ebenen, auf denen sie ansetzen · eine Frage</p>
-  <div class="spalte l">${SPALTE_L.map(s => karteHTML(AKTE(s))).join("")}</div>
+  return `<div class="spalte l">${SPALTE_L.map(s => karteHTML(AKTE(s))).join("")}</div>
   <svg class="rad" viewBox="0 0 1280 720" aria-hidden="true">${EBENEN.map((e, i) => `<path d="${segment(i)}" class="seg e-${e[0]}${S.filter === e[0] ? " aktiv" : ""}${sel && sel.gew[e[0]] >= 2 ? " betont" : ""}" data-ebene="${e[0]}"></path>`).join("")}<circle cx="${CX}" cy="${CY}" r="${RI-4}" class="kern"></circle></svg>
   <svg class="linien" viewBox="0 0 1280 720" aria-hidden="true">${linienSVG()}</svg>
   <div class="frage-kern" role="heading" aria-level="2"><div><b>Wie war das möglich?</b><span>Sechs Antworten, fünf Ebenen</span></div></div>
@@ -1144,7 +1557,7 @@ function akte(){
   <div class="dash-kopf">${zeitKopf("akte")}<div class="umschalter" role="tablist" aria-label="Ansicht der Übersicht">${[["frage","Frage und Ebenen"],["vergleich","Vergleich"],["zeit","Zeitachse"]].map(([k, t]) => `<button role="tab" data-ansicht="${k}" aria-selected="${(S.ansicht || "frage") === k}">${t}</button>`).join("")}</div><span class="hinweis">Tippe auf eine Ansicht; deine Eingaben bleiben.</span><button class="btn klein" type="button" data-film><span aria-hidden="true">▶</span> Film: So geht’s</button></div>
   <div class="buehne${a ? " offen " + (SPALTE_R.includes(a.s) && (S.ansicht || "frage") === "frage" ? "links" : "rechts") : ""}" id="buehne"><div class="dash" id="dash">${(S.ansicht || "frage") === "vergleich" ? dashVergleich() : (S.ansicht || "frage") === "zeit" ? dashZeit() : dashFrage()}</div>
   <aside class="panel" id="panel" role="region" aria-label="Erklärung" ${a ? "" : "hidden"}>${a ? deckel(a, S.stufe[a.s] || 1, S.karte[a.s] || {}) : ""}</aside></div>
-  <div class="dash-fuss"><p class="fortschritt${n >= 2 ? " ok" : ""}" id="fortschritt" aria-live="polite">${n >= 2 ? `✓ ${n} Erklärungskarten. Auftrag L (Landkarte) ist frei.` : `${n} von 2 Erklärungskarten. Mindestens zwei Erklärungen, eine aus einer anderen Ebene; eine Karte zählt, wenn These und Erklärung stehen.`}</p><p class="modellhinweis">Fünf Ebenen und Gewichtungen sind ein Modell der Lehrkraft zum Ordnen der Erklärungen, keine Forschungseinteilung und keine Messwerte.</p></div>
+  <div class="dash-fuss"><p class="fortschritt${n >= 2 ? " ok" : ""}" id="fortschritt" aria-live="polite">${n >= 2 ? `✓ ${n} Erklärungskarten. Auftrag L (Landkarte) ist frei.` : `${n} von 2 Erklärungskarten. Mindestens zwei Erklärungen, eine aus einer anderen Ebene; eine Karte zählt, wenn These und Erklärung stehen.`}</p><ul class="ebenen-legende" aria-label="Die fünf Ebenen">${EBENEN.map(([k, n, u]) => `<li data-ebene="${k}"><b>${n}</b>${esc(u)}</li>`).join("")}</ul><p class="modellhinweis">Sechs Erklärungen der Forschung, fünf Ebenen, auf denen sie ansetzen, eine Frage. Die fünf Ebenen und die Gewichtungen sind ein Modell der Lehrkraft zum Ordnen der Erklärungen, keine Forschungseinteilung und keine Messwerte.</p></div>
   ${weiter("landkarte","Zum Landkarten-Moment", { aus: n < 2, hinweis: n < 2 ? "Erst zwei Erklärungskarten, dann weiter." : "Dein Stand wird nur auf diesem Gerät gespeichert." })}`;
 }
 function deckel(a, st, k){
@@ -1321,9 +1734,7 @@ function rueckblick(){
 /* ---------- Auftrag 7 · Schreibauftrag wie in der Klassenarbeit (Aufgabe C2 der Klassenarbeit Nr. 2, 2025/26; dort »M24«, hier M22) ---------- */
 const KA_AUFGABE = `Hannah Arendt prägte den Begriff der „Banalität des Bösen“, Christopher Browning sprach von „ganz normalen Männern“. <b>Erklären Sie</b> mithilfe der Konzepte aus M22, warum Menschen im Zweiten Weltkrieg zu Täter*innen werden konnten.`;
 const KA_STUFEN = [["Grundlegend","Du nennst Schlagworte wie „Banalität des Bösen“ oder „Gruppendruck“, erklärst sie aber kaum."],["Sicher","Die Grundidee eines Konzepts ist klar. Arendt und Browning gehen noch durcheinander."],["Souverän","Du stellst ein Konzept richtig dar und überträgst es auf das Verhalten der Täter*innen."]];
-const KA_INHALT = [["Arendt, „Banalität des Bösen“:","Eichmann als Beispiel – kein Dämon, sondern ein pflichtbewusster Beamter, der nicht nachdenkt. Gedankenlosigkeit, Routine, Karriere. Täter sehen sich als „Rädchen im Getriebe“."],
-  ["Browning, „Ganz normale Männer“:","Die Reservisten des Polizeibataillons 101 waren durchschnittliche Männer, keine Sadisten. Gruppendruck, Gehorsam, Gewöhnung. Aussteigen war möglich, wurde aber selten genutzt."],
-  ["Beide:","Das Bild vom „Monster“ reicht nicht. Soziale Umstände und Strukturen sind entscheidend. „Ich würde niemals …“ ist deshalb ein gefährlicher Satz."]];
+/* Die erwarteten Inhalte stehen seit Fassung 5.0 nur noch im Text für die Lehrkraft (privat/lk/m22.html). */
 const kaRaster = () => `<div class="raster3">${KA_STUFEN.map(([s, x]) => `<div><b>${s}</b>${esc(x)}</div>`).join("")}</div>`;
 function schreiben(){
   const w = woerter(S.erz), fertig = schreibFertig();
@@ -1343,7 +1754,7 @@ function schreiben(){
   </div></div>
   <div id="krit" ${S.krit && fertig ? "" : "hidden"}><h2 class="abschnitt">Kriterien zum Abgleich</h2>
     <p class="hinweis">Lies deinen Text noch einmal. Wo stehst du? Die Seite vergibt keine Punkte.</p>${kaRaster()}
-    <div class="ka-inhalt"><p><b>Das kann in deinem Text stehen</b> (ein Konzept genügt):</p>${KA_INHALT.map(([a, b]) => `<p><b>${esc(a)}</b> ${esc(b)}</p>`).join("")}</div></div>
+    <p class="hinweis" style="margin-top:.6rem">Ein Konzept genügt. Was genau im Text stehen kann, besprecht ihr im Plenum.</p></div>
   <div id="schreibblatt" aria-hidden="true"><p class="zeit"><span class="nr">M22 · Schreibblatt</span><span>Name: ______________ · Datum: __________</span></p>
     <h2>Schreibauftrag wie in der Klassenarbeit</h2><blockquote class="ka-aufgabe">${KA_AUFGABE}</blockquote>
     <p><b>Erst gliedern.</b> Drei Stichpunkte:</p><div class="gl3"><div class="linien"></div><div class="linien"></div><div class="linien"></div></div>
@@ -1415,6 +1826,23 @@ function zusammenfassung(){
   <p class="quelle">Quellen: Browning 1993; Kitterman 1988; bpb-Lexikon „Befehlsnotstand“; Bajohr 2013; Nationalfonds Österreich (Ertl); Adorno 1950/1966; Arendt 1964; Stangneth 2011; Goldhagen 1996; Milgram 1963; Haslam/Reicher 2012; Bauman 1992; Welzer 2005. Fotos: siehe Bildliste im Moodle-Kurs.</p>
   </div>
   `;
+}
+
+/* ---------- Extra · freiwillig (Vorschlag vom 18.11.2026): hängt an einem Gespräch, am eigenen Rad und an einer Stelle aus diesem Blatt ---------- */
+function extra(){
+  const feld = (k, marke, lab, rows) => `<li><label for="ex-${k}"><b>${marke}</b> ${lab}</label><textarea id="ex-${k}" data-ex="${k}" rows="${rows}">${esc(S.ex[k] || "")}</textarea></li>`;
+  return `<p class="ab-unter"><span class="ab-frei">freiwillig</span> Dieses Extra gehört nicht zu den 90 Minuten und wird nicht benotet. Du brauchst dafür ein Gespräch. Das kann dir kein Programm abnehmen.</p>
+  ${auftrag("Allein · mit einer erwachsenen Person", "Ein Gespräch über einen Satz", "In Auftrag 2 hast du drei Sätze geprüft. Solche Sätze hört man bis heute. Führ ein kurzes Gespräch und halte es hier fest – getippt oder von Hand auf dem ausgedruckten Blatt.")}
+  <p><b>Deine Frage an die Person:</b></p>
+  <blockquote class="ka-aufgabe">„Waren die Täter Monster – oder ganz normale Menschen?“</blockquote>
+  <ol class="ab-schritte">
+  ${feld("a", "Die Antwort.", "Schreib sie in zwei Sätzen auf. Ohne Namen: Schreib nur „eine erwachsene Person“.", 3)}
+  ${feld("e", "Die Ebene.", "Auf welcher Ebene setzt die Antwort an – Person, Situation, Weltbild, Apparat oder Vorteil? Begründe in einem Satz.", 2)}
+  ${feld("b", "Deine Antwort mit Beleg.", "Was würdest du der Person sagen? Stütz dich auf eine Stelle aus diesem Blatt und nenne sie, zum Beispiel „Auftrag 3, Karte 4“ oder „Erklärung C“.", 3)}
+  ${feld("u", "Ein Satz zu dir.", "Was hat das Gespräch an deinem Urteil geändert – oder bestätigt?", 2)}
+  </ol>
+  <p class="hinweis" style="margin-top:1rem">Bring das Blatt mit. Zu Beginn der nächsten Stunde hören wir zwei oder drei Gespräche.</p>
+  <div class="reihe nodruck"><button class="btn" data-drucken>Dieses Blatt drucken oder als PDF sichern</button></div>`;
 }
 
 /* ---------- Für Lehrkräfte: Text verschlüsselt im Datenblock lehr-daten; Schloss aus src/lk-schloss.js (python3 tools/lk_einsetzen.py) ---------- */
@@ -1506,9 +1934,12 @@ document.head.insertAdjacentHTML("beforeend", `<style id="lehr-stil">
 </style>`);
 /* ===== Ende Lehrkraft-Schloss ===== */
 /* LEHR-SCHLOSS:ENDE */
-/* Beamer-Werkzeuge der Lehrkraft: erscheinen erst im geöffneten Bereich. Sie enthalten keine Lösungen. */
-function lehrWerkzeuge(){
-  return `<h2 class="abschnitt">Freigabe</h2>
+/* Am Beamer (seit Fassung 5.0 eine eigene Seite, bisher im Lehrkraftbereich): Freigabe, Moderation, Modelle der Tischgruppen. Keine Lösungen. */
+function beamer(){
+  return `<h1 class="ab-h eckig"><span class="ab-nr" aria-hidden="true">B</span><span>Am Beamer</span></h1>
+  <p class="ab-meta">Für das Gerät der Lehrkraft · ohne Lösungen</p>
+  <p>Diese Seite ist für das Gerät am Beamer gedacht. Sie zeigt Werkzeuge für das Plenum. Erwartungen und Hinweise zur Stunde stehen hier nicht; sie liegen im Paket für die Lehrkraft.</p>
+  <h2 class="abschnitt">Freigabe</h2>
   <p>Für das Gerät am Beamer: alle Aufträge auf einmal öffnen. Auf den iPads tippen die Schüler*innen selbst auf „Unsere Lehrkraft hat freigegeben“, wenn du es ansagst.</p>
   <div class="reihe"><button class="btn" data-allefrei>Alle Aufträge auf diesem Gerät freigeben</button></div>
   <h2 class="abschnitt">Beamer-Werkzeuge</h2>
@@ -1516,7 +1947,8 @@ function lehrWerkzeuge(){
   <h2 class="abschnitt">Modelle der Tischgruppen</h2>
   <p>Trag die Gewichtungen jeder Tischgruppe ein. Gruppen ohne Eintrag erscheinen nicht. Keine Namen, keine Rangfolge.</p>
   <div class="eingabe">${[0,1,2,3,4,5].map(g => { const m = S.klasse[g] || {}; return `<fieldset><legend>Tisch ${g+1}</legend>${EBENEN.map(([k, n]) => `<div class="z"><label for="kl-${g}-${k}" style="font-weight:400">${n}</label><select id="kl-${g}-${k}" data-kl="${g}" data-k="${k}"><option value="">–</option>${STUFE.map((s, i) => `<option value="${i}"${m[k] === i ? " selected" : ""}>${s}</option>`).join("")}</select></div>`).join("")}</fieldset>`; }).join("")}</div>
-  <div class="reihe"><button class="btn dunkel" data-klasse>Am Beamer zeigen</button></div>`;
+  <div class="reihe"><button class="btn dunkel" data-klasse>Am Beamer zeigen</button></div>
+  <div class="ab-fuss nodruck"><button class="btn" data-geh="start">‹ Deckblatt</button><span></span><span></span></div>`;
 }
 
 /* ---------- Beamer: Modelle der Klasse (AD) ---------- */
@@ -1564,21 +1996,25 @@ window.addEventListener("message", e => { if (e.data === "m22-film-zu" && docume
 const schliesse = () => { clearInterval(UHR); document.getElementById("ueber").innerHTML = ""; if (FILM_VON && document.contains(FILM_VON)) FILM_VON.focus({ preventScroll:true }); FILM_VON = null; };
 
 /* ---------- Zeichnen ---------- */
-const SEITE_FN = { start, einstieg, fakten, jozefow, akte, landkarte, markt, diskussion, schreiben, rueckblick, zusammenfassung, lehrkraft };
-function loeschBereich(){
-  return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button>${S.seite === "lehrkraft" ? "" : lehrTuer()}
-  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> Antworten, Siegel, Erklärungskarten, Gewichtungen, Landkarte, Notizen, Modell und Position werden auf diesem Gerät entfernt.</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div></div>`;
+const SEITE_FN = { start, einstieg, fakten, jozefow, akte, landkarte, markt, diskussion, schreiben, rueckblick, zusammenfassung, extra, beamer };
+if (typeof lehrkraft === "function") SEITE_FN.lehrkraft = lehrkraft;   // nur in der Fassung mit Schloss; im Paket für Lernende fehlt der Bereich ganz
+function werkzeuge(){
+  const mitte = `<button class="btn" data-loeschfrage>Eingaben löschen …</button>
+  <div id="loesch-frage" hidden class="loesch-frage"><p><b>Wirklich alles löschen?</b> Antworten, Siegel, Erklärungskarten, Gewichtungen, Landkarte, Notizen, Modell und Position werden auf diesem Gerät entfernt. Brauchst du sie noch? Dann sichere zuerst den Stand als Datei.</p><div class="reihe"><button class="btn primary" data-loeschen="ja">Ja, alles löschen</button><button class="btn" data-loeschen="nein">Abbrechen</button></div></div>
+  <button class="btn" data-geh="beamer">Am Beamer (für die Lehrkraft)</button>${typeof lehrTuer === "function" && S.seite !== "lehrkraft" ? lehrTuer() : ""}`;
+  return GGKBlatt.werkzeuge(mitte, (document.querySelector(".urheberzeile") || {}).textContent || "");
 }
 let LETZTE_SEITE = null;
 function zeichne(fokus){
   if (!SEITE_FN[S.seite]) S.seite = "start";
   document.querySelector(".ab-rahmen").classList.toggle("schmal", SCHMAL());
   kopf();
-  const m = document.getElementById("main");
-  m.classList.toggle("breit", S.seite === "lehrkraft" || S.seite === "zusammenfassung");
-  m.classList.toggle("dashboard", S.seite === "akte");
-  const auf = AUF[AUFI(S.seite)];
-  m.innerHTML = blattzeile() + (auf ? blatt(auf) : SEITE_FN[S.seite]()) + (QUER() && !SCHMAL() ? "" : loeschBereich());
+  const m = document.getElementById("main"), auf = AUF[AUFI(S.seite)], auf_offen = !auf || offen(S.seite);
+  m.classList.toggle("breit", S.seite === "lehrkraft" || (S.seite === "zusammenfassung" && auf_offen));
+  m.classList.toggle("dashboard", S.seite === "akte" && auf_offen);
+  m.classList.toggle("weit", !!(auf && auf.weit) && S.seite !== "akte" && auf_offen);   // Aufträge, deren Material die Breite braucht (Entscheidung vom 16.11.2026)
+  if (S.seite === "zusammenfassung" && auf_offen && !S.durch.zusammenfassung) { S.durch.zusammenfassung = true; speichere(); }
+  m.innerHTML = blattzeile() + (auf ? blatt(auf) : SEITE_FN[S.seite]()) + (QUER() && !SCHMAL() ? "" : werkzeuge());
   m.querySelectorAll("[data-vt]").forEach(b => b.style.viewTransitionName = b.dataset.vt);
   if (LETZTE_SEITE !== S.seite) { const b = document.getElementById("band"); if (b && b.classList.contains("mit")) neu(b, "neu"); }
   LETZTE_SEITE = S.seite;
@@ -1649,6 +2085,7 @@ document.addEventListener("click", ev => {
 });
 document.addEventListener("input", ev => {
   const t = ev.target, d = t.dataset;
+  if (d.ex !== undefined) { S.ex[d.ex] = t.value; speichere(); return; }
   if (d.af !== undefined) { S.af[d.af] = t.value; speichere(); return; }
   if (d.feld === "xtext") { S.x.text = t.value; speichere(); const ok = t.value.trim().length >= 10; document.querySelector("[data-siegeln]").disabled = !ok; document.getElementById("xhinweis").textContent = ok ? "" : "Schreib mindestens einen Satz."; return; }
   if (d.feld === "neu") { S.neu = t.value; speichere(); return; }
@@ -1667,7 +2104,7 @@ document.addEventListener("input", ev => {
 function aktenStand(){
   const n = fertigeAkten().length, f = document.getElementById("fortschritt");
   if (f) { f.classList.toggle("ok", n >= 2); f.textContent = n >= 2 ? `✓ ${n} Erklärungskarten. Auftrag L (Landkarte) ist frei.` : `${n} von 2 Erklärungskarten. Mindestens zwei Erklärungen, eine aus einer anderen Ebene; eine Karte zählt, wenn These und Erklärung stehen.`; }
-  document.querySelectorAll("#dash .akte").forEach(b => { const s = b.dataset.akte, ok = karteFertig(s), sp = b.querySelector(".fs span:nth-child(2)"); if (sp) { sp.classList.toggle("ok", ok); sp.textContent = (ok ? "✓ " : "") + "Karte"; } });
+  document.querySelectorAll("#dash .akte").forEach(b => { const s = b.dataset.akte, ok = karteFertig(s), sp = [...b.querySelectorAll(".fs span:not(.emp)")][1]; if (sp) { sp.classList.toggle("ok", ok); sp.textContent = (ok ? "✓ " : "") + "Karte"; } });
 }
 function lkStand(){ // Landkarten-Moment: Felder freigeben, ohne neu zu zeichnen (Fokus bleibt im Feld)
   const l = S.lk, frei = l.vermutung.trim().length >= 10, t2 = document.getElementById("lk-teil2"); if (!t2) return;
@@ -1695,6 +2132,6 @@ let WARQUER = QUER();
 window.addEventListener("resize", () => { document.documentElement.style.setProperty("--ab-kopf", document.querySelector(".kopf").offsetHeight + "px"); if (QUER() !== WARQUER) { WARQUER = QUER(); zeichne(false); } });
 zeichne();
 </script>
-  <p class="urheberzeile" style="font-size:1rem;opacity:.72;margin-top:1.5rem">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p>
+  <p class="urheberzeile">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p>
 </body>
 </html>
