@@ -33,7 +33,7 @@ Anlass: Rückmeldung vom 18.11.2026 – der Film zeigte noch den Ablauf vor dem 
 
 ## Messung und Bewertung
 
-Gemessen mit `python3 tools/pruef/film_pruef.py` an 264 Zeitpunkten (jedes Standbild und alle 0,5 s): Text unter 18 px (Bildsätze unter 28 px) 0 · Text außerhalb der sicheren Fläche 0 · Text über Text 0 · Kontrast unter 4,5 : 1 0 · 25 Sätze, keiner steht zu kurz · Film und Blatt haben gleiche Daten · 18 Belegstellen im Blatt gefunden. Im Blatt auf dem iPad quer ist die kleinste Schrift 15,7 bis 16,3 px groß, die Bildsätze 27 bis 28 px.
+Gemessen mit `python3 tools/pruef/film_pruef.py` an 261 Zeitpunkten (jedes Standbild und alle 0,5 s): Text unter 18 px (Bildsätze unter 28 px) 0 · Text außerhalb der sicheren Fläche 0 · Text über Text 0 · Kontrast unter 4,5 : 1 0 · 25 Sätze, keiner steht zu kurz · Film und Blatt haben gleiche Daten · 18 Belegstellen im Blatt gefunden. Im Blatt auf dem iPad quer ist die kleinste Schrift 15,7 bis 16,3 px groß, die Bildsätze 27 bis 28 px.
 
 Eigene Bewertung (1–10, kein Ersatz für das Ansehen): Einstieg 8 · gleiches Gesicht 9 · Bewegung mit Zweck 8 · Lesbarkeit 8 · Tempo 8 · Handwerk 8.
 Nicht geprüft: Safari auf dem iPad, ob der Film flüssig läuft, ob er im Unterricht trägt.

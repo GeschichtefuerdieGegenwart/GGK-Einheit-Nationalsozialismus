@@ -26,3 +26,28 @@ Eine Extra-Aufgabe hängt an etwas, das nur in dieser Stunde und bei dieser Pers
 - an einem **Gespräch** (jemanden befragen, eine Position mündlich vertreten),
 - an der **Handschrift** auf dem Blatt.
 Sie verlangt einen Beleg aus dem Material der Stunde mit Fundstelle und endet mit einem Satz, was sich am eigenen Urteil geändert hat. Abgegeben wird im Gespräch oder auf dem Blatt, nicht als Datei.
+
+## 18.11.2026, 19:48 Uhr · Marios Antwort am Stopp »Zeig sie mir« (Pilot M22, Fassung 5.0)
+
+| Nr. | Frage | Antwort | Folge |
+| --- | --- | --- | --- |
+| 1 | Passt der Pilot? | **Nein.** Darstellung und Größe des Blatts, auf dem die Schüler*innen arbeiten, **exakt wie beim Modul Motivation im Psycho-Labor**. Unnötige Klicks vermeiden. Erst dann wird übertragen. Reihenfolge: **M23, M25, M26, M27, danach M16 bis M21.** | Fassung 5.1: Kopfzeile, Register, Blatt, Auftragskopf, Schriftgrößen und Deckblatt in den Maßen des Vorbilds (gemessen bei 1180 × 820, Tabelle in `DESIGN.md`, Abschnitt 12). Sichern, laden und freigeben mit je einem Tipp; der Faktencheck dreht mit der Schätzung. Übertragen wird erst nach der Freigabe der Fassung 5.1. |
+| 2 | Welche iPads hat die Klasse? | Vermutlich **iPad 10 und 11**, vielleicht neuere. | Quer 1180 px breit: Die Übersicht in Auftrag 4 erscheint mit dem Rad. Die Liste (unter 1150 px) bleibt für das Hochformat und ältere Geräte. Vorschlag V2 (kleinere Schrift für schmale iPads) entfällt. |
+| 3 | Das Extra | **Noch nicht entschieden** – Mario will erst wissen, was das Extra ist. | Beschrieben in `PILOT_M22.md`, Abschnitt 6, V1. Bleibt als Vorschlag im Blatt, bis Mario entscheidet. |
+| 4 | Erklärfilm zu Auftrag 4 | **Neu fassen.** | Fassung 2 des Films (`m22-film-erklaerungen.html`, Drehbuch in `FILM_M22_Drehbuch.md`): Oberfläche und Ablauf von heute, Daten aus dem Blatt. |
+
+### Was daraus für alle Stunden folgt
+
+- **Same-Sheet Rule:** Jeder Auftrag liegt auf demselben Blatt in denselben Maßen. Breiter wird das Blatt nur dort, wo ein Schaubild die Fläche braucht – dann wird das Register zur Nummernleiste.
+- **Few-Taps Rule:** Tipps je Handlung werden gezählt und berichtet. Sichern, laden und freigeben brauchen je einen Tipp; eine Rückfrage steht nur vor dem Löschen. Die Festlegung löst die Auflösung selbst aus.
+- **Vorbild messen:** Nennt Mario ein Vorbild, werden zuerst dessen Maße genommen und neben die eigenen gestellt. Abweichungen werden einzeln genannt und begründet.
+
+### Bewusste Abweichungen vom Modul Motivation (zur Entscheidung, nicht still gesetzt)
+
+| Abweichung | Grund | Lässt sich umstellen |
+| --- | --- | --- |
+| Titel in Fraunces statt Bricolage Grotesque | Fraunces ist die Schrift des GGK-Labors (Startseite, alle Stunden) | ja, eine Zeile in der Schicht |
+| Register auf altem Papier, je Eintrag zwei Zeilen | Entscheidung vom 16.11. (»nur die Seitenleiste mit dem alten Papier«); zwölf Einträge statt acht | ja |
+| Schreibfelder mit Linien statt Rahmen | Auftrag vom 18.11., 17:12 Uhr: »Linien zum Schreiben« | ja |
+| Freigabe auf Ansage mit einem Tipp (Vorbild: zwei) | »Vermeide unnötige Klicks« | ja (V7) |
+| »Stand sichern« in der Kopfzeile | zwölf Einträge im Register schieben die Werkzeuge unter den Bildrand | ja |

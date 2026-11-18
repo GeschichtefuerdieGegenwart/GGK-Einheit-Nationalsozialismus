@@ -9,7 +9,8 @@ import asyncio, json, pathlib, sys
 from playwright.async_api import async_playwright
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
-BLATT, FILM = REPO / 'm22-wie-war-das-moeglich.html', REPO / 'm22-film-erklaerungen.html'
+ORDNER = pathlib.Path(sys.argv[sys.argv.index('--ordner') + 1]).resolve() if '--ordner' in sys.argv else REPO   # nur zum Prüfen: z. B. ein entpacktes Paket
+BLATT, FILM = ORDNER / 'm22-wie-war-das-moeglich.html', ORDNER / 'm22-film-erklaerungen.html'
 A, E = '/* FILM-DATEN:ANFANG */', '/* FILM-DATEN:ENDE */'
 LESEN = """() => ({
   akten: AKTEN.map(a => ({ s: a.s, name: a.name, titel: a.titel, jahr: a.jahr, frage: a.frage, gew: EBENEN.map(([k]) => a.gew[k]),

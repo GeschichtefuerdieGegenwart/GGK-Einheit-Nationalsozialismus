@@ -7,14 +7,16 @@ Misst auf der Bühne 1280 × 720 an jedem Standbild und alle 0,5 Sekunden:
   Lesezeit je Satz (1 s + 0,3 s je Wort).
 Dazu: Daten des Films gegen das Blatt · Belegstellen im Blatt · Bedienung (Start, Fokus, Leertaste, »Weniger Bewegung«,
 Sprungmarken) · Konsole und fremde Server · Größe im Blatt (eingebettet, iPad quer).
-Aufruf: python3 tools/pruef/film_pruef.py [--bilder ORDNER]    (mit --bilder werden die Standbilder als PNG abgelegt)
+Aufruf: python3 tools/pruef/film_pruef.py [--bilder ORDNER] [--ordner ORDNER]
+        --bilder legt die Standbilder als PNG ab · --ordner prüft Film und Blatt in einem anderen Ordner (z. B. im entpackten Paket)
 Grenzen: Chromium statt Safari; ob der Film trägt, entscheidet der Mensch beim Ansehen."""
 import asyncio, io, pathlib, subprocess, sys
 from playwright.async_api import async_playwright
 from PIL import Image
 
 REPO = pathlib.Path(__file__).resolve().parents[2]
-FILM, BLATT = REPO / 'm22-film-erklaerungen.html', REPO / 'm22-wie-war-das-moeglich.html'
+ORDNER = pathlib.Path(sys.argv[sys.argv.index('--ordner') + 1]).resolve() if '--ordner' in sys.argv else REPO   # z. B. ein entpacktes Paket
+FILM, BLATT = ORDNER / 'm22-film-erklaerungen.html', ORDNER / 'm22-wie-war-das-moeglich.html'
 BILDER = pathlib.Path(sys.argv[sys.argv.index('--bilder') + 1]) if '--bilder' in sys.argv else None
 # Sätze des Films, die sich auf Wortlaut im Blatt stützen: Ändert sich das Blatt, schlägt die Prüfung an.
 BELEGE = ['Marktplatz · eine Runde, 5 Minuten', 'Wer eine Karte zu Erklärung A, C oder E hat, steht am Stand.', 'Alle anderen besuchen zwei Stände.',
@@ -72,8 +74,8 @@ def schlechtester(bild, t):
 async def main():
     bericht, fehler, fremd = [], [], []
     # 1 · Daten und Belegstellen
-    r = subprocess.run([sys.executable, str(REPO / 'tools' / 'film_m22_daten.py'), '--pruefen'], capture_output=True, text=True)
-    bericht.append('Daten: ' + r.stdout.strip())
+    r = subprocess.run([sys.executable, str(REPO / 'tools' / 'film_m22_daten.py'), '--pruefen'] + (['--ordner', str(ORDNER)] if ORDNER != REPO else []), capture_output=True, text=True)
+    bericht.append('Daten: ' + (r.stdout.strip() or r.stderr.strip()[-200:]))
     blatt = BLATT.read_text('utf-8'); fehlt = [b for b in BELEGE if b not in blatt]
     bericht.append(f"Belegstellen im Blatt: {len(BELEGE) - len(fehlt)} von {len(BELEGE)} gefunden" + (f" · FEHLT: {fehlt}" if fehlt else ''))
     async with async_playwright() as p:

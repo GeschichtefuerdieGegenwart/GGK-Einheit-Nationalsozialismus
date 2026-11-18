@@ -1,4 +1,4 @@
-> **Hinweis (18.11.2026):** Dieser Bericht beschreibt die Fassungen 3.0 und 3.1. Seit dem 18.11.2026 gibt es auf dem Branch `neufassung-arbeitsblatt-geschichte` die **Fassung 5.0** als Pilot des Standards »Arbeitsblatt Geschichte« – Bericht: `docs/neufassung/PILOT_M22.md`. Inhalte, Reihenfolge und Speicher (`ggk-m22-taeter:v3`) sind gleich geblieben.
+> **Hinweis (18.11.2026):** Dieser Bericht beschreibt die Fassungen 3.0 und 3.1. Seit dem 18.11.2026 gibt es auf dem Branch `neufassung-arbeitsblatt-geschichte` die **Fassung 5.1** als Pilot des Standards »Arbeitsblatt Geschichte« – Bericht: `docs/neufassung/PILOT_M22.md`. Der Erklärfilm ist am 18.11.2026 neu gefasst (Drehbuch: `docs/neufassung/FILM_M22_Drehbuch.md`); der Nachtrag vom 08.11.2026 unten beschreibt die alte Fassung. Inhalte, Reihenfolge und Speicher (`ggk-m22-taeter:v3`) sind gleich geblieben.
 
 # M22 · Bericht Fassung 3.0 – Dashboard und Landkarten-Moment
 

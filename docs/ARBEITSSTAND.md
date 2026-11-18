@@ -1,7 +1,32 @@
 # Arbeitsstand · Blatt-Standard für alle Module und Kapitel Weimarer Republik
 
-## Stand am 18.11.2026, später Abend · Neufassung »Arbeitsblatt Geschichte«: Phase 3 (Pilot M22) fertig, Stopp »Zeig sie mir«
+## Stand am 18.11.2026, Nacht · Pilot M22 in Fassung 5.1, Erklärfilm neu – Stopp »Zeig sie mir« (zweite Runde)
 
+Branch `neufassung-arbeitsblatt-geschichte`, alles gepusht. Pull Request 28 als Entwurf; **nichts zusammengeführt.**
+
+**Marios Rückmeldung zum ersten Pilot (18.11., 19:48 Uhr, `docs/neufassung/ENTSCHEIDUNGEN.md`):** (1) passt nicht – Darstellung und Größe des Blatts exakt wie beim Modul Motivation im Psycho-Labor, unnötige Klicks vermeiden; erst dann übertragen, Reihenfolge M23, M25, M26, M27, danach M16 bis M21 · (2) iPad 10 und 11, vielleicht neuere · (3) was ist das Extra? · (4) Erklärfilm neu fassen.
+
+**Gebaut (Fassung 5.1):**
+
+- `src/arbeitsblatt/ab.css`, `ab.js` – Maße des Vorbilds (Kopfzeile 64 px, Register 290 px, Blatt 829 px bei 1180 px Fensterbreite, Innenrand 35,4 px, Nummer 52 px, Titel 35,3 px, Text 18,7 px); »Stand sichern« ein Tipp ohne Fenster; »Stand aus Datei laden« öffnet gleich die Dateiwahl
+- `m22-wie-war-das-moeglich.html` – Fassung 5.1. **Der Umbau steht in `docs/neufassung/werkzeug/umbau_m22_4-1_auf_5-1.py`** (arbeitet auf der Fassung 4.1 aus dem Commit `de200e5`; die Arbeitskopie lag im Scratchpad und kann fehlen – dann diese Datei nehmen und die Pfade oben im Skript anpassen)
+- `m22-film-erklaerungen.html` – Fassung 2 (2:03 Minuten, sieben Teile, 17 Standbilder); Daten aus dem Blatt über `tools/film_m22_daten.py`; Drehbuch `docs/neufassung/FILM_M22_Drehbuch.md`
+- `tools/pruef/ab_pruef.py` (Beispielstand mit geprüften Erklärungen, Bühne in fünf Fenstergrößen, sichern/laden/freigeben mit einem Tipp) · `tools/pruef/film_pruef.py` (261 Zeitpunkte, Bedienung, Film im Blatt)
+- `privat/lk/m22.html` (nicht im Repository) auf 5.1, `lk/m22.enc.json` neu verschlüsselt (alle 38 öffnen)
+- `docs/neufassung/DESIGN.md` (Maße nebeneinander in Abschnitt 12), `PILOT_M22.md` (Bericht 5.1), `ENTSCHEIDUNGEN.md` (Antworten von 19:48 Uhr)
+- zwei Pakete in `dist/` (nicht im Repository): `Hefter-Nationalsozialismus_Lernende_Pilot-M22_2026-11-18.zip` · `…_Lehrkraft_Pilot-M22_2026-11-18.zip`
+
+**So wird gebaut (Reihenfolge):** Umbau-Skript (nur wenn M22 selbst geändert wird) → `python3 tools/ab_einsetzen.py` → `python3 tools/lk_einsetzen.py` → `python3 tools/film_m22_daten.py` → `python3 tools/bau_einheit_paket.py --einheit ns --nur M22 --apps <Ordner mit den Klonen>` → `python3 tools/pruef/ab_pruef.py` und `python3 tools/pruef/film_pruef.py` (Repository) → beide mit dem entpackten Paket (`ab_pruef.py <Ordner>`, `film_pruef.py --ordner <Ordner>`). Lehrkrafttext geändert: `LK_PASS='…' node tools/lk-bauen.mjs`, dann `--pruefen` (Passwort nur im Chat).
+
+**Wartet auf Mario (Stopp):** Fassung 5.1 ansehen · Pakete in Moodle und auf dem iPad testen · V1 (Extra behalten, ändern, streichen), V4 bis V7 aus `PILOT_M22.md` · Abweichungen vom Vorbild (Fraunces, Register, Linien, ein Tipp) bestätigen oder umstellen · danach Freigabe für die Übertragung.
+
+**Danach (Phase 4, Übertragung):** M23, M25, M26, M27, dann M16 bis M21. Je Stunde: Diagnose gegen das Heft, Schicht einsetzen (`data-einheit="ns"`, Marken `AB-STIL` und `AB-KERN`), Deckblatt mit Titelbild und Ablauf, Auftragskopf, Freigabe mit einem Tipp, »Stand sichern« in der Kopfzeile, Bildliste, Meldung an den Hefter, Lehrkrafttext prüfen, Paket, Prüfung mit vollem Beispielstand. Die Kerne (`src/m25-m27/`, `src/m16-m17/`) und die erprobten Stunden M18 bis M21, M23 erst nach Rücksprache anfassen: Dort gibt es die Seiten `mNN-teil2.html` vom Nachmittag – vor dem Umbau klären, ob Teil 2 ins Blatt wandert.
+
+**Nicht vergessen:** Das Passwort der Lehrkraftbereiche steht nur im Chat. Token-Links stehen nur in `privat/moodle-links.json`. Bilder in Reserve stehen nicht in den Seiten. Nichts ist in Moodle, auf einem echten iPad oder im Unterricht geprüft.
+
+---
+
+## Stand am 18.11.2026, später Abend · Pilot M22 in Fassung 5.0 (überholt durch 5.1, siehe oben)
 Branch `neufassung-arbeitsblatt-geschichte`, alles gepusht. Pull Request als Entwurf; **nichts zusammengeführt.**
 
 **Marios Auswahl (18.11., 18:31 Uhr, `docs/neufassung/ENTSCHEIDUNGEN.md`):** Weimar Litfaßsäule · NS Archiv · Ost-West Zwei Tinten · kein starres Baustein-System, Grundlage ist sein Material · Lehrkrafttext und erwartete Inhalte ins eigene Paket, Auflösungen der Entscheidungsstunden bleiben im Blatt · alle Bilder aus seinem Material erlaubt · M22 zuerst · keine Hausaufgaben, nur freiwillige Extras.
@@ -9,7 +34,7 @@ Branch `neufassung-arbeitsblatt-geschichte`, alles gepusht. Pull Request als Ent
 **Gebaut:**
 
 - `src/arbeitsblatt/` – gemeinsame Schicht (`ab.css`, `ab.js`, `hefter.js`, `hefter.html`, `basis.css`); `tools/ab_einsetzen.py` setzt sie ein und baut die Hefter-Seiten
-- `m22-wie-war-das-moeglich.html` – Fassung 5.0 (Umbau nachvollziehbar in `docs/neufassung/werkzeug/umbau_m22_4-1_auf_5-0.py`; arbeitet auf der Fassung 4.1 aus dem Commit `de200e5`)
+- `m22-wie-war-das-moeglich.html` – Fassung 5.0 (Umbau damals in `umbau_m22_4-1_auf_5-0.py`, heute `docs/neufassung/werkzeug/umbau_m22_4-1_auf_5-1.py`; arbeitet auf der Fassung 4.1 aus dem Commit `de200e5`)
 - `hefter-nationalsozialismus.html` – Hefter der Einheit (im Paket `index.html`)
 - `tools/bau_einheit_paket.py` – zwei Pakete je Einheit (Lernende · Lehrkraft) mit Anleitung für Moodle
 - `tools/pruef/ab_pruef.py` – Prüfung im Browser, auch für ein entpacktes Paket
@@ -23,7 +48,7 @@ Branch `neufassung-arbeitsblatt-geschichte`, alles gepusht. Pull Request als Ent
 
 **Danach (Phase 4, Übertragung):** NS-Einheit in der Reihenfolge des Unterrichts (M23, M25, M26, M27, dann M16 bis M21), je Stunde: Diagnose gegen das Heft, Schicht einsetzen, Deckblatt mit Titelbild, Bildliste, Meldung an den Hefter, Lehrkrafttext prüfen, Paket, Prüfung. Die Kerne (`src/m25-m27/blatt.css`, `src/weimar/`, `src/ost-west/`) tragen dieselben Klassennamen wie die Schicht; dort ersetzt die Schicht den Rahmen. Dann Weimar und Ost-West mit eigenen Heftern (`weimar/index.html` und `ost-west/index.html` gibt es schon als Übersichten).
 
-**Nicht vergessen:** Das Passwort der Lehrkraftbereiche steht nur im Chat. Token-Links stehen nur in `privat/moodle-links.json`. Bilder in Reserve stehen nicht in den Seiten. Der Erklärfilm zu M22 zeigt noch den Ablauf vor dem 13.11.
+**Nicht vergessen:** Das Passwort der Lehrkraftbereiche steht nur im Chat. Token-Links stehen nur in `privat/moodle-links.json`. Bilder in Reserve stehen nicht in den Seiten. (Der Erklärfilm ist seit der Fassung 5.1 neu gefasst.)
 
 ## Stand am 18.11.2026, früher Abend · Neufassung »Arbeitsblatt Geschichte«: Phase 1 und 2 fertig, Stopp
 

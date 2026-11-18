@@ -64,8 +64,10 @@ Gut zu wissen
 {punkte}
 """
 PUNKTE_L = """- Was die Lernenden eingeben, bleibt auf ihrem Gerät (im Browser). Es gibt keine Anmeldung und keinen Server.
-- Wechsel des Geräts: im Register unter »Sichern · Laden · Ansicht« den Stand als Datei sichern und auf dem anderen Gerät laden.
-  In der Moodle-App kann das Sichern als Datei scheitern. Dann die Seite in Safari öffnen oder »Text kopieren« nehmen.
+- Wechsel des Geräts: im Blatt oben rechts »Stand sichern« antippen (ein Tipp, die Datei liegt dann bei den Downloads).
+  Auf dem anderen Gerät im Hefter »Stand aus Datei laden« antippen und die Datei wählen.
+  In der Moodle-App kann das Sichern als Datei scheitern. Dann die Seite in Safari öffnen oder bei den Werkzeugen
+  »Geht keine Datei? Stand als Text« nehmen.
 - Auf geteilten iPads am Ende der Stunde: erst den Stand sichern, dann im Hefter »Alle Eingaben dieses Hefters löschen«.
 - In diesem Paket steht kein Text für die Lehrkraft – auch nicht versteckt im Quelltext. Er liegt im zweiten Paket.
 - Im Paket liegen diese Blätter: {blaetter}. Die anderen Blätter zeigt der Hefter als »liegt noch nicht in diesem Paket«.
@@ -145,7 +147,7 @@ def main():
         for d in B['seiten']: seiten[d] = lernende((R / d).read_text('utf-8'), d)
         if B.get('bildliste'): seiten[B['bildliste']] = (R / B['bildliste']).read_text('utf-8'); bildlisten.append(B['bildliste'])
     for d in list(seiten):
-        t = umschreiben(seiten[d], 0, links if d != 'index.html' else None, apps_da)
+        t = umschreiben(seiten[d], 0, links if d != 'index.html' and 'W_LINKS' in seiten[d] else None, apps_da)   # Links mit Schlüssel nur in Seiten, die sie brauchen
         seiten[d] = t.replace(E['hefter'], 'index.html')
     dateien, luecken, nach_aussen, fremd, app_noetig = set(), set(), set(), {}, set()
     for d, t in seiten.items():
