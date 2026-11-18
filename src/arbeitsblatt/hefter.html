@@ -27,7 +27,7 @@
     const st = B.stand(), n = e.blaetter.length;
     const karten = e.blaetter.map(b => {
       const s = st[b.nr], da = !PAKET || PAKET.indexOf(b.nr) >= 0, fertig = !!(s && s.von && s.fertig >= s.von);
-      const wort = !da ? "liegt noch nicht in diesem Paket" : !s || !s.fertig ? "noch nicht begonnen" : fertig ? "✓ fertig" : s.fertig + " von " + s.von + " Aufträgen fertig";
+      const wort = !da ? "liegt noch nicht in diesem Paket" : !b.ab ? "Blatt in der früheren Fassung – dein Stand steht im Blatt" : !s || !s.fertig ? "noch nicht begonnen" : fertig ? "✓ fertig" : s.fertig + " von " + s.von + " Aufträgen fertig";
       const innen = '<span class="reiter">' + esc(b.nr) + "</span><b>" + esc(b.titel) + '</b><small class="stand' + (fertig ? " fertig" : "") + '">' + wort + "</small>" + (st._zuletzt === b.nr && da ? "<small>Hier hast du zuletzt gearbeitet.</small>" : "");
       return "<li>" + (da ? '<a class="bl" href="' + esc(b.datei) + '"' + (st._zuletzt === b.nr ? " data-hier" : "") + ">" + innen + "</a>" : '<div class="bl fehlt">' + innen + "</div>") + "</li>";
     }).join("");
