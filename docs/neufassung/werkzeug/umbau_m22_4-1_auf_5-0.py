@@ -202,8 +202,9 @@ function register(immer){
   const sl = r.scrollLeft, st = r.scrollTop;
   const zeile = (id, nr, kurz, unter, kl, label) => `<li><button data-geh="${id}" class="${kl}"${id === S.seite ? ' aria-current="step"' : ""} aria-label="${esc(label)}"><span class="ab-nr" aria-hidden="true">${nr}</span><span><b>${esc(kurz)}</b><span class="ab-st">${esc(unter)}</span></span></button></li>`;
   r.innerHTML = `<p class="ab-regtitel">Dieses Blatt · 90 Minuten</p><ol>${zeile("start", "D", "Deckblatt", S.seite === "start" ? "du bist hier" : "Frage und Ablauf", "eckig", "Deckblatt: Zentrale Frage und Ablauf")}${AUF.map(a => { const hier = a.id === S.seite;
-    const [wort, kl] = hier ? ["du bist hier","hier"] : erledigt(a.id) ? ["✓ fertig","fertig"] : offen(a.id) ? ["offen","offen"] : a.frei === "ansage" ? ["auf Ansage","ansage"] : ["nach deiner Antwort","antwort"];
-    return zeile(a.id, a.nr, a.kurz, (a.extra ? "" : a.min + " Min. · ") + wort, kl + (a.extra ? " eckig" : ""), `${a.extra ? "Extra" : "Auftrag " + a.nr}: ${a.kurz}, ${a.form}${a.extra ? "" : ", " + a.min + " Minuten"}, ${wort}`); }).join("")}</ol>`;
+    const [wort, kl] = hier ? ["du bist hier","hier"] : erledigt(a.id) ? ["✓ fertig","fertig"] : offen(a.id) ? ["offen","offen"] : a.frei === "ansage" ? ["auf Ansage","ansage"] : ["nach Antwort","antwort"];
+    const lang = { "auf Ansage":"öffnet auf Ansage", "nach Antwort":"öffnet nach deiner Antwort", "✓ fertig":"fertig" }[wort] || wort;
+    return zeile(a.id, a.nr, a.kurz, (a.extra ? "" : a.min + " Min. · ") + wort, kl + (a.extra ? " eckig" : ""), `${a.extra ? "Extra" : "Auftrag " + a.nr}: ${a.kurz}, ${a.form}${a.extra ? "" : ", " + a.min + " Minuten"}, ${lang}`); }).join("")}</ol>`;
   if (QUER() && !SCHMAL()) r.insertAdjacentHTML("beforeend", werkzeuge());
   r.scrollLeft = sl; r.scrollTop = st;
 }
