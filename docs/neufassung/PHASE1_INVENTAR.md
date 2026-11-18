@@ -169,3 +169,135 @@ Aus der Nie-Liste von `signatur-design` v8.0, wichtig für die Farbwahl: **»Cre
 10. Kontrast über Fotos an der hellsten Stelle rechnen → betrifft Titelbilder im Blattkopf.
 11. Die passende Antwort ist die längste → Längen vergleichen.
 12. Eine Rückmeldung aus dem Unterricht wird auf alle Stunden übertragen, obwohl sie nur zu einzelnen gehört.
+
+---
+
+## D · Ist-Stand der Geschichtsmodule und Bildlücken
+
+Gemessen am 18.11.2026 am Stand `ea6a695` (Branch `blatt-standard-und-weimar`): alle Seiten in Chromium bei 1180 × 820 geöffnet, Register ausgelesen (`tools`-Skript im Arbeitsordner, Ergebnis `inventar.json`), Bilddateien gegen das Repository und die Bildlisten abgeglichen.
+
+### D1 · Was da ist: 41 Seiten, vier Bauarten
+
+| Einheit | Stunden | Bauart | Register | Kopf mit Leitfrage | Sozialform an jedem Auftrag | Freigabe (offen · Ansage · Antwort) | »Erst erinnern« | »Verorten« | Schreibauftrag | L | Z heißt | Datei sichern |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **Weimar** | 16 (M1–M14.2) | Kern `src/weimar` (17./18.11.) | ja | ja | ja | ja, alle drei | in 9 von 16 | als »roter Faden« (ein Satz je Stunde) | 16 | 16 | Zusammenfassung | nur auf der Kapitelseite |
+| **NS, neuer Kern** | 5 (M16, M17, M25, M26, M27) | Kern `src/m25-m27` | ja | Leitfrage nicht im Kopf | **nein** (nur L und Schreibauftrag) | **nein, alles offen** | nein | nein | M16, M17 | 4 von 5 (M26: Blick am Urteil) | Zusammenfassung | nein |
+| **NS, von Hand gebaut** | 5 (M18, M19, M20, M21, M23) + je ein »Teil 2« | eigene Seiten, je anders | Teil 2: ja · Stunde: nein | – | Teil 2: ja | Teil 2: Ansage oder Codewort | nein | nein | in Teil 2 | in Teil 2 (M21 in der Stunde) | je anders | nein |
+| **NS, M22** | 1 | eigene Fassung 4.1 | ja | ja | ja | ja | nein | nein | ja | ja | Zusammenfassung | nein (zwei Verweise zum Herunterladen, kein Laden) |
+| **Ost-West** | 9 (Stunde 1–9 = M29–M44) | Kern `src/ost-west` | ja | Leitfrage nicht im Kopf | ja | **nein, alles offen** | nein | **ja, fester Auftrag** | 9 | 9 | **Merkseite** | nein |
+
+Dazu: Startseite `index.html`, Kapitelseiten `weimar/index.html` und `ost-west/index.html`, sechs Bildlisten. **M15 und M24 gibt es im Heft, aber nicht als Modul.**
+
+**Befunde:**
+
+1. **Kein einziges Arbeitsblatt kann seinen Stand als Datei sichern oder laden.** Nur die Kapitelseite Weimar kann es (`weimar-lernspur-….json`, alle Weimar-Schlüssel in einer Datei). Wer das Gerät wechselt, verliert in NS und Ost-West alles.
+2. **44 getrennte Speicherschlüssel.** Weimar und Ost-West haben zusätzlich einen Schlüssel für die Einheit (`ggk-weimar:v1`, `ggk-owk:v1`), NS nicht.
+3. **Dieselbe Sache heißt verschieden:** »Zusammenfassung« (Weimar, NS) und »Merkseite« (Ost-West); »roter Faden« (Weimar) und »Verorten« (Ost-West); »Stunde 3« (Ost-West) und »M17« (NS, Weimar).
+4. **Die NS-Einheit ist am uneinheitlichsten:** drei Bauarten in elf Stunden; fünf Stunden bestehen aus zwei Seiten (Stunde und Teil 2).
+5. **»Erst erinnern«** (Abruf ohne Heft) gibt es nur in Weimar, **»Verorten«** als Auftrag nur in Ost-West. Beides fordert die Lehrfunktion »Sichern und üben« und »Übertragen«.
+6. **Planzeiten über 90 Minuten:** M1 (105), M6 (104), M11 (158), M17 (108), Ost-West 2 (103), Ost-West 4 (99), Ost-West 6 (98). Ob das Doppelstunden mit Reserve oder zwei Stunden sind, weißt nur du. Gekürzt wird nichts ohne deine Auswahl (K-Listen im Pilot und bei der Übertragung).
+7. **Wortlaut der Landkarte:** Der »Blick« von M14.2 heißt »Politikgeschichte« – diesen Namen hat die Landkarte nicht (dort: Ereignisgeschichte, 2.3.8). In NS und Ost-West ist das am 18.11. schon berichtigt, in Weimar noch nicht.
+
+### D2 · Titelbilder: 8 Lücken, 20 ungeklärte Bilder, 8 geklärte
+
+Maßstab ist dein neuer Auftrag: nur frei lizenzierte oder gemeinfreie Bilder oder eigene Grafiken; unter jedem Bild Herkunft, Datum, Urheber, Lizenz.
+
+| Stand | Module | Anzahl |
+| --- | --- | --- |
+| **Kein Titelbild** | Weimar M1, M3, M7, M7.1, M8, M9, M10, M11 | **8** |
+| **Bild da, Herkunft oder Lizenz ungeklärt** (aus dem Heft übernommen) | Weimar M2, M4, M5, M6, M12, M13, M14, M14.2 · NS M19 (Karte aus dem Heft), M20 (London 1940), M25 (»im Heft ohne Angabe – prüfen«), M26 (aus dem Heft), M27 (»vermutlich IWM – prüfen«) · Ost-West Stunde 1, 2, 3, 5, 6, 7, 8 (»Nachweis offen«) | **20** |
+| **Bild da, aber nicht frei** | Ost-West Stunde 4 (Karikatur STIG 1948, Ausschnitt der Heftseite) · Stunde 9 (laut Heft ndr.de) | **2** |
+| **Geklärt und frei** | NS M16, M17, M18 (eigene Grafiken) · M21 (Steven Lek, CC BY-SA, Wikimedia Commons) · M22 (Paweł Byra, CC BY-SA 4.0) · M23 (Jens Cederskjold, CC BY 4.0) | **6** |
+
+Das heißt: **Von 36 Stunden haben heute 6 ein Titelbild, das deinem neuen Maßstab genügt.** 8 fehlen ganz, 22 müssen geprüft oder ersetzt werden.
+
+Weitere Befunde zu Bildern:
+
+- **Weimar hat keine Bildliste.** 24 Bilder aus dem Heft liegen in `weimar/media/` (nur im Moodle-Paket, nicht im Repository), ohne einen einzigen Nachweis.
+- **Ost-West:** 35 Bilder, davon tragen fast alle »Nachweis offen«.
+- **Nicht als Titelbild geeignet,** auch wenn die Datei da ist: M1 (zwei Standbilder aus einem Spielfilm), M3 (Foto von 1915 – steht zu Recht hinter Hinweis und eigenem Tippen), M17 (Boykott-Plakat, Pranger in Cuxhaven: Propaganda und Demütigung realer Menschen), M25 (Buchenwald-Fotos), M27 (Vermessung eines Kriegsgefangenen).
+- **Bildlisten fehlen** für M16, M18, M19, M20, M26 und ganz Weimar.
+
+**Vorschlag für den Weg zum Titelbild** (Reihenfolge der Prüfung je Modul):
+1. **Eigene Grafik** nach `schaubild-design`, wenn das Modul ein Denkbild hat (Karte, Linie, Schaubild). Sofort frei, passt zur Farbwelt.
+2. **Gemeinfreies oder frei lizenziertes Dokument oder Ortsfoto** (Wikimedia Commons, Bundesarchiv mit CC-Lizenz), an der Fundstelle geprüft: Datum, Urheber, Lizenz, Signatur.
+3. **»offen«,** wenn beides nicht geht – dann zeigt der Kopf das Nummernfeld der Einheit.
+
+Motivrichtungen für die acht Lücken (noch **keine** Bildangaben – Fundstellen werden erst im Pilot und bei der Übertragung geprüft und dir je Modul als Bildliste vorgelegt):
+
+| Modul | Motivrichtung | Weg | Nicht |
+| --- | --- | --- | --- |
+| M1 Mein Leben 1917 | Feldpostbrief oder Lebensmittelkarte von 1917 als Dokument | 2 | Filmstandbild |
+| M3 Standortgebundenheit | eigene Grafik: ein Ereignis, zwei Wörter, zwei Rednerpulte | 1 | Opferfoto |
+| M7 Versailler Vertrag | Vertragsseite mit Siegeln oder der Spiegelsaal als Ort | 2 | Karikatur mit unklarem Urheber |
+| M7.1 Kriegsschuld | eigene Grafik: zwei Buchrücken, zwei Thesen | 1 | Porträts lebender Historiker ohne Lizenz |
+| M8 Kollektives Gedächtnis | Kriegerdenkmal als Ortsfoto | 2 | – |
+| M9 Wahlen 1919 | Stimmzettel oder Wahlaufruf von 1919; oder eigene Grafik der Sitzverteilung | 2 oder 1 | Parteiplakate mit Feindbildern |
+| M10 Saat der Gewalt | Zeitungsseite von 1919–1922 als Dokument | 2 | Gewaltfotos |
+| M11 Krisenjahr 1923 | Geldschein von 1923 als Dokument | 2 | – |
+
+---
+
+## E · Zuordnungstabelle: Modul × Prinzip × digitale Technik × Lerngewinn gegenüber Papier
+
+**Lesehilfe.** »Prinzip« ist der Abschnitt der kognitiven Landkarte, den der Auftrag L der Stunde heute als zentral setzt. »Zugang« ist der Blick der Stunde (acht Zugänge aus `fachdidaktik-geschichte`). »Technik« nennt das Interaktionsmuster (Nummer aus dem Katalog) und in Klammern, was das Gerät dabei tut (verdecken · rückmelden · messen · variieren · stufen · bündeln). **da** = steht heute schon in der Stunde · **neu** = Vorschlag. »Bewegung« steht nur dort, wo sie selbst die Erkenntnis ist. Alle neuen Techniken sind Vorschläge; Daten für Regler und Zeitachsen werden vor dem Bau am Heft und an einer Fundstelle belegt.
+
+### E1 · Weimarer Republik
+
+| Modul | Prinzip (L) | Zugang | Technik | Lerngewinn gegenüber Papier | Bewegung als Erkenntnis |
+| --- | --- | --- | --- | --- | --- |
+| M1 Mein Leben 1917 | 3.1.2 Darstellung in der Geschichtskultur | Mensch und Biografie | Festlegung vor dem Film versiegeln, danach »Was denkst du jetzt?« (1 · verdecken) – **da** | Die erste Antwort lässt sich nicht nachträglich schönen; vorher und nachher stehen nebeneinander | – |
+| M2 Kriegsausbruch | 2.3.8 Ereignisgeschichte | Ereignis | Bündnisse auf der Karte färben mit Rückmeldung je Land (3 · rückmelden) – **da**; Bündnisjahre ziehen – **neu** | Fehler beim Färben werden sofort erklärt; das Wachsen der Bündnisse wird als Abfolge sichtbar | Zeit ziehen: Bündnisse rasten Jahr für Jahr ein |
+| M3 Standortgebundenheit | 2.1.8 Standortgebundenheit | Geschichtskultur | Vier Stimmen ohne Amt lesen, Amt vermuten, dann aufdecken (8 · verdecken) – **neu** | Der Standort wird erschlossen statt mitgeteilt – auf Papier steht das Amt schon in der Überschrift | Quelle aufdecken: Das Amt erscheint an der Stimme |
+| M4 Matrosenaufstand | 2.1.3 Partikularität, 2.1.4 Selektivität | Sozialgeschichte | Sechs Karten ansehen, eine Person wählen; die Seite zeigt, wen man nicht gewählt hat (bündeln) – **da**, Rückblick **neu** | Die eigene Auswahl wird selbst zum Material: »Wessen Novembertag fehlt in deiner Geschichte?« | – |
+| M5 Doppelte Ausrufung | 2.1.1 Retrospektivität | Agency | Abstimmen, Stimmkarte, Auflösung auf Ansage (7, 12 · verdecken) – **da** | Alle legen sich fest, bevor der Ausgang bekannt ist | Aufdecken: späteres Wissen im eigenen Kasten |
+| M6 Friedenskonferenz | 1.3 Verständnis der Gegenwart | Ideengeschichte | Eigene Grenzen skizzieren, dann die Karte von 1919 darüberschieben (6 · variieren) – **neu** | Der eigene Entwurf liegt über dem Ergebnis; man sieht, wo Selbstbestimmung an Grenzen stößt | Vorher–nachher: 1914 und 1919 |
+| M7 Versailler Vertrag | 2.3.2 Nationalgeschichte gegen 2.3.4 Globalgeschichte | Global | Aussagen den zwei Erzählungen zuordnen, mit Begründung (3 · rückmelden) – **da** | gering: Die Tabelle geht auf Papier gleich gut. Gewinn nur durch die gestufte Rückmeldung | – |
+| M7.1 Kriegsschuld | 2.1.9 Kontroversität, 2.1.8 | Forschungskontroverse | Position auf einer Linie vor und nach Fischer und Clark; Klassenbild vorne (5, 12 · messen) – **da** (Abstimmung), Linie **neu** | Man sieht, wer sich bewegt hat – und fragt, warum | Position verschieben |
+| M8 Kollektives Gedächtnis | 3.1.1 Kollektives Gedächtnis | Geschichtskultur | Ereignis – Erinnerung – Folge als Netz legen und jede Verbindung benennen (Legeform Netz · stufen) – **neu** | Umbauen ohne Radieren; Zwischenstand; die Struktur wandert in den Hefter | – |
+| M9 Wahlen 1919 | 2.1.1 Retrospektivität | Agency | Politik-Check 1919: eigene Positionen, Auswertung, dann das Wahlergebnis (1 · messen, verdecken) – **da** | Auswerten kann Papier nicht; das Ergebnis bleibt bis zur eigenen Wahl verdeckt | – |
+| M10 Saat der Gewalt | 2.1.6 Narrativität, 2.1.1 | Geschichtskultur | Vermutung zum Titel vor dem Film, Beobachtung mit Zeitmarken (1 · verdecken) – **da** | gering: Der Film trägt die Stunde. Das Gerät sichert nur die Vermutung | – |
+| M11 Krisenjahr 1923 | 1.2, 1.4 Wozu Geschichte | Vergleich | Krisen als Netz oder Kreislauf legen – **da** (Zusammenhang); Geldentwertung als Verlauf ziehen (5 · variieren) – **neu** | Das Tempo der Entwertung wird spürbar; eine Tabelle zeigt Zahlen, aber nicht die Beschleunigung | Zeit ziehen: 1923 Monat für Monat |
+| M12 Goldene Zwanziger | 2.1.2 Perspektivität, 2.1.4 Selektivität | Geschichtskultur | Aus vielen Belegen wenige für die eigene Collage wählen; die Seite zeigt den Rest (bündeln) – **neu** | Selektivität wird an der eigenen Auswahl erfahren | – |
+| M13 Zwei Leben | 3.1.5 Agency | Mensch und Biografie | Meinungslinie »Umwelt oder Ich?« als Startpunkt; kehrt in M14 und M14.2 wieder (5 · messen) – **da** | Die Linie über drei Stunden gibt es auf Papier nicht: Dort ist die frühere Position weg | Spielraum verschieben |
+| M14 Weltwirtschaftskrise | 2.1.5 Partialität, 2.1.3 | Sozialgeschichte | Arbeitslosigkeit und Wahlergebnisse 1928–1932 gemeinsam ziehen (5 · variieren) – **neu**; Linie aus M13 – **da** | Gleichzeitigkeit wird sichtbar – und die Frage »Was lässt dieses Bild weg?« | Zeit ziehen: Wahl für Wahl |
+| M14.2 Verfassung | 1.8 Wozu Geschichte | Ereignis | Stimmungskurve der Republik selbst zeichnen – **da** | gering bis mittel: Zeichnen geht auf Papier gleich gut; Gewinn ist, dass die Kurve im Hefter neben der Linie aus M13 liegt | – |
+
+### E2 · Nationalsozialismus
+
+| Modul | Prinzip (L) | Zugang | Technik | Lerngewinn gegenüber Papier | Bewegung als Erkenntnis |
+| --- | --- | --- | --- | --- | --- |
+| M16 Was macht den Menschen zum Menschen? | 1.10, 1.4 Wozu Geschichte | Gegenwartsfrage | Eigene Werte in eine Reihenfolge legen (4 · messen) – **da**; dieselbe Reihenfolge kehrt in M17 wieder – **neu** | Die eigene Rangfolge wird in M17 unter Druck noch einmal geprüft | – |
+| M17 Leben in der Diktatur | 2.1.2 Perspektivität | Mensch und Biografie | Spielraum je Station für zwei Lebensläufe einschätzen (5 · messen) – **da**; Verordnungen 1933–1939 ziehen – **neu** | Zwei Spielräume schrumpfen verschieden schnell – nebeneinander und in der Zeit | Spielraum verschieben; Zeit ziehen |
+| M18 Fünf Säulen | 1.1 Wozu Geschichte | Ideengeschichte | Sechs Zeugnisse zuordnen, mit Detail begründen, gestufte Rückmeldung (3 · rückmelden) – **da** | Rückmeldung zu jeder Zuordnung, sofort und erklärend | – (bewusst ruhig) |
+| M19 Appeasement | 2.1.1 Retrospektivität | Agency | Entscheiden, Stimmkarte, Codewort, Auswertung (7, 12, 8 · verdecken) – **da**; vier Lagekarten 1936–1939 ziehen – **neu** | Entscheidung unter dem Wissen von damals; auf Papier liegt die Auflösung schon im Heft | Aufdecken; Zeit ziehen über die Karten |
+| M20 Dilemmata | 3.1.5 Agency | Agency | wie M19, drei Entscheidungen – **da** | wie M19 | Aufdecken |
+| M21 Es geht um Menschen | 3.1.2 | Mensch und Biografie | Lebenswege in Stationen im eigenen Tempo lesen, dann gemeinsame Matrix (stufen) – **da** | Der Wechsel vom Einzelleben zum System wird in Schritten geführt | – (bewusst ruhig) |
+| M22 Wie war das möglich? | 2.1.2, 2.1.9 Kontroversität | Forschungskontroverse | Erklärungen gewichten vor und nach den Akten (5 · messen) – **da** | Die eigene Gewichtung vorher und nachher; Klassenbild | Gewichte verschieben |
+| M23 Ländervergleich | 2.1.7 Konstruktivität | Vergleich und Modell | Vorhersagen, Karte aufdecken, These an einem neuen Land testen (1 · verdecken, variieren) – **da** | Das Modell entsteht aus den eigenen Faktoren, erst danach kommt das der Lehrkraft | Aufdecken |
+| M25 Leben in Ruinen | 2.1.2, 2.1.9 | Alltagsgeschichte | Fotos erst nach Hinweis und eigenem Tippen; drei Fragen der Quellenkritik (verdecken) – **da** | Sorgfalt: Niemand sieht ein belastendes Bild ungefragt | – |
+| M26 Kontinuitäten | Blick 2.3.7 Sozialgeschichte (kein L) | Gegenwartsfrage | Schätzen, dann die belegte Zahl (1 · verdecken, messen) – **da** | Die eigene Schätzung steht neben dem Befund | – |
+| M27 Die Vergessenen | 2.1.2, 2.1.8 | Global | Zentrum der Weltkarte verschieben; Strukturbild legen (Geste · variieren) – **da** | Eurozentrismus wird als Blickpunkt erfahren: Dieselbe Karte, ein anderes Zentrum | Zentrum verschieben |
+
+### E3 · Ost-West-Konflikt
+
+| Stunde (Heft) | Prinzip (L) | Zugang | Technik | Lerngewinn gegenüber Papier | Bewegung als Erkenntnis |
+| --- | --- | --- | --- | --- | --- |
+| 1 Stunde Null (M29/M30) | 2.1.1 Retrospektivität | Agency | Vorhersagen, dann das Abkommen (1 · verdecken) – **da**; Karte 1937 und 1945 – **neu** | Festlegung vor der Auflösung | Vorher–nachher |
+| 2 Kommunismus gegen Kapitalismus (M31) | 2.1.2 Perspektivität | Ideengeschichte | Zwei Reden, Sprecher verdeckt, zuordnen, aufdecken (8 · verdecken) – **neu**; Spiegelbild – **da** | Die Spiegelstruktur wird entdeckt, nicht mitgeteilt | Quelle aufdecken |
+| 3 Berlin-Blockade (M32/M33) | 2.1.6 Narrativität | Agency | Entscheiden vor dem Verlauf (7) – **da**; Ablauf in eine Reihe legen (4 · rückmelden) – **da** | Entscheidung mit dem Wissen von damals | Aufdecken |
+| 4 Doppelte Staatsgründung (M34) | 2.1.8 Standortgebundenheit | Perspektiven | Zwei Reden markieren mit Regel, Vergleichstabelle (11, 3) – **da** | mittel: Lange Reden bleiben auf Papier; am Gerät nur der Vergleich der Markierungen | – |
+| 5 Westbindung (M35/M36) | 2.1.4 Selektivität | Ereignis | Schritte reihen (4) – **da**; Urteilslinie vor und nach dem Streit (5 · messen) – **neu** | Die eigene Position vorher und nachher | Position verschieben |
+| 6 Flucht und Mauer (M36–M39) | 2.1.5 Partialität | Sozialgeschichte | Fluchtzahlen 1949–1961 ziehen (5 · variieren) – **neu**; Gründe ordnen – **da** | Spitzen und Tempo werden sichtbar; »Was zeigen Zahlen nicht?« | Zeit ziehen |
+| 7 Geschichte im Staatsdienst (M40) | 2.1.7 Konstruktivität | Geschichtspolitik | Zwei Schulbuchtexte, Herkunft verdeckt, Wertung markieren, aufdecken (8, 11 · verdecken) – **neu** | Die Texte werden als Quellen ihrer Staaten gelesen, bevor man weiß, woher sie sind | Quelle aufdecken |
+| 8 Ostverträge (M41) | 2.1.1 Retrospektivität | Ereignis | Debatte: Position vorher und nachher, Stimmkarte (12 · messen) – **neu** | Klassenbild als Gesprächsanlass | – |
+| 9 Ende der DDR (M42–M44) | 2.1.6 Narrativität | Erklären aus mehreren Ursachen | Vier Blickwinkel gewichten (5 · messen) – **neu**; Herbst 1989 reihen (4) – **da** | Mehrere Ursachen bekommen ein eigenes Gewicht; die Gewichte der Klasse unterscheiden sich | Gewichte verschieben |
+
+### E4 · Was die Tabelle zeigt
+
+- **Wo das Gerät am meisten kann:** verdecken und aufdecken (Retrospektivität, Standortgebundenheit) – in 14 von 36 Stunden. Das ist der fachliche Kern deines Konzepts und auf Papier nicht zu haben.
+- **Bewegung als Erkenntnis** schlage ich in 19 von 36 Stunden vor, in fünf Formen: Zeit ziehen (6) · Vorher–nachher (2) · Aufdecken (8) · Spielraum, Position oder Gewicht verschieben (6) · Zentrum verschieben (1). In 17 Stunden bleibt die Seite still.
+- **Ehrlich gering** ist der Gewinn in M7, M10, M14.2 und Ost-West 4. Dort trägt Film, Papier oder Gespräch die Stunde; das Blatt gibt nur Ordnung, Sicherung und den Platz im Hefter. Das ist ein gutes Ergebnis, kein Mangel.
+- **Kein Scrollytelling, kein Autoplay, kein sich aufbauender Text** (Begründung in Block C).
+- **Jede Stunde behält höchstens drei Muster und zwei Bewegungsformen.** M17 und M19 liegen an der Grenze (zwei Formen).
+- **Kontroversität (2.1.9) ist dünn besetzt:** nur M7.1, M22, M25. Die Ost-West-Einheit hat keine Stunde, die eine Forschungskontroverse trägt. Das ist eine fachliche Lücke, keine technische – ich nenne sie, ohne sie zu füllen.
