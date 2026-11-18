@@ -899,6 +899,7 @@ blockquote{background:var(--karton);border-left:6px solid var(--tief);border-rad
 .band figure img{min-height:0}
 .band figcaption{position:static;font-size:1rem;background:#2A2824;padding:.5rem .8rem .6rem}
 .dash-kopf [data-film]{margin-left:auto}
+.dreh,.jz-karte{scroll-margin:calc(var(--ab-kopf) + 12px) 0 12px}
 .merksatz{border-color:var(--tinte)}
 .karte{border-color:var(--linie)}
 h1{font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem)}
@@ -1530,7 +1531,7 @@ function fakten(){
     return `<div class="dreh${um ? " um" : ""}" id="dreh-${f.id}"><div class="dreh-in">
       <div class="seite vorne"><p class="kartennr">Karte ${i+1} von 3</p><p class="floskel">${esc(f.satz)}</p><p style="margin-top:.7rem">${esc(f.frage)}</p>
         <div class="optionen" role="group" aria-label="Deine Schätzung">${f.opt.map((o, j) => `<button data-z="${f.id}" data-o="${j}" aria-pressed="${w === j}">${esc(o)}</button>`).join("")}</div>
-        <div class="reihe"><button class="btn dunkel" data-dreh="${f.id}" ${w === undefined ? "disabled" : ""}>Umdrehen</button></div></div>
+        ${w === undefined ? "" : `<div class="reihe"><button class="btn dunkel" data-dreh="${f.id}">Umdrehen</button></div>`}</div>
       <div class="seite hinten"${um ? "" : " hidden"}><p class="kartennr">Befund</p><p>${esc(f.befund)}</p>
         <p style="margin-top:.6rem"><b>Deine Schätzung:</b> ${w === undefined ? "–" : esc(f.opt[w])}</p>
         <p style="margin-top:.6rem"><b>Also bleibt die Frage:</b> ${esc(f.rueck)}</p><p class="quelle">${f.quelle}</p>
@@ -2139,7 +2140,7 @@ document.addEventListener("click", ev => {
   if (d.afo !== undefined) { const i = d.afo; S.afo[i] = !S.afo[i]; speichere(); const w = document.getElementById("afw" + i); w.hidden = !S.afo[i]; t.textContent = S.afo[i] ? "Zuklappen" : "Aufdecken"; t.setAttribute("aria-expanded", S.afo[i]); if (S.afo[i] && !tast) neu(w, "neu"); return; }
   if ("siegeln" in d) { const v = document.getElementById("xtext").value; const z = new Date(); S.x = { text:v, zu:true, zeit:String(z.getHours()).padStart(2,"0") + ":" + String(z.getMinutes()).padStart(2,"0") }; speichere(); zeichne(); const u = document.getElementById("umschlag"); if (!tast) neu(u, "neu"); u.scrollIntoView({ block:"center", behavior: ruhig() || tast ? "auto" : "smooth" }); return; }
   if ("oeffnen" in d) { S.x.zu = false; speichere(); zeichne(); document.getElementById("xneu").focus(); return; }
-  if (d.z) { S.z[d.z] = +d.o; speichere(); t.parentNode.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b === t)); document.querySelector(`[data-dreh="${d.z}"]`).disabled = false; { const fs = document.getElementById("fc-st-" + d.z); if (fs) fs.textContent = "geschätzt · jetzt umdrehen"; } return; }
+  if (d.z) { const id = d.z; S.z[id] = +d.o; S.zum[id] = true; speichere(); zeichne(); const k = document.getElementById("dreh-" + id); if (!tast && !ruhig()) { k.classList.remove("um"); k.querySelector(".hinten").hidden = false; void k.offsetWidth; k.classList.add("um"); } k.querySelector("[data-zurueck]").focus({ preventScroll:true }); k.scrollIntoView({ block:"nearest", behavior: ruhig() ? "auto" : "smooth" }); return; }
   if (d.dreh) { S.zum[d.dreh] = true; speichere(); const id = d.dreh; zeichne(); const k = document.getElementById("dreh-" + id); if (!tast && !ruhig()) { k.classList.remove("um"); k.querySelector(".hinten").hidden = false; void k.offsetWidth; k.classList.add("um"); } k.scrollIntoView({ block:"center" }); k.querySelector("[data-zurueck]").focus({ preventScroll:true }); return; }
   if (d.zurueck) { S.zum[d.zurueck] = false; speichere(); const id = d.zurueck; zeichne(); const k = document.getElementById("dreh-" + id); k.scrollIntoView({ block:"center" }); document.querySelector(`[data-dreh="${id}"]`).focus({ preventScroll:true }); return; }
   if ("beamer" in d) { S.beamer = !S.beamer; speichere(); document.getElementById("stapel").classList.toggle("beamer", S.beamer); t.setAttribute("aria-pressed", S.beamer); t.textContent = "Beamer: " + (S.beamer ? "an" : "aus"); return; }

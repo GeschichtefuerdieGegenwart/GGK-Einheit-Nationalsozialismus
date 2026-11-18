@@ -66,6 +66,7 @@ NEU_CSS = r'''
 .band figure img{min-height:0}
 .band figcaption{position:static;font-size:1rem;background:#2A2824;padding:.5rem .8rem .6rem}
 .dash-kopf [data-film]{margin-left:auto}
+.dreh,.jz-karte{scroll-margin:calc(var(--ab-kopf) + 12px) 0 12px}
 .merksatz{border-color:var(--tinte)}
 .karte{border-color:var(--linie)}
 h1{font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem)}
@@ -267,6 +268,13 @@ einmal('''  if ("freifrage" in d) { const f = document.getElementById("ab-frage"
 ''', '')
 einmal('''if (d.frei !== undefined) { if (d.frei) { S.frei[d.frei] = true; speichere(); zeichne(true); } else { document.getElementById("ab-frage").hidden = true; document.querySelector("[data-freifrage]").focus(); } return; }''',
        '''if (d.frei) { S.frei[d.frei] = true; speichere(); zeichne(true); return; }   // Freigabe mit einem Tipp''')
+
+# Faktencheck (Auftrag 2): Die Schätzung ist die Festlegung – danach dreht sich die Karte von selbst, wie es im Auftrag steht (ein Tipp statt zwei je Satz).
+# »Umdrehen« bleibt nur für den Weg zurück: wenn die Karte nach »Zur Vorderseite« wieder vorn liegt.
+einmal('''<div class="reihe"><button class="btn dunkel" data-dreh="${f.id}" ${w === undefined ? "disabled" : ""}>Umdrehen</button></div></div>''',
+       '''${w === undefined ? "" : `<div class="reihe"><button class="btn dunkel" data-dreh="${f.id}">Umdrehen</button></div>`}</div>''')
+einmal('''if (d.z) { S.z[d.z] = +d.o; speichere(); t.parentNode.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b === t)); document.querySelector(`[data-dreh="${d.z}"]`).disabled = false; { const fs = document.getElementById("fc-st-" + d.z); if (fs) fs.textContent = "geschätzt · jetzt umdrehen"; } return; }''',
+       '''if (d.z) { const id = d.z; S.z[id] = +d.o; S.zum[id] = true; speichere(); zeichne(); const k = document.getElementById("dreh-" + id); if (!tast && !ruhig()) { k.classList.remove("um"); k.querySelector(".hinten").hidden = false; void k.offsetWidth; k.classList.add("um"); } k.querySelector("[data-zurueck]").focus({ preventScroll:true }); k.scrollIntoView({ block:"nearest", behavior: ruhig() ? "auto" : "smooth" }); return; }''')
 
 # Schreibauftrag: Erwartete Inhalte stehen nicht mehr im Blatt (Paket der Lehrkraft)
 a = s.index('const KA_INHALT = '); e = s.index('const kaRaster = ')
