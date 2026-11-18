@@ -18,7 +18,8 @@ BLATT = {   # wächst mit der Übertragung
                       'neu': 'Ich sehe jetzt, dass die Lage in der Gruppe mehr erklärt, als ich dachte.',
                       'karte': {'A': {'these': 'Die Erziehung macht autoritätshörig.', 'erkl': 'Wer so erzogen ist, gehorcht und tritt nach unten.'},
                                 'C': {'these': 'Ganz normale Männer wurden zu Mördern.', 'erkl': 'Gruppendruck und Gehorsam wirkten stärker als das Gewissen.'}},
-                      'gelesen': {'A': 1, 'C': 1}, 'lk': {'vermutung': 'Die Forscher schauen von verschiedenen Orten und Zeiten auf dasselbe.', 'prinzip': None, 'grund': '', 'ok': False},
+                      'gelesen': {'A': 1, 'C': 1}, 'gewok': {'A': True, 'C': True, 'F': True}, 'gew': {'C': {'person': 1, 'situation': 3, 'weltbild': 2, 'apparat': 1, 'vorteil': 2}},   # geprüfte Erklärungen: Marken und Linien werden mitgemessen
+                      'lk': {'vermutung': 'Die Forscher schauen von verschiedenen Orten und Zeiten auf dasselbe.', 'prinzip': None, 'grund': '', 'ok': False},
                       'grund': 'Wir halten die Situation für am wichtigsten, weil fast alle mitmachten.', 'erz': LANG,
                       'gl': ['Bild vom Monster', 'Browning: Gruppe', 'Arendt: Gedankenlosigkeit'], 'krit': True, 'durch': {}}},
 }
@@ -72,7 +73,7 @@ async def main():
                 for i in ids:
                     await pg.evaluate('i => geh(i)', i); await pg.wait_for_timeout(260)
                     varianten = [None]
-                    if i == 'akte': varianten += ["document.querySelector('[data-akte=C]').click()", "document.querySelector('[data-zu-akte]').click(); document.querySelector('[data-ansicht=vergleich]').click()", "document.querySelector('[data-ansicht=zeit]').click()", "document.querySelector('[data-ansicht=frage]').click()"]
+                    if i == 'akte': varianten += ["document.querySelector('#dash button[data-ebene=weltbild]').click()", "document.querySelector('#dash button[data-ebene=weltbild]').click(); document.querySelector('[data-akte=C]').click()",  "document.querySelector('[data-zu-akte]').click(); document.querySelector('[data-ansicht=vergleich]').click()", "document.querySelector('[data-ansicht=zeit]').click()", "document.querySelector('[data-ansicht=frage]').click()"]
                     for v in varianten:
                         if v: await pg.evaluate(v); await pg.wait_for_timeout(420)
                         m = await pg.evaluate(MESSEN)
