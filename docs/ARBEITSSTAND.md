@@ -1,5 +1,32 @@
 # Arbeitsstand · Blatt-Standard für alle Module und Kapitel Weimarer Republik
 
+## Stand am 18.11.2026 · Halt nach dem Kapitel Weimar
+
+Branch `blatt-standard-und-weimar`, alles gepusht (Stand `5222864` und folgende). Nichts ist zusammengeführt.
+
+**Auftrag vom 18.11.:** Auftrag wieder aufnehmen, neue Skills beachten (`fachdidaktik-geschichte` v1, `lernseite-bauen` v3.0), weiter schärfen – und nach den Modulen zur Weimarer Republik anhalten. **Hier steht die Arbeit.** M15, M24, die Übertragung auf NS und Ost-West, das Abschluss-Paket und der Pull Request warten auf ein neues Wort.
+
+**Neu am 18.11. (alle 16 Stunden und die Kapitelübersicht):**
+
+- Rahmen: eine Adresse – eine Seite (Deckblatt ohne Anker, jeder Auftrag mit Anker, »Weitermachen«, Deckblatt im Register) · was einmal offen war, bleibt offen (`S.war`) · Selbsttests überspringbar · Leitfrage als Linie vor Auftrag 1 und bei der Zusammenfassung (`L.pole`) · Blick der Stunde nach dem Landkarten-Auftrag (`L.blick`) · Abruf früherer Stunden (`erinnere`) · Linie »Umwelt oder Ich?« in M13, M14, M14.2 (`L.linie`, Vorschlag) · Ebenen Welt · Europa · Deutschland auf dem Deckblatt (`W_EBENE`).
+- Stunden: Leitfragen mit zwei Polen (M2, M4, M8, M10, M11, M14, M14.2) · Landkarte: M4 Partikularität, M7.1 Kontroversität, M10 Narrativität, M14 Partialität – über das Kapitel alle Einträge aus 2.1 · Schreibaufträge in Teilaufgaben a) und b) · Operatoren analysieren (M5, M9) und bewerten (M10) · Erwartungshorizonte als Bandbreite (M6, M12, M13, M14, M14.2) · M8: eigene Erinnerung freiwillig.
+- Kapitelübersicht: Zeitspannen statt zweiter Zählung · Raster Welt · Europa · Deutschland mit Vernetzen · Landkarte des Kapitels (`W_LK`) · Abschluss als Re-Konstruktion »Warum scheiterte die erste deutsche Demokratie?« mit eigenem Ausdruck.
+- Prüfen: `tools/pruef/blatt_rauch.py` mit `--voll` (Zeitdiagnose am vollen Stand, 150 Wörter je Minute) und `--privat`; misst jetzt auch die wirksame Schrift in Schaubildern, Adresse und Anker, Überspringen. `tools/pruef/weimar_pruef.py` gleicht Landkarte, Ebenen, Selbsttests und Operatoren ab.
+- Moodle-Paket vom 18.11. (`dist/GGK-Labor_Moodle_2026-11-18.zip`, 14,8 MB) ging an Mario; Paketprüfung: 59 Seiten geöffnet, keine Meldung im Kapitel Weimar.
+
+**Gelaufen:** Rauchprüfung aller 16 Stunden (958 Prüfungen bestanden, Chromium, 1180 × 820, `file://`), Zusammenfassung je 2 Seiten A4, Schreibblatt je 1 Seite; Kapitelübersicht und Startseite ohne Konsolenfehler und ohne Querlauf; Druck der Abschlussgeschichte.
+
+**Nicht gelaufen:** andere Breiten als 1180 px, echtes iPad und Safari, Stift und Tastatur, GoodNotes, VoiceOver, Moodle-Upload, axe; die Module außerhalb von Weimar nach der Änderung an `blatt.js` (M22 nutzt `blatt.js` und wurde nicht neu gebaut).
+
+**Wie es weitergeht, wenn Mario es sagt:**
+
+1. M15 und M24 (Wurzel; `tools/bau_weimar.py` kann Wurzelmodule schon bauen: `src/weimar/m15.js`, `m24.js`).
+2. Blatt-Standard und die Neuerungen vom 18.11. auf M16, M17, M25–M27 und Ost-West übertragen. Achtung: `kern.js` braucht `blatt.js`; `tools/bau_m25_m27.py` und `tools/bau_ost_west.py` binden es noch nicht ein – diese Seiten bis dahin nicht neu bauen.
+3. Blatt-Standard auf M18–M21, M23 (von Hand gebaute Seiten); M22 mit dem geänderten `blatt.js` neu bauen und prüfen.
+4. Gesamtprüfung, Abschluss-ZIP, Bericht, Pull Request.
+
+Moodle-Material, das nicht im Repository liegt, entsteht so neu: `python3 tools/weimar_bilder.py <Heft.pdf>`, `python3 tools/texte_aus_heft.py <Heft.pdf>`, `python3 tools/owk_texte.py <Heft.pdf>` (danach `git checkout src/ost-west/quellen.js`). Lehrkraft-Texte: Klartext in `privat/lk/` (nicht im Repository) und gebündelt im Claude-Projekt (`claude/Lehrkraftbereiche_Klartext_Weimar.html`); verschlüsseln mit `LK_PASS='…' node tools/lk-bauen.mjs`.
+
 ## Stand am 17.11.2026, 15:30 Uhr
 
 Branch `blatt-standard-und-weimar`, alles gepusht. Nichts ist zusammengeführt.
@@ -32,8 +59,8 @@ Diese Datei wird nach jedem Paket fortgeschrieben, damit eine Unterbrechung höc
 | Nr. | Paket | Stand |
 | --- | --- | --- |
 | 1 | Gemeinsamer Blatt-Rahmen im Kern (`src/m25-m27/`): Register auf altem Papier, ein Auftrag je Seite, Freigabe in drei Zuständen, Schreibauftrag im Klassenarbeitsformat, Zusammenfassung »wissen / können«, Landkarte als Auftrag L | in Arbeit |
-| 2 | Weimarer Republik: Heft M1–M15 als Arbeitsblätter (`src/weimar/`) | offen |
-| 3 | Startseite: Kapitel Weimar mit allen Modulen; erste Moodle-ZIP | offen |
+| 2 | Weimarer Republik: Heft M1–M14.2 als Arbeitsblätter (`src/weimar/`), geschärft am 18.11. | fertig (M15 offen) |
+| 3 | Startseite: Kapitel Weimar mit allen Modulen; Moodle-ZIP vom 17.11. und 18.11. | fertig |
 | 4 | Übertragung auf M16, M17, M25–M27 und Ost-West (Kern) | offen |
 | 5 | Übertragung auf M18, M19, M20, M21, M23 (eigene Dateien; Codewörter bleiben in M19/M20) | offen |
 | 6 | M24 (Widerstand) neu | offen |
