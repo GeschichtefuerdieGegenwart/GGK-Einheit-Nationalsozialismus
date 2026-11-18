@@ -192,10 +192,10 @@ Dazu: Startseite `index.html`, Kapitelseiten `weimar/index.html` und `ost-west/i
 
 1. **Kein einziges Arbeitsblatt kann seinen Stand als Datei sichern oder laden.** Nur die Kapitelseite Weimar kann es (`weimar-lernspur-….json`, alle Weimar-Schlüssel in einer Datei). Wer das Gerät wechselt, verliert in NS und Ost-West alles.
 2. **44 getrennte Speicherschlüssel.** Weimar und Ost-West haben zusätzlich einen Schlüssel für die Einheit (`ggk-weimar:v1`, `ggk-owk:v1`), NS nicht.
-3. **Dieselbe Sache heißt verschieden:** »Zusammenfassung« (Weimar, NS) und »Merkseite« (Ost-West); »roter Faden« (Weimar) und »Verorten« (Ost-West); »Stunde 3« (Ost-West) und »M17« (NS, Weimar).
+3. **Dieselbe Sache heißt verschieden:** »Zusammenfassung« (Weimar, NS) und »Merkseite« (Ost-West); der eine Satz zur Leitfrage heißt »roter Faden« und steht in Weimar in der Zusammenfassung, in Ost-West im Auftrag »Verorten«, in NS gibt es ihn nicht; »Stunde 3« (Ost-West) und »M17« (NS, Weimar).
 4. **Die NS-Einheit ist am uneinheitlichsten:** drei Bauarten in elf Stunden; fünf Stunden bestehen aus zwei Seiten (Stunde und Teil 2).
 5. **»Erst erinnern«** (Abruf ohne Heft) gibt es als eigenen Auftrag nur in Weimar (9 von 16 Stunden); in Ost-West stehen Abruffragen auf dem Deckblatt; in NS fehlen sie. **»Verorten«** als Auftrag gibt es nur in Ost-West. Beides fordert die Lehrfunktion »Sichern und üben« und »Übertragen«.
-6. **Planzeiten über 90 Minuten:** M1 (105), M6 (104), M11 (158), M17 (108), Ost-West 2 (103), Ost-West 4 (99), Ost-West 6 (98). Ob das Doppelstunden mit Reserve oder zwei Stunden sind, weißt nur du. Gekürzt wird nichts ohne deine Auswahl (K-Listen im Pilot und bei der Übertragung).
+6. **Planzeiten über 90 Minuten:** M1 (105), M6 (104), M11 (158 – laut Blatt zwei Doppelstunden), M17 (108), Ost-West 2 (103), Ost-West 4 (99), Ost-West 6 (98). Ob die anderen Doppelstunden mit Reserve oder zwei Stunden sind, weißt nur du. Gekürzt wird nichts ohne deine Auswahl (K-Listen im Pilot und bei der Übertragung).
 7. **Wortlaut der Landkarte:** Der »Blick« von M14.2 heißt »Politikgeschichte« – diesen Namen hat die Landkarte nicht (dort: Ereignisgeschichte, 2.3.8). In NS und Ost-West ist das am 18.11. schon berichtigt, in Weimar noch nicht.
 
 ### D2 · Titelbilder: 8 Lücken, 22 zu prüfen oder zu ersetzen, 6 geklärt
@@ -246,7 +246,7 @@ Motivrichtungen für die acht Lücken (noch **keine** Bildangaben – Fundstelle
 
 | Modul | Prinzip (L) | Zugang | Technik | Lerngewinn gegenüber Papier | Bewegung als Erkenntnis |
 | --- | --- | --- | --- | --- | --- |
-| M1 Mein Leben 1917 | 3.1.2 Darstellung in der Geschichtskultur | Mensch und Biografie | Festlegung vor dem Film versiegeln, danach »Was denkst du jetzt?« (1 · verdecken) – **da** | Die erste Antwort lässt sich nicht nachträglich schönen; vorher und nachher stehen nebeneinander | – |
+| M1 Mein Leben 1917 | 3.1.2 Public History | Mensch und Biografie | Festlegung vor dem Film versiegeln, danach »Was denkst du jetzt?« (1 · verdecken) – **da** | Die erste Antwort lässt sich nicht nachträglich schönen; vorher und nachher stehen nebeneinander | – |
 | M2 Kriegsausbruch | 2.3.8 Ereignisgeschichte | Ereignis | Bündnisse auf der Karte färben mit Rückmeldung je Land (3 · rückmelden) – **da**; Bündnisjahre ziehen – **neu** | Fehler beim Färben werden sofort erklärt; das Wachsen der Bündnisse wird als Abfolge sichtbar | Zeit ziehen: Bündnisse rasten Jahr für Jahr ein |
 | M3 Standortgebundenheit | 2.1.8 Standortgebundenheit | Geschichtskultur | Vier Stimmen ohne Amt lesen, Amt vermuten, dann aufdecken (8 · verdecken) – **neu** | Der Standort wird erschlossen statt mitgeteilt – auf Papier steht das Amt schon in der Überschrift | Quelle aufdecken: Das Amt erscheint an der Stimme |
 | M4 Matrosenaufstand | 2.1.3 Partikularität, 2.1.4 Selektivität | Sozialgeschichte | Sechs Karten ansehen, eine Person wählen; die Seite zeigt, wen man nicht gewählt hat (bündeln) – **da**, Rückblick **neu** | Die eigene Auswahl wird selbst zum Material: »Wessen Novembertag fehlt in deiner Geschichte?« | – |
@@ -272,11 +272,11 @@ Motivrichtungen für die acht Lücken (noch **keine** Bildangaben – Fundstelle
 | M18 Fünf Säulen | 1.1 Wozu Geschichte | Ideengeschichte | Sechs Zeugnisse zuordnen, mit Detail begründen, gestufte Rückmeldung (3 · rückmelden) – **da** | Rückmeldung zu jeder Zuordnung, sofort und erklärend | – (bewusst ruhig) |
 | M19 Appeasement | 2.1.1 Retrospektivität | Agency | Entscheiden, Stimmkarte, Codewort, Auswertung (7, 12, 8 · verdecken) – **da**; vier Lagekarten 1936–1939 ziehen – **neu** | Entscheidung unter dem Wissen von damals; auf Papier liegt die Auflösung schon im Heft | Aufdecken; Zeit ziehen über die Karten |
 | M20 Dilemmata | 3.1.5 Agency | Agency | wie M19, drei Entscheidungen – **da** | wie M19 | Aufdecken |
-| M21 Es geht um Menschen | 3.1.2 | Mensch und Biografie | Lebenswege in Stationen im eigenen Tempo lesen, dann gemeinsame Matrix (stufen) – **da** | Der Wechsel vom Einzelleben zum System wird in Schritten geführt | – (bewusst ruhig) |
+| M21 Es geht um Menschen | 3.1.2 Public History | Mensch und Biografie | Lebenswege in Stationen im eigenen Tempo lesen, dann gemeinsame Matrix (stufen) – **da** | Der Wechsel vom Einzelleben zum System wird in Schritten geführt | – (bewusst ruhig) |
 | M22 Wie war das möglich? | 2.1.2, 2.1.9 Kontroversität | Forschungskontroverse | Erklärungen gewichten vor und nach den Akten (5 · messen) – **da** | Die eigene Gewichtung vorher und nachher; Klassenbild | Gewichte verschieben |
 | M23 Ländervergleich | 2.1.7 Konstruktivität | Vergleich und Modell | Vorhersagen, Karte aufdecken, These an einem neuen Land testen (1 · verdecken, variieren) – **da** | Das Modell entsteht aus den eigenen Faktoren, erst danach kommt das der Lehrkraft | Aufdecken |
 | M25 Leben in Ruinen | 2.1.2, 2.1.9 | Alltagsgeschichte | Fotos erst nach Hinweis und eigenem Tippen; drei Fragen der Quellenkritik (verdecken) – **da** | Sorgfalt: Niemand sieht ein belastendes Bild ungefragt | – |
-| M26 Kontinuitäten | Blick 2.3.7 Sozialgeschichte (kein L) | Gegenwartsfrage | Schätzen, dann die belegte Zahl (1 · verdecken, messen) – **da** | Die eigene Schätzung steht neben dem Befund | – |
+| M26 Kontinuitäten | 2.4.3 Vom Sachurteil zum Werturteil (heute im Auftrag »Urteil«, kein eigener Auftrag L) | Gegenwartsfrage | Schätzen, dann die belegte Zahl (1 · verdecken, messen) – **da** | Die eigene Schätzung steht neben dem Befund | – |
 | M27 Die Vergessenen | 2.1.2, 2.1.8 | Global | Zentrum der Weltkarte verschieben; Strukturbild legen (Geste · variieren) – **da** | Eurozentrismus wird als Blickpunkt erfahren: Dieselbe Karte, ein anderes Zentrum | Zentrum verschieben |
 
 ### E3 · Ost-West-Konflikt
@@ -301,3 +301,20 @@ Motivrichtungen für die acht Lücken (noch **keine** Bildangaben – Fundstelle
 - **Kein Scrollytelling, kein Autoplay, kein sich aufbauender Text** (Begründung in Block C).
 - **Jede Stunde behält höchstens drei Muster und zwei Bewegungsformen.** M17 und M19 liegen an der Grenze (zwei Formen).
 - **Kontroversität (2.1.9) ist dünn besetzt:** nur M7.1, M22, M25. Die Ost-West-Einheit hat keine Stunde, die eine Forschungskontroverse trägt. Das ist eine fachliche Lücke, keine technische – ich nenne sie, ohne sie zu füllen.
+
+---
+
+## F · Spannungen und Fragen, die vor dem Pilot zu klären sind
+
+1. **»Lösungen nicht im Paket der Lernenden – auch nicht versteckt im Quelltext« gegen »Rückmeldung nach der eigenen Antwort«.** Eine Seite ohne Server kann nichts zurückhalten: Was sie nach einer Festlegung zeigt, steht in ihrer Datei. Das betrifft drei Arten von Text:
+   - *Lehrkraftbereiche* (Ablauf, Kürzungen, Abweichungen vom Heft) und *erwartete Inhalte der Schreibaufträge*. Sie können ganz aus dem Paket der Lernenden heraus und in ein eigenes Paket für dich. **Vorschlag: so machen.** Die drei Stufen (grundlegend · sicher · souverän) bleiben im Blatt, weil sie nichts verraten.
+   - *Rückmeldungen zu Übungsaufgaben* (Landkarte, Zuordnen, Abruf). Sie sind Lernhilfe. **Vorschlag: bleiben im Blatt.**
+   - *Auflösungen der Entscheidungsstunden* (M5, M9, M19, M20, Ost-West 1 und 3: »Was London tat«). Sie sind der zweite Teil der Stunde. **Zwei Wege:** (a) im Blatt lassen, hinter Ansage oder Codewort – einfach, aber im Quelltext lesbar; (b) als eigene Datei »Auflösung«, die du in Moodle erst zur richtigen Zeit sichtbar schaltest – sauber, aber ein Handgriff mehr im Unterricht.
+2. **Strengere Bildregel gegen die bisherige Erlaubnis.** Bisher lagen Heftbilder mit deiner Verantwortung im Paket (§ 60a UrhG). Dein neuer Auftrag lässt nur Freies und Eigenes zu. Das trifft 22 Titelbilder und viele Bilder in den Stunden, darunter Bildquellen, an denen gearbeitet wird (Karikaturen, Fotos aus dem Heft). Gilt die strenge Regel für **alle** Bilder oder nur für Titelbilder und neue Bilder?
+3. **Ich kann in dieser Werkbank keine Bilder aus dem Netz laden.** Ich kann Fundstellen suchen und Lizenzangaben prüfen; die Bilddateien müssen danach ins Projekt (du lädst sie hoch, oder das Netz für die Werkbank wird in den Einstellungen freigegeben – das gilt dann für eine neue Unterhaltung). Eigene Grafiken kann ich sofort bauen.
+4. **Je Einheit ein Paket gegen Verbindungen über Einheiten.** Jedes Paket braucht eine eigene Kopie der kognitiven Landkarte und der kleinen Apps, auf die seine Stunden verweisen. Die Startseite »GGK-Labor« mit allen drei Kapiteln passt in kein einzelnes Paket; in jedem Paket ist der Hefter die Startdatei.
+5. **Feste Bausteine kosten Zeit.** »Erst erinnern«, »Landkarte« und »Verorten« brauchen zusammen rund 14 Minuten. In Weimar sind sie schon eingerechnet. In NS und Ost-West kommen sie teils dazu: Das Musterblatt M26 hat 103 statt 93 Minuten. Das geht nur mit Kürzungen (K-Listen je Stunde) oder wenn Schreibauftrag und Zusammenfassung in die Hausaufgabe wandern.
+6. **Die von Hand gebauten Stunden (M18–M21, M23) und M22.** Ein Format für alle heißt: Diese sechs Stunden werden in den gemeinsamen Kern umgebaut; »Teil 2« (seit 18.11.) fällt dann wieder weg. Das ist der größte Posten der Übertragung. M19 und M20 behalten ihre Abstimmungen.
+7. **Nummern in Ost-West.** Im Kopf soll die Modulnummer stehen. Die Ost-West-Stunden fassen mehrere Heftmodule zusammen (M29/M30 … M42–M44). Vorschlag im Musterblatt: Heftnummern im Reiter (»M36–39«) und die Zählung »Blatt 6 von 9« im Hefter.
+8. **Reihenfolge der Übertragung** ([Reihenfolge] im Auftrag ist leer): Welche Einheit unterrichtest du als Nächstes?
+9. **Noch unbeantwortet vom 18.11., 16:50 Uhr:** sechs Entscheidungen zu NS und Ost-West (Teil 2 statt Neubau · Codewort-Tor · kein zusätzlicher Schreibauftrag in M25–M27 · Schreibauftrag in M19/M20 = die vorhandene Urteilsaufgabe · Landkarte und Schreibauftrag in M16 als Hausaufgabe · Schreibauftrag in Ost-West als Hausaufgabe). Punkt 6 oben macht die ersten beiden gegenstandslos, wenn du den Umbau willst.
