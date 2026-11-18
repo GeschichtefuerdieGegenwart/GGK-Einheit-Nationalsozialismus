@@ -15,7 +15,7 @@ css = (H / 'muster.css').read_text('utf-8').replace('KORN', KORN)
 js = (H / 'muster.js').read_text('utf-8')
 body = (H / 'muster.html').read_text('utf-8')
 datei = body.replace('HINWEIS', 'Sichern, Laden und Drucken kannst du hier ausprobieren.')
-vorschau = body.replace('HINWEIS', 'In dieser Vorschau starten Datei-Download und Drucken nicht; dafür gibt es die Datei-Fassung. »Stand als Text« und »Stand laden« gehen auch hier.')
+vorschau = body.replace('HINWEIS', 'In dieser Vorschau fragt Claude beim Sichern einmal nach. Drucken geht hier nicht – dafür gibt es die Datei-Fassung.')
 kopf = '<title>Arbeitsblatt Geschichte</title>\n<meta name="claude:viewport-fit-sides" content="cover">\n<style>\n' + fonts + css + '\n</style>\n'
 voll = '<!DOCTYPE html>\n<html lang="de">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="robots" content="noindex">\n' + kopf + '</head>\n<body>\n' + datei + '<script>\n' + js + '\n</script>\n</body>\n</html>\n'
 ziel = H.parent / 'Musterblatt_Arbeitsblatt_Geschichte.html'
