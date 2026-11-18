@@ -115,3 +115,6 @@ a.h-karte:hover,a.h-karte:focus-visible{transform:translateY(-3px);box-shadow:0 
 @media (max-width:820px){ .h-lkraster,.h-linie,.h-rkpr{grid-template-columns:1fr} .h-lkraster article:nth-child(2){grid-row:auto}
   .h-otab,.h-otab tbody,.h-otab tr,.h-otab td,.h-otab tbody th{display:block;width:auto} .h-otab thead{display:none} .h-otab td::before{content:attr(data-ebene);display:block;font-family:var(--display);font-weight:700;margin-bottom:.3rem} .h-linie li{grid-template-columns:3.4rem minmax(0,1fr)} }
 @media print{ .h-rkkopf{background:#fff !important;color:#000;border-top-color:#999} .h-rkkopf h2,.h-rkkopf p,.h-rkkopf .kennung{color:#000} .h-otab thead th{color:#000;background:#fff !important;border-bottom:2px solid #000} .h-rk,.h-ort,.h-lk{break-inside:auto} }
+@media print{ body.druck-rk #main > *:not(.h-rk){display:none !important} body.druck-rk .h-rk{margin:0;border:0} body.druck-rk .h-rk .w-mw button:not([aria-pressed=true]){display:none} body.druck-rk .h-rk textarea{border:1px solid #999;min-height:3rem} }
+.h-druckspiegel{display:none}
+@media print{ #main textarea{display:none !important} .h-druckspiegel{display:block;white-space:pre-wrap;border:1px solid #999;border-radius:.4rem;padding:.5rem .7rem;min-height:2.2rem;margin:.3rem 0 .8rem;line-height:1.5;break-inside:auto} }

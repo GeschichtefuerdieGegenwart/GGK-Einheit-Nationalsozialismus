@@ -250,3 +250,8 @@
 .w-blickzu{margin:1.6rem 0 0;padding:.7rem 1rem;border:1.5px dashed var(--gold);border-radius:var(--r-lg);color:var(--muted);max-width:62rem}
 .w-weiter{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:space-between;margin:0 0 1rem;padding:.6rem .7rem .6rem 1rem;background:var(--kuli-hi);border:1.5px solid var(--kuli);border-radius:var(--r-lg)}
 .w-weiter .btn{min-height:48px}
+.w-ebene{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:.1rem 0 .7rem;font-size:.92rem}
+.w-ebene span{margin-right:.3rem;color:var(--muted)}
+.w-ebene b{padding:.15rem .7rem;border-radius:999px;border:1.5px solid var(--line);color:var(--faint);font-weight:600}
+.w-ebene b.an{color:#fff;border-color:transparent}
+.w-ebene b.an.welt{background:#1E4FB5}.w-ebene b.an.europa{background:#7D5C12}.w-ebene b.an.de{background:#24221F}

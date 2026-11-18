@@ -64,16 +64,16 @@ SPALTEN = {'weimar': [('9. Nov. 1918', 'Ausrufung der Republik', None), ('11. Au
 KURZ.update(W_KURZ)
 SPALTEN['weimar'] = [(W_MERK.get(nr, (None, None))[0], W_MERK.get(nr, (None, None))[1], nr if nr in W_NR else None) for wid, nr, titel, datei, block in W_ALLE if nr in W_NR or nr in W_MERK]
 # Zweite Ordnung: Prinzipien der kognitiven Landkarte -> Module (aus den Landkarten-Seiten der Module abgelesen)
-PRINZIP = [('2-1-1', 'Retrospektivität', 'Wir betrachten die Vergangenheit immer im Nachhinein, aus der Gegenwart heraus.', ['M5', 'M9', 'M19', 'M20', 1, 8]),
- ('2-1-2', 'Perspektivität', 'Jede Betrachtung erfolgt aus einer Sichtweise, geprägt von Überzeugungen, Interessen und Erfahrungen.', ['M17', 'M27', 'M22', 'M25', 2]),
- ('2-1-3', 'Partikularität', 'Historische Erkenntnisse sind immer nur Ausschnitte der gesamten Vergangenheit.', []),
- ('2-1-4', 'Selektivität', 'Wer Geschichte erzählt, wählt aus: Welche Quellen, Ereignisse und Personen sind wichtig?', [5]),
- ('2-1-5', 'Partialität', 'Quellen zeigen immer nur einen Teil der Vergangenheit, und nur ein Teil der Quellen ist erhalten.', [6]),
- ('2-1-6', 'Narrativität', 'Geschichte gibt es nur als Erzählung.', [3, 9]),
+PRINZIP = [('2-1-1', 'Retrospektivität', 'Wir betrachten die Vergangenheit immer im Nachhinein, aus der Gegenwart heraus.', ['M5', 'M9', 'M10', 'M19', 'M20', 1, 8]),
+ ('2-1-2', 'Perspektivität', 'Jede Betrachtung erfolgt aus einer Sichtweise, geprägt von Überzeugungen, Interessen und Erfahrungen.', ['M12', 'M17', 'M27', 'M22', 'M25', 2]),
+ ('2-1-3', 'Partikularität', 'Historische Erkenntnisse sind immer nur Ausschnitte der gesamten Vergangenheit.', ['M4', 'M14']),
+ ('2-1-4', 'Selektivität', 'Wer Geschichte erzählt, wählt aus: Welche Quellen, Ereignisse und Personen sind wichtig?', ['M4', 'M12', 5]),
+ ('2-1-5', 'Partialität', 'Quellen zeigen immer nur einen Teil der Vergangenheit, und nur ein Teil der Quellen ist erhalten.', ['M14', 6]),
+ ('2-1-6', 'Narrativität', 'Geschichte gibt es nur als Erzählung.', ['M10', 3, 9]),
  ('2-1-7', 'Konstruktivität', 'Geschichte wird nicht gefunden, sondern zusammengesetzt. Aus denselben Fakten können verschiedene Geschichten entstehen.', [7]),
  ('2-1-8', 'Standortgebundenheit', 'Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Kontext geprägt, oft unbewusst.', ['M3', 'M7.1', 'M27', 4])]
 # Weimar-Module, deren Landkarten-Auftrag einen anderen Teil der Landkarte nutzt (Wozu Geschichte?, Formen, Auswirkungen)
-W_ANDERS = ['M1', 'M2', 'M4', 'M6', 'M7', 'M8', 'M10', 'M11', 'M12', 'M13', 'M14', 'M14.2']
+W_ANDERS = ['M1', 'M2', 'M6', 'M7', 'M8', 'M11', 'M13', 'M14.2']
 OFFEN = ['M16', 'M18', 'M21', 'M23', 'M26']
 MOD = {m[0]: (m[2], m[4]) for m in NS}; MOD.update({m[0]: (m[2], 'ost-west/' + m[4]) for m in ST}); MOD.update({m[0]: (m[2], m[4]) for m in WM})
 # Nummer im Heft (steht im Titel). Die Reihenfolge der Karten ist die Nummernfolge; eine zweite Zählung gibt es nicht.

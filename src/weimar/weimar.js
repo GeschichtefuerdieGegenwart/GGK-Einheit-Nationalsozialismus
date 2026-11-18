@@ -29,6 +29,8 @@ const W_MODULE = [
   ["m14","M14","Warum scheitert Weimar? Die Weltwirtschaftskrise","m14-warum-scheitert-weimar.html","d"],
   ["m142","M14.2","Warum scheitert Weimar? Verfassung und Präsidialkabinette","m14-2-verfassung-praesidialkabinette.html","d"],
 ];
+/* Ebenen der Stunden (Orientierung in drei Ebenen wie im Raster der Kapitelübersicht) */
+const W_EBENE = { m01:["de"], m02:["europa"], m03:["welt"], m04:["de"], m05:["de"], m06:["welt","europa"], m07:["welt","europa","de"], m071:["europa"], m08:["de"], m09:["de"], m10:["europa","de"], m11:["europa","de"], m12:["de"], m13:["welt","europa","de"], m14:["welt","europa","de"], m142:["de"] };
 /* Ankerdaten des Kapitels (Orientierungswissen) */
 const W_ANKER = [["1914","Der Erste Weltkrieg beginnt"],["9. Nov. 1918","Ausrufung der Republik"],["28. Juni 1919","Versailler Vertrag"],["11. Aug. 1919","Weimarer Verfassung"],["1923","Krisenjahr"],["1924–1929","Jahre der Stabilisierung"],["Okt. 1929","Weltwirtschaftskrise"],["30. Jan. 1933","Hitler wird Reichskanzler"]];
 const wMod = id => W_MODULE.find(m => m[0] === (id || L.wid));
@@ -45,6 +47,7 @@ function deckblatt(){
   <p class="leitfrage">${esc(L.frage)}</p>
   ${c.belastend ? belastend(c.belastend) : ""}
   <section class="w-wo" aria-label="Wo wir stehen"><p class="kennung">Wo wir stehen · ${esc(b[0])} (${esc(b[1])})</p>
+  ${W_EBENE[L.wid] ? `<p class="w-ebene"><span>Diese Stunde spielt auf der Ebene</span>${[["welt","Welt"],["europa","Europa"],["de","Deutschland"]].map(e => `<b class="${W_EBENE[L.wid].includes(e[0]) ? "an " + e[0] : ""}">${e[1]}</b>`).join("")}</p>` : ""}
   ${zeitleiste((L.anker || W_ANKER).map((a, i) => [a[0], a[1], "", (c.hier || []).includes(i) ? "hier" : ""]), { klasse:"klein" })}
   <p class="hinweis">Leitfrage dieses Abschnitts: ${esc(b[2])}</p></section>
   <div class="deck"><div>

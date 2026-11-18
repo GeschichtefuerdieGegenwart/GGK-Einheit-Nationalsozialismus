@@ -117,7 +117,8 @@ function hAbschluss(){
   <p class="hinweis" aria-live="polite"><b>${n === 3 ? "Drei gewählt." : n < 3 ? `${n} von 3 gewählt.` : `${n} gewählt – entscheide dich für drei.`}</b> Die sechs Ansätze sind für den Unterricht formuliert. Sie bündeln, was die Forschung an Ursachen nennt; sie sind keine Zitate.</p>
   ${textfeld("rk.grund", "Warum diese drei – und was lasse ich weg?", { rows:2, zaehl:false, anfaenge:["Ich wähle diese drei, weil", "Weg lasse ich"] })}</div></div>
   <div class="h-rkschritt"><span class="h-rknr" aria-hidden="true">2</span><div><h3>Erzählen</h3><p>Schreib deine Geschichte in 150 bis 200 Wörtern. Sie braucht einen Anfang, mindestens einen Wendepunkt und ein Ende. Nenne zu jedem Schritt einen Beleg aus einer Stunde: eine Zahl, ein Datum oder eine Quelle.</p>
-  ${textfeld("rk.text", "Meine Geschichte", { rows:11, anfaenge:["Am Anfang steht", "Ein Wendepunkt ist", "Entscheidend wird", "Am Ende"] })}</div></div>
+  ${textfeld("rk.text", "Meine Geschichte", { rows:11, anfaenge:["Am Anfang steht", "Ein Wendepunkt ist", "Entscheidend wird", "Am Ende"] })}
+  <p class="reihe nodruck"><button type="button" class="btn" data-akt="wdruckrk">Meine Geschichte drucken oder als PDF sichern</button><span class="hinweis">Druckt nur den Abschluss – zum Abheften hinter der Zusammenfassung von M14.2.</span></p></div></div>
   <div class="h-rkschritt"><span class="h-rknr" aria-hidden="true">3</span><div><h3>Prüfen</h3><p>Prüfe deine eigene Geschichte so, wie du in M12 die „Goldenen Zwanziger“ geprüft hast. Hake ab, was stimmt – und notiere, was du noch änderst.</p>
   <div class="h-rkpr" role="group" aria-label="Drei Triftigkeiten abhaken">${H_PRUEF.map(p => `<button type="button" data-akt="mw" data-p="rk.pr.${p[0]}" aria-pressed="${!!pr[p[0]]}"><b>${pr[p[0]] ? "✓ " : ""}${p[1]}</b><span>${p[2]}</span></button>`).join("")}</div>
   ${textfeld("rk.aendern", "Das ändere ich noch", { rows:2, zaehl:false })}</div></div>
@@ -151,7 +152,12 @@ AKTION.wexport = () => {
   a.href = URL.createObjectURL(b); a.download = `weimar-lernspur-${tag}.json`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
   const m = document.getElementById("h-meld"); if (m) m.textContent = `Gesichert: ${Object.keys(d).length} Einträge in der Datei weimar-lernspur-${tag}.json.`;
 };
+/* Druck: Ein Textfeld druckt nur, was gerade sichtbar ist. Vor dem Drucken bekommt deshalb jedes Feld einen Spiegel aus normalem Text; das Feld selbst bleibt im Druck verborgen. */
+const hDruckNach = () => document.querySelectorAll(".h-druckspiegel").forEach(d => d.remove());
+const hDruckVor = () => { hDruckNach(); document.querySelectorAll("#main textarea").forEach(t => { const d = document.createElement("div"); d.className = "h-druckspiegel"; d.textContent = t.value.trim() || "–"; t.insertAdjacentElement("afterend", d); }); };
+window.addEventListener("beforeprint", hDruckVor); window.addEventListener("afterprint", hDruckNach);
 AKTION.wdruck = () => window.print();
+AKTION.wdruckrk = () => { document.body.classList.add("druck-rk"); const weg = () => { document.body.classList.remove("druck-rk"); window.removeEventListener("afterprint", weg); }; window.addEventListener("afterprint", weg); window.print(); };
 document.addEventListener("change", ev => {
   const t = ev.target.closest && ev.target.closest("[data-wimport]"); if (!t || !t.files || !t.files[0]) return;
   const r = new FileReader(), meld = s => { const m = document.getElementById("h-meld"); if (m) m.textContent = s; };

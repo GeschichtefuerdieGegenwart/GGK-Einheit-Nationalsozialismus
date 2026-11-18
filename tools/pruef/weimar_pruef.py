@@ -25,6 +25,15 @@ for k, nr in mods:
 fehlt = [f'2-1-{i}' for i in range(1, 10) if f'2-1-{i}' not in alle and i != 7]
 if fehlt: bad.append(f'Einträge aus 2.1 ohne Stunde: {fehlt}')
 print('  2.1 abgedeckt:', sorted(x for x in alle if x.startswith('2-1-')), '· 2.1.7 Konstruktivität steht im Abschluss der Kapitelübersicht')
+# Ebenen: Deckblatt (W_EBENE) und Raster der Kapitelübersicht (H_ORT) müssen dasselbe sagen
+eb = json.loads(re.sub(r'(m\d+):', r'"\1":', re.search(r'const W_EBENE = (\{.*?\});', wj).group(1)))
+hub = (W / 'hub.js').read_text('utf-8'); ort = {}
+for zeile in re.finditer(r'welt:\[(.*?)\],\s*europa:\[(.*?)\],\s*de:\[(.*?)\] \}', hub, re.S):
+    for name, inhalt in zip(('welt', 'europa', 'de'), zeile.groups()):
+        for mid in re.findall(r'"(m\d+)"', inhalt): ort.setdefault(mid, set()).add(name)
+for mid, soll in sorted(ort.items()):
+    if set(eb.get(mid, [])) != soll: bad.append(f'{mid}: Ebenen auf dem Deckblatt {sorted(eb.get(mid, []))} ≠ Raster der Übersicht {sorted(soll)}')
+print('  Ebenen Welt · Europa · Deutschland: Deckblätter und Raster verglichen für', len(ort), 'Stunden')
 print('2 · Selbsttests: Länge und Platz der richtigen Antwort')
 n = lang = erst = 0
 for p in sorted(W.glob('m*.js')):

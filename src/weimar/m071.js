@@ -7,6 +7,7 @@ const L = {
   blick:{ name:"Forschungskontroverse", anker:"2-1-9", tut:"Du vergleichst nicht Quellen, sondern Deutungen: zwei Historiker, ein Ereignis, zwei Urteile.", fehlt:"Was fehlt: die Quellen selbst. Du prüfst Urteile über 1914, nicht die Akten und Telegramme von 1914. Wer den Streit entscheiden will, muss dorthin zurück." },
   deck:{ dauer:"Einzelstunde · 45 Minuten", jahr:"1914", hier:[0, 2],
     satz:"Artikel 231 gab Deutschland und seinen Verbündeten die Verantwortung für den Krieg. Die Geschichtswissenschaft streitet darüber bis heute.",
+    bild:{ datei:"heft-m07-schlachtfeld.jpg", alt:"Schwarz-Weiß-Foto: Ein Soldat steht mit dem Rücken zur Kamera in einem zerschossenen Wald. Aus dem aufgewühlten Boden ragen nur noch Baumstümpfe.", text:"Zerstörte Landschaft im Ersten Weltkrieg. Ort und Jahr sind im Heft nicht angegeben.", nachweis:"Bild aus dem Unterrichtsheft, M7.1. Nachweis offen." },
     ziele:["die Thesen von Fritz Fischer und Christopher Clark wiedergeben und ihre Unterschiede herausarbeiten,", "weitere Überlegungen der Forschung prüfen und ein eigenes Urteil begründen,", "erklären, warum die Entstehungszeit eines Urteils das Urteil prägt (Standortgebundenheit)."] },
   blatt:[
     { id:"vorher", nr:"1", kurz:"Erst festlegen", name:"Erst erinnern und festlegen", form:"Allein · ohne Heft", min:4, frei:"offen" },

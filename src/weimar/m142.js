@@ -66,6 +66,7 @@ function erinnern(){
 function praesident(){
   return `${auftrag("Zu zweit · 25 Minuten", "Die Macht des Reichspräsidenten", "Untersucht die Verfassung: Wer wählt wen, wer darf was? Charakterisiert dann die besondere Rolle des Reichspräsidenten und beurteilt, inwiefern er ein „Ersatzkaiser“ ist. Recherchiert, was Artikel 48 enthält. Diskutiert, welche Gefahren ihr für die Demokratie seht.")}
   <h3 class="klein">Die Weimarer Reichsverfassung von 1919</h3>
+  ${bild({ datei:"heft-m14-verfassung.jpg", alt:"Schaubild der Weimarer Reichsverfassung von 1919 mit drei Gewalten: Reichspräsident und Reichsregierung, Reichstag und Reichsrat, Reichsgericht. Darunter stehen die Länder und die wahlberechtigten Staatsbürgerinnen und Staatsbürger.", text:"Schaubild aus dem Heft: Wer wählt wen, wer darf was? Die Karten darunter sagen dasselbe in Worten.", nachweis:"Aus dem Unterrichtsheft, M14.2 (Geschichte und Gesellschaft konkret, Cornelsen 2021)." })}
   ${wahlKarte("org", ORGANE.map((o, i) => ({ id:o.id, nr:String(i + 1), titel:o.titel, unter:o.kurz, html:`<h3>${esc(o.titel)}</h3><p class="kennung">${esc(o.kurz)}</p><ul>${o.punkte.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` })), { titel:"Organ wählen", klasse:"viele" })}
   <p class="quelle">Angaben nach dem Verfassungsschaubild im Unterrichtsheft, M14.2 (Geschichte und Gesellschaft konkret, Cornelsen 2021).</p>
   ${tabelle("p", ["", "Unsere Ergebnisse"], ["Rolle des Reichspräsidenten – ein „Ersatzkaiser“?", "Artikel 48 der Verfassung: Was steht darin?", "Gefahren für die Demokratie"], { rows:3 })}

@@ -14,7 +14,7 @@ const L = {
   blatt:[
     { id:"stimmung", nr:"1", kurz:"Stimmungen", name:"Zwei Stimmungen vergleichen", form:"Plenum", min:8, frei:"offen" },
     { id:"kreislauf", nr:"2", kurz:"Kreislauf", name:"Die Weltwirtschaftskrise: Wer hängt an wem?", form:"Gruppe", min:14, frei:"offen" },
-    { id:"leben", nr:"3", kurz:"Mein Leben", name:"Auswirkungen auf das Leben", form:"Frei wählbar", min:12, frei:"antwort", nach:"kreislauf", fehlt:"Bearbeite erst Auftrag 2." },
+    { id:"leben", nr:"3", kurz:"Leben in der Krise", name:"Auswirkungen auf das Leben", form:"Frei wählbar", min:12, frei:"antwort", nach:"kreislauf", fehlt:"Bearbeite erst Auftrag 2." },
     { id:"wahlen", nr:"4", kurz:"Wahlen", name:"Wirtschaft und Politik: die Wahlen 1928 bis 1932", form:"Frei wählbar", min:15, frei:"antwort", nach:"leben", fehlt:"Bearbeite erst Auftrag 3." },
     { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Was zeigen die Quellen – und was nicht?", form:"Allein", min:7, frei:"antwort", nach:"wahlen", fehlt:"Bearbeite erst Auftrag 4." },
     { id:"schreiben", nr:"5", kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein", min:15, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:"Du erklärst die Krise und beurteilst ihren Einfluss auf die Wahlen." },

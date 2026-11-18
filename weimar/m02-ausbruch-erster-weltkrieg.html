@@ -794,6 +794,11 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 .w-blickzu{margin:1.6rem 0 0;padding:.7rem 1rem;border:1.5px dashed var(--gold);border-radius:var(--r-lg);color:var(--muted);max-width:62rem}
 .w-weiter{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:space-between;margin:0 0 1rem;padding:.6rem .7rem .6rem 1rem;background:var(--kuli-hi);border:1.5px solid var(--kuli);border-radius:var(--r-lg)}
 .w-weiter .btn{min-height:48px}
+.w-ebene{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:.1rem 0 .7rem;font-size:.92rem}
+.w-ebene span{margin-right:.3rem;color:var(--muted)}
+.w-ebene b{padding:.15rem .7rem;border-radius:999px;border:1.5px solid var(--line);color:var(--faint);font-weight:600}
+.w-ebene b.an{color:#fff;border-color:transparent}
+.w-ebene b.an.welt{background:#1E4FB5}.w-ebene b.an.europa{background:#7D5C12}.w-ebene b.an.de{background:#24221F}
 /* M2: acht Länder als Felder (Modell, keine Landkarte) */
 .w-kacheln{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:repeat(6,minmax(3.4rem,auto));gap:.45rem;margin:.8rem 0;background:#DCE5F0;border-radius:var(--r-lg);padding:.8rem}
 .w-kacheln button{display:grid;align-content:center;justify-items:center;gap:.1rem;border:2px solid #8B857A;border-radius:.7rem;background:var(--surface2);color:var(--ink);font:inherit;padding:.3rem .4rem;line-height:1.15;text-align:center;min-height:48px}
@@ -1413,6 +1418,8 @@ const W_MODULE = [
   ["m14","M14","Warum scheitert Weimar? Die Weltwirtschaftskrise","m14-warum-scheitert-weimar.html","d"],
   ["m142","M14.2","Warum scheitert Weimar? Verfassung und Präsidialkabinette","m14-2-verfassung-praesidialkabinette.html","d"],
 ];
+/* Ebenen der Stunden (Orientierung in drei Ebenen wie im Raster der Kapitelübersicht) */
+const W_EBENE = { m01:["de"], m02:["europa"], m03:["welt"], m04:["de"], m05:["de"], m06:["welt","europa"], m07:["welt","europa","de"], m071:["europa"], m08:["de"], m09:["de"], m10:["europa","de"], m11:["europa","de"], m12:["de"], m13:["welt","europa","de"], m14:["welt","europa","de"], m142:["de"] };
 /* Ankerdaten des Kapitels (Orientierungswissen) */
 const W_ANKER = [["1914","Der Erste Weltkrieg beginnt"],["9. Nov. 1918","Ausrufung der Republik"],["28. Juni 1919","Versailler Vertrag"],["11. Aug. 1919","Weimarer Verfassung"],["1923","Krisenjahr"],["1924–1929","Jahre der Stabilisierung"],["Okt. 1929","Weltwirtschaftskrise"],["30. Jan. 1933","Hitler wird Reichskanzler"]];
 const wMod = id => W_MODULE.find(m => m[0] === (id || L.wid));
@@ -1429,6 +1436,7 @@ function deckblatt(){
   <p class="leitfrage">${esc(L.frage)}</p>
   ${c.belastend ? belastend(c.belastend) : ""}
   <section class="w-wo" aria-label="Wo wir stehen"><p class="kennung">Wo wir stehen · ${esc(b[0])} (${esc(b[1])})</p>
+  ${W_EBENE[L.wid] ? `<p class="w-ebene"><span>Diese Stunde spielt auf der Ebene</span>${[["welt","Welt"],["europa","Europa"],["de","Deutschland"]].map(e => `<b class="${W_EBENE[L.wid].includes(e[0]) ? "an " + e[0] : ""}">${e[1]}</b>`).join("")}</p>` : ""}
   ${zeitleiste((L.anker || W_ANKER).map((a, i) => [a[0], a[1], "", (c.hier || []).includes(i) ? "hier" : ""]), { klasse:"klein" })}
   <p class="hinweis">Leitfrage dieses Abschnitts: ${esc(b[2])}</p></section>
   <div class="deck"><div>
