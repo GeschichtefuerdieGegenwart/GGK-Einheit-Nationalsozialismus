@@ -3,6 +3,9 @@ const BEREICHE = [["bnd","BND (Geheimdienst)"],["justiz","Justiz (Richter und St
 const GRUPPEN = BEREICHE.slice(1);
 const STUFEN = ["–","gering","mittel","hoch","sehr hoch"];
 const L = {
+  blick:{"name": "Sozialgeschichte: Ämter und Berufsgruppen in Zahlen", "anker": "2-3-7", "tut": "Du untersuchst nicht einzelne Lebenswege, sondern gesellschaftliche Strukturen: Wie viele machten in Behörden und Berufen nach 1945 weiter?", "fehlt": "Was fehlt: der einzelne Mensch. Zahlen zeigen, dass viele im Amt blieben – nicht, ob jemand umdachte, schwieg oder weitermachte wie zuvor."},
+  blickAn:"urteil",
+  blattPlus:{"urteil": {"marke": "Sach- und Werturteil wie in der Klassenarbeit"}},
   blattAuto:true, kapitel:"Nationalsozialismus", dauer:90,   /* Blatt-Rahmen: Register links, ein Auftrag je Seite (blatt.js) */
   key:"ggk-m26-kontinuitaeten:v1", nr:"M26", titel:"Ende gut, alles gut?", unter:"Kontinuitäten des Nationalsozialismus",
   /* Zeichen der Stunde: eine Akte, die weiterwandert */

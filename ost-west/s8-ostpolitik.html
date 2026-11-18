@@ -1252,9 +1252,9 @@ const erinnere = (fragen, pfad = "ab") => `<div class="w-erinn"><p class="kennun
 
 /* ---------- Der Blick dieser Stunde: Der Zugang wird als Form von Geschichte offengelegt – erst selbst überlegen, was er ausblendet, dann vergleichen.
    L.blick = { name, anker (Abschnitt der Landkarte, z. B. "2-3-8"), tut, fehlt } ---------- */
-const blickKarte = () => { const b = L.blick; if (!b) return "";
+const blickKarte = ohneSperre => { const b = L.blick; if (!b) return "";
   /* Der Blick wird erst nach der Landkarten-Aufgabe benannt: Sonst nähme die Karte die Antwort vorweg (erst die Sache, dann der Begriff). */
-  if (!S.lk.ok && !String(S.blickfehlt || "").trim()) return `<p class="w-blickzu">Der Blick dieser Stunde · öffnet sich, wenn du die Landkarten-Aufgabe geprüft hast.</p>`;
+  if (!ohneSperre && !S.lk.ok && !String(S.blickfehlt || "").trim()) return `<p class="w-blickzu">Der Blick dieser Stunde · öffnet sich, wenn du die Landkarten-Aufgabe geprüft hast.</p>`;
   return `<section class="w-blickk"><p class="kennung">Der Blick dieser Stunde · 1 Minute</p><h3>So haben wir heute auf Geschichte geschaut: ${esc(b.name)}</h3><p>${esc(b.tut)}${b.anker ? ` <a href="${LK}${b.anker}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a>` : ""}</p>
   ${textfeld("blickfehlt", "Was blendet dieser Blick aus? Ein Satz.", { rows:2, zaehl:false, platz:"Nicht in den Blick kommt …" })}
   ${vergleich("blickv", ["blickfehlt"], 10, "Mit einem Vorschlag vergleichen", `<p>${esc(b.fehlt)}</p><p class="hinweis">Jeder Blick zeigt etwas und lässt etwas weg. Deshalb wechselt der Blick von Stunde zu Stunde.</p>`)}</section>`; };
@@ -1299,7 +1299,7 @@ kernStart = function(){
     if (L.pole) { const id0 = L.blatt[0].id, f0 = SEITE_FN[id0]; SEITE_FN[id0] = () => leitVor() + f0();
       if (L.zf && !L.pole.eigen) (L.zf.mein = L.zf.mein || []).push(["Die Leitfrage – am Anfang und am Ende", () => { const lf = S.lf || {}; return lf.vor == null && lf.nach == null ? "" : `Am Anfang: ${lf.vor == null ? "offen" : lf.vor + " von 5"} · am Ende: ${lf.nach == null ? "offen" : lf.nach + " von 5"} (1 = ${L.pole.links} · 5 = ${L.pole.rechts})`; }]);
       if (L.blattAuto && !L.pole.eigen) { const zid = L.blatt[L.blatt.length - 1].id, z0 = SEITE_FN[zid]; SEITE_FN[zid] = () => leitNach() + z0(); } }
-    if (L.blick && SEITE_FN.landkarte) { const f1 = SEITE_FN.landkarte; SEITE_FN.landkarte = () => f1() + blickKarte(); }
+    { const bid = L.blickAn || "landkarte"; if (L.blick && SEITE_FN[bid]) { const f1 = SEITE_FN[bid]; SEITE_FN[bid] = () => f1() + blickKarte(bid !== "landkarte"); } }
     if (L.blattAuto) { const s0 = SEITE_FN.start; SEITE_FN.start = () => weiterLeiste() + s0(); }
   }
   kernStart0();
@@ -1832,6 +1832,9 @@ function stundeStart(){
 }
 /* ===== Stunde 8: Wandel durch Annäherung (Heft M41) ===== */
 const L = {
+  blick:{"name": "Ereignisgeschichte: zwei Verträge und eine Debatte", "anker": "2-3-8", "tut": "Du untersuchst zwei Verträge und den Streit darüber im Bundestag – Ereignisse mit ihren unmittelbaren Ursachen und Folgen.", "fehlt": "Was fehlt: die Sicht der Menschen in Polen, in der Sowjetunion und in der DDR. Du hörst vor allem die Stimmen aus Bonn."},
+  blattPlus:{"vertraege": {"form": "Zu zweit"}, "debatte": {"form": "Zu zweit, dann allein"}, "landkarte": {"form": "Allein"}, "verorten": {"form": "Allein"}},
+  schreib:{"vor": "In der Stunde hast du dein Urteil schon in vier bis sechs Sätzen notiert. Hier wird daraus ein Text, wie ihn die Klassenarbeit verlangt: erst darstellen (a), dann urteilen (b). Dein Urteil aus der Stunde darfst du verwenden und ausbauen. Du schreibst eine halbe Seite – auf Ansage in der Stunde oder als Hausaufgabe.", "gleich": "Du erklärst „Wandel durch Annäherung“ und erörterst, ob die Ostverträge Verzicht oder Realismus waren.", "aufgabe": "<b>a) Erklären Sie</b> die Formel „Wandel durch Annäherung“ und nennen Sie die Kernpunkte der Verträge von Moskau und Warschau.<br><b>b) Erörtern Sie</b>, ob die Ostverträge Verzicht oder Realismus waren.", "woerter": 140, "min": 60, "stufen": [["Grundlegend", "Du erklärst die Formel in einem Satz, nennst je einen Kernpunkt der Verträge und entscheidest dich."], ["Sicher", "Du stützt „Verzicht“ und „Realismus“ je mit einem Beleg und begründest dein Ergebnis."], ["Souverän", "Du nennst deinen Maßstab, beziehst das „vorläufig“ von Potsdam ein und wägst ab."]], "inhalt": [["Formel:", "Wandel durch Annäherung (Egon Bahr): Veränderung durch Kontakt statt durch Abgrenzung. Die Regierung erkennt an, was seit 1945 besteht, um es auf lange Sicht verändern zu können."], ["Verzicht:", "Die Grenze an Oder und Neiße wird anerkannt; das „vorläufig“ von Potsdam wird 1970 faktisch aufgegeben."], ["Realismus:", "Die Verträge erkennen an, was seit 1945 besteht, und öffnen Wege für Kontakte und Entspannung."], ["Erörterung:", "Tragfähig sind beide Urteile. Es zählt, dass du beide Seiten mit einem Beleg stützt und deinen Maßstab nennst."]], "material": "<p><b>M1 · Daten:</b> 12. August 1970 Moskauer Vertrag: Gewaltverzicht, Unverletzlichkeit der Grenzen · 7. Dezember 1970 Warschauer Vertrag: Anerkennung der Oder-Neiße-Linie als Westgrenze Polens · 27. April 1972 Misstrauensvotum scheitert · 17. Mai 1972 Der Bundestag stimmt zu.</p>"},
   sid:"s8", key:"ggk-owk-s8:v1", nr:"Stunde 8", titel:"Wandel durch Annäherung", unter:"Die Ostverträge, 1970 bis 1972", mark:OWK_MARK,
   seiten:[["start","",""],["vertraege","22 Min.","Die Verträge"],["debatte","20 Min.","Die Debatte"],["landkarte","8 Min.","Landkarte"],["verorten","22 Min.","Verorten"],["merk","","Merkseite"]],
   breit:["vertraege","debatte","verorten","lehrkraft"],

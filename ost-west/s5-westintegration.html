@@ -1251,9 +1251,9 @@ const erinnere = (fragen, pfad = "ab") => `<div class="w-erinn"><p class="kennun
 
 /* ---------- Der Blick dieser Stunde: Der Zugang wird als Form von Geschichte offengelegt – erst selbst überlegen, was er ausblendet, dann vergleichen.
    L.blick = { name, anker (Abschnitt der Landkarte, z. B. "2-3-8"), tut, fehlt } ---------- */
-const blickKarte = () => { const b = L.blick; if (!b) return "";
+const blickKarte = ohneSperre => { const b = L.blick; if (!b) return "";
   /* Der Blick wird erst nach der Landkarten-Aufgabe benannt: Sonst nähme die Karte die Antwort vorweg (erst die Sache, dann der Begriff). */
-  if (!S.lk.ok && !String(S.blickfehlt || "").trim()) return `<p class="w-blickzu">Der Blick dieser Stunde · öffnet sich, wenn du die Landkarten-Aufgabe geprüft hast.</p>`;
+  if (!ohneSperre && !S.lk.ok && !String(S.blickfehlt || "").trim()) return `<p class="w-blickzu">Der Blick dieser Stunde · öffnet sich, wenn du die Landkarten-Aufgabe geprüft hast.</p>`;
   return `<section class="w-blickk"><p class="kennung">Der Blick dieser Stunde · 1 Minute</p><h3>So haben wir heute auf Geschichte geschaut: ${esc(b.name)}</h3><p>${esc(b.tut)}${b.anker ? ` <a href="${LK}${b.anker}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a>` : ""}</p>
   ${textfeld("blickfehlt", "Was blendet dieser Blick aus? Ein Satz.", { rows:2, zaehl:false, platz:"Nicht in den Blick kommt …" })}
   ${vergleich("blickv", ["blickfehlt"], 10, "Mit einem Vorschlag vergleichen", `<p>${esc(b.fehlt)}</p><p class="hinweis">Jeder Blick zeigt etwas und lässt etwas weg. Deshalb wechselt der Blick von Stunde zu Stunde.</p>`)}</section>`; };
@@ -1298,7 +1298,7 @@ kernStart = function(){
     if (L.pole) { const id0 = L.blatt[0].id, f0 = SEITE_FN[id0]; SEITE_FN[id0] = () => leitVor() + f0();
       if (L.zf && !L.pole.eigen) (L.zf.mein = L.zf.mein || []).push(["Die Leitfrage – am Anfang und am Ende", () => { const lf = S.lf || {}; return lf.vor == null && lf.nach == null ? "" : `Am Anfang: ${lf.vor == null ? "offen" : lf.vor + " von 5"} · am Ende: ${lf.nach == null ? "offen" : lf.nach + " von 5"} (1 = ${L.pole.links} · 5 = ${L.pole.rechts})`; }]);
       if (L.blattAuto && !L.pole.eigen) { const zid = L.blatt[L.blatt.length - 1].id, z0 = SEITE_FN[zid]; SEITE_FN[zid] = () => leitNach() + z0(); } }
-    if (L.blick && SEITE_FN.landkarte) { const f1 = SEITE_FN.landkarte; SEITE_FN.landkarte = () => f1() + blickKarte(); }
+    { const bid = L.blickAn || "landkarte"; if (L.blick && SEITE_FN[bid]) { const f1 = SEITE_FN[bid]; SEITE_FN[bid] = () => f1() + blickKarte(bid !== "landkarte"); } }
     if (L.blattAuto) { const s0 = SEITE_FN.start; SEITE_FN.start = () => weiterLeiste() + s0(); }
   }
   kernStart0();
@@ -1831,6 +1831,9 @@ function stundeStart(){
 }
 /* ===== Stunde 5: Die Bindung der Bundesrepublik an den Westen (Heft M35, M36) ===== */
 const L = {
+  blick:{"name": "Ereignisgeschichte: ein Streit, fünf Schritte, eine Wahl", "anker": "2-3-8", "tut": "Du verfolgst einen politischen Streit von den Positionen über die Verträge bis zur Wahl. So arbeitet die Ereignisgeschichte: Sie erzählt Ereignisse mit ihren unmittelbaren Ursachen und Folgen.", "fehlt": "Was fehlt: die langsamen Veränderungen unter der Oberfläche der Ereignisse – Alltag, Wirtschaft, Einstellungen. Und die Menschen in der DDR, über deren Zukunft mitentschieden wird."},
+  blattPlus:{"streit": {"form": "Zu zweit"}, "schritte": {"form": "Allein"}, "wahl": {"form": "Allein, dann Plenum"}, "landkarte": {"form": "Allein"}, "verorten": {"form": "Allein"}},
+  schreib:{"vor": "In der Stunde hast du dein Urteil schon in vier bis sechs Sätzen notiert. Hier wird daraus ein Text, wie ihn die Klassenarbeit verlangt: erst darstellen (a), dann urteilen (b). Dein Urteil aus der Stunde darfst du verwenden und ausbauen. Du schreibst eine halbe Seite – auf Ansage in der Stunde oder als Hausaufgabe.", "gleich": "Du stellst die Schritte der Westbindung dar und beurteilst Adenauers Politik aus der Sicht der Zeit.", "aufgabe": "<b>a) Stellen Sie dar</b>, mit welchen Schritten die Bundesrepublik zwischen 1952 und 1956 an den Westen gebunden wurde.<br><b>b) Beurteilen Sie</b> Adenauers Politik der Westbindung aus der Sicht der Zeit.", "woerter": 140, "min": 60, "stufen": [["Grundlegend", "Du nennst drei Schritte mit Jahr und sagst, ob du Adenauers Politik für richtig hältst."], ["Sicher", "Du stellst die Schritte geordnet dar und wägst Sicherheit gegen Einheit ab."], ["Souverän", "Du urteilst aus der Sicht von 1955: Du nennst, was man damals wissen konnte, und nimmst den Wahlsieg von 1957 nicht als Beweis."]], "inhalt": [["Schritte:", "1952 Deutschlandvertrag; 1954 Pariser Verträge; 5. Mai 1955 Souveränität; 9. Mai 1955 NATO-Beitritt und Aufbau der Bundeswehr; 1956 Wehrpflicht."], ["Dafür:", "Sicherheit und Souveränität durch die feste Bindung an den Westen."], ["Dagegen:", "Die feste Bindung kann die Teilung vertiefen; die Einheit rückt in die Ferne."], ["Urteil:", "Tragfähig sind beide Richtungen. Es zählt, dass du aus der Sicht der Zeit urteilst: Der Wahlsieg von 1957 beweist nicht, dass die Politik richtig war."]], "material": "<p><b>M1 · Schritte:</b> Mai 1952 Deutschlandvertrag · Oktober 1954 Pariser Verträge · 5. Mai 1955 volle Souveränität · 9. Mai 1955 Beitritt zur NATO · 7. Juli 1956 allgemeine Wehrpflicht.</p><p><b>M2 · Der Streit:</b> Adenauer will Sicherheit und Souveränität durch die feste Bindung an den Westen. Seine Gegner fürchten, dass genau das die Teilung Deutschlands vertieft.</p>"},
   sid:"s5", key:"ggk-owk-s5:v1", nr:"Stunde 5", titel:"Die Bindung der Bundesrepublik an den Westen", unter:"Westintegration und Wiederbewaffnung, 1949 bis 1957", mark:OWK_MARK,
   seiten:[["start","",""],["streit","20 Min.","Der Streit"],["schritte","15 Min.","Die Schritte"],["wahl","20 Min.","Das Urteil"],["landkarte","8 Min.","Landkarte"],["verorten","14 Min.","Verorten"],["merk","","Merkseite"]],
   breit:["streit","schritte","wahl","verorten","lehrkraft"],

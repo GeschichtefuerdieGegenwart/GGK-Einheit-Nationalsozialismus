@@ -1251,9 +1251,9 @@ const erinnere = (fragen, pfad = "ab") => `<div class="w-erinn"><p class="kennun
 
 /* ---------- Der Blick dieser Stunde: Der Zugang wird als Form von Geschichte offengelegt – erst selbst überlegen, was er ausblendet, dann vergleichen.
    L.blick = { name, anker (Abschnitt der Landkarte, z. B. "2-3-8"), tut, fehlt } ---------- */
-const blickKarte = () => { const b = L.blick; if (!b) return "";
+const blickKarte = ohneSperre => { const b = L.blick; if (!b) return "";
   /* Der Blick wird erst nach der Landkarten-Aufgabe benannt: Sonst nähme die Karte die Antwort vorweg (erst die Sache, dann der Begriff). */
-  if (!S.lk.ok && !String(S.blickfehlt || "").trim()) return `<p class="w-blickzu">Der Blick dieser Stunde · öffnet sich, wenn du die Landkarten-Aufgabe geprüft hast.</p>`;
+  if (!ohneSperre && !S.lk.ok && !String(S.blickfehlt || "").trim()) return `<p class="w-blickzu">Der Blick dieser Stunde · öffnet sich, wenn du die Landkarten-Aufgabe geprüft hast.</p>`;
   return `<section class="w-blickk"><p class="kennung">Der Blick dieser Stunde · 1 Minute</p><h3>So haben wir heute auf Geschichte geschaut: ${esc(b.name)}</h3><p>${esc(b.tut)}${b.anker ? ` <a href="${LK}${b.anker}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a>` : ""}</p>
   ${textfeld("blickfehlt", "Was blendet dieser Blick aus? Ein Satz.", { rows:2, zaehl:false, platz:"Nicht in den Blick kommt …" })}
   ${vergleich("blickv", ["blickfehlt"], 10, "Mit einem Vorschlag vergleichen", `<p>${esc(b.fehlt)}</p><p class="hinweis">Jeder Blick zeigt etwas und lässt etwas weg. Deshalb wechselt der Blick von Stunde zu Stunde.</p>`)}</section>`; };
@@ -1298,7 +1298,7 @@ kernStart = function(){
     if (L.pole) { const id0 = L.blatt[0].id, f0 = SEITE_FN[id0]; SEITE_FN[id0] = () => leitVor() + f0();
       if (L.zf && !L.pole.eigen) (L.zf.mein = L.zf.mein || []).push(["Die Leitfrage – am Anfang und am Ende", () => { const lf = S.lf || {}; return lf.vor == null && lf.nach == null ? "" : `Am Anfang: ${lf.vor == null ? "offen" : lf.vor + " von 5"} · am Ende: ${lf.nach == null ? "offen" : lf.nach + " von 5"} (1 = ${L.pole.links} · 5 = ${L.pole.rechts})`; }]);
       if (L.blattAuto && !L.pole.eigen) { const zid = L.blatt[L.blatt.length - 1].id, z0 = SEITE_FN[zid]; SEITE_FN[zid] = () => leitNach() + z0(); } }
-    if (L.blick && SEITE_FN.landkarte) { const f1 = SEITE_FN.landkarte; SEITE_FN.landkarte = () => f1() + blickKarte(); }
+    { const bid = L.blickAn || "landkarte"; if (L.blick && SEITE_FN[bid]) { const f1 = SEITE_FN[bid]; SEITE_FN[bid] = () => f1() + blickKarte(bid !== "landkarte"); } }
     if (L.blattAuto) { const s0 = SEITE_FN.start; SEITE_FN.start = () => weiterLeiste() + s0(); }
   }
   kernStart0();
@@ -1831,6 +1831,9 @@ function stundeStart(){
 }
 /* ===== Stunde 6: Flucht und Mauer (Heft M36 Fluchtbewegung, M37, M38, M39) ===== */
 const L = {
+  blick:{"name": "Sozialgeschichte: Zahlen und Lebenslagen", "anker": "2-3-7", "tut": "Du liest eine Fluchtstatistik und vier Protokolle: Was bringt Hunderttausende dazu, ihr Land zu verlassen?", "fehlt": "Was fehlt: die Menschen, die blieben. Protokolle aus dem Notaufnahmelager zeigen nur, wer ging – und was man dort bei der Befragung sagte."},
+  blattPlus:{"zahlen": {"form": "Allein, dann zu zweit"}, "gruende": {"form": "Zu zweit"}, "mauer": {"form": "Allein, dann Plenum"}, "landkarte": {"form": "Allein"}, "verorten": {"form": "Allein"}},
+  schreib:{"vor": "So kann die Aufgabe in der Klassenarbeit stehen: Material, zwei Operatoren, höchstens eine Seite. Hier schreibst du eine halbe Seite – auf Ansage in der Stunde oder als Hausaufgabe.", "gleich": "Du analysierst die Fluchtbewegung und erörterst, ob es eine Alternative zur Mauer gab.", "aufgabe": "<b>a) Analysieren Sie</b> die Fluchtbewegung aus der DDR von 1949 bis 1961 (M1, M2).<br><b>b) Erörtern Sie</b>, ob die SED-Führung 1961 eine Alternative zum Bau der Mauer hatte.", "woerter": 140, "min": 60, "stufen": [["Grundlegend", "Du nennst Zahlen und zwei Fluchtgründe und sagst, ob es eine Alternative gab."], ["Sicher", "Du erklärst die Zahlen mit den Gründen und nennst eine Alternative mit ihrem Risiko für die SED."], ["Souverän", "Du trennst „keine Alternative“ von „keine, die die SED-Führung gehen wollte“ und kommst zu einem begründeten Ergebnis."]], "inhalt": [["Analyse:", "Die Zahlen steigen in Krisenjahren (1953; 1960/61 nach der Kollektivierung). Es gehen vor allem junge Menschen. Die Gründe sind politisch, wirtschaftlich und persönlich."], ["Alternativen:", "Reformen, Reisefreiheit, höhere Löhne – jede hätte die Herrschaft der SED gefährdet."], ["Erörterung:", "Tragfähig sind beide Ergebnisse. Es zählt die Abwägung: Die SED-Führung ändert nicht die Verhältnisse, sondern schließt die letzte offene Grenze."]], "material": "<p><b>M1 · Flüchtlinge aus der DDR:</b> 1949: 129 245 · 1953: 331 390 (Höchststand, Jahr des 17. Juni) · 1949 bis 1961 zusammen rund 2,7 Millionen, etwa die Hälfte jünger als 25 Jahre.</p><p><b>M2 · Gründe aus vier Protokollen:</b> politischer Druck, Gewissensgründe, Druck zum Eintritt in Partei und Organisationen, Mangel, Verdienst, Familie.</p>"},
   sid:"s6", key:"ggk-owk-s6:v1", nr:"Stunde 6", titel:"Flucht und Mauer", unter:"1949 bis 1961", mark:OWK_MARK,
   seiten:[["start","",""],["zahlen","18 Min.","Die Zahlen"],["gruende","22 Min.","Die Gründe"],["mauer","18 Min.","Die Mauer"],["landkarte","8 Min.","Landkarte"],["verorten","14 Min.","Verorten"],["merk","","Merkseite"]],
   breit:["zahlen","gruende","mauer","verorten","lehrkraft"],

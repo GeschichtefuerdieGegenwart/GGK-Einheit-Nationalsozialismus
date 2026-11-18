@@ -1,5 +1,7 @@
 /* ===== M27 · Die Vergessenen! Eine Globalgeschichte des Zweiten Weltkriegs ===== */
 const L = {
+  blick:{"name": "Globalgeschichte und postkoloniale Geschichte", "anker": "2-3-4", "tut": "Du drehst die Weltkarte: Wer hat im Zweiten Weltkrieg gekämpft und gelitten – und kommt in unseren Büchern kaum vor?", "fehlt": "Was fehlt: Auch die Weltkarte zeigt Staaten und Zahlen. Einzelne Stimmen der Menschen aus den Kolonien sind selten überliefert – und in dieser Stunde kaum zu hören."},
+  blattPlus:{"schluss": {"marke": "ein Absatz für das Schulbuch"}},
   blattAuto:true, kapitel:"Nationalsozialismus", dauer:90,   /* Blatt-Rahmen: Register links, ein Auftrag je Seite (blatt.js) */
   key:"ggk-m27-vergessene:v1", nr:"M27", titel:"Die Vergessenen!", unter:"Eine Globalgeschichte des Zweiten Weltkriegs",
   /* Zeichen der Stunde: ein Globus, der auf dem Kopf steht */

@@ -1137,9 +1137,9 @@ const erinnere = (fragen, pfad = "ab") => `<div class="w-erinn"><p class="kennun
 
 /* ---------- Der Blick dieser Stunde: Der Zugang wird als Form von Geschichte offengelegt – erst selbst überlegen, was er ausblendet, dann vergleichen.
    L.blick = { name, anker (Abschnitt der Landkarte, z. B. "2-3-8"), tut, fehlt } ---------- */
-const blickKarte = () => { const b = L.blick; if (!b) return "";
+const blickKarte = ohneSperre => { const b = L.blick; if (!b) return "";
   /* Der Blick wird erst nach der Landkarten-Aufgabe benannt: Sonst nähme die Karte die Antwort vorweg (erst die Sache, dann der Begriff). */
-  if (!S.lk.ok && !String(S.blickfehlt || "").trim()) return `<p class="w-blickzu">Der Blick dieser Stunde · öffnet sich, wenn du die Landkarten-Aufgabe geprüft hast.</p>`;
+  if (!ohneSperre && !S.lk.ok && !String(S.blickfehlt || "").trim()) return `<p class="w-blickzu">Der Blick dieser Stunde · öffnet sich, wenn du die Landkarten-Aufgabe geprüft hast.</p>`;
   return `<section class="w-blickk"><p class="kennung">Der Blick dieser Stunde · 1 Minute</p><h3>So haben wir heute auf Geschichte geschaut: ${esc(b.name)}</h3><p>${esc(b.tut)}${b.anker ? ` <a href="${LK}${b.anker}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a>` : ""}</p>
   ${textfeld("blickfehlt", "Was blendet dieser Blick aus? Ein Satz.", { rows:2, zaehl:false, platz:"Nicht in den Blick kommt …" })}
   ${vergleich("blickv", ["blickfehlt"], 10, "Mit einem Vorschlag vergleichen", `<p>${esc(b.fehlt)}</p><p class="hinweis">Jeder Blick zeigt etwas und lässt etwas weg. Deshalb wechselt der Blick von Stunde zu Stunde.</p>`)}</section>`; };
@@ -1184,7 +1184,7 @@ kernStart = function(){
     if (L.pole) { const id0 = L.blatt[0].id, f0 = SEITE_FN[id0]; SEITE_FN[id0] = () => leitVor() + f0();
       if (L.zf && !L.pole.eigen) (L.zf.mein = L.zf.mein || []).push(["Die Leitfrage – am Anfang und am Ende", () => { const lf = S.lf || {}; return lf.vor == null && lf.nach == null ? "" : `Am Anfang: ${lf.vor == null ? "offen" : lf.vor + " von 5"} · am Ende: ${lf.nach == null ? "offen" : lf.nach + " von 5"} (1 = ${L.pole.links} · 5 = ${L.pole.rechts})`; }]);
       if (L.blattAuto && !L.pole.eigen) { const zid = L.blatt[L.blatt.length - 1].id, z0 = SEITE_FN[zid]; SEITE_FN[zid] = () => leitNach() + z0(); } }
-    if (L.blick && SEITE_FN.landkarte) { const f1 = SEITE_FN.landkarte; SEITE_FN.landkarte = () => f1() + blickKarte(); }
+    { const bid = L.blickAn || "landkarte"; if (L.blick && SEITE_FN[bid]) { const f1 = SEITE_FN[bid]; SEITE_FN[bid] = () => f1() + blickKarte(bid !== "landkarte"); } }
     if (L.blattAuto) { const s0 = SEITE_FN.start; SEITE_FN.start = () => weiterLeiste() + s0(); }
   }
   kernStart0();
@@ -1282,6 +1282,8 @@ document.head.insertAdjacentHTML("beforeend", `<style id="lehr-stil">
 const leer = () => ({ s1:{ sehen:"", denkt:"", d14:{ a:false, b:false, c:false }, d14zu:false, nach:"" }, s2:{ pro:"", contra:"", tun:"", nach:"", extra:"" }, s3:{ folgen:"", foto:false, bild:"" }, s4:{ tun:"", nach:"" },
   raum:{ 1:null, 2:null, 3:null, 4:null }, raum2:{ 1:"", 2:"", 3:"", 4:"" }, j39:"", agency:null, agrund:"", tausch:"", zurueck:"" });
 const L = {
+  blick:{"name": "Blick aus der Nähe: zwei ausgedachte Lebensläufe", "anker": "2-3-6", "tut": "Du begleitest zwei Menschen durch die Jahre 1933 bis 1939. So arbeitet die Mikrogeschichte – nur sind die beiden Lebensläufe ausgedacht.", "fehlt": "Was fehlt: die Menschen, die die Gesetze machten, durchsetzten oder davon profitierten. Aus der Nähe zweier Lebensläufe sieht man die Ausgrenzung – aber nicht, warum so viele mitmachten."},
+  schreib:{"vor": "So kann die Aufgabe in der Klassenarbeit stehen: Material, zwei Operatoren, höchstens eine Seite. Hier schreibst du eine halbe Seite – auf Ansage in der Stunde oder als Hausaufgabe.", "gleich": "Du stellst die Stufen der Ausgrenzung dar und beurteilst den Handlungsspielraum.", "aufgabe": "<b>a) Stellen Sie</b> die Stufen der Ausgrenzung der jüdischen Bevölkerung von 1933 bis 1938 <b>dar</b>.<br><b>b) Beurteilen Sie</b>, wie viel Handlungsspielraum Menschen in Deutschland in diesen Jahren hatten. Vermeiden Sie den Rückschaufehler.", "woerter": 140, "min": 60, "stufen": [["Grundlegend", "Du nennst die vier Stationen mit Datum und sagst, ob es Spielraum gab."], ["Sicher", "Du zeigst, wie jede Stufe weiter geht als die davor, und begründest dein Urteil an einem Beispiel aus deinem Lebenslauf."], ["Souverän", "Du sagst, wessen Spielraum du meinst und wovon er abhing, und urteilst aus der Sicht der Zeit."]], "inhalt": [["Stufen:", "1933 Boykott: SA und SS hindern Menschen am Betreten jüdischer Geschäfte. 1933 Berufsbeamtengesetz: Der „Arierparagraph“ verdrängt jüdische Beamt*innen aus dem öffentlichen Dienst. 1935 Nürnberger Gesetze: Jüdinnen und Juden werden zu Menschen minderen Rechts. 1938 Novemberpogrom: Synagogen brennen; Menschen werden misshandelt, verhaftet und getötet."], ["Spielraum:", "Für die Verfolgten wird er von Stufe zu Stufe enger. Für die Mehrheit bleibt er größer: wegsehen, mitmachen, helfen."], ["Urteil:", "Tragfähig sind verschiedene Urteile. Es zählt, dass du sagst, wessen Spielraum du meinst und wovon er abhing – und dass du nicht vom späteren Wissen um die Shoah her urteilst."]], "material": "<p><b>M1 · Vier Stationen:</b> 1. April 1933 Boykott jüdischer Geschäfte, Kanzleien und Praxen · 7. April 1933 Berufsbeamtengesetz mit „Arierparagraph“ · 15. September 1935 Nürnberger Gesetze · 9./10. November 1938 Novemberpogrom.</p>"},
   blattAuto:true, kapitel:"Nationalsozialismus", dauer:90,   /* Blatt-Rahmen: Register links, ein Auftrag je Seite (blatt.js) */
   key:"ggk-m17-leben:v1", nr:"M17", titel:"Mein Leben in der NS-Diktatur I", unter:"Ausgrenzung 1933–1939 aus zwei Blickwinkeln",
   /* Zeichen der Stunde: eine Linie, die sich teilt */

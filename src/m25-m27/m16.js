@@ -1,10 +1,13 @@
 /* ===== M16 · Was macht den Menschen zum Menschen? (Heft „Geschichte aktuell 1“, M16) ===== */
 const L = {
+  blick:{"name": "Gegenwartsfrage: Wir befragen die Vergangenheit mit heutigen Fragen", "anker": "1-3", "tut": "Du beginnst die Einheit nicht im Jahr 1933, sondern bei dir: Was macht für dich einen Menschen aus? Eine Überlebende gibt den Anstoß.", "fehlt": "Was fehlt: die Geschichte selbst. Über die Jahre 1933 bis 1945 hast du in dieser Stunde noch nichts erfahren. Das beginnt in M17."},
+  blattPlus:{"landkarte": {"form": "Allein · auch als Hausaufgabe"}},
+  schreib:{"vor": "So kann die Aufgabe in der Klassenarbeit stehen: zwei Teilaufgaben, höchstens eine Seite. Hier schreibst du eine halbe Seite – als Hausaufgabe. Bei b) ist ein Werturteil gefragt: Nenne den Maßstab, an dem du misst.", "gleich": "Du gibst Margot Friedländers Appell wieder und nimmst Stellung zur Frage der Stunde.", "aufgabe": "<b>a) Geben Sie</b> Margot Friedländers Appell <b>wieder</b> und <b>erklären Sie</b>, was sie damit meint.<br><b>b) Nehmen Sie Stellung</b> zu der Frage, ob ein Mensch seine Menschlichkeit verlieren kann. Legen Sie Ihren Maßstab offen.", "woerter": 140, "min": 60, "stufen": [["Grundlegend", "Du gibst den Appell wieder und sagst, ob Menschlichkeit verloren gehen kann."], ["Sicher", "Du erklärst den Appell mit einem Begriff aus der Stunde und begründest deine Stellungnahme an einem Beispiel."], ["Souverän", "Du unterscheidest, was „Menschlichkeit“ meinen kann, legst deinen Maßstab offen und wägst eine Gegenposition ab."]], "inhalt": [["Appell:", "So, wie du ihn in Auftrag 1 notiert hast. Ein Appell ist ein dringender Aufruf; sie richtet ihn als Überlebende an uns."], ["Stellungnahme:", "Tragfähig sind verschiedene Antworten: „Ja – wer anderen die Würde nimmt, handelt unmenschlich“, „Nein – auch wer Unrecht tut, bleibt ein Mensch und damit verantwortlich“ oder „Es kommt darauf an“. Es zählt der Maßstab, den du nennst."]]},
   blattAuto:true, kapitel:"Nationalsozialismus", dauer:45,   /* Blatt-Rahmen: Register links, ein Auftrag je Seite (blatt.js) */
   key:"ggk-m16-mensch:v1", nr:"M16", titel:"Was macht den Menschen zum Menschen?", unter:"Einstieg in die Einheit Nationalsozialismus",
   /* Zeichen der Stunde: zwei Kreise, die sich überschneiden (ich und die anderen) */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><circle cx="13" cy="17" r="9" fill="none" stroke="#24221F" stroke-width="2.4"/><circle cx="21" cy="17" r="9" fill="none" stroke="#9B402D" stroke-width="2.4"/></svg>`,
-  seiten:[["start","",""],["appell","0–10 Min.","Der Appell"],["menschlich","10–18 Min.","Was ist menschlich?"],["humanismus","18–27 Min.","Humanismus"],["werte","27–38 Min.","Meine Werte"],["frage","38–45 Min.","Die Frage"],["zusammenfassung","Zum Abheften","Zusammenfassung"]],
+  seiten:[["start","",""],["appell","0–10 Min.","Der Appell"],["menschlich","10–18 Min.","Was ist menschlich?"],["humanismus","18–27 Min.","Humanismus"],["werte","27–38 Min.","Meine Werte"],["frage","38–45 Min.","Die Frage"],["landkarte","5 Min.","Landkarte"],["zusammenfassung","Zum Abheften","Zusammenfassung"]],
   breit:["humanismus","werte","zusammenfassung","lehrkraft"],
   loesch:"Dein Appell, deine Wörter, Markierungen, Entscheidungen, Werte und deine Stimme werden auf diesem Gerät entfernt.",
   init:() => ({ appell:"", meint:"", w1:[], w2:[], hsatz:"", dil:{}, top:[], wsatz:"", mehr:false, stimme:null, wo:"" }),
@@ -162,5 +165,19 @@ AKTION.tafelwoerter = () => tafel(`<div class="tafelwoerter"><div><h2>Was ist me
 AKTION.dil = t => { const i = t.dataset.i, alt = (S.dil || {})[i] || {}; setz("dil." + i, { o:+t.dataset.o, w:alt.w || "" }); zeichneBehalte(); };
 AKTION.top = t => { const w = t.dataset.w, a = S.top.slice(), i = a.indexOf(w); if (i >= 0) a.splice(i, 1); else if (a.length < 3) a.push(w); setz("top", a); zeichneBehalte(); };
 document.addEventListener("keydown", ev => { const t = ev.target; if (ev.key === "Enter" && t.dataset && t.dataset.chip) { ev.preventDefault(); const b = document.querySelector(`[data-akt="chipplus"][data-p="${t.dataset.chip}"]`); if (b) AKTION.chipplus(b); } });
-const SEITE_FN = { start, appell, menschlich, humanismus, werte, frage, zusammenfassung, lehrkraft };
+function seiteLk(){
+  return landkarteL({ teil:"wozu", frage:"Eine Überlebende spricht bis ins hohe Alter mit Schüler*innen und richtet einen Appell an uns. Welchen Punkt aus „Wozu Geschichte?“ trifft das am besten?",
+    lead:"Denk an das Gespräch mit Margot Friedländer. Vermute: Wozu erzählt sie ihre Geschichte – und wozu hören wir zu?", platz:"Sie erzählt, damit …",
+    urteil:{
+      "1-10":["zentral","Geschichten von Mut, Widerstand und sozialem Wandel können motivieren, sich selbst einzusetzen. Genau darauf zielt ein Appell: Er will, dass wir etwas tun."],
+      "1-4":["zentral","Ein Appell setzt voraus, dass man aus Geschichte lernen kann. Die Landkarte warnt aber: Situationen wiederholen sich nie genau. Besprecht: Was lässt sich aus ihrer Geschichte lernen – und was nicht einfach übertragen?"],
+      "1-6":["teils","Die Stunde fragt, was dir selbst wichtig ist – das gehört zur Identität. Der Appell zielt aber weniger auf das, was du bist, als auf das, was du tust."],
+      "1-8":["teils","Wer weiß, wie eine Demokratie zerstört wurde, kann sie besser schützen. Das wird in den nächsten Stunden wichtig. Heute ging es zuerst um Menschlichkeit."],
+      "1-1":["kaum","Wie Propaganda funktioniert, untersuchst du später in dieser Einheit. Heute hast du noch keine Propaganda geprüft – der Appell zielt auf etwas anderes."],
+      "1-3":["teils","Die Stunde beginnt mit einer heutigen Frage: Was macht den Menschen aus? Das ist der Dialog zwischen Gegenwart und Vergangenheit. Der Appell will aber mehr als verstehen: Er will, dass wir etwas tun."],
+      "1-2":["kaum","Die Stunde fragt zwar, was den Menschen ausmacht. Anthropologische Konstanten meinen aber wiederkehrende Muster im Verhalten, zum Beispiel in Krisen. Solche Muster hast du heute noch nicht untersucht."],
+    },
+    bruecke:`<b>Merke:</b> Frag bei jeder Geschichte, die dir jemand erzählt: Wozu wird sie erzählt – und was soll ich damit tun?` });
+}
+const SEITE_FN = { start, appell, menschlich, humanismus, werte, frage, landkarte:seiteLk, zusammenfassung, lehrkraft };
 kernStart();

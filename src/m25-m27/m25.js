@@ -1,5 +1,7 @@
 /* ===== M25 · Leben in Ruinen und der Umgang mit Schuld – nach dem Modul zum Kriegsende von Offene Geschichte ===== */
 const L = {
+  blick:{"name": "Alltagsgeschichte: Erfahrungen „gewöhnlicher“ Menschen", "anker": "2-3-10", "tut": "Du liest, wie Menschen das Kriegsende erlebt haben: ein befreiter Häftling, eine junge Frau in Bayern, eine Journalistin in Berlin. Nicht Regierungen stehen im Mittelpunkt, sondern Erfahrungen.", "fehlt": "Was fehlt: die Sieger und ihre Pläne. Was die Alliierten mit Deutschland vorhatten, entscheidet sich in Potsdam – das ist die erste Stunde der Einheit zum Ost-West-Konflikt."},
+  blattPlus:{"verantwortung": {"marke": "zwei Urteile wie in der Klassenarbeit"}},
   blattAuto:true, kapitel:"Nationalsozialismus", dauer:90,   /* Blatt-Rahmen: Register links, ein Auftrag je Seite (blatt.js) */
   key:"ggk-m25-ruinen:v1", nr:"M25", titel:"Leben in Ruinen und der Umgang mit Schuld", unter:"Kriegsende 1945 · nach dem Modul von Offene Geschichte",
   herkunft:`Dieses Modul beruht auf dem Modul zum Kriegsende von <a href="https://offene-geschichte.de/kriegsende-1/" target="_blank" rel="noopener">Offene Geschichte</a> (offenes Unterrichtsmaterial, herausgegeben von der Universität Tübingen). Für das Unterrichtsheft und diese Seite wurde es angepasst.`,
