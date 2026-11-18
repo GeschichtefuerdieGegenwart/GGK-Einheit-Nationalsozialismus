@@ -37,7 +37,7 @@
       (e.frage ? '<p class="leitfrage">' + esc(e.frage) + "</p><p>" + esc(e.frageOrt) + "</p>" : "") +
       "<p>" + (zahlwort[n] ? zahlwort[n].charAt(0).toUpperCase() + zahlwort[n].slice(1) : n) + " Arbeitsblätter in der Reihenfolge deines Hefts. Jedes Blatt merkt sich deinen Stand auf diesem Gerät.</p></div>" +
       '<div><p><b>Wechselst du das Gerät?</b> Sichere deinen Stand als Datei und lade ihn auf dem anderen Gerät wieder. Es gibt keine Anmeldung und keinen Server.</p>' +
-      '<div class="reihe nodruck"><button type="button" class="btn dunkel" data-ab="sichern">Stand als Datei sichern</button><button type="button" class="btn" data-ab="laden">Stand aus Datei laden</button></div>' +
+      '<div class="reihe nodruck">' + B.dateiKnoepfe("dunkel") + "</div>" +
       '<label class="haken nodruck"><input type="checkbox" data-ab="beamer"' + (B.beamer() ? " checked" : "") + "> Ansicht für den Beamer</label></div></section>" +
       '<section aria-labelledby="h-blaetter"><h2 id="h-blaetter">Die Arbeitsblätter</h2><ol class="blaetter">' + karten + "</ol></section>" +
       '<section aria-labelledby="h-spur"><h2 id="h-spur">Deine Lernspur</h2>' +

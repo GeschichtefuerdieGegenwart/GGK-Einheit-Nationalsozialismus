@@ -1,7 +1,7 @@
 /* ===== Arbeitsblatt Geschichte · gemeinsamer Kern · Quelle: src/arbeitsblatt/ab.js – nur dort ändern =====
    Platz im Hefter · Stand an den Hefter melden · Stand als Datei sichern und laden (Text als Rückfall) · Ansicht für den Beamer.
    Alles bleibt im Browser oder in der Datei: keine Anmeldung, kein Server, keine Namen.
-   Wenige Tipps: Sichern ist ein Tipp, Laden öffnet sofort die Dateiwahl; die Rückmeldung steht daneben, nicht in einem Fenster. */
+   Wenige Tipps: Sichern ist ein Tipp (auch aus der Kopfzeile), Laden öffnet sofort die Dateiwahl; die Rückmeldung steht daneben, nicht in einem Fenster. */
 (function () {
   "use strict";
   const doc = document, root = doc.documentElement;
@@ -39,11 +39,36 @@
   let RUECK = "";   // letzte Rückmeldung zum Sichern oder Laden; bleibt stehen, auch wenn das Register neu gezeichnet wird
   function rueck(html) { RUECK = html || ""; doc.querySelectorAll("[data-ab-rueck]").forEach(p => { p.innerHTML = RUECK; }); }
   function sichern() {
-    if (!E()) return;
+    if (!E()) return false;
     const text = paket(), name = dateiname();
     try { const a = doc.createElement("a"); a.href = URL.createObjectURL(new Blob([text], { type: "application/json" })); a.download = name; doc.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
-    catch (e) { textFenster(); return; }
+    catch (e) { textFenster(); return false; }
     rueck("<b>Gesichert:</b> " + esc(name) + ". Die Datei liegt bei deinen Downloads. Leg sie in deinen Ordner für Geschichte.");
+    return true;
+  }
+  /* Der getippte Knopf zeigt kurz selbst, dass gesichert wurde – auch dort, wo die Werkzeuge gerade nicht zu sehen sind (Knopf in der Kopfzeile). */
+  function kurz(t, text) {
+    if (!t || t.hasAttribute("data-ab-alt")) return;
+    t.setAttribute("data-ab-alt", t.textContent); t.textContent = text;
+    setTimeout(() => { if (doc.contains(t)) t.textContent = t.getAttribute("data-ab-alt"); t.removeAttribute("data-ab-alt"); }, 3500);
+  }
+  /* Laden: eine einzige Dateiwahl für die ganze Seite. Sie bleibt bestehen, auch wenn Register oder Blatt neu gezeichnet werden. */
+  let WAHL = null;
+  function laden() {
+    if (!E()) return;
+    if (!WAHL) {
+      WAHL = doc.createElement("input"); WAHL.type = "file"; WAHL.accept = "application/json,.json,text/plain"; WAHL.id = "ab-datei"; WAHL.tabIndex = -1;
+      WAHL.setAttribute("aria-hidden", "true"); WAHL.style.cssText = "position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none";
+      WAHL.addEventListener("change", () => {
+        const f = WAHL.files && WAHL.files[0]; if (!f) return;
+        const r = new FileReader();
+        r.onload = () => { const m = uebernehmen(String(r.result || "")); if (m) rueck(esc(m)); };
+        r.onerror = () => rueck("Die Datei ließ sich nicht lesen.");
+        r.readAsText(f); WAHL.value = "";
+      });
+      doc.body.appendChild(WAHL);
+    }
+    WAHL.click();
   }
   function uebernehmen(text) {
     const e = E();
@@ -96,7 +121,7 @@
   /* ---------- Werkzeuge: überall dieselben Knöpfe an derselben Stelle, offen sichtbar ---------- */
   function dateiKnoepfe(klasse) {
     return '<button type="button" class="btn' + (klasse ? " " + klasse : "") + '" data-ab="sichern">Stand als Datei sichern</button>' +
-      '<label class="btn">Stand aus Datei laden<input type="file" accept="application/json,.json,text/plain" class="sr" data-ab="datei"></label>' +
+      '<button type="button" class="btn" data-ab="laden">Stand aus Datei laden</button>' +
       '<p class="ab-klein" data-ab-rueck aria-live="polite">' + RUECK + "</p>";
   }
   function werkzeuge(mitte, lizenz) {
@@ -109,7 +134,8 @@
   doc.addEventListener("click", ev => {
     const t = ev.target.closest && ev.target.closest("[data-ab]"); if (!t || t.tagName === "INPUT") return;
     const a = t.getAttribute("data-ab");
-    if (a === "sichern") sichern();
+    if (a === "sichern") { if (sichern()) kurz(t, "✓ Gesichert"); }
+    else if (a === "laden") laden();
     else if (a === "text") textFenster();
     else if (a === "zu") fensterZu();
     else if (a === "kopieren") { const ta = doc.getElementById("ab-standtext"), s = doc.getElementById("ab-kopiert"); ta.select(); let ok = false; try { ok = doc.execCommand("copy"); } catch (e) {} if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ta.value).then(() => { s.textContent = "Kopiert."; }, () => { s.textContent = ok ? "Kopiert." : "Markiere den Text und kopiere ihn von Hand."; }); else s.textContent = ok ? "Kopiert." : "Markiere den Text und kopiere ihn von Hand."; }
@@ -118,16 +144,10 @@
   doc.addEventListener("change", ev => {
     const t = ev.target; if (!t || !t.getAttribute) return;
     const a = t.getAttribute("data-ab");
-    if (a === "beamer") { setzeBeamer(t.checked); return; }
-    if (a === "datei" && t.files && t.files[0]) {
-      const r = new FileReader();
-      r.onload = () => { const m = uebernehmen(String(r.result || "")); if (m) rueck(esc(m)); };
-      r.onerror = () => rueck("Die Datei ließ sich nicht lesen.");
-      r.readAsText(t.files[0]); t.value = "";
-    }
+    if (a === "beamer") setzeBeamer(t.checked);
   });
   doc.addEventListener("keydown", ev => { const f = doc.getElementById("ab-fenster"); if (f && !f.hidden && ev.key === "Escape") fensterZu(); });
 
-  window.GGKBlatt = { platz, stand, melde, vergiss, sichern, werkzeuge, dateiKnoepfe, beamer, einheit: E, esc };
+  window.GGKBlatt = { platz, stand, melde, vergiss, sichern, laden, werkzeuge, dateiKnoepfe, beamer, einheit: E, esc };
 })();
 /* ===== Ende des gemeinsamen Kerns ===== */

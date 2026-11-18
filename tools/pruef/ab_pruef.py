@@ -2,7 +2,7 @@
 """Arbeitsblatt Geschichte · Prüfung eines Blatts im Browser (Chromium über Playwright, per file://).
 Misst je Seite des Blatts und je Bildschirmgröße: waagerechter Überlauf · Schrift unter 16 px · Ziele unter 44 px ·
 Textkontrast unter 4,5 : 1 · Fehler in der Konsole · Anfragen an fremde Server. Dazu: Stand als Datei sichern und laden,
-falsche Datei, Stand nach Neuladen, Ansicht für den Beamer, erster Knopf am Beamer.
+falsche Datei, Stand nach Neuladen, Freigabe mit einem Tipp, Übersicht (Karten, Linien, Bühne im Bild), Ansicht für den Beamer, erster Knopf am Beamer.
 Aufruf: python3 tools/pruef/ab_pruef.py [Ordner mit den Seiten]      (ohne Angabe: das Repository; sonst z. B. ein entpacktes Paket)
 Grenzen: Text auf Fotos (Bildbänder) und Text in SVG-Grafiken wird beim Kontrast nicht gemessen. Kein Safari, kein iPad, kein VoiceOver."""
 import asyncio, json, pathlib, sys, tempfile
@@ -95,26 +95,50 @@ async def main():
             await pg.reload(); await pg.wait_for_timeout(300)
             bericht.append(f"{nr} · Stand nach Neuladen: {'bleibt' if await pg.input_value('#ex-u') == 'Das Gespräch hat mein Urteil bestätigt.' else 'FEHLT'}")
             await pg.evaluate("geh('start')"); await pg.wait_for_timeout(200)
-            await pg.click('.ab-werk summary'); await pg.wait_for_timeout(150)
-            async with pg.expect_download() as dl: await pg.click('[data-ab="sichern"]')
+            # Sichern: ein Tipp in der Kopfzeile, kein Fenster
+            async with pg.expect_download() as dl: await pg.click('.kopf [data-ab="sichern"]')
             d = await dl.value; ziel = pathlib.Path(tempfile.mkdtemp()) / d.suggested_filename; await d.save_as(ziel)
             j = json.loads(ziel.read_text('utf-8'))
-            bericht.append(f"{nr} · Stand als Datei: {d.suggested_filename} · {ziel.stat().st_size} Bytes · Schlüssel: {sorted(j['daten'])}")
-            await pg.click('[data-ab="zu"]')
+            knopf = await pg.inner_text('.kopf [data-ab="sichern"]'); meld = await pg.evaluate('(() => { const p = document.querySelector("[data-ab-rueck]"); return p ? p.textContent : "–"; })()')
+            fenster = await pg.evaluate('!!document.querySelector(".ab-fenster:not([hidden])")')
+            bericht.append(f"{nr} · Stand als Datei (ein Tipp, Kopfzeile): {d.suggested_filename} · {ziel.stat().st_size} Bytes · Schlüssel: {sorted(j['daten'])} · Knopf zeigt „{knopf}“ · Meldung „{meld[:60]}…“ · Fenster offen: {'JA' if fenster else 'nein'}")
             await pg.evaluate('localStorage.clear()'); await pg.reload(); await pg.wait_for_timeout(300)
             leer = await pg.evaluate('k => localStorage.getItem(k)', B['key'])
-            await pg.click('.ab-werk summary'); await pg.click('[data-ab="laden"]'); await pg.wait_for_timeout(150)
+            # Laden: ein Tipp öffnet die Dateiwahl; die Rückmeldung steht bei den Werkzeugen
             falsch = pathlib.Path(tempfile.mkdtemp()) / 'falsch.json'; falsch.write_text('{"art":"etwas anderes"}', 'utf-8')
-            await pg.set_input_files('#ab-dateiwahl', str(falsch)); await pg.wait_for_timeout(300)
-            bericht.append(f"{nr} · falsche Datei: „{await pg.inner_text('#ab-lademeld')}“")
-            await pg.set_input_files('#ab-dateiwahl', str(ziel)); await pg.wait_for_timeout(700)
+            async with pg.expect_file_chooser() as fc: await pg.click('.ab-reg [data-ab="laden"]')
+            await (await fc.value).set_files(str(falsch)); await pg.wait_for_timeout(300)
+            bericht.append(f"{nr} · falsche Datei: „{await pg.inner_text('.ab-reg [data-ab-rueck]')}“")
+            async with pg.expect_file_chooser() as fc: await pg.click('.ab-reg [data-ab="laden"]')
+            await (await fc.value).set_files(str(ziel)); await pg.wait_for_timeout(700)
             await pg.evaluate("geh('extra')"); await pg.wait_for_timeout(200)
             zurueck = await pg.input_value('#ex-u') == 'Das Gespräch hat mein Urteil bestätigt.'
-            bericht.append(f"{nr} · löschen → aus Datei laden: vorher {'leer' if not leer else 'NICHT LEER'}, danach {'wieder da' if zurueck else 'FEHLT'}")
+            bericht.append(f"{nr} · löschen → aus Datei laden (ein Tipp und die Dateiwahl): vorher {'leer' if not leer else 'NICHT LEER'}, danach {'wieder da' if zurueck else 'FEHLT'}")
+            # Freigabe auf Ansage: ein Tipp, keine Rückfrage
+            await pg.evaluate("S.frei = {}; speichere(); geh('jozefow')"); await pg.wait_for_timeout(300)
+            zu = await pg.evaluate('!!document.querySelector(".ab-zu")'); await pg.click('.ab-zu [data-frei]'); await pg.wait_for_timeout(300)
+            auf = await pg.evaluate('!document.querySelector(".ab-zu") && offen("jozefow")')
+            bericht.append(f"{nr} · Freigabe auf Ansage: vorher {'geschlossen' if zu else 'OFFEN'}, nach einem Tipp {'offen' if auf else 'NOCH ZU'}")
+            await pg.evaluate('([k, s]) => { localStorage.setItem(k, JSON.stringify(s)); }', [B['key'], B['stand']]); await pg.reload(); await pg.wait_for_timeout(300)
+            # Übersicht (Auftrag 4): Karten ohne Überlauf, Linien enden an der Mitte der Karten, Tipp holt die Bühne ganz ins Bild
+            for w, h in [(1180, 820), (1180, 712), (1150, 700), (1280, 720), (1440, 900)]:
+                await pg.set_viewport_size({'width': w, 'height': h}); await pg.evaluate("geh('akte')"); await pg.wait_for_timeout(350)
+                m = await pg.evaluate("""(() => { const d = document.getElementById('dash').getBoundingClientRect(), b = document.getElementById('buehne').getBoundingClientRect();
+                  const k = [...document.querySelectorAll('#dash .spalte .akte')].map(e => { const r = e.getBoundingClientRect(), [ax, ay] = ankerKarte(e.dataset.akte);
+                    const innen = [...e.children].reduce((u, c) => Math.max(u, c.getBoundingClientRect().bottom), 0);
+                    return { s: e.dataset.akte, ueber: Math.round(innen - r.bottom + 6), raus: r.bottom > b.bottom || r.top < b.top, dy: Math.round((r.top + r.height / 2 - d.top) / d.height * 720 - ay), dx: Math.round(((ax < 640 ? r.right : r.left) - d.left) / d.width * 1280 - ax) }; });
+                  return { buehne: [Math.round(b.width), Math.round(b.height)], karten: k }; })()""")
+                schlecht = [x for x in m['karten'] if x['ueber'] > 0 or x['raus'] or abs(x['dy']) > 6 or abs(x['dx']) > 6]
+                await pg.evaluate("window.scrollTo(0, 0)"); await pg.click('#dash [data-akte="C"]'); await pg.wait_for_timeout(900)
+                r = await pg.evaluate("(() => { const b = document.getElementById('buehne').getBoundingClientRect(); return [Math.round(b.top), Math.round(b.bottom), innerHeight, Math.round(document.querySelector('.kopf').getBoundingClientRect().bottom)]; })()")
+                ganz = r[0] >= r[3] - 1 and r[1] <= r[2] + 1
+                bericht.append(f"{nr} · Übersicht {w} × {h}: Bühne {m['buehne'][0]} × {m['buehne'][1]} px · {len(m['karten'])} Karten, davon mit Fehler {len(schlecht)}{' ' + str(schlecht) if schlecht else ''} · nach Tipp auf eine Karte liegt die Bühne von {r[0]} bis {r[1]} px (Kopf bis {r[3]}, Fenster {r[2]}): {'ganz im Bild' if ganz else 'nicht ganz im Bild'}")
+                await pg.evaluate("schliessePanel()"); await pg.wait_for_timeout(250)
+            await pg.set_viewport_size({'width': 1180, 'height': 820})
             # Beamer-Ansicht und Hefter
-            await pg.evaluate("geh('start')"); await pg.click('.ab-werk summary'); await pg.check('[data-ab="beamer"]'); await pg.wait_for_timeout(150)
+            await pg.evaluate("geh('start')"); await pg.wait_for_timeout(200); await pg.check('.ab-reg [data-ab="beamer"]'); await pg.wait_for_timeout(150)
             bg = await pg.evaluate('getComputedStyle(document.getElementById("main")).backgroundColor')
-            bericht.append(f'{nr} · Ansicht für den Beamer: Blatt {bg}'); await pg.uncheck('[data-ab="beamer"]')
+            bericht.append(f'{nr} · Ansicht für den Beamer: Blatt {bg}'); await pg.uncheck('.ab-reg [data-ab="beamer"]')
             await pg.click('.kopf a.btn'); await pg.wait_for_timeout(400)
             hier = await pg.evaluate('(() => { const a = document.querySelector(".blaetter [data-hier]"); return a ? a.textContent.replace(/\\s+/g, " ").trim().slice(0, 110) : "–"; })()')
             m = await pg.evaluate(MESSEN)

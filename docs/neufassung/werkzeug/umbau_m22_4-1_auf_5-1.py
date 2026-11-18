@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Einmaliger Umbau: M22 von Fassung 4.1 auf Fassung 5.0 (Arbeitsblatt Geschichte, Farbwelt Archiv).
+"""Einmaliger Umbau: M22 von Fassung 4.1 auf Fassung 5.1 (Arbeitsblatt Geschichte in den Maßen des Moduls Motivation
+im Psycho-Labor, Farbwelt Archiv, wenige Tipps).
 Arbeitet auf der Fassung 4.1 aus dem Commit vor dem Umbau (git show) und schreibt die Seite neu.
 Danach: python3 tools/ab_einsetzen.py"""
 import pathlib, re, subprocess, sys
@@ -42,7 +43,7 @@ css = css.replace('/* Bewusst nur hell (Beamer, Druck), wie M18–M20. Farben au
 NEU_CSS = r'''
 /* AB-STIL:ANFANG */
 /* AB-STIL:ENDE */
-/* ===== Fassung 5.0 (18.11.2026): Arbeitsblatt Geschichte · Farbwelt Archiv · nichts unter 16 px ===== */
+/* ===== Fassung 5.1 (18.11.2026): Arbeitsblatt Geschichte · Blatt in den Maßen des Moduls Motivation (Psycho-Labor) · Farbwelt Archiv · nichts unter 16 px ===== */
 /* Fünf Ebenen (Modell der Lehrkraft): eigene Kennfarben, immer mit Wort. Rot entfällt; »Weltbild« trägt Pflaume. */
 :root{--e-person:#1E4FB5;--e-person-hi:#DCE5F7;--e-situation:var(--ok);--e-weltbild:#6A3B6E;--e-weltbild-hi:#EADFEB;--e-apparat:var(--slate);--e-vorteil:var(--achtung);--fast:150ms;--uebergang:300ms}
 .e-person,.ebenen .eb-person{color:var(--e-person);background:var(--e-person-hi)}
@@ -60,17 +61,17 @@ NEU_CSS = r'''
 .umschalter [role=tab]{border:2px solid var(--tinte)}
 .stempel{width:5.6rem;height:5.6rem;border-color:var(--tief);color:var(--tief)}
 .band .taeter{background:var(--tinte)}
-.band figcaption{font-size:1rem}
+/* Bildband: Die Bildunterschrift steht unter dem Bild, nicht darauf – so bleibt sie an jeder Bildstelle lesbar und verdeckt nichts */
+.band figure{display:grid;grid-template-rows:minmax(0,1fr) auto}
+.band figure img{min-height:0}
+.band figcaption{position:static;font-size:1rem;background:#2A2824;padding:.5rem .8rem .6rem}
+.dash-kopf [data-film]{margin-left:auto}
 .merksatz{border-color:var(--tinte)}
 .karte{border-color:var(--linie)}
 h1{font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem)}
 .zeit{color:var(--tief)}
-.urheberzeile{font-size:1rem;color:var(--leise);margin:0 1.2rem 1.2rem}
-.ab-rahmen:not(.schmal) ~ .urheberzeile{display:none}
-@media (max-width:899px){.ab-rahmen:not(.schmal) ~ .urheberzeile{display:none}}
+.urheberzeile{display:none}   /* die Zeile steht bei den Werkzeugen: im Register oder unter dem Blatt */
 /* Auftrag 4 · Übersicht: Die Karten tragen Name, Kennung und Frage in 16 px. Das Rad zeigt nur die Namen der Ebenen; ihre Erklärung steht darunter. */
-#main.dashboard .ab-zeile,#main.dashboard .ab-meta{display:none}
-#main.dashboard .ab-h{font-size:1.35rem;margin-bottom:.5rem}
 #main.dashboard .dash-fuss{margin-top:.6rem;display:grid;gap:.5rem}
 .fortschritt{font-size:1rem}
 .ring-text,#main.dashboard .ring-text{font-size:1rem;text-transform:none;letter-spacing:0;color:var(--leise)}
@@ -94,7 +95,7 @@ h1{font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem)}
 .zeitachse .jahr.tief{top:61%}
 .zeitachse .jahr.tief::before{top:-2.45em;height:2.2em}
 .ebenen-legende{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.5rem;margin:0;padding:0}
-.ebenen-legende li{padding:.4rem .6rem;border-left:5px solid var(--eb);background:var(--blatt);font-size:1rem;line-height:1.35}
+.ebenen-legende li{padding:.4rem .6rem;border-left:5px solid var(--eb);background:var(--grund);font-size:1rem;line-height:1.35}
 .ebenen-legende b{display:block}
 .ebenen-legende [data-ebene=person]{--eb:var(--e-person)}
 .ebenen-legende [data-ebene=situation]{--eb:var(--e-situation)}
@@ -103,20 +104,35 @@ h1{font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem)}
 .ebenen-legende [data-ebene=vorteil]{--eb:var(--e-vorteil)}
 .modellhinweis{font-size:1rem;color:var(--leise);margin:0}
 @media (min-width:1150px){
-  #main.dashboard .spalte{width:26%}
-  #main.dashboard .spalte .akte{font-size:1rem;grid-template-columns:3.3rem minmax(0,1fr);gap:.05rem .7rem;padding:.5rem .75rem;align-content:center}
-  #main.dashboard .spalte .akte .pf{grid-row:1/3;width:3.3rem;height:3.3rem;font-size:1.2rem;border-radius:.3rem}
-  #main.dashboard .spalte .akte b{font-size:1.28rem;align-self:end}
-  #main.dashboard .spalte .akte .j{align-self:start}
-  #main.dashboard .spalte .akte .fr{font-size:1rem;line-height:1.3;margin-top:.3rem}
-  #main.dashboard .spalte .akte .fs{margin-top:.3rem}
+  /* Die Bühne behält ihr Raster 16:9 (alle Punkte im Rad bleiben, wo sie sind). Die beiden Kartenspalten reichen oben und unten darüber hinaus:
+     zusammen 32:21. So tragen die Karten Name, Kennung, Frage und Stand in 16 px auch auf dem Blatt in der Größe des Vorbilds.
+     Die Bühne ist nie höher als das Fenster unter der Kopfzeile, aber nie schmaler als 945 px (darunter gilt ohnehin die Liste). */
+  #main.dashboard .buehne{aspect-ratio:32/21;width:100%;width:min(100%,max(945px,calc((100dvh - var(--ab-kopf) - 16px) * 1.5238)));margin-inline:auto;scroll-margin:calc(var(--ab-kopf) + 8px) 0 8px}
+  #main.dashboard .buehne .dash{height:auto;width:100%;margin:4.6875% auto}
+  #main.dashboard .spalte{width:27.5%;top:-3.9cqi;bottom:-3.9cqi;gap:1cqi}
+  #main.dashboard .spalte .akte{font-size:1rem;grid-template-columns:2.75rem minmax(0,1fr);gap:.15rem .7rem;padding:.45rem .75rem;align-content:center}
+  #main.dashboard .spalte .akte .pf{grid-row:1;width:2.75rem;height:2.75rem;font-size:1.2rem;border-radius:.3rem}
+  #main.dashboard .spalte .akte b{font-size:1.2rem;align-self:center}
+  #main.dashboard .spalte .akte .j{grid-column:1/-1;align-self:start}
+  #main.dashboard .spalte .akte .fr{font-size:1rem;line-height:1.3;margin-top:.1rem}
+  #main.dashboard .spalte .akte .fs{margin-top:.25rem}
   #main.dashboard .spalte .akte .fs span{font-size:1rem;padding:0 .4rem}
   .ebfeld small{display:none}
   .ebfeld{width:13%}
   .frage-kern{font-size:1rem;width:16.5%;height:29.3%;padding:.4rem}
   .frage-kern b{font-size:1.45rem}
   .frage-kern span{margin-top:.3rem;line-height:1.2}
-  .rad-satz{left:28%;right:28%;top:auto;bottom:1.2%;min-height:0}
+  .rad-satz{left:30%;right:30%;top:auto;bottom:1.2%;min-height:0}
+  /* Vergleich: Die Tabelle steht ganz da, die Bühne wächst mit ihr (kein Scrollen im Scrollen) */
+  #main.dashboard .buehne.a-vergleich{aspect-ratio:auto;width:100%}
+  #main.dashboard .buehne.a-vergleich .dash{aspect-ratio:auto;margin:0;padding:1rem 1rem 1.2rem}
+  #main.dashboard .buehne.a-vergleich .ring-text{position:static;transform:none;white-space:normal;margin:0 0 .6rem}
+  #main.dashboard .buehne.a-vergleich .ansicht{position:static;overflow:visible}
+  /* Zeitachse: nutzt die ganze Höhe der Bühne */
+  #main.dashboard .buehne.a-zeit .dash{aspect-ratio:32/21;margin:0 auto}
+  .zeitachse-fuss{top:0}
+  .panel{width:43%}
+  .panel .stufen button{padding-inline:.8rem}
 }
 @media (max-width:1149px){
   #main.dashboard .buehne{aspect-ratio:auto;overflow:visible}
@@ -136,15 +152,13 @@ h1{font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem)}
 #main summary{min-height:44px}
 /* Zusammenfassung: Das Rad ist so groß, dass seine Beschriftung 16 px erreicht (im Druck rund 9 pt) */
 .zf .schau{grid-template-columns:minmax(0,19rem) minmax(0,1fr)}
-/* Deckblatt, Extra, Am Beamer */
+/* Deckblatt */
 .ab-deck .ab-titelbild img{aspect-ratio:5/4;object-fit:cover;object-position:center 40%}
-.ab-deck .belastend,.ab-deck .merksatz{grid-column:1/-1;margin:0}
-.ab-deck ul{padding-left:1.2rem;display:grid;gap:.25rem}
 .eingabe fieldset{border:2px solid var(--stahl);border-radius:.3rem}
 @media print{
   .ab-deck .ab-titelbild img{aspect-ratio:16/10}
   html[data-seite="zusammenfassung"]{font-size:9pt}
-  html[data-seite="zusammenfassung"] .ab-h,html[data-seite="zusammenfassung"] .ab-meta{display:none!important}
+  html[data-seite="zusammenfassung"] .ab-akopf{display:none!important}
   .zf .ab-druckfeld{--zeile:6.6mm}
   .zf .schau{grid-template-columns:46mm minmax(0,1fr)}
   html[data-seite="zusammenfassung"] .zf > .zeit{display:none}
@@ -180,18 +194,16 @@ const PLATZ = GGKBlatt.platz("M22");                // Blatt 7 von 11, davor M21
 
 fn('kopf', r'''
 function kopf(){
-  document.getElementById("kopf").innerHTML = `<span class="reiter">M22</span><div class="titel">„Große Verbrechen brauchen keine Monster!“<small>Hefter ${esc(PLATZ.name)} · Arbeitsblatt ${PLATZ.i} von ${PLATZ.n}</small></div><a class="btn" href="${HEFTER}">← Hefter</a>`;
+  document.getElementById("kopf").innerHTML = `<span class="reiter">M22</span><div class="titel">„Große Verbrechen brauchen keine Monster!“<small>Hefter ${esc(PLATZ.name)} · Arbeitsblatt ${PLATZ.i} von ${PLATZ.n}</small></div><button type="button" class="btn" data-ab="sichern">Stand sichern</button><a class="btn" href="${HEFTER}">← Hefter</a>`;
   document.documentElement.style.setProperty("--ab-kopf", document.querySelector(".kopf").offsetHeight + "px");
   register(true);
 }
 ''')
 
-# Aufträge: breite Seiten kennzeichnen, Extra anhängen
-for kid in ['einstieg', 'fakten', 'jozefow', 'akte', 'landkarte', 'markt', 'diskussion']:
-    einmal(f'  {{ id:"{kid}", nr:', f'  {{ weit:true, id:"{kid}", nr:')
+# Aufträge: Extra anhängen (seit 5.1 gibt es keine »breiten« Seiten mehr: jedes Blatt hat dieselbe Größe)
 einmal('''fehlt:"Die Zusammenfassung enthält die Erklärungen. Sie öffnet sich nach deinem Text in Auftrag 7." },
 ];''', '''fehlt:"Die Zusammenfassung enthält die Erklärungen. Sie öffnet sich nach deinem Text in Auftrag 7." },
-  { id:"extra", nr:"＋", kurz:"Extra · freiwillig", name:"Extra: Ein Gespräch über einen Satz", form:"Freiwillig · außerhalb der 90 Minuten", min:0, frei:"antwort", nach:"schreiben", fehlt:"Das Extra öffnet sich nach deinem Text in Auftrag 7.", extra:true },
+  { id:"extra", nr:"＋", kurz:"Extra · freiwillig", name:"Ein Gespräch über einen Satz", form:"Freiwillig · außerhalb der 90 Minuten", min:0, frei:"antwort", nach:"schreiben", fehlt:"Das Extra öffnet sich nach deinem Text in Auftrag 7.", extra:true },
 ];''')
 einmal('''markt: () => (S.grund || "").trim().length >= 10, schreiben: schreibFertig, rueckblick: () => (S.neu || "").trim().length >= 10 };''',
        '''markt: () => (S.grund || "").trim().length >= 10, schreiben: schreibFertig, rueckblick: () => (S.neu || "").trim().length >= 10, extra: () => (S.ex.u || "").trim().length >= 10 };''')
@@ -214,28 +226,47 @@ einmal('''const blattzeile = () => `<div class="ab-zeile"><span>GGK · Nationals
        '''const blattzeile = () => `<div class="ab-zeile"><span>GGK · ${esc(PLATZ.name)}</span><span><b>M22</b> · Blatt ${PLATZ.i} von ${PLATZ.n} im Hefter</span><span>Datum: ${new Date().toLocaleDateString("de-DE")}</span></div>`;''')
 einmal('''  return `<h1 class="ab-h"><span class="ab-nr" aria-hidden="true">${a.nr}</span><span>Arbeitsauftrag ${a.nr}${n > 1 ? BUCHST[i] : ""}: ${esc(a.name)}</span></h1>
   <p class="ab-meta">${esc(a.form)} · ${a.min} Minuten${a.marke ? `<span class="ab-marke">${esc(a.marke)}</span>` : ""}</p>''',
-       '''  return `<h1 class="ab-h${a.extra ? " eckig" : ""}"><span class="ab-nr" aria-hidden="true">${a.nr}</span><span>${a.extra ? "" : `Arbeitsauftrag ${a.nr}${n > 1 ? BUCHST[i] : ""}: `}${esc(a.name)}</span></h1>
-  <p class="ab-meta">${esc(a.form)}${a.extra ? "" : ` · ${a.min} Minuten`}${a.marke ? `<span class="ab-marke">${esc(a.marke)}</span>` : ""}</p>''')
+       '''  return `<header class="ab-akopf${a.extra ? " eckig" : ""}"><span class="ab-nr" aria-hidden="true">${a.nr}</span><div><p class="ab-kicker">${a.extra ? "Extra · freiwillig" : `Arbeitsauftrag ${a.nr}${n > 1 ? BUCHST[i] : ""}`}</p><h1 class="ab-titel">${esc(a.name)}</h1>
+  <p class="ab-meta">${a.form.split(" · ").map(x => `<span>${esc(x)}</span>`).join("")}${a.extra ? "" : `<span>${a.min} Minuten</span>`}${a.marke ? `<span class="ab-marke">${esc(a.marke)}</span>` : ""}</p></div></header>''')
 einmal('''`<a class="btn" href="${LABOR}">Zum GGK-Labor</a>`}</div>`;''', '''`<a class="btn" href="${HEFTER}">Zum Hefter</a>`}</div>`;''')
 
 fn('start', r'''
 function start(){
   const b = BILDER.wald, da = b && !FEHLT.has("wald"), runden = AUF.filter(a => !a.extra);
-  return `<div class="ab-deck"><div class="ab-deck__kopf"><span class="reiter">M22</span>
+  const naechst = runden.find(a => !erledigt(a.id)), begonnen = runden.some(a => erledigt(a.id));
+  return `<div class="ab-deck"><div class="ab-deck__text">
+    <p class="ab-kicker">M22 · Blatt ${PLATZ.i} von ${PLATZ.n} im Hefter · davor ${PLATZ.davor.nr} · danach ${PLATZ.danach.nr} · 90 Minuten</p>
     <h1>„Große Verbrechen brauchen keine Monster!“</h1>
-    <div><p class="ab-zentral">Zentrale Frage</p><p class="leitfrage">Wie war das möglich? Wer wurde zum Täter, wer zur Täterin?</p></div>
-    <p class="ab-platz"><b>Platz im Hefter:</b> Blatt ${PLATZ.i} von ${PLATZ.n}<br>davor: ${PLATZ.davor.nr} ${esc(PLATZ.davor.kurz)}<br>danach: ${PLATZ.danach.nr} ${esc(PLATZ.danach.kurz)}</p>
-    <div class="reihe nodruck" style="margin-top:0"><button class="btn primary" data-geh="einstieg">Arbeitsauftrag 1 beginnen ›</button></div></div>
-  ${da ? `<figure class="ab-titelbild"><img src="${b.datei}" alt="${esc(b.alt)}" width="1000" height="1248" data-bild="wald" onerror="bildFehlt(this)"><figcaption>${esc(b.unter)}. ${esc(b.quelle)}.</figcaption></figure>` : "<span></span>"}
-  <div class="ab-deck__unten"><div><h2>Darum geht es</h2><p>In M21 ging es um die Menschen, die ermordet wurden. Heute fragst du nach denen, die die Morde möglich machten. Die Täter waren keine Monster. Das ist das Ergebnis von siebzig Jahren Forschung, und es ist das Beunruhigende daran.</p>
-    <p>Du prüfst drei Sätze, untersuchst einen Fall und vergleichst Erklärungen der Forschung. Am Ende schreibst du eine Erklärung – so, wie sie in der Klassenarbeit verlangt wird.</p>
-    <h2 style="margin-top:1rem">So arbeitest du mit diesem Blatt</h2><ul><li>Links stehen alle Arbeitsaufträge. Du siehst immer, wo du bist und was noch kommt.</li><li>Jeder Auftrag hat eine eigene Seite. Du scrollst von oben nach unten.</li><li>Manche Aufträge öffnen sich erst nach deiner Antwort, manche auf Ansage deiner Lehrkraft.</li><li>Am Ende sicherst du deinen Stand als Datei. So geht nichts verloren, auch wenn du das Gerät wechselst.</li></ul></div>
-  <div><h2>So läuft dieses Blatt</h2><table class="ab-ablauf"><tbody>${runden.map(a => `<tr><td>${a.nr}</td><td>${esc(a.name)}<span class="form">${esc(a.form)}</span></td><td>${a.min} Min.</td></tr>`).join("")}<tr><td></td><td>zusammen</td><td>${runden.reduce((n, a) => n + a.min, 0)} Min.</td></tr></tbody></table>
-    <p class="hinweis" style="margin-top:.5rem">Dazu ein Extra: freiwillig und außerhalb der 90 Minuten.</p></div></div>
-  <div class="belastend"><b>Hinweis:</b> In dieser Stunde geht es um Massenmord. Die Texte beschreiben ihn knapp und ohne Einzelheiten der Gewalt. Es gibt keine Bilder von Gewalt. Wenn dich etwas belastet, sprich mit deiner Lehrkraft.</div>
-  <p class="merksatz">Erklären heißt nicht entschuldigen.</p></div>`;
+    <p class="ab-zentral">Zentrale Frage</p>
+    <p class="leitfrage">Wie war das möglich? Wer wurde zum Täter, wer zur Täterin?</p>
+    <div class="reihe nodruck"><button class="btn primary" data-geh="einstieg">Los geht’s: Auftrag 1 →</button>${begonnen && naechst && naechst.id !== "einstieg" ? `<button class="btn" data-geh="${naechst.id}">Weiter, wo du warst: Auftrag ${naechst.nr}</button>` : ""}</div></div>
+  ${da ? `<figure class="ab-titelbild"><img src="${b.datei}" alt="${esc(b.alt)}" width="1000" height="1248" data-bild="wald" onerror="bildFehlt(this)"><figcaption>${esc(b.unter)}. ${esc(b.quelle)}.</figcaption></figure>` : ""}</div>
+  <div class="ab-paar"><div><h3>Darum geht es</h3><p>In M21 ging es um die Menschen, die ermordet wurden. Heute fragst du nach denen, die die Morde möglich machten. Die Täter waren keine Monster. Das ist das Ergebnis von siebzig Jahren Forschung, und es ist das Beunruhigende daran.</p>
+    <p>Du prüfst drei Sätze, untersuchst einen Fall und vergleichst Erklärungen der Forschung. Am Ende schreibst du eine Erklärung – so, wie sie in der Klassenarbeit verlangt wird.</p></div>
+  <div><h3>So arbeitest du mit diesem Blatt</h3><ul><li>Links stehen alle Arbeitsaufträge. Du siehst immer, wo du bist und was noch kommt.</li><li>Jeder Auftrag ist ein Blatt. Du scrollst von oben nach unten.</li><li>Manche Aufträge öffnen nach deiner Antwort, manche auf Ansage deiner Lehrkraft.</li><li>Oben rechts sicherst du deinen Stand als Datei. So geht nichts verloren, auch wenn du das Gerät wechselst.</li></ul></div></div>
+  <h3 class="ab-deck-h">So läuft dieses Blatt</h3>
+  <table class="ab-ablauf"><thead><tr><th scope="col">Nr.</th><th scope="col">Arbeitsauftrag</th><th scope="col">Sozialform</th><th scope="col">Minuten</th></tr></thead>
+  <tbody>${runden.map(a => `<tr><td>${a.nr}</td><td>${esc(a.name)}</td><td class="form">${esc(a.form)}</td><td>${a.min}</td></tr>`).join("")}<tr><td></td><td>zusammen</td><td></td><td>${runden.reduce((n, a) => n + a.min, 0)}</td></tr></tbody></table>
+  <p class="hinweis" style="margin-top:.5rem">Dazu ein Extra: freiwillig und außerhalb der 90 Minuten.</p>
+  <div class="ab-info"><p><b>Hinweis:</b> In dieser Stunde geht es um Massenmord. Die Texte beschreiben ihn knapp und ohne Einzelheiten der Gewalt. Es gibt keine Bilder von Gewalt. Wenn dich etwas belastet, sprich mit deiner Lehrkraft.</p></div>
+  <p class="merksatz">Erklären heißt nicht entschuldigen.</p>
+  <div class="ab-fuss nodruck"><a class="btn" href="${HEFTER}">‹ Zum Hefter</a><button class="btn primary" data-geh="einstieg">1 Es geht um Menschen ›</button></div>`;
 }
 ''')
+
+# Geschlossener Auftrag: Wortlaut wie im Vorbild; die Freigabe braucht einen Tipp statt zwei (Rückmeldung vom 18.11.2026: unnötige Klicks vermeiden)
+fn('zuSeite', r'''
+function zuSeite(a){
+  const ans = a.frei === "ansage";
+  return `<div class="ab-zu"><p class="ab-zu-t">${ans ? "Dieser Auftrag öffnet auf Ansage." : "Dieser Auftrag öffnet nach deiner Antwort."}</p>
+  ${ans ? `<p>Warte, bis deine Lehrkraft sagt, dass es weitergeht. So bleibt die Klasse beisammen.</p><p><b>Darum geht es gleich:</b> ${esc(a.gleich)}</p>` : `<p>${esc(a.fehlt)}</p>`}
+  <div class="reihe">${ans ? `<button class="btn primary" data-frei="${a.id}">Auftrag ${a.nr} öffnen</button>` : `<button class="btn primary" data-geh="${a.nach}">Zu Auftrag ${AUF[AUFI(a.nach)].nr}</button><button class="btn still" data-frei="${a.id}">Auf Ansage trotzdem öffnen</button>`}</div></div>`;
+}
+''')
+einmal('''  if ("freifrage" in d) { const f = document.getElementById("ab-frage"); f.hidden = false; t.setAttribute("aria-expanded", "true"); f.querySelector("button").focus(); return; }
+''', '')
+einmal('''if (d.frei !== undefined) { if (d.frei) { S.frei[d.frei] = true; speichere(); zeichne(true); } else { document.getElementById("ab-frage").hidden = true; document.querySelector("[data-freifrage]").focus(); } return; }''',
+       '''if (d.frei) { S.frei[d.frei] = true; speichere(); zeichne(true); return; }   // Freigabe mit einem Tipp''')
 
 # Schreibauftrag: Erwartete Inhalte stehen nicht mehr im Blatt (Paket der Lehrkraft)
 a = s.index('const KA_INHALT = '); e = s.index('const kaRaster = ')
@@ -256,8 +287,8 @@ a = s.index('/* ---------- Für Lehrkräfte: Text verschlüsselt im Datenblock l
 EXTRA = r'''/* ---------- Extra · freiwillig (Vorschlag vom 18.11.2026): hängt an einem Gespräch, am eigenen Rad und an einer Stelle aus diesem Blatt ---------- */
 function extra(){
   const feld = (k, marke, lab, rows) => `<li><label for="ex-${k}"><b>${marke}</b> ${lab}</label><textarea id="ex-${k}" data-ex="${k}" rows="${rows}">${esc(S.ex[k] || "")}</textarea></li>`;
-  return `<p class="ab-unter"><span class="ab-frei">freiwillig</span> Dieses Extra gehört nicht zu den 90 Minuten und wird nicht benotet. Du brauchst dafür ein Gespräch. Das kann dir kein Programm abnehmen.</p>
-  ${auftrag("Allein · mit einer erwachsenen Person", "Ein Gespräch über einen Satz", "In Auftrag 2 hast du drei Sätze geprüft. Solche Sätze hört man bis heute. Führ ein kurzes Gespräch und halte es hier fest – getippt oder von Hand auf dem ausgedruckten Blatt.")}
+  return `<p class="ab-unter">Dieses Extra gehört nicht zu den 90 Minuten und wird nicht benotet. Du brauchst dafür ein Gespräch. Das kann dir kein Programm abnehmen.</p>
+  ${auftrag("Allein · mit einer erwachsenen Person", "Fragen, zuhören, festhalten", "In Auftrag 2 hast du drei Sätze geprüft. Solche Sätze hört man bis heute. Führ ein kurzes Gespräch und halte es hier fest – getippt oder von Hand auf dem ausgedruckten Blatt.")}
   <p><b>Deine Frage an die Person:</b></p>
   <blockquote class="ka-aufgabe">„Waren die Täter Monster – oder ganz normale Menschen?“</blockquote>
   <ol class="ab-schritte">
@@ -278,8 +309,7 @@ alt_werk = s[a:e]
 m = re.search(r'return `(<h2 class="abschnitt">Freigabe</h2>.*)`;\n\}\n$', alt_werk, re.S); assert m
 BEAMER = '''/* Am Beamer (seit Fassung 5.0 eine eigene Seite, bisher im Lehrkraftbereich): Freigabe, Moderation, Modelle der Tischgruppen. Keine Lösungen. */
 function beamer(){
-  return `<h1 class="ab-h eckig"><span class="ab-nr" aria-hidden="true">B</span><span>Am Beamer</span></h1>
-  <p class="ab-meta">Für das Gerät der Lehrkraft · ohne Lösungen</p>
+  return `<header class="ab-akopf eckig"><span class="ab-nr" aria-hidden="true">B</span><div><p class="ab-kicker">Für das Gerät der Lehrkraft</p><h1 class="ab-titel">Am Beamer</h1><p class="ab-meta"><span>Plenum</span><span>ohne Lösungen</span></p></div></header>
   <p>Diese Seite ist für das Gerät am Beamer gedacht. Sie zeigt Werkzeuge für das Plenum. Erwartungen und Hinweise zur Stunde stehen hier nicht; sie liegen im Paket für die Lehrkraft.</p>
   ''' + m.group(1) + '''
   <div class="ab-fuss nodruck"><button class="btn" data-geh="start">‹ Deckblatt</button><span></span><span></span></div>`;
@@ -303,20 +333,39 @@ fn('zeichne', r'''
 function zeichne(fokus){
   if (!SEITE_FN[S.seite]) S.seite = "start";
   document.documentElement.setAttribute("data-seite", S.seite);   // für den Druck: die Zusammenfassung hat ihr eigenes Maß
-  document.querySelector(".ab-rahmen").classList.toggle("schmal", SCHMAL());
+  document.querySelector(".ab-rahmen").classList.toggle("schmal", SCHMAL());   // nur die Übersicht (Auftrag 4): Register als Nummernleiste, dasselbe Blatt darf breiter werden
   kopf();
   const m = document.getElementById("main"), auf = AUF[AUFI(S.seite)], auf_offen = !auf || offen(S.seite);
-  m.classList.toggle("breit", S.seite === "lehrkraft" || (S.seite === "zusammenfassung" && auf_offen));
   m.classList.toggle("dashboard", S.seite === "akte" && auf_offen);
-  m.classList.toggle("weit", !!(auf && auf.weit) && S.seite !== "akte" && auf_offen);   // Aufträge, deren Material die Breite braucht (Entscheidung vom 16.11.2026)
   if (S.seite === "zusammenfassung" && auf_offen && !S.durch.zusammenfassung) { S.durch.zusammenfassung = true; speichere(); }
-  m.innerHTML = blattzeile() + (auf ? blatt(auf) : SEITE_FN[S.seite]()) + (QUER() && !SCHMAL() ? "" : werkzeuge());
+  m.innerHTML = blattzeile() + (auf ? blatt(auf) : SEITE_FN[S.seite]());
+  document.getElementById("unten").innerHTML = QUER() && !SCHMAL() ? "" : werkzeuge();   // Werkzeuge: neben dem Blatt im Register, sonst unter dem Blatt
   m.querySelectorAll("[data-vt]").forEach(b => b.style.viewTransitionName = b.dataset.vt);
   if (LETZTE_SEITE !== S.seite) { const b = document.getElementById("band"); if (b && b.classList.contains("mit")) neu(b, "neu"); }
   LETZTE_SEITE = S.seite;
   if (fokus) { m.focus({ preventScroll:true }); window.scrollTo(0, 0); }
 }
 ''')
+einmal('<div class="ab-rahmen"><nav class="ab-reg" id="reg" aria-label="Alle Arbeitsaufträge"></nav><main id="main" tabindex="-1"></main></div>',
+       '<div class="ab-rahmen"><nav class="ab-reg" id="reg" aria-label="Alle Arbeitsaufträge"></nav><main id="main" tabindex="-1"></main></div>\n<div class="ab-unten nodruck" id="unten"></div>')
+einmal('matchMedia("(min-width:900px)")', 'matchMedia("(min-width:981px)")')   # Register neben dem Blatt ab 981 px, wie im Vorbild
+# Übersicht: Die Kartenspalten reichen jetzt über das Raster 16:9 hinaus (zusammen 16:10). Die Linien enden an der Mitte der Karten.
+einmal('const y = [134, 360, 586][l >= 0 ? l : r]; return l >= 0 ? [340, y] : [940, y]; };', 'const y = [82, 360, 638][l >= 0 ? l : r]; return l >= 0 ? [365, y] : [915, y]; };')
+# Die Bühne kennt ihre Ansicht: Das Rad hat ein festes Format, die Tabelle wächst mit ihrem Inhalt, die Zeitachse nutzt die ganze Höhe
+einmal('<div class="buehne${a ? " offen " +', '<div class="buehne a-${S.ansicht || "frage"}${a ? " offen " +')
+# Über der Bühne steht eine Zeile: drei Ansichten links, der Film rechts
+einmal('<span class="hinweis">Tippe auf eine Ansicht; deine Eingaben bleiben.</span>', '')
+# Tipp auf eine Erklärung: Die Bühne rückt ganz ins Bild (das Blatt beginnt wie jedes Blatt mit Blattkopf und Auftragskopf)
+einmal('''S.akte = d.akte; S.gelesen[d.akte] = true; speichere(); zeichne(); const z = document.querySelector("#panel [data-zu-akte]"); if (z) z.focus({ preventScroll:true }); return; }''',
+       '''S.akte = d.akte; S.gelesen[d.akte] = true; speichere(); zeichne(); const z = document.querySelector("#panel [data-zu-akte]"); if (z) z.focus({ preventScroll:true });
+    const bu = document.getElementById("buehne"); if (bu && bu.scrollIntoView && matchMedia("(min-width:1150px)").matches) bu.scrollIntoView({ block:"nearest", behavior: ruhig() ? "auto" : "smooth" }); return; }''')
+# Wortlaut: keine Hausaufgaben (Auswahl vom 18.11.2026), Freigabe mit einem Tipp, »Auftrag 4« statt »Phase 4«
+einmal('<p class="hinweis"><b>Für Schnelle – oder als Hausaufgabe.</b> In der Stunde ist dafür keine Zeit eingeplant.</p>',
+       '<p class="hinweis"><b>Für Schnelle – freiwillig.</b> In der Stunde ist dafür keine Zeit eingeplant.</p>')
+einmal('Auf den iPads tippen die Schüler*innen selbst auf „Unsere Lehrkraft hat freigegeben“, wenn du es ansagst.',
+       'Auf den iPads tippen die Schüler*innen selbst auf „Auftrag … öffnen“, wenn du es ansagst. Ein Tipp genügt.')
+einmal('Phase 4 im Film: Was du jetzt tust und wohin die Reise geht', 'Auftrag 4 im Film: So arbeitest du mit der Übersicht')
+einmal('title="Erklärfilm zu Phase 4, ohne Ton, zwei Minuten"', 'title="Erklärfilm zu Auftrag 4, ohne Ton"')
 
 # Eingaben im Extra
 einmal('''document.addEventListener("input", ev => {
@@ -331,7 +380,14 @@ einmal('''    <span class="nr">Erklärung ${a.s}${emp ? ` <span class="emp">Empf
     <span class="pf" aria-hidden="true">''', '''    <span class="pf" aria-hidden="true">''')
 einmal('''<b>${esc(a.name)}</b><span class="j">${esc(a.jahr)}${ok ? " · " + ebenenNachCheck(a) : ""}</span>''',
        '''<b>${esc(a.name)}</b><span class="j">Erklärung ${a.s}<span class="jz"> · ${esc(a.jahr)}</span></span>''')
-einmal('''<span class="fs" aria-label="Stand"><span class="${gel ? "ok" : ""}">''', '''<span class="fs" aria-label="Stand">${emp ? `<span class="emp">Empfehlung</span>` : ""}<span class="${gel ? "ok" : ""}">''')
+# Stand der Erklärung in einer Zeile (5.1): Drei Marken nebeneinander passten nicht mehr in die Karte. »gelesen« steht nur, solange noch keine Karte geschrieben ist.
+einmal('''<span class="fs" aria-label="Stand"><span class="${gel ? "ok" : ""}">${gel ? "✓ " : ""}gelesen</span><span class="${gesch ? "ok" : ""}">${gesch ? "✓ " : ""}Karte</span><span class="${ok ? "ok" : ""}">${ok ? "✓ " : ""}geprüft</span></span></button>`;''',
+       '''<span class="fs" aria-label="Stand">${standHTML(a, emp)}</span></button>`;''')
+einmal('\nfunction karteHTML(a, extra = ""){', '''
+/* Stand einer Erklärung in einer Zeile: »gelesen« steht nur, solange noch keine Karte geschrieben ist (wer die Karte schreibt, hat gelesen). So passt der Stand in jede Kartenbreite. */
+const standHTML = (a, emp) => { const m = []; if (karteFertig(a.s)) m.push("Karte"); else if (S.gelesen[a.s]) m.push("gelesen"); if (geprueft(a.s)) m.push("geprüft");
+  return (emp ? `<span class="emp">Empfehlung</span>` : "") + (m.length ? m.map(x => `<span class="ok">✓ ${x}</span>`).join("") : `<span>noch offen</span>`); };
+function karteHTML(a, extra = ""){''')
 einmal('''  return `<p class="ring-text">Sechs Erklärungen der Forschung · fünf Ebenen, auf denen sie ansetzen · eine Frage</p>
   <div class="spalte l">''', '''  return `<div class="spalte l">''')
 einmal('''<p class="modellhinweis">Fünf Ebenen und Gewichtungen sind ein Modell der Lehrkraft zum Ordnen der Erklärungen, keine Forschungseinteilung und keine Messwerte.</p></div>''',
@@ -343,8 +399,9 @@ einmal('''      h += `<span class="jahr" style="left:${xx}%">${JZ[a.s]}</span>` 
        '''      const doppelt = JZ[a.s] === jvor, tief = !doppelt && xx - jx < 6 && !jtief; if (!doppelt) { jx = xx; jtief = tief; jvor = JZ[a.s]; }
       h += (doppelt ? "" : `<span class="jahr${tief ? " tief" : ""}" style="left:${xx}%">${JZ[a.s]}</span>`) + karteHTML(a, `left:${xx}%;top:${top}`); });''')
 einmal('''const letzte = { oben:-99, unten:-99 }; let h = "";''', '''const letzte = { oben:-99, unten:-99 }; let h = "", jx = -99, jtief = false, jvor = null;''')
-# aktenStand() zählte die Marken der Karte nach ihrer Stelle; mit der Marke »Empfehlung« davor stimmt die Stelle nicht mehr
-einmal('''sp = b.querySelector(".fs span:nth-child(2)"); if (sp) {''', '''sp = [...b.querySelectorAll(".fs span:not(.emp)")][1]; if (sp) {''')
+# aktenStand() schreibt den Stand der Karte neu, ohne die Übersicht neu zu zeichnen (der Fokus bleibt im Feld)
+einmal('''document.querySelectorAll("#dash .akte").forEach(b => { const s = b.dataset.akte, ok = karteFertig(s), sp = b.querySelector(".fs span:nth-child(2)"); if (sp) { sp.classList.toggle("ok", ok); sp.textContent = (ok ? "✓ " : "") + "Karte"; } });''',
+       '''document.querySelectorAll("#dash .akte").forEach(b => { const st = b.querySelector(".fs"); if (st) st.innerHTML = standHTML(AKTE(b.dataset.akte), b.classList.contains("empfohlen")); });''')
 
 einmal('''<summary style="cursor:pointer;min-height:40px;display:flex;''', '''<summary style="cursor:pointer;min-height:44px;display:flex;''')
 # »Eingaben löschen« nimmt auch den Eintrag im Hefter weg (Stand und Satz der Lernspur); beim Start gleicht das Blatt den Hefter ab
@@ -355,5 +412,6 @@ s = s.replace('zeichne();\n</script>', 'zeichne();\nif (localStorage.getItem(KEY
 einmal('''  <p class="urheberzeile" style="font-size:1rem;opacity:.72;margin-top:1.5rem">''', '''  <p class="urheberzeile">''')
 
 assert 'KA_INHALT' not in s and 'LABOR' not in s.replace('GGK-Labor', '') and 'loeschBereich' not in s, 'Reste'
+assert 'class="ab-h' not in s and 'weit:true' not in s and 'freifrage' not in s and 'ab-frage' not in s, 'Reste des Rahmens von 5.0'
 (REPO / DATEI).write_text(s, 'utf-8')
-print('M22 umgebaut:', len(s.encode()) // 1024, 'KB ·', n_klein, 'Schriftgrößen auf 1 rem gehoben')
+print('M22 umgebaut (Fassung 5.1):', len(s.encode()) // 1024, 'KB ·', n_klein, 'Schriftgrößen auf 1 rem gehoben')

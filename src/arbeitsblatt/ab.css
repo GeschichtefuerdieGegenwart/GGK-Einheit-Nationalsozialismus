@@ -79,15 +79,17 @@ label{font-weight:700}
 /* Werkzeuge: stehen offen da (wie im Vorbild) – im Register, auf schmalen und breiten Blättern unter dem Blatt */
 .ab-werk{margin-top:auto;padding-top:16px;border-top:2px solid var(--stahl);display:grid;gap:8px;font-size:1rem}
 .ab-werk .btn{width:100%;min-height:48px;padding:8px 14px;font-size:1rem}
-.ab-werk label.btn{cursor:pointer}
 .ab-werk .haken{margin:0;padding:0 4px;font-weight:700}
 .ab-klein{font-size:1rem;line-height:1.45;color:#3D382F;margin:0}
 .ab-klein:empty{display:none}
 .ab-c{font-size:1rem;line-height:1.4;color:#3D382F;margin:0}
 .ab-unten{max-width:84rem;margin:0 auto;padding:0 clamp(12px,2.6vw,40px) 32px}
 .ab-unten:empty{display:none}
-.ab-unten .ab-werk{margin-top:0;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));align-items:start}
-.ab-unten .ab-werk > p,.ab-unten .ab-werk > .loesch-frage{grid-column:1/-1}
+.ab-unten .ab-werk{margin-top:0;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.ab-unten .ab-werk .btn{width:auto}
+.ab-unten .ab-werk > p,.ab-unten .ab-werk > .loesch-frage{flex:0 0 100%}
+.ab-werk .lehr-tuer{margin:0;padding:0 4px;min-height:44px;text-align:left;font-weight:700}
+.ab-werk .btn.still{width:auto;justify-content:flex-start;justify-self:start;text-align:left;padding:8px 4px}
 .loesch-frage{display:grid;gap:12px;padding:16px;border-radius:10px;background:var(--achtung-hi);border:0;box-shadow:none}
 .loesch-frage p{margin:0}
 .loesch-frage .reihe{margin:0}
@@ -120,15 +122,17 @@ label{font-weight:700}
 .ab-zwei h3{font-family:var(--text);font-size:1.02rem;margin-bottom:.3rem}
 .ab-zwei ul{padding-left:1.2rem;display:grid;gap:.3rem}
 .ab-unter{color:var(--leise);margin:0 0 12px}
+@container (max-width:56rem){.ab-zwei:not(.gleich){grid-template-columns:minmax(0,1fr)}}   /* auf dem Blatt in der Größe des Vorbilds: untereinander */
 
 /* Kästen: Auftrag (dunkel) · Material (Karton, Linie in der Farbe der Einheit) · Hinweis */
-.auftrag{background:var(--tinte);color:var(--grund);border-radius:10px;padding:24px;margin:0 0 24px}
+.auftrag{background:var(--tinte);color:var(--grund);border-radius:10px;padding:24px;margin:24px 0}
+.ab-teil > .auftrag:first-child,.ab-zwei > div > .auftrag:first-child{margin-top:0}
 .auftrag .form{display:block;color:var(--platte);font-size:1rem;font-weight:700;margin-bottom:6px}
 .auftrag p{color:var(--grund)}
 blockquote{background:var(--karton);border-left:6px solid var(--tief);border-radius:0 10px 10px 0}
 .quelle,.hinweis{font-size:1rem;line-height:1.45;color:var(--leise)}
 .quelle a{color:var(--leise)}
-#main a:not(.btn){display:inline-block;padding:.7rem 0;margin:-.7rem 0}   /* Links im Text: Zielfläche 44 px, ohne die Zeile zu verschieben */
+#main a:not(.btn){padding:.8rem 0}   /* Links im Text: Zielfläche 44 px. Der Link bleibt im Textfluss und bricht mit der Zeile um. */
 
 /* ---------- Deckblatt (Aufbau wie im Vorbild; statt der Ziele steht das Titelbild) ---------- */
 .ab-deck{display:grid;gap:24px;align-items:start}
@@ -191,6 +195,7 @@ blockquote{background:var(--karton);border-left:6px solid var(--tief);border-rad
 .spur li{display:grid;grid-template-columns:4rem minmax(0,1fr);gap:12px;padding:12px 16px;background:var(--hauch);box-shadow:inset 6px 0 0 var(--tief);border-radius:0 10px 10px 0;margin:0}
 .spur b{font-family:var(--titel);font-weight:600}
 .hefter .reihe{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:0}
+.hefter .reihe .ab-klein{flex-basis:100%}
 
 /* ---------- Fenster nur für den Stand als Text (Rückfall, wenn keine Datei geht) ---------- */
 .ab-fenster{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:rgba(42,38,34,.55)}
@@ -216,7 +221,7 @@ blockquote{background:var(--karton);border-left:6px solid var(--tief);border-rad
   .ab-reg ol button[aria-current] .ab-st{display:none}
   .ab-zwei,.ab-zwei.gleich,.gliederung,.hefter__kopf{grid-template-columns:minmax(0,1fr)}
 }
-@media (max-width:600px){.titel small{display:none}}
+@media (max-width:600px){.titel{visibility:hidden}.kopf-in{gap:8px}.kopf .btn{padding:0 10px}}   /* Telefon: Reiter und die zwei Knöpfe; der Titel steht auf dem Blatt */
 /* Breite Aufträge (wie data-schmal im Vorbild): Das Register wird zur Nummernleiste, das Blatt darf bis 84 rem wachsen */
 @media (min-width:981px){
   .ab-rahmen.schmal{grid-template-columns:76px minmax(0,1fr)}
@@ -252,11 +257,12 @@ blockquote{background:var(--karton);border-left:6px solid var(--tief);border-rad
   .ab-deck .leitfrage{font-size:13pt}
   .ab-titelbild img{box-shadow:none}
   .ab-titelbild figcaption{font-size:8.5pt;margin-top:1.5mm}
-  .ab-paar{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:5mm 8mm;margin:5mm 0}
+  .ab-paar{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4mm 8mm;margin:4mm 0}
   .ab-paar h3,.ab-deck-h{font-size:12pt;margin-bottom:1.5mm}
   .ab-ablauf{font-size:9.5pt}
-  .ab-ablauf th,.ab-ablauf td{padding:.6mm 1.5mm;border-bottom-width:.6pt}
-  .ab-info{padding:3mm 4mm;margin-top:4mm}
+  .ab-ablauf th,.ab-ablauf td{padding:.3mm 1.5mm;border-bottom-width:.6pt}
+  .ab-info{padding:2.5mm 4mm;margin-top:3mm}
+  .ab-info ~ .merksatz{margin:3mm 0 0}
   .ab-druckweg{display:none!important}
   .ab-druckfeld{--zeile:7.6mm;display:block;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:1.5mm;padding:0 2mm;border-left:2pt solid #999;border-bottom:1pt solid #666;line-height:var(--zeile);min-height:calc(var(--zeile) * var(--zeilen,3));background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--zeile) - .8pt),#777 calc(var(--zeile) - .8pt),#777 var(--zeile));-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
   input[type=text]{border-left:2pt solid #999;border-bottom:1pt solid #666}
