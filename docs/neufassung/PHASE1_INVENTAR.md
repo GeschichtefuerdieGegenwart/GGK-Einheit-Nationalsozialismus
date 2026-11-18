@@ -59,3 +59,113 @@ Was die Stimmung ausmacht: **warmes Papier, eine kräftige Farbe als versetzte P
 - **Kein Material neben dem Auftrag.** Die Aufträge stehen in einer Spalte; Quellen stehen unter dem Auftrag. Geschichte arbeitet mit Quellen – hier braucht es die zweite Spalte.
 - **Keine Bilder.** Das Psycho-Labor kommt ohne Fotos aus. Titelbilder, Bildquellen und Bildnachweise sind für Geschichte neu zu regeln.
 - **Bekannte Abweichungen im alten Teil** (`lab.css`, Block Wahrnehmung): Schrift unter 16 px, Bewegung 350 ms, weiche Schatten. Der Kern der Einheit Motivation hat sie nicht mehr.
+
+---
+
+## B · Funde im Tresor »Arbeitsgedächtnis«
+
+Gelesen am 18.11.2026 über den verbundenen Ordner. Die Liste des Tresors nennt 482 Einträge; **43 Notizen sind seit dem 4.11.2026 neu oder geändert**. Ganz gelesen wurden die kurzen Notizen; die großen Stand- und Entscheidungsnotizen wurden gezielt nach Datum (ab 4.11.) und nach den Stichwörtern Kidu, Webdesign, Aufgaben, Struktur, Bewegung gelesen. Nicht gelesen: Claude-Coach, einzelne Doppelstunden der Demokratiebildung, das Protokoll im Volltext.
+
+### B1 · Die vier Pflichtnotizen
+
+| Notiz | Stand | Was dort steht | Was ich nutze |
+| --- | --- | --- | --- |
+| **Digitale Didaktik – Prinzipien und Fachgrenzen** | 08.11. (Status: Vorschlag) | zehn Prinzipien: Papierprobe zuerst · erst denken, dann zeigen · eine Frage vor jeder Bewegung · Bewegung zeigt Veränderung · Lernende steuern das Tempo · Bild, Zahl und Wort zusammen · Modelle heißen Modell · Lernhilfe, keine Leistungsmessung · Ergebnisse kommen zurück in den Raum · Zugang für alle. Fachgrenze Geschichte: Rückschaufehler, Grenzen der Perspektivübernahme, keine Ästhetisierung bei NS-Themen | **alle zehn als Prüfliste für die Zuordnungstabelle** (Block E); »ein großer Moment je Seite« als Obergrenze für Bewegung |
+| **Erfahrungen aus Erprobungen** | 17.11. | getragen hat: gemeinsam geführt am Smartboard, parallel am eigenen Gerät. Nachzuschärfen: Zwischenstand beim Sortieren, einzeln zurücklegen, Zwischenstände speichern, ein Satz zur Bedienung vor jedem Film, **weniger Klicken, ein Arbeitsfenster**, **Ergebnisse brauchen eine Datei**. Aus dem Bauen: Übersicht darf keine Antwort verraten · Linien enden am Ziel · Lehrkraftbereich von Anfang an verschlüsselt · eine Seitenleiste kostet Breite · mit einem Register darf die Seite scrollen · eine Adresse zeigt immer dieselbe Seite · neue Freigaben dürfen übernommene Arbeit nicht verstecken · wirksame Schriftgröße in SVG · ein Maß ersetzt den Blick aufs Foto nicht. Nicht getragen: Ergebnisse vieler Geräte per QR bündeln | **Datei sichern und laden** als Pflichtbaustein · **die Nummer des Auftrags als Anker** zwischen Board und iPad · Register, das scrollen darf · Prüfregeln für Phase 3 |
+| **Lernmappe und Lernübersicht** | 18.10. | Belastung niedrig · Inhalte bleiben sichtbar (Lernübersicht 1–2 Seiten, Hilfekästen wortgleich an der Aufgabe) · Auftrag, Information, Sicherung getrennt · Lernmappe als PDF für GoodNotes, Ziel 4 Seiten · Variante A (Labor als Einstieg) und B (ganze Stunde) je Stunde begründen | **drei getrennte Kastenarten** im Blatt · Hilfen wortgleich mit der Zusammenfassung · die Frage A oder B je Stunde in der Tabelle |
+| **Didaktische Signatur – Lesart des Hefts** | 26.10. | vier Leitfragen statt Chronologie (Standortgebundenheit · erst entscheiden, dann auflösen · Umwelt oder Ich? · Geschichte wirkt in die Gegenwart); »die Landkarte ist der eigentliche Lehrplan«; Handschrift: Urteil vor Vollständigkeit, Rollen ohne Täterrollen, Ebenenwechsel Mensch – Struktur – Mensch; Schwächen: Erwartungshorizonte liefern das Urteil mit, die Ost-West-Einheit hat die Handschrift noch nicht, »Umwelt oder Ich« ohne Linie | **die vier Leitfragen als rote Fäden der Hefter** · die Linie »Umwelt oder Ich?« (seit 18.11. beschlossen) als sichtbare Spur im Hefter NS |
+
+### B2 · Weitere Funde der letzten zwei Wochen
+
+| Thema | Fundstelle | Fund | Nutzen für Geschichte |
+| --- | --- | --- | --- |
+| **Struktur** | Psychologie J2, Stand 17.11. · Entscheidungen 10.–17.11. | Einheit Motivation 2.1 auf einem Kern nach dem GGK-Blatt; Einheitsseite; Lernspur; jede Stunde endet mit Verorten, Verbinden und einem Satz; »beim Urteilen schweigt das Gerät«; Selbsttests überspringbar; Privates weder in Zusammenfassung noch Lernmappe; Einheitsseite zeigt nur Bearbeitetes | Vorbild für Hefter und feste Bausteine (Block A) |
+| **Struktur** | Demokratiebildung, Stand 17.11. (Leitfaden 3.0) | drittes Projekt auf dem Blatt-Standard: Deckblatt und Register, »Als Datei sichern« und »Datei laden«, Kompass mit »wir sind hier« | bestätigt: Deckblatt + Register + Datei ist inzwischen dein fachübergreifender Standard |
+| **Struktur** | Politikdidaktik, v16–v18 (16.–18.11.) | Halbjahreskarte · Ich-kann-Liste · Zusammenfassung je Modul · Wiederholung vor der Klassenarbeit, deren Zusammenfassung erst nach den fünf Bereichen öffnet · Urteilslinie mit Klassenbild vorher und nachher | **Ich-kann-Liste** und **Urteilslinie vorher – nachher** als Bausteine für den Hefter |
+| **Aufgabenformate** | Unterricht digital, 11.11. (4.31/4.32) und 16.11. (4.44) | Aufgabenkoffer nach Unterrichtsphasen (Einstieg · Erarbeitung · Sichern und üben · Übertragen und Ausblick), 16 Ideen; fünf Legeformen (Reihe · Ordnung · Netz · Gegensatz · Kreislauf); fünf Lese-Muster (Markieren mit Grund · Lesen in drei Schritten · Lesen in Rollen · Zweimal lesen · Struktur legen und begründen). **»Zwei Aufgaben gehen ohne Gerät besser«: Lesen in drei Schritten und ein Urteil schreiben** | Legeformen für Ursachen und Abfolgen; **lange Quellen und das Urteil gehören auf Papier oder in die Handschrift** – das stützt Schreibblatt und Linien |
+| **Aufgabenformate** | Unterricht digital, 13.11. (Sichtung) | Lehrfunktion je Phase; die Phase »Übertragen und Ausblick« ist in deinen Beispielen die seltenste; nicht das Gerät wirkt, sondern die Lerntätigkeit (Sailer u. a. 2024: reiner Ersatz g = 0,01 · neue Aufgabe mit eigenem Denken 0,85) | jede Stunde braucht eine Stelle **Übertragen** – in Geschichte ist das »Verorten« und der Gegenwartsbezug |
+| **Modell** | Unterricht digital, 09.11. | sechs Prinzipien (früher Hebel): **verdecken · rückmelden · messen · variieren · stufen · bündeln**; im Raum: deuten, streiten, urteilen; das Gerät trägt AFB I und II, der Raum das Urteil | Spalte »digitale Technik« in Block E nennt je Zeile eines der sechs Prinzipien |
+| **Webdesign** | Unterricht digital, 14.11. (4.41/4.42) | »Wo bin ich?«: eine Zeile oben (Weg zurück), unten ein kleiner Fahrplan mit »Du bist hier«; ganze Bildschirmbreite, Fließtext höchstens 68 Zeichen; »Auf einen Blick« in jedem Werkzeug; erste Handlung am Beamer im ersten Bildschirm | Kopfzeile des Blatts mit Platz im Hefter; Deckblatt mit erstem Knopf oberhalb von 720 px |
+| **Webdesign** | Quellen/Webdesign-Trends 2026 (18.10.) | übernehmen: eigenes Erscheinungsbild, View Transitions, Beamer-Ansicht, »als Arbeitsbogen drucken«, lokale Merkliste ohne Tracking. Nicht: WebGL, Glas, KI-Bilder, bewegter Fließtext, Autoplay | »als Arbeitsbogen drucken« = die A4-Grundlage |
+| **Bewegung** | Politikdidaktik, v9 (08.11.) | Scroll-Fassung des Gesetzgebungswegs gebaut; **Rückblick nach zwei bis drei Wochen steht noch aus** – ob die Bewegung beim Verstehen hilft, ist nicht beobachtet | Scrollytelling in Geschichte nur als Vorschlag, nicht als Standard (Block C) |
+| **Bilder** | Bausteine/Geschichtsdidaktik/Bildrechte und Veröffentlichung | zwei Orte: öffentlich nur Gemeinfreies und frei Lizenziertes; Moodle zusätzlich § 60a UrhG. Liste geprüfter Bilder aus M19 und M20 (z. B. Bundesarchiv Bild 183-41636-0002, CC BY-SA 3.0, »gerahmt als Täterfoto«) | Grundlage der Bildlisten; **dein neuer Auftrag ist strenger** (nur frei lizenziert) – siehe Block F |
+| **Erprobung** | Psychologie, Nach der Stunde 06.11. | gemeinsam geführt am Smartboard: »sehr gut«, schafft Orientierung. Fachgrenze Geschichte: Das Führen darf die Festlegung nicht vorwegnehmen | Tafelmodus und Freigabe »auf Ansage« bleiben getrennt von der eigenen Entscheidung |
+| **Skills** | Unterricht digital, 18.11. (4.49) · Meine Skills | »Eine Regel, ein Ort«; Plugins »kidu« 0.8.0 und »kidu-bau« 0.8.0; »kidu-bau« 0.9.0 liegt bereit (mit `website-design-workflow` v6.1), ist hier aber noch nicht eingespielt | gearbeitet wird mit den Fassungen vom 18.11. (Block C); die vier Fallstricke aus 0.9.0 kenne ich nur aus der Notiz |
+
+### B3 · Lehren anderer Fächer, die hier greifen – und wo sie in Geschichte brechen
+
+1. **Psychologie: »Gemeinsam geführt, parallel am Gerät.«** Greift: die Auftragsnummer als gemeinsamer Anker. Bricht: in Entscheidungsstunden (M9, M19, M20, Ost-West 1 und 5) darf vorne nichts stehen, was die Entscheidung vorwegnimmt.
+2. **Politik: »Ergebnisse brauchen eine Datei.«** Greift ohne Bruch – und ist die Voraussetzung dafür, dass der Hefter über Wochen wächst.
+3. **Psychologie: »Beim Urteilen schweigt das Gerät.«** Greift verstärkt: In Geschichte ist fast jede Schlussaufgabe ein Urteil. Gestufte Rückmeldung (zentral · auch begründbar · passt kaum) nur bei Landkarte und Zuordnungen.
+4. **Psychologie: »Die Einheitsseite zeigt nur Bearbeitetes.«** Greift doppelt: Eine Zeitleiste im Hefter nähme sonst Ausgänge vorweg (Rückschaufehler).
+5. **Politik: »Urteilslinie vorher – nachher.«** Greift als Linie »Umwelt oder Ich?«. Bricht, wenn die Linie als Fortschritt gelesen wird: Eine Position, die sich nicht bewegt, ist kein Fehler.
+6. **Kidu: »Ein Urteil schreiben geht ohne Gerät besser.«** Greift: Schreibblatt mit Linien, Handschrift erlaubt, Kriterien erst danach.
+
+---
+
+## C · Die acht Skills in der neuesten Fassung
+
+Gelesen am 18.11.2026 aus den eingespielten Plugins: `unterricht-digitalisieren` v4.7 · `digital-check` v1.6 (beide »kidu« 0.8.0) · `lernseite-bauen` v3.0 · `signatur-design` v8.0 · `bewegung-als-lernmittel` v3.0 · `schaubild-design` v1.4 · `website-design-workflow` v6.0 (alle »kidu-bau« 0.8.0) · `fachdidaktik-geschichte` v1 (einzeln). Alle tragen das Datum 18.11.2026. Gelesen wurden die Skill-Texte und die Fallstrick-Dateien von `lernseite-bauen` und (Abschnitt Druck) `website-design-workflow`; nicht gelesen: `film-regie`, die Code-Bausteine im Einzelnen, `lehrfunktionen.md`.
+
+### C1 · Was neu ist – und ob es in Geschichte einen echten Lerngewinn bringt
+
+**Bewegung (Motion)**
+
+| Technik | Was der Skill sagt | Echter Lerngewinn in Geschichte? | Wo |
+| --- | --- | --- | --- |
+| **Zeit ziehen (Scrubbing)** | die Person zieht Zeit vor und zurück und hält an; lernt Verlauf, Tempo, Wendepunkte; Zeitpunkte rasten ein, Zwischenwerte sind keine Daten | **Ja.** Zeit ist der Gegenstand des Fachs. Wer zieht, sieht, dass etwas schneller oder langsamer kam, als die Erzählung behauptet | Inflation 1923 (M11) · Wahlen 1928–1933 (M14) · Verordnungen 1933–1939 (M17) · Fluchtzahlen bis 1961 (Ost-West 6) |
+| **Vorher–nachher** | einen Zustand über den anderen schieben; nur wenn beide nicht nebeneinander passen | **Ja, bei Karten und bei zwei Fassungen desselben Gegenstands** | Grenzen 1914/1919 (M7) · 1937/1945 (Ost-West 1) · zwei Schulbuchtexte (M8, Ost-West 7) |
+| **Aufdecken nach Festlegung** (Muster 8) | Schwärzung dessen, was man damals nicht wissen konnte; fällt erst nach der eigenen Entscheidung | **Ja – das ist Retrospektivität als Handlung.** Auf Papier geht es nicht ohne zweites Blatt | M9 · M15 · M19 · M20 · Ost-West 1 und 5 |
+| **Spielraum verschieben** (Regler mit sichtbarer Folge) | Folge als Zahl und Wort; »Was lässt das Modell weg?« | **Ja, wenn der Spielraum selbst die Frage ist** (Agency). Nein als Meinungsregler ohne Folge | Linie »Umwelt oder Ich?« (M13, M14, M14.2, M17, M22, M23) |
+| **Zustandskarte** | alle Zustände eines Bausteins nebeneinander, mit Tokens; »ohne Zustandskarte ist der Baustein nicht fertig« | kein Lerngewinn für Lernende, aber **Pflicht für den Standard**: offen · auf Ansage · nach deiner Antwort · erledigt · du bist hier | DESIGN.md »Arbeitsblatt Geschichte« |
+| **View Transitions** (Ansichtswechsel) | dasselbe Ding von der Übersicht ins Detail verfolgen; 320 ms; Rückfall: sofortiger Wechsel | **Bedingt.** Gewinn nur an einer Stelle: vom Hefter ins Blatt und zurück (»Wo bin ich?«). Innerhalb der Stunde ist es Schmuck | Hefter ↔ Blatt, Zeitleiste ↔ Modul |
+| **Scrollytelling** | feste Bühne, Text scrollt; gut für Abläufe, nicht für Inhalte zum Vergleichen; Status im Skill: »Vorschlag, noch nicht erprobt«; der Rückblick in Politik steht aus | **Eher nein als Standard.** Geschichte vergleicht und urteilt; ein geführter Ablauf erzählt eine Geschichte als gegeben (Narrativität!). Sinnvoll nur, wo die **Abfolge selbst** gelernt wird – und dann mit der Frage »Wer erzählt hier?« | höchstens: 30. Januar bis August 1934 (M15), Sommer bis November 1989 (Ost-West 9) – als Option zur Wahl, nicht gesetzt |
+| **Sich aufbauender Text** | nur die eine Leitfrage oder ein Zitat, höchstens 2,4 s | **Nein.** Kein Erkenntnisgewinn; bei NS-Themen heikel | nirgends |
+| **Autoplay** | nur wenn Bewegung Lerngegenstand ist, unter fünf Bedingungen | **Nein.** Geschichte braucht kein Abspielen; alles wird gezogen | nirgends |
+
+Grenzen aus den Skills, die ich übernehme: höchstens **zwei** Bewegungsformen je Stunde, höchstens **drei** Interaktionsmuster · vor jeder Bewegung eine Frage · Zahl und Wort stehen neben dem Bild · alles lässt sich mit Finger, Regler und Knopf bedienen · in der Arbeitsphase bewegt sich nur die Antwort auf die eigene Handlung (Quiet Work) · nach dem Laden bewegt sich nichts (Input-First) · bei NS-Themen keine Belohnungsbewegung, keine Geräusche.
+
+**Aufgabenmöglichkeiten** (Katalog der 13 Interaktionsmuster in `lernseite-bauen`)
+
+| Muster | Denkhandlung | In Geschichte tragend? |
+| --- | --- | --- |
+| 1 Vorhersage → Auflösung | vorhersagen | ja – als »Festlegung« vor jeder Quelle |
+| 3 Zuordnen mit Begründung, gestuft | zuordnen und begründen | ja – Landkarten-Auftrag L |
+| 4 Reihen und ordnen | Abläufe | ja – Abfolgen sind Prüfungsstoff (Machtübernahme, Stufen der Ausgrenzung) |
+| 7 Entscheidungsweg | beurteilen, Folgen abwägen | ja – Agency-Stunden |
+| 8 Aufdecken nach Festlegung | »damals nicht wissbar« | ja – siehe oben |
+| 10 Satzanfänge → Kriterienvergleich | erklären, Produkt | ja – Schreibauftrag; Kriterien erst nach dem eigenen Text |
+| 11 Markieren im Text | Quelle erschließen | bedingt – nur bei Texten bis zu einer Bildschirmseite, mit Regel; sonst Papier |
+| 12 Stimmkarte | Urteil ins Plenum | ja – Klassenbild vorne |
+| 13 Selbsteinschätzung mit Wort | eigenes Können | ja – Ich-kann-Liste im Hefter |
+| 2 Einfachwahl mit Erklärung | verstehen | sparsam – nur für Sachwissen, nie für Deutung |
+| 5 Regler · 6 Vorher–nachher | Zusammenhang, Veränderung | wie oben |
+| 9 Karte dreht nach Antwort | abrufen | ja – »Erst erinnern« am Stundenanfang |
+
+**Strukturen**
+
+- **Ganze Einheit als Rahmen** (`unterricht-digitalisieren` Schritt E, `lernseite-bauen` »mehrere Stunden als Einheit«): Einheitsseite mit Leitfrage und Landkarte aller Stunden – **Papierstunden stehen mit darauf** –, in jeder Stunde dieselben Bausteine, Lernspur, die sich als Datei sichern lässt, gemeinsamer Kern, Speicher je Einheit. → Das ist der Hefter.
+- **Lehrfunktion je Phase:** Einstieg · Erarbeitung · Sichern und üben · Übertragen und Ausblick. Für jede Stunde zu prüfen: Gibt es eine Stelle zum Abrufen ohne Vorlage und eine zum Übertragen?
+- **Papierfrage** (neun Regeln, 17.11.): hybrid ist der Normalfall · eine Kernentscheidung je Stunde · zurück in den Raum · Schreiben geht auch von Hand · eine Stunde ganz auf Papier ist ein gutes Ergebnis.
+- **Zeitdiagnose am vollen Stand:** Wörter ÷ 150 je Minute plus Eingaben; Kürzungen nur als Liste K1, K2 …
+
+**Webdesign** (benannte Regeln, die ich in DESIGN.md übernehme)
+
+Three-Tap (höchstens drei Tipps bis zur ersten eigenen Antwort) · First-Action und Beamer Rule (erster Knopf bei 1280 × 720 im ersten Bildschirm) · Two-Line (Überschrift nie über zwei Zeilen) · Screen-Width (Breite nutzen, Text höchstens 68 Zeichen) · One-Order (eine Ordnung je Bild) · Line-to-Target (jede Linie trägt eine Beziehung) · Input-First · Quiet Work · One Moment · Visible-at-Rest · Reader-Paced · Grow-in-Place · Brightest-Spot (Kontrast an der ungünstigsten Bildstelle) · Device-Switch (Ergebnisse überleben den Gerätewechsel) · Locked-from-Start (Lehrkraftbereich von Anfang an verschlüsselt) · 16-Pixel Floor · Zielflächen 44 px.
+
+Aus der Nie-Liste von `signatur-design` v8.0, wichtig für die Farbwahl: **»Creme mit Terrakotta« gilt als KI-Standard und braucht eine Begründung in DESIGN.md**; ebenso Pillen-Etiketten, gesperrte Versalien, Haarlinien, weiche Schatten. Für NS-Themen verboten: Rot-Schwarz-Weiß, Fraktur, Kriegsästhetik (Fachbaustein GGK).
+
+### C2 · Fallstricke, die für diesen Auftrag besonders zählen
+
+1. Eine Übersicht verrät, was die Aufgabe abfragt → der Hefter zeigt nur Bearbeitetes.
+2. Rückmeldung vor der Festlegung lesbar (im gemeinsamen Kern, also in allen Stunden) → nach jeder Kernänderung alle Stunden prüfen.
+3. Neue Freigaben verstecken übernommene Arbeit → beim Übernehmen alter Stände jeden bearbeiteten Auftrag freigeben.
+4. Ein Speicherschlüssel bekommt eine neue Version, die Nachbarstunde liest den alten → beim Wechsel auf einen Speicher je Einheit alle alten Schlüssel einsammeln (`grep`), mit Rückfall.
+5. Nach »Eingaben löschen« legt ein später Speichervorgang den Stand wieder an.
+6. Moodle-Paket ohne Schriften, weil nur `media/` gesammelt wurde → alle relativen Pfade einsammeln, entpackt per `file://` öffnen.
+7. Eine neue Seitenart (Hefter) druckt ihre Bildschirmfassung mit (14 statt 4 Seiten) → jede neue Seitenart in die Druckregel.
+8. Druckregeln werden von einer späteren Grundregel aufgehoben → Druckregeln ans Ende, jedes PDF ansehen.
+9. Bildunterschriften nie nach der Miniatur; Datum und Ort an einer Fundstelle prüfen (M17: 1935 statt 27. Juli 1933).
+10. Kontrast über Fotos an der hellsten Stelle rechnen → betrifft Titelbilder im Blattkopf.
+11. Die passende Antwort ist die längste → Längen vergleichen.
+12. Eine Rückmeldung aus dem Unterricht wird auf alle Stunden übertragen, obwohl sie nur zu einzelnen gehört.
