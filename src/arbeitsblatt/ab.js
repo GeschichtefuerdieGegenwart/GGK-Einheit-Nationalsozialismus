@@ -1,6 +1,7 @@
 /* ===== Arbeitsblatt Geschichte · gemeinsamer Kern · Quelle: src/arbeitsblatt/ab.js – nur dort ändern =====
    Platz im Hefter · Stand an den Hefter melden · Stand als Datei sichern und laden (Text als Rückfall) · Ansicht für den Beamer.
-   Alles bleibt im Browser oder in der Datei: keine Anmeldung, kein Server, keine Namen. */
+   Alles bleibt im Browser oder in der Datei: keine Anmeldung, kein Server, keine Namen.
+   Wenige Tipps: Sichern ist ein Tipp, Laden öffnet sofort die Dateiwahl; die Rückmeldung steht daneben, nicht in einem Fenster. */
 (function () {
   "use strict";
   const doc = document, root = doc.documentElement;
@@ -26,7 +27,6 @@
     if (JSON.stringify(Object.assign({}, s[nr], neu)) === alt) return;
     s[nr] = Object.assign(neu, { zeit: new Date().toISOString().slice(0, 10) }); s._zuletzt = nr; schreib(standKey(), JSON.stringify(s));
   }
-
   function vergiss(nr) { const s = stand(); if (!(nr in s)) return; delete s[nr]; if (s._zuletzt === nr) delete s._zuletzt; schreib(standKey(), JSON.stringify(s)); }   // »Eingaben löschen« im Blatt: auch der Eintrag im Hefter geht
 
   /* ---------- Stand als Datei ---------- */
@@ -36,47 +36,44 @@
     return JSON.stringify({ art: "ggk-hefter", einheit: einheit(), name: e.name, version: 1, datum: new Date().toISOString(), daten: daten });
   }
   const dateiname = () => "Hefter-" + E().name.replace(/[^A-Za-zÄÖÜäöüß]+/g, "-") + "_" + new Date().toISOString().slice(0, 10) + ".json";
-  let VON = null;
-  function fenster(html) {
-    let f = doc.getElementById("ab-fenster");
-    if (!f) { f = doc.createElement("div"); f.id = "ab-fenster"; f.className = "ab-fenster nodruck"; doc.body.appendChild(f); }
-    if (f.hidden !== false || !f.innerHTML) VON = doc.activeElement;
-    f.innerHTML = '<div class="ab-fenster__blatt" role="dialog" aria-modal="true" aria-labelledby="ab-fenster-t">' + html + "</div>"; f.hidden = false;
-    const k = f.querySelector("[data-fokus]") || f.querySelector("button,textarea,input"); if (k) k.focus();
-  }
-  function fensterZu() { const f = doc.getElementById("ab-fenster"); if (f) { f.hidden = true; f.innerHTML = ""; } if (VON && doc.contains(VON)) VON.focus(); VON = null; }
+  let RUECK = "";   // letzte Rückmeldung zum Sichern oder Laden; bleibt stehen, auch wenn das Register neu gezeichnet wird
+  function rueck(html) { RUECK = html || ""; doc.querySelectorAll("[data-ab-rueck]").forEach(p => { p.innerHTML = RUECK; }); }
   function sichern() {
     if (!E()) return;
-    const text = paket(), name = dateiname(); let weg = true;
+    const text = paket(), name = dateiname();
     try { const a = doc.createElement("a"); a.href = URL.createObjectURL(new Blob([text], { type: "application/json" })); a.download = name; doc.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
-    catch (e) { weg = false; }
-    fenster('<h2 id="ab-fenster-t">' + (weg ? "Stand gesichert" : "Stand als Text") + "</h2><p>" +
-      (weg ? "Die Datei <b>" + esc(name) + "</b> liegt jetzt bei deinen Downloads. Leg sie in deinen Ordner für Geschichte. Auf einem anderen Gerät lädst du sie mit „Stand aus Datei laden“."
-           : "Hier lässt sich gerade keine Datei sichern. Kopiere den Text und sichere ihn in einer Notiz.") + "</p>" +
-      '<p class="hinweis">Keine Datei angekommen? Dann kopiere den Text. Er enthält dasselbe.</p>' +
-      '<textarea readonly id="ab-standtext" aria-label="Stand als Text">' + esc(text) + "</textarea>" +
-      '<div class="reihe"><button type="button" class="btn" data-ab="kopieren">Text kopieren</button><button type="button" class="btn primary" data-ab="zu" data-fokus>Fertig</button><span class="hinweis" id="ab-kopiert" role="status"></span></div>');
-  }
-  function laden() {
-    if (!E()) return;
-    fenster('<h2 id="ab-fenster-t">Stand laden</h2><p>Wähle die Datei, die du gesichert hast. Sie heißt „Hefter-' + esc(E().name) + '_…“. Was in der Datei steht, ersetzt den Stand dieser Blätter auf diesem Gerät.</p>' +
-      '<div class="reihe"><label class="btn" data-fokus tabindex="0">Datei wählen<input type="file" accept="application/json,.json,text/plain" class="sr" id="ab-dateiwahl"></label></div>' +
-      '<label for="ab-ladetext">… oder den gesicherten Text hier einfügen</label><textarea id="ab-ladetext"></textarea>' +
-      '<p class="hinweis" id="ab-lademeld" role="status" aria-live="polite"></p>' +
-      '<div class="reihe"><button type="button" class="btn primary" data-ab="text-laden">Text laden</button><button type="button" class="btn" data-ab="zu">Abbrechen</button></div>');
+    catch (e) { textFenster(); return; }
+    rueck("<b>Gesichert:</b> " + esc(name) + ". Die Datei liegt bei deinen Downloads. Leg sie in deinen Ordner für Geschichte.");
   }
   function uebernehmen(text) {
-    const m = doc.getElementById("ab-lademeld"), e = E();
+    const e = E();
     try {
       const j = JSON.parse(text);
       if (!j || j.art !== "ggk-hefter" || !j.daten || typeof j.daten !== "object") throw 0;
-      if (j.einheit !== einheit()) { if (m) m.textContent = "Diese Datei gehört zum Hefter „" + (j.name || j.einheit) + "“. Hier ist der Hefter „" + e.name + "“."; return false; }
+      if (j.einheit !== einheit()) return "Diese Datei gehört zum Hefter „" + (j.name || j.einheit) + "“. Hier ist der Hefter „" + e.name + "“.";
       const re = new RegExp(e.schluessel); let n = 0;
       Object.keys(j.daten).forEach(k => { if (re.test(k) && typeof j.daten[k] === "string" && schreib(k, j.daten[k])) n++; });
       if (!n) throw 0;
-      location.reload(); return true;
-    } catch (x) { if (m) m.textContent = "Das passt nicht. Wähle die Datei, die mit „Hefter-“ beginnt und auf „.json“ endet."; return false; }
+      location.reload(); return "";
+    } catch (x) { return "Das passt nicht. Wähle die Datei, die mit „Hefter-“ beginnt und auf „.json“ endet."; }
   }
+  /* Rückfall, wenn keine Datei geht (zum Beispiel in manchen Apps): der Stand als Text zum Kopieren und Einfügen */
+  let VON = null;
+  function textFenster() {
+    if (!E()) return;
+    let f = doc.getElementById("ab-fenster");
+    if (!f) { f = doc.createElement("div"); f.id = "ab-fenster"; f.className = "ab-fenster nodruck"; doc.body.appendChild(f); }
+    VON = doc.activeElement;
+    f.innerHTML = '<div class="ab-fenster__blatt" role="dialog" aria-modal="true" aria-labelledby="ab-fenster-t"><h2 id="ab-fenster-t">Stand als Text</h2>' +
+      "<p>Geht keine Datei? Kopiere diesen Text und sichere ihn in einer Notiz. Er enthält dasselbe wie die Datei.</p>" +
+      '<textarea readonly id="ab-standtext" aria-label="Stand als Text">' + esc(paket()) + "</textarea>" +
+      '<div class="reihe"><button type="button" class="btn" data-ab="kopieren" data-fokus>Text kopieren</button><span class="hinweis" id="ab-kopiert" role="status"></span></div>' +
+      '<label for="ab-ladetext">Gesicherten Text hier einfügen und laden</label><textarea id="ab-ladetext"></textarea>' +
+      '<p class="hinweis" id="ab-lademeld" role="status" aria-live="polite"></p>' +
+      '<div class="reihe"><button type="button" class="btn" data-ab="text-laden">Text laden</button><button type="button" class="btn primary" data-ab="zu">Fertig</button></div></div>';
+    f.hidden = false; const k = f.querySelector("[data-fokus]"); if (k) k.focus();
+  }
+  function fensterZu() { const f = doc.getElementById("ab-fenster"); if (f) { f.hidden = true; f.innerHTML = ""; } if (VON && doc.contains(VON)) VON.focus(); VON = null; }
 
   /* ---------- Ansicht für den Beamer (gilt für alle Blätter auf diesem Gerät) ---------- */
   const beamer = () => root.getAttribute("data-ansicht") === "beamer";
@@ -96,36 +93,41 @@
   function nachDruck() { doc.querySelectorAll(".ab-druckfeld").forEach(d => d.remove()); doc.querySelectorAll(".ab-druckweg").forEach(t => t.classList.remove("ab-druckweg")); }
   window.addEventListener("beforeprint", vorDruck); window.addEventListener("afterprint", nachDruck);
 
-  /* ---------- Werkzeuge: überall dieselben Knöpfe an derselben Stelle ---------- */
-  let WERK_AUF = false;
-  function werkzeuge(mitte, lizenz) {
-    return '<details class="ab-werk nodruck"' + (WERK_AUF ? " open" : "") + '><summary>Sichern · Laden · Ansicht</summary><div class="ab-werk__in">' +
-      '<button type="button" class="btn" data-ab="sichern">Stand als Datei sichern</button>' +
-      '<button type="button" class="btn" data-ab="laden">Stand aus Datei laden</button>' + (mitte || "") +
-      '<label class="haken"><input type="checkbox" data-ab="beamer"' + (beamer() ? " checked" : "") + "> Ansicht für den Beamer</label>" +
-      (lizenz ? '<p class="ab-c">' + esc(lizenz) + "</p>" : "") + "</div></details>";
+  /* ---------- Werkzeuge: überall dieselben Knöpfe an derselben Stelle, offen sichtbar ---------- */
+  function dateiKnoepfe(klasse) {
+    return '<button type="button" class="btn' + (klasse ? " " + klasse : "") + '" data-ab="sichern">Stand als Datei sichern</button>' +
+      '<label class="btn">Stand aus Datei laden<input type="file" accept="application/json,.json,text/plain" class="sr" data-ab="datei"></label>' +
+      '<p class="ab-klein" data-ab-rueck aria-live="polite">' + RUECK + "</p>";
   }
-  doc.addEventListener("toggle", ev => { const t = ev.target; if (t && t.classList && t.classList.contains("ab-werk")) WERK_AUF = t.open; }, true);
+  function werkzeuge(mitte, lizenz) {
+    return '<div class="ab-werk nodruck">' + dateiKnoepfe() + (mitte || "") +
+      '<label class="haken"><input type="checkbox" data-ab="beamer"' + (beamer() ? " checked" : "") + "> Ansicht für den Beamer</label>" +
+      '<button type="button" class="btn still" data-ab="text">Geht keine Datei? Stand als Text</button>' +
+      '<p class="ab-klein">Alles bleibt auf diesem Gerät. Nichts wird gesendet.</p>' +
+      (lizenz ? '<p class="ab-c">' + esc(lizenz) + "</p>" : "") + "</div>";
+  }
   doc.addEventListener("click", ev => {
-    const t = ev.target.closest && ev.target.closest("[data-ab]"); if (!t) return;
+    const t = ev.target.closest && ev.target.closest("[data-ab]"); if (!t || t.tagName === "INPUT") return;
     const a = t.getAttribute("data-ab");
     if (a === "sichern") sichern();
-    else if (a === "laden") laden();
+    else if (a === "text") textFenster();
     else if (a === "zu") fensterZu();
     else if (a === "kopieren") { const ta = doc.getElementById("ab-standtext"), s = doc.getElementById("ab-kopiert"); ta.select(); let ok = false; try { ok = doc.execCommand("copy"); } catch (e) {} if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ta.value).then(() => { s.textContent = "Kopiert."; }, () => { s.textContent = ok ? "Kopiert." : "Markiere den Text und kopiere ihn von Hand."; }); else s.textContent = ok ? "Kopiert." : "Markiere den Text und kopiere ihn von Hand."; }
-    else if (a === "text-laden") uebernehmen((doc.getElementById("ab-ladetext") || {}).value || "");
+    else if (a === "text-laden") { const m = uebernehmen((doc.getElementById("ab-ladetext") || {}).value || ""); if (m) doc.getElementById("ab-lademeld").textContent = m; }
   });
   doc.addEventListener("change", ev => {
-    const t = ev.target; if (!t) return;
-    if (t.getAttribute && t.getAttribute("data-ab") === "beamer") { setzeBeamer(t.checked); doc.dispatchEvent(new Event("ab:ansicht")); return; }
-    if (t.id === "ab-dateiwahl" && t.files && t.files[0]) { const r = new FileReader(); r.onload = () => uebernehmen(String(r.result || "")); r.onerror = () => uebernehmen(""); r.readAsText(t.files[0]); }
+    const t = ev.target; if (!t || !t.getAttribute) return;
+    const a = t.getAttribute("data-ab");
+    if (a === "beamer") { setzeBeamer(t.checked); return; }
+    if (a === "datei" && t.files && t.files[0]) {
+      const r = new FileReader();
+      r.onload = () => { const m = uebernehmen(String(r.result || "")); if (m) rueck(esc(m)); };
+      r.onerror = () => rueck("Die Datei ließ sich nicht lesen.");
+      r.readAsText(t.files[0]); t.value = "";
+    }
   });
-  doc.addEventListener("keydown", ev => {
-    const f = doc.getElementById("ab-fenster"); if (!f || f.hidden) return;
-    if (ev.key === "Escape") { fensterZu(); return; }
-    if ((ev.key === "Enter" || ev.key === " ") && ev.target.matches && ev.target.matches("label.btn")) { ev.preventDefault(); const i = ev.target.querySelector("input"); if (i) i.click(); }
-  });
+  doc.addEventListener("keydown", ev => { const f = doc.getElementById("ab-fenster"); if (f && !f.hidden && ev.key === "Escape") fensterZu(); });
 
-  window.GGKBlatt = { platz, stand, melde, vergiss, sichern, laden, werkzeuge, beamer, einheit: E, esc };
+  window.GGKBlatt = { platz, stand, melde, vergiss, sichern, werkzeuge, dateiKnoepfe, beamer, einheit: E, esc };
 })();
 /* ===== Ende des gemeinsamen Kerns ===== */
