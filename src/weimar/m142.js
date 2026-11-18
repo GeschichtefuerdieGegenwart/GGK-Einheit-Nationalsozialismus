@@ -3,16 +3,19 @@ const L = {
   wid:"m142", key:"ggk-w-m142:v1", nr:"M14.2", titel:"Warum scheitert Weimar? Verfassung und Präsidialkabinette", unter:"Der Reichspräsident, Artikel 48 und Hitlers Weg zur Kanzlerschaft", dauer:90, block:"d",
   /* Zeichen der Stunde: ein Paragraf mit Riss */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M21 9c0-3-2-5-5-5s-5 2-5 4.5c0 6 11 5 11 11 0 3-2.5 5-5.5 5S11 22 11 20" fill="none" stroke="#24221F" stroke-width="2.6" stroke-linecap="round"/><path d="M11 15.5c0-2 2-3.5 5-3.5m5 6.500c0 2-2 3.500-5 3.500" fill="none" stroke="#24221F" stroke-width="2.6" stroke-linecap="round"/><path d="M4 30l8-3 5 2 6-3 7 3" fill="none" stroke="#9B402D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  frage:"Warum konnte sich die Republik nicht verteidigen – und wie wird Hitler Reichskanzler?",
+  frage:"Warum scheitert Weimar? An ihrer Verfassung – oder an den Menschen, die sie nicht verteidigen?",
+  blick:{ name:"Politikgeschichte: Regeln und Entscheidungen an der Spitze", anker:"2-3-8", tut:"Du untersuchst die Verfassung und die Entscheidungen weniger Männer zwischen 1930 und 1933. Das steht der Ereignisgeschichte nahe.", fehlt:"Was fehlt: die Millionen, die wählten, hofften oder wegsahen. Wer nur auf Präsident und Kanzler schaut, übersieht, dass eine Demokratie auch von ihren Bürger*innen verteidigt werden muss." },
+  pole:{ frage:"Woran scheitert die Republik am Ende mehr?", links:"an den Regeln der Verfassung", rechts:"an den Menschen" },
+  linie:{ fall:"Am 30. Januar 1933 ernennt Hindenburg Hitler zum Reichskanzler – auf Anraten von Beratern wie Franz von Papen, mitten in der Krise und ohne Mehrheit im Reichstag.", frage:"Wie stark bestimmt hier die Umwelt Hindenburgs Entscheidung?", anf:["Die Umwelt wirkt hier durch", "Hindenburg hätte auch"] },
   deck:{ dauer:"Doppelstunde · 90 Minuten", jahr:"1930–1933", hier:[6, 7],
     satz:"Die Weltwirtschaftskrise bringt die Republik ins Wanken. Radikale Parteien gewinnen, das Parlament verliert an Macht. Jetzt muss sich zeigen, ob die junge Republik noch Anhänger*innen hat, die sich für sie einsetzen.",
     ziele:["die besondere Rolle des Reichspräsidenten und den Inhalt von Artikel 48 erklären,", "den Begriff „Präsidialkabinett“ erklären und beschreiben, wie sich die NSDAP zwischen 1929 und 1933 verhält,", "den Weg zu Hitlers Kanzlerschaft in groben Zügen darstellen und die Gefahren der Verfassung beurteilen."] },
   blatt:[
-    { id:"erinnern", nr:"1", kurz:"Erst vermuten", name:"Erst erinnern und vermuten", form:"Allein · ohne Heft", min:3, frei:"offen" },
+    { id:"erinnern", nr:"1", kurz:"Erst vermuten", name:"Erst erinnern und vermuten", form:"Allein · ohne Heft", min:4, frei:"offen" },
     { id:"praesident", nr:"2", kurz:"Reichspräsident", name:"Die Verfassung und der Reichspräsident", form:"Zu zweit", min:25, frei:"offen" },
-    { id:"kabinette", nr:"3", kurz:"Hitlers Weg", name:"Präsidialkabinette und Hitlers Weg zur Kanzlerschaft", form:"Frei wählbar", min:25, frei:"antwort", nach:"praesident", fehlt:"Bearbeite erst Auftrag 2." },
+    { id:"kabinette", nr:"3", kurz:"Hitlers Weg", name:"Präsidialkabinette und Hitlers Weg zur Kanzlerschaft", form:"Frei wählbar", min:27, frei:"antwort", nach:"praesident", fehlt:"Bearbeite erst Auftrag 2." },
     { id:"kurve", nr:"4", kurz:"Stimmungskurve", name:"Die Stimmungskurve der Weimarer Republik", form:"Allein, dann Plenum", min:10, frei:"ansage", gleich:"Rückblick auf das ganze Kapitel: Du zeichnest die Stimmung von 1918 bis 1933 als Kurve." },
-    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Wozu das alles wissen?", form:"Allein", min:6, frei:"antwort", nach:"kabinette", fehlt:"Bearbeite erst Auftrag 3." },
+    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Wozu das alles wissen?", form:"Allein", min:7, frei:"antwort", nach:"kabinette", fehlt:"Bearbeite erst Auftrag 3." },
     { id:"schreiben", nr:"5", kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein", min:15, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:"Du erklärst die Präsidialkabinette und erörterst die Rolle der Verfassung." },
     { id:"zusammenfassung", nr:"Z", kurz:"Zusammenfassung", name:"Zusammenfassung", form:"Zum Abheften", min:4, frei:"antwort", nach:"schreiben", fehlt:"Die Zusammenfassung öffnet sich nach deinem Text in Auftrag 5.", kopf:"Zum Abheften" },
   ],
@@ -75,7 +78,8 @@ function kabinette(){
   ${vergleich("rvgl", ["r.0.0","r.1.0","r.2.0"], 15, "Mit dem Heft vergleichen", `<h3 class="klein">So arbeiteten die Präsidialregierungen</h3><ol class="w-kette">${MECH.map(k => `<li class="${k[2]}"><b>${esc(k[0])}</b>${esc(k[1])}</li>`).join("")}</ol><p>Durch das Zusammenspiel von Artikel 48 und Artikel 25 wurde das Parlament als Ort der Entscheidung ausgeschaltet.</p><p class="quelle">Nach dem Schaubild von Reinhard Sturm im Unterrichtsheft, M14.3. Eigene Darstellung.</p>
   ${zeitleiste(WEG, { klasse:"klein" })}
   <div class="w-karten k3">${EWH3.map(e => `<article class="w-kk"><h3>${esc(e[0])}</h3><p>${esc(e[1])}</p></article>`).join("")}</div><p class="quelle">Gekürzt nach dem Erwartungshorizont des Unterrichtsheftes, M14.3. Daten der Kanzler nach: E. Piper, Bundeszentrale für politische Bildung 2021; Wahlergebnisse berechnet aus den Stimmenzahlen bei der Konrad-Adenauer-Stiftung.</p>`)}
-  ${kgFeld("Mein Eintrag: Verhalten der NSDAP", "Wie tritt die NSDAP auf – und was macht das mit dem Bild, das Menschen von der Republik haben? Zwei bis drei Stichpunkte für das Raster aus M8.1.")}`;
+  ${kgFeld("Mein Eintrag: Verhalten der NSDAP", "Wie tritt die NSDAP auf – und was macht das mit dem Bild, das Menschen von der Republik haben? Zwei bis drei Stichpunkte für das Raster aus M8.1.")}
+  ${linieFeld()}`;
 }
 function kurveS(){
   return `${auftrag("Allein · 6 Minuten, dann Plenum · 4 Minuten", "Die Stimmungskurve", "Blick zurück auf das ganze Kapitel: Wie war die Stimmung in der Republik? Tippe für jede Station einen Wert von 1 (sehr schlecht) bis 5 (sehr gut) an. Es entsteht eine Kurve. Vergleicht eure Kurven im Plenum.")}
@@ -97,14 +101,14 @@ function seiteLk(){
 }
 L.schreib = {
   vor:"So kann die Aufgabe in der Klassenarbeit stehen: Material, zwei Operatoren, höchstens eine Seite. Hier schreibst du eine halbe Seite.",
-  aufgabe:`<b>Erklären Sie</b> den Begriff „Präsidialkabinett“ und <b>erörtern Sie</b>, ob die Weimarer Verfassung die Zerstörung der Demokratie ermöglicht hat.`,
+  aufgabe:`<b>a) Erklären Sie</b> den Begriff „Präsidialkabinett“.<br><b>b) Erörtern Sie</b>, ob die Weimarer Verfassung die Zerstörung der Demokratie ermöglicht hat.`,
   material:`<p><b>M1 · Rechte des Reichspräsidenten:</b> Ernennung und Entlassung des Reichskanzlers · Oberbefehl über die Reichswehr · Auflösung des Reichstags (Artikel 25) · Notverordnungen (Artikel 48), dabei dürfen Grundrechte vorübergehend außer Kraft gesetzt werden.</p><p><b>M2 · Der Mechanismus:</b> Der Reichstag lehnt ein Gesetz ab → der Präsident erlässt es als Notverordnung → der Reichstag verlangt die Aufhebung → der Präsident löst den Reichstag auf.</p><p><b>M3 · Der Weg:</b> 30. März 1930 Brüning · Juli 1932 NSDAP stärkste Partei · 30. Januar 1933 Hitler Reichskanzler einer Regierung aus NSDAP und DNVP.</p><p class="quelle">Nach dem Unterrichtsheft, M14.2 und M14.3.</p>`,
   woerter:150, min:60,
   stufen:[["Grundlegend","Du erklärst, was ein Präsidialkabinett ist, und nennst Artikel 48."],["Sicher","Du erklärst den Mechanismus aus Artikel 48 und Artikel 25 und zeigst an einem Beispiel, wie er das Parlament ausschaltet."],["Souverän","Du wägst ab: Was ermöglicht die Verfassung, was entscheiden Menschen (Hindenburg, die konservativen Berater, die Wähler*innen)? Du kommst zu einem begründeten Urteil."]],
   inhalt:[["Präsidialkabinett:","Regierung ohne Mehrheit im Reichstag, gestützt auf das Vertrauen des Reichspräsidenten und seine Notverordnungen (1930–1933: Brüning, Papen, Schleicher)."],
     ["Dafür, dass die Verfassung es ermöglicht:","Machtfülle des Präsidenten; Artikel 48 ohne klare Grenzen; Zusammenspiel mit Artikel 25 schaltet das Parlament aus; Grundrechte können außer Kraft gesetzt werden."],
     ["Dagegen:","Eine Verfassung handelt nicht selbst. Entscheidend sind Menschen: Parteien, die keine Mehrheit bilden; ein Präsident, der die Republik nicht verteidigt; Konservative, die Hitler „einrahmen“ wollen; Millionen, die antidemokratische Parteien wählen."],
-    ["Urteil:","Die Verfassung öffnet die Tür; hindurchgegangen sind Menschen."]],
+    ["Urteil:","Tragfähig sind verschiedene Urteile – von „Die Verfassung hat es ermöglicht“ bis „Entscheidend waren Menschen“. Es zählt: Du wägst Regeln (Artikel 48 und 25) gegen Entscheidungen ab (Hindenburg, seine Berater, die Parteien, die Wähler*innen) und begründest, was für dich schwerer wiegt."]],
 };
 L.zf = {
   frage:L.frage,

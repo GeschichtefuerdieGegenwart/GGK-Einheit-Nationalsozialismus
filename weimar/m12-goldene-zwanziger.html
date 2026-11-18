@@ -759,6 +759,41 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 .w-kreis .kr-t{font:12.5px var(--body, sans-serif);fill:#24221F}
 .w-kreis .kr-z{font:700 12.5px var(--body, sans-serif);fill:#7A2E1F}
 @media (max-width:899px){ .w-kurve{grid-template-columns:1fr} .w-kurve .ku-achse{flex-direction:row} .w-kurve .ku-namen{grid-column:1} .w-kurve .ku-namen li span{display:none} }
+
+/* ===== Nachgerüstet am 18.11.2026 ===== */
+/* Blick der Stunde: auf dem Deckblatt eine Zeile, an der Landkarte eine Karte */
+.w-blickk{margin-top:1.6rem;padding:1rem 1.1rem 1.1rem;border:1.5px solid var(--gold);border-radius:var(--r-lg);background:var(--surface2);max-width:62rem}
+.w-blickk h3{font-family:var(--display);font-size:1.3rem;margin:.1rem 0 .4rem}
+.w-blickk .kennung{margin:0;color:var(--gold)}
+/* Leitfrage als Linie */
+.w-leit{margin:0 0 1.4rem;padding:.9rem 1.1rem 1rem;border:1.5px solid var(--kuli);border-radius:var(--r-lg);background:var(--kuli-hi);max-width:62rem}
+.w-leit .kennung{margin:0;color:var(--kuli)}
+.w-leit .w-skala{margin:.5rem 0 .4rem;max-width:none}
+.w-leit .w-skala legend{font-family:var(--display);font-size:1.18rem;line-height:1.3}
+.w-leit .w-stufen button{background:var(--surface2)}
+.w-leit .w-stufen button[aria-pressed=true]{background:var(--kuli);border-color:var(--kuli);color:#fff}
+.w-leit .hinweis{margin:0}
+.w-beweg{margin:.2rem 0 0;font-weight:600}
+/* Linie des Kurses */
+.w-linie{margin:1.6rem 0 0;padding:1rem 1.1rem 1.1rem;border-radius:var(--r-lg);background:var(--offset);border-left:6px solid var(--ink)}
+.w-linie h3{font-family:var(--display);font-size:1.3rem;margin:.1rem 0 .4rem}
+.w-linie .kennung{margin:0}
+.w-linie .w-skala{margin:.4rem 0}
+/* Überspringen: leise, aber groß genug zum Tippen */
+.w-skip{display:flex;flex-wrap:wrap;gap:.4rem .8rem;align-items:center;margin:.8rem 0 0}
+.w-skipk{min-height:44px;padding:.35rem .9rem;border:1.5px dashed #8B857A;border-radius:999px;background:none;color:var(--muted);font:inherit;font-size:.95rem}
+.w-skipk[aria-pressed=true]{border-style:solid;color:var(--ink);background:var(--offset)}
+/* Deckblatt im Register */
+.w-zumdeck{display:block;width:100%;text-align:left;border:2px solid transparent;border-radius:.45rem;background:none;padding:.3rem .55rem;margin:0 0 .25rem;min-height:44px;font:inherit;font-weight:700;font-size:.95rem;color:inherit;border-bottom:1px solid rgba(36,34,31,.18)}
+.w-zumdeck small{display:block;font-weight:400;font-size:.78rem;color:#463F33}
+.w-zumdeck.hier{background:var(--kuli-hi);border-color:var(--kuli)}
+.deck-start{gap:.6rem;flex-wrap:wrap}
+.w-erinn{margin:0 0 1.3rem;padding:.7rem 1rem .4rem;border-left:4px solid var(--green);background:var(--green-hi);border-radius:0 var(--r-lg) var(--r-lg) 0;max-width:62rem}
+.w-erinn .kennung{margin:0 0 .3rem;color:var(--green)}
+.w-erinn .w-abruf{margin:0}
+.w-blickzu{margin:1.6rem 0 0;padding:.7rem 1rem;border:1.5px dashed var(--gold);border-radius:var(--r-lg);color:var(--muted);max-width:62rem}
+.w-weiter{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:space-between;margin:0 0 1rem;padding:.6rem .7rem .6rem 1rem;background:var(--kuli-hi);border:1.5px solid var(--kuli);border-radius:var(--r-lg)}
+.w-weiter .btn{min-height:48px}
 </style>
 </head>
 <body>
@@ -766,7 +801,7 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 <div class="ab-rahmen"><aside class="ab-reg" id="reg" aria-label="Aufträge dieses Blatts"></aside><main id="main" tabindex="-1"></main></div>
 <div id="ueber"></div>
 <noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft „Geschichte aktuell 1“ (M1–M14).</p></noscript>
-<script type="application/json" id="lehr-daten">{"v":2,"alg":"AES-GCM-256/PBKDF2-SHA256","iter":600000,"salt":"S2AE0Ck1PuvFDIipEmJzCg==","iv":"UrPiBk52O1mPWifR","ct":"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"}</script>
+<script type="application/json" id="lehr-daten">{"v":2,"alg":"AES-GCM-256/PBKDF2-SHA256","iter":600000,"salt":"S2AE0Ck1PuvFDIipEmJzCg==","iv":"5i8Y673BAAjW8fOT","ct":"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"}</script>
 <script src="../assets/gegenwart/bundle.js"></script>
 <script>
 window.GGK_ZURUECK = "../index.html";
@@ -1048,7 +1083,8 @@ const QUER = () => { try { return matchMedia("(min-width:900px)").matches; } cat
 const probe = f => { try { return !!(f && f()); } catch(e) { return false; } };
 const beantwortet = id => { const f = (L.erledigt || {})[id]; return f ? probe(f) : !!(S.durch || {})[id]; };
 const erledigt = id => probe((L.erledigt || {})[id]) || !!(S.durch || {})[id];
-const offen = id => { const a = AUF(id); if (!a || !a.frei || a.frei === "offen" || (S.frei || {})[id]) return true; return a.frei === "antwort" && beantwortet(a.nach); };
+/* Was schon einmal offen war (S.war) oder schon bearbeitet ist, bleibt offen: Eine neue Freigaberegel darf vorhandene Arbeit nicht verstecken. */
+const offen = id => { const a = AUF(id); if (!a || !a.frei || a.frei === "offen" || (S.frei || {})[id] || (S.war || {})[id] || probe((L.erledigt || {})[id])) return true; return a.frei === "antwort" && beantwortet(a.nach); };
 const SCHMAL = () => BLATT() && (L.schmal || []).includes(S.seite) && offen(S.seite);
 
 function register(immer){
@@ -1073,6 +1109,7 @@ function zuSeite(a){
 const blattzeile = () => `<div class="ab-zeile"><span>GGK · ${esc(L.kapitel || "")}</span><span>${esc(L.nr)} · Arbeitsblatt</span><span>Datum: ${new Date().toLocaleDateString("de-DE")}</span></div>`;
 function blatt(a){
   const zu = !offen(a.id), ai = AUFI(a.id);
+  if (!zu && a.frei && a.frei !== "offen" && !(S.war || {})[a.id]) { if (!S.war) S.war = {}; S.war[a.id] = true; speichere(); }
   let html; BLATT_AN = true;
   try { html = zu ? zuSeite(a) : String(SEITE_FN[a.id]()).replace(/^\s*(<p class="zeit">[\s\S]*?<\/p>)?\s*<h1[^>]*>[\s\S]*?<\/h1>/, ""); } finally { BLATT_AN = false; }
   const davor = ai > 0 ? L.blatt[ai - 1] : null, danach = ai < L.blatt.length - 1 ? L.blatt[ai + 1] : null;
@@ -1162,7 +1199,7 @@ const LKTEIL = {
     ["3-1-5","Agency (Handlungsspielraum)","fragt, inwieweit Menschen oder Gruppen in historischen Situationen eigenständig handeln, Entscheidungen treffen und Entwicklungen beeinflussen konnten."],
     ["3-1-6","Kritische Medienkompetenz","verbindet die historischen Prüfwerkzeuge (Quellenkritik, Triftigkeiten) mit Strategien, die Faktenchecker*innen nutzen."]] },
 };
-LKTEIL.prinzip = { anker:"2-1", titel:"2.1 Die Gemeinsamkeiten einer jeden Geschichte", liste:Object.keys(PRINZIP).map(id => [id, PRINZIP[id][0], PRINZIP[id][1]]).concat([["2-1-9","Multiperspektivität als Folge","Weil jede Geschichte an einen Standort gebunden ist, braucht man mehrere Perspektiven, um ihr näherzukommen."]]) };
+LKTEIL.prinzip = { anker:"2-1", titel:"2.1 Die Gemeinsamkeiten einer jeden Geschichte", liste:Object.keys(PRINZIP).map(id => [id, PRINZIP[id][0], PRINZIP[id][1]]).concat([["2-1-9","Multiperspektivität · Kontroversität · Pluralität","Was folgt daraus? Quellen verschiedener Beteiligter, unterschiedliche Deutungen von Historiker*innen und verschiedene begründete Urteile gehören nebeneinander."]]) };
 /* cfg = { teil:"prinzip"|"wozu"|"trift"|"formen"|"wirkung", frage, lead, platz, heft (Frage aus dem Heft, wörtlich), urteil:{ id:[stufe,text] }, sonst:[stufe,text], bruecke } */
 function landkarteL(cfg){
   const T = LKTEIL[cfg.teil || "prinzip"], l = S.lk, frei = l.vermutung.trim().length >= 10;
@@ -1336,7 +1373,7 @@ document.head.insertAdjacentHTML("beforeend", `<style id="lehr-stil">
 /* ===== Kapitel »Weimarer Republik« (Heft „Geschichte aktuell 1“, M1–M14): gemeinsame Teile jeder Stunde =====
    Jede Stunde setzt L = { wid, key, nr, titel, unter, mark, dauer, block, hier, frage, satz, ziele, blatt, erledigt, schreib, zf, init } und ruft am Ende weimarStart(). */
 const W_KEY = "ggk-weimar:v1";
-const wLade = () => { try { return Object.assign({ faden:{}, kg:{} }, JSON.parse(localStorage.getItem(W_KEY)) || {}); } catch(e) { return { faden:{}, kg:{} }; } };
+const wLade = () => { try { return Object.assign({ faden:{}, kg:{}, linie:{} }, JSON.parse(localStorage.getItem(W_KEY)) || {}); } catch(e) { return { faden:{}, kg:{}, linie:{} }; } };
 const wSchreib = f => { const u = wLade(); f(u); try { localStorage.setItem(W_KEY, JSON.stringify(u)); } catch(e) {} };
 /* Vier Blöcke mit Leitsatz – Titel und Leitsätze wörtlich aus dem digitalen Inhaltsverzeichnis des Kurses (Inhaltsverzeichnis-GGK). */
 const W_BLOCK = {
@@ -1374,12 +1411,13 @@ const wBand = c => `<div class="band gross mit w-band"><div class="bt"><span cla
   <figure><div class="w-jahr" aria-hidden="true"><span>${esc(c.jahr)}</span></div>${c.bild ? `<img src="media/${c.bild.datei}" alt="${esc(c.bild.alt)}" onerror="this.closest('figure').classList.add('ohne');this.remove()"><figcaption>${c.bild.text} <span>${c.bild.nachweis}</span></figcaption>` : ""}</figure></div>`;
 /* Deckblatt: Kopfband, Leitfrage, Ziele, Ablauf, »Wo wir stehen«, roter Faden bisher */
 function deckblatt(){
-  const c = L.deck, b = W_BLOCK[L.block], u = wLade(), vor = wNachbar(-1), faden = vor ? u.faden[vor[0]] : "";
-  return `${wBand(c)}
+  const c = L.deck, b = L.blockinfo || W_BLOCK[L.block], u = wLade(), vor = wNachbar(-1) || (L.vorher ? wMod(L.vorher) : null), faden = vor ? u.faden[vor[0]] : "";
+  const zl = S.zuletzt && AUF(S.zuletzt) && S.zuletzt !== L.blatt[0].id ? AUF(S.zuletzt) : null;
+  return `${zl ? `<p class="w-weiter nodruck"><span>Zuletzt warst du bei Auftrag ${zl.nr}: <b>${esc(zl.kurz)}</b>.</span><button type="button" class="btn primary" data-geh="${zl.id}">Weitermachen ›</button></p>` : ""}${wBand(c)}
   <p class="leitfrage">${esc(L.frage)}</p>
   ${c.belastend ? belastend(c.belastend) : ""}
   <section class="w-wo" aria-label="Wo wir stehen"><p class="kennung">Wo wir stehen · ${esc(b[0])} (${esc(b[1])})</p>
-  ${zeitleiste(W_ANKER.map((a, i) => [a[0], a[1], "", (c.hier || []).includes(i) ? "hier" : ""]), { klasse:"klein" })}
+  ${zeitleiste((L.anker || W_ANKER).map((a, i) => [a[0], a[1], "", (c.hier || []).includes(i) ? "hier" : ""]), { klasse:"klein" })}
   <p class="hinweis">Leitfrage dieses Abschnitts: ${esc(b[2])}</p></section>
   <div class="deck"><div>
     <h2 class="abschnitt">Am Ende kannst du</h2><ul class="ziele">${c.ziele.map(z => `<li>${esc(z)}</li>`).join("")}</ul>
@@ -1387,7 +1425,7 @@ function deckblatt(){
   </div><div>
     <h2 class="abschnitt">So läuft dieses Blatt</h2>${blattAblauf()}
     <p class="hinweis" style="margin-top:.7rem">Links steht das Register mit allen Aufträgen. Manche öffnen erst auf Ansage oder nach deiner Antwort. Dein Stand bleibt auf diesem Gerät; sichere am Ende die Zusammenfassung als PDF.</p>
-    <div class="deck-start"><button type="button" class="btn primary" data-geh="${L.blatt[0].id}">Mit Auftrag ${L.blatt[0].nr} beginnen ›</button></div>
+    <div class="deck-start">${zl ? `<button type="button" class="btn" data-geh="${L.blatt[0].id}">Von vorn: Auftrag ${L.blatt[0].nr}</button><button type="button" class="btn primary" data-geh="${zl.id}">Weitermachen bei Auftrag ${zl.nr}: ${esc(zl.kurz)} ›</button>` : `<button type="button" class="btn primary" data-geh="${L.blatt[0].id}">Mit Auftrag ${L.blatt[0].nr} beginnen ›</button>`}</div>
   </div></div>`;
 }
 /* Auftrag und Bild als ein Kopf (Muster aus M22 4.1). Fehlt das Bild, bleibt der Auftrag allein stehen. */
@@ -1408,7 +1446,7 @@ const W_KG8 = [
 /* Das Raster aus M8.1 wächst weiter: In diesen Stunden schreiben die Lernenden je einen Eintrag (Speicher der Einheit, kg[wid]). */
 const W_KGNEU = [["m10","Gewalt auf den Straßen, Morde an Politikern"],["m11","Krisenjahr 1923"],["m12","Die Goldenen Zwanziger"],["m14","Weltwirtschaftskrise 1929"],["m142","Verhalten der NSDAP"]];
 /* Roter Faden: ein Satz am Ende jeder Stunde; er wandert in die Übersicht des Kapitels und aufs Deckblatt der nächsten Stunde. */
-const fadenFeld = () => `<div class="w-fadenfeld nodruck">${auftrag("Allein · 2 Minuten", "Ein Satz für den roten Faden", "Die Leitfrage dieses Abschnitts: " + esc(W_BLOCK[L.block][2]) + " Was trägt diese Stunde zur Antwort bei?")}
+const fadenFeld = () => leitNach() + `<div class="w-fadenfeld nodruck">${auftrag("Allein · 2 Minuten", "Ein Satz für den roten Faden", "Die Leitfrage dieses Abschnitts: " + esc(W_BLOCK[L.block][2]) + " Was trägt diese Stunde zur Antwort bei?")}
   ${textfeld("faden", "Mein Satz", { rows:2, zaehl:false, anfaenge:L.fadenAnf || ["Diese Stunde zeigt, dass", "Für die Leitfrage heißt das:"] })}</div>`;
 /* Eintrag ins »kollektive Gedächtnis der Weimarer Republik« (Raster aus M8.1, wächst von M8 bis M14) */
 const kgFeld = (titel, text) => `<div class="w-kgfeld">${auftrag("Allein · 3 Minuten", "Eintrag ins kollektive Gedächtnis der Republik", text || "Was aus dieser Stunde bleibt im Gedächtnis der Menschen von damals – und wie wirkt es weiter? Zwei bis drei Stichpunkte für das Raster aus M8.1.")}
@@ -1422,15 +1460,23 @@ const balken = (titel, werte, nachweis) => { const max = Math.max.apply(null, we
   return `<figure class="w-balken"><figcaption><b>${esc(titel)}</b></figcaption><div class="w-bz" role="list">${werte.map(w => `<div class="w-bzeile" role="listitem"><span class="w-bn">${esc(w[0])}</span><span class="w-bb"><span style="width:${(w[1] / max * 100).toFixed(1)}%;background:${w[2] || "var(--ink)"}"></span></span><span class="w-bw">${String(w[1]).replace(".", ",")} %</span></div>`).join("")}</div><p class="quelle">${nachweis}</p></figure>`; };
 
 function weimarStart(){
-  L.kapitel = "Weimarer Republik"; L.seiten = [["start","",""]].concat(L.blatt.map(a => [a.id, a.min + " Min.", a.kurz]));
-  const init0 = L.init; L.init = () => Object.assign({ faden:(wLade().faden[L.wid] || ""), kg:(wLade().kg[L.wid] || "") }, init0 ? init0() : {});
+  L.kapitel = L.kapitel || "Weimarer Republik"; L.seiten = [["start","",""]].concat(L.blatt.map(a => [a.id, a.min + " Min.", a.kurz]));
+  const init0 = L.init; L.init = () => Object.assign({ faden:(wLade().faden[L.wid] || ""), kg:(wLade().kg[L.wid] || ""), lf:{ vor:null, nach:null }, blickfehlt:"", linie:null, liniegrund:"", zuletzt:"" }, init0 ? init0() : {});
   const ne0 = L.nachEingabe; L.nachEingabe = p => { if (p === "faden") wSchreib(u => { u.faden[L.wid] = S.faden; }); if (p === "kg") wSchreib(u => { u.kg[L.wid] = S.kg; }); if (ne0) ne0(p); };
   const ni0 = L.nachInit; L.nachInit = () => { zkInit(); if (ni0) ni0(); };
+  /* Leitfrage als Linie: vor dem ersten Auftrag festlegen, am Ende zurückkehren (L.pole) · Blick der Stunde an der Landkarte offenlegen (L.blick) */
+  if (L.pole) { const id0 = L.blatt[0].id, f0 = SEITE_FN[id0]; SEITE_FN[id0] = () => leitVor() + f0();
+    if (L.zf && !L.pole.eigen) (L.zf.mein = L.zf.mein || []).push(["Die Leitfrage – am Anfang und am Ende", () => { const lf = S.lf || {}; return lf.vor == null && lf.nach == null ? "" : `Am Anfang: ${lf.vor == null ? "offen" : lf.vor + " von 5"} · am Ende: ${lf.nach == null ? "offen" : lf.nach + " von 5"} (1 = ${L.pole.links} · 5 = ${L.pole.rechts})`; }]); }
+  if (L.blick && SEITE_FN.landkarte) { const f1 = SEITE_FN.landkarte; SEITE_FN.landkarte = () => f1() + blickKarte(); }
   kernStart();
+  /* Eine Adresse zeigt immer dieselbe Seite: ohne Anker das Deckblatt, mit Anker den Auftrag. Der gemerkte Platz bleibt als »Weitermachen« erhalten. */
+  const h = location.hash.replace("#", "");
+  if (AUF(S.seite)) S.zuletzt = S.seite;
+  if (!(h && SEITE_FN[h]) && S.seite !== "start") { S.seite = "start"; zeichne(false); }
 }
 /* Kopf: Rückweg zur Übersicht und zum Kapitel */
 const kopf0 = kopf;
-kopf = function(){ kopf0(); const k = document.getElementById("kopf"), p = k.querySelector(".pill"); if (p && !L.hub) p.insertAdjacentHTML("beforebegin", `<a class="pill kapitel" href="index.html">Kapitel Weimar</a>`); };
+kopf = function(){ kopf0(); const k = document.getElementById("kopf"), p = k.querySelector(".pill"); if (p && !L.hub && wMod()) p.insertAdjacentHTML("beforebegin", `<a class="pill kapitel" href="index.html">Kapitel Weimar</a>`); };
 
 /* ---------- Wahr oder falsch – mit Erklärung je Antwort (Muster 2). aussagen = [[Text, richtig:true|false|null, Erklärung bei „wahr“, Erklärung bei „falsch“]]
    richtig = null heißt: Die Aussage lässt sich nicht mit einem Wort beantworten; beide Antworten bekommen eine einordnende Rückmeldung. ---------- */
@@ -1439,9 +1485,9 @@ function wahrFalsch(pfad, aussagen){
   return `<div class="w-wahrfalsch">${aussagen.map((a, i) => { const v = st[i], r = a[1];
     const stufe = v == null ? "" : (r === null ? "teils" : ((v === "w") === r ? "zentral" : "kaum")), wort = { zentral:"Stimmt.", kaum:"Noch nicht.", teils:"Genauer hinsehen." }[stufe];
     return `<div class="w-wf"><p>${esc(a[0])}</p><div class="w-wfk" role="group" aria-label="Wahr oder falsch"><button type="button" data-akt="wf" data-p="${pfad}" data-i="${i}" data-w="w" aria-pressed="${v === "w"}" ${v ? "disabled" : ""}>Wahr</button><button type="button" data-akt="wf" data-p="${pfad}" data-i="${i}" data-w="f" aria-pressed="${v === "f"}" ${v ? "disabled" : ""}>Falsch</button>${v ? `<button type="button" class="btn" data-akt="wfneu" data-p="${pfad}" data-i="${i}" style="min-width:0">Noch einmal</button>` : ""}</div>
-    <div aria-live="polite" style="grid-column:1/-1">${v ? `<div class="rm ${stufe}"><b>${wort}</b> ${esc(v === "w" ? a[2] : a[3])}</div>` : ""}</div></div>`; }).join("")}</div>`;
+    <div aria-live="polite" style="grid-column:1/-1">${v ? `<div class="rm ${stufe}"><b>${wort}</b> ${esc(v === "w" ? a[2] : a[3])}</div>` : ""}</div></div>`; }).join("")}${skipZeile(pfad, aussagen.length)}</div>`;
 }
-const wfFertig = (pfad, n) => { const st = hol(pfad) || {}; for (let i = 0; i < n; i++) if (!st[i]) return false; return true; };
+const wfFertig = (pfad, n) => { const st = hol(pfad) || {}; if (st.skip) return true; for (let i = 0; i < n; i++) if (!st[i]) return false; return true; };
 AKTION.wf = t => { setz(`${t.dataset.p}.${t.dataset.i}`, t.dataset.w); zeichneBehalte(); };
 AKTION.wfneu = t => { setz(`${t.dataset.p}.${t.dataset.i}`, null); zeichneBehalte(); };
 const lang = (p, n = 10) => String(hol(p) || "").trim().length >= n;
@@ -1452,9 +1498,9 @@ function check(pfad, fragen){
   const st = hol(pfad) || {};
   return `<div class="w-check">${fragen.map((f, i) => { const v = st[i], gew = v == null ? null : f[1][v];
     return `<fieldset class="w-cf"><legend><span class="w-nr">${i + 1}</span> ${esc(f[0])}</legend><div class="w-co">${f[1].map((o, k) => `<button type="button" data-akt="check" data-p="${pfad}" data-i="${i}" data-w="${k}" aria-pressed="${v === k}" ${v == null ? "" : "disabled"}>${esc(o[0])}</button>`).join("")}</div>
-    <div aria-live="polite">${gew ? `<div class="rm ${gew[1] ? "zentral" : "kaum"}"><b>${gew[1] ? "Stimmt." : "Noch nicht."}</b> ${esc(gew[2])}${gew[1] ? "" : ` <span class="hinweis">Lies noch einmal: ${esc(f[2])}.</span> <button type="button" class="btn" data-akt="checkneu" data-p="${pfad}" data-i="${i}">Noch einmal</button>`}</div>` : ""}</div></fieldset>`; }).join("")}</div>`;
+    <div aria-live="polite">${gew ? `<div class="rm ${gew[1] ? "zentral" : "kaum"}"><b>${gew[1] ? "Stimmt." : "Noch nicht."}</b> ${esc(gew[2])}${gew[1] ? "" : ` <span class="hinweis">Lies noch einmal: ${esc(f[2])}.</span> <button type="button" class="btn" data-akt="checkneu" data-p="${pfad}" data-i="${i}">Noch einmal</button>`}</div>` : ""}</div></fieldset>`; }).join("")}${skipZeile(pfad, fragen.length)}</div>`;
 }
-const checkFertig = (pfad, n) => { const st = hol(pfad) || {}; for (let i = 0; i < n; i++) if (st[i] == null) return false; return true; };
+const checkFertig = (pfad, n) => { const st = hol(pfad) || {}; if (st.skip) return true; for (let i = 0; i < n; i++) if (st[i] == null) return false; return true; };
 AKTION.check = t => { setz(`${t.dataset.p}.${t.dataset.i}`, +t.dataset.w); zeichneBehalte(); };
 AKTION.checkneu = t => { setz(`${t.dataset.p}.${t.dataset.i}`, null); zeichneBehalte(); };
 
@@ -1516,11 +1562,11 @@ const kurveVoll = (pfad, n) => { const st = hol(pfad) || {}; return Array.from({
 /* ---------- Rechnen mit Rückmeldung: erst die eigene Zahl, dann die Erklärung (Muster 1). Stand: S[pfad] = { v, ok } ---------- */
 function rechne(pfad, frage, soll, o = {}){
   const st = hol(pfad) || {}, ok = st.ok, id = "re-" + pfad.replace(/\W/g, "-");
-  return `<div class="w-rechne"><label for="${id}">${esc(frage)}</label><div class="reihe"><input id="${id}" type="text" inputmode="decimal" data-f="${pfad}.v" value="${esc(st.v || "")}" placeholder="Zahl" autocomplete="off" ${ok === true ? "readonly" : ""}><span class="w-re-e">${esc(o.einheit || "%")}</span><button type="button" class="btn dunkel" data-akt="rechne" data-p="${pfad}" data-soll="${soll}" data-tol="${o.tol ?? .15}" ${ok === true ? "disabled" : ""}>Prüfen</button></div>
+  return `<div class="w-rechne"><label for="${id}">${esc(frage)}</label><div class="reihe"><input id="${id}" type="text" inputmode="decimal" data-f="${pfad}.v" value="${esc(st.v || "")}" placeholder="Zahl" autocomplete="off" ${ok === true ? "readonly" : ""}><span class="w-re-e">${esc(o.einheit || "%")}</span><button type="button" class="btn dunkel" data-akt="rechne" data-p="${pfad}" data-soll="${soll}" data-tol="${o.tol ?? .15}" ${ok === true ? "disabled" : ""}>Prüfen</button>${ok === true ? "" : `<button type="button" class="w-skipk" data-akt="skip" data-p="${pfad}" aria-pressed="${!!st.skip}">${st.skip ? "Übersprungen" : "Überspringen"}</button>`}</div>
   <div aria-live="polite">${ok === true ? `<div class="rm zentral"><b>Stimmt.</b> ${esc(o.ja || "")}</div>` : ok === false ? `<div class="rm kaum"><b>Noch nicht.</b> ${esc(o.nein || "Rechne noch einmal nach.")}</div>` : ""}</div></div>`;
 }
 AKTION.rechne = t => { const p = t.dataset.p, v = parseFloat(String((hol(p) || {}).v || "").replace(",", ".").replace(/[^\d.\-]/g, "")); setz(p + ".ok", !isNaN(v) && Math.abs(v - +t.dataset.soll) <= +t.dataset.tol); zeichneBehalte(); };
-const rechneOk = p => (hol(p) || {}).ok === true;
+const rechneOk = p => { const s = hol(p) || {}; return s.ok === true || !!s.skip; };
 /* ---------- Auf einem Bild zeichnen (Stift oder Finger): Linien liegen als Zahlen im Stand, nichts wird übertragen.
    pfad → S[pfad] = [{ s:Stift, p:[[x,y] …] }] mit x, y zwischen 0 und 1 · stifte = [[id, Farbe, Name]] ---------- */
 function zeichenKarte(pfad, b, stifte){
@@ -1553,12 +1599,66 @@ document.addEventListener("pointerup", zkEnde); document.addEventListener("point
 AKTION.zkzurueck = t => { const l = (hol(t.dataset.p) || []).slice(0, -1); setz(t.dataset.p, l); zeichneBehalte(); };
 AKTION.zkleer = t => { setz(t.dataset.p, []); zeichneBehalte(); };
 window.addEventListener("resize", () => document.querySelectorAll("canvas[data-zkc]").forEach(zkMale));
+
+/* ===== Nachgerüstet am 18.11.2026 (Fachdidaktik Geschichte v1, Lernseite bauen v3.0) ===== */
+/* ---------- Selbsttests sind freiwillig: überspringen sperrt nichts (»Freiwillig heißt freiwillig«) ---------- */
+const skipZeile = (pfad, n) => { const st = hol(pfad) || {}; let alle = true; for (let i = 0; i < n; i++) if (st[i] == null) alle = false; if (alle && !st.skip) return "";
+  return `<p class="w-skip nodruck"><button type="button" class="w-skipk" data-akt="skip" data-p="${pfad}" aria-pressed="${!!st.skip}">${st.skip ? "Übersprungen – doch bearbeiten" : "Selbsttest überspringen"}</button><span class="hinweis">${st.skip ? "Du kannst ihn jederzeit nachholen." : "Der Selbsttest ist freiwillig. Er sperrt nichts."}</span></p>`; };
+AKTION.skip = t => { setz(t.dataset.p + ".skip", !(hol(t.dataset.p) || {}).skip); zeichneBehalte(); };
+
+/* ---------- Leitfrage als Linie: festlegen vor dem ersten Material, zurückkehren am Ende (»Wer hat sich bewegt?«)
+   L.pole = { frage?, links, rechts } · Stand: S.lf = { vor, nach } · steht automatisch vor Auftrag 1 und beim Satz für den roten Faden ---------- */
+const leitVor = () => !L.pole ? "" : `<div class="w-leit vor"><p class="kennung">Leg dich fest – noch ohne Material · 1 Minute</p>${skala("lf.vor", esc(L.pole.frage || L.frage), 5, "1 = " + L.pole.links, "5 = " + L.pole.rechts)}<p class="hinweis">Hier gibt es kein Richtig oder Falsch. Am Ende der Stunde kommst du auf diese Linie zurück.</p></div>`;
+const leitBeweg = () => { const lf = S.lf || {}, v = lf.vor, n = lf.nach;
+  return n == null ? (v == null ? "Am Anfang hast du dich noch nicht festgelegt." : `Am Anfang standest du bei ${v} von 5.`) : v == null ? `Jetzt stehst du bei ${n} von 5.` : v === n ? `Am Anfang ${v}, jetzt ${n} von 5: Du bist bei deiner Einschätzung geblieben. Welcher Beleg aus der Stunde stützt sie am stärksten?` : `Am Anfang ${v}, jetzt ${n} von 5: Du hast dich bewegt. Was hat dich bewegt? Halte es in deiner Begründung fest.`; };
+/* Steht die Rückkehr schon in einem eigenen Auftrag der Stunde (L.pole.eigen), entfällt sie beim roten Faden. */
+const leitNach = () => { if (!L.pole || L.pole.eigen) return "";
+  return `<div class="w-leit nach nodruck"><p class="kennung">Zurück zur Leitfrage · 1 Minute</p>${skala("lf.nach", "Wo stehst du jetzt? " + esc(L.pole.frage || L.frage), 5, "1 = " + L.pole.links, "5 = " + L.pole.rechts)}<p class="w-beweg" aria-live="polite">${leitBeweg()}</p></div>`; };
+
+/* ---------- Erst erinnern (P2): zwei Fragen zu früheren Stunden, ohne Heft; aufdecken nach der eigenen Antwort ---------- */
+const erinnere = (fragen, pfad = "ab") => `<div class="w-erinn"><p class="kennung">Erst erinnern · ohne Heft · ${fragen.length > 1 ? "2 Minuten" : "1 Minute"}</p>${abrufen(pfad, fragen)}</div>`;
+
+/* ---------- Der Blick dieser Stunde: Der Zugang wird als Form von Geschichte offengelegt – erst selbst überlegen, was er ausblendet, dann vergleichen.
+   L.blick = { name, anker (Abschnitt der Landkarte, z. B. "2-3-8"), tut, fehlt } ---------- */
+const blickKarte = () => { const b = L.blick; if (!b) return "";
+  /* Der Blick wird erst nach der Landkarten-Aufgabe benannt: Sonst nähme die Karte die Antwort vorweg (erst die Sache, dann der Begriff). */
+  if (!S.lk.ok && !String(S.blickfehlt || "").trim()) return `<p class="w-blickzu">Der Blick dieser Stunde · öffnet sich, wenn du die Landkarten-Aufgabe geprüft hast.</p>`;
+  return `<section class="w-blickk"><p class="kennung">Der Blick dieser Stunde · 1 Minute</p><h3>So haben wir heute auf Geschichte geschaut: ${esc(b.name)}</h3><p>${esc(b.tut)}${b.anker ? ` <a href="${LK}${b.anker}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a>` : ""}</p>
+  ${textfeld("blickfehlt", "Was blendet dieser Blick aus? Ein Satz.", { rows:2, zaehl:false, platz:"Nicht in den Blick kommt …" })}
+  ${vergleich("blickv", ["blickfehlt"], 10, "Mit einem Vorschlag vergleichen", `<p>${esc(b.fehlt)}</p><p class="hinweis">Jeder Blick zeigt etwas und lässt etwas weg. Deshalb wechselt der Blick von Stunde zu Stunde.</p>`)}</section>`; };
+
+/* ---------- Linie des Kurses »Umwelt oder Ich?« (Vorschlag vom 18.11.2026 – abschaltbar: L.linie in der Stunde weglassen).
+   Die Linie beginnt mit der These aus M13 und kehrt mit derselben Skala wieder. L.linie = { fall, frage, anf } · Stand: S.linie, im Speicher der Einheit linie[wid] ---------- */
+const linieFeld = () => { const c = L.linie; if (!c) return ""; const u = wLade().linie || {}, alt = W_MODULE.filter(m => u[m[0]] != null && m[0] !== L.wid);
+  return `<section class="w-linie"><p class="kennung">Linie des Kurses seit M13 · 2 Minuten</p><h3>Umwelt oder Ich?</h3><p>${esc(c.fall)}</p>
+  <div class="ab-zwei gleich"><div>${skala("linie", esc(c.frage), 5, "1 = eigene Entscheidung", "5 = die Umwelt bestimmt")}${alt.length ? `<p class="hinweis">Deine Linie bisher: ${alt.map(m => `${esc(m[1])}: ${u[m[0]]} von 5`).join(" · ")}</p>` : ""}</div>
+  <div>${textfeld("liniegrund", "Mein Grund in einem Satz", { rows:2, zaehl:false, anfaenge:c.anf || ["Die Umwelt wirkt hier durch", "Spielraum bleibt, weil"] })}</div></div></section>`; };
+const skala0 = AKTION.skala;
+AKTION.skala = t => { skala0(t); const p = t.dataset.p; if (typeof L.wid !== "string") return;
+  if (p === "linie") wSchreib(u => { (u.linie = u.linie || {})[L.wid] = S.linie; });
+  if (L.wid === "m13" && (p === "l1" || p === "l2")) wSchreib(u => { (u.linie = u.linie || {}).m13 = S.l2 != null ? S.l2 : S.l1; }); };
+
+/* ---------- Landkarte des Kapitels: welcher Eintrag in welcher Stunde zentral ist (tools/pruef/weimar_landkarte.py gleicht das mit den Stunden ab) ---------- */
+const W_LK = { m01:[["3-1-2","Public History"]], m02:[["2-3-8","Ereignisgeschichte"]], m03:[["2-1-8","Standortgebundenheit"]], m04:[["2-1-3","Partikularität"],["2-1-4","Selektivität"]], m05:[["2-1-1","Retrospektivität"]],
+  m06:[["1-3","Verständnis der Gegenwart"]], m07:[["2-3-2","Nationalgeschichte"]], m071:[["2-1-9","Kontroversität"],["2-1-8","Standortgebundenheit"]], m08:[["3-1-1","Kollektives Gedächtnis"]],
+  m09:[["2-1-1","Retrospektivität"]], m10:[["2-1-6","Narrativität"],["2-1-1","Retrospektivität"]], m11:[["1-2","Anthropologische Konstanten"],["1-4","Lernen aus der Vergangenheit"]],
+  m12:[["2-1-2","Perspektivität"],["2-1-4","Selektivität"]], m13:[["3-1-5","Agency"]], m14:[["2-1-5","Partialität"],["2-1-3","Partikularität"]], m142:[["1-8","Demokratisches Bewusstsein"]] };
+
+/* ---------- Eine Adresse, eine Seite: Jeder Auftrag hat seinen Anker; das Deckblatt bleibt über das Register erreichbar ---------- */
+const geh0 = geh;
+geh = function(id){ if (BLATT() && AUF(id)) S.zuletzt = id; geh0(id); wAdresse(); };
+const wAdresse = () => { try { const z = S.seite === "start" ? "" : "#" + S.seite; if (location.hash !== z) history.replaceState(null, "", z || (location.pathname + location.search)); } catch(e) {} };
+window.addEventListener("hashchange", () => { if (!S) return; const h = location.hash.replace("#", ""), z = h && SEITE_FN[h] ? h : "start"; if (z !== S.seite && (SEITE_FN[h] || !h)) geh0(z); });
+const register0 = register;
+register = function(immer){ register0(immer); const r = document.getElementById("reg"); if (!r || !BLATT()) return; const t = r.querySelector(".ab-regtitel");
+  if (t && !r.querySelector(".w-zumdeck")) t.insertAdjacentHTML("afterend", `<button type="button" class="w-zumdeck${S.seite === "start" ? " hier" : ""}" data-geh="start"${S.seite === "start" ? ' aria-current="page"' : ""}>Deckblatt<small>Leitfrage und Ablauf</small></button>`); };
 /* ===== M12 · Stabilisierungsjahre: Die Goldenen Zwanziger (Heft „Geschichte aktuell 1“, M12 mit Erwartungshorizont) ===== */
 const L = {
   wid:"m12", key:"ggk-w-m12:v1", nr:"M12", titel:"Stabilisierungsjahre: Die Goldenen Zwanziger", unter:"Wie golden waren sie – und für wen?", dauer:90, block:"d",
   /* Zeichen der Stunde: eine Schallplatte mit goldenem Etikett */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="13" fill="#24221F"/><circle cx="17" cy="17" r="9" fill="none" stroke="#FBF8F1" stroke-width=".8" opacity=".6"/><circle cx="17" cy="17" r="5" fill="#E0B74A"/><circle cx="17" cy="17" r="1.3" fill="#24221F"/></svg>`,
   frage:"Inwieweit ist es gerechtfertigt, von den „Goldenen Zwanzigern“ zu sprechen?",
+  blick:{ name:"De-Konstruktion: einen Epochenbegriff prüfen", anker:"2-4-1", tut:"Du nimmst eine fertige Erzählung – die „Goldenen Zwanziger“ – auseinander und prüfst, ob sie trägt.", fehlt:"Was fehlt: eine eigene Erzählung. Wer einen Begriff prüft, weiß danach, was nicht stimmt – aber noch nicht, wie man die Jahre 1924 bis 1929 besser erzählt." },
   deck:{ dauer:"Doppelstunde · 90 Minuten", jahr:"1924–1929", hier:[5],
     satz:"Revuen, Jazz, Kino, Bauhaus: Die Jahre nach der Inflation gelten als golden. Die meisten Menschen lebten aber nicht in Berlin.",
     ziele:["Kunst, Kultur und Lebensgefühl der Zwanzigerjahre an Beispielen beschreiben,", "Unterschiede zwischen Stadt und Land darstellen,", "mit den drei Triftigkeiten prüfen, wie gerechtfertigt der Begriff „Goldene Zwanziger“ ist."] },
@@ -1567,7 +1667,7 @@ const L = {
     { id:"collage", nr:"2", kurz:"Recherche", name:"Recherche und Collage", form:"Zu zweit", min:30, frei:"offen" },
     { id:"land", nr:"3", kurz:"Stadt und Land", name:"Stadt und Land", form:"Allein", min:12, frei:"offen" },
     { id:"trift", nr:"4", kurz:"Triftigkeit", name:"Die Triftigkeitsprüfung", form:"Zu zweit", min:18, frei:"antwort", nach:"land", fehlt:"Bearbeite erst Auftrag 3." },
-    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Welche Prinzipien werden deutlich?", form:"Allein", min:6, frei:"antwort", nach:"trift", fehlt:"Bearbeite erst Auftrag 4." },
+    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Welche Prinzipien werden deutlich?", form:"Allein", min:7, frei:"antwort", nach:"trift", fehlt:"Bearbeite erst Auftrag 4." },
     { id:"schreiben", nr:"5", kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein", min:15, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:"Du überprüfst den Begriff „Goldene Zwanziger“ und nimmst Stellung." },
     { id:"zusammenfassung", nr:"Z", kurz:"Zusammenfassung", name:"Zusammenfassung", form:"Zum Abheften", min:4, frei:"antwort", nach:"schreiben", fehlt:"Die Zusammenfassung öffnet sich nach deinem Text in Auftrag 5.", kopf:"Zum Abheften" },
   ],
@@ -1599,7 +1699,7 @@ const STADTLAND = [
 const TRIFT = LKTEIL.trift.liste;
 const TR_ERG = [
   ["Empirisch", "Belegt sind die wirtschaftliche Stabilisierung nach 1924 (Rentenmark, Dawes-Plan), technischer Fortschritt (Elektrifizierung, Radio, Auto) und ein deutlicher Kulturboom in den Großstädten. Belegt ist aber auch Elend: Arbeitslosigkeit in Krisenjahren, enge Mietskasernen, belastete ländliche Regionen. Über 70 Prozent lebten auf dem Land oder in kleinen Städten.", "Für Großstädte und bestimmte Milieus gut belegt – für die ganze Gesellschaft nur eingeschränkt."],
-  ["Normativ", "„Golden“ ist eine starke, positive Wertung: kulturelle Blüte, Lebensfreude, neue Rollenbilder. Sie entspricht den Erfahrungen bestimmter Gruppen – städtisches Bürgertum, Künstler*innen, Intellektuelle. Für Landbevölkerung, Arbeitslose und Ausgegrenzte gilt sie kaum. Sie überdeckt politische Gewalt und Unsicherheit.", "Nur eingeschränkt triftig: golden für bestimmte Gruppen, zwiespältig für die Gesellschaft insgesamt."],
+  ["Normativ", "„Golden“ ist eine starke, positive Wertung: kulturelle Blüte, Lebensfreude, neue Rollenbilder. Der Begriff legt seinen Maßstab aber nicht offen. Er übernimmt die Erfahrung bestimmter Gruppen – städtisches Bürgertum, Künstler*innen, Intellektuelle. Wer fragt, ob es allen Menschen gut ging, kommt zu einem anderen Ergebnis: Für Landbevölkerung, Arbeitslose und Ausgegrenzte gilt „golden“ kaum; politische Gewalt und Unsicherheit werden überdeckt.", "Nur eingeschränkt triftig: golden für bestimmte Gruppen, zwiespältig für die Gesellschaft insgesamt."],
   ["Narrativ", "Die Erzählung „Krise nach 1918 – Stabilisierung 1924 bis 1929 – erneute Krise ab 1929“ ordnet die Zeit schlüssig und hat klare Symbole: Charleston, Kino, „Neue Frau“, Bauhaus. Sie vereinfacht aber (Glanz gegen Elend) und baut die politische Radikalisierung und die Anfälligkeit der Wirtschaft zu wenig ein.", "Als Ordnung der Zeit triftig, aber vereinfachend. Sie braucht Gegen-Erzählungen."],
 ];
 
@@ -1656,14 +1756,14 @@ function seiteLk(){
 }
 L.schreib = {
   vor:"So kann die Aufgabe in der Klassenarbeit stehen: Material, zwei Operatoren, höchstens eine Seite. Hier schreibst du eine halbe Seite.",
-  aufgabe:`<b>Überprüfen Sie</b> mithilfe der drei Triftigkeiten, inwieweit es gerechtfertigt ist, von den „Goldenen Zwanzigern“ zu sprechen, und <b>nehmen Sie Stellung</b>.`,
+  aufgabe:`<b>a) Überprüfen Sie</b> mithilfe der drei Triftigkeiten, inwieweit es gerechtfertigt ist, von den „Goldenen Zwanzigern“ zu sprechen.<br><b>b) Nehmen Sie Stellung.</b>`,
   material:`<p><b>M1 · Großstadt:</b> Kunst und Kultur entfalten sich frei; Revuen, Tanz, Kino; in Berlin 1922 bereits 32 Kabarettbühnen; wirtschaftliche Stabilisierung nach 1924.</p><p><b>M2 · Land:</b> Über 70 Prozent leben auf dem Land oder in kleinen Städten. Dort: hergebrachte Ordnung, unsichere wirtschaftliche Lage, wenig Zugang zu Bildung und Kultur, Skepsis gegenüber der Republik.</p><p><b>M3 · Drei Fragen:</b> Stimmen die Tatsachen (empirisch)? Sind die Wertungen begründet (normativ)? Ist der Zusammenhang schlüssig (narrativ)?</p><p class="quelle">Nach dem Unterrichtsheft, M12, und der kognitiven Landkarte, 2.2.</p>`,
   woerter:150, min:60,
   stufen:[["Grundlegend","Du nennst, was für und was gegen den Begriff spricht, und sagst, ob du ihn für gerechtfertigt hältst."],["Sicher","Du prüfst den Begriff mit zwei Triftigkeiten, nennst sie beim Namen und begründest deine Stellungnahme mit M1 und M2."],["Souverän","Du prüfst mit allen drei Triftigkeiten, zeigst, für wen der Begriff gilt und was er überdeckt, und kommst zu einer abgewogenen Stellungnahme."]],
   inhalt:[["Empirisch:","Aufschwung und Kulturboom sind belegt – aber vor allem für Großstädte; über 70 Prozent leben auf dem Land oder in kleinen Städten."],
-    ["Normativ:","„Golden“ ist eine starke Wertung; sie entspricht der Erfahrung bestimmter Gruppen und überdeckt Elend, Gewalt und Unsicherheit."],
+    ["Normativ:","„Golden“ ist eine starke Wertung, deren Maßstab nicht offengelegt wird; sie übernimmt die Erfahrung bestimmter Gruppen und überdeckt Elend, Gewalt und Unsicherheit."],
     ["Narrativ:","Die Folge Krise – Stabilisierung – Krise ist schlüssig, vereinfacht aber."],
-    ["Stellungnahme:","Gerechtfertigt, wenn offengelegt wird, für wen der Begriff gilt; als Bezeichnung für die ganze Gesellschaft nicht."]],
+    ["Stellungnahme:","Tragfähig sind verschiedene Stellungnahmen – von „gerechtfertigt für Kultur und Großstadt“ bis „nicht gerechtfertigt, weil der Begriff die Mehrheit ausblendet“. Es zählt: Du legst deinen Maßstab offen (Für wen muss ein Epochenbegriff gelten?) und stützt dich auf alle drei Prüfungen."]],
 };
 L.zf = {
   frage:L.frage,
@@ -1672,7 +1772,7 @@ L.zf = {
   abfolge:{ titel:"Stadt und Land", punkte:[["Stadt","viele Schichten, offen für Neues; Industrie und Dienstleistung; viele Schulen, Theater, Kinos; vielfältige Politik; modernes Leben in Mietskasernen."],["Land","hergebrachte Ordnung; Landwirtschaft, oft unsichere Lage; wenig Zugang zu Bildung; konservativ, skeptisch gegenüber der Republik; Leben im Rhythmus der Landwirtschaft."]] },
   zahlen:[["1924–1929","Jahre der Stabilisierung"],["über 70 %","lebten auf dem Land oder in kleinen Städten"],["32","Kabarettbühnen in Berlin (1922)"]],
   lk:{ name:"Triftigkeitsprüfung (2.2)", satz:"Empirisch: Stimmen die Tatsachen? Normativ: Sind die Wertungen begründet? Narrativ: Ist der Zusammenhang schlüssig?", beispiel:"„Goldene Zwanziger“: empirisch vor allem für Großstädte belegt, normativ nur für bestimmte Gruppen „golden“, narrativ schlüssig, aber vereinfachend." },
-  werkzeug:{ titel:"Einen Epochenbegriff prüfen", schritte:["Empirisch: Für wen und wo stimmen die Tatsachen?","Normativ: Wessen Maßstab steckt in der Wertung?","Narrativ: Was ordnet der Begriff – und was lässt er weg?"] },
+  werkzeug:{ titel:"Einen Epochenbegriff prüfen", schritte:["Empirisch: Für wen und wo stimmen die Tatsachen?","Normativ: Ist die Wertung offengelegt – und nach welchem Maßstab ist sie begründet?","Narrativ: Was ordnet der Begriff – und was lässt er weg?"] },
   sonst:"eure Recherche und Collage (Auftrag 2), der Vergleich von Stadt und Land (Auftrag 3).",
   mein:[["Wie golden? Vorher und nachher", () => S.g1 == null ? "" : `Vorher: ${S.g1} von 5. Nachher: ${S.g2 == null ? "offen" : S.g2 + " von 5"}. ${S.urteil}`], ["Mein Eintrag ins kollektive Gedächtnis", "kg"]],
 };

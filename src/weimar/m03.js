@@ -5,23 +5,24 @@ const L = {
   /* Zeichen der Stunde: zwei Standorte, ein Gegenstand */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="9" r="4" fill="#24221F"/><path d="M5 28l12-15 12 15" fill="none" stroke="#9B402D" stroke-width="2.4" stroke-linejoin="round"/><circle cx="5" cy="28" r="2.6" fill="#24221F"/><circle cx="29" cy="28" r="2.6" fill="#24221F"/></svg>`,
   frage:"Warum sprechen zwei Menschen über dasselbe Ereignis von 1915 so verschieden – und was hat ihr Amt damit zu tun?",
+  blick:{ name:"Geschichtskultur und Geschichtspolitik", anker:"3-1-3", tut:"Du klärst zuerst, was 1915/16 geschah. Dann untersuchst du, wie hundert Jahre später darüber gesprochen wird – und wozu.", fehlt:"Was fehlt: die Stimmen der Betroffenen selbst. In dieser Stunde sprechen vor allem Amtsträger von 2015 – nicht die Armenier*innen von 1915." },
   deck:{ dauer:"Doppelstunde · 90 Minuten", jahr:"1915/16", hier:[0],
     satz:"Im April 2015 jährt sich der Beginn der Deportationen und Massentötungen an den Armenier*innen zum hundertsten Mal. Viele äußern sich. Eine Frage steht immer im Raum: Fällt das Wort „Völkermord“ – oder nicht?",
     belastend:"In dieser Stunde geht es um Deportationen und die Ermordung von Hunderttausenden Menschen. Bilder der Toten zeigt die Seite nicht. Du darfst jederzeit aussetzen und mit deiner Lehrkraft sprechen.",
     ziele:["darstellen, was 1915/16 im Osmanischen Reich geschah und worüber bis heute gestritten wird,", "erklären, wie Amt und Interessen prägen, was jemand über die Vergangenheit sagt (Standortgebundenheit),", "zwei Positionen mit den Triftigkeitsprüfungen beurteilen."] },
   blatt:[
-    { id:"vermuten", nr:"1", kurz:"Erst vermuten", name:"Erst vermuten: ein Ereignis, zwei Wörter", form:"Allein", min:3, frei:"offen" },
+    { id:"vermuten", nr:"1", kurz:"Erst vermuten", name:"Erst vermuten: ein Ereignis, zwei Wörter", form:"Allein", min:5, frei:"offen" },
     { id:"ereignis", nr:"2", kurz:"Was geschah?", name:"Was geschah 1915/16 im Osmanischen Reich?", form:"Zu zweit · Recherche", min:20, frei:"offen" },
     { id:"stimmen", nr:"3", kurz:"Vier Stimmen", name:"Vier Stimmen im April 2015", form:"Allein oder zu zweit", min:20, frei:"offen" },
     { id:"urteil", nr:"4", kurz:"Prüfen und urteilen", name:"Prüfen und urteilen mit den Triftigkeiten", form:"Allein", min:12, frei:"antwort", nach:"stimmen", fehlt:"Untersuche erst zwei der vier Stimmen in Auftrag 3." },
-    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Welches Prinzip zeigt sich hier?", form:"Allein", min:6, frei:"antwort", nach:"urteil", fehlt:"Bearbeite erst Auftrag 4." },
+    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Welches Prinzip zeigt sich hier?", form:"Allein", min:7, frei:"antwort", nach:"urteil", fehlt:"Bearbeite erst Auftrag 4." },
     { id:"schreiben", nr:"5", kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein", min:15, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:"Du erläuterst die Standortgebundenheit am Beispiel dieser Stunde." },
     { id:"rueckblick", nr:"6", kurz:"Rückblick", name:"Rückblick: Was denkst du jetzt?", form:"Allein, dann Plenum", min:4, frei:"antwort", nach:"schreiben", fehlt:"Schreib erst deinen Text in Auftrag 5." },
     { id:"zusammenfassung", nr:"Z", kurz:"Zusammenfassung", name:"Zusammenfassung", form:"Zum Abheften", min:4, frei:"antwort", nach:"schreiben", fehlt:"Die Zusammenfassung öffnet sich nach deinem Text in Auftrag 5.", kopf:"Zum Abheften" },
   ],
   breit:["lehrkraft"],
   loesch:"Deine Vermutung, deine Recherche, deine Tabelle, dein Urteil, dein Text und dein Satz für den roten Faden werden auf diesem Gerät entfernt.",
-  init:() => ({ vermutung:"", f:{}, t:{}, tr:{ e:"", n:"", na:"" }, urteil:"", neu:"" }),
+  init:() => ({ ab:{}, vermutung:"", f:{}, t:{}, tr:{ e:"", n:"", na:"" }, urteil:"", neu:"" }),
   erledigt:{
     vermuten:() => lang("vermutung"), ereignis:() => [0,1,2,3].filter(i => lang("f." + i)).length >= 3, stimmen:() => tabelleVoll("t", 3, 2, 5),
     urteil:() => lang("tr.e") && lang("tr.n") && lang("urteil"), landkarte:() => !!S.lk.ok, schreiben:() => schreibFertig(), rueckblick:() => lang("neu"),
@@ -49,7 +50,8 @@ const stimmKarte = p => `<div class="w-kopfzeile"><h3>${esc(p.name)}</h3><span c
 
 function start(){ return deckblatt(); }
 function vermuten(){
-  return `${auftrag("Allein · 3 Minuten", "Ein Ereignis, zwei Wörter", "April 2015, Deutschland. Der Bundespräsident spricht vom „Völkermord“ an den Armeniern. Der Außenminister desselben Landes vermeidet das Wort. Vermute, bevor du mehr weißt: Woran kann das liegen?")}
+  return `${erinnere([["M2: Was war der Anlass des Ersten Weltkriegs?", "Das Attentat von Sarajevo am 28. Juni 1914: Der österreichisch-ungarische Thronfolger und seine Frau werden erschossen."], ["M2: Warum wurde daraus ein Krieg der Großmächte?", "Wegen der Bündnisse: Die Staaten hatten sich Beistand versprochen. Dazu kamen tiefere Ursachen wie das Wettrüsten, der Streit um Kolonien und die Spannungen auf dem Balkan."]])}
+  ${auftrag("Allein · 3 Minuten", "Ein Ereignis, zwei Wörter", "April 2015, Deutschland. Der Bundespräsident spricht vom „Völkermord“ an den Armeniern. Der Außenminister desselben Landes vermeidet das Wort. Vermute, bevor du mehr weißt: Woran kann das liegen?")}
   ${textfeld("vermutung", "Meine Vermutung", { rows:3, zaehl:false, anfaenge:["Es könnte daran liegen, dass", "Vielleicht hat das Amt damit zu tun, weil"] })}`;
 }
 function ereignis(){
@@ -96,7 +98,7 @@ function seiteLk(){
 }
 L.schreib = {
   vor:"So kann die Aufgabe in der Klassenarbeit stehen. Die Begriffe der kognitiven Landkarte sind dort Prüfungsstoff.",
-  aufgabe:`Im April 2015 sprach Bundespräsident Joachim Gauck vom „Völkermord“ an den Armeniern; Außenminister Frank-Walter Steinmeier vermied das Wort. <b>Erläutern Sie</b> mithilfe des Begriffs Standortgebundenheit, warum Menschen über dasselbe Ereignis verschieden sprechen, und <b>beurteilen Sie</b> eine der beiden Positionen mit einer Triftigkeitsprüfung.`,
+  aufgabe:`Im April 2015 sprach Bundespräsident Joachim Gauck vom „Völkermord“ an den Armeniern; Außenminister Frank-Walter Steinmeier vermied das Wort.<br><b>a) Erläutern Sie</b> mithilfe des Begriffs Standortgebundenheit, warum Menschen über dasselbe Ereignis verschieden sprechen.<br><b>b) Beurteilen Sie</b> eine der beiden Positionen mit einer Triftigkeitsprüfung.`,
   woerter:140, min:60,
   stufen:[["Grundlegend","Du nennst den Begriff Standortgebundenheit und stellst fest, dass die beiden verschieden sprechen."],["Sicher","Du erklärst an Amt und Interessen, warum die beiden verschieden sprechen, und wendest eine Triftigkeitsprüfung richtig an."],["Souverän","Du trennst die Frage der Belege von der Frage der Benennung, zeigst die Folgen der Wortwahl und kommst zu einem begründeten eigenen Urteil."]],
   inhalt:[["Standortgebundenheit:","Wer Geschichte erzählt, ist durch seinen gesellschaftlichen und kulturellen Gesamtkontext geprägt – hier durch Staat, Amt und Zeitpunkt."],

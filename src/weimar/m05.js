@@ -4,6 +4,7 @@ const L = {
   /* Zeichen der Stunde: zwei Fahnen an einem Mast */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 4v27" stroke="#24221F" stroke-width="2.4" stroke-linecap="round"/><path d="M17 6h11l-3 4 3 4H17z" fill="#24221F"/><path d="M17 16H6l3 4-3 4h11z" fill="#9B402D"/></svg>`,
   frage:"Der Kaiser ist fort, der Krieg verloren: Welche Republik soll es werden – und welche hättest du unterstützt?",
+  blick:{ name:"Entscheidungen in offener Lage (Agency)", anker:"3-1-5", tut:"Du stellst dich in den 9. November 1918 und fragst: Welche Möglichkeiten gab es, und wer hat entschieden?", fehlt:"Was fehlt: die Verhältnisse, die den Spielraum begrenzen – Hunger, Kriegsmüdigkeit, die Macht der Armee. Wer nur auf Entscheidungen schaut, überschätzt leicht einzelne Personen." },
   deck:{ dauer:"Doppelstunde · 90 Minuten", jahr:"9.11.1918", hier:[1],
     satz:"Am 9. November 1918 wird in Berlin zweimal die Republik ausgerufen – um 14 Uhr und um 16 Uhr. Gemeint sind zwei verschiedene Staaten.",
     bild:{ datei:"heft-m05-berlin-november-1918.jpg", alt:"Bewaffnete Soldaten und Matrosen auf einem Lastwagen vor dem Brandenburger Tor in Berlin, November 1918.", text:"Berlin, November 1918: Revolutionäre vor dem Brandenburger Tor.", nachweis:"Bild aus dem Unterrichtsheft, M5.3. Nachweis offen." },
@@ -14,7 +15,7 @@ const L = {
     { id:"reden", nr:"3", kurz:"Zwei Reden", name:"Zwei Reden an einem Nachmittag", form:"Allein, dann zu zweit", min:15, frei:"offen" },
     { id:"abstimmung", nr:"4", kurz:"Abstimmung", name:"Stimm ab: Welche Republik?", form:"Allein, dann Plenum", min:8, frei:"antwort", nach:"reden", fehlt:"Lies erst die beiden Reden in Auftrag 3 und schreib deine zwei Sätze." },
     { id:"film", nr:"5", kurz:"Wer setzt sich durch?", name:"Welche Republik setzt sich durch?", form:"Plenum, dann allein", min:20, frei:"ansage", gleich:"Ein Film zeigt, wie der Streit zwischen Friedrich Ebert und Rosa Luxemburg ausgeht. Vorher stimmt die Klasse ab." },
-    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Warum fiel die Entscheidung damals schwerer?", form:"Allein", min:6, frei:"antwort", nach:"film", fehlt:"Bearbeite erst Auftrag 5." },
+    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Warum fiel die Entscheidung damals schwerer?", form:"Allein", min:7, frei:"antwort", nach:"film", fehlt:"Bearbeite erst Auftrag 5." },
     { id:"schreiben", nr:"6", kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein", min:15, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:"Du erklärst die beiden Republiken an den zwei Reden – so, wie es in der Klassenarbeit verlangt wird." },
     { id:"rueckblick", nr:"7", kurz:"Rückblick", name:"Rückblick: Was denkst du jetzt?", form:"Allein, dann Plenum", min:3, frei:"antwort", nach:"schreiben", fehlt:"Schreib erst deinen Text in Auftrag 6." },
     { id:"zusammenfassung", nr:"Z", kurz:"Zusammenfassung", name:"Zusammenfassung", form:"Zum Abheften", min:4, frei:"antwort", nach:"schreiben", fehlt:"Die Zusammenfassung enthält die Auflösung. Sie öffnet sich nach deinem Text in Auftrag 6.", kopf:"Zum Abheften" },
@@ -135,7 +136,7 @@ function seiteLk(){
 }
 L.schreib = {
   vor:"So kann die Aufgabe in der Klassenarbeit stehen: Material, ein Operator, höchstens eine Seite. Hier schreibst du eine halbe Seite.",
-  aufgabe:`Am 9. November 1918 wurde in Berlin zweimal die Republik ausgerufen. <b>Erklären Sie</b> mithilfe von Q1 und Q2 den Unterschied zwischen den beiden Republiken und <b>stellen Sie dar</b>, wie sich eine von beiden 1918/19 durchsetzte.`,
+  aufgabe:`Am 9. November 1918 wurde in Berlin zweimal die Republik ausgerufen.<br><b>a) Analysieren Sie</b> Q1 und Q2: Welche Republik wird jeweils ausgerufen, und worin unterscheiden sich die beiden?<br><b>b) Stellen Sie dar</b>, wie sich eine von beiden 1918/19 durchsetzte.`,
   material:`<p><b>Q1 · Philipp Scheidemann, 14 Uhr:</b> „Der Kaiser hat abgedankt. […] Das Alte und Morsche, die Monarchie, ist zusammengebrochen. Es lebe das Neue, es lebe die deutsche Republik!“</p><p><b>Q2 · Karl Liebknecht, 16 Uhr:</b> „Der Tag der Revolution ist gekommen. […] In dieser Stunde proklamieren wir die freie sozialistische Republik Deutschland. […] Wir wollen an der Stelle, wo die Kaiserstandarte wehte, die rote Fahne der freien Republik Deutschland hissen!“</p><p class="quelle">Auszüge aus dem Unterrichtsheft, M5.1.</p>`,
   woerter:140, min:60,
   stufen:[["Grundlegend","Du nennst beide Republiken und ordnest sie Scheidemann und Liebknecht zu. Der Unterschied bleibt ein Schlagwort."],["Sicher","Du erklärst den Unterschied an mindestens einem Merkmal (wer entscheidet, wie die Wirtschaft geordnet ist) und belegst mit Q1 oder Q2. Der Weg zur Durchsetzung fehlt oder ist ungenau."],["Souverän","Du erklärst den Unterschied mit Belegen aus beiden Quellen und stellst die Durchsetzung in Schritten dar – mit Daten und mit dem Preis, den sie hatte."]],

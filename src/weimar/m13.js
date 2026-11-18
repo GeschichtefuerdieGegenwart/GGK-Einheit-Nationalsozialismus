@@ -4,21 +4,22 @@ const L = {
   /* Zeichen der Stunde: zwei Köpfe, die in verschiedene Richtungen blicken */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><circle cx="11" cy="12" r="5" fill="none" stroke="#24221F" stroke-width="2.4"/><path d="M3 29c0-6 3.5-9 8-9s8 3 8 9" fill="none" stroke="#24221F" stroke-width="2.4" stroke-linecap="round"/><circle cx="24" cy="12" r="5" fill="#E0B74A" stroke="#24221F" stroke-width="2"/><path d="M17 29c0-6 3-9 7-9s7 3 7 9" fill="none" stroke="#9B402D" stroke-width="2.4" stroke-linecap="round"/></svg>`,
   frage:"Wie stark wird das Denken und Handeln eines Menschen durch seine Umwelt geprägt – und wie viel Raum bleibt für eigenständiges Urteilen?",
+  blick:{ name:"Blick aus der Nähe: zwei Leben", anker:"2-3-6", tut:"Du folgst zwei Frauen durch ihren Alltag. So arbeitet die Mikrogeschichte – nur sind Lotte und Anna ausgedacht.", fehlt:"Was fehlt: Lotte und Anna sind erfunden und stehen für Milieus. Wirkliche Menschen sind widersprüchlicher. Und zwei Leben sagen noch nichts darüber, wie viele so dachten." },
   deck:{ dauer:"Doppelstunde · 90 Minuten", jahr:"1925", hier:[5],
     satz:"Zwei junge Frauen, dieselbe Zeit, dasselbe Land: Lotte in Berlin, Anna in einem Dorf in Thüringen. Du untersuchst, wie ihr Umfeld ihr Urteil über die Außenpolitik der Republik prägt.",
     ziele:["die Außenpolitik der Stabilisierungsjahre von Dawes-Plan bis Young-Plan darstellen,", "erklären, warum Menschen in Stadt und Land diese Politik so verschieden beurteilen,", "mit dem Agency-Konzept beurteilen, wie viel Raum für ein eigenständiges Urteil bleibt."] },
   blatt:[
     { id:"linie", nr:"1", kurz:"Meinungslinie", name:"Meinungslinie: Wie frei ist mein Denken?", form:"Plenum", min:6, frei:"offen" },
     { id:"rolle", nr:"2", kurz:"Zwei Leben", name:"Zwei Leben einer Zeit", form:"Allein", min:20, frei:"offen" },
-    { id:"aussen", nr:"3", kurz:"Außenpolitik", name:"Lotte, Anna und die Außenpolitik", form:"Frei wählbar", min:20, frei:"antwort", nach:"rolle", fehlt:"Wähle erst in Auftrag 2 dein Leben und ordne es ein." },
+    { id:"aussen", nr:"3", kurz:"Außenpolitik", name:"Lotte, Anna und die Außenpolitik", form:"Frei wählbar", min:22, frei:"antwort", nach:"rolle", fehlt:"Wähle erst in Auftrag 2 dein Leben und ordne es ein." },
     { id:"spiel", nr:"4", kurz:"Entscheiden", name:"Wenn Lotte oder Anna entscheiden dürften", form:"Plenum", min:8, frei:"ansage", gleich:"Ihr spielt gemeinsam ein kurzes Entscheidungsspiel zur Außenpolitik und haltet die Kennzahlen fest." },
-    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Agency – wie viel Spielraum bleibt?", form:"Allein", min:8, frei:"antwort", nach:"aussen", fehlt:"Bearbeite erst Auftrag 3." },
+    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Agency – wie viel Spielraum bleibt?", form:"Allein", min:9, frei:"antwort", nach:"aussen", fehlt:"Bearbeite erst Auftrag 3." },
     { id:"schreiben", nr:"5", kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein", min:15, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:"Du erklärst an Lotte und Anna, wie die Umwelt das Urteil prägt, und beurteilst den Spielraum." },
     { id:"zusammenfassung", nr:"Z", kurz:"Zusammenfassung", name:"Zusammenfassung", form:"Zum Abheften", min:4, frei:"antwort", nach:"schreiben", fehlt:"Die Zusammenfassung öffnet sich nach deinem Text in Auftrag 5.", kopf:"Zum Abheften" },
   ],
   breit:["lehrkraft"],
   loesch:"Deine Position auf der Meinungslinie, deine Einordnung, deine Notizen zur Außenpolitik, die Kennzahlen, dein Text und dein Satz für den roten Faden werden auf diesem Gerät entfernt.",
-  init:() => ({ l1:null, lgrund:"", wer:null, privat:"", gesell:"", milieu:"", partei:"", pgrund:"", h:{}, anders:"", kz:{}, modell:"", agency:"", l2:null, jetzt:"" }),
+  init:() => ({ ab:{}, l1:null, lgrund:"", wer:null, privat:"", gesell:"", milieu:"", partei:"", pgrund:"", h:{}, anders:"", kz:{}, modell:"", agency:"", l2:null, jetzt:"" }),
   erledigt:{
     linie:() => S.l1 != null && lang("lgrund", 15), rolle:() => !!S.wer && lang("privat", 20) && lang("gesell", 20) && lang("milieu", 3) && lang("partei", 2) && lang("pgrund", 15),
     aussen:() => tabelleVoll("h", 3, 2, 8) && lang("anders", 20), spiel:() => [0,1,2,3].every(r => lang(`kz.${r}.0`, 1) || lang(`kz.${r}.1`, 1)) && lang("modell", 10),
@@ -77,7 +78,8 @@ function rolle(){
 }
 function aussen(){
   const wer = S.wer || "lotte", p = LEBEN[wer], g = wer === "lotte" ? ["sbahn", "Lotte Müller in der S-Bahn", "M13.1"] : ["wirtshaus", "Anna Bauer im Wirtshaus", "M13.2"], e = EWH13[wer];
-  return `${auftrag("Frei wählbar · 20 Minuten", "Die Außenpolitik", `Lies das Gespräch, das ${p.name.split(" ")[0]} mit anhört. Untersuche: Was hätte sie von der Außenpolitik gehalten – und woran liegt das? Halte dein Ergebnis in der Tabelle fest.`)}
+  return `${erinnere([["M7: Was legte der Versailler Vertrag für Deutschland fest?", "Gebietsverluste, Reparationen, eine begrenzte Armee und Artikel 231 über die Kriegsschuld."], ["M11: Was geschah im Januar 1923 im Ruhrgebiet?", "Deutschland war mit den Reparationen in Verzug. Französische und belgische Truppen marschierten ins Ruhrgebiet ein."]])}
+  ${auftrag("Frei wählbar · 20 Minuten", "Die Außenpolitik", `Lies das Gespräch, das ${p.name.split(" ")[0]} mit anhört. Untersuche: Was hätte sie von der Außenpolitik gehalten – und woran liegt das? Halte dein Ergebnis in der Tabelle fest.`)}
   ${zeitleiste(SCHRITTE13, { klasse:"klein" })}
   <p class="quelle">Sechs Schritte der Außenpolitik nach dem Unterrichtsheft, M13.4. Außenminister in diesen Jahren: Gustav Stresemann.</p>
   <div class="ab-zwei gleich"><div>${leseblatt(g[1], M13_GESPRAECH[g[0]].map(x => x[0] ? [x[0] + ":", "„" + esc(x[1]) + "“"] : esc(x[1])), `Ausgedachtes Gespräch aus dem Unterrichtsheft, ${g[2]}. Die Sprecher*innen sind erfunden; so wurde damals gestritten.`)}</div>
@@ -112,14 +114,14 @@ function seiteLk(){
 }
 L.schreib = {
   vor:"So kann die Aufgabe in der Klassenarbeit stehen: Material, zwei Operatoren, höchstens eine Seite. Hier schreibst du eine halbe Seite.",
-  aufgabe:`<b>Erklären Sie</b> an Lotte Müller und Anna Bauer, wie die Umwelt eines Menschen sein Urteil über die Außenpolitik der Weimarer Republik prägt, und <b>beurteilen Sie</b>, wie viel Raum für ein eigenständiges Urteil bleibt.`,
+  aufgabe:`<b>a) Erklären Sie</b> an Lotte Müller und Anna Bauer, wie die Umwelt eines Menschen sein Urteil über die Außenpolitik der Weimarer Republik prägt.<br><b>b) Beurteilen Sie</b>, wie viel Raum für ein eigenständiges Urteil bleibt.`,
   material:`<p><b>M1 · Zwei erfundene Leben (1925):</b> Lotte Müller, 19, Berlin, Tochter eines liberalen Anwalts und einer Lehrerin, höhere Schule. Anna Bauer, 20, Dorf in Thüringen, Tochter eines Landwirts, Dorfschule, konservatives Umfeld.</p><p><b>M2 · Außenpolitik:</b> Dawes-Plan (1924) · Vertrag von Locarno (1925) · Völkerbund (1926) · Berliner Vertrag (1926) · Rheinlandräumung (1926–1930) · Young-Plan (1929).</p><p><b>M3 · Agency:</b> fragt, inwieweit Menschen in historischen Situationen eigenständig handeln, Entscheidungen treffen und Entwicklungen beeinflussen konnten. Agency hängt von Fähigkeiten ab, aber auch von Strukturen, Macht, Geschlecht, Herkunft und Rechten.</p><p class="quelle">M1 und M2 nach dem Unterrichtsheft, M13. M3: kognitive Landkarte, 3.1.5.</p>`,
   woerter:150, min:60,
   stufen:[["Grundlegend","Du beschreibst, wie Lotte und Anna die Außenpolitik wahrscheinlich sehen, und nennst je einen Grund aus ihrem Umfeld."],["Sicher","Du erklärst die Unterschiede mit Bildung, Umfeld und wirtschaftlicher Lage und beziehst zwei Schritte der Außenpolitik ein."],["Souverän","Du nutzt das Agency-Konzept: Du zeigst, was den Spielraum begrenzt und was ihn öffnet, und begründest, warum „wahrscheinlich“ nicht „zwangsläufig“ heißt."]],
   inhalt:[["Lotte:","befürwortet wahrscheinlich: Stabilität durch Dawes- und Young-Plan, Frieden und Anerkennung durch Locarno und Völkerbund; Umfeld: liberal, gebildet, viele Meinungen."],
     ["Anna:","sieht es wahrscheinlich kritisch: Reparationen als Last für den Hof, Locarno als Kapitulation; Umfeld: konservativ, eine vorherrschende Sicht, wenig Zugang zu Bildung."],
     ["Erklärung:","Das Umfeld bestimmt, welche Informationen, Deutungen und Vorbilder ein Mensch hat."],
-    ["Urteil:","Spielraum bleibt, ist aber ungleich verteilt (Agency: Fähigkeiten, Strukturen, Herkunft, Rechte). Ein eigenes Urteil braucht Zugang zu anderen Sichtweisen."]],
+    ["Urteil:","Tragfähig sind verschiedene Urteile – von „viel Raum“ bis „wenig Raum“. Es zählt: Du nennst, was den Spielraum begrenzt und was ihn öffnet (Agency: Fähigkeiten, Strukturen, Herkunft, Rechte, Zugang zu anderen Sichtweisen), und du unterscheidest „wahrscheinlich“ von „zwangsläufig“."]],
 };
 L.zf = {
   frage:L.frage,

@@ -4,6 +4,7 @@ const L = {
   /* Zeichen der Stunde: ein aufgeschlagenes Tagebuch */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 9c-3-2-7-3-11-2v19c4-1 8 0 11 2 3-2 7-3 11-2V7c-4-1-8 0-11 2z" fill="none" stroke="#24221F" stroke-width="2.4" stroke-linejoin="round"/><path d="M17 9v19" stroke="#9B402D" stroke-width="2.4"/></svg>`,
   frage:"Du bist 18 Jahre alt und lebst 1917 in Deutschland: Was hättest du gedacht?",
+  blick:{ name:"Blick aus der Nähe: ein einzelner Mensch", anker:"2-3-6", tut:"Du folgst einem jungen Menschen durch das Jahr 1917. So arbeitet die Mikrogeschichte – nur ist deine Person ausgedacht.", fehlt:"Was fehlt: die großen Zusammenhänge. Warum es zum Krieg kam, wer entschied und was an anderen Orten geschah, sieht man aus der Nähe kaum. Das klärt M2." },
   deck:{ dauer:"Doppelstunde · dazu der Film", jahr:"1917", hier:[0],
     satz:"Bevor wir Ursachen und Daten ordnen, fragen wir: Wie fühlte sich dieser Krieg für Menschen an, die so alt waren wie du?",
     belastend:"Der Film „Im Westen nichts Neues“ zeigt Kriegsgewalt sehr direkt. Du darfst jederzeit wegsehen, hinausgehen und mit deiner Lehrkraft sprechen.",
@@ -15,7 +16,7 @@ const L = {
     { id:"film", nr:"3", kurz:"Beim Film", name:"Beim Film: Paul vorher und nachher", form:"Plenum · allein notieren", min:45, frei:"ansage", gleich:"Ihr seht den Film (oder einen Ausschnitt). Du beobachtest Paul: seine Vorstellung vom Krieg, die Wirklichkeit und was sich in ihm verändert." },
     { id:"gefuehl", nr:"4", kurz:"Ein Wort", name:"Nachbesprechung im Empfindungs-Modus", form:"Allein · zu zweit · Plenum", min:8, frei:"ansage", gleich:"Nach dem Film geht es zuerst nicht um Fakten, sondern um ein Wort für dein Gefühl." },
     { id:"tagebuch", nr:"5", kurz:"Tagebuch", name:"Tagebucheintrag 1917", form:"Allein", min:12, frei:"antwort", nach:"gefuehl", fehlt:"Halte erst in Auftrag 4 dein Wort und deine Begründung fest." },
-    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Was ist dieser Film?", form:"Allein", min:5, frei:"antwort", nach:"tagebuch", fehlt:"Schreib erst deinen Tagebucheintrag in Auftrag 5." },
+    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Was ist dieser Film?", form:"Allein", min:6, frei:"antwort", nach:"tagebuch", fehlt:"Schreib erst deinen Tagebucheintrag in Auftrag 5." },
     { id:"schreiben", nr:"6", kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein", min:15, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:"Du beurteilst, was ein Spielfilm über die Vergangenheit zeigen kann." },
     { id:"zusammenfassung", nr:"Z", kurz:"Zusammenfassung", name:"Zusammenfassung", form:"Zum Abheften", min:4, frei:"antwort", nach:"schreiben", fehlt:"Die Zusammenfassung öffnet sich nach deinem Text in Auftrag 6.", kopf:"Zum Abheften" },
   ],
@@ -93,7 +94,7 @@ function seiteLk(){
 }
 L.schreib = {
   vor:"So kann die Aufgabe in der Klassenarbeit stehen. Du brauchst dafür deine Notizen zum Film und die vier Stationen aus Auftrag 2.",
-  aufgabe:`Der Spielfilm „Im Westen nichts Neues“ (2022) erzählt vom Ersten Weltkrieg. <b>Erläutern Sie</b> an einer Szene, wie der Film den Krieg darstellt, und <b>beurteilen Sie</b>, was ein Spielfilm über die Vergangenheit zeigen kann und was nicht.`,
+  aufgabe:`Der Spielfilm „Im Westen nichts Neues“ (2022) erzählt vom Ersten Weltkrieg.<br><b>a) Erläutern Sie</b> an einer Szene, wie der Film den Krieg darstellt.<br><b>b) Beurteilen Sie</b>, was ein Spielfilm über die Vergangenheit zeigen kann und was nicht.`,
   woerter:130, min:60,
   stufen:[["Grundlegend","Du beschreibst eine Szene und nennst deinen Eindruck. Ob der Film „stimmt“, bleibt offen."],["Sicher","Du erläuterst an der Szene, mit welchen Mitteln der Film wirkt (Bilder, Geräusche, Blick auf einzelne Soldaten), und unterscheidest Darstellung und Quelle."],["Souverän","Du wägst ab: Der Film macht Erfahrung nachfühlbar, wählt aber aus und erfindet. Du nutzt die Rezeptionsgeschichte als Beleg dafür, dass Urteile über das Werk vom Standort abhängen."]],
   inhalt:[["Darstellung:","Blick auf junge Soldaten; Begeisterung am Anfang, dann Angst, Erschöpfung, Tod; Bilder, Geräusche und Musik verdichten."],

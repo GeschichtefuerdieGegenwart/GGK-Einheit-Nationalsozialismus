@@ -4,17 +4,19 @@ const L = {
   /* Zeichen der Stunde: eine Grenze, mit dem Stift gezogen */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="5" y="6" width="24" height="22" rx="3" fill="none" stroke="#24221F" stroke-width="2.4"/><path d="M8 20c4-6 6 3 10-3s5 1 8-4" fill="none" stroke="#9B402D" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="1 4.5"/></svg>`,
   frage:"Die Sieger wollen einen Frieden, der jeden neuen Krieg verhindert: Lässt sich Europa nach dem „Selbstbestimmungsrecht der Völker“ neu ordnen?",
+  blick:{ name:"Ideengeschichte", anker:"2-3-1", tut:"Du verfolgst eine Idee – das Selbstbestimmungsrecht der Völker – und prüfst, was aus ihr wird, wenn sie auf Interessen trifft.", fehlt:"Was fehlt: die Menschen in den umstrittenen Gebieten. Wie es war, plötzlich in einem anderen Staat zu leben, zeigt der Blick auf die Idee nicht." },
+  pole:{ frage:"Lässt sich Europa nach dem „Selbstbestimmungsrecht der Völker“ neu ordnen?", links:"Nein, das kann nicht gelingen", rechts:"Ja, das kann gelingen" },
   deck:{ dauer:"Doppelstunde und Teil der nächsten Stunde · etwa 105 Minuten", jahr:"1919", hier:[2],
     satz:"Das Zarenreich, das deutsche Kaiserreich und Österreich-Ungarn sind Geschichte. In Paris setzen die Siegermächte die Grenzen neu. Was sie dort verabreden, wirkt bis heute.",
     bild:{ datei:"heft-m06-friedenskonferenz.jpg", alt:"Gemälde: Staatsmänner sitzen an einem langen Tisch im Spiegelsaal von Versailles, einer unterschreibt.", text:"Unterzeichnung des Friedensvertrags im Spiegelsaal von Versailles, 28. Juni 1919 (Gemälde).", nachweis:"Bild aus dem Unterrichtsheft, M6. Nachweis offen." },
     ziele:["Wilsons 14 Punkte nennen und erklären, wo in ihnen Streit steckt,", "an Österreich-Ungarn zeigen, warum sich Grenzen nach dem „Selbstbestimmungsrecht der Völker“ schwer ziehen lassen,", "beurteilen, inwieweit das Selbstbestimmungsrecht 1919 verwirklicht wurde – und dein Urteil mit dem des Historikers Ian Kershaw vergleichen."] },
   blatt:[
-    { id:"erinnern", nr:"1", kurz:"Erst erinnern", name:"Erst erinnern: Europa im Winter 1918/19", form:"Allein · ohne Heft", min:3, frei:"offen" },
+    { id:"erinnern", nr:"1", kurz:"Erst erinnern", name:"Erst erinnern: Europa im Winter 1918/19", form:"Allein · ohne Heft", min:4, frei:"offen" },
     { id:"wilson", nr:"2", kurz:"14 Punkte", name:"Wilsons 14 Punkte: Wo steckt Streit?", form:"Zu zweit", min:10, frei:"offen" },
     { id:"grenzen", nr:"3", kurz:"Grenzen ziehen", name:"Die neuen Staatsgrenzen: Wie sollen sie aussehen?", form:"Kleingruppe", min:15, frei:"offen" },
     { id:"doku", nr:"4", kurz:"Die Umsetzung", name:"Die Umsetzung des Selbstbestimmungsrechts", form:"Allein · Film", min:40, frei:"ansage", gleich:"Ein Film zeigt, wie die Grenzen wirklich gezogen wurden. Vorher zeichnet ihr eure eigenen." },
     { id:"kershaw", nr:"5", kurz:"Das Urteil Kershaws", name:"Dein Urteil und das Urteil des Historikers", form:"Zu zweit", min:10, frei:"antwort", nach:"doku", fehlt:"Schreib erst dein eigenes Urteil in Auftrag 4." },
-    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Wozu Grenzen von 1919?", form:"Allein", min:5, frei:"antwort", nach:"kershaw", fehlt:"Bearbeite erst Auftrag 5." },
+    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Wozu Grenzen von 1919?", form:"Allein", min:6, frei:"antwort", nach:"kershaw", fehlt:"Bearbeite erst Auftrag 5." },
     { id:"schreiben", nr:"6", kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein", min:15, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:"Du erklärst und beurteilst das Selbstbestimmungsrecht der Völker." },
     { id:"zusammenfassung", nr:"Z", kurz:"Zusammenfassung", name:"Zusammenfassung", form:"Zum Abheften", min:4, frei:"antwort", nach:"schreiben", fehlt:"Die Zusammenfassung enthält die Auflösung. Sie öffnet sich nach deinem Text in Auftrag 6.", kopf:"Zum Abheften" },
   ],
@@ -99,14 +101,14 @@ function seiteLk(){
 }
 L.schreib = {
   vor:"So kann die Aufgabe in der Klassenarbeit stehen: Material, zwei Operatoren, höchstens eine Seite. Hier schreibst du eine halbe Seite.",
-  aufgabe:`<b>Erklären Sie</b> an einem Beispiel, warum sich das „Selbstbestimmungsrecht der Völker“ nach dem Ersten Weltkrieg schwer umsetzen ließ, und <b>beurteilen Sie</b>, inwieweit es 1919/20 verwirklicht wurde.`,
+  aufgabe:`<b>a) Erklären Sie</b> an einem Beispiel, warum sich das „Selbstbestimmungsrecht der Völker“ nach dem Ersten Weltkrieg schwer umsetzen ließ.<br><b>b) Beurteilen Sie</b>, inwieweit es 1919/20 verwirklicht wurde.`,
   material:`<p><b>M1 · Aus Wilsons 14 Punkten (8. Januar 1918):</b> 10. Die Völker Österreich-Ungarns können sich selbstständig entwickeln. · 13. Ein unabhängiger polnischer Staat mit allen Gebieten, die „unbestreitbar“ polnisch bewohnt sind.</p><p><b>M2 · Der Historiker Ian Kershaw (2016):</b> „Den ‚Großen Vier‘ war von Anfang an klar, dass wegen der ethnisch komplexen Zusammensetzung der Regionen Mittel- und Osteuropas nationale Selbstbestimmung nicht zu verwirklichen war.“</p><p class="quelle">M1: eigene Kurzfassung. M2: Ian Kershaw, Höllensturz. Europa 1914–1949, München 2016, S. 170 f.</p>`,
   woerter:140, min:60,
   stufen:[["Grundlegend","Du erklärst, was Selbstbestimmungsrecht meint, und nennst ein Gebiet, in dem es Streit gab."],["Sicher","Du erklärst am Beispiel, warum Grenzen entlang der Nationalitäten kaum zu ziehen waren, und nennst, wer sich bei der Grenzziehung durchsetzte."],["Souverän","Du wägst ab: Wo wurde das Recht umgesetzt (neue Staaten), wo nicht (Minderheiten, Interessen der Sieger)? Du stützt dein Urteil auf M1 und M2."]],
   inhalt:[["Begriff:","Völker sollen selbst bestimmen, zu welchem Staat sie gehören."],
     ["Schwierigkeit:","In Mittel- und Osteuropa lebten viele Nationalitäten gemischt (Beispiel Österreich-Ungarn); jede Grenze schuf neue Minderheiten."],
     ["Umsetzung:","neue Staaten wie Polen, die Tschechoslowakei, Österreich, Ungarn; aber Grenzziehung auch nach strategischen und wirtschaftlichen Interessen der Sieger."],
-    ["Urteil:","nur teilweise verwirklicht; Kershaw: den „Großen Vier“ war das von Anfang an klar; Folge: neue Spannungen."]],
+    ["Urteil:","Tragfähig sind verschiedene Urteile – von „in Teilen verwirklicht“ (neue Staaten wie Polen und die Tschechoslowakei) bis „kaum verwirklicht“ (neue Minderheiten, Grenzen nach den Interessen der Sieger). Es zählt: ein Maßstab, Belege aus M1 und M2 und eine Gegenüberlegung. Kershaw urteilt, den „Großen Vier“ sei das von Anfang an klar gewesen – du darfst ihm folgen oder widersprechen."]],
 };
 L.zf = {
   frage:L.frage,

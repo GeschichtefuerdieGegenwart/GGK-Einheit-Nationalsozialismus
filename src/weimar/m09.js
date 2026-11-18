@@ -4,25 +4,27 @@ const L = {
   /* Zeichen der Stunde: ein Stimmzettel in der Urne */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M5 17h24v12H5z" fill="none" stroke="#24221F" stroke-width="2.4" stroke-linejoin="round"/><path d="M11 17l3-11h9l2 11" fill="#FBF8F1" stroke="#24221F" stroke-width="2" stroke-linejoin="round"/><path d="M15 12l2 2 4-4" fill="none" stroke="#9B402D" stroke-width="2.2" stroke-linecap="round"/><path d="M11 22h12" stroke="#24221F" stroke-width="2.4" stroke-linecap="round"/></svg>`,
   frage:"Wofür entscheiden sich die Menschen 1919 – und war die Demokratie da schon zum Scheitern verurteilt?",
+  blick:{ name:"Entscheidungen in offener Lage (Agency)", anker:"3-1-5", tut:"Du entscheidest selbst wie die Wähler*innen im Januar 1919 – und vergleichst dann mit dem Ergebnis.", fehlt:"Was fehlt: Du entscheidest mit dem Wissen und den Werten von heute. Was Menschen 1919 fürchteten und hofften, kannst du nur zum Teil nachvollziehen. Und ein Wahlergebnis zeigt, wie gewählt wurde – nicht, warum." },
+  pole:{ frage:"War die Demokratie 1919 bereits zum Scheitern verurteilt?", links:"Nein, sie hatte eine echte Chance", rechts:"Ja, sie war von Anfang an verloren", eigen:true },
   deck:{ dauer:"Einzelstunde · 45 Minuten (Schreibauftrag als Hausaufgabe)", jahr:"19.1.1919", hier:[1, 3],
     satz:"Zwei Monate nach der Revolution wählen die Deutschen eine Nationalversammlung. Zum ersten Mal dürfen auch Frauen wählen. Wohin soll die Reise gehen?",
     ziele:["sechs Herausforderungen der Zeit nennen und zu einer davon Stellung nehmen,", "das Wahlergebnis von 1919 auswerten und erklären, welche Milieus sich durchgesetzt haben,", "beurteilen, ob die Demokratie 1919 bereits zum Scheitern verurteilt war."] },
   blatt:[
-    { id:"lage", nr:"1", kurz:"Herausforderungen", name:"Die Herausforderungen der Zeit", form:"Allein", min:3, frei:"offen" },
+    { id:"lage", nr:"1", kurz:"Herausforderungen", name:"Die Herausforderungen der Zeit", form:"Allein", min:5, frei:"offen" },
     { id:"wahlomat", nr:"2", kurz:"Wahl-O-Mat", name:"Wofür wärst du gewesen? Der Wahl-O-Mat 1919", form:"Frei wählbar", min:10, frei:"antwort", nach:"lage", fehlt:"Leg dich erst in Auftrag 1 fest." },
     { id:"partei", nr:"3", kurz:"Deine Partei", name:"Wofür steht deine Partei?", form:"Frei wählbar", min:5, frei:"antwort", nach:"wahlomat", fehlt:"Bearbeite erst Auftrag 2." },
     { id:"ergebnis", nr:"4", kurz:"Wahlergebnis", name:"Das historische Wahlergebnis 1919", form:"Frei wählbar", min:18, frei:"offen" },
     { id:"urteil", nr:"5", kurz:"Urteil", name:"War die Demokratie 1919 schon verloren?", form:"Allein, dann Plenum", min:4, frei:"antwort", nach:"ergebnis", fehlt:"Bearbeite erst Auftrag 4." },
-    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Von wo aus urteilst du?", form:"Allein", min:5, frei:"antwort", nach:"urteil", fehlt:"Bearbeite erst Auftrag 5." },
+    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Von wo aus urteilst du?", form:"Allein", min:6, frei:"antwort", nach:"urteil", fehlt:"Bearbeite erst Auftrag 5." },
     { id:"schreiben", nr:"6", kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein · auch als Hausaufgabe", min:12, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:"Du wertest das Wahlergebnis aus und kommst zu einem Urteil." },
     { id:"zusammenfassung", nr:"Z", kurz:"Zusammenfassung", name:"Zusammenfassung", form:"Zum Abheften", min:2, frei:"antwort", nach:"schreiben", fehlt:"Die Zusammenfassung öffnet sich nach deinem Text in Auftrag 6.", kopf:"Zum Abheften" },
   ],
   breit:["lehrkraft"],
   loesch:"Deine Antworten, deine Rechnungen, dein Urteil, dein Text und dein Satz für den roten Faden werden auf diesem Gerät entfernt.",
-  init:() => ({ hf:null, antw:"", partei:"", passt:"", steht:"", re1:{}, re2:{}, milieus:"", werte:"", u:null, ugrund:"" }),
+  init:() => ({ ab:{}, hf:null, antw:"", partei:"", passt:"", steht:"", re1:{}, re2:{}, milieus:"", werte:"", u:null, ugrund:"" }),
   erledigt:{
     lage:() => !!S.hf && lang("antw", 15), wahlomat:() => lang("partei", 2) && lang("passt"), partei:() => lang("steht", 20),
-    ergebnis:() => rechneOk("re1") && rechneOk("re2") && lang("milieus") && lang("werte"), urteil:() => S.u != null && lang("ugrund", 15),
+    ergebnis:() => rechneOk("re1") && rechneOk("re2") && lang("milieus") && lang("werte"), urteil:() => ((S.lf || {}).nach != null || S.u != null) && lang("ugrund", 15),
     landkarte:() => !!S.lk.ok, schreiben:() => schreibFertig(),
   },
   fadenAnf:["1919 steht die Demokratie auf einer breiten Mehrheit. Schwer wird es trotzdem, weil", "Eine Demokratie braucht mehr als eine Mehrheit bei der Wahl:"],
@@ -42,7 +44,8 @@ const WAHL19 = [["USPD", 7.6, "#C4622D", "links von der SPD"], ["SPD", 37.9, "#B
 function start(){ return deckblatt(); }
 function lage(){
   const h = HF.find(x => x.id === S.hf);
-  return `${auftrag("Allein · 3 Minuten", "Die Herausforderungen der Zeit", "Deutschland im Januar 1919: Sechs große Fragen sind offen. Wähle die Herausforderung, die dir am dringendsten erscheint, und schreib auf, welche Antwort du darauf gehabt hättest.")}
+  return `${erinnere([["M8: Was ist das kollektive Gedächtnis?", "Die gemeinsamen Erinnerungen einer Gruppe. Sie entstehen im Austausch, werden durch Erzählungen, Rituale und Symbole weitergegeben und stiften Identität."]])}
+  ${auftrag("Allein · 3 Minuten", "Die Herausforderungen der Zeit", "Deutschland im Januar 1919: Sechs große Fragen sind offen. Wähle die Herausforderung, die dir am dringendsten erscheint, und schreib auf, welche Antwort du darauf gehabt hättest.")}
   <div class="w-milieus" role="group" aria-label="Herausforderung wählen">${HF.map((x, i) => `<button type="button" data-akt="setz" data-p="hf" data-w="${x.id}" aria-pressed="${S.hf === x.id}"><b>${i + 1} · ${esc(x.titel)}</b><small>${esc(x.frage)}</small></button>`).join("")}</div>
   <p class="quelle">Sechs Herausforderungen und Leitfragen nach dem Unterrichtsheft, M9.</p>
   <div class="${h ? "" : "gesperrt"}">${textfeld("antw", h ? `Meine Antwort: ${h.frage}` : "Meine Antwort", { rows:3, zaehl:false, anfaenge:["Ich wäre dafür gewesen, dass", "Am wichtigsten ist mir dabei"] })}</div>`;
@@ -72,8 +75,9 @@ function ergebnis(){
   ${vergleich("mvgl", ["milieus","werte"], 10, "Mit Stichpunkten vergleichen", `<div class="w-karten k3"><article class="w-kk rot"><h3>SPD</h3><p>vor allem die Industriearbeiterschaft: soziale Gerechtigkeit, Arbeiterrechte, parlamentarische Demokratie.</p></article><article class="w-kk"><h3>Zentrum</h3><p>das katholische Milieu quer durch die Schichten: Schutz der Kirche, sozialer Ausgleich, Stabilität.</p></article><article class="w-kk blau"><h3>DDP</h3><p>liberales Bürgertum: Grundrechte, Verfassung, eine weltoffene demokratische Gesellschaft.</p></article></div><p class="quelle">Stichpunkte nach den Seiten „Parteien 1919“ und „Wahl-O-Mat 1919“ des Kurses. Prüfe an der Seite zu den Milieus.</p>`)}</div>`;
 }
 function urteil(){
+  if (S.u != null && (S.lf || {}).nach == null) { S.lf = S.lf || {}; S.lf.nach = S.u; }
   return `${auftrag("Allein · 2 Minuten, dann Plenum · 2 Minuten", "Dein Urteil", "War die Demokratie 1919 bereits zum Scheitern verurteilt? Leg dich auf der Linie fest und begründe mit dem Wahlergebnis und den Herausforderungen der Zeit.")}
-  <div class="ab-zwei gleich"><div>${skala("u", "War die Demokratie 1919 bereits zum Scheitern verurteilt?", 5, "1 = Nein, sie hatte eine echte Chance", "5 = Ja, sie war von Anfang an verloren")}</div>
+  <div class="ab-zwei gleich"><div>${skala("lf.nach", "War die Demokratie 1919 bereits zum Scheitern verurteilt?", 5, "1 = Nein, sie hatte eine echte Chance", "5 = Ja, sie war von Anfang an verloren")}<p class="w-beweg" aria-live="polite">${leitBeweg()}</p></div>
   <div>${textfeld("ugrund", "Meine Begründung", { rows:3, zaehl:false, anfaenge:["Dafür spricht das Wahlergebnis:", "Dagegen spricht, dass", "Entscheidend ist für mich"] })}</div></div>`;
 }
 function seiteLk(){
@@ -90,7 +94,7 @@ function seiteLk(){
 }
 L.schreib = {
   vor:"So kann die Aufgabe in der Klassenarbeit stehen: Material, zwei Operatoren, höchstens eine Seite. Hier schreibst du eine halbe Seite.",
-  aufgabe:`<b>Werten Sie</b> das Ergebnis der Wahl zur Nationalversammlung 1919 <b>aus</b> und <b>beurteilen Sie</b>, ob die Demokratie 1919 bereits zum Scheitern verurteilt war.`,
+  aufgabe:`<b>a) Analysieren Sie</b> das Ergebnis der Wahl zur Nationalversammlung 1919 (M1).<br><b>b) Beurteilen Sie</b>, ob die Demokratie 1919 bereits zum Scheitern verurteilt war.`,
   material:`<p><b>M1 · Wahl zur Nationalversammlung, 19. Januar 1919 (Stimmen in Prozent):</b> USPD 7,6 · SPD 37,9 · DDP 18,5 · Zentrum 19,7 · DVP 4,4 · DNVP 10,3 · Sonstige 1,6.</p><p><b>M2 · Herausforderungen der Zeit:</b> Verfassung · Versailler Vertrag · soziale Fragen · wirtschaftliche Stabilität · nationale Identität und Gesellschaft · revolutionäre Bewegungen und Unruhen.</p><p class="quelle">Nach dem Unterrichtsheft, M9.</p>`,
   woerter:140, min:60,
   stufen:[["Grundlegend","Du nennst die stärksten Parteien mit Zahlen und sagst, ob die Demokratie für dich verloren war."],["Sicher","Du fasst Parteien zu Lagern zusammen, rechnest ihre Stärke aus und begründest dein Urteil mit Zahlen und einer Herausforderung."],["Souverän","Du wägst die Mehrheit von 1919 gegen die Belastungen ab und zeigst, dass ein Urteil vom Ende 1933 her die offene Lage von 1919 verfehlt."]],
@@ -108,7 +112,7 @@ L.zf = {
   lk:{ name:"Retrospektivität (2.1.1)", satz:"Wir betrachten die Vergangenheit immer im Nachhinein (ex post), also aus der Gegenwart heraus.", beispiel:"Wer 1933 kennt, hält die Republik leicht für „von Anfang an verloren“. Die Wähler*innen von 1919 kannten das Ende nicht." },
   werkzeug:{ titel:"Ein Wahlergebnis auswerten", schritte:["Wer ist am stärksten? Welche Parteien gehören zu einem Lager?","Zusammenrechnen: Wie stark sind die Lager?","Deuten: Was sagt das Ergebnis über die Lage – und was sagt es nicht?"] },
   sonst:"Wahl-O-Mat 1919 und die Parteien (Aufträge 2 und 3), die Milieus der Gesellschaft (Auftrag 4).",
-  mein:[["Meine Partei laut Wahl-O-Mat", () => S.partei ? `${S.partei}. ${S.steht}` : ""], ["Mein Urteil", () => S.u == null ? "" : `${S.u} von 5 (1 = echte Chance, 5 = von Anfang an verloren). ${S.ugrund}`]],
+  mein:[["Meine Partei laut Wahl-O-Mat", () => S.partei ? `${S.partei}. ${S.steht}` : ""], ["Mein Urteil – am Anfang und am Ende", () => { const lf = S.lf || {}, n = lf.nach != null ? lf.nach : S.u; return n == null ? "" : `Am Anfang: ${lf.vor == null ? "offen" : lf.vor + " von 5"} · am Ende: ${n} von 5 (1 = echte Chance, 5 = von Anfang an verloren). ${S.ugrund}`; }]],
 };
 function zusammenfassung(){ return fadenFeld() + zusammen(); }
 const SEITE_FN = { start, lage, wahlomat, partei, ergebnis, urteil, landkarte:seiteLk, schreiben:schreibauftrag, zusammenfassung, lehrkraft };

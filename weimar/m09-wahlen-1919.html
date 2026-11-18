@@ -759,6 +759,41 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 .w-kreis .kr-t{font:12.5px var(--body, sans-serif);fill:#24221F}
 .w-kreis .kr-z{font:700 12.5px var(--body, sans-serif);fill:#7A2E1F}
 @media (max-width:899px){ .w-kurve{grid-template-columns:1fr} .w-kurve .ku-achse{flex-direction:row} .w-kurve .ku-namen{grid-column:1} .w-kurve .ku-namen li span{display:none} }
+
+/* ===== Nachgerüstet am 18.11.2026 ===== */
+/* Blick der Stunde: auf dem Deckblatt eine Zeile, an der Landkarte eine Karte */
+.w-blickk{margin-top:1.6rem;padding:1rem 1.1rem 1.1rem;border:1.5px solid var(--gold);border-radius:var(--r-lg);background:var(--surface2);max-width:62rem}
+.w-blickk h3{font-family:var(--display);font-size:1.3rem;margin:.1rem 0 .4rem}
+.w-blickk .kennung{margin:0;color:var(--gold)}
+/* Leitfrage als Linie */
+.w-leit{margin:0 0 1.4rem;padding:.9rem 1.1rem 1rem;border:1.5px solid var(--kuli);border-radius:var(--r-lg);background:var(--kuli-hi);max-width:62rem}
+.w-leit .kennung{margin:0;color:var(--kuli)}
+.w-leit .w-skala{margin:.5rem 0 .4rem;max-width:none}
+.w-leit .w-skala legend{font-family:var(--display);font-size:1.18rem;line-height:1.3}
+.w-leit .w-stufen button{background:var(--surface2)}
+.w-leit .w-stufen button[aria-pressed=true]{background:var(--kuli);border-color:var(--kuli);color:#fff}
+.w-leit .hinweis{margin:0}
+.w-beweg{margin:.2rem 0 0;font-weight:600}
+/* Linie des Kurses */
+.w-linie{margin:1.6rem 0 0;padding:1rem 1.1rem 1.1rem;border-radius:var(--r-lg);background:var(--offset);border-left:6px solid var(--ink)}
+.w-linie h3{font-family:var(--display);font-size:1.3rem;margin:.1rem 0 .4rem}
+.w-linie .kennung{margin:0}
+.w-linie .w-skala{margin:.4rem 0}
+/* Überspringen: leise, aber groß genug zum Tippen */
+.w-skip{display:flex;flex-wrap:wrap;gap:.4rem .8rem;align-items:center;margin:.8rem 0 0}
+.w-skipk{min-height:44px;padding:.35rem .9rem;border:1.5px dashed #8B857A;border-radius:999px;background:none;color:var(--muted);font:inherit;font-size:.95rem}
+.w-skipk[aria-pressed=true]{border-style:solid;color:var(--ink);background:var(--offset)}
+/* Deckblatt im Register */
+.w-zumdeck{display:block;width:100%;text-align:left;border:2px solid transparent;border-radius:.45rem;background:none;padding:.3rem .55rem;margin:0 0 .25rem;min-height:44px;font:inherit;font-weight:700;font-size:.95rem;color:inherit;border-bottom:1px solid rgba(36,34,31,.18)}
+.w-zumdeck small{display:block;font-weight:400;font-size:.78rem;color:#463F33}
+.w-zumdeck.hier{background:var(--kuli-hi);border-color:var(--kuli)}
+.deck-start{gap:.6rem;flex-wrap:wrap}
+.w-erinn{margin:0 0 1.3rem;padding:.7rem 1rem .4rem;border-left:4px solid var(--green);background:var(--green-hi);border-radius:0 var(--r-lg) var(--r-lg) 0;max-width:62rem}
+.w-erinn .kennung{margin:0 0 .3rem;color:var(--green)}
+.w-erinn .w-abruf{margin:0}
+.w-blickzu{margin:1.6rem 0 0;padding:.7rem 1rem;border:1.5px dashed var(--gold);border-radius:var(--r-lg);color:var(--muted);max-width:62rem}
+.w-weiter{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:space-between;margin:0 0 1rem;padding:.6rem .7rem .6rem 1rem;background:var(--kuli-hi);border:1.5px solid var(--kuli);border-radius:var(--r-lg)}
+.w-weiter .btn{min-height:48px}
 </style>
 </head>
 <body>
@@ -766,7 +801,7 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 <div class="ab-rahmen"><aside class="ab-reg" id="reg" aria-label="Aufträge dieses Blatts"></aside><main id="main" tabindex="-1"></main></div>
 <div id="ueber"></div>
 <noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft „Geschichte aktuell 1“ (M1–M14).</p></noscript>
-<script type="application/json" id="lehr-daten">{"v":2,"alg":"AES-GCM-256/PBKDF2-SHA256","iter":600000,"salt":"S2AE0Ck1PuvFDIipEmJzCg==","iv":"f+mcNvBoofUu2C4w","ct":"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"}</script>
+<script type="application/json" id="lehr-daten">{"v":2,"alg":"AES-GCM-256/PBKDF2-SHA256","iter":600000,"salt":"S2AE0Ck1PuvFDIipEmJzCg==","iv":"CdCB8nMB3uxXw0D2","ct":"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"}</script>
 <script src="../assets/gegenwart/bundle.js"></script>
 <script>
 window.GGK_ZURUECK = "../index.html";
@@ -1048,7 +1083,8 @@ const QUER = () => { try { return matchMedia("(min-width:900px)").matches; } cat
 const probe = f => { try { return !!(f && f()); } catch(e) { return false; } };
 const beantwortet = id => { const f = (L.erledigt || {})[id]; return f ? probe(f) : !!(S.durch || {})[id]; };
 const erledigt = id => probe((L.erledigt || {})[id]) || !!(S.durch || {})[id];
-const offen = id => { const a = AUF(id); if (!a || !a.frei || a.frei === "offen" || (S.frei || {})[id]) return true; return a.frei === "antwort" && beantwortet(a.nach); };
+/* Was schon einmal offen war (S.war) oder schon bearbeitet ist, bleibt offen: Eine neue Freigaberegel darf vorhandene Arbeit nicht verstecken. */
+const offen = id => { const a = AUF(id); if (!a || !a.frei || a.frei === "offen" || (S.frei || {})[id] || (S.war || {})[id] || probe((L.erledigt || {})[id])) return true; return a.frei === "antwort" && beantwortet(a.nach); };
 const SCHMAL = () => BLATT() && (L.schmal || []).includes(S.seite) && offen(S.seite);
 
 function register(immer){
@@ -1073,6 +1109,7 @@ function zuSeite(a){
 const blattzeile = () => `<div class="ab-zeile"><span>GGK · ${esc(L.kapitel || "")}</span><span>${esc(L.nr)} · Arbeitsblatt</span><span>Datum: ${new Date().toLocaleDateString("de-DE")}</span></div>`;
 function blatt(a){
   const zu = !offen(a.id), ai = AUFI(a.id);
+  if (!zu && a.frei && a.frei !== "offen" && !(S.war || {})[a.id]) { if (!S.war) S.war = {}; S.war[a.id] = true; speichere(); }
   let html; BLATT_AN = true;
   try { html = zu ? zuSeite(a) : String(SEITE_FN[a.id]()).replace(/^\s*(<p class="zeit">[\s\S]*?<\/p>)?\s*<h1[^>]*>[\s\S]*?<\/h1>/, ""); } finally { BLATT_AN = false; }
   const davor = ai > 0 ? L.blatt[ai - 1] : null, danach = ai < L.blatt.length - 1 ? L.blatt[ai + 1] : null;
@@ -1162,7 +1199,7 @@ const LKTEIL = {
     ["3-1-5","Agency (Handlungsspielraum)","fragt, inwieweit Menschen oder Gruppen in historischen Situationen eigenständig handeln, Entscheidungen treffen und Entwicklungen beeinflussen konnten."],
     ["3-1-6","Kritische Medienkompetenz","verbindet die historischen Prüfwerkzeuge (Quellenkritik, Triftigkeiten) mit Strategien, die Faktenchecker*innen nutzen."]] },
 };
-LKTEIL.prinzip = { anker:"2-1", titel:"2.1 Die Gemeinsamkeiten einer jeden Geschichte", liste:Object.keys(PRINZIP).map(id => [id, PRINZIP[id][0], PRINZIP[id][1]]).concat([["2-1-9","Multiperspektivität als Folge","Weil jede Geschichte an einen Standort gebunden ist, braucht man mehrere Perspektiven, um ihr näherzukommen."]]) };
+LKTEIL.prinzip = { anker:"2-1", titel:"2.1 Die Gemeinsamkeiten einer jeden Geschichte", liste:Object.keys(PRINZIP).map(id => [id, PRINZIP[id][0], PRINZIP[id][1]]).concat([["2-1-9","Multiperspektivität · Kontroversität · Pluralität","Was folgt daraus? Quellen verschiedener Beteiligter, unterschiedliche Deutungen von Historiker*innen und verschiedene begründete Urteile gehören nebeneinander."]]) };
 /* cfg = { teil:"prinzip"|"wozu"|"trift"|"formen"|"wirkung", frage, lead, platz, heft (Frage aus dem Heft, wörtlich), urteil:{ id:[stufe,text] }, sonst:[stufe,text], bruecke } */
 function landkarteL(cfg){
   const T = LKTEIL[cfg.teil || "prinzip"], l = S.lk, frei = l.vermutung.trim().length >= 10;
@@ -1336,7 +1373,7 @@ document.head.insertAdjacentHTML("beforeend", `<style id="lehr-stil">
 /* ===== Kapitel »Weimarer Republik« (Heft „Geschichte aktuell 1“, M1–M14): gemeinsame Teile jeder Stunde =====
    Jede Stunde setzt L = { wid, key, nr, titel, unter, mark, dauer, block, hier, frage, satz, ziele, blatt, erledigt, schreib, zf, init } und ruft am Ende weimarStart(). */
 const W_KEY = "ggk-weimar:v1";
-const wLade = () => { try { return Object.assign({ faden:{}, kg:{} }, JSON.parse(localStorage.getItem(W_KEY)) || {}); } catch(e) { return { faden:{}, kg:{} }; } };
+const wLade = () => { try { return Object.assign({ faden:{}, kg:{}, linie:{} }, JSON.parse(localStorage.getItem(W_KEY)) || {}); } catch(e) { return { faden:{}, kg:{}, linie:{} }; } };
 const wSchreib = f => { const u = wLade(); f(u); try { localStorage.setItem(W_KEY, JSON.stringify(u)); } catch(e) {} };
 /* Vier Blöcke mit Leitsatz – Titel und Leitsätze wörtlich aus dem digitalen Inhaltsverzeichnis des Kurses (Inhaltsverzeichnis-GGK). */
 const W_BLOCK = {
@@ -1374,12 +1411,13 @@ const wBand = c => `<div class="band gross mit w-band"><div class="bt"><span cla
   <figure><div class="w-jahr" aria-hidden="true"><span>${esc(c.jahr)}</span></div>${c.bild ? `<img src="media/${c.bild.datei}" alt="${esc(c.bild.alt)}" onerror="this.closest('figure').classList.add('ohne');this.remove()"><figcaption>${c.bild.text} <span>${c.bild.nachweis}</span></figcaption>` : ""}</figure></div>`;
 /* Deckblatt: Kopfband, Leitfrage, Ziele, Ablauf, »Wo wir stehen«, roter Faden bisher */
 function deckblatt(){
-  const c = L.deck, b = W_BLOCK[L.block], u = wLade(), vor = wNachbar(-1), faden = vor ? u.faden[vor[0]] : "";
-  return `${wBand(c)}
+  const c = L.deck, b = L.blockinfo || W_BLOCK[L.block], u = wLade(), vor = wNachbar(-1) || (L.vorher ? wMod(L.vorher) : null), faden = vor ? u.faden[vor[0]] : "";
+  const zl = S.zuletzt && AUF(S.zuletzt) && S.zuletzt !== L.blatt[0].id ? AUF(S.zuletzt) : null;
+  return `${zl ? `<p class="w-weiter nodruck"><span>Zuletzt warst du bei Auftrag ${zl.nr}: <b>${esc(zl.kurz)}</b>.</span><button type="button" class="btn primary" data-geh="${zl.id}">Weitermachen ›</button></p>` : ""}${wBand(c)}
   <p class="leitfrage">${esc(L.frage)}</p>
   ${c.belastend ? belastend(c.belastend) : ""}
   <section class="w-wo" aria-label="Wo wir stehen"><p class="kennung">Wo wir stehen · ${esc(b[0])} (${esc(b[1])})</p>
-  ${zeitleiste(W_ANKER.map((a, i) => [a[0], a[1], "", (c.hier || []).includes(i) ? "hier" : ""]), { klasse:"klein" })}
+  ${zeitleiste((L.anker || W_ANKER).map((a, i) => [a[0], a[1], "", (c.hier || []).includes(i) ? "hier" : ""]), { klasse:"klein" })}
   <p class="hinweis">Leitfrage dieses Abschnitts: ${esc(b[2])}</p></section>
   <div class="deck"><div>
     <h2 class="abschnitt">Am Ende kannst du</h2><ul class="ziele">${c.ziele.map(z => `<li>${esc(z)}</li>`).join("")}</ul>
@@ -1387,7 +1425,7 @@ function deckblatt(){
   </div><div>
     <h2 class="abschnitt">So läuft dieses Blatt</h2>${blattAblauf()}
     <p class="hinweis" style="margin-top:.7rem">Links steht das Register mit allen Aufträgen. Manche öffnen erst auf Ansage oder nach deiner Antwort. Dein Stand bleibt auf diesem Gerät; sichere am Ende die Zusammenfassung als PDF.</p>
-    <div class="deck-start"><button type="button" class="btn primary" data-geh="${L.blatt[0].id}">Mit Auftrag ${L.blatt[0].nr} beginnen ›</button></div>
+    <div class="deck-start">${zl ? `<button type="button" class="btn" data-geh="${L.blatt[0].id}">Von vorn: Auftrag ${L.blatt[0].nr}</button><button type="button" class="btn primary" data-geh="${zl.id}">Weitermachen bei Auftrag ${zl.nr}: ${esc(zl.kurz)} ›</button>` : `<button type="button" class="btn primary" data-geh="${L.blatt[0].id}">Mit Auftrag ${L.blatt[0].nr} beginnen ›</button>`}</div>
   </div></div>`;
 }
 /* Auftrag und Bild als ein Kopf (Muster aus M22 4.1). Fehlt das Bild, bleibt der Auftrag allein stehen. */
@@ -1408,7 +1446,7 @@ const W_KG8 = [
 /* Das Raster aus M8.1 wächst weiter: In diesen Stunden schreiben die Lernenden je einen Eintrag (Speicher der Einheit, kg[wid]). */
 const W_KGNEU = [["m10","Gewalt auf den Straßen, Morde an Politikern"],["m11","Krisenjahr 1923"],["m12","Die Goldenen Zwanziger"],["m14","Weltwirtschaftskrise 1929"],["m142","Verhalten der NSDAP"]];
 /* Roter Faden: ein Satz am Ende jeder Stunde; er wandert in die Übersicht des Kapitels und aufs Deckblatt der nächsten Stunde. */
-const fadenFeld = () => `<div class="w-fadenfeld nodruck">${auftrag("Allein · 2 Minuten", "Ein Satz für den roten Faden", "Die Leitfrage dieses Abschnitts: " + esc(W_BLOCK[L.block][2]) + " Was trägt diese Stunde zur Antwort bei?")}
+const fadenFeld = () => leitNach() + `<div class="w-fadenfeld nodruck">${auftrag("Allein · 2 Minuten", "Ein Satz für den roten Faden", "Die Leitfrage dieses Abschnitts: " + esc(W_BLOCK[L.block][2]) + " Was trägt diese Stunde zur Antwort bei?")}
   ${textfeld("faden", "Mein Satz", { rows:2, zaehl:false, anfaenge:L.fadenAnf || ["Diese Stunde zeigt, dass", "Für die Leitfrage heißt das:"] })}</div>`;
 /* Eintrag ins »kollektive Gedächtnis der Weimarer Republik« (Raster aus M8.1, wächst von M8 bis M14) */
 const kgFeld = (titel, text) => `<div class="w-kgfeld">${auftrag("Allein · 3 Minuten", "Eintrag ins kollektive Gedächtnis der Republik", text || "Was aus dieser Stunde bleibt im Gedächtnis der Menschen von damals – und wie wirkt es weiter? Zwei bis drei Stichpunkte für das Raster aus M8.1.")}
@@ -1422,15 +1460,23 @@ const balken = (titel, werte, nachweis) => { const max = Math.max.apply(null, we
   return `<figure class="w-balken"><figcaption><b>${esc(titel)}</b></figcaption><div class="w-bz" role="list">${werte.map(w => `<div class="w-bzeile" role="listitem"><span class="w-bn">${esc(w[0])}</span><span class="w-bb"><span style="width:${(w[1] / max * 100).toFixed(1)}%;background:${w[2] || "var(--ink)"}"></span></span><span class="w-bw">${String(w[1]).replace(".", ",")} %</span></div>`).join("")}</div><p class="quelle">${nachweis}</p></figure>`; };
 
 function weimarStart(){
-  L.kapitel = "Weimarer Republik"; L.seiten = [["start","",""]].concat(L.blatt.map(a => [a.id, a.min + " Min.", a.kurz]));
-  const init0 = L.init; L.init = () => Object.assign({ faden:(wLade().faden[L.wid] || ""), kg:(wLade().kg[L.wid] || "") }, init0 ? init0() : {});
+  L.kapitel = L.kapitel || "Weimarer Republik"; L.seiten = [["start","",""]].concat(L.blatt.map(a => [a.id, a.min + " Min.", a.kurz]));
+  const init0 = L.init; L.init = () => Object.assign({ faden:(wLade().faden[L.wid] || ""), kg:(wLade().kg[L.wid] || ""), lf:{ vor:null, nach:null }, blickfehlt:"", linie:null, liniegrund:"", zuletzt:"" }, init0 ? init0() : {});
   const ne0 = L.nachEingabe; L.nachEingabe = p => { if (p === "faden") wSchreib(u => { u.faden[L.wid] = S.faden; }); if (p === "kg") wSchreib(u => { u.kg[L.wid] = S.kg; }); if (ne0) ne0(p); };
   const ni0 = L.nachInit; L.nachInit = () => { zkInit(); if (ni0) ni0(); };
+  /* Leitfrage als Linie: vor dem ersten Auftrag festlegen, am Ende zurückkehren (L.pole) · Blick der Stunde an der Landkarte offenlegen (L.blick) */
+  if (L.pole) { const id0 = L.blatt[0].id, f0 = SEITE_FN[id0]; SEITE_FN[id0] = () => leitVor() + f0();
+    if (L.zf && !L.pole.eigen) (L.zf.mein = L.zf.mein || []).push(["Die Leitfrage – am Anfang und am Ende", () => { const lf = S.lf || {}; return lf.vor == null && lf.nach == null ? "" : `Am Anfang: ${lf.vor == null ? "offen" : lf.vor + " von 5"} · am Ende: ${lf.nach == null ? "offen" : lf.nach + " von 5"} (1 = ${L.pole.links} · 5 = ${L.pole.rechts})`; }]); }
+  if (L.blick && SEITE_FN.landkarte) { const f1 = SEITE_FN.landkarte; SEITE_FN.landkarte = () => f1() + blickKarte(); }
   kernStart();
+  /* Eine Adresse zeigt immer dieselbe Seite: ohne Anker das Deckblatt, mit Anker den Auftrag. Der gemerkte Platz bleibt als »Weitermachen« erhalten. */
+  const h = location.hash.replace("#", "");
+  if (AUF(S.seite)) S.zuletzt = S.seite;
+  if (!(h && SEITE_FN[h]) && S.seite !== "start") { S.seite = "start"; zeichne(false); }
 }
 /* Kopf: Rückweg zur Übersicht und zum Kapitel */
 const kopf0 = kopf;
-kopf = function(){ kopf0(); const k = document.getElementById("kopf"), p = k.querySelector(".pill"); if (p && !L.hub) p.insertAdjacentHTML("beforebegin", `<a class="pill kapitel" href="index.html">Kapitel Weimar</a>`); };
+kopf = function(){ kopf0(); const k = document.getElementById("kopf"), p = k.querySelector(".pill"); if (p && !L.hub && wMod()) p.insertAdjacentHTML("beforebegin", `<a class="pill kapitel" href="index.html">Kapitel Weimar</a>`); };
 
 /* ---------- Wahr oder falsch – mit Erklärung je Antwort (Muster 2). aussagen = [[Text, richtig:true|false|null, Erklärung bei „wahr“, Erklärung bei „falsch“]]
    richtig = null heißt: Die Aussage lässt sich nicht mit einem Wort beantworten; beide Antworten bekommen eine einordnende Rückmeldung. ---------- */
@@ -1439,9 +1485,9 @@ function wahrFalsch(pfad, aussagen){
   return `<div class="w-wahrfalsch">${aussagen.map((a, i) => { const v = st[i], r = a[1];
     const stufe = v == null ? "" : (r === null ? "teils" : ((v === "w") === r ? "zentral" : "kaum")), wort = { zentral:"Stimmt.", kaum:"Noch nicht.", teils:"Genauer hinsehen." }[stufe];
     return `<div class="w-wf"><p>${esc(a[0])}</p><div class="w-wfk" role="group" aria-label="Wahr oder falsch"><button type="button" data-akt="wf" data-p="${pfad}" data-i="${i}" data-w="w" aria-pressed="${v === "w"}" ${v ? "disabled" : ""}>Wahr</button><button type="button" data-akt="wf" data-p="${pfad}" data-i="${i}" data-w="f" aria-pressed="${v === "f"}" ${v ? "disabled" : ""}>Falsch</button>${v ? `<button type="button" class="btn" data-akt="wfneu" data-p="${pfad}" data-i="${i}" style="min-width:0">Noch einmal</button>` : ""}</div>
-    <div aria-live="polite" style="grid-column:1/-1">${v ? `<div class="rm ${stufe}"><b>${wort}</b> ${esc(v === "w" ? a[2] : a[3])}</div>` : ""}</div></div>`; }).join("")}</div>`;
+    <div aria-live="polite" style="grid-column:1/-1">${v ? `<div class="rm ${stufe}"><b>${wort}</b> ${esc(v === "w" ? a[2] : a[3])}</div>` : ""}</div></div>`; }).join("")}${skipZeile(pfad, aussagen.length)}</div>`;
 }
-const wfFertig = (pfad, n) => { const st = hol(pfad) || {}; for (let i = 0; i < n; i++) if (!st[i]) return false; return true; };
+const wfFertig = (pfad, n) => { const st = hol(pfad) || {}; if (st.skip) return true; for (let i = 0; i < n; i++) if (!st[i]) return false; return true; };
 AKTION.wf = t => { setz(`${t.dataset.p}.${t.dataset.i}`, t.dataset.w); zeichneBehalte(); };
 AKTION.wfneu = t => { setz(`${t.dataset.p}.${t.dataset.i}`, null); zeichneBehalte(); };
 const lang = (p, n = 10) => String(hol(p) || "").trim().length >= n;
@@ -1452,9 +1498,9 @@ function check(pfad, fragen){
   const st = hol(pfad) || {};
   return `<div class="w-check">${fragen.map((f, i) => { const v = st[i], gew = v == null ? null : f[1][v];
     return `<fieldset class="w-cf"><legend><span class="w-nr">${i + 1}</span> ${esc(f[0])}</legend><div class="w-co">${f[1].map((o, k) => `<button type="button" data-akt="check" data-p="${pfad}" data-i="${i}" data-w="${k}" aria-pressed="${v === k}" ${v == null ? "" : "disabled"}>${esc(o[0])}</button>`).join("")}</div>
-    <div aria-live="polite">${gew ? `<div class="rm ${gew[1] ? "zentral" : "kaum"}"><b>${gew[1] ? "Stimmt." : "Noch nicht."}</b> ${esc(gew[2])}${gew[1] ? "" : ` <span class="hinweis">Lies noch einmal: ${esc(f[2])}.</span> <button type="button" class="btn" data-akt="checkneu" data-p="${pfad}" data-i="${i}">Noch einmal</button>`}</div>` : ""}</div></fieldset>`; }).join("")}</div>`;
+    <div aria-live="polite">${gew ? `<div class="rm ${gew[1] ? "zentral" : "kaum"}"><b>${gew[1] ? "Stimmt." : "Noch nicht."}</b> ${esc(gew[2])}${gew[1] ? "" : ` <span class="hinweis">Lies noch einmal: ${esc(f[2])}.</span> <button type="button" class="btn" data-akt="checkneu" data-p="${pfad}" data-i="${i}">Noch einmal</button>`}</div>` : ""}</div></fieldset>`; }).join("")}${skipZeile(pfad, fragen.length)}</div>`;
 }
-const checkFertig = (pfad, n) => { const st = hol(pfad) || {}; for (let i = 0; i < n; i++) if (st[i] == null) return false; return true; };
+const checkFertig = (pfad, n) => { const st = hol(pfad) || {}; if (st.skip) return true; for (let i = 0; i < n; i++) if (st[i] == null) return false; return true; };
 AKTION.check = t => { setz(`${t.dataset.p}.${t.dataset.i}`, +t.dataset.w); zeichneBehalte(); };
 AKTION.checkneu = t => { setz(`${t.dataset.p}.${t.dataset.i}`, null); zeichneBehalte(); };
 
@@ -1516,11 +1562,11 @@ const kurveVoll = (pfad, n) => { const st = hol(pfad) || {}; return Array.from({
 /* ---------- Rechnen mit Rückmeldung: erst die eigene Zahl, dann die Erklärung (Muster 1). Stand: S[pfad] = { v, ok } ---------- */
 function rechne(pfad, frage, soll, o = {}){
   const st = hol(pfad) || {}, ok = st.ok, id = "re-" + pfad.replace(/\W/g, "-");
-  return `<div class="w-rechne"><label for="${id}">${esc(frage)}</label><div class="reihe"><input id="${id}" type="text" inputmode="decimal" data-f="${pfad}.v" value="${esc(st.v || "")}" placeholder="Zahl" autocomplete="off" ${ok === true ? "readonly" : ""}><span class="w-re-e">${esc(o.einheit || "%")}</span><button type="button" class="btn dunkel" data-akt="rechne" data-p="${pfad}" data-soll="${soll}" data-tol="${o.tol ?? .15}" ${ok === true ? "disabled" : ""}>Prüfen</button></div>
+  return `<div class="w-rechne"><label for="${id}">${esc(frage)}</label><div class="reihe"><input id="${id}" type="text" inputmode="decimal" data-f="${pfad}.v" value="${esc(st.v || "")}" placeholder="Zahl" autocomplete="off" ${ok === true ? "readonly" : ""}><span class="w-re-e">${esc(o.einheit || "%")}</span><button type="button" class="btn dunkel" data-akt="rechne" data-p="${pfad}" data-soll="${soll}" data-tol="${o.tol ?? .15}" ${ok === true ? "disabled" : ""}>Prüfen</button>${ok === true ? "" : `<button type="button" class="w-skipk" data-akt="skip" data-p="${pfad}" aria-pressed="${!!st.skip}">${st.skip ? "Übersprungen" : "Überspringen"}</button>`}</div>
   <div aria-live="polite">${ok === true ? `<div class="rm zentral"><b>Stimmt.</b> ${esc(o.ja || "")}</div>` : ok === false ? `<div class="rm kaum"><b>Noch nicht.</b> ${esc(o.nein || "Rechne noch einmal nach.")}</div>` : ""}</div></div>`;
 }
 AKTION.rechne = t => { const p = t.dataset.p, v = parseFloat(String((hol(p) || {}).v || "").replace(",", ".").replace(/[^\d.\-]/g, "")); setz(p + ".ok", !isNaN(v) && Math.abs(v - +t.dataset.soll) <= +t.dataset.tol); zeichneBehalte(); };
-const rechneOk = p => (hol(p) || {}).ok === true;
+const rechneOk = p => { const s = hol(p) || {}; return s.ok === true || !!s.skip; };
 /* ---------- Auf einem Bild zeichnen (Stift oder Finger): Linien liegen als Zahlen im Stand, nichts wird übertragen.
    pfad → S[pfad] = [{ s:Stift, p:[[x,y] …] }] mit x, y zwischen 0 und 1 · stifte = [[id, Farbe, Name]] ---------- */
 function zeichenKarte(pfad, b, stifte){
@@ -1553,31 +1599,86 @@ document.addEventListener("pointerup", zkEnde); document.addEventListener("point
 AKTION.zkzurueck = t => { const l = (hol(t.dataset.p) || []).slice(0, -1); setz(t.dataset.p, l); zeichneBehalte(); };
 AKTION.zkleer = t => { setz(t.dataset.p, []); zeichneBehalte(); };
 window.addEventListener("resize", () => document.querySelectorAll("canvas[data-zkc]").forEach(zkMale));
+
+/* ===== Nachgerüstet am 18.11.2026 (Fachdidaktik Geschichte v1, Lernseite bauen v3.0) ===== */
+/* ---------- Selbsttests sind freiwillig: überspringen sperrt nichts (»Freiwillig heißt freiwillig«) ---------- */
+const skipZeile = (pfad, n) => { const st = hol(pfad) || {}; let alle = true; for (let i = 0; i < n; i++) if (st[i] == null) alle = false; if (alle && !st.skip) return "";
+  return `<p class="w-skip nodruck"><button type="button" class="w-skipk" data-akt="skip" data-p="${pfad}" aria-pressed="${!!st.skip}">${st.skip ? "Übersprungen – doch bearbeiten" : "Selbsttest überspringen"}</button><span class="hinweis">${st.skip ? "Du kannst ihn jederzeit nachholen." : "Der Selbsttest ist freiwillig. Er sperrt nichts."}</span></p>`; };
+AKTION.skip = t => { setz(t.dataset.p + ".skip", !(hol(t.dataset.p) || {}).skip); zeichneBehalte(); };
+
+/* ---------- Leitfrage als Linie: festlegen vor dem ersten Material, zurückkehren am Ende (»Wer hat sich bewegt?«)
+   L.pole = { frage?, links, rechts } · Stand: S.lf = { vor, nach } · steht automatisch vor Auftrag 1 und beim Satz für den roten Faden ---------- */
+const leitVor = () => !L.pole ? "" : `<div class="w-leit vor"><p class="kennung">Leg dich fest – noch ohne Material · 1 Minute</p>${skala("lf.vor", esc(L.pole.frage || L.frage), 5, "1 = " + L.pole.links, "5 = " + L.pole.rechts)}<p class="hinweis">Hier gibt es kein Richtig oder Falsch. Am Ende der Stunde kommst du auf diese Linie zurück.</p></div>`;
+const leitBeweg = () => { const lf = S.lf || {}, v = lf.vor, n = lf.nach;
+  return n == null ? (v == null ? "Am Anfang hast du dich noch nicht festgelegt." : `Am Anfang standest du bei ${v} von 5.`) : v == null ? `Jetzt stehst du bei ${n} von 5.` : v === n ? `Am Anfang ${v}, jetzt ${n} von 5: Du bist bei deiner Einschätzung geblieben. Welcher Beleg aus der Stunde stützt sie am stärksten?` : `Am Anfang ${v}, jetzt ${n} von 5: Du hast dich bewegt. Was hat dich bewegt? Halte es in deiner Begründung fest.`; };
+/* Steht die Rückkehr schon in einem eigenen Auftrag der Stunde (L.pole.eigen), entfällt sie beim roten Faden. */
+const leitNach = () => { if (!L.pole || L.pole.eigen) return "";
+  return `<div class="w-leit nach nodruck"><p class="kennung">Zurück zur Leitfrage · 1 Minute</p>${skala("lf.nach", "Wo stehst du jetzt? " + esc(L.pole.frage || L.frage), 5, "1 = " + L.pole.links, "5 = " + L.pole.rechts)}<p class="w-beweg" aria-live="polite">${leitBeweg()}</p></div>`; };
+
+/* ---------- Erst erinnern (P2): zwei Fragen zu früheren Stunden, ohne Heft; aufdecken nach der eigenen Antwort ---------- */
+const erinnere = (fragen, pfad = "ab") => `<div class="w-erinn"><p class="kennung">Erst erinnern · ohne Heft · ${fragen.length > 1 ? "2 Minuten" : "1 Minute"}</p>${abrufen(pfad, fragen)}</div>`;
+
+/* ---------- Der Blick dieser Stunde: Der Zugang wird als Form von Geschichte offengelegt – erst selbst überlegen, was er ausblendet, dann vergleichen.
+   L.blick = { name, anker (Abschnitt der Landkarte, z. B. "2-3-8"), tut, fehlt } ---------- */
+const blickKarte = () => { const b = L.blick; if (!b) return "";
+  /* Der Blick wird erst nach der Landkarten-Aufgabe benannt: Sonst nähme die Karte die Antwort vorweg (erst die Sache, dann der Begriff). */
+  if (!S.lk.ok && !String(S.blickfehlt || "").trim()) return `<p class="w-blickzu">Der Blick dieser Stunde · öffnet sich, wenn du die Landkarten-Aufgabe geprüft hast.</p>`;
+  return `<section class="w-blickk"><p class="kennung">Der Blick dieser Stunde · 1 Minute</p><h3>So haben wir heute auf Geschichte geschaut: ${esc(b.name)}</h3><p>${esc(b.tut)}${b.anker ? ` <a href="${LK}${b.anker}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a>` : ""}</p>
+  ${textfeld("blickfehlt", "Was blendet dieser Blick aus? Ein Satz.", { rows:2, zaehl:false, platz:"Nicht in den Blick kommt …" })}
+  ${vergleich("blickv", ["blickfehlt"], 10, "Mit einem Vorschlag vergleichen", `<p>${esc(b.fehlt)}</p><p class="hinweis">Jeder Blick zeigt etwas und lässt etwas weg. Deshalb wechselt der Blick von Stunde zu Stunde.</p>`)}</section>`; };
+
+/* ---------- Linie des Kurses »Umwelt oder Ich?« (Vorschlag vom 18.11.2026 – abschaltbar: L.linie in der Stunde weglassen).
+   Die Linie beginnt mit der These aus M13 und kehrt mit derselben Skala wieder. L.linie = { fall, frage, anf } · Stand: S.linie, im Speicher der Einheit linie[wid] ---------- */
+const linieFeld = () => { const c = L.linie; if (!c) return ""; const u = wLade().linie || {}, alt = W_MODULE.filter(m => u[m[0]] != null && m[0] !== L.wid);
+  return `<section class="w-linie"><p class="kennung">Linie des Kurses seit M13 · 2 Minuten</p><h3>Umwelt oder Ich?</h3><p>${esc(c.fall)}</p>
+  <div class="ab-zwei gleich"><div>${skala("linie", esc(c.frage), 5, "1 = eigene Entscheidung", "5 = die Umwelt bestimmt")}${alt.length ? `<p class="hinweis">Deine Linie bisher: ${alt.map(m => `${esc(m[1])}: ${u[m[0]]} von 5`).join(" · ")}</p>` : ""}</div>
+  <div>${textfeld("liniegrund", "Mein Grund in einem Satz", { rows:2, zaehl:false, anfaenge:c.anf || ["Die Umwelt wirkt hier durch", "Spielraum bleibt, weil"] })}</div></div></section>`; };
+const skala0 = AKTION.skala;
+AKTION.skala = t => { skala0(t); const p = t.dataset.p; if (typeof L.wid !== "string") return;
+  if (p === "linie") wSchreib(u => { (u.linie = u.linie || {})[L.wid] = S.linie; });
+  if (L.wid === "m13" && (p === "l1" || p === "l2")) wSchreib(u => { (u.linie = u.linie || {}).m13 = S.l2 != null ? S.l2 : S.l1; }); };
+
+/* ---------- Landkarte des Kapitels: welcher Eintrag in welcher Stunde zentral ist (tools/pruef/weimar_landkarte.py gleicht das mit den Stunden ab) ---------- */
+const W_LK = { m01:[["3-1-2","Public History"]], m02:[["2-3-8","Ereignisgeschichte"]], m03:[["2-1-8","Standortgebundenheit"]], m04:[["2-1-3","Partikularität"],["2-1-4","Selektivität"]], m05:[["2-1-1","Retrospektivität"]],
+  m06:[["1-3","Verständnis der Gegenwart"]], m07:[["2-3-2","Nationalgeschichte"]], m071:[["2-1-9","Kontroversität"],["2-1-8","Standortgebundenheit"]], m08:[["3-1-1","Kollektives Gedächtnis"]],
+  m09:[["2-1-1","Retrospektivität"]], m10:[["2-1-6","Narrativität"],["2-1-1","Retrospektivität"]], m11:[["1-2","Anthropologische Konstanten"],["1-4","Lernen aus der Vergangenheit"]],
+  m12:[["2-1-2","Perspektivität"],["2-1-4","Selektivität"]], m13:[["3-1-5","Agency"]], m14:[["2-1-5","Partialität"],["2-1-3","Partikularität"]], m142:[["1-8","Demokratisches Bewusstsein"]] };
+
+/* ---------- Eine Adresse, eine Seite: Jeder Auftrag hat seinen Anker; das Deckblatt bleibt über das Register erreichbar ---------- */
+const geh0 = geh;
+geh = function(id){ if (BLATT() && AUF(id)) S.zuletzt = id; geh0(id); wAdresse(); };
+const wAdresse = () => { try { const z = S.seite === "start" ? "" : "#" + S.seite; if (location.hash !== z) history.replaceState(null, "", z || (location.pathname + location.search)); } catch(e) {} };
+window.addEventListener("hashchange", () => { if (!S) return; const h = location.hash.replace("#", ""), z = h && SEITE_FN[h] ? h : "start"; if (z !== S.seite && (SEITE_FN[h] || !h)) geh0(z); });
+const register0 = register;
+register = function(immer){ register0(immer); const r = document.getElementById("reg"); if (!r || !BLATT()) return; const t = r.querySelector(".ab-regtitel");
+  if (t && !r.querySelector(".w-zumdeck")) t.insertAdjacentHTML("afterend", `<button type="button" class="w-zumdeck${S.seite === "start" ? " hier" : ""}" data-geh="start"${S.seite === "start" ? ' aria-current="page"' : ""}>Deckblatt<small>Leitfrage und Ablauf</small></button>`); };
 /* ===== M9 · Wohin soll die Reise gehen? Die Wahlen 1919 (Heft „Geschichte aktuell 1“, M9) ===== */
 const L = {
   wid:"m09", key:"ggk-w-m09:v1", nr:"M9", titel:"Wohin soll die Reise gehen? Die Wahlen 1919", unter:"Sechs Herausforderungen, viele Antworten – und ein Wahlergebnis", dauer:45, block:"d",
   /* Zeichen der Stunde: ein Stimmzettel in der Urne */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M5 17h24v12H5z" fill="none" stroke="#24221F" stroke-width="2.4" stroke-linejoin="round"/><path d="M11 17l3-11h9l2 11" fill="#FBF8F1" stroke="#24221F" stroke-width="2" stroke-linejoin="round"/><path d="M15 12l2 2 4-4" fill="none" stroke="#9B402D" stroke-width="2.2" stroke-linecap="round"/><path d="M11 22h12" stroke="#24221F" stroke-width="2.4" stroke-linecap="round"/></svg>`,
   frage:"Wofür entscheiden sich die Menschen 1919 – und war die Demokratie da schon zum Scheitern verurteilt?",
+  blick:{ name:"Entscheidungen in offener Lage (Agency)", anker:"3-1-5", tut:"Du entscheidest selbst wie die Wähler*innen im Januar 1919 – und vergleichst dann mit dem Ergebnis.", fehlt:"Was fehlt: Du entscheidest mit dem Wissen und den Werten von heute. Was Menschen 1919 fürchteten und hofften, kannst du nur zum Teil nachvollziehen. Und ein Wahlergebnis zeigt, wie gewählt wurde – nicht, warum." },
+  pole:{ frage:"War die Demokratie 1919 bereits zum Scheitern verurteilt?", links:"Nein, sie hatte eine echte Chance", rechts:"Ja, sie war von Anfang an verloren", eigen:true },
   deck:{ dauer:"Einzelstunde · 45 Minuten (Schreibauftrag als Hausaufgabe)", jahr:"19.1.1919", hier:[1, 3],
     satz:"Zwei Monate nach der Revolution wählen die Deutschen eine Nationalversammlung. Zum ersten Mal dürfen auch Frauen wählen. Wohin soll die Reise gehen?",
     ziele:["sechs Herausforderungen der Zeit nennen und zu einer davon Stellung nehmen,", "das Wahlergebnis von 1919 auswerten und erklären, welche Milieus sich durchgesetzt haben,", "beurteilen, ob die Demokratie 1919 bereits zum Scheitern verurteilt war."] },
   blatt:[
-    { id:"lage", nr:"1", kurz:"Herausforderungen", name:"Die Herausforderungen der Zeit", form:"Allein", min:3, frei:"offen" },
+    { id:"lage", nr:"1", kurz:"Herausforderungen", name:"Die Herausforderungen der Zeit", form:"Allein", min:5, frei:"offen" },
     { id:"wahlomat", nr:"2", kurz:"Wahl-O-Mat", name:"Wofür wärst du gewesen? Der Wahl-O-Mat 1919", form:"Frei wählbar", min:10, frei:"antwort", nach:"lage", fehlt:"Leg dich erst in Auftrag 1 fest." },
     { id:"partei", nr:"3", kurz:"Deine Partei", name:"Wofür steht deine Partei?", form:"Frei wählbar", min:5, frei:"antwort", nach:"wahlomat", fehlt:"Bearbeite erst Auftrag 2." },
     { id:"ergebnis", nr:"4", kurz:"Wahlergebnis", name:"Das historische Wahlergebnis 1919", form:"Frei wählbar", min:18, frei:"offen" },
     { id:"urteil", nr:"5", kurz:"Urteil", name:"War die Demokratie 1919 schon verloren?", form:"Allein, dann Plenum", min:4, frei:"antwort", nach:"ergebnis", fehlt:"Bearbeite erst Auftrag 4." },
-    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Von wo aus urteilst du?", form:"Allein", min:5, frei:"antwort", nach:"urteil", fehlt:"Bearbeite erst Auftrag 5." },
+    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Von wo aus urteilst du?", form:"Allein", min:6, frei:"antwort", nach:"urteil", fehlt:"Bearbeite erst Auftrag 5." },
     { id:"schreiben", nr:"6", kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein · auch als Hausaufgabe", min:12, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:"Du wertest das Wahlergebnis aus und kommst zu einem Urteil." },
     { id:"zusammenfassung", nr:"Z", kurz:"Zusammenfassung", name:"Zusammenfassung", form:"Zum Abheften", min:2, frei:"antwort", nach:"schreiben", fehlt:"Die Zusammenfassung öffnet sich nach deinem Text in Auftrag 6.", kopf:"Zum Abheften" },
   ],
   breit:["lehrkraft"],
   loesch:"Deine Antworten, deine Rechnungen, dein Urteil, dein Text und dein Satz für den roten Faden werden auf diesem Gerät entfernt.",
-  init:() => ({ hf:null, antw:"", partei:"", passt:"", steht:"", re1:{}, re2:{}, milieus:"", werte:"", u:null, ugrund:"" }),
+  init:() => ({ ab:{}, hf:null, antw:"", partei:"", passt:"", steht:"", re1:{}, re2:{}, milieus:"", werte:"", u:null, ugrund:"" }),
   erledigt:{
     lage:() => !!S.hf && lang("antw", 15), wahlomat:() => lang("partei", 2) && lang("passt"), partei:() => lang("steht", 20),
-    ergebnis:() => rechneOk("re1") && rechneOk("re2") && lang("milieus") && lang("werte"), urteil:() => S.u != null && lang("ugrund", 15),
+    ergebnis:() => rechneOk("re1") && rechneOk("re2") && lang("milieus") && lang("werte"), urteil:() => ((S.lf || {}).nach != null || S.u != null) && lang("ugrund", 15),
     landkarte:() => !!S.lk.ok, schreiben:() => schreibFertig(),
   },
   fadenAnf:["1919 steht die Demokratie auf einer breiten Mehrheit. Schwer wird es trotzdem, weil", "Eine Demokratie braucht mehr als eine Mehrheit bei der Wahl:"],
@@ -1597,7 +1698,8 @@ const WAHL19 = [["USPD", 7.6, "#C4622D", "links von der SPD"], ["SPD", 37.9, "#B
 function start(){ return deckblatt(); }
 function lage(){
   const h = HF.find(x => x.id === S.hf);
-  return `${auftrag("Allein · 3 Minuten", "Die Herausforderungen der Zeit", "Deutschland im Januar 1919: Sechs große Fragen sind offen. Wähle die Herausforderung, die dir am dringendsten erscheint, und schreib auf, welche Antwort du darauf gehabt hättest.")}
+  return `${erinnere([["M8: Was ist das kollektive Gedächtnis?", "Die gemeinsamen Erinnerungen einer Gruppe. Sie entstehen im Austausch, werden durch Erzählungen, Rituale und Symbole weitergegeben und stiften Identität."]])}
+  ${auftrag("Allein · 3 Minuten", "Die Herausforderungen der Zeit", "Deutschland im Januar 1919: Sechs große Fragen sind offen. Wähle die Herausforderung, die dir am dringendsten erscheint, und schreib auf, welche Antwort du darauf gehabt hättest.")}
   <div class="w-milieus" role="group" aria-label="Herausforderung wählen">${HF.map((x, i) => `<button type="button" data-akt="setz" data-p="hf" data-w="${x.id}" aria-pressed="${S.hf === x.id}"><b>${i + 1} · ${esc(x.titel)}</b><small>${esc(x.frage)}</small></button>`).join("")}</div>
   <p class="quelle">Sechs Herausforderungen und Leitfragen nach dem Unterrichtsheft, M9.</p>
   <div class="${h ? "" : "gesperrt"}">${textfeld("antw", h ? `Meine Antwort: ${h.frage}` : "Meine Antwort", { rows:3, zaehl:false, anfaenge:["Ich wäre dafür gewesen, dass", "Am wichtigsten ist mir dabei"] })}</div>`;
@@ -1627,8 +1729,9 @@ function ergebnis(){
   ${vergleich("mvgl", ["milieus","werte"], 10, "Mit Stichpunkten vergleichen", `<div class="w-karten k3"><article class="w-kk rot"><h3>SPD</h3><p>vor allem die Industriearbeiterschaft: soziale Gerechtigkeit, Arbeiterrechte, parlamentarische Demokratie.</p></article><article class="w-kk"><h3>Zentrum</h3><p>das katholische Milieu quer durch die Schichten: Schutz der Kirche, sozialer Ausgleich, Stabilität.</p></article><article class="w-kk blau"><h3>DDP</h3><p>liberales Bürgertum: Grundrechte, Verfassung, eine weltoffene demokratische Gesellschaft.</p></article></div><p class="quelle">Stichpunkte nach den Seiten „Parteien 1919“ und „Wahl-O-Mat 1919“ des Kurses. Prüfe an der Seite zu den Milieus.</p>`)}</div>`;
 }
 function urteil(){
+  if (S.u != null && (S.lf || {}).nach == null) { S.lf = S.lf || {}; S.lf.nach = S.u; }
   return `${auftrag("Allein · 2 Minuten, dann Plenum · 2 Minuten", "Dein Urteil", "War die Demokratie 1919 bereits zum Scheitern verurteilt? Leg dich auf der Linie fest und begründe mit dem Wahlergebnis und den Herausforderungen der Zeit.")}
-  <div class="ab-zwei gleich"><div>${skala("u", "War die Demokratie 1919 bereits zum Scheitern verurteilt?", 5, "1 = Nein, sie hatte eine echte Chance", "5 = Ja, sie war von Anfang an verloren")}</div>
+  <div class="ab-zwei gleich"><div>${skala("lf.nach", "War die Demokratie 1919 bereits zum Scheitern verurteilt?", 5, "1 = Nein, sie hatte eine echte Chance", "5 = Ja, sie war von Anfang an verloren")}<p class="w-beweg" aria-live="polite">${leitBeweg()}</p></div>
   <div>${textfeld("ugrund", "Meine Begründung", { rows:3, zaehl:false, anfaenge:["Dafür spricht das Wahlergebnis:", "Dagegen spricht, dass", "Entscheidend ist für mich"] })}</div></div>`;
 }
 function seiteLk(){
@@ -1645,7 +1748,7 @@ function seiteLk(){
 }
 L.schreib = {
   vor:"So kann die Aufgabe in der Klassenarbeit stehen: Material, zwei Operatoren, höchstens eine Seite. Hier schreibst du eine halbe Seite.",
-  aufgabe:`<b>Werten Sie</b> das Ergebnis der Wahl zur Nationalversammlung 1919 <b>aus</b> und <b>beurteilen Sie</b>, ob die Demokratie 1919 bereits zum Scheitern verurteilt war.`,
+  aufgabe:`<b>a) Analysieren Sie</b> das Ergebnis der Wahl zur Nationalversammlung 1919 (M1).<br><b>b) Beurteilen Sie</b>, ob die Demokratie 1919 bereits zum Scheitern verurteilt war.`,
   material:`<p><b>M1 · Wahl zur Nationalversammlung, 19. Januar 1919 (Stimmen in Prozent):</b> USPD 7,6 · SPD 37,9 · DDP 18,5 · Zentrum 19,7 · DVP 4,4 · DNVP 10,3 · Sonstige 1,6.</p><p><b>M2 · Herausforderungen der Zeit:</b> Verfassung · Versailler Vertrag · soziale Fragen · wirtschaftliche Stabilität · nationale Identität und Gesellschaft · revolutionäre Bewegungen und Unruhen.</p><p class="quelle">Nach dem Unterrichtsheft, M9.</p>`,
   woerter:140, min:60,
   stufen:[["Grundlegend","Du nennst die stärksten Parteien mit Zahlen und sagst, ob die Demokratie für dich verloren war."],["Sicher","Du fasst Parteien zu Lagern zusammen, rechnest ihre Stärke aus und begründest dein Urteil mit Zahlen und einer Herausforderung."],["Souverän","Du wägst die Mehrheit von 1919 gegen die Belastungen ab und zeigst, dass ein Urteil vom Ende 1933 her die offene Lage von 1919 verfehlt."]],
@@ -1663,7 +1766,7 @@ L.zf = {
   lk:{ name:"Retrospektivität (2.1.1)", satz:"Wir betrachten die Vergangenheit immer im Nachhinein (ex post), also aus der Gegenwart heraus.", beispiel:"Wer 1933 kennt, hält die Republik leicht für „von Anfang an verloren“. Die Wähler*innen von 1919 kannten das Ende nicht." },
   werkzeug:{ titel:"Ein Wahlergebnis auswerten", schritte:["Wer ist am stärksten? Welche Parteien gehören zu einem Lager?","Zusammenrechnen: Wie stark sind die Lager?","Deuten: Was sagt das Ergebnis über die Lage – und was sagt es nicht?"] },
   sonst:"Wahl-O-Mat 1919 und die Parteien (Aufträge 2 und 3), die Milieus der Gesellschaft (Auftrag 4).",
-  mein:[["Meine Partei laut Wahl-O-Mat", () => S.partei ? `${S.partei}. ${S.steht}` : ""], ["Mein Urteil", () => S.u == null ? "" : `${S.u} von 5 (1 = echte Chance, 5 = von Anfang an verloren). ${S.ugrund}`]],
+  mein:[["Meine Partei laut Wahl-O-Mat", () => S.partei ? `${S.partei}. ${S.steht}` : ""], ["Mein Urteil – am Anfang und am Ende", () => { const lf = S.lf || {}, n = lf.nach != null ? lf.nach : S.u; return n == null ? "" : `Am Anfang: ${lf.vor == null ? "offen" : lf.vor + " von 5"} · am Ende: ${n} von 5 (1 = echte Chance, 5 = von Anfang an verloren). ${S.ugrund}`; }]],
 };
 function zusammenfassung(){ return fadenFeld() + zusammen(); }
 const SEITE_FN = { start, lage, wahlomat, partei, ergebnis, urteil, landkarte:seiteLk, schreiben:schreibauftrag, zusammenfassung, lehrkraft };

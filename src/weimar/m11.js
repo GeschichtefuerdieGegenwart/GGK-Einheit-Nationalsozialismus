@@ -3,18 +3,20 @@ const L = {
   wid:"m11", key:"ggk-w-m11:v1", nr:"M11", titel:"Das Krisenjahr 1923 und seine Konsequenzen", unter:"Vier Krisen, ein Jahr – und die Frage, was daraus folgt", dauer:180, block:"d",
   /* Zeichen der Stunde: ein Geldschein, der zerfällt */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M4 9h17l-3 6 4 4-3 6H4z" fill="none" stroke="#24221F" stroke-width="2.4" stroke-linejoin="round"/><circle cx="11" cy="17" r="3.4" fill="#E0B74A" stroke="#24221F" stroke-width="1.6"/><path d="M25 10l4 3M24 17h6M25 24l4-3" stroke="#9B402D" stroke-width="2.4" stroke-linecap="round"/></svg>`,
-  frage:"Wie verhalten sich Menschen, wenn viele Krisen zugleich kommen – und was macht das mit einer Demokratie?",
+  frage:"Viele Krisen zugleich: Wie verhalten sich Menschen – und übersteht die Republik das Jahr 1923 gestärkt oder geschwächt?",
+  blick:{ name:"Vergleich: Muster im Verhalten von Menschen", anker:"1-2", tut:"Du untersuchst vier Krisen nebeneinander und fragst: Wie verhalten sich Menschen, wenn alles unsicher wird?", fehlt:"Was fehlt: das Einmalige. Wer nach Mustern sucht, übersieht leicht, was nur 1923 so war – und was heute anders ist." },
+  pole:{ frage:"Eine junge Demokratie gerät in mehrere Krisen zugleich und übersteht sie. Wie geht sie daraus hervor?", links:"geschwächt", rechts:"gestärkt" },
   deck:{ dauer:"Zwei Doppelstunden · 2 × 90 Minuten", jahr:"1923", hier:[4],
     satz:"Besetzung, Geldentwertung, Aufstände, ein Putsch: 1923 trifft alles zugleich auf die junge Republik. Ihr untersucht, wie Menschen darauf antworten.",
     ziele:["die Krisen des Jahres 1923 darstellen und erklären, wie sie zusammenhängen,", "beschreiben, wie sich Menschen in den Krisen verhalten, und den Einfluss der Krisen auf ihr Leben bewerten,", "untersuchen, wie sich das Krisenjahr auf die Wahl von 1924 auswirkt."] },
   blatt:[
-    { id:"vorher", nr:"1", kurz:"Erst vermuten", name:"Erst erinnern und vermuten", form:"Allein · ohne Heft", min:4, frei:"offen" },
+    { id:"vorher", nr:"1", kurz:"Erst vermuten", name:"Erst erinnern und vermuten", form:"Allein · ohne Heft", min:5, frei:"offen" },
     { id:"krise", nr:"2", kurz:"Eure Krise", name:"Eure Krise: ein Legetechnikvideo", form:"Gruppe", min:45, frei:"offen" },
     { id:"kino", nr:"3", kurz:"Vier Krisen", name:"Vier Krisen ansehen und bewerten", form:"Plenum, dann allein", min:25, frei:"ansage", gleich:"Ihr seht euch die Videos aller Gruppen an. Danach bewertest du, wie stark jede Krise das Leben der Menschen trifft." },
     { id:"kette", nr:"4", kurz:"Zusammenhänge", name:"Wie hängen die Krisen zusammen?", form:"Zu zweit", min:15, frei:"antwort", nach:"kino", fehlt:"Bewerte erst die vier Krisen (Auftrag 3)." },
     { id:"plakat", nr:"5", kurz:"Wahlplakat", name:"Ein Wahlplakat für 1924", form:"Gruppe", min:30, frei:"ansage", gleich:"Zweite Doppelstunde: Ihr entwerft ein Wahlplakat und vergleicht es mit Plakaten der Zeit." },
     { id:"wahl", nr:"6", kurz:"Wahl 1924", name:"Was das Krisenjahr an der Wahlurne bewirkt", form:"Allein", min:12, frei:"antwort", nach:"kette", fehlt:"Bearbeite erst Auftrag 4." },
-    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Wozu das Ganze?", form:"Allein", min:6, frei:"antwort", nach:"kino", fehlt:"Bearbeite erst Auftrag 3." },
+    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Wozu das Ganze?", form:"Allein", min:7, frei:"antwort", nach:"kino", fehlt:"Bearbeite erst Auftrag 3." },
     { id:"schreiben", nr:"7", kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein", min:15, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:"Du erläuterst den Zusammenhang der Krisen und urteilst, wie die Republik das Jahr übersteht." },
     { id:"zusammenfassung", nr:"Z", kurz:"Zusammenfassung", name:"Zusammenfassung", form:"Zum Abheften", min:4, frei:"antwort", nach:"schreiben", fehlt:"Die Zusammenfassung öffnet sich nach deinem Text in Auftrag 7.", kopf:"Zum Abheften" },
   ],
@@ -113,7 +115,7 @@ function seiteLk(){
 }
 L.schreib = {
   vor:"So kann die Aufgabe in der Klassenarbeit stehen: Material, zwei Operatoren, höchstens eine Seite. Hier schreibst du eine halbe Seite.",
-  aufgabe:`<b>Erläutern Sie</b>, wie die Krisen des Jahres 1923 zusammenhängen, und <b>beurteilen Sie</b>, ob die Republik das Krisenjahr gestärkt oder geschwächt überstanden hat.`,
+  aufgabe:`<b>a) Erläutern Sie</b>, wie die Krisen des Jahres 1923 zusammenhängen.<br><b>b) Beurteilen Sie</b>, ob die Republik das Krisenjahr gestärkt oder geschwächt überstanden hat.`,
   material:`<p><b>M1 · Krisen 1923:</b> Ruhrbesetzung (ab Januar) · passiver Widerstand · Hyperinflation · Aufstände von links (Oktober) · Hitler-Putsch (8./9. November).</p><p><b>M2 · Maßnahmen unter Reichskanzler Stresemann:</b> Abbruch des passiven Widerstands (September) · Rentenmark (15. November) · Einsatz der Reichswehr · Verhaftung und Verurteilung Hitlers.</p><p><b>M3 · Reichstagswahl 4. Mai 1924 (in Klammern: 1920):</b> SPD ${k(wahlAnteil("1924a","spd"))} % (${k(wahlAnteil("1920","spd"))}) · DNVP ${k(wahlAnteil("1924a","dnvp"))} % (${k(wahlAnteil("1920","dnvp"))}) · DVP ${k(wahlAnteil("1924a","dvp"))} % (${k(wahlAnteil("1920","dvp"))}) · DDP ${k(wahlAnteil("1924a","ddp"))} % (${k(wahlAnteil("1920","ddp"))}) · Völkische und Nationalsozialisten ${k(wahlAnteil("1924a","ns"))} % (–).</p><p class="quelle">M1 und M2 nach dem Unterrichtsheft, M11. M3 berechnet aus den Stimmenzahlen bei der Konrad-Adenauer-Stiftung.</p>`,
   woerter:150, min:60,
   stufen:[["Grundlegend","Du nennst die Krisen in der richtigen Reihenfolge und sagst, ob die Republik für dich gestärkt oder geschwächt ist."],["Sicher","Du erklärst, wie eine Krise die nächste auslöst, und begründest dein Urteil mit einer Maßnahme und einer Zahl aus M3."],["Souverän","Du wägst ab: Was gelingt der Republik, was bleibt als Schaden im Gedächtnis der Menschen? Du kommst zu einem begründeten Urteil."]],

@@ -3,25 +3,27 @@ const L = {
   wid:"m08", key:"ggk-w-m08:v1", nr:"M8", titel:"Das kollektive Gedächtnis – Identität und Erinnerung", unter:"… und was 1919 in den Köpfen der Menschen vorgeht (M8.1)", dauer:90, block:"d",
   /* Zeichen der Stunde: ein Kopf, in dem sich Erinnerungen verbinden */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 4a11 11 0 0 0-7 19.5V30h14v-6.5A11 11 0 0 0 17 4z" fill="none" stroke="#24221F" stroke-width="2.4" stroke-linejoin="round"/><path d="M12 14l5-4 5 5-4 4z" fill="none" stroke="#24221F" stroke-width="1.6"/><circle cx="12" cy="14" r="2" fill="#9B402D"/><circle cx="17" cy="10" r="2" fill="#E0B74A"/><circle cx="22" cy="15" r="2" fill="#9B402D"/><circle cx="18" cy="19" r="2" fill="#24221F"/></svg>`,
-  frage:"Was geht 1919 in den Köpfen der Menschen vor – und warum belastet das die junge Republik?",
+  frage:"Was geht 1919 in den Köpfen der Menschen vor – und was belastet die junge Republik mehr: das, was geschehen ist, oder die Art, wie es erinnert wird?",
+  blick:{ name:"Erinnerungsgeschichte: das kollektive Gedächtnis", anker:"3-1-1", tut:"Du fragst nicht zuerst, was geschah, sondern wie Menschen es erinnern und deuten.", fehlt:"Was fehlt: Geld, Macht und Interessen. Und: Nicht alle erinnern sich gleich. Ein „kollektives“ Gedächtnis ist ein Modell – es verdeckt leicht die Unterschiede zwischen den Gruppen." },
+  pole:{ frage:"Was belastet die junge Republik 1919 mehr?", links:"das, was geschehen ist", rechts:"die Art, wie es erinnert wird" },
   deck:{ dauer:"Doppelstunde · 90 Minuten", jahr:"1919", hier:[2, 3],
     satz:"Der Krieg ist vorbei, aber nicht in den Köpfen. Was eine Gesellschaft erinnert und wie sie es deutet, bestimmt, wie sie handelt.",
     belastend:"In Auftrag 4 geht es um Eugenik: die Vorstellung, Menschen nach einem angeblichen „Wert“ einzuteilen. Das kann belasten. Du darfst jederzeit aussetzen und mit deiner Lehrkraft sprechen.",
     ziele:["individuelles und kollektives Gedächtnis unterscheiden und erklären, wie gemeinsame Erinnerung Identität stiftet,", "acht Erfahrungen und Deutungen nennen, die das Denken vieler Menschen in der frühen Republik prägen,", "erläutern, wie das kollektive Gedächtnis politisches Handeln lenkt."] },
   blatt:[
-    { id:"erinnern", nr:"1", kurz:"Ich und wir", name:"Erst überlegen: Ich erinnere mich, wir erinnern uns", form:"Allein, dann zu zweit", min:5, frei:"offen" },
+    { id:"erinnern", nr:"1", kurz:"Ich und wir", name:"Erst überlegen: Ich erinnere mich, wir erinnern uns", form:"Allein, dann zu zweit", min:6, frei:"offen" },
     { id:"theorie", nr:"2", kurz:"Theorie", name:"Wie Gruppen sich erinnern", form:"Allein", min:18, frei:"offen" },
-    { id:"republik", nr:"3", kurz:"In den Köpfen 1919", name:"Das kollektive Gedächtnis der Weimarer Republik", form:"Zu zweit", min:22, frei:"antwort", nach:"theorie", fehlt:"Bearbeite erst Auftrag 2." },
+    { id:"republik", nr:"3", kurz:"In den Köpfen 1919", name:"Das kollektive Gedächtnis der Weimarer Republik", form:"Zu zweit", min:24, frei:"antwort", nach:"theorie", fehlt:"Bearbeite erst Auftrag 2." },
     { id:"recherche", nr:"4", kurz:"Recherche", name:"Rechercheauftrag: Eugenik und „Rassenkunde“", form:"Allein oder zu zweit", min:10, frei:"ansage", gleich:"Ein Rechercheauftrag zu einer Idee aus dem 19. Jahrhundert, die später mörderische Folgen hatte. Deine Lehrkraft sagt, ob ihr ihn in der Stunde oder zu Hause bearbeitet." },
-    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Womit untersuchst du das?", form:"Allein", min:8, frei:"antwort", nach:"republik", fehlt:"Bearbeite erst Auftrag 3." },
+    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Womit untersuchst du das?", form:"Allein", min:9, frei:"antwort", nach:"republik", fehlt:"Bearbeite erst Auftrag 3." },
     { id:"schreiben", nr:"5", kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein", min:15, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:"Du erklärst den Begriff und wendest ihn auf die frühe Republik an." },
     { id:"zusammenfassung", nr:"Z", kurz:"Zusammenfassung", name:"Zusammenfassung", form:"Zum Abheften", min:4, frei:"antwort", nach:"schreiben", fehlt:"Die Zusammenfassung öffnet sich nach deinem Text in Auftrag 5.", kopf:"Zum Abheften" },
   ],
   breit:["lehrkraft"],
   loesch:"Deine Notizen, deine Antworten, deine Auswahl, deine Recherche, dein Text und dein Satz für den roten Faden werden auf diesem Gerät entfernt.",
-  init:() => ({ ich:"", wir:"", woher:"", ck:{}, top:{}, topgrund:"", r:{}, rq:"", meta:"" }),
+  init:() => ({ ab:{}, ich:"", wir:"", woher:"", ck:{}, top:{}, topgrund:"", r:{}, rq:"", meta:"" }),
   erledigt:{
-    erinnern:() => lang("ich") && lang("wir") && lang("woher", 5), theorie:() => checkFertig("ck", 3),
+    erinnern:() => (lang("ich") || !!S.ichzu) && lang("wir") && lang("woher", 5), theorie:() => checkFertig("ck", 3),
     republik:() => mwZahl("top") === 3 && lang("topgrund", 20), recherche:() => tabelleVoll("r", 3, 1, 8) && lang("rq", 5),
     landkarte:() => !!S.lk.ok, schreiben:() => schreibFertig(),
   },
@@ -48,6 +50,7 @@ function erinnern(){
   return `${auftrag("Allein · 3 Minuten, dann zu zweit · 2 Minuten", "Ich erinnere mich, wir erinnern uns", "Notiere ein Ereignis, an das du dich selbst erinnerst. Notiere dann eines, an das sich „alle“ erinnern – auch du, obwohl du nicht dabei warst. Woher kennst du es? Tauscht euch danach zu zweit aus.")}
   <div class="ab-zwei gleich"><div>${textfeld("ich", "Daran erinnere ich mich selbst", { rows:3, zaehl:false, platz:"ein Tag, ein Fest, ein Ort …" })}</div>
   <div>${textfeld("wir", "Daran erinnern sich „alle“ – obwohl ich nicht dabei war", { rows:3, zaehl:false, platz:"ein Ereignis aus der Geschichte, der Familie, dem Verein …" })}</div></div>
+  <p class="w-skip nodruck"><button type="button" class="w-skipk" data-akt="setz" data-p="ichzu" data-w="${S.ichzu ? "false" : "true"}" aria-pressed="${!!S.ichzu}">${S.ichzu ? "Übersprungen – doch notieren" : "Meine eigene Erinnerung behalte ich für mich"}</button><span class="hinweis">Das linke Feld ist freiwillig. Es erscheint in keiner Zusammenfassung und in keinem Ausdruck.</span></p>
   ${textfeld("woher", "Woher kenne ich das zweite Ereignis?", { rows:2, zaehl:false, anfaenge:["Aus Erzählungen von", "Aus der Schule:", "Durch einen Gedenktag:", "Aus Filmen oder Bildern:"] })}`;
 }
 function theorie(){
@@ -61,7 +64,8 @@ function theorie(){
 }
 function republik(){
   const n = mwZahl("top");
-  return `${auftrag("Zu zweit · 22 Minuten", "Das kollektive Gedächtnis der Weimarer Republik", "Lest die acht Einträge. Sie zeigen, was um 1919 in den Köpfen vieler Menschen vorgeht. Wählt dann die drei Einträge, die die junge Republik eurer Meinung nach am stärksten belasten, und begründet eure Wahl.")}
+  return `${erinnere([["M7: Was legte der Versailler Vertrag für Deutschland fest?", "Gebietsverluste, Reparationen, eine begrenzte Armee und Artikel 231 über die Kriegsschuld. Viele Deutsche sprachen von einem „Diktatfrieden“."], ["M5: Wer blieb nach der Revolution in Armee, Justiz und Verwaltung im Amt?", "Die alten Eliten des Kaiserreichs. Das war der Preis für das Bündnis der Regierung Ebert mit der Armeeführung."]])}
+  ${auftrag("Zu zweit · 22 Minuten", "Das kollektive Gedächtnis der Weimarer Republik", "Lest die acht Einträge. Sie zeigen, was um 1919 in den Köpfen vieler Menschen vorgeht. Wählt dann die drei Einträge, die die junge Republik eurer Meinung nach am stärksten belasten, und begründet eure Wahl.")}
   <p class="lead">Um den Aufstieg des Nationalsozialismus zu verstehen, muss man die damalige Gesellschaft möglichst genau betrachten. Der Zweite Weltkrieg und die Shoah entstehen nicht aus dem Nichts. Trotzdem bleibt die Frage: Musste es so kommen? 1918 war nicht klar, wohin sich Deutschland entwickeln würde. Die NSDAP gibt es noch nicht. Sozialist*innen, Demokrat*innen und Monarchist*innen streiten um die Zukunft.</p>
   <ol class="w-treppe" style="--n:${TREPPE.length}" aria-label="Stufenmodell: Aufstieg der NSDAP verstehen">${TREPPE.map((t, i) => `<li style="--i:${i}"><b>${esc(t[0])}</b><span>${esc(t[1])}</span></li>`).join("")}</ol>
   <p class="quelle">Stufenmodell „Aufstieg der NSDAP verstehen“ nach dem Unterrichtsheft, M8.1. Ein Modell: Eine Treppe sieht zwangsläufig aus. Das war dieser Weg nicht.</p>
@@ -98,7 +102,7 @@ function seiteLk(){
 }
 L.schreib = {
   vor:"So kann die Aufgabe in der Klassenarbeit stehen: Material, zwei Operatoren, höchstens eine Seite. Hier schreibst du eine halbe Seite.",
-  aufgabe:`<b>Erklären Sie</b> den Begriff „kollektives Gedächtnis“ und <b>erläutern Sie</b> an zwei Beispielen, wie das kollektive Gedächtnis die Weimarer Republik von Beginn an belastete.`,
+  aufgabe:`<b>a) Erklären Sie</b> den Begriff „kollektives Gedächtnis“.<br><b>b) Erläutern Sie</b> an zwei Beispielen, wie das kollektive Gedächtnis die Weimarer Republik von Beginn an belastete.`,
   material:`<p><b>M1 · Begriff:</b> Das kollektive Gedächtnis umfasst die gemeinsamen Erinnerungen einer Gruppe oder Gesellschaft. Es entsteht durch Austausch, wird durch Erzählungen, Rituale und Symbole weitergegeben und verändert sich mit den Bedürfnissen der Gegenwart.</p><p><b>M2 · Aus dem Raster M8.1:</b> Kriegstrauma · Dolchstoßlegende · Versailles als „Diktatfrieden“ · Gegner der Demokratie im Staatsdienst · eine Justiz, die „auf dem rechten Auge blind“ ist.</p><p class="quelle">Nach dem Unterrichtsheft, M8 und M8.1.</p>`,
   woerter:140, min:60,
   stufen:[["Grundlegend","Du erklärst den Begriff in eigenen Worten und nennst zwei Einträge aus dem Raster."],["Sicher","Du erklärst, wie gemeinsame Erinnerung entsteht und wirkt, und zeigst an zwei Beispielen, wie sie das Bild der Republik prägt."],["Souverän","Du unterscheidest Ereignis und Deutung (zum Beispiel Niederlage und „Dolchstoß“), zeigst die politische Nutzung der Erinnerung und erklärst, warum das eine Demokratie schwächt."]],

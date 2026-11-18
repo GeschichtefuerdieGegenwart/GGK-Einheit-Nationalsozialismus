@@ -17,7 +17,7 @@ SCHALE = '''<!doctype html>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>{titel}</title>
 <meta name="description" content="{desc}">
-<link rel="stylesheet" href="../assets/gegenwart/bundle.css">
+<link rel="stylesheet" href="{p}assets/gegenwart/bundle.css">
 <style>
 {css}</style>
 </head>
@@ -27,7 +27,7 @@ SCHALE = '''<!doctype html>
 <div id="ueber"></div>
 <noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft „Geschichte aktuell 1“ (M1–M14).</p></noscript>
 <script type="application/json" id="lehr-daten">{lehr}</script>
-<script src="../assets/gegenwart/bundle.js"></script>{tx}
+<script src="{p}assets/gegenwart/bundle.js"></script>{tx}
 <script>
 {js}</script>
 </body>
@@ -36,8 +36,8 @@ SCHALE = '''<!doctype html>
 BLATT = '<div class="ab-rahmen"><aside class="ab-reg" id="reg" aria-label="Aufträge dieses Blatts"></aside><main id="main" tabindex="-1"></main></div>'
 def gebaut():
     return [m[0] for m in MODULE if (H/f'{m[0]}.js').exists()]  # mNN-daten.js gehört zur Stunde und zählt nicht eigens
-def css(extra=''):
-    return (K/'basis.css').read_text('utf-8').replace('url(assets/', 'url(../assets/') + (K/'kern.css').read_text('utf-8') + (K/'blatt.css').read_text('utf-8') + (H/'weimar.css').read_text('utf-8') + extra
+def css(extra='', p='../'):
+    return (K/'basis.css').read_text('utf-8').replace('url(assets/', f'url({p}assets/') + (K/'kern.css').read_text('utf-8') + (K/'blatt.css').read_text('utf-8') + (H/'weimar.css').read_text('utf-8') + extra
 def lehr(k):
     p = REPO/'lk'/f'w-{k}.enc.json'
     return p.read_text('utf-8').strip() if p.exists() else 'null'
@@ -54,7 +54,7 @@ def bau(k):
         js = kopfjs() + ''.join(p.read_text('utf-8') for p in (K/'kern.js', K/'blatt.js', REPO/'src'/'lk-schloss.js', H/'weimar.js', H/'hub.js'))
         assert '</script' not in js
         html = SCHALE.format(titel='Weimarer Republik 1914–1933 – Kapitelübersicht', desc='GGK Jahrgangsstufe 1: Vom Ersten Weltkrieg bis zum Ende der Weimarer Republik. Alle Stunden, Ankerdaten, roter Faden und das kollektive Gedächtnis der Republik.',
-                             css=css((H/'hub.css').read_text('utf-8')), rumpf='<main id="main" tabindex="-1"></main>', lehr=lehr('hub'), tx='', js=js)
+                             css=css((H/'hub.css').read_text('utf-8')), rumpf='<main id="main" tabindex="-1"></main>', lehr=lehr('hub'), tx='', js=js, p='../')
         (ZIEL/'index.html').write_text(html, 'utf-8'); print('index.html', len(html)); return
     m = next(x for x in MODULE if x[0] == k)
     teile = [K/'kern.js', K/'blatt.js', REPO/'src'/'lk-schloss.js', H/'weimar.js'] + ([H/f'{k}-daten.js'] if (H/f'{k}-daten.js').exists() else []) + [H/f'{k}.js']
@@ -63,8 +63,20 @@ def bau(k):
     extra = (H/f'{k}.css').read_text('utf-8') if (H/f'{k}.css').exists() else ''
     tx = ''.join(f'\n<script src="texte/{t}"></script>' for t in TEXTE.get(k, []))
     desc = f'GGK {m[1]}: {m[2]}. Arbeitsblatt mit Register, Schreibauftrag im Format der Klassenarbeit und Zusammenfassung auf zwei Seiten.'
-    html = SCHALE.format(titel=f'{m[1]} {m[2]}', desc=desc.replace('"', '&quot;'), css=css(extra), rumpf=BLATT, lehr=lehr(k), tx=tx, js=js)
+    html = SCHALE.format(titel=f'{m[1]} {m[2]}', desc=desc.replace('"', '&quot;'), css=css(extra), rumpf=BLATT, lehr=lehr(k), tx=tx, js=js, p='../')
     (ZIEL/m[3]).write_text(html, 'utf-8'); print(m[3], len(html))
+# Stunden, die mit demselben Grundgerüst gebaut werden, aber in der Wurzel liegen (Kapitel Nationalsozialismus)
+WURZEL = [('m15', 'M15', 'Der Weg in die Diktatur', 'm15-weg-in-die-diktatur.html'), ('m24', 'M24', 'Wer war was? Widerstand im Nationalsozialismus', 'm24-wer-war-was.html')]
+def bau_wurzel(k):
+    m = next(x for x in WURZEL if x[0] == k)
+    teile = [K/'kern.js', K/'blatt.js', REPO/'src'/'lk-schloss.js', H/'weimar.js'] + ([H/f'{k}-daten.js'] if (H/f'{k}-daten.js').exists() else []) + [H/f'{k}.js']
+    js = 'window.GGK_ZURUECK = "index.html";\nwindow.W_GEBAUT = [];\n' + ''.join(p.read_text('utf-8') for p in teile)
+    assert '</script' not in js, k
+    lp = REPO/'lk'/f'{k}.enc.json'
+    desc = f'GGK {m[1]}: {m[2]}. Arbeitsblatt mit Register, Schreibauftrag im Format der Klassenarbeit und Zusammenfassung auf zwei Seiten.'
+    html = SCHALE.format(titel=f'{m[1]} {m[2]}', desc=desc, css=css('', ''), rumpf=BLATT, lehr=(lp.read_text('utf-8').strip() if lp.exists() else 'null'), tx='', js=js, p='')
+    (REPO/m[3]).write_text(html, 'utf-8'); print(m[3], len(html))
 if __name__ == '__main__':
     ZIEL.mkdir(exist_ok=True)
-    for k in (sys.argv[1:] or (gebaut() + (['hub'] if (H/'hub.js').exists() else []))): bau(k)
+    for k in (sys.argv[1:] or (gebaut() + (['hub'] if (H/'hub.js').exists() else []) + [w[0] for w in WURZEL if (H/f'{w[0]}.js').exists()])):
+        bau_wurzel(k) if k in [w[0] for w in WURZEL] else bau(k)

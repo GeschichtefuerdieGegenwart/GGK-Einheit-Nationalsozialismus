@@ -4,6 +4,7 @@ const L = {
   /* Zeichen der Stunde: ein Blatt mit Siegel */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M9 4h12l6 6v20H9z" fill="none" stroke="#24221F" stroke-width="2.4" stroke-linejoin="round"/><path d="M13 13h8M13 18h10" stroke="#24221F" stroke-width="2"/><circle cx="20" cy="25" r="3.2" fill="#9B402D"/></svg>`,
   frage:"Was erzählt eine Geschichte des Versailler Vertrags, die nur auf Deutschland schaut – und was lässt sie weg?",
+  blick:{ name:"Nationalgeschichte – und ihr Gegenstück, die Globalgeschichte", anker:"2-3-4", tut:"Du erzählst den Versailler Vertrag erst aus deutscher Sicht und dann mit dem Blick über die Grenzen hinweg.", fehlt:"Was fehlt: Auch der globale Blick lässt etwas weg – die Erfahrungen einzelner Menschen und die Frage, wie der Vertrag in den Köpfen weiterwirkt. Das untersuchst du in M8." },
   deck:{ dauer:"Doppelstunde · 90 Minuten", jahr:"28.6.1919", hier:[2],
     satz:"In Deutschland heißt der Vertrag bald „Diktatfrieden“. Für viele Völker in Osteuropa und im Nahen Osten bedeutet dieselbe Friedensordnung etwas ganz anderes.",
     ziele:["die wichtigsten Bestimmungen des Versailler Vertrags für Deutschland nennen und erklären, warum er auf Ablehnung stieß,", "Folgen der Pariser Friedensordnung außerhalb Deutschlands darstellen,", "Nationalgeschichte und Globalgeschichte unterscheiden und zeigen, wie die Form der Erzählung das Urteil verändert."] },
@@ -12,7 +13,7 @@ const L = {
     { id:"deutsch", nr:"2", kurz:"„Deutsche“ Sicht", name:"Der Vertrag aus „deutscher“ Perspektive", form:"Zu zweit", min:15, frei:"offen" },
     { id:"global", nr:"3", kurz:"Globale Sicht", name:"Der Vertrag als globalhistorisches Ereignis", form:"Allein · Film", min:45, frei:"ansage", gleich:"Ein Film zeigt, was dieselbe Friedensordnung außerhalb Deutschlands bedeutete. Vorher hältst du fest, wie bedeutsam dir der Vertrag aus deutscher Sicht erscheint." },
     { id:"vergleich", nr:"4", kurz:"Zwei Geschichten", name:"Zwei Geschichten gegenüberstellen", form:"Allein, dann Plenum", min:8, frei:"antwort", nach:"global", fehlt:"Bearbeite erst Auftrag 3." },
-    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Welche Form von Geschichte ist das?", form:"Allein", min:5, frei:"antwort", nach:"deutsch", fehlt:"Bearbeite erst Auftrag 2." },
+    { id:"landkarte", nr:"L", kurz:"Landkarte", name:"Landkarte: Welche Form von Geschichte ist das?", form:"Allein", min:6, frei:"antwort", nach:"deutsch", fehlt:"Bearbeite erst Auftrag 2." },
     { id:"schreiben", nr:"5", kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein", min:15, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:"Du stellst die deutsche Sicht dar und erläuterst, warum sie zu kurz greift." },
     { id:"zusammenfassung", nr:"Z", kurz:"Zusammenfassung", name:"Zusammenfassung", form:"Zum Abheften", min:4, frei:"antwort", nach:"schreiben", fehlt:"Die Zusammenfassung öffnet sich nach deinem Text in Auftrag 5.", kopf:"Zum Abheften" },
   ],
@@ -91,7 +92,7 @@ function seiteLk(){
 }
 L.schreib = {
   vor:"So kann die Aufgabe in der Klassenarbeit stehen: Material, zwei Operatoren, höchstens eine Seite. Hier schreibst du eine halbe Seite.",
-  aufgabe:`<b>Stellen Sie dar</b>, wie der Versailler Vertrag in Deutschland aufgenommen wurde, und <b>erläutern Sie</b> mithilfe der Begriffe Nationalgeschichte und Globalgeschichte, warum eine Darstellung nur aus deutscher Perspektive zu kurz greift.`,
+  aufgabe:`<b>a) Stellen Sie dar</b>, wie der Versailler Vertrag in Deutschland aufgenommen wurde.<br><b>b) Erläutern Sie</b> mithilfe der Begriffe Nationalgeschichte und Globalgeschichte, warum eine Darstellung nur aus deutscher Perspektive zu kurz greift.`,
   material:`<p><b>M1 · Aus deutscher Perspektive:</b> „Diktatfrieden“ ohne Verhandlung · Gebietsverluste · Reparationen, begründet mit Artikel 231 (Kriegsschuldklausel) · Armee auf 100.000 Mann begrenzt · Empörung und Proteste.</p><p><b>M2 · Außerhalb Deutschlands:</b> Polen wird wieder ein Staat · Finnland und die baltischen Staaten werden unabhängig · die Ukraine wird aufgeteilt · Minderheiten in fast allen neuen Staaten · Mandatsgebiete im Nahen Osten.</p><p class="quelle">Zusammenstellung aus den Aufträgen 2 und 3.</p>`,
   woerter:140, min:60,
   stufen:[["Grundlegend","Du nennst Bestimmungen des Vertrags und die Ablehnung in Deutschland. Die beiden Begriffe kommen vor, bleiben aber unerklärt."],["Sicher","Du stellst die deutsche Aufnahme geordnet dar und erklärst an einem Beispiel aus M2, was die nationale Sicht nicht zeigt."],["Souverän","Du erläuterst mit beiden Begriffen, dass die Form der Erzählung das Urteil lenkt, und zeigst an Beispielen, wie sich die Bedeutung des Vertrags im globalen Blick verändert."]],
