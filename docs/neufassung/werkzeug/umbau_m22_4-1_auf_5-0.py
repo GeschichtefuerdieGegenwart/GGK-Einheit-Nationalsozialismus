@@ -168,6 +168,11 @@ einmal('''const speichere = () => { try { localStorage.setItem(KEY, JSON.stringi
        '''const melde = () => { try { const zaehlt = AUF.filter(a => !a.extra); GGKBlatt.melde("M22", { fertig: zaehlt.filter(a => erledigt(a.id)).length, von: zaehlt.length, satz: (S.neu || "").trim() }); } catch(e) {} };
 const speichere = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} clearTimeout(REGT); REGT = setTimeout(() => { melde(); if (typeof register === "function") register(); }, 200); };''')
 a = s.index('const MARK = '); e = s.index('\n', a); s = s[:a] + s[e + 1:]
+# Bilder in Reserve (nie gezeigt) stehen nicht mehr in der Seite – sonst reisen sie ungenutzt im Paket mit. Sie bleiben in media/ und in der Bildliste.
+for k in ['familie', 'eichmann', 'bauman', 'aufbau']:
+    m = re.search(r'\n  ' + k + r':\s*\{ datei:"media/[^\n]*\},?(?=\n)', s); assert m, k
+    assert not re.search(r'(bild:\s*"' + k + r'"|\("' + k + r'"|BILDER\.' + k + r'\b)', s), k + ' wird benutzt'
+    s = s[:m.start()] + s[m.end():]
 # Hefter statt Labor
 einmal('''const LABOR = /github\\.io$/.test(location.hostname) ? "index.html" : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";''',
        '''const HEFTER = "hefter-nationalsozialismus.html";   // Startdatei des Hefters; im Moodle-Paket heißt sie index.html
