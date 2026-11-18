@@ -65,10 +65,13 @@ def main():
     with zipfile.ZipFile(zp, 'w', zipfile.ZIP_DEFLATED, compresslevel=6) as z:
         for p in sorted(R.glob('*.html')):
             z.writestr(p.name, seite(p.read_text('utf-8'), 0, links, apps_da)); n['seiten'] += 1
+        # Bilder des Kapitels Weimar nur mitnehmen, wenn eine Seite sie zeigt: Im Arbeitsordner liegen alle Bilder aus dem Heft, auch solche, die bewusst nicht eingebaut sind.
+        gezeigt = ''.join(q.read_text('utf-8') for q in list((R/'weimar').glob('*.html')) + [R/'index.html'])
         for o in ORDNER:
             for p in sorted((R/o).rglob('*')):
                 rel = p.relative_to(R).as_posix()
                 if not p.is_file() or NICHT.search(rel): continue
+                if rel.startswith('weimar/media/') and p.name not in gezeigt: n.setdefault('ausgelassen', []).append(p.name); continue
                 if p.suffix == '.html':
                     z.writestr(rel, seite(p.read_text('utf-8'), rel.count('/'), links, apps_da)); n['seiten'] += 1
                 else:
