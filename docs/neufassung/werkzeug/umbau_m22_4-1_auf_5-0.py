@@ -88,6 +88,11 @@ h1{font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem)}
 .rad-satz{font-size:1rem}
 .ansicht{font-size:1rem}
 .zeitachse .jahr,.zeitachse .dekade,.zeitachse-fuss{font-size:1rem}
+/* Zeitachse: Die Karten tragen nur Name und Kennung – das Jahr steht an der Achse */
+.zeitachse .akte{display:block;width:auto;max-width:10.5rem;padding:.35rem .65rem;font-size:1rem}
+.zeitachse .akte .pf,.zeitachse .akte .fs,.zeitachse .akte .jz{display:none}
+.zeitachse .jahr.tief{top:61%}
+.zeitachse .jahr.tief::before{top:-2.45em;height:2.2em}
 .ebenen-legende{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.5rem;margin:0;padding:0}
 .ebenen-legende li{padding:.4rem .6rem;border-left:5px solid var(--eb);background:var(--blatt);font-size:1rem;line-height:1.35}
 .ebenen-legende b{display:block}
@@ -115,7 +120,8 @@ h1{font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem)}
 }
 @media (max-width:1149px){
   #main.dashboard .buehne{aspect-ratio:auto;overflow:visible}
-  .ebfeld,.zeitachse .akte{font-size:1rem}
+  .ebfeld,.zeitachse .akte{font-size:1rem;width:auto}
+  .ansicht.zeitachse{min-height:29rem}
   .ebenen-legende{display:none}
 }
 @media (min-width:821px) and (max-width:1149px){   /* zwischen Hochformat und Rad: die sechs Karten in zwei Spalten */
@@ -318,12 +324,19 @@ einmal('''document.addEventListener("input", ev => {
 einmal('''    <span class="nr">Erklärung ${a.s}${emp ? ` <span class="emp">Empfehlung</span>` : ""}</span>
     <span class="pf" aria-hidden="true">''', '''    <span class="pf" aria-hidden="true">''')
 einmal('''<b>${esc(a.name)}</b><span class="j">${esc(a.jahr)}${ok ? " · " + ebenenNachCheck(a) : ""}</span>''',
-       '''<b>${esc(a.name)}</b><span class="j">Erklärung ${a.s} · ${esc(a.jahr)}</span>''')
+       '''<b>${esc(a.name)}</b><span class="j">Erklärung ${a.s}<span class="jz"> · ${esc(a.jahr)}</span></span>''')
 einmal('''<span class="fs" aria-label="Stand"><span class="${gel ? "ok" : ""}">''', '''<span class="fs" aria-label="Stand">${emp ? `<span class="emp">Empfehlung</span>` : ""}<span class="${gel ? "ok" : ""}">''')
 einmal('''  return `<p class="ring-text">Sechs Erklärungen der Forschung · fünf Ebenen, auf denen sie ansetzen · eine Frage</p>
   <div class="spalte l">''', '''  return `<div class="spalte l">''')
 einmal('''<p class="modellhinweis">Fünf Ebenen und Gewichtungen sind ein Modell der Lehrkraft zum Ordnen der Erklärungen, keine Forschungseinteilung und keine Messwerte.</p></div>''',
        '''<ul class="ebenen-legende" aria-label="Die fünf Ebenen">${EBENEN.map(([k, n, u]) => `<li data-ebene="${k}"><b>${n}</b>${esc(u)}</li>`).join("")}</ul><p class="modellhinweis">Sechs Erklärungen der Forschung, fünf Ebenen, auf denen sie ansetzen, eine Frage. Die fünf Ebenen und die Gewichtungen sind ein Modell der Lehrkraft zum Ordnen der Erklärungen, keine Forschungseinteilung und keine Messwerte.</p></div>''')
+# Zeitachse: Karten unter der Achse rücken tiefer, eng stehende Jahreszahlen wechseln die Zeile (in 16 px überdeckten sie sich)
+einmal('''let reihe = i % 2 === 0 ? "oben" : "unten", top = reihe === "oben" ? "14%" : "58%";''', '''let reihe = i % 2 === 0 ? "oben" : "unten", top = reihe === "oben" ? "14%" : "68%";''')
+einmal('''{ top = reihe === "oben" ? "36%" : "78%"; }''', '''{ top = reihe === "oben" ? "34%" : "85%"; }''')
+einmal('''      h += `<span class="jahr" style="left:${xx}%">${JZ[a.s]}</span>` + karteHTML(a, `left:${xx}%;top:${top}`); });''',
+       '''      const doppelt = JZ[a.s] === jvor, tief = !doppelt && xx - jx < 6 && !jtief; if (!doppelt) { jx = xx; jtief = tief; jvor = JZ[a.s]; }
+      h += (doppelt ? "" : `<span class="jahr${tief ? " tief" : ""}" style="left:${xx}%">${JZ[a.s]}</span>`) + karteHTML(a, `left:${xx}%;top:${top}`); });''')
+einmal('''const letzte = { oben:-99, unten:-99 }; let h = "";''', '''const letzte = { oben:-99, unten:-99 }; let h = "", jx = -99, jtief = false, jvor = null;''')
 # aktenStand() zählte die Marken der Karte nach ihrer Stelle; mit der Marke »Empfehlung« davor stimmt die Stelle nicht mehr
 einmal('''sp = b.querySelector(".fs span:nth-child(2)"); if (sp) {''', '''sp = [...b.querySelectorAll(".fs span:not(.emp)")][1]; if (sp) {''')
 
