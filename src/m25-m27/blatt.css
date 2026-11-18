@@ -227,3 +227,45 @@
   .zf2 p,.zf2 li{font-size:10pt}
   .zf2 .seitenumbruch{break-before:page;border-top:0;padding-top:0}
 }
+
+/* ===== Nachgerüstet am 18.11.2026 ===== */
+/* Blick der Stunde: auf dem Deckblatt eine Zeile, an der Landkarte eine Karte */
+.w-blickk{margin-top:1.6rem;padding:1rem 1.1rem 1.1rem;border:1.5px solid var(--gold);border-radius:var(--r-lg);background:var(--surface2);max-width:62rem}
+.w-blickk h3{font-family:var(--display);font-size:1.3rem;margin:.1rem 0 .4rem}
+.w-blickk .kennung{margin:0;color:var(--gold)}
+/* Leitfrage als Linie */
+.w-leit{margin:0 0 1.4rem;padding:.9rem 1.1rem 1rem;border:1.5px solid var(--kuli);border-radius:var(--r-lg);background:var(--kuli-hi);max-width:62rem}
+.w-leit .kennung{margin:0;color:var(--kuli)}
+.w-leit .w-skala{margin:.5rem 0 .4rem;max-width:none}
+.w-leit .w-skala legend{font-family:var(--display);font-size:1.18rem;line-height:1.3}
+.w-leit .w-stufen button{background:var(--surface2)}
+.w-leit .w-stufen button[aria-pressed=true]{background:var(--kuli);border-color:var(--kuli);color:#fff}
+.w-leit .hinweis{margin:0}
+.w-beweg{margin:.2rem 0 0;font-weight:600}
+/* Linie des Kurses */
+.w-linie{margin:1.6rem 0 0;padding:1rem 1.1rem 1.1rem;border-radius:var(--r-lg);background:var(--offset);border-left:6px solid var(--ink)}
+.w-linie h3{font-family:var(--display);font-size:1.3rem;margin:.1rem 0 .4rem}
+.w-linie .kennung{margin:0}
+.w-linie .w-skala{margin:.4rem 0}
+/* Überspringen: leise, aber groß genug zum Tippen */
+.w-skip{display:flex;flex-wrap:wrap;gap:.4rem .8rem;align-items:center;margin:.8rem 0 0}
+.w-skipk{min-height:44px;padding:.35rem .9rem;border:1.5px dashed #8B857A;border-radius:999px;background:none;color:var(--muted);font:inherit;font-size:.95rem}
+.w-skipk[aria-pressed=true]{border-style:solid;color:var(--ink);background:var(--offset)}
+/* Deckblatt im Register */
+.w-zumdeck{display:block;width:100%;text-align:left;border:2px solid transparent;border-radius:.45rem;background:none;padding:.3rem .55rem;margin:0 0 .25rem;min-height:44px;font:inherit;font-weight:700;font-size:.95rem;color:inherit;border-bottom:1px solid rgba(36,34,31,.18)}
+.w-zumdeck small{display:block;font-weight:400;font-size:.78rem;color:#463F33}
+.w-zumdeck.hier{background:var(--kuli-hi);border-color:var(--kuli)}
+.deck-start{gap:.6rem;flex-wrap:wrap}
+.w-erinn{margin:0 0 1.3rem;padding:.7rem 1rem .4rem;border-left:4px solid var(--green);background:var(--green-hi);border-radius:0 var(--r-lg) var(--r-lg) 0;max-width:62rem}
+.w-erinn .kennung{margin:0 0 .3rem;color:var(--green)}
+.w-erinn .w-abruf{margin:0}
+.w-blickzu{margin:1.6rem 0 0;padding:.7rem 1rem;border:1.5px dashed var(--gold);border-radius:var(--r-lg);color:var(--muted);max-width:62rem}
+.w-weiter{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:space-between;margin:0 0 1rem;padding:.6rem .7rem .6rem 1rem;background:var(--kuli-hi);border:1.5px solid var(--kuli);border-radius:var(--r-lg)}
+.w-weiter .btn{min-height:48px}
+.w-ebene{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:.1rem 0 .7rem;font-size:.92rem}
+.w-ebene span{margin-right:.3rem;color:var(--muted)}
+.w-ebene b{padding:.15rem .7rem;border-radius:999px;border:1.5px solid var(--line);color:var(--faint);font-weight:600}
+.w-ebene b.an{color:#fff;border-color:transparent}
+.w-ebene b.an.welt{background:#1E4FB5}.w-ebene b.an.europa{background:#7D5C12}.w-ebene b.an.de{background:#24221F}
+.w-bildzu{margin:1rem 0;padding:.9rem 1.1rem;border:1.5px dashed #8B857A;border-radius:var(--r-lg);background:var(--surface);max-width:62rem}
+.w-bildzu p{margin:0 0 .6rem}

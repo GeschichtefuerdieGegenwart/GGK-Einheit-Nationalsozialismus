@@ -542,6 +542,48 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
   .zf2 p,.zf2 li{font-size:10pt}
   .zf2 .seitenumbruch{break-before:page;border-top:0;padding-top:0}
 }
+
+/* ===== Nachgerüstet am 18.11.2026 ===== */
+/* Blick der Stunde: auf dem Deckblatt eine Zeile, an der Landkarte eine Karte */
+.w-blickk{margin-top:1.6rem;padding:1rem 1.1rem 1.1rem;border:1.5px solid var(--gold);border-radius:var(--r-lg);background:var(--surface2);max-width:62rem}
+.w-blickk h3{font-family:var(--display);font-size:1.3rem;margin:.1rem 0 .4rem}
+.w-blickk .kennung{margin:0;color:var(--gold)}
+/* Leitfrage als Linie */
+.w-leit{margin:0 0 1.4rem;padding:.9rem 1.1rem 1rem;border:1.5px solid var(--kuli);border-radius:var(--r-lg);background:var(--kuli-hi);max-width:62rem}
+.w-leit .kennung{margin:0;color:var(--kuli)}
+.w-leit .w-skala{margin:.5rem 0 .4rem;max-width:none}
+.w-leit .w-skala legend{font-family:var(--display);font-size:1.18rem;line-height:1.3}
+.w-leit .w-stufen button{background:var(--surface2)}
+.w-leit .w-stufen button[aria-pressed=true]{background:var(--kuli);border-color:var(--kuli);color:#fff}
+.w-leit .hinweis{margin:0}
+.w-beweg{margin:.2rem 0 0;font-weight:600}
+/* Linie des Kurses */
+.w-linie{margin:1.6rem 0 0;padding:1rem 1.1rem 1.1rem;border-radius:var(--r-lg);background:var(--offset);border-left:6px solid var(--ink)}
+.w-linie h3{font-family:var(--display);font-size:1.3rem;margin:.1rem 0 .4rem}
+.w-linie .kennung{margin:0}
+.w-linie .w-skala{margin:.4rem 0}
+/* Überspringen: leise, aber groß genug zum Tippen */
+.w-skip{display:flex;flex-wrap:wrap;gap:.4rem .8rem;align-items:center;margin:.8rem 0 0}
+.w-skipk{min-height:44px;padding:.35rem .9rem;border:1.5px dashed #8B857A;border-radius:999px;background:none;color:var(--muted);font:inherit;font-size:.95rem}
+.w-skipk[aria-pressed=true]{border-style:solid;color:var(--ink);background:var(--offset)}
+/* Deckblatt im Register */
+.w-zumdeck{display:block;width:100%;text-align:left;border:2px solid transparent;border-radius:.45rem;background:none;padding:.3rem .55rem;margin:0 0 .25rem;min-height:44px;font:inherit;font-weight:700;font-size:.95rem;color:inherit;border-bottom:1px solid rgba(36,34,31,.18)}
+.w-zumdeck small{display:block;font-weight:400;font-size:.78rem;color:#463F33}
+.w-zumdeck.hier{background:var(--kuli-hi);border-color:var(--kuli)}
+.deck-start{gap:.6rem;flex-wrap:wrap}
+.w-erinn{margin:0 0 1.3rem;padding:.7rem 1rem .4rem;border-left:4px solid var(--green);background:var(--green-hi);border-radius:0 var(--r-lg) var(--r-lg) 0;max-width:62rem}
+.w-erinn .kennung{margin:0 0 .3rem;color:var(--green)}
+.w-erinn .w-abruf{margin:0}
+.w-blickzu{margin:1.6rem 0 0;padding:.7rem 1rem;border:1.5px dashed var(--gold);border-radius:var(--r-lg);color:var(--muted);max-width:62rem}
+.w-weiter{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:space-between;margin:0 0 1rem;padding:.6rem .7rem .6rem 1rem;background:var(--kuli-hi);border:1.5px solid var(--kuli);border-radius:var(--r-lg)}
+.w-weiter .btn{min-height:48px}
+.w-ebene{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:.1rem 0 .7rem;font-size:.92rem}
+.w-ebene span{margin-right:.3rem;color:var(--muted)}
+.w-ebene b{padding:.15rem .7rem;border-radius:999px;border:1.5px solid var(--line);color:var(--faint);font-weight:600}
+.w-ebene b.an{color:#fff;border-color:transparent}
+.w-ebene b.an.welt{background:#1E4FB5}.w-ebene b.an.europa{background:#7D5C12}.w-ebene b.an.de{background:#24221F}
+.w-bildzu{margin:1rem 0;padding:.9rem 1.1rem;border:1.5px dashed #8B857A;border-radius:var(--r-lg);background:var(--surface);max-width:62rem}
+.w-bildzu p{margin:0 0 .6rem}
 /* ===== Kapitel »Weimarer Republik«: eigene Teile. Kapitelfarbe Gold (wie auf der Startseite), nur auf dunklem Grund. ===== */
 :root{--w-gold:#E0B74A}
 .pill.kapitel{background:transparent;border-color:var(--line);font-weight:400}
@@ -759,46 +801,6 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 .w-kreis .kr-t{font:12.5px var(--body, sans-serif);fill:#24221F}
 .w-kreis .kr-z{font:700 12.5px var(--body, sans-serif);fill:#7A2E1F}
 @media (max-width:899px){ .w-kurve{grid-template-columns:1fr} .w-kurve .ku-achse{flex-direction:row} .w-kurve .ku-namen{grid-column:1} .w-kurve .ku-namen li span{display:none} }
-
-/* ===== Nachgerüstet am 18.11.2026 ===== */
-/* Blick der Stunde: auf dem Deckblatt eine Zeile, an der Landkarte eine Karte */
-.w-blickk{margin-top:1.6rem;padding:1rem 1.1rem 1.1rem;border:1.5px solid var(--gold);border-radius:var(--r-lg);background:var(--surface2);max-width:62rem}
-.w-blickk h3{font-family:var(--display);font-size:1.3rem;margin:.1rem 0 .4rem}
-.w-blickk .kennung{margin:0;color:var(--gold)}
-/* Leitfrage als Linie */
-.w-leit{margin:0 0 1.4rem;padding:.9rem 1.1rem 1rem;border:1.5px solid var(--kuli);border-radius:var(--r-lg);background:var(--kuli-hi);max-width:62rem}
-.w-leit .kennung{margin:0;color:var(--kuli)}
-.w-leit .w-skala{margin:.5rem 0 .4rem;max-width:none}
-.w-leit .w-skala legend{font-family:var(--display);font-size:1.18rem;line-height:1.3}
-.w-leit .w-stufen button{background:var(--surface2)}
-.w-leit .w-stufen button[aria-pressed=true]{background:var(--kuli);border-color:var(--kuli);color:#fff}
-.w-leit .hinweis{margin:0}
-.w-beweg{margin:.2rem 0 0;font-weight:600}
-/* Linie des Kurses */
-.w-linie{margin:1.6rem 0 0;padding:1rem 1.1rem 1.1rem;border-radius:var(--r-lg);background:var(--offset);border-left:6px solid var(--ink)}
-.w-linie h3{font-family:var(--display);font-size:1.3rem;margin:.1rem 0 .4rem}
-.w-linie .kennung{margin:0}
-.w-linie .w-skala{margin:.4rem 0}
-/* Überspringen: leise, aber groß genug zum Tippen */
-.w-skip{display:flex;flex-wrap:wrap;gap:.4rem .8rem;align-items:center;margin:.8rem 0 0}
-.w-skipk{min-height:44px;padding:.35rem .9rem;border:1.5px dashed #8B857A;border-radius:999px;background:none;color:var(--muted);font:inherit;font-size:.95rem}
-.w-skipk[aria-pressed=true]{border-style:solid;color:var(--ink);background:var(--offset)}
-/* Deckblatt im Register */
-.w-zumdeck{display:block;width:100%;text-align:left;border:2px solid transparent;border-radius:.45rem;background:none;padding:.3rem .55rem;margin:0 0 .25rem;min-height:44px;font:inherit;font-weight:700;font-size:.95rem;color:inherit;border-bottom:1px solid rgba(36,34,31,.18)}
-.w-zumdeck small{display:block;font-weight:400;font-size:.78rem;color:#463F33}
-.w-zumdeck.hier{background:var(--kuli-hi);border-color:var(--kuli)}
-.deck-start{gap:.6rem;flex-wrap:wrap}
-.w-erinn{margin:0 0 1.3rem;padding:.7rem 1rem .4rem;border-left:4px solid var(--green);background:var(--green-hi);border-radius:0 var(--r-lg) var(--r-lg) 0;max-width:62rem}
-.w-erinn .kennung{margin:0 0 .3rem;color:var(--green)}
-.w-erinn .w-abruf{margin:0}
-.w-blickzu{margin:1.6rem 0 0;padding:.7rem 1rem;border:1.5px dashed var(--gold);border-radius:var(--r-lg);color:var(--muted);max-width:62rem}
-.w-weiter{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:space-between;margin:0 0 1rem;padding:.6rem .7rem .6rem 1rem;background:var(--kuli-hi);border:1.5px solid var(--kuli);border-radius:var(--r-lg)}
-.w-weiter .btn{min-height:48px}
-.w-ebene{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:.1rem 0 .7rem;font-size:.92rem}
-.w-ebene span{margin-right:.3rem;color:var(--muted)}
-.w-ebene b{padding:.15rem .7rem;border-radius:999px;border:1.5px solid var(--line);color:var(--faint);font-weight:600}
-.w-ebene b.an{color:#fff;border-color:transparent}
-.w-ebene b.an.welt{background:#1E4FB5}.w-ebene b.an.europa{background:#7D5C12}.w-ebene b.an.de{background:#24221F}
 /* ===== Kapitelübersicht Weimar ===== */
 main.breit{max-width:74rem}
 .h-kopf{background:#211D12;color:#F4F1EA;border-radius:var(--r-lg);padding:clamp(1.4rem,3vw,2.4rem) clamp(1.2rem,3vw,2.4rem) 1.4rem;border-top:8px solid #E0B74A;background-image:linear-gradient(120deg,#211D12 55%,#3A2F14)}
@@ -1219,7 +1221,7 @@ function register(immer){
   const sl = r.scrollLeft, st = r.scrollTop;
   r.innerHTML = `<p class="ab-regtitel">Dieses Blatt · ${L.dauer || 90} Minuten</p><ol>${L.blatt.map(a => { const hier = a.id === S.seite;
     const [wort, kl] = hier ? ["du bist hier","hier"] : erledigt(a.id) ? ["fertig","fertig"] : offen(a.id) ? ["offen","offen"] : a.frei === "ansage" ? ["öffnet auf Ansage","ansage"] : ["öffnet nach deiner Antwort","antwort"];
-    return `<li><button type="button" data-geh="${a.id}" class="${kl}"${hier ? ' aria-current="step"' : ""} aria-label="Auftrag ${a.nr}: ${esc(a.kurz)}, ${esc(a.form)}, ${a.min} Minuten, ${wort}"><span class="ab-nr" aria-hidden="true">${a.nr}</span><span><b>${esc(a.kurz)}</b><small>${esc(a.form)} · ${a.min} Min.</small><span class="ab-st">${wort}</span></span></button></li>`; }).join("")}</ol>`;
+    return `<li><button type="button" data-geh="${a.id}" class="${kl}"${hier ? ' aria-current="step"' : ""} aria-label="Auftrag ${a.nr}: ${esc(a.kurz)}, ${esc(a.form)}, ${a.min} Minuten, ${wort}"><span class="ab-nr" aria-hidden="true">${a.nr}</span><span><b>${esc(a.kurz)}</b><small>${a.form ? esc(a.form) + " · " : ""}${a.min} Min.</small><span class="ab-st">${wort}</span></span></button></li>`; }).join("")}</ol>`;
   if (QUER() && !SCHMAL()) r.insertAdjacentHTML("beforeend", loeschBereich());
   r.scrollLeft = sl; r.scrollTop = st;
 }
@@ -1239,7 +1241,7 @@ function blatt(a){
   try { html = zu ? zuSeite(a) : String(SEITE_FN[a.id]()).replace(/^\s*(<p class="zeit">[\s\S]*?<\/p>)?\s*<h1[^>]*>[\s\S]*?<\/h1>/, ""); } finally { BLATT_AN = false; }
   const davor = ai > 0 ? L.blatt[ai - 1] : null, danach = ai < L.blatt.length - 1 ? L.blatt[ai + 1] : null;
   return `<h1 class="ab-h"><span class="ab-nr" aria-hidden="true">${a.nr}</span><span>${esc(a.kopf || "Arbeitsauftrag " + a.nr)}: ${esc(a.name)}</span></h1>
-  <p class="ab-meta">${esc(a.form)} · ${a.min} Minuten${a.marke ? `<span class="ab-marke">${esc(a.marke)}</span>` : ""}</p>
+  <p class="ab-meta">${a.form ? esc(a.form) + " · " : ""}${a.min} Minuten${a.marke ? `<span class="ab-marke">${esc(a.marke)}</span>` : ""}</p>
   <section class="ab-teil">${html}</section>
   <div class="ab-fuss nodruck"><button type="button" class="btn" data-geh="${davor ? davor.id : "start"}">‹ ${davor ? esc(davor.nr + " " + davor.kurz) : "Deckblatt"}</button><span></span>
   ${danach ? `<button type="button" class="btn primary" data-geh="${danach.id}"${zu ? "" : ` data-durch="${a.id}"`}>${esc(danach.nr + " " + danach.kurz)} ›</button>` : `<a class="btn primary" href="${LABOR}">Zur Übersicht</a>`}</div>`;
@@ -1409,6 +1411,81 @@ AKTION.abrufauf = t => { setz(`${t.dataset.p}.auf.${t.dataset.w}`, true); zeichn
 window.addEventListener("afterprint", () => document.body.classList.remove("druck-sb"));
 let BREIT_ALT = null;
 window.addEventListener("resize", () => { if (!BLATT()) return; const q = QUER(); if (q !== BREIT_ALT) { BREIT_ALT = q; const a = document.activeElement; if (!a || !/^(TEXTAREA|INPUT|SELECT)$/.test(a.tagName)) zeichneBehalte(); } });
+
+/* ===== Gemeinsam für alle Arbeitsblätter (am 18.11.2026 aus dem Kapitel Weimar hierher gezogen; gilt auch für NS und Ost-West) ===== */
+/* ---------- Selbsttests sind freiwillig: überspringen sperrt nichts (»Freiwillig heißt freiwillig«) ---------- */
+const skipZeile = (pfad, n) => { const st = hol(pfad) || {}; let alle = true; for (let i = 0; i < n; i++) if (st[i] == null) alle = false; if (alle && !st.skip) return "";
+  return `<p class="w-skip nodruck"><button type="button" class="w-skipk" data-akt="skip" data-p="${pfad}" aria-pressed="${!!st.skip}">${st.skip ? "Übersprungen – doch bearbeiten" : "Selbsttest überspringen"}</button><span class="hinweis">${st.skip ? "Du kannst ihn jederzeit nachholen." : "Der Selbsttest ist freiwillig. Er sperrt nichts."}</span></p>`; };
+AKTION.skip = t => { setz(t.dataset.p + ".skip", !(hol(t.dataset.p) || {}).skip); zeichneBehalte(); };
+
+/* ---------- Leitfrage als Linie: festlegen vor dem ersten Material, zurückkehren am Ende (»Wer hat sich bewegt?«)
+   L.pole = { frage?, links, rechts } · Stand: S.lf = { vor, nach } · steht automatisch vor Auftrag 1 und beim Satz für den roten Faden ---------- */
+const leitVor = () => !L.pole ? "" : `<div class="w-leit vor"><p class="kennung">Leg dich fest – noch ohne Material · 1 Minute</p>${skala("lf.vor", esc(L.pole.frage || L.frage), 5, "1 = " + L.pole.links, "5 = " + L.pole.rechts)}<p class="hinweis">Hier gibt es kein Richtig oder Falsch. Am Ende der Stunde kommst du auf diese Linie zurück.</p></div>`;
+const leitBeweg = () => { const lf = S.lf || {}, v = lf.vor, n = lf.nach;
+  return n == null ? (v == null ? "Am Anfang hast du dich noch nicht festgelegt." : `Am Anfang standest du bei ${v} von 5.`) : v == null ? `Jetzt stehst du bei ${n} von 5.` : v === n ? `Am Anfang ${v}, jetzt ${n} von 5: Du bist bei deiner Einschätzung geblieben. Welcher Beleg aus der Stunde stützt sie am stärksten?` : `Am Anfang ${v}, jetzt ${n} von 5: Du hast dich bewegt. Was hat dich bewegt? Halte es in deiner Begründung fest.`; };
+/* Steht die Rückkehr schon in einem eigenen Auftrag der Stunde (L.pole.eigen), entfällt sie beim roten Faden. */
+const leitNach = () => { if (!L.pole || L.pole.eigen) return "";
+  return `<div class="w-leit nach nodruck"><p class="kennung">Zurück zur Leitfrage · 1 Minute</p>${skala("lf.nach", "Wo stehst du jetzt? " + esc(L.pole.frage || L.frage), 5, "1 = " + L.pole.links, "5 = " + L.pole.rechts)}<p class="w-beweg" aria-live="polite">${leitBeweg()}</p></div>`; };
+
+/* ---------- Erst erinnern (P2): zwei Fragen zu früheren Stunden, ohne Heft; aufdecken nach der eigenen Antwort ---------- */
+const erinnere = (fragen, pfad = "ab") => `<div class="w-erinn"><p class="kennung">Erst erinnern · ohne Heft · ${fragen.length > 1 ? "2 Minuten" : "1 Minute"}</p>${abrufen(pfad, fragen)}</div>`;
+
+/* ---------- Der Blick dieser Stunde: Der Zugang wird als Form von Geschichte offengelegt – erst selbst überlegen, was er ausblendet, dann vergleichen.
+   L.blick = { name, anker (Abschnitt der Landkarte, z. B. "2-3-8"), tut, fehlt } ---------- */
+const blickKarte = () => { const b = L.blick; if (!b) return "";
+  /* Der Blick wird erst nach der Landkarten-Aufgabe benannt: Sonst nähme die Karte die Antwort vorweg (erst die Sache, dann der Begriff). */
+  if (!S.lk.ok && !String(S.blickfehlt || "").trim()) return `<p class="w-blickzu">Der Blick dieser Stunde · öffnet sich, wenn du die Landkarten-Aufgabe geprüft hast.</p>`;
+  return `<section class="w-blickk"><p class="kennung">Der Blick dieser Stunde · 1 Minute</p><h3>So haben wir heute auf Geschichte geschaut: ${esc(b.name)}</h3><p>${esc(b.tut)}${b.anker ? ` <a href="${LK}${b.anker}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a>` : ""}</p>
+  ${textfeld("blickfehlt", "Was blendet dieser Blick aus? Ein Satz.", { rows:2, zaehl:false, platz:"Nicht in den Blick kommt …" })}
+  ${vergleich("blickv", ["blickfehlt"], 10, "Mit einem Vorschlag vergleichen", `<p>${esc(b.fehlt)}</p><p class="hinweis">Jeder Blick zeigt etwas und lässt etwas weg. Deshalb wechselt der Blick von Stunde zu Stunde.</p>`)}</section>`; };
+
+/* ---------- Belastendes Bild: erst der Hinweis, dann der eigene Tipp (Sorgfaltsregel). Fehlt die Datei (öffentliche Fassung), verschwindet der ganze Kasten. Stand: S[pfad] ---------- */
+function bildNachTipp(pfad, b, hinweis){
+  return hol(pfad) ? `${bild(b)}<p class="nodruck"><button type="button" class="w-skipk" data-akt="setz" data-p="${pfad}" data-w="false">Foto wieder verbergen</button></p>`
+    : `<div class="w-bildzu"><img src="${b.pfad || "media/"}${b.datei}" alt="" hidden onerror="this.closest('.w-bildzu').remove()"><p><b>Hier liegt ein Foto, das belasten kann.</b> ${esc(hinweis)}</p><div class="reihe"><button type="button" class="btn" data-akt="setz" data-p="${pfad}" data-w="true">Foto ansehen</button><span class="hinweis">Du musst es nicht ansehen. Die Aufgabe lässt sich auch ohne das Foto lösen.</span></div></div>`;
+}
+
+/* ---------- Eine Adresse, eine Seite: Jeder Auftrag hat seinen Anker; das Deckblatt bleibt über das Register erreichbar ---------- */
+const geh0 = geh;
+geh = function(id){ if (BLATT() && AUF(id)) S.zuletzt = id; geh0(id); wAdresse(); };
+const wAdresse = () => { try { const z = S.seite === "start" ? "" : "#" + S.seite; if (location.hash !== z) history.replaceState(null, "", z || (location.pathname + location.search)); } catch(e) {} };
+window.addEventListener("hashchange", () => { if (!S) return; const h = location.hash.replace("#", ""), z = h && SEITE_FN[h] ? h : "start"; if (z !== S.seite && (SEITE_FN[h] || !h)) geh0(z); });
+const register0 = register;
+register = function(immer){ register0(immer); const r = document.getElementById("reg"); if (!r || !BLATT()) return; const t = r.querySelector(".ab-regtitel");
+  if (t && !r.querySelector(".w-zumdeck")) t.insertAdjacentHTML("afterend", `<button type="button" class="w-zumdeck${S.seite === "start" ? " hier" : ""}" data-geh="start"${S.seite === "start" ? ' aria-current="page"' : ""}>Deckblatt<small>Leitfrage und Ablauf</small></button>`); };
+
+/* ---------- Blatt aus Phasen: Stunden, die noch als Folge von Phasen gebaut sind (L.seiten), bekommen den Blatt-Rahmen ohne Umbau der Seiten.
+   L.blattAuto = true · L.blattPlus = { id:{ form, frei, nach, fehlt, kurz, name, min } } · Der Schreibauftrag (L.schreib) steht vor der letzten Seite (Zusammenfassung oder Merkseite). ---------- */
+function blattAusSeiten(){
+  const plus = L.blattPlus || {}, b = []; let n = 0;
+  const min = x => { const m = String(x || "").match(/(\d+)\s*[–-]\s*(\d+)/); if (m) return +m[2] - +m[1]; const e = String(x || "").match(/(\d+)/); return e ? +e[1] : 3; };
+  const seiten = L.seiten.filter(s => s[0] !== "start" && SEITE_FN[s[0]]), letzte = seiten.length ? seiten[seiten.length - 1][0] : "";
+  seiten.forEach(s => { const id = s[0], z = id === letzte, lk = id === "landkarte";
+    if (z && L.schreib) b.push({ id:"schreiben", nr:String(++n), kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein · auch als Hausaufgabe", min:L.schreib.zeit || 15, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:L.schreib.gleich || "Du schreibst einen Text, wie er in der Klassenarbeit verlangt wird." });
+    b.push(Object.assign({ id, nr:z ? "Z" : lk ? "L" : String(++n), kurz:s[2], name:s[2], form:"", min:min(s[1]), frei:"offen" }, z ? { kopf:"Zum Abheften" } : {}, plus[id] || {})); });
+  L.blatt = b; L.erledigt = Object.assign({ landkarte:() => !!S.lk.ok, schreiben:() => schreibFertig() }, L.erledigt || {});
+}
+const weiterLeiste = () => { const zl = S.zuletzt && AUF(S.zuletzt) && S.zuletzt !== L.blatt[0].id ? AUF(S.zuletzt) : null;
+  return zl ? `<p class="w-weiter nodruck"><span>Zuletzt warst du bei Auftrag ${zl.nr}: <b>${esc(zl.kurz)}</b>.</span><button type="button" class="btn primary" data-geh="${zl.id}">Weitermachen ›</button></p>` : ""; };
+
+/* ---------- Start: Was jedes Arbeitsblatt braucht, hängt hier am Kern (Linie zur Leitfrage, Blick der Stunde, Adresse und Anker) ---------- */
+const kernStart0 = kernStart;
+kernStart = function(){
+  if (L.blattAuto && !Array.isArray(L.blatt)) blattAusSeiten();
+  if (BLATT()) {
+    L.seiten = [["start","",""]].concat(L.blatt.map(a => [a.id, a.min + " Min.", a.kurz]));
+    const init0 = L.init; L.init = () => Object.assign({ lf:{ vor:null, nach:null }, blickfehlt:"", zuletzt:"" }, init0 ? init0() : {});
+    if (L.schreib && !SEITE_FN.schreiben) SEITE_FN.schreiben = schreibauftrag;
+    if (L.pole) { const id0 = L.blatt[0].id, f0 = SEITE_FN[id0]; SEITE_FN[id0] = () => leitVor() + f0();
+      if (L.zf && !L.pole.eigen) (L.zf.mein = L.zf.mein || []).push(["Die Leitfrage – am Anfang und am Ende", () => { const lf = S.lf || {}; return lf.vor == null && lf.nach == null ? "" : `Am Anfang: ${lf.vor == null ? "offen" : lf.vor + " von 5"} · am Ende: ${lf.nach == null ? "offen" : lf.nach + " von 5"} (1 = ${L.pole.links} · 5 = ${L.pole.rechts})`; }]);
+      if (L.blattAuto && !L.pole.eigen) { const zid = L.blatt[L.blatt.length - 1].id, z0 = SEITE_FN[zid]; SEITE_FN[zid] = () => leitNach() + z0(); } }
+    if (L.blick && SEITE_FN.landkarte) { const f1 = SEITE_FN.landkarte; SEITE_FN.landkarte = () => f1() + blickKarte(); }
+    if (L.blattAuto) { const s0 = SEITE_FN.start; SEITE_FN.start = () => weiterLeiste() + s0(); }
+  }
+  kernStart0();
+  /* Eine Adresse zeigt immer dieselbe Seite: ohne Anker das Deckblatt, mit Anker den Auftrag. Der gemerkte Platz bleibt als »Weitermachen« erhalten. */
+  if (BLATT()) { const h = location.hash.replace("#", ""); if (AUF(S.seite)) S.zuletzt = S.seite; if (!(h && SEITE_FN[h]) && S.seite !== "start") { S.seite = "start"; zeichne(false); } }
+};
 /* ===== Lehrkraft-Schloss · Quelle: src/lk-schloss.js – nur dort ändern =====
    Der Text für Lehrkräfte steht verschlüsselt auf dieser Seite (Datenblock mit der id lehr-daten): AES-GCM 256,
    Schlüssel per PBKDF2-SHA-256 (600 000 Runden) aus dem Passwort. Weder Passwort noch Klartext stehen im Repository.
@@ -1588,19 +1665,11 @@ const balken = (titel, werte, nachweis) => { const max = Math.max.apply(null, we
   return `<figure class="w-balken"><figcaption><b>${esc(titel)}</b></figcaption><div class="w-bz" role="list">${werte.map(w => `<div class="w-bzeile" role="listitem"><span class="w-bn">${esc(w[0])}</span><span class="w-bb"><span style="width:${(w[1] / max * 100).toFixed(1)}%;background:${w[2] || "var(--ink)"}"></span></span><span class="w-bw">${String(w[1]).replace(".", ",")} %</span></div>`).join("")}</div><p class="quelle">${nachweis}</p></figure>`; };
 
 function weimarStart(){
-  L.kapitel = L.kapitel || "Weimarer Republik"; L.seiten = [["start","",""]].concat(L.blatt.map(a => [a.id, a.min + " Min.", a.kurz]));
-  const init0 = L.init; L.init = () => Object.assign({ faden:(wLade().faden[L.wid] || ""), kg:(wLade().kg[L.wid] || ""), lf:{ vor:null, nach:null }, blickfehlt:"", linie:null, liniegrund:"", zuletzt:"" }, init0 ? init0() : {});
+  L.kapitel = L.kapitel || "Weimarer Republik";
+  const init0 = L.init; L.init = () => Object.assign({ faden:(wLade().faden[L.wid] || ""), kg:(wLade().kg[L.wid] || ""), linie:null, liniegrund:"" }, init0 ? init0() : {});
   const ne0 = L.nachEingabe; L.nachEingabe = p => { if (p === "faden") wSchreib(u => { u.faden[L.wid] = S.faden; }); if (p === "kg") wSchreib(u => { u.kg[L.wid] = S.kg; }); if (ne0) ne0(p); };
   const ni0 = L.nachInit; L.nachInit = () => { zkInit(); if (ni0) ni0(); };
-  /* Leitfrage als Linie: vor dem ersten Auftrag festlegen, am Ende zurückkehren (L.pole) · Blick der Stunde an der Landkarte offenlegen (L.blick) */
-  if (L.pole) { const id0 = L.blatt[0].id, f0 = SEITE_FN[id0]; SEITE_FN[id0] = () => leitVor() + f0();
-    if (L.zf && !L.pole.eigen) (L.zf.mein = L.zf.mein || []).push(["Die Leitfrage – am Anfang und am Ende", () => { const lf = S.lf || {}; return lf.vor == null && lf.nach == null ? "" : `Am Anfang: ${lf.vor == null ? "offen" : lf.vor + " von 5"} · am Ende: ${lf.nach == null ? "offen" : lf.nach + " von 5"} (1 = ${L.pole.links} · 5 = ${L.pole.rechts})`; }]); }
-  if (L.blick && SEITE_FN.landkarte) { const f1 = SEITE_FN.landkarte; SEITE_FN.landkarte = () => f1() + blickKarte(); }
-  kernStart();
-  /* Eine Adresse zeigt immer dieselbe Seite: ohne Anker das Deckblatt, mit Anker den Auftrag. Der gemerkte Platz bleibt als »Weitermachen« erhalten. */
-  const h = location.hash.replace("#", "");
-  if (AUF(S.seite)) S.zuletzt = S.seite;
-  if (!(h && SEITE_FN[h]) && S.seite !== "start") { S.seite = "start"; zeichne(false); }
+  kernStart();   /* Linie zur Leitfrage, Blick der Stunde, Adresse und Anker: gemeinsam für alle Arbeitsblätter in blatt.js */
 }
 /* Kopf: Rückweg zur Übersicht und zum Kapitel */
 const kopf0 = kopf;
@@ -1729,32 +1798,6 @@ AKTION.zkleer = t => { setz(t.dataset.p, []); zeichneBehalte(); };
 window.addEventListener("resize", () => document.querySelectorAll("canvas[data-zkc]").forEach(zkMale));
 
 /* ===== Nachgerüstet am 18.11.2026 (Fachdidaktik Geschichte v1, Lernseite bauen v3.0) ===== */
-/* ---------- Selbsttests sind freiwillig: überspringen sperrt nichts (»Freiwillig heißt freiwillig«) ---------- */
-const skipZeile = (pfad, n) => { const st = hol(pfad) || {}; let alle = true; for (let i = 0; i < n; i++) if (st[i] == null) alle = false; if (alle && !st.skip) return "";
-  return `<p class="w-skip nodruck"><button type="button" class="w-skipk" data-akt="skip" data-p="${pfad}" aria-pressed="${!!st.skip}">${st.skip ? "Übersprungen – doch bearbeiten" : "Selbsttest überspringen"}</button><span class="hinweis">${st.skip ? "Du kannst ihn jederzeit nachholen." : "Der Selbsttest ist freiwillig. Er sperrt nichts."}</span></p>`; };
-AKTION.skip = t => { setz(t.dataset.p + ".skip", !(hol(t.dataset.p) || {}).skip); zeichneBehalte(); };
-
-/* ---------- Leitfrage als Linie: festlegen vor dem ersten Material, zurückkehren am Ende (»Wer hat sich bewegt?«)
-   L.pole = { frage?, links, rechts } · Stand: S.lf = { vor, nach } · steht automatisch vor Auftrag 1 und beim Satz für den roten Faden ---------- */
-const leitVor = () => !L.pole ? "" : `<div class="w-leit vor"><p class="kennung">Leg dich fest – noch ohne Material · 1 Minute</p>${skala("lf.vor", esc(L.pole.frage || L.frage), 5, "1 = " + L.pole.links, "5 = " + L.pole.rechts)}<p class="hinweis">Hier gibt es kein Richtig oder Falsch. Am Ende der Stunde kommst du auf diese Linie zurück.</p></div>`;
-const leitBeweg = () => { const lf = S.lf || {}, v = lf.vor, n = lf.nach;
-  return n == null ? (v == null ? "Am Anfang hast du dich noch nicht festgelegt." : `Am Anfang standest du bei ${v} von 5.`) : v == null ? `Jetzt stehst du bei ${n} von 5.` : v === n ? `Am Anfang ${v}, jetzt ${n} von 5: Du bist bei deiner Einschätzung geblieben. Welcher Beleg aus der Stunde stützt sie am stärksten?` : `Am Anfang ${v}, jetzt ${n} von 5: Du hast dich bewegt. Was hat dich bewegt? Halte es in deiner Begründung fest.`; };
-/* Steht die Rückkehr schon in einem eigenen Auftrag der Stunde (L.pole.eigen), entfällt sie beim roten Faden. */
-const leitNach = () => { if (!L.pole || L.pole.eigen) return "";
-  return `<div class="w-leit nach nodruck"><p class="kennung">Zurück zur Leitfrage · 1 Minute</p>${skala("lf.nach", "Wo stehst du jetzt? " + esc(L.pole.frage || L.frage), 5, "1 = " + L.pole.links, "5 = " + L.pole.rechts)}<p class="w-beweg" aria-live="polite">${leitBeweg()}</p></div>`; };
-
-/* ---------- Erst erinnern (P2): zwei Fragen zu früheren Stunden, ohne Heft; aufdecken nach der eigenen Antwort ---------- */
-const erinnere = (fragen, pfad = "ab") => `<div class="w-erinn"><p class="kennung">Erst erinnern · ohne Heft · ${fragen.length > 1 ? "2 Minuten" : "1 Minute"}</p>${abrufen(pfad, fragen)}</div>`;
-
-/* ---------- Der Blick dieser Stunde: Der Zugang wird als Form von Geschichte offengelegt – erst selbst überlegen, was er ausblendet, dann vergleichen.
-   L.blick = { name, anker (Abschnitt der Landkarte, z. B. "2-3-8"), tut, fehlt } ---------- */
-const blickKarte = () => { const b = L.blick; if (!b) return "";
-  /* Der Blick wird erst nach der Landkarten-Aufgabe benannt: Sonst nähme die Karte die Antwort vorweg (erst die Sache, dann der Begriff). */
-  if (!S.lk.ok && !String(S.blickfehlt || "").trim()) return `<p class="w-blickzu">Der Blick dieser Stunde · öffnet sich, wenn du die Landkarten-Aufgabe geprüft hast.</p>`;
-  return `<section class="w-blickk"><p class="kennung">Der Blick dieser Stunde · 1 Minute</p><h3>So haben wir heute auf Geschichte geschaut: ${esc(b.name)}</h3><p>${esc(b.tut)}${b.anker ? ` <a href="${LK}${b.anker}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a>` : ""}</p>
-  ${textfeld("blickfehlt", "Was blendet dieser Blick aus? Ein Satz.", { rows:2, zaehl:false, platz:"Nicht in den Blick kommt …" })}
-  ${vergleich("blickv", ["blickfehlt"], 10, "Mit einem Vorschlag vergleichen", `<p>${esc(b.fehlt)}</p><p class="hinweis">Jeder Blick zeigt etwas und lässt etwas weg. Deshalb wechselt der Blick von Stunde zu Stunde.</p>`)}</section>`; };
-
 /* ---------- Linie des Kurses »Umwelt oder Ich?« (Vorschlag vom 18.11.2026 – abschaltbar: L.linie in der Stunde weglassen).
    Die Linie beginnt mit der These aus M13 und kehrt mit derselben Skala wieder. L.linie = { fall, frage, anf } · Stand: S.linie, im Speicher der Einheit linie[wid] ---------- */
 const linieFeld = () => { const c = L.linie; if (!c) return ""; const u = wLade().linie || {}, alt = W_MODULE.filter(m => u[m[0]] != null && m[0] !== L.wid);
@@ -1771,15 +1814,6 @@ const W_LK = { m01:[["3-1-2","Public History"]], m02:[["2-3-8","Ereignisgeschich
   m06:[["1-3","Verständnis der Gegenwart"]], m07:[["2-3-2","Nationalgeschichte"]], m071:[["2-1-9","Kontroversität"],["2-1-8","Standortgebundenheit"]], m08:[["3-1-1","Kollektives Gedächtnis"]],
   m09:[["2-1-1","Retrospektivität"]], m10:[["2-1-6","Narrativität"],["2-1-1","Retrospektivität"]], m11:[["1-2","Anthropologische Konstanten"],["1-4","Lernen aus der Vergangenheit"]],
   m12:[["2-1-2","Perspektivität"],["2-1-4","Selektivität"]], m13:[["3-1-5","Agency"]], m14:[["2-1-5","Partialität"],["2-1-3","Partikularität"]], m142:[["1-8","Demokratisches Bewusstsein"]] };
-
-/* ---------- Eine Adresse, eine Seite: Jeder Auftrag hat seinen Anker; das Deckblatt bleibt über das Register erreichbar ---------- */
-const geh0 = geh;
-geh = function(id){ if (BLATT() && AUF(id)) S.zuletzt = id; geh0(id); wAdresse(); };
-const wAdresse = () => { try { const z = S.seite === "start" ? "" : "#" + S.seite; if (location.hash !== z) history.replaceState(null, "", z || (location.pathname + location.search)); } catch(e) {} };
-window.addEventListener("hashchange", () => { if (!S) return; const h = location.hash.replace("#", ""), z = h && SEITE_FN[h] ? h : "start"; if (z !== S.seite && (SEITE_FN[h] || !h)) geh0(z); });
-const register0 = register;
-register = function(immer){ register0(immer); const r = document.getElementById("reg"); if (!r || !BLATT()) return; const t = r.querySelector(".ab-regtitel");
-  if (t && !r.querySelector(".w-zumdeck")) t.insertAdjacentHTML("afterend", `<button type="button" class="w-zumdeck${S.seite === "start" ? " hier" : ""}" data-geh="start"${S.seite === "start" ? ' aria-current="page"' : ""}>Deckblatt<small>Leitfrage und Ablauf</small></button>`); };
 /* ===== Kapitelübersicht »Weimarer Republik« (weimar/index.html): vier Abschnitte mit Leitfragen, alle Stunden, roter Faden, das wachsende Blatt »Kollektives Gedächtnis« ===== */
 const L = {
   key:"ggk-w-hub:v1", hub:true, nr:"Kapitel 1", titel:"Weimarer Republik", unter:"Vom Ersten Weltkrieg bis zum Ende der ersten deutschen Demokratie · 1914–1933",

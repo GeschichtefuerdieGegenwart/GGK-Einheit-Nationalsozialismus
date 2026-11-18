@@ -24,12 +24,14 @@ def vorhanden():
     return ['hub'] + gebaut()
 def bau(k):
     datei, titel, desc, extra, texte = ST[k]
-    css = (K/'basis.css').read_text('utf-8').replace('url(assets/', 'url(../assets/') + (K/'kern.css').read_text('utf-8') + (H/'owk.css').read_text('utf-8') + ((H/f'{k}.css').read_text('utf-8') if (H/f'{k}.css').exists() else '')
-    teile = [K/'kern.js', REPO/'src'/'lk-schloss.js', H/'karten.js'] + ([H/'glossar.js', H/'einheit.js'] if k == 'hub' else [H/'einheit.js', H/'quellen.js', H/'stunde.js']) + [H/e for e in extra] + [H/f'{k}.js']
+    css = (K/'basis.css').read_text('utf-8').replace('url(assets/', 'url(../assets/') + (K/'kern.css').read_text('utf-8') + (K/'blatt.css').read_text('utf-8') + (H/'owk.css').read_text('utf-8') + ((H/f'{k}.css').read_text('utf-8') if (H/f'{k}.css').exists() else '')
+    teile = [K/'kern.js', K/'blatt.js', REPO/'src'/'lk-schloss.js', H/'karten.js'] + ([H/'glossar.js', H/'einheit.js'] if k == 'hub' else [H/'einheit.js', H/'quellen.js', H/'stunde.js']) + [H/e for e in extra] + [H/f'{k}.js']
     js = 'window.OWK_GEBAUT = ' + json.dumps(gebaut()) + ';\n' + ''.join(t.read_text('utf-8') for t in teile)
     assert '</script' not in js
     lehr = (REPO/'lk'/f'ow-{k}.enc.json').read_text('utf-8').strip()
     tx = ''.join(f'\n<script src="texte/{t}"></script>' for t in texte)
+    # Stunden stehen im Blatt-Rahmen (Register links); die Übersicht behält ihre Leiste
+    rumpf = '<header class="kopf"><div class="kopf-in" id="kopf"></div><nav class="weg" id="weg" aria-label="Lernweg"></nav></header>\n<main id="main" tabindex="-1"></main>' if k == 'hub' else '<header class="kopf"><div class="kopf-in" id="kopf"></div></header>\n<div class="ab-rahmen"><aside class="ab-reg" id="reg" aria-label="Aufträge dieses Blatts"></aside><main id="main" tabindex="-1"></main></div>'
     html = f'''<!doctype html>
 <html lang="de">
 <head>
@@ -43,8 +45,7 @@ def bau(k):
 {css}</style>
 </head>
 <body>
-<header class="kopf"><div class="kopf-in" id="kopf"></div><nav class="weg" id="weg" aria-label="Lernweg"></nav></header>
-<main id="main" tabindex="-1"></main>
+{rumpf}
 <div id="ueber"></div>
 <noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft „Geschichte aktuell 1“ (M28–M44).</p></noscript>
 <script type="application/json" id="lehr-daten">{lehr}</script>

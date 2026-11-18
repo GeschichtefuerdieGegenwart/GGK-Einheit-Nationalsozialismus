@@ -1,5 +1,6 @@
 /* ===== M16 · Was macht den Menschen zum Menschen? (Heft „Geschichte aktuell 1“, M16) ===== */
 const L = {
+  blattAuto:true, kapitel:"Nationalsozialismus", dauer:45,   /* Blatt-Rahmen: Register links, ein Auftrag je Seite (blatt.js) */
   key:"ggk-m16-mensch:v1", nr:"M16", titel:"Was macht den Menschen zum Menschen?", unter:"Einstieg in die Einheit Nationalsozialismus",
   /* Zeichen der Stunde: zwei Kreise, die sich überschneiden (ich und die anderen) */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><circle cx="13" cy="17" r="9" fill="none" stroke="#24221F" stroke-width="2.4"/><circle cx="21" cy="17" r="9" fill="none" stroke="#9B402D" stroke-width="2.4"/></svg>`,

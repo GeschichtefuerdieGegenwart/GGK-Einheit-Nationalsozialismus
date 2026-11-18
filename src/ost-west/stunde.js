@@ -81,8 +81,9 @@ AKTION.rraus = t => { const r = S.reihe[t.dataset.id]; r.folge = r.folge.filter(
 AKTION.rpruef = t => { S.reihe[t.dataset.id].gepr = true; speichere(); zeichneBehalte(); };
 AKTION.rneu = t => { S.reihe[t.dataset.id] = { folge:[], gepr:false }; speichere(); zeichneBehalte(); };
 /* Tabelle mit eigenen Einträgen: zeilen = [[schlüssel, Titel]], pfad = Ort in S */
-const tabelle = (pfad, kopf, zeilen) => `<div class="matrix-wrap"><table class="tab3"><thead><tr>${kopf.map(k => `<th>${esc(k)}</th>`).join("")}</tr></thead><tbody>${zeilen.map(z => `<tr><th scope="row">${esc(z[1])}</th>${kopf.slice(1).map((k, i) => { const p = pfad + "." + z[0] + (kopf.length > 2 ? "_" + i : ""); return `<td><label class="sr" for="f-${p.replace(/\W/g, "-")}">${esc(z[1])}: ${esc(k)}</label><textarea id="f-${p.replace(/\W/g, "-")}" data-f="${p}" rows="2">${esc(hol(p) || "")}</textarea></td>`; }).join("")}</tr>`).join("")}</tbody></table></div>`;
+const tabelleO = (pfad, kopf, zeilen) => `<div class="matrix-wrap"><table class="tab3"><thead><tr>${kopf.map(k => `<th>${esc(k)}</th>`).join("")}</tr></thead><tbody>${zeilen.map(z => `<tr><th scope="row">${esc(z[1])}</th>${kopf.slice(1).map((k, i) => { const p = pfad + "." + z[0] + (kopf.length > 2 ? "_" + i : ""); return `<td><label class="sr" for="f-${p.replace(/\W/g, "-")}">${esc(z[1])}: ${esc(k)}</label><textarea id="f-${p.replace(/\W/g, "-")}" data-f="${p}" rows="2">${esc(hol(p) || "")}</textarea></td>`; }).join("")}</tr>`).join("")}</tbody></table></div>`;
 function stundeStart(){
+  L.blattAuto = true; L.kapitel = L.kapitel || "Ost-West-Konflikt";   /* Blatt-Rahmen: Register links, ein Auftrag je Seite (blatt.js) */
   const eig = L.nachEingabe;
   L.nachEingabe = p => {
     if (p === "v.faden") owkSchreib(u => { u.faden[L.sid] = S.v.faden; });

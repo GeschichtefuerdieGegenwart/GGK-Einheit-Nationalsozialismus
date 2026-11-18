@@ -26,7 +26,7 @@ function streit(){
   <div class="zweispalt"><div>${lesetext("Die Bundesrepublik bindet sich an den Westen", HEFT.m36_a, "Unterrichtsheft, M36.")}</div>
   <div><div class="qblatt lese"><h3>Die SPD lehnt einen Verteidigungsbeitrag ab</h3><div class="qtext"><p>„${esc(HEFT.m36_spd)}“</p></div><p class="quelle">Erklärung der SPD, nach dem Unterrichtsheft, M36 (dort ohne Nachweis).</p></div>
   ${bildO("owk-s5-protest", "Protest gegen die Wiederbewaffnung der Bundesrepublik.", "Schwarz-Weiß-Foto: Junge Leute auf einem Lastwagen mit Plakaten gegen die Wiederbewaffnung.", "M36")}</div></div>
-  ${tabelle("arg", ["Position", "Kernargument", "Befürchtung"], [["cdu", "CDU/CSU, Adenauer"], ["spd", "SPD, Gewerkschaften, Teile der evangelischen Kirche"]])}
+  ${tabelleO("arg", ["Position", "Kernargument", "Befürchtung"], [["cdu", "CDU/CSU, Adenauer"], ["spd", "SPD, Gewerkschaften, Teile der evangelischen Kirche"]])}
   ${vergleich("arg", ["arg.cdu_0", "arg.spd_0"], 12, "Mit dem Heft vergleichen", `<p><b>CDU/CSU, Adenauer:</b> Integration in die westliche Welt, Politik der Stärke, Wiederbewaffnung, Beitritt zur NATO. Sicherheit gibt es nur an der Seite Westeuropas und der USA; nur so lässt sich die Wiedervereinigung durchsetzen.</p><p><b>SPD, Gewerkschaften:</b> Die enge Anlehnung an den Westen vertieft die Teilung und macht die Wiedervereinigung unmöglich. Kein Beitritt zur NATO.</p>`)}
   ${weiter("schritte", "Weiter: Die Schritte")}`;
 }

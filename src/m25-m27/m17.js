@@ -3,6 +3,7 @@
 const leer = () => ({ s1:{ sehen:"", denkt:"", d14:{ a:false, b:false, c:false }, d14zu:false, nach:"" }, s2:{ pro:"", contra:"", tun:"", nach:"", extra:"" }, s3:{ folgen:"", foto:false, bild:"" }, s4:{ tun:"", nach:"" },
   raum:{ 1:null, 2:null, 3:null, 4:null }, raum2:{ 1:"", 2:"", 3:"", 4:"" }, j39:"", agency:null, agrund:"", tausch:"", zurueck:"" });
 const L = {
+  blattAuto:true, kapitel:"Nationalsozialismus", dauer:90,   /* Blatt-Rahmen: Register links, ein Auftrag je Seite (blatt.js) */
   key:"ggk-m17-leben:v1", nr:"M17", titel:"Mein Leben in der NS-Diktatur I", unter:"Ausgrenzung 1933–1939 aus zwei Blickwinkeln",
   /* Zeichen der Stunde: eine Linie, die sich teilt */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M3 17h10l8-8h10" fill="none" stroke="#24221F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 17l8 8h10" fill="none" stroke="#9B402D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,

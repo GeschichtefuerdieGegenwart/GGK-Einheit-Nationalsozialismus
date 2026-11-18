@@ -1,5 +1,6 @@
 /* ===== M25 · Leben in Ruinen und der Umgang mit Schuld – nach dem Modul zum Kriegsende von Offene Geschichte ===== */
 const L = {
+  blattAuto:true, kapitel:"Nationalsozialismus", dauer:90,   /* Blatt-Rahmen: Register links, ein Auftrag je Seite (blatt.js) */
   key:"ggk-m25-ruinen:v1", nr:"M25", titel:"Leben in Ruinen und der Umgang mit Schuld", unter:"Kriegsende 1945 · nach dem Modul von Offene Geschichte",
   herkunft:`Dieses Modul beruht auf dem Modul zum Kriegsende von <a href="https://offene-geschichte.de/kriegsende-1/" target="_blank" rel="noopener">Offene Geschichte</a> (offenes Unterrichtsmaterial, herausgegeben von der Universität Tübingen). Für das Unterrichtsheft und diese Seite wurde es angepasst.`,
   /* Zeichen der Stunde: ein offenes Tor */

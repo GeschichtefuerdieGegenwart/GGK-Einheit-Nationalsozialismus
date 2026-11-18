@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Baut m16/m17 und m25/m26/m27 als je eine HTML-Datei (CSS und JS eingebettet; Gegenwart-Bundle und Schriften aus assets/)."""
+"""Baut m16/m17 und m25/m26/m27 als je eine HTML-Datei (CSS und JS eingebettet; Gegenwart-Bundle und Schriften aus assets/).
+Seit 18.11.2026 im Blatt-Rahmen: links das Register, rechts ein Auftrag je Seite (blatt.js, blatt.css; L.blattAuto in der Stunde)."""
 import sys, pathlib
 H = pathlib.Path(__file__).resolve().parent.parent / 'src' / 'm25-m27'
 REPO = pathlib.Path(__file__).resolve().parent.parent
@@ -12,8 +13,8 @@ ST = {
 }
 def bau(k):
     datei, titel, desc, extra = ST[k]
-    css = (H/'basis.css').read_text('utf-8') + (H/'kern.css').read_text('utf-8') + ((H/f'{k}.css').read_text('utf-8') if (H/f'{k}.css').exists() else '')
-    js = (H/'kern.js').read_text('utf-8') + (REPO/'src'/'lk-schloss.js').read_text('utf-8') + ''.join((H/e).read_text('utf-8') for e in extra) + (H/f'{k}.js').read_text('utf-8')
+    css = (H/'basis.css').read_text('utf-8') + (H/'kern.css').read_text('utf-8') + (H/'blatt.css').read_text('utf-8') + ((H/f'{k}.css').read_text('utf-8') if (H/f'{k}.css').exists() else '')
+    js = (H/'kern.js').read_text('utf-8') + (H/'blatt.js').read_text('utf-8') + (REPO/'src'/'lk-schloss.js').read_text('utf-8') + ''.join((H/e).read_text('utf-8') for e in extra) + (H/f'{k}.js').read_text('utf-8')
     assert '</script' not in js
     lehr = (REPO/'lk'/f'{k}.enc.json').read_text('utf-8').strip()
     texte = {'m26':'\n<script src="texte/m26-bnd.js"></script>','m27':'\n<script src="texte/m27-artikel.js"></script>'}.get(k,'')
@@ -30,8 +31,8 @@ def bau(k):
 {css}</style>
 </head>
 <body>
-<header class="kopf"><div class="kopf-in" id="kopf"></div><nav class="weg" id="weg" aria-label="Lernweg"></nav></header>
-<main id="main" tabindex="-1"></main>
+<header class="kopf"><div class="kopf-in" id="kopf"></div></header>
+<div class="ab-rahmen"><aside class="ab-reg" id="reg" aria-label="Aufträge dieses Blatts"></aside><main id="main" tabindex="-1"></main></div>
 <div id="ueber"></div>
 <noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft „Geschichte aktuell 1“ ({k.upper()}).</p></noscript>
 <script type="application/json" id="lehr-daten">{lehr}</script>

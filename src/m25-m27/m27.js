@@ -1,5 +1,6 @@
 /* ===== M27 · Die Vergessenen! Eine Globalgeschichte des Zweiten Weltkriegs ===== */
 const L = {
+  blattAuto:true, kapitel:"Nationalsozialismus", dauer:90,   /* Blatt-Rahmen: Register links, ein Auftrag je Seite (blatt.js) */
   key:"ggk-m27-vergessene:v1", nr:"M27", titel:"Die Vergessenen!", unter:"Eine Globalgeschichte des Zweiten Weltkriegs",
   /* Zeichen der Stunde: ein Globus, der auf dem Kopf steht */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="12" fill="none" stroke="#24221F" stroke-width="2.4"/><path d="M5 17h24M17 5c-6 7-6 17 0 24M17 5c6 7 6 17 0 24" fill="none" stroke="#24221F" stroke-width="1.8"/><path d="M12 23l5 6 5-6" fill="none" stroke="#9B402D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
@@ -77,7 +78,7 @@ function start(){
   ${weiter("bild", "Beginnen")}`;
 }
 
-function bild(){
+function bildSeite(){
   const z = S.bildzu, sel = (p) => `<select data-f="${p}" aria-label="Region" ${z ? "disabled" : ""}><option value="">Wo liegt das?</option>${REGIONEN.map(r => `<option value="${r[0]}" ${hol(p) === r[0] ? "selected" : ""}>${esc(r[1])}</option>`).join("")}</select>`;
   return `${zeitKopf("bild")}<h1>Dein Bild vom Krieg</h1>
   ${auftrag("Allein · 4 Minuten · ohne Heft", "Was fällt dir zuerst ein?", "Schreib drei Orte oder Ereignisse des Zweiten Weltkriegs auf – die ersten, die dir einfallen. Wähle zu jedem die Region. Beantworte dann die zwei Fragen und lege fest. Es gibt hier kein Richtig oder Falsch: Du hältst fest, was du im Kopf hast.")}
@@ -276,5 +277,5 @@ AKTION.sbkarte = t => { S.sb.hand = S.sb.hand === t.dataset.k ? null : t.dataset
 AKTION.sbslot = t => { const sb = S.sb, art = t.dataset.art, s = t.dataset.slot; if (sb.hand && sb.hand[0] === art) { sb[art][s] = sb.hand.slice(2); sb.hand = null; } else if (!sb.hand && sb[art][s]) { delete sb[art][s]; } else return; sb.gepr = false; speichere(); zeichneBehalte(); };
 AKTION.sbpruef = (t, ev) => { S.sb.n++; S.sb.gepr = true; speichere(); zeichneBehalte(); if (ev.detail !== 0) neu(document.getElementById("sbauf"), "neu"); };
 AKTION.sbhilfe = () => { S.sb.b = { sk:"sk", v:"v", p:"p", g:"g", d1:"de", d2:"fu", d3:"ha" }; S.sb.hilfe = true; S.sb.gepr = false; S.sb.hand = null; speichere(); zeichneBehalte(); };
-const SEITE_FN = { start, bild, artikel, karte, struktur, landkarte:() => landkarte(LKCFG), schluss, zusammenfassung, lehrkraft };
+const SEITE_FN = { start, bild:bildSeite, artikel, karte, struktur, landkarte:() => landkarte(LKCFG), schluss, zusammenfassung, lehrkraft };
 kernStart();

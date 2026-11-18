@@ -44,7 +44,7 @@ function sbz(){
   return `${zeitKopf("sbz")}<h1>Währenddessen in der sowjetischen Zone</h1>
   ${auftrag("Zu zweit · 20 Minuten", "Fünf Maßnahmen, ein Ziel", "Lest den Text. Tragt zu jeder Maßnahme ein, was geschah. Formuliert dann das Ziel, das alle fünf verbindet.")}
   <div class="lesepult"><div>${lesetext("Die Entwicklung in der sowjetischen Besatzungszone", HEFT.m33, "Unterrichtsheft, M33.")}</div>
-  <aside class="fragenspalte">${tabelle("sbz", ["Maßnahme", "Was geschah?"], SBZ)}
+  <aside class="fragenspalte">${tabelleO("sbz", ["Maßnahme", "Was geschah?"], SBZ)}
   ${textfeld("sbzziel", "Ziel dieser Maßnahmen", { rows:2, zaehl:false })}
   ${vergleich("sbz", ["sbz.zv", "sbz.boden", "sbz.wirt", "sbz.sed", "sbzziel"], 10, "Mit dem Heft vergleichen", `<p><b>Zentralverwaltungen:</b> für Wirtschaft, Justiz, Volksbildung; die Länder verlieren ihre Eigenständigkeit. <b>Bodenreform:</b> Enteignung von Gütern und Großbetrieben ohne Entschädigung, Verteilung an Bauern. <b>Verstaatlichung:</b> Banken, Versicherungen, Fabriken und Bergwerke werden enteignet – es entstehen Volkseigene Betriebe. <b>SED:</b> Vereinigung von KPD und SPD im April 1946, damit die Kommunisten die SPD kontrollieren. <b>Gruppe Ulbricht:</b> Kommunisten, die ab Mai 1945 eine kommunistische Ordnung aufbauen.</p><p><b>Ziel:</b> Durchsetzung einer sozialistischen Gesellschaftsordnung. – Prüft: Welches Wort im Text zeigt, dass das nach außen anders aussehen sollte?</p>`)}</aside></div>
   ${weiter("landkarte", "Weiter: Landkarte")}`;

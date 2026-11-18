@@ -91,19 +91,11 @@ const balken = (titel, werte, nachweis) => { const max = Math.max.apply(null, we
   return `<figure class="w-balken"><figcaption><b>${esc(titel)}</b></figcaption><div class="w-bz" role="list">${werte.map(w => `<div class="w-bzeile" role="listitem"><span class="w-bn">${esc(w[0])}</span><span class="w-bb"><span style="width:${(w[1] / max * 100).toFixed(1)}%;background:${w[2] || "var(--ink)"}"></span></span><span class="w-bw">${String(w[1]).replace(".", ",")} %</span></div>`).join("")}</div><p class="quelle">${nachweis}</p></figure>`; };
 
 function weimarStart(){
-  L.kapitel = L.kapitel || "Weimarer Republik"; L.seiten = [["start","",""]].concat(L.blatt.map(a => [a.id, a.min + " Min.", a.kurz]));
-  const init0 = L.init; L.init = () => Object.assign({ faden:(wLade().faden[L.wid] || ""), kg:(wLade().kg[L.wid] || ""), lf:{ vor:null, nach:null }, blickfehlt:"", linie:null, liniegrund:"", zuletzt:"" }, init0 ? init0() : {});
+  L.kapitel = L.kapitel || "Weimarer Republik";
+  const init0 = L.init; L.init = () => Object.assign({ faden:(wLade().faden[L.wid] || ""), kg:(wLade().kg[L.wid] || ""), linie:null, liniegrund:"" }, init0 ? init0() : {});
   const ne0 = L.nachEingabe; L.nachEingabe = p => { if (p === "faden") wSchreib(u => { u.faden[L.wid] = S.faden; }); if (p === "kg") wSchreib(u => { u.kg[L.wid] = S.kg; }); if (ne0) ne0(p); };
   const ni0 = L.nachInit; L.nachInit = () => { zkInit(); if (ni0) ni0(); };
-  /* Leitfrage als Linie: vor dem ersten Auftrag festlegen, am Ende zurückkehren (L.pole) · Blick der Stunde an der Landkarte offenlegen (L.blick) */
-  if (L.pole) { const id0 = L.blatt[0].id, f0 = SEITE_FN[id0]; SEITE_FN[id0] = () => leitVor() + f0();
-    if (L.zf && !L.pole.eigen) (L.zf.mein = L.zf.mein || []).push(["Die Leitfrage – am Anfang und am Ende", () => { const lf = S.lf || {}; return lf.vor == null && lf.nach == null ? "" : `Am Anfang: ${lf.vor == null ? "offen" : lf.vor + " von 5"} · am Ende: ${lf.nach == null ? "offen" : lf.nach + " von 5"} (1 = ${L.pole.links} · 5 = ${L.pole.rechts})`; }]); }
-  if (L.blick && SEITE_FN.landkarte) { const f1 = SEITE_FN.landkarte; SEITE_FN.landkarte = () => f1() + blickKarte(); }
-  kernStart();
-  /* Eine Adresse zeigt immer dieselbe Seite: ohne Anker das Deckblatt, mit Anker den Auftrag. Der gemerkte Platz bleibt als »Weitermachen« erhalten. */
-  const h = location.hash.replace("#", "");
-  if (AUF(S.seite)) S.zuletzt = S.seite;
-  if (!(h && SEITE_FN[h]) && S.seite !== "start") { S.seite = "start"; zeichne(false); }
+  kernStart();   /* Linie zur Leitfrage, Blick der Stunde, Adresse und Anker: gemeinsam für alle Arbeitsblätter in blatt.js */
 }
 /* Kopf: Rückweg zur Übersicht und zum Kapitel */
 const kopf0 = kopf;
@@ -232,32 +224,6 @@ AKTION.zkleer = t => { setz(t.dataset.p, []); zeichneBehalte(); };
 window.addEventListener("resize", () => document.querySelectorAll("canvas[data-zkc]").forEach(zkMale));
 
 /* ===== Nachgerüstet am 18.11.2026 (Fachdidaktik Geschichte v1, Lernseite bauen v3.0) ===== */
-/* ---------- Selbsttests sind freiwillig: überspringen sperrt nichts (»Freiwillig heißt freiwillig«) ---------- */
-const skipZeile = (pfad, n) => { const st = hol(pfad) || {}; let alle = true; for (let i = 0; i < n; i++) if (st[i] == null) alle = false; if (alle && !st.skip) return "";
-  return `<p class="w-skip nodruck"><button type="button" class="w-skipk" data-akt="skip" data-p="${pfad}" aria-pressed="${!!st.skip}">${st.skip ? "Übersprungen – doch bearbeiten" : "Selbsttest überspringen"}</button><span class="hinweis">${st.skip ? "Du kannst ihn jederzeit nachholen." : "Der Selbsttest ist freiwillig. Er sperrt nichts."}</span></p>`; };
-AKTION.skip = t => { setz(t.dataset.p + ".skip", !(hol(t.dataset.p) || {}).skip); zeichneBehalte(); };
-
-/* ---------- Leitfrage als Linie: festlegen vor dem ersten Material, zurückkehren am Ende (»Wer hat sich bewegt?«)
-   L.pole = { frage?, links, rechts } · Stand: S.lf = { vor, nach } · steht automatisch vor Auftrag 1 und beim Satz für den roten Faden ---------- */
-const leitVor = () => !L.pole ? "" : `<div class="w-leit vor"><p class="kennung">Leg dich fest – noch ohne Material · 1 Minute</p>${skala("lf.vor", esc(L.pole.frage || L.frage), 5, "1 = " + L.pole.links, "5 = " + L.pole.rechts)}<p class="hinweis">Hier gibt es kein Richtig oder Falsch. Am Ende der Stunde kommst du auf diese Linie zurück.</p></div>`;
-const leitBeweg = () => { const lf = S.lf || {}, v = lf.vor, n = lf.nach;
-  return n == null ? (v == null ? "Am Anfang hast du dich noch nicht festgelegt." : `Am Anfang standest du bei ${v} von 5.`) : v == null ? `Jetzt stehst du bei ${n} von 5.` : v === n ? `Am Anfang ${v}, jetzt ${n} von 5: Du bist bei deiner Einschätzung geblieben. Welcher Beleg aus der Stunde stützt sie am stärksten?` : `Am Anfang ${v}, jetzt ${n} von 5: Du hast dich bewegt. Was hat dich bewegt? Halte es in deiner Begründung fest.`; };
-/* Steht die Rückkehr schon in einem eigenen Auftrag der Stunde (L.pole.eigen), entfällt sie beim roten Faden. */
-const leitNach = () => { if (!L.pole || L.pole.eigen) return "";
-  return `<div class="w-leit nach nodruck"><p class="kennung">Zurück zur Leitfrage · 1 Minute</p>${skala("lf.nach", "Wo stehst du jetzt? " + esc(L.pole.frage || L.frage), 5, "1 = " + L.pole.links, "5 = " + L.pole.rechts)}<p class="w-beweg" aria-live="polite">${leitBeweg()}</p></div>`; };
-
-/* ---------- Erst erinnern (P2): zwei Fragen zu früheren Stunden, ohne Heft; aufdecken nach der eigenen Antwort ---------- */
-const erinnere = (fragen, pfad = "ab") => `<div class="w-erinn"><p class="kennung">Erst erinnern · ohne Heft · ${fragen.length > 1 ? "2 Minuten" : "1 Minute"}</p>${abrufen(pfad, fragen)}</div>`;
-
-/* ---------- Der Blick dieser Stunde: Der Zugang wird als Form von Geschichte offengelegt – erst selbst überlegen, was er ausblendet, dann vergleichen.
-   L.blick = { name, anker (Abschnitt der Landkarte, z. B. "2-3-8"), tut, fehlt } ---------- */
-const blickKarte = () => { const b = L.blick; if (!b) return "";
-  /* Der Blick wird erst nach der Landkarten-Aufgabe benannt: Sonst nähme die Karte die Antwort vorweg (erst die Sache, dann der Begriff). */
-  if (!S.lk.ok && !String(S.blickfehlt || "").trim()) return `<p class="w-blickzu">Der Blick dieser Stunde · öffnet sich, wenn du die Landkarten-Aufgabe geprüft hast.</p>`;
-  return `<section class="w-blickk"><p class="kennung">Der Blick dieser Stunde · 1 Minute</p><h3>So haben wir heute auf Geschichte geschaut: ${esc(b.name)}</h3><p>${esc(b.tut)}${b.anker ? ` <a href="${LK}${b.anker}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a>` : ""}</p>
-  ${textfeld("blickfehlt", "Was blendet dieser Blick aus? Ein Satz.", { rows:2, zaehl:false, platz:"Nicht in den Blick kommt …" })}
-  ${vergleich("blickv", ["blickfehlt"], 10, "Mit einem Vorschlag vergleichen", `<p>${esc(b.fehlt)}</p><p class="hinweis">Jeder Blick zeigt etwas und lässt etwas weg. Deshalb wechselt der Blick von Stunde zu Stunde.</p>`)}</section>`; };
-
 /* ---------- Linie des Kurses »Umwelt oder Ich?« (Vorschlag vom 18.11.2026 – abschaltbar: L.linie in der Stunde weglassen).
    Die Linie beginnt mit der These aus M13 und kehrt mit derselben Skala wieder. L.linie = { fall, frage, anf } · Stand: S.linie, im Speicher der Einheit linie[wid] ---------- */
 const linieFeld = () => { const c = L.linie; if (!c) return ""; const u = wLade().linie || {}, alt = W_MODULE.filter(m => u[m[0]] != null && m[0] !== L.wid);
@@ -274,12 +240,3 @@ const W_LK = { m01:[["3-1-2","Public History"]], m02:[["2-3-8","Ereignisgeschich
   m06:[["1-3","Verständnis der Gegenwart"]], m07:[["2-3-2","Nationalgeschichte"]], m071:[["2-1-9","Kontroversität"],["2-1-8","Standortgebundenheit"]], m08:[["3-1-1","Kollektives Gedächtnis"]],
   m09:[["2-1-1","Retrospektivität"]], m10:[["2-1-6","Narrativität"],["2-1-1","Retrospektivität"]], m11:[["1-2","Anthropologische Konstanten"],["1-4","Lernen aus der Vergangenheit"]],
   m12:[["2-1-2","Perspektivität"],["2-1-4","Selektivität"]], m13:[["3-1-5","Agency"]], m14:[["2-1-5","Partialität"],["2-1-3","Partikularität"]], m142:[["1-8","Demokratisches Bewusstsein"]] };
-
-/* ---------- Eine Adresse, eine Seite: Jeder Auftrag hat seinen Anker; das Deckblatt bleibt über das Register erreichbar ---------- */
-const geh0 = geh;
-geh = function(id){ if (BLATT() && AUF(id)) S.zuletzt = id; geh0(id); wAdresse(); };
-const wAdresse = () => { try { const z = S.seite === "start" ? "" : "#" + S.seite; if (location.hash !== z) history.replaceState(null, "", z || (location.pathname + location.search)); } catch(e) {} };
-window.addEventListener("hashchange", () => { if (!S) return; const h = location.hash.replace("#", ""), z = h && SEITE_FN[h] ? h : "start"; if (z !== S.seite && (SEITE_FN[h] || !h)) geh0(z); });
-const register0 = register;
-register = function(immer){ register0(immer); const r = document.getElementById("reg"); if (!r || !BLATT()) return; const t = r.querySelector(".ab-regtitel");
-  if (t && !r.querySelector(".w-zumdeck")) t.insertAdjacentHTML("afterend", `<button type="button" class="w-zumdeck${S.seite === "start" ? " hier" : ""}" data-geh="start"${S.seite === "start" ? ' aria-current="page"' : ""}>Deckblatt<small>Leitfrage und Ablauf</small></button>`); };

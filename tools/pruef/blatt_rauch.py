@@ -106,7 +106,7 @@ async def main():
             pr(await pg.locator('#reg .w-zumdeck').count() == 1, 'Register ohne Weg zum Deckblatt')
             await pg.goto(URL); await pg.reload(); await pg.wait_for_timeout(200)
             pr(await pg.evaluate("S.seite") == 'start', 'Adresse ohne Anker zeigt nicht das Deckblatt')
-            pr(await pg.locator('.deck-start .btn.primary', has_text='Weitermachen').count() == 1, 'Deckblatt ohne »Weitermachen«')
+            pr(await pg.locator('.deck-start .btn.primary, .w-weiter .btn.primary', has_text='Weitermachen').count() >= 1, 'Deckblatt ohne »Weitermachen«')
             await pg.goto(URL + '#' + ziel); await pg.reload(); await pg.wait_for_timeout(200)
             pr(await pg.evaluate("S.seite") == ziel, 'Adresse mit Anker zeigt nicht den Auftrag')
             if a.fotos: await pg.goto(URL); await pg.reload(); await pg.wait_for_timeout(200); await pg.screenshot(path=f'{a.fotos}/99-deckblatt-weiter.png', full_page=False)

@@ -58,6 +58,7 @@ function ereignis(){
   const n = [0,1,2,3].filter(i => lang("f." + i)).length;
   return `${auftrag("Zu zweit · 20 Minuten · Recherche", "Was geschah 1915/16?", "Informiert euch über die Ereignisse 1915/16 im Osmanischen Reich und klärt die vier Fragen. Notiert je zwei bis drei Sätze und schreibt dazu, woher die Angabe stammt. Startpunkt ist die Seite, die das Heft nennt.")}
   ${belastend("Die Texte, die ihr findet, beschreiben Deportationen, Hunger und Mord. Manche Seiten zeigen Fotos der Toten. Ihr müsst sie nicht ansehen.")}
+  ${bildNachTipp("foto1915", { datei:"heft-m03-foto-1915.jpg", alt:"Schwarz-Weiß-Foto: Auf einem kahlen Feld kniet eine Frau mit Kopftuch und beugt sich über ein Kind, das reglos am Boden liegt. Ein zweites Kind steht daneben.", text:"Foto aus dem Heft (dort Abbildung 1). Ort, Datum und Fotograf*in nennt das Heft nicht. <b>Prüfe das Foto als Quelle:</b> Was zeigt es? Was zeigt es nicht? Was müsstest du wissen, um es als Beleg zu nutzen?", nachweis:"Im Unterrichtsheft, M3, mit Verweis auf: Der Tagesspiegel, „Die Vernichtungsabsicht kann belegt werden“ (tagesspiegel.de). Nachweis des Fotos offen." }, "Es zeigt eine Frau, die sich über ein lebloses Kind beugt.")}
   <div class="ab-zwei schmalrechts"><div>
   ${FRAGEN3.map((f, i) => textfeld("f." + i, f[0], { rows:3, zaehl:false, platz:"Antwort in zwei bis drei Sätzen · Fundstelle:" })).join("")}
   <p class="hinweis">${n} von 4 Fragen beantwortet (mindestens 3).</p>

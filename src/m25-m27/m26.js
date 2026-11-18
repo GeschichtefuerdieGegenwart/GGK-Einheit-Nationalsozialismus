@@ -3,6 +3,7 @@ const BEREICHE = [["bnd","BND (Geheimdienst)"],["justiz","Justiz (Richter und St
 const GRUPPEN = BEREICHE.slice(1);
 const STUFEN = ["–","gering","mittel","hoch","sehr hoch"];
 const L = {
+  blattAuto:true, kapitel:"Nationalsozialismus", dauer:90,   /* Blatt-Rahmen: Register links, ein Auftrag je Seite (blatt.js) */
   key:"ggk-m26-kontinuitaeten:v1", nr:"M26", titel:"Ende gut, alles gut?", unter:"Kontinuitäten des Nationalsozialismus",
   /* Zeichen der Stunde: eine Akte, die weiterwandert */
   mark:`<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M4 9h9l3 4h14v16H4z" fill="none" stroke="#24221F" stroke-width="2.4" stroke-linejoin="round"/><path d="M10 21h12m-4-4 4 4-4 4" fill="none" stroke="#9B402D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,

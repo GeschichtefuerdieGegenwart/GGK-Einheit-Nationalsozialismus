@@ -313,6 +313,277 @@ textarea::placeholder,input::placeholder{color:var(--faint);opacity:1}
 /* Herkunftszeile (z. B. M25: nach Offene Geschichte) */
 .herkunft{font-size:.95rem;border-left:4px solid var(--kuli,#24221F);padding:.15rem 0 .15rem .7rem;margin:.6rem 0 1rem;max-width:68ch}
 .herkunft a{font-weight:700}
+/* ===== Blatt-Rahmen (Standard aus M22, Fassung 4.1): Register links auf altem Papier, ein Auftrag je Seite zum Scrollen =====
+   Nur das Register trägt Papier mit Maserung (reines CSS, keine Bilddatei); der Arbeitsbereich bleibt hell und ruhig. */
+:root{--ab-reg:15rem;--ab-kopf:3.7rem}
+.kopf-in{max-width:none}
+.ab-rahmen{display:grid;grid-template-columns:var(--ab-reg) minmax(0,1fr);align-items:start}
+.ab-reg{position:sticky;top:var(--ab-kopf);height:calc(100dvh - var(--ab-kopf));overflow-y:auto;padding:.8rem .55rem 1rem .7rem;border-right:1px solid #A39270;color:#24221F;background-color:#E2D4B4;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='k'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .30  0 0 0 0 .21  0 0 0 0 .09  0 0 0 .6 -.17'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23k)'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .55' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36  0 0 0 0 .26  0 0 0 0 .12  0 0 0 .5 -.14'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.007' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42  0 0 0 0 .30  0 0 0 0 .13  0 0 0 .5 -.14'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E"),repeating-linear-gradient(90deg, rgba(90,70,30,.06) 0 1px, transparent 1px 27px),linear-gradient(90deg, rgba(120,95,45,.16), rgba(120,95,45,0) 18%, rgba(120,95,45,0) 86%, rgba(90,70,30,.14));background-size:360px 360px,720px 360px,900px 900px,auto,auto}
+.ab-regtitel{font-size:.8rem;font-weight:700;color:#463F33;margin:0 0 .35rem .5rem}
+.ab-reg ol{list-style:none;display:grid;gap:0}
+.ab-reg ol button{display:flex;gap:.55rem;align-items:center;width:100%;text-align:left;border:2px solid transparent;background:none;border-radius:.45rem;padding:.16rem .45rem;min-height:48px;color:inherit;line-height:1.2;font:inherit}
+.ab-reg ol button[aria-current]{background:var(--kuli-hi);border-color:var(--kuli)}
+.ab-nr{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:1.9rem;height:1.9rem;border-radius:999px;border:2px solid currentColor;font-family:var(--display);font-weight:600;font-size:1rem;line-height:1;background:var(--surface2)}
+.ab-reg b{display:block;font-size:.95rem;line-height:1.2}
+.ab-reg small{display:block;font-size:.78rem;color:#463F33;line-height:1.25}
+.ab-st{display:block;font-size:.78rem;font-weight:700;color:#463F33;line-height:1.25}
+.ab-reg .fertig .ab-nr{background:var(--green);border-color:var(--green);color:var(--surface2)}
+.ab-reg .fertig .ab-st{color:#24503D}
+.ab-reg .hier .ab-nr,.ab-reg .hier .ab-st{color:var(--kuli)}
+.ab-reg .ansage .ab-nr,.ab-reg .ansage .ab-st{color:#623D05}
+.ab-rahmen > #main{max-width:none;margin:1rem 1.2rem 1.4rem;padding:.8rem 1.9rem 1rem;background:var(--surface2);border:1px solid var(--line);border-radius:.4rem;min-height:calc(100dvh - var(--ab-kopf) - 2.4rem);display:flex;flex-direction:column}
+.ab-rahmen > #main:focus{outline:none}
+.ab-zeile{display:flex;justify-content:space-between;gap:1rem;font-size:.8rem;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:.3rem;margin-bottom:.6rem}
+.ab-h{display:flex;align-items:center;gap:.7rem;font-size:clamp(1.45rem,1.2rem + .8vw,1.75rem);margin:0 0 .15rem}
+.ab-h .ab-nr{width:2.25rem;height:2.25rem;font-size:1.2rem;background:var(--ink);border-color:var(--ink);color:var(--surface2)}
+.ab-meta{margin:0 0 .7rem 2.95rem;font-size:.9rem;font-weight:700;color:var(--red)}
+.ab-marke{margin-left:.6rem;padding:.15rem .6rem;border-radius:.3rem;background:var(--marker);color:var(--ink);font-size:.82rem}
+.ab-teil{max-width:none;container-type:inline-size}
+.ab-teil > p,.ab-teil > ul,.ab-teil > ol,.ab-teil > .leitfrage,.ab-teil > .lead{max-width:62rem}
+.ab-teil > .auftrag:first-child,.ab-teil > .band:first-child{margin-top:.3rem}
+.ab-teil .leitfrage{margin-bottom:.9rem}
+.ab-fuss{margin-top:auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem .8rem}
+.ab-fuss::before{content:"";flex:0 0 100%;border-top:1px solid var(--line);margin-top:1.4rem}
+.ab-fuss > span:empty{display:none}
+.ab-fuss > :last-child{margin-left:auto}
+.ab-zu{max-width:36rem;margin:2.2rem auto 1rem;text-align:center;display:grid;gap:.9rem;justify-items:center}
+.ab-zu-t{font-family:var(--display);font-weight:600;font-size:1.5rem;line-height:1.25}
+.ab-zu .loesch-frage{text-align:left}
+.ab-zwei{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:1.6rem;align-items:start}
+.ab-zwei.gleich{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.ab-zwei.schmalrechts{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+.ab-zwei > div > .auftrag:first-child{margin-top:0}
+.ab-zwei h3{font-size:1.1rem;margin-bottom:.3rem}
+.ab-unter{color:var(--muted);margin:0 0 .7rem}
+.ab-ablauf li{grid-template-columns:2.2rem 1fr}
+.ab-ablauf li b{font-family:var(--display);font-size:1.05rem}
+.ab-ablauf small{display:block;color:var(--muted);font-size:.85rem}
+.gesperrt{opacity:.45;pointer-events:none}
+/* Schreibauftrag */
+.ka-aufgabe{border-left:4px solid var(--ink);background:none;border-radius:0;padding:.1rem 0 .1rem .9rem;margin:0 0 1rem;max-width:54rem;font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.35}
+.ka-aufgabe b{box-shadow:inset 0 -.38em 0 var(--marker)}
+.ka-aufgabe.klein{font-size:1rem;margin-bottom:.4rem}
+.ka-material{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1rem 1.2rem;font-size:1rem}
+.ka-material p + p{margin-top:.5rem}
+.ka-material .quelle{font-size:.82rem}
+.gliederung{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin:.3rem 0 .9rem}
+.haken{display:flex;align-items:center;gap:.6rem;min-height:44px;margin:.6rem 0;font-weight:400}
+.haken input{width:1.4rem;height:1.4rem;flex:0 0 auto}
+.ka-inhalt{display:grid;gap:.35rem;margin:.7rem 0;max-width:62rem}
+#schreibblatt{display:none}
+.ab-reg .loesch{margin-top:.5rem;padding-top:.45rem;border-top:1px solid #A39270;font-size:.82rem;color:#463F33;display:flex;flex-wrap:wrap;gap:.2rem .7rem;align-items:center}
+.ab-reg .loesch-frage{flex:1 0 100%}
+.ab-reg .loesch .btn{min-height:44px;padding:.35rem .8rem;font-size:.85rem}
+.ab-reg .loesch p{font-size:.72rem!important;line-height:1.3}
+.ab-reg .lehr-tuer{margin-left:0}
+
+/* ----- Deckblatt ----- */
+#main.deckblatt .band{margin-bottom:1.1rem}
+.deck{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.8rem;align-items:start;margin-top:.4rem}
+.deck h2.abschnitt{margin-top:.2rem;font-size:1.3rem}
+.deck .ziele{font-size:1.05rem;gap:.45rem}
+.deck-start{display:flex;justify-content:flex-end;margin-top:1.2rem}
+.deck-start .btn{min-height:56px;font-size:1.1rem;padding:.7rem 1.6rem}
+.band.gross{min-height:17rem}
+.band.gross.mit{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}
+.band.gross .bt h2{font-size:clamp(1.8rem,1.3rem + 1.8vw,2.7rem)}
+
+/* ----- Auswahl links, die eine Karte rechts ----- */
+.w-wahl{display:grid;grid-template-columns:minmax(14rem,1fr) minmax(0,2.3fr);gap:1.5rem;align-items:start;margin-top:1rem}
+.w-liste{display:grid;gap:.6rem}
+.w-liste > button{display:grid;gap:.15rem;text-align:left;width:100%;padding:.8rem 1.1rem;border:1.5px solid #8B857A;border-left-width:6px;border-radius:var(--r-lg);background:var(--surface);color:var(--ink);font:inherit;min-height:4.4rem;align-content:center}
+.w-liste > button[aria-pressed=true]{border-color:var(--ink);border-left-color:var(--red);background:var(--surface2);box-shadow:4px 4px 0 0 var(--offset)}
+.w-nr{font-size:.85rem;font-weight:700;color:var(--red)}
+.w-t{font-family:var(--display);font-weight:600;font-size:1.2rem;line-height:1.2}
+.w-u{font-size:.9rem;color:var(--muted);line-height:1.3}
+.w-st{font-size:.85rem;font-weight:700;color:var(--green)}
+/* Viele Einträge (ab etwa sieben): Liste in zwei Spalten, die Karte bleibt beim Rollen stehen */
+.w-wahl.viele{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.w-wahl.viele .w-liste{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.w-wahl.viele .w-liste > button{padding:.6rem .7rem;min-height:4.8rem;min-width:0}
+.w-wahl.viele .w-liste .w-t{font-size:1.02rem;hyphens:auto;overflow-wrap:anywhere}
+.w-wahl.viele .w-karte{position:sticky;top:5rem}
+.w-karte{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem 1.8rem 1.4rem;min-height:24rem;font-size:1.08rem}
+.w-karte:focus{outline:none}
+.w-karte > h3{font-size:clamp(1.5rem,1.2rem + 1vw,2rem);margin-bottom:.5rem}
+.w-karte p + p{margin-top:.6rem}
+.w-karte .w-bild{margin:0 0 1rem}
+.w-karte .zwei{margin-top:.8rem}
+.w-leer{color:var(--faint);font-style:italic}
+/* ----- Skala ----- */
+.w-skala{border:0;margin:1rem 0;max-width:46rem}
+.w-skala legend{font-weight:700;margin-bottom:.5rem}
+.w-stufen{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:.4rem}
+.w-stufen button{min-height:56px;border:1.5px solid #8B857A;background:var(--surface2);border-radius:.6rem;font-family:var(--display);font-weight:600;font-size:1.25rem;color:var(--ink)}
+.w-stufen button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--inverse)}
+/* ----- Erst erinnern ----- */
+.w-abruf{display:grid;gap:.9rem;max-width:54rem;margin-top:.8rem}
+.w-frage{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.4rem .7rem;align-items:end;border-left:4px solid var(--line);padding-left:.9rem}
+.w-frage label{grid-column:1/-1;font-weight:700}
+.w-frage .w-nr{display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;border-radius:999px;background:var(--ink);color:var(--inverse);font-size:.85rem;margin-right:.3rem}
+.w-frage input{margin:0}
+.w-loesung{grid-column:1/-1;font-size:1rem}
+.w-loesung:not(:empty){background:var(--green-hi);border-radius:.5rem;padding:.5rem .8rem}
+/* ----- Tabelle zum Ausfüllen ----- */
+.w-tab th[scope=row]{width:26%;background:var(--surface);font-size:.95rem}
+.w-tab td{padding:.3rem}
+.w-tab textarea{margin:0;min-height:3.6rem;border-radius:.5rem;font-size:.95rem;padding:.45rem .6rem}
+/* ----- Film ----- */
+.w-film{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 1.4rem;align-items:center;background:var(--dunkel);color:var(--inverse);border-radius:var(--r-lg);padding:1.2rem 1.4rem;margin:1rem 0;max-width:62rem}
+.w-film h3{font-size:1.35rem;color:var(--inverse);margin:.1rem 0 .3rem}
+.w-film p{color:#DCD5CA;font-size:.98rem}
+.w-film .kennung{color:var(--marker)}
+.w-film .quelle{color:#B9B1A4;margin-top:.3rem}
+.w-film .btn.dunkel{background:var(--marker);color:var(--ink);min-height:56px;font-size:1.05rem}
+.w-film .hinweis{grid-column:1/-1;color:#B9B1A4;margin:0}
+/* ----- Bild groß ----- */
+.w-bild{margin:1rem 0;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.w-bild img{display:block;width:100%;height:auto;max-height:34rem;object-fit:contain;background:#EFEAE0}
+.w-bild.hoch img{max-height:44rem}
+.w-bild.flach{max-width:54rem}
+.w-bild.flach img{max-height:19rem;object-fit:cover}
+.w-bild figcaption{padding:.55rem .9rem .65rem;font-size:.9rem;line-height:1.4}
+.w-bild .nachweis{display:block;font-size:.78rem;color:var(--muted);margin-top:.15rem}
+/* ----- Zeitleiste ----- */
+.w-zeit{list-style:none;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:.5rem;margin:1rem 0;position:relative;padding-top:1.1rem}
+.w-zeit::before{content:"";position:absolute;left:0;right:0;top:.35rem;border-top:3px solid var(--ink)}
+.w-zeit li{position:relative;display:grid;gap:.1rem;align-content:start;padding:.5rem .6rem .6rem;background:var(--surface);border:1px solid var(--border);border-radius:.6rem;font-size:.9rem;line-height:1.3}
+.w-zeit li::before{content:"";position:absolute;left:.8rem;top:-1.05rem;width:.8rem;height:.8rem;border-radius:999px;background:var(--surface2);border:3px solid var(--ink)}
+.w-zeit li b{font-family:var(--display);font-size:1.05rem}
+.w-zeit .w-zt{font-weight:700}
+.w-zeit .w-zx{color:var(--muted);font-size:.85rem}
+.w-zeit li.rot{border-top:4px solid var(--red)}
+.w-zeit li.hier{border-color:var(--red);background:var(--red-hi)}
+.w-zeit li.hier::before{background:var(--red);border-color:var(--red)}
+.w-zeit li.da{opacity:.8}
+/* ----- Karten im Raster ----- */
+.w-karten{display:grid;gap:1rem;margin:1rem 0}
+.w-karten.k2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.w-karten.k3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.w-karten.k4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.w-kk{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1rem 1.2rem;border-top:5px solid var(--ink)}
+.w-kk h3{font-size:1.25rem;margin-bottom:.35rem}
+.w-kk ul{padding-left:1.1rem;display:grid;gap:.25rem;font-size:.98rem}
+.w-kk.rot{border-top-color:var(--red)}.w-kk.blau{border-top-color:var(--kuli)}.w-kk.gruen{border-top-color:var(--green)}.w-kk.gold{border-top-color:var(--gold)}.w-kk.grau{border-top-color:var(--slate)}
+/* ----- Das brauchst du ----- */
+.w-wissen{background:var(--gold-hi);border-radius:var(--r-lg);padding:1rem 1.2rem;margin:1rem 0;max-width:62rem}
+.w-wissen h3{font-size:1.15rem;margin-bottom:.3rem}
+.w-wissen ul{padding-left:1.1rem;display:grid;gap:.25rem}
+.w-wissen .kennung{color:var(--gold)}
+/* ----- Landkarte L ----- */
+.lk-wahl{margin-top:1.2rem}
+.lk-wahl .prinzipien{grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin-top:0}
+.lk-wahl .prinzipien button{padding:.8rem 1rem;display:grid;align-content:start}
+.lk-wahl .prinzipien button b{font-size:1.08rem}
+.lk-wahl .prinzipien button small{font-size:.9rem;margin-top:.15rem}
+.lk-wahl > label{margin-top:1rem}
+/* ----- Zusammenfassung in zwei Teilen ----- */
+.zf2{max-width:60rem}
+.zf2 .zf-teil{font-size:.8rem;font-weight:700;color:var(--red);margin:0}
+.zf2 .zf-seite{background:var(--surface);border:1px solid var(--border);border-radius:.4rem;padding:1.4rem 1.7rem 1.5rem;margin-bottom:1.2rem}
+.zf2 .zf-seite h1{font-size:clamp(1.6rem,1.3rem + 1vw,2.1rem);margin:.1rem 0 .4rem}
+.zf2 .zf-seite h2{font-size:1.15rem;margin:1.1rem 0 .35rem}
+.zf2 .seitenumbruch{margin-top:0;border-top:1px solid var(--border);padding-top:1.4rem}
+.zf2 .werk ol{padding-left:1.2rem;margin-top:.25rem}
+.zf2 .zf-sonst{margin-top:.9rem;font-size:.92rem;color:var(--muted)}
+.zf2 .raster3{margin-bottom:.4rem}
+.zf2 .karte{padding:.6rem .9rem;margin-top:.5rem}
+
+@media (max-width:899px){
+  .ab-rahmen{display:block}
+  .ab-reg{position:static;height:auto;border-right:0;border-bottom:1px solid #A39270;padding:.45rem .6rem;overflow-x:auto}
+  .ab-regtitel{display:none}
+  .ab-reg ol{display:flex;gap:.2rem}
+  .ab-reg li{flex:0 0 auto}
+  .ab-reg small,.ab-reg button:not([aria-current]) b,.ab-reg button:not([aria-current]) .ab-st{display:none}
+  .ab-reg button{padding:.2rem .3rem}
+  .ab-rahmen > #main{margin:.6rem .6rem 1rem;padding:1rem 1rem .9rem}
+  .ab-zwei,.ab-zwei.gleich,.ab-zwei.schmalrechts,.gliederung,.deck,.w-wahl,.lk-wahl .prinzipien,.w-karten.k2,.w-karten.k3,.w-karten.k4{grid-template-columns:1fr}
+  .w-liste,.w-wahl.viele .w-liste{display:flex;overflow-x:auto;gap:.4rem;padding-bottom:.3rem}
+  .w-wahl.viele .w-karte{position:static}
+  .w-liste > button{flex:0 0 auto;min-height:48px;padding:.4rem .8rem;width:auto}
+  .w-liste .w-u{display:none}
+  .w-zeit{grid-template-columns:1fr;padding:0 0 0 1.2rem}
+  .w-zeit::before{left:.35rem;right:auto;top:0;bottom:0;border-top:0;border-left:3px solid var(--ink)}
+  .w-zeit li::before{left:-1.25rem;top:.7rem}
+  .w-film{grid-template-columns:1fr}
+  .band.gross.mit{grid-template-columns:1fr}
+}
+@media (min-width:900px) and (max-width:1150px){
+  .w-karten.k4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .lk-wahl .prinzipien{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:900px){
+  .ab-rahmen.schmal{--ab-reg:3.9rem}
+  .ab-rahmen.schmal .ab-regtitel,.ab-rahmen.schmal .ab-reg ol button > span:last-child{display:none}
+  .ab-rahmen.schmal .ab-reg{padding:.8rem .35rem}
+  .ab-rahmen.schmal .ab-reg ol button{justify-content:center;padding:.28rem 0}
+}
+@media print{
+  .ab-reg,.ab-zeile,.ab-h,.ab-meta,.ab-fuss{display:none!important}
+  .ab-rahmen{display:block}
+  .ab-rahmen > #main{margin:0;padding:0;border:0;min-height:0;display:block;background:#fff}
+  .ab-teil{max-width:none}
+  body.druck-sb .ab-teil > *:not(#schreibblatt){display:none!important}
+  body.druck-sb #schreibblatt{display:block}
+  #schreibblatt h2{font-size:14pt;margin:0 0 .3rem}
+  #schreibblatt .ka-aufgabe{font-size:11.5pt;margin:.4rem 0 .6rem}
+  #schreibblatt .ka-material{font-size:9.5pt;padding:.3rem .6rem;margin-bottom:.4rem}
+  #schreibblatt .linien{height:8mm;border-bottom:1px solid #999}
+  #schreibblatt .gl3{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm}
+  .zf2{max-width:none}
+  .zf2 .zf-seite{border:0;padding:0;margin:0;background:none}
+  .zf2 .zf-seite h1{font-size:17pt;margin:0 0 .15rem}
+  .zf2 .zf-seite h2{font-size:11.5pt;margin:.5rem 0 .15rem;break-after:avoid}
+  .zf2 .zf-teil{font-size:8.5pt}
+  .zf2 .raster3{font-size:8.6pt;gap:.3rem}
+  .zf2 .raster3 div{padding:.3rem .45rem}
+  .zf2 .ka-aufgabe{font-size:10pt}
+  .zf2 p,.zf2 li{font-size:10pt}
+  .zf2 .seitenumbruch{break-before:page;border-top:0;padding-top:0}
+}
+
+/* ===== Nachgerüstet am 18.11.2026 ===== */
+/* Blick der Stunde: auf dem Deckblatt eine Zeile, an der Landkarte eine Karte */
+.w-blickk{margin-top:1.6rem;padding:1rem 1.1rem 1.1rem;border:1.5px solid var(--gold);border-radius:var(--r-lg);background:var(--surface2);max-width:62rem}
+.w-blickk h3{font-family:var(--display);font-size:1.3rem;margin:.1rem 0 .4rem}
+.w-blickk .kennung{margin:0;color:var(--gold)}
+/* Leitfrage als Linie */
+.w-leit{margin:0 0 1.4rem;padding:.9rem 1.1rem 1rem;border:1.5px solid var(--kuli);border-radius:var(--r-lg);background:var(--kuli-hi);max-width:62rem}
+.w-leit .kennung{margin:0;color:var(--kuli)}
+.w-leit .w-skala{margin:.5rem 0 .4rem;max-width:none}
+.w-leit .w-skala legend{font-family:var(--display);font-size:1.18rem;line-height:1.3}
+.w-leit .w-stufen button{background:var(--surface2)}
+.w-leit .w-stufen button[aria-pressed=true]{background:var(--kuli);border-color:var(--kuli);color:#fff}
+.w-leit .hinweis{margin:0}
+.w-beweg{margin:.2rem 0 0;font-weight:600}
+/* Linie des Kurses */
+.w-linie{margin:1.6rem 0 0;padding:1rem 1.1rem 1.1rem;border-radius:var(--r-lg);background:var(--offset);border-left:6px solid var(--ink)}
+.w-linie h3{font-family:var(--display);font-size:1.3rem;margin:.1rem 0 .4rem}
+.w-linie .kennung{margin:0}
+.w-linie .w-skala{margin:.4rem 0}
+/* Überspringen: leise, aber groß genug zum Tippen */
+.w-skip{display:flex;flex-wrap:wrap;gap:.4rem .8rem;align-items:center;margin:.8rem 0 0}
+.w-skipk{min-height:44px;padding:.35rem .9rem;border:1.5px dashed #8B857A;border-radius:999px;background:none;color:var(--muted);font:inherit;font-size:.95rem}
+.w-skipk[aria-pressed=true]{border-style:solid;color:var(--ink);background:var(--offset)}
+/* Deckblatt im Register */
+.w-zumdeck{display:block;width:100%;text-align:left;border:2px solid transparent;border-radius:.45rem;background:none;padding:.3rem .55rem;margin:0 0 .25rem;min-height:44px;font:inherit;font-weight:700;font-size:.95rem;color:inherit;border-bottom:1px solid rgba(36,34,31,.18)}
+.w-zumdeck small{display:block;font-weight:400;font-size:.78rem;color:#463F33}
+.w-zumdeck.hier{background:var(--kuli-hi);border-color:var(--kuli)}
+.deck-start{gap:.6rem;flex-wrap:wrap}
+.w-erinn{margin:0 0 1.3rem;padding:.7rem 1rem .4rem;border-left:4px solid var(--green);background:var(--green-hi);border-radius:0 var(--r-lg) var(--r-lg) 0;max-width:62rem}
+.w-erinn .kennung{margin:0 0 .3rem;color:var(--green)}
+.w-erinn .w-abruf{margin:0}
+.w-blickzu{margin:1.6rem 0 0;padding:.7rem 1rem;border:1.5px dashed var(--gold);border-radius:var(--r-lg);color:var(--muted);max-width:62rem}
+.w-weiter{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:space-between;margin:0 0 1rem;padding:.6rem .7rem .6rem 1rem;background:var(--kuli-hi);border:1.5px solid var(--kuli);border-radius:var(--r-lg)}
+.w-weiter .btn{min-height:48px}
+.w-ebene{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:.1rem 0 .7rem;font-size:.92rem}
+.w-ebene span{margin-right:.3rem;color:var(--muted)}
+.w-ebene b{padding:.15rem .7rem;border-radius:999px;border:1.5px solid var(--line);color:var(--faint);font-weight:600}
+.w-ebene b.an{color:#fff;border-color:transparent}
+.w-ebene b.an.welt{background:#1E4FB5}.w-ebene b.an.europa{background:#7D5C12}.w-ebene b.an.de{background:#24221F}
+.w-bildzu{margin:1rem 0;padding:.9rem 1.1rem;border:1.5px dashed #8B857A;border-radius:var(--r-lg);background:var(--surface);max-width:62rem}
+.w-bildzu p{margin:0 0 .6rem}
 /* ===== Ost-West-Einheit: Zeitraster, Ereigniskarten, Ordnen, Netz, Glossar ===== */
 :root{--sp-w:var(--kuli);--sp-w-hi:var(--kuli-hi);--sp-e:var(--gold);--sp-e-hi:var(--gold-hi);--sp-d:var(--green);--sp-d-hi:var(--green-hi)}
 .spur-w{--sp:var(--sp-w);--sp-hi:var(--sp-w-hi)}.spur-e{--sp:var(--sp-e);--sp-hi:var(--sp-e-hi)}.spur-d{--sp:var(--sp-d);--sp-hi:var(--sp-d-hi)}
@@ -474,8 +745,8 @@ main.breit:has(.zraster.gross){max-width:78rem}
 </style>
 </head>
 <body>
-<header class="kopf"><div class="kopf-in" id="kopf"></div><nav class="weg" id="weg" aria-label="Lernweg"></nav></header>
-<main id="main" tabindex="-1"></main>
+<header class="kopf"><div class="kopf-in" id="kopf"></div></header>
+<div class="ab-rahmen"><aside class="ab-reg" id="reg" aria-label="Aufträge dieses Blatts"></aside><main id="main" tabindex="-1"></main></div>
 <div id="ueber"></div>
 <noscript><p style="padding:2rem;max-width:40rem;margin:auto">Diese Lernumgebung braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft „Geschichte aktuell 1“ (M28–M44).</p></noscript>
 <script type="application/json" id="lehr-daten">{"v":2,"alg":"AES-GCM-256/PBKDF2-SHA256","iter":600000,"salt":"S2AE0Ck1PuvFDIipEmJzCg==","iv":"7jZv7u/iSeASR71t","ct":"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"}</script>
@@ -493,13 +764,14 @@ const setz = (p, v) => { const k = p.split("."); let o = S; for (let i = 0; i < 
 const woerter = t => String(t || "").trim().split(/\s+/).filter(Boolean).length;
 const ruhig = () => { try { return !!S.ruhig || matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e) { return !!S.ruhig; } };
 const neu = (el, k) => { if (!el) return; el.classList.remove(k); void el.offsetWidth; if (!ruhig()) el.classList.add(k); };
-const LABOR = /github\.io$/.test(location.hostname) ? "index.html" : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
+/* Rückweg zur Übersicht. Seiten in Unterordnern setzen vor dem Kern window.GGK_ZURUECK = "../index.html". */
+const LABOR = /github\.io$/.test(location.hostname) ? (typeof window.GGK_ZURUECK === "string" ? window.GGK_ZURUECK : "index.html") : "https://geschichtefuerdiegegenwart.github.io/GGK-Einheit-Nationalsozialismus/";
 const LK = "https://geschichtefuerdiegegenwart.github.io/kognitive-Landkarte-des-Geschichtsunterrichts/#s-";
 const idx = id => Math.max(0, L.seiten.findIndex(s => s[0] === id));
 
 /* ---------- Bausteine für Seiten ---------- */
-const zeitKopf = id => { const s = L.seiten[idx(id)]; return `<p class="zeit"><span class="nr">${esc(s[1])}</span><span>${esc(s[2])}</span></p>`; };
-const weiter = (nach, text, o = {}) => `<div class="fuss"><span class="hinweis">${o.hinweis || "Dein Stand wird nur auf diesem Gerät gespeichert."}</span><button class="btn primary" data-geh="${nach}">${esc(text)} ›</button></div>`;
+const zeitKopf = id => { if (BLATT_AN) return ""; const s = L.seiten[idx(id)]; return `<p class="zeit"><span class="nr">${esc(s[1])}</span><span>${esc(s[2])}</span></p>`; };
+const weiter = (nach, text, o = {}) => BLATT_AN ? "" : `<div class="fuss"><span class="hinweis">${o.hinweis || "Dein Stand wird nur auf diesem Gerät gespeichert."}</span><button class="btn primary" data-geh="${nach}">${esc(text)} ›</button></div>`;
 const auftrag = (form, titel, text) => `<div class="auftrag"><span class="form">${esc(form)}</span><h3>${esc(titel)}</h3><p>${text}</p></div>`;
 const belastend = text => `<p class="belastend"><b>Hinweis vorab.</b> ${text}</p>`;
 const status = (art, text) => `<span class="status ${art}">${esc(text)}</span>`;
@@ -555,7 +827,7 @@ const STUFENWORT = { zentral:"zentral", begruendbar:"auch begründbar", kaum:"pa
 function gWahl(id, frage, optionen, o = {}){
   const st = (S.wahl || {})[id] || {}, zu = !!st.zu;
   return `<div class="g"><div class="g-wahl" data-g="wahl" data-mind="${o.mind ?? 8}" data-id="${id}" ${zu ? 'data-zu=""' : ""}>
-  <fieldset><legend>${frage}</legend>${optionen.map((op, i) => `<label class="g-option" data-urteil="${op[1]}" data-grund="${esc(op[2])}"><input type="radio" name="w-${id}" value="${i}" ${st.o === i ? "checked" : ""} ${zu ? "disabled" : ""}><span>${esc(op[0])}<span class="g-option__urteil">${STUFENWORT[op[1]]} – ${esc(op[2])}</span></span></label>`).join("")}</fieldset>
+  <fieldset><legend>${frage}</legend>${optionen.map((op, i) => `<label class="g-option" data-urteil="${op[1]}" data-grund="${esc(op[2])}"><input type="radio" name="w-${id}" value="${i}" ${st.o === i ? "checked" : ""} ${zu ? "disabled" : ""}><span>${esc(op[0])}<span class="g-option__urteil">${(o.worte || STUFENWORT)[op[1]]} – ${esc(op[2])}</span></span></label>`).join("")}</fieldset>
   ${o.ohneGrund ? "" : `<label>Begründung in einem Satz<textarea data-grund-feld rows="2" ${zu ? "readonly" : ""} placeholder="${esc(o.platz || "Ich wähle das, weil …")}">${esc(st.grund || "")}</textarea></label>`}
   <div class="g-wahl__fuss"><button type="button" class="g-knopf g-knopf--primaer" data-g-festlegen ${zu ? "disabled" : ""}>Festlegen</button><span class="g-stempel" ${zu ? "" : "hidden"}>Festgelegt</span>${zu ? `<button type="button" class="btn nodruck" data-neu-wahl="${id}">Noch einmal</button>` : ""}<span class="sr" aria-live="polite"></span></div>
   </div></div>`;
@@ -618,8 +890,8 @@ function tafelZu(){ const u = document.getElementById("ueber"); if (!u.innerHTML
 /* ---------- Kopf, Löschen, Zeichnen ---------- */
 function kopf(){
   document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div><a class="pill" href="${LABOR}">← GGK-Labor</a>`;
-  const a = idx(S.seite);
-  document.getElementById("weg").innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
+  const a = idx(S.seite), weg = document.getElementById("weg");
+  if (weg) weg.innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
 }
 function loeschBereich(){
   return `<div class="loesch nodruck"><button class="btn" data-loeschfrage>Eingaben löschen</button><label class="g-schalter" style="font-family:var(--body)"><input type="checkbox" role="switch" data-bewegung ${S.ruhig ? "checked" : ""}> Weniger Bewegung</label><span>Alles bleibt auf diesem Gerät. Nichts wird übertragen.</span>${S.seite === "lehrkraft" ? "" : lehrTuer()}
@@ -632,7 +904,13 @@ function zeichne(fokus){
   kopf();
   const m = document.getElementById("main");
   m.classList.toggle("breit", (L.breit || []).includes(S.seite));
-  m.innerHTML = SEITE_FN[S.seite]() + loeschBereich();
+  if (BLATT()) {
+    const rahmen = document.querySelector(".ab-rahmen"), auf = AUF(S.seite), schmal = SCHMAL();
+    if (rahmen) rahmen.classList.toggle("schmal", schmal);
+    m.classList.toggle("deckblatt", !auf);
+    m.innerHTML = blattzeile() + (auf ? blatt(auf) : SEITE_FN[S.seite]()) + (QUER() && !schmal ? "" : loeschBereich());
+    register(true);
+  } else m.innerHTML = SEITE_FN[S.seite]() + loeschBereich();
   window.Gegenwart && Gegenwart.init(m);
   nachInit();
   if (fokus) { m.focus({ preventScroll:true }); window.scrollTo(0, 0); }
@@ -650,7 +928,9 @@ function nachEingabe(pfad){
   document.querySelectorAll("[data-vergleich]").forEach(b => { const ok = b.dataset.bed.split(",").every(p => String(hol(p) || "").trim().length >= +b.dataset.min); b.disabled = !ok; const h = document.querySelector(`[data-vergleichhinweis="${b.dataset.vergleich}"]`); if (h) h.textContent = ok ? "" : "Erst deine Antworten, dann der Vergleich."; });
   if (pfad === "lk.vermutung") { const frei = S.lk.vermutung.trim().length >= 10, t = document.getElementById("lk-teil2"); if (t && t.classList.contains("gesperrt") === frei) zeichneBehalte(); }
   if (pfad === "lk.grund") { const b = document.querySelector("[data-lkpruef]"); if (b) b.disabled = !(S.lk.prinzip && S.lk.grund.trim().length >= 10 && !S.lk.ok); }
+  if (pfad.indexOf("sa.") === 0) schreibStand();
   if (typeof L.nachEingabe === "function") L.nachEingabe(pfad);
+  if (BLATT()) register();
 }
 /* Neu zeichnen, aber Scrollstand und Fokus (samt Cursor) behalten. */
 function zeichneBehalte(){
@@ -661,16 +941,20 @@ function zeichneBehalte(){
 
 function kernStart(){
   const d = L.init(), g = lade();
-  S = Object.assign({ seite:"start", ruhig:false, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false } }, d);
+  S = Object.assign({ seite:"start", ruhig:false, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false }, frei:{}, durch:{}, wk:{}, sa:{ gl:["","",""], text:"", hand:false, krit:false } }, d);
   Object.keys(g).forEach(k => { S[k] = (S[k] && typeof S[k] === "object" && !Array.isArray(S[k]) && g[k] && typeof g[k] === "object" && !Array.isArray(g[k])) ? Object.assign({}, S[k], g[k]) : g[k]; });
   const h = location.hash.replace("#", ""); if (h && SEITE_FN[h]) S.seite = h;
   zeichne(false);
 }
 
 document.addEventListener("click", ev => {
-  const t = ev.target.closest("[data-geh],[data-mark],[data-stift],[data-satz],[data-vergleich],[data-prinzip],[data-lkpruef],[data-lkneu],[data-stimme],[data-stimmkarte],[data-tafelzu],[data-loeschfrage],[data-loeschen],[data-g-festlegen],[data-neu-wahl],[data-akt],[data-drucken]");
+  const t = ev.target.closest("[data-geh],[data-mark],[data-stift],[data-satz],[data-vergleich],[data-prinzip],[data-lkpruef],[data-lkneu],[data-stimme],[data-stimmkarte],[data-tafelzu],[data-loeschfrage],[data-loeschen],[data-g-festlegen],[data-neu-wahl],[data-akt],[data-drucken],[data-freifrage],[data-frei],[data-schreibblatt],[data-krit]");
   if (!t) return;
-  if (t.dataset.geh) return geh(t.dataset.geh);
+  if (t.dataset.geh) { if (t.dataset.durch) { if (!S.durch) S.durch = {}; S.durch[t.dataset.durch] = true; } return geh(t.dataset.geh); }
+  if (t.hasAttribute("data-freifrage")) { const f = document.getElementById("ab-frage"); f.hidden = false; t.setAttribute("aria-expanded", "true"); f.querySelector("button").focus(); return; }
+  if (t.dataset.frei !== undefined) { if (t.dataset.frei) { if (!S.frei) S.frei = {}; S.frei[t.dataset.frei] = true; speichere(); zeichne(true); } else { document.getElementById("ab-frage").hidden = true; const k = document.querySelector("[data-freifrage]"); k.setAttribute("aria-expanded", "false"); k.focus(); } return; }
+  if (t.hasAttribute("data-schreibblatt")) { document.body.classList.add("druck-sb"); window.print(); return; }
+  if (t.hasAttribute("data-krit")) { if (!schreibFertig()) return; S.sa.krit = !S.sa.krit; speichere(); const k = document.getElementById("krit"); k.hidden = !S.sa.krit; t.setAttribute("aria-expanded", String(S.sa.krit)); if (S.sa.krit) { neu(k, "neu"); k.scrollIntoView({ block:"nearest", behavior: ruhig() ? "auto" : "smooth" }); } return; }
   if (t.dataset.mark) return markiere(t);
   if (t.dataset.stift) { const [id, s] = t.dataset.stift.split(":"); setz("stift." + id, s); t.parentElement.querySelectorAll(".g-stift").forEach(b => b.setAttribute("aria-pressed", String(b === t))); return; }
   if (t.dataset.satz) { const f = document.getElementById(t.dataset.satz); if (!f) return; f.value = (f.value.trim() ? f.value.replace(/\s*$/, "") + " " : "") + t.dataset.text + " "; setz(f.dataset.f, f.value); nachEingabe(f.dataset.f); f.focus(); return; }
@@ -686,9 +970,9 @@ document.addEventListener("click", ev => {
   if (t.hasAttribute("data-g-festlegen")) { const w = t.closest(".g-wahl[data-id]"); if (!w) return; const gew = w.querySelector("input:checked"), ta = w.querySelector("textarea"); if (!gew) return; setz("wahl." + w.dataset.id, { o:+gew.value, grund: ta ? ta.value : "", zu:true }); setTimeout(() => { zeichneBehalte(); if (typeof L.nachWahl === "function") L.nachWahl(w.dataset.id); }, ruhig() ? 0 : 420); return; }
   if (t.dataset.neuWahl) { setz("wahl." + t.dataset.neuWahl, {}); return zeichneBehalte(); }
   if (t.hasAttribute("data-drucken")) return window.print();
-  if (t.dataset.akt && AKTION[t.dataset.akt]) return AKTION[t.dataset.akt](t, ev);
+  if (t.dataset.akt && AKTION[t.dataset.akt]) { AKTION[t.dataset.akt](t, ev); if (BLATT()) register(); return; }
 });
-function kernStartLeer(r){ S = {}; const d = L.init(); S = Object.assign({ seite:"start", ruhig:r, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false } }, d); speichere(); zeichne(true); }
+function kernStartLeer(r){ S = {}; const d = L.init(); S = Object.assign({ seite:"start", ruhig:r, mark:{}, stift:{}, wahl:{}, offen:{}, lk:{ vermutung:"", prinzip:null, grund:"", ok:false }, frei:{}, durch:{}, wk:{}, sa:{ gl:["","",""], text:"", hand:false, krit:false } }, d); speichere(); zeichne(true); }
 function markiere(t){
   const [id, i] = t.dataset.mark.split(":"), st = (S.stift || {})[id] || "a";
   if (!S.mark[id]) S.mark[id] = {};
@@ -699,6 +983,7 @@ function markiere(t){
   if (!hat && window.Gegenwart && st === "a") Gegenwart.bewegen(t, [{ backgroundSize:"0% 100%" }, { backgroundSize:"100% 100%" }], { dauer:260 });
   document.querySelectorAll("[data-belege]").forEach(b => { const ids = b.dataset.belege.split(","); if (!ids.includes(id)) return; QUELLEN[ids[0]].stifte.forEach(s => { const sp = b.querySelector(".sp." + s[0]); const alt = sp.querySelector("ul,.leer"); if (alt) alt.outerHTML = belegListe(ids, s[0]); }); });
   if (typeof L.nachMark === "function") L.nachMark(id);
+  if (BLATT()) register();
 }
 document.addEventListener("keydown", ev => {
   if (ev.key === "Escape") return tafelZu();
@@ -712,6 +997,7 @@ document.addEventListener("input", ev => {
 });
 document.addEventListener("change", ev => {
   const t = ev.target;
+  if (t.hasAttribute && t.hasAttribute("data-hand")) { S.sa.hand = t.checked; speichere(); schreibStand(); if (BLATT()) register(); return; }
   if (t.hasAttribute && t.hasAttribute("data-bewegung")) { S.ruhig = t.checked; speichere(); if (S.ruhig) document.documentElement.setAttribute("data-bewegung", "weniger"); else document.documentElement.removeAttribute("data-bewegung"); return; }
   if (t.tagName === "SELECT" && t.dataset.f) { setz(t.dataset.f, t.value); nachEingabe(t.dataset.f); if (t.dataset.neu !== undefined) zeichneBehalte(); return; }
   const w = t.closest && t.closest(".g-wahl"); if (w) pruefeWahl(w);
@@ -727,6 +1013,297 @@ function bildFehlt(img){
 const AKTION = {
   /* data-akt="setz" data-p="pfad" data-w="wert": Wert setzen und neu zeichnen */
   setz(t){ let w = t.dataset.w; if (w === "true") w = true; else if (w === "false") w = false; setz(t.dataset.p, w); zeichneBehalte(); },
+};
+/* ===== Blatt-Rahmen (Standard aus M22, Fassung 4.1) =====
+   Ein Modul ist ein Arbeitsblatt: links das Register mit allen Arbeitsaufträgen und ihrem Stand, rechts genau ein Auftrag (eine Seite zum Scrollen).
+   L.blatt   = [{ id, nr, kurz, name, form, min, frei:"offen"|"ansage"|"antwort", nach, fehlt, gleich, marke, kopf }]
+   L.erledigt = { id: () => wahr, wenn der Auftrag bearbeitet ist }
+   L.schmal  = [ids]  – Aufträge, die die ganze Breite brauchen (Register wird zur Nummernleiste)
+   L.kapitel = "Weimarer Republik" · L.dauer = 90
+   L.schreib = Schreibauftrag im Format der Klassenarbeit · L.zf = Zusammenfassung in zwei Teilen (wissen / können) */
+let BLATT_AN = false;   // wahr, während eine Auftragsseite gebaut wird: zeitKopf() und weiter() liefern dann nichts, der Rahmen trägt Kopf und Fuß
+const BLATT = () => Array.isArray(L.blatt);
+const AUFI = id => BLATT() ? L.blatt.findIndex(a => a.id === id) : -1;
+const AUF = id => L.blatt[AUFI(id)];
+const QUER = () => { try { return matchMedia("(min-width:900px)").matches; } catch(e) { return true; } };
+const probe = f => { try { return !!(f && f()); } catch(e) { return false; } };
+const beantwortet = id => { const f = (L.erledigt || {})[id]; return f ? probe(f) : !!(S.durch || {})[id]; };
+const erledigt = id => probe((L.erledigt || {})[id]) || !!(S.durch || {})[id];
+/* Was schon einmal offen war (S.war) oder schon bearbeitet ist, bleibt offen: Eine neue Freigaberegel darf vorhandene Arbeit nicht verstecken. */
+const offen = id => { const a = AUF(id); if (!a || !a.frei || a.frei === "offen" || (S.frei || {})[id] || (S.war || {})[id] || probe((L.erledigt || {})[id])) return true; return a.frei === "antwort" && beantwortet(a.nach); };
+const SCHMAL = () => BLATT() && (L.schmal || []).includes(S.seite) && offen(S.seite);
+
+function register(immer){
+  const r = document.getElementById("reg"); if (!r || !BLATT()) return;
+  const lf = document.getElementById("loesch-frage");
+  if (!immer && (r.contains(document.activeElement) || (lf && !lf.hidden && r.contains(lf)))) return;
+  const sl = r.scrollLeft, st = r.scrollTop;
+  r.innerHTML = `<p class="ab-regtitel">Dieses Blatt · ${L.dauer || 90} Minuten</p><ol>${L.blatt.map(a => { const hier = a.id === S.seite;
+    const [wort, kl] = hier ? ["du bist hier","hier"] : erledigt(a.id) ? ["fertig","fertig"] : offen(a.id) ? ["offen","offen"] : a.frei === "ansage" ? ["öffnet auf Ansage","ansage"] : ["öffnet nach deiner Antwort","antwort"];
+    return `<li><button type="button" data-geh="${a.id}" class="${kl}"${hier ? ' aria-current="step"' : ""} aria-label="Auftrag ${a.nr}: ${esc(a.kurz)}, ${esc(a.form)}, ${a.min} Minuten, ${wort}"><span class="ab-nr" aria-hidden="true">${a.nr}</span><span><b>${esc(a.kurz)}</b><small>${a.form ? esc(a.form) + " · " : ""}${a.min} Min.</small><span class="ab-st">${wort}</span></span></button></li>`; }).join("")}</ol>`;
+  if (QUER() && !SCHMAL()) r.insertAdjacentHTML("beforeend", loeschBereich());
+  r.scrollLeft = sl; r.scrollTop = st;
+}
+function zuSeite(a){
+  const ans = a.frei === "ansage", nach = ans ? null : AUF(a.nach);
+  return `<div class="ab-zu"><p class="ab-zu-t">${ans ? "Dieser Auftrag öffnet auf Ansage." : "Dieser Auftrag öffnet nach deiner Antwort."}</p>
+  <p>${esc(ans ? "Darum geht es gleich: " + (a.gleich || a.name) : (a.fehlt || "Bearbeite erst den Auftrag davor."))}</p>
+  ${nach ? `<button type="button" class="btn dunkel" data-geh="${nach.id}">Zu Auftrag ${nach.nr}</button>` : ""}
+  <button type="button" class="btn${ans ? " dunkel" : ""}" data-freifrage aria-expanded="false">${ans ? "Unsere Lehrkraft hat freigegeben" : "Auf Ansage trotzdem öffnen"}</button>
+  <div id="ab-frage" hidden class="loesch-frage"><p><b>Hat eure Lehrkraft Auftrag ${a.nr} freigegeben?</b></p><div class="reihe"><button type="button" class="btn primary" data-frei="${a.id}">Ja, öffnen</button><button type="button" class="btn" data-frei="">Nein, noch nicht</button></div></div></div>`;
+}
+const blattzeile = () => `<div class="ab-zeile"><span>GGK · ${esc(L.kapitel || "")}</span><span>${esc(L.nr)} · Arbeitsblatt</span><span>Datum: ${new Date().toLocaleDateString("de-DE")}</span></div>`;
+function blatt(a){
+  const zu = !offen(a.id), ai = AUFI(a.id);
+  if (!zu && a.frei && a.frei !== "offen" && !(S.war || {})[a.id]) { if (!S.war) S.war = {}; S.war[a.id] = true; speichere(); }
+  let html; BLATT_AN = true;
+  try { html = zu ? zuSeite(a) : String(SEITE_FN[a.id]()).replace(/^\s*(<p class="zeit">[\s\S]*?<\/p>)?\s*<h1[^>]*>[\s\S]*?<\/h1>/, ""); } finally { BLATT_AN = false; }
+  const davor = ai > 0 ? L.blatt[ai - 1] : null, danach = ai < L.blatt.length - 1 ? L.blatt[ai + 1] : null;
+  return `<h1 class="ab-h"><span class="ab-nr" aria-hidden="true">${a.nr}</span><span>${esc(a.kopf || "Arbeitsauftrag " + a.nr)}: ${esc(a.name)}</span></h1>
+  <p class="ab-meta">${a.form ? esc(a.form) + " · " : ""}${a.min} Minuten${a.marke ? `<span class="ab-marke">${esc(a.marke)}</span>` : ""}</p>
+  <section class="ab-teil">${html}</section>
+  <div class="ab-fuss nodruck"><button type="button" class="btn" data-geh="${davor ? davor.id : "start"}">‹ ${davor ? esc(davor.nr + " " + davor.kurz) : "Deckblatt"}</button><span></span>
+  ${danach ? `<button type="button" class="btn primary" data-geh="${danach.id}"${zu ? "" : ` data-durch="${a.id}"`}>${esc(danach.nr + " " + danach.kurz)} ›</button>` : `<a class="btn primary" href="${LABOR}">Zur Übersicht</a>`}</div>`;
+}
+/* Ablauf fürs Deckblatt: die Aufträge als Liste */
+const blattAblauf = () => `<ol class="ablauf ab-ablauf">${L.blatt.map(a => `<li><b>${a.nr}</b><span>${esc(a.name)} <small>${esc(a.form)} · ${a.min} Min.${a.frei === "ansage" ? " · auf Ansage" : ""}</small></span></li>`).join("")}</ol>`;
+
+/* ---------- Auswahl links, die eine Karte rechts (Muster aus M22 4.1) ----------
+   eintraege = [{ id, nr, titel, unter, html, fertig }] · Stand: S.wk[gruppe] = id */
+function wahlKarte(gruppe, eintraege, o = {}){
+  const akt = (S.wk || {})[gruppe] || (o.leer ? null : eintraege[0].id), e = eintraege.find(x => x.id === akt);
+  return `<div class="w-wahl ${o.klasse || ""}" data-wahlgruppe="${gruppe}">
+  <div class="w-liste" role="group" aria-label="${esc(o.titel || "Auswahl")}">${eintraege.map(x => `<button type="button" data-akt="wk" data-p="${gruppe}" data-w="${x.id}" aria-pressed="${x.id === akt}" class="${x.fertig ? "um" : ""}">${x.nr ? `<span class="w-nr">${esc(x.nr)}</span>` : ""}<span class="w-t">${esc(x.titel)}</span>${x.unter ? `<span class="w-u">${esc(x.unter)}</span>` : ""}${x.fertig ? `<span class="w-st">✓ ${esc(typeof x.fertig === "string" ? x.fertig : "bearbeitet")}</span>` : ""}</button>`).join("")}</div>
+  <div class="w-karte" id="wk-${gruppe}" tabindex="-1" aria-live="polite">${e ? e.html : `<p class="w-leer">${esc(o.leer)}</p>`}</div></div>`;
+}
+/* ---------- Skala: sich festlegen auf einer Linie (Meinungslinie, Bewertung 1–5) ---------- */
+function skala(pfad, frage, n, links, rechts, o = {}){
+  const v = hol(pfad), von = o.von ?? 1;
+  return `<fieldset class="w-skala"><legend>${frage}</legend><div class="w-stufen" style="--n:${n}">${Array.from({ length:n }, (_, i) => i + von).map(i => `<button type="button" data-akt="skala" data-p="${pfad}" data-w="${i}" aria-pressed="${v === i}" aria-label="${i} von ${n + von - 1}">${i}</button>`).join("")}</div><div class="pole"><span>${esc(links)}</span><span>${esc(rechts)}</span></div></fieldset>`;
+}
+/* ---------- Erst erinnern (P2): Frage – eigene Antwort im Kopf oder im Feld – dann aufdecken ---------- */
+function abrufen(pfad, fragen){
+  const a = hol(pfad) || {};
+  return `<div class="w-abruf">${fragen.map((f, i) => { const auf = !!(a.auf || {})[i], t = (a.t || {})[i] || "";
+    return `<div class="w-frage"><label for="ab-${pfad}-${i}"><span class="w-nr">${i + 1}</span> ${esc(f[0])}</label><input type="text" id="ab-${pfad}-${i}" data-f="${pfad}.t.${i}" value="${esc(t)}" placeholder="Stichwort genügt" autocomplete="off" ${auf ? "readonly" : ""}>
+    <button type="button" class="btn" data-akt="abrufauf" data-p="${pfad}" data-w="${i}" ${auf ? "disabled" : ""}>${auf ? "Aufgedeckt" : "Aufdecken"}</button>
+    <div class="w-loesung" aria-live="polite">${auf ? `<b>Das gehört dazu:</b> ${f[1]}` : ""}</div></div>`; }).join("")}</div>`;
+}
+/* ---------- Tabelle zum Ausfüllen: kopf = [Spalten], zeilen = [Zeilentitel] ---------- */
+function tabelle(pfad, kopf, zeilen, o = {}){
+  return `<div class="matrix-wrap w-tab"><table><thead><tr>${kopf.map(k => `<th scope="col">${esc(k)}</th>`).join("")}</tr></thead><tbody>${zeilen.map((z, r) => `<tr><th scope="row">${z}</th>${kopf.slice(1).map((k, c) => `<td><textarea data-f="${pfad}.${r}.${c}" rows="${o.rows || 2}" aria-label="${esc(String(z).replace(/<[^>]+>/g, ""))}: ${esc(k)}" placeholder="${esc((o.platz || [])[c] || "")}">${esc(hol(`${pfad}.${r}.${c}`) || "")}</textarea></td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+}
+const tabelleVoll = (pfad, zeilen, spalten, min = 3) => { for (let r = 0; r < zeilen; r++) for (let c = 0; c < spalten; c++) if (String(hol(`${pfad}.${r}.${c}`) || "").trim().length < min) return false; return true; };
+/* ---------- Film oder Seite außerhalb: öffnet erst auf eigenes Tippen in einem neuen Tab (nichts wird vorab geladen) ---------- */
+function filmKarte(v){
+  return `<div class="w-film"><div class="w-film-t"><span class="kennung">${esc(v.art || "Film")}${v.dauer ? " · " + esc(v.dauer) : ""}</span><h3>${esc(v.titel)}</h3><p>${v.text || ""}</p><p class="quelle">${v.nachweis || ""}</p></div>
+  <a class="btn dunkel" href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.knopf || "Film öffnen")} ↗</a><p class="hinweis">Öffnet in einem neuen Tab bei ${esc(v.wo)}. Deine Eingaben hier bleiben.</p></div>`;
+}
+/* ---------- Großes Bild mit Nachweis; fehlt die Datei (öffentliche Fassung), verschwindet die Figur ---------- */
+function bild(b, o = {}){
+  return `<figure class="w-bild ${o.klasse || ""}" data-bildgruppe="${o.gruppe || ""}"><img src="${b.pfad || "media/"}${b.datei}" alt="${esc(b.alt)}" loading="lazy" onerror="bildFehlt(this)"><figcaption>${b.text || ""}<span class="nachweis">${b.nachweis || "Bild aus dem Unterrichtsheft. Nachweis offen."}</span></figcaption></figure>`;
+}
+/* ---------- Zeitleiste (Orientierung): punkte = [[datum, titel, text, klasse]] ---------- */
+const zeitleiste = (punkte, o = {}) => `<ol class="w-zeit ${o.klasse || ""}" style="--n:${punkte.length}">${punkte.map(p => `<li class="${p[3] || ""}"><b>${esc(p[0])}</b><span class="w-zt">${esc(p[1])}</span>${p[2] ? `<span class="w-zx">${esc(p[2])}</span>` : ""}</li>`).join("")}</ol>`;
+/* ---------- Karten im Raster (Personen, Parteien, Positionen) ---------- */
+const karten = (liste, o = {}) => `<div class="w-karten k${o.spalten || 3}">${liste.map(k => `<article class="w-kk ${k.klasse || ""}">${k.kopf ? `<p class="kennung">${esc(k.kopf)}</p>` : ""}<h3>${esc(k.titel)}</h3>${k.html || ""}</article>`).join("")}</div>`;
+/* ---------- Kasten »Das brauchst du« (Erklärung direkt an der Aufgabe, wortgleich mit der Zusammenfassung) ---------- */
+const wissen = (titel, html) => `<aside class="w-wissen"><p class="kennung">Das brauchst du</p><h3>${esc(titel)}</h3>${html}</aside>`;
+
+/* ---------- Landkarte als fester Auftrag L: erst vermuten, dann einen Eintrag der kognitiven Landkarte wählen und begründen ----------
+   Namen und Erklärungen wörtlich aus der kognitiven Landkarte (Repository kognitive-Landkarte-des-Geschichtsunterrichts, Stand 17.11.2026). */
+const LKTEIL = {
+  wozu:{ anker:"1-0", titel:"1 Wozu Geschichte?", liste:[
+    ["1-1","Resilienz gegen Manipulation","Wenn du weißt, wie Propaganda in der Vergangenheit funktioniert hat und wie Geschichten gebaut werden, erkennst du leichter, mit welchen Absichten dir heute etwas erzählt wird."],
+    ["1-2","Anthropologische Konstanten","Geschichte zeigt wiederkehrende Muster menschlichen Verhaltens, zum Beispiel wie Menschen in Krisen reagieren, wie Gruppen sich abgrenzen oder wie Macht gesichert wird."],
+    ["1-3","Verständnis der Gegenwart","Wir befragen die Vergangenheit mit unseren heutigen Fragen, und ihre Antworten helfen uns, unsere Gegenwart zu verstehen."],
+    ["1-4","Lernen aus der Vergangenheit","Kann man aus Geschichte lernen? Situationen wiederholen sich nie genau."],
+    ["1-5","Kulturelles Bewusstsein","Wer sich mit anderen Zeiten und Kulturen beschäftigt, erkennt auch, dass die eigene Lebensweise nicht selbstverständlich ist."],
+    ["1-6","Identitätsbildung","Geschichte stiftet Identität, für Einzelne wie für Gruppen und Nationen. Aber Identitäten sind gemacht."],
+    ["1-7","Kritisches Denken","Quellen kritisch prüfen: Wer hat sie verfasst? Wann, wozu, für wen? Was kann eine Quelle wissen und was nicht?"],
+    ["1-8","Demokratisches Bewusstsein","Wer versteht, wie Demokratien entstanden sind und wie sie gescheitert sind, kann sich besser an der Demokratie beteiligen."],
+    ["1-9","Verständnis globaler Zusammenhänge","Globalgeschichte hilft, Entwicklungen zu verstehen, die an keiner Grenze haltmachen."],
+    ["1-10","Inspiration und Motivation","Geschichten von Mut, Widerstand und sozialem Wandel können motivieren, sich selbst einzusetzen."]] },
+  trift:{ anker:"2-2", titel:"2.2 Die Unterschiede: Triftigkeitsprüfungen", liste:[
+    ["2-2-1","Empirische Triftigkeit","Stimmen die Tatsachen? Eine Geschichte ist empirisch triftig, wenn die behaupteten Fakten durch Quellen belegt und mit dem Forschungsstand vereinbar sind."],
+    ["2-2-2","Normative Triftigkeit","Sind die Wertungen begründet? Normativ triftig ist eine Geschichte, wenn ihre Wertungen offengelegt und durch begründbare, allgemein zustimmungsfähige Normen gedeckt sind."],
+    ["2-2-3","Narrative Triftigkeit","Ist der Zusammenhang schlüssig? Ursache und Folge, Kontinuität und Wandel müssen begründet sein, nicht nur behauptet."]] },
+  formen:{ anker:"2-3", titel:"2.3 Formen von Geschichte", liste:[
+    ["2-3-1","Ideengeschichte","untersucht, wie philosophische, religiöse und politische Ideen entstehen, sich verbreiten und verändern."],
+    ["2-3-2","Nationalgeschichte","stellt die Geschichte eines Landes oder einer Nation in den Mittelpunkt."],
+    ["2-3-4","Globalgeschichte","untersucht Prozesse, die über nationale Grenzen hinausgehen: Handel, Migration, Imperien, Krankheiten, Wissen."],
+    ["2-3-5","Postkoloniale Geschichte","untersucht die Folgen des Kolonialismus für Kolonisierte und Kolonialmächte."],
+    ["2-3-6","Mikrogeschichte","untersucht kleine Einheiten wie ein Dorf, eine Familie oder eine einzelne Person sehr genau, um daran größere Zusammenhänge sichtbar zu machen."],
+    ["2-3-7","Sozialgeschichte","untersucht gesellschaftliche Strukturen und Prozesse: Klassen, Schichten, soziale Bewegungen, Lebensbedingungen."],
+    ["2-3-8","Ereignisgeschichte","erzählt einzelne Ereignisse wie Schlachten, Verträge oder Revolutionen und ihre unmittelbaren Ursachen und Folgen."],
+    ["2-3-9","Kulturgeschichte","untersucht Deutungen, Symbole, Rituale, Kunst und Alltagspraktiken: Wie haben Menschen ihre Welt wahrgenommen und ihr Sinn gegeben?"]] },
+  wirkung:{ anker:"3-1", titel:"3.1 Analyseinstrumente", liste:[
+    ["3-1-1","Kollektives Gedächtnis","Auch wenn wir uns als Einzelne erinnern, geschieht das immer in „sozialen Rahmen“ wie Familie, Religion, Klasse oder Nation (Maurice Halbwachs, 1925)."],
+    ["3-1-2","Public History","alle Formen, in denen Geschichte außerhalb von Schule und Universität dargestellt wird: in Museen, Gedenkstätten, Filmen, Serien, Computerspielen, Podcasts, Social Media."],
+    ["3-1-3","Geschichtspolitik","der bewusste Versuch politischer Akteure, Geschichte für ihre Ziele zu nutzen: durch Gesetze, Gedenktage, Denkmäler, Lehrpläne, Reden oder das Löschen von Erinnerung."],
+    ["3-1-4","Erinnerungskultur","der Oberbegriff für alle Formen, in denen eine Gesellschaft bewusst an Vergangenes erinnert: Denkmäler, Gedenktage, Rituale, Museen, Straßennamen, Schulbücher."],
+    ["3-1-5","Agency (Handlungsspielraum)","fragt, inwieweit Menschen oder Gruppen in historischen Situationen eigenständig handeln, Entscheidungen treffen und Entwicklungen beeinflussen konnten."],
+    ["3-1-6","Kritische Medienkompetenz","verbindet die historischen Prüfwerkzeuge (Quellenkritik, Triftigkeiten) mit Strategien, die Faktenchecker*innen nutzen."]] },
+};
+LKTEIL.prinzip = { anker:"2-1", titel:"2.1 Die Gemeinsamkeiten einer jeden Geschichte", liste:Object.keys(PRINZIP).map(id => [id, PRINZIP[id][0], PRINZIP[id][1]]).concat([["2-1-9","Multiperspektivität · Kontroversität · Pluralität","Was folgt daraus? Quellen verschiedener Beteiligter, unterschiedliche Deutungen von Historiker*innen und verschiedene begründete Urteile gehören nebeneinander."]]) };
+/* cfg = { teil:"prinzip"|"wozu"|"trift"|"formen"|"wirkung", frage, lead, platz, heft (Frage aus dem Heft, wörtlich), urteil:{ id:[stufe,text] }, sonst:[stufe,text], bruecke } */
+function landkarteL(cfg){
+  const T = LKTEIL[cfg.teil || "prinzip"], l = S.lk, frei = l.vermutung.trim().length >= 10;
+  const p = T.liste.find(x => x[0] === l.prinzip), u = p ? (cfg.urteil[p[0]] || cfg.sonst || ["kaum", "Dieser Eintrag trifft den Kern der Stunde kaum. Lies deine Vermutung noch einmal und vergleiche sie mit den Erklärungen."]) : null;
+  return `<p class="leitfrage">${esc(cfg.frage)}</p>
+  ${cfg.heft ? `<p class="ab-unter">Im Heft steht dazu unter „Geschichtstheorie: Die Meta-Ebene“: ${esc(cfg.heft)}</p>` : ""}
+  <div class="ab-zwei gleich"><div>
+  ${auftrag("Allein · 2 Minuten", "Erst vermuten", cfg.lead)}
+  ${textfeld("lk.vermutung", "Meine Vermutung", { rows:3, platz:cfg.platz, zaehl:false })}
+  <p class="hinweis" id="lk-hinweis">${frei ? "Gut. Jetzt die Landkarte öffnen, dann rechts einen Eintrag wählen." : "Schreib mindestens einen Satz. Danach geht es weiter."}</p>
+  </div><div id="lk-teil2" class="${frei ? "" : "gesperrt"}">
+  ${auftrag("Allein · 4 Minuten", "Dann die Landkarte", `Öffne „${esc(T.titel)}“ in der kognitiven Landkarte. Sie öffnet sich in einem neuen Tab, deine Eingaben hier bleiben. Wähle unten den Eintrag, der hier am besten passt, und begründe in einem Satz.`)}
+  <p><a class="btn dunkel" id="lk-link" href="${LK}${T.anker}" target="_blank" rel="noopener" ${frei ? "" : 'aria-disabled="true" tabindex="-1"'}>Landkarte öffnen: ${esc(T.titel)} ↗</a></p>
+  </div></div>
+  <div class="lk-wahl ${frei ? "" : "gesperrt"}"><div class="prinzipien" role="group" aria-label="Eintrag der Landkarte wählen">${T.liste.map(x => `<button type="button" data-prinzip="${x[0]}" aria-pressed="${l.prinzip === x[0]}" class="${l.ok && l.prinzip === x[0] ? u[0] : ""}" ${(!frei || l.ok) ? "disabled" : ""}><b>${esc(x[1])}</b><small>${esc(x[2])}</small></button>`).join("")}</div>
+  <label for="lk-grund">Meine Begründung</label><textarea id="lk-grund" data-f="lk.grund" rows="2" placeholder="Dieser Eintrag passt hier, weil …" ${(!frei || !l.prinzip || l.ok) ? "disabled" : ""}>${esc(l.grund)}</textarea>
+  <div class="reihe"><button type="button" class="btn dunkel" data-lkpruef ${(!frei || !l.prinzip || l.grund.trim().length < 10 || l.ok) ? "disabled" : ""}>Prüfen</button>${l.ok ? `<button type="button" class="btn" data-lkneu>Noch einmal</button>` : ""}<span class="hinweis">Rückmeldung in drei Stufen: zentral · auch begründbar · passt kaum.</span></div>
+  <div id="lk-fb" aria-live="polite">${l.ok && u ? `<div class="rm ${u[0]}"><b>${LKSTUFE[u[0]]}</b> ${esc(u[1])} <a href="${LK}${p[0]}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a></div>` : ""}</div></div>
+  ${cfg.bruecke ? `<div class="trift">${cfg.bruecke}</div>` : ""}`;
+}
+
+/* ---------- Schreibauftrag im Format der Klassenarbeit (Standard aus M22, Auftrag 7) ----------
+   L.schreib = { vor, aufgabe (HTML, Sie-Form mit <b>Operator</b>), material (HTML, optional), woerter:130, min:60, stufen:[[Name,Text]×3], inhaltKopf, inhalt:[[Kopf,Text]] } · Stand: S.sa */
+const schreibFertig = () => !!S.sa.hand || woerter(S.sa.text) >= (L.schreib.min || 60);
+const kaRaster = () => `<div class="raster3">${L.schreib.stufen.map(([s, x]) => `<div><b>${esc(s)}</b>${esc(x)}</div>`).join("")}</div>`;
+function schreibauftrag(){
+  const c = L.schreib, w = woerter(S.sa.text), fertig = schreibFertig(), ziel = c.woerter || 130;
+  const schreibteil = `<p><b>Erst gliedern.</b> Drei Stichpunkte, bevor du schreibst:</p>
+    <div class="gliederung">${[0,1,2].map(i => `<input type="text" data-f="sa.gl.${i}" aria-label="Stichpunkt ${i + 1}" placeholder="${i + 1}" value="${esc(S.sa.gl[i] || "")}" autocomplete="off">`).join("")}</div>
+    <label for="sa-text">Dein Text · etwa ${ziel} Wörter</label><textarea id="sa-text" data-f="sa.text" rows="${c.material ? 9 : 8}">${esc(S.sa.text)}</textarea>
+    <p class="hinweis" id="sa-zahl" aria-live="polite">${w} von etwa ${ziel} Wörtern</p>`;
+  const handteil = `<p><b>Lieber von Hand?</b> Öffne das Schreibblatt, sichere es als PDF und schreib mit dem Stift.</p>
+    <div class="reihe"><button type="button" class="btn" data-schreibblatt>Schreibblatt für den Stift</button></div>
+    <label class="haken"><input type="checkbox" data-hand ${S.sa.hand ? "checked" : ""}> Ich habe von Hand geschrieben.</label>
+    <div class="reihe"><button type="button" class="btn dunkel" data-krit ${fertig ? "" : "disabled"} aria-expanded="${!!(S.sa.krit && fertig)}">Kriterien zum Abgleich</button></div>
+    <p class="hinweis" id="krit-hinweis">${fertig ? "" : `Die Kriterien öffnen sich nach deinem Text: ab etwa ${c.min || 60} Wörtern oder wenn du von Hand geschrieben hast.`}</p>`;
+  return `<p class="ab-unter">${c.vor || "So kann die Aufgabe in der Klassenarbeit stehen. Dort gibt es dafür etwa 10 Punkte und höchstens eine Seite."}</p>
+  <blockquote class="ka-aufgabe">${c.aufgabe}</blockquote>
+  ${c.material ? `<div class="ab-zwei gleich"><div class="ka-material"><p class="kennung">Material</p>${c.material}</div><div>${schreibteil}${handteil}</div></div>` : `<div class="ab-zwei"><div>${schreibteil}</div><div>${handteil}</div></div>`}
+  <div id="krit" ${S.sa.krit && fertig ? "" : "hidden"}><h2 class="abschnitt">Kriterien zum Abgleich</h2>
+    <p class="hinweis">Lies deinen Text noch einmal. Wo stehst du? Die Seite vergibt keine Punkte.</p>${kaRaster()}
+    <div class="ka-inhalt"><p><b>${esc(c.inhaltKopf || "Das kann in deinem Text stehen")}</b></p>${c.inhalt.map(([a, b]) => `<p><b>${esc(a)}</b> ${esc(b)}</p>`).join("")}</div></div>
+  <div id="schreibblatt" aria-hidden="true"><p class="zeit"><span class="nr">${esc(L.nr)} · Schreibblatt</span><span>Name: ______________ · Datum: __________</span></p>
+    <h2>Schreibauftrag wie in der Klassenarbeit</h2><blockquote class="ka-aufgabe">${c.aufgabe}</blockquote>${c.material ? `<div class="ka-material">${c.material}</div>` : ""}
+    <p><b>Erst gliedern.</b> Drei Stichpunkte:</p><div class="gl3"><div class="linien"></div><div class="linien"></div><div class="linien"></div></div>
+    <p style="margin-top:5mm"><b>Mein Text</b> (etwa eine halbe Seite)</p>${'<div class="linien"></div>'.repeat(c.material ? 14 : 20)}</div>`;
+}
+function schreibStand(){
+  const z = document.getElementById("sa-zahl"); if (!z) return;
+  const c = L.schreib, f = schreibFertig(), k = document.querySelector("[data-krit]"), h = document.getElementById("krit-hinweis");
+  z.textContent = woerter(S.sa.text) + " von etwa " + (c.woerter || 130) + " Wörtern"; if (k) k.disabled = !f;
+  if (h) h.textContent = f ? "" : `Die Kriterien öffnen sich nach deinem Text: ab etwa ${c.min || 60} Wörtern oder wenn du von Hand geschrieben hast.`;
+  if (!f) { const kr = document.getElementById("krit"); if (kr) kr.hidden = true; }
+}
+
+/* ---------- Zusammenfassung: höchstens zwei Seiten A4 in zwei Teilen ----------
+   L.zf = { frage, kern, begriffe:[[Begriff,Erklärung]], abfolge:{ titel, punkte:[[Datum,Text]] }, zahlen:[[Zahl,Text]] (optional),
+            lk:{ name, satz, beispiel }, werkzeug:{ titel, schritte:[3] }, sonst:"…", mein:[[Titel, Pfad|Funktion]] } */
+function zusammen(){
+  const c = L.zf, s = L.schreib, m = (t, leer = "noch offen") => `<p class="mein ${String(t || "").trim() ? "" : "leer"}">${esc(String(t || "").trim() || leer)}</p>`;
+  const meinText = S.sa.text.trim() ? S.sa.text : (S.sa.hand ? "Von Hand geschrieben – siehe Schreibblatt." : "");
+  return `<div class="zf zf2"><div class="reihe nodruck" style="margin:0 0 1rem"><button type="button" class="btn dunkel" data-drucken>Drucken oder als PDF sichern</button><span class="hinweis">Zwei Seiten A4. In GoodNotes ablegen.</span></div>
+  <section class="zf-seite"><p class="zf-teil">${esc(L.nr)} · ${esc(L.titel)} · Seite 1</p><h1>Das musst du wissen</h1>
+  <p class="leitfrage">${esc(c.frage)}</p><p class="merksatz">${esc(c.kern)}</p>
+  <h2>Begriffe</h2><div class="begriffe">${c.begriffe.map(b => `<div><b>${esc(b[0])}:</b> ${esc(b[1])}</div>`).join("")}</div>
+  <h2>${esc(c.abfolge.titel)}</h2><ol class="zl">${c.abfolge.punkte.map(z => `<li><b>${esc(z[0])}</b><span>${esc(z[1])}</span></li>`).join("")}</ol>
+  ${c.zahlen ? `<h2>Daten und Zahlen</h2><ul class="zl">${c.zahlen.map(z => `<li><b>${esc(z[0])}</b><span>${esc(z[1])}</span></li>`).join("")}</ul>` : ""}</section>
+  <section class="zf-seite seitenumbruch"><p class="zf-teil">${esc(L.nr)} · ${esc(L.titel)} · Seite 2</p><h1>Das musst du können</h1>
+  <h2>Landkarte: ${esc(c.lk.name)}</h2><p>${esc(c.lk.satz)}</p><p><b>Beispiel aus der Stunde:</b> ${esc(c.lk.beispiel)}</p>
+  <div class="werk"><b>Denkwerkzeug: ${esc(c.werkzeug.titel)}</b><ol>${c.werkzeug.schritte.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>
+  <h2>So wird gefragt</h2><blockquote class="ka-aufgabe klein">${s.aufgabe}</blockquote>
+  <h2>Mein Text</h2>${m(meinText, "noch offen – Schreibauftrag")}
+  ${kaRaster()}
+  ${(c.mein || []).length ? `<h2>Meine Ergebnisse</h2>${c.mein.map(x => `<div class="karte"><b>${esc(x[0])}</b>${m(typeof x[1] === "function" ? x[1]() : hol(x[1]))}</div>`).join("")}` : ""}
+  ${c.sonst ? `<p class="zf-sonst"><b>Was sonst Thema war:</b> ${esc(c.sonst)}</p>` : ""}</section></div>`;
+}
+
+/* ---------- Aktionen des Rahmens ---------- */
+AKTION.wk = t => { if (!S.wk) S.wk = {}; S.wk[t.dataset.p] = t.dataset.w; speichere(); zeichneBehalte(); const k = document.getElementById("wk-" + t.dataset.p); if (k) { k.focus({ preventScroll:true }); const r = k.getBoundingClientRect(); if (r.top < 70 || r.top > innerHeight * .6) window.scrollBy({ top:r.top - 90, behavior: ruhig() ? "auto" : "smooth" }); } };
+AKTION.skala = t => { setz(t.dataset.p, +t.dataset.w); zeichneBehalte(); };
+AKTION.abrufauf = t => { setz(`${t.dataset.p}.auf.${t.dataset.w}`, true); zeichneBehalte(); };
+window.addEventListener("afterprint", () => document.body.classList.remove("druck-sb"));
+let BREIT_ALT = null;
+window.addEventListener("resize", () => { if (!BLATT()) return; const q = QUER(); if (q !== BREIT_ALT) { BREIT_ALT = q; const a = document.activeElement; if (!a || !/^(TEXTAREA|INPUT|SELECT)$/.test(a.tagName)) zeichneBehalte(); } });
+
+/* ===== Gemeinsam für alle Arbeitsblätter (am 18.11.2026 aus dem Kapitel Weimar hierher gezogen; gilt auch für NS und Ost-West) ===== */
+/* ---------- Selbsttests sind freiwillig: überspringen sperrt nichts (»Freiwillig heißt freiwillig«) ---------- */
+const skipZeile = (pfad, n) => { const st = hol(pfad) || {}; let alle = true; for (let i = 0; i < n; i++) if (st[i] == null) alle = false; if (alle && !st.skip) return "";
+  return `<p class="w-skip nodruck"><button type="button" class="w-skipk" data-akt="skip" data-p="${pfad}" aria-pressed="${!!st.skip}">${st.skip ? "Übersprungen – doch bearbeiten" : "Selbsttest überspringen"}</button><span class="hinweis">${st.skip ? "Du kannst ihn jederzeit nachholen." : "Der Selbsttest ist freiwillig. Er sperrt nichts."}</span></p>`; };
+AKTION.skip = t => { setz(t.dataset.p + ".skip", !(hol(t.dataset.p) || {}).skip); zeichneBehalte(); };
+
+/* ---------- Leitfrage als Linie: festlegen vor dem ersten Material, zurückkehren am Ende (»Wer hat sich bewegt?«)
+   L.pole = { frage?, links, rechts } · Stand: S.lf = { vor, nach } · steht automatisch vor Auftrag 1 und beim Satz für den roten Faden ---------- */
+const leitVor = () => !L.pole ? "" : `<div class="w-leit vor"><p class="kennung">Leg dich fest – noch ohne Material · 1 Minute</p>${skala("lf.vor", esc(L.pole.frage || L.frage), 5, "1 = " + L.pole.links, "5 = " + L.pole.rechts)}<p class="hinweis">Hier gibt es kein Richtig oder Falsch. Am Ende der Stunde kommst du auf diese Linie zurück.</p></div>`;
+const leitBeweg = () => { const lf = S.lf || {}, v = lf.vor, n = lf.nach;
+  return n == null ? (v == null ? "Am Anfang hast du dich noch nicht festgelegt." : `Am Anfang standest du bei ${v} von 5.`) : v == null ? `Jetzt stehst du bei ${n} von 5.` : v === n ? `Am Anfang ${v}, jetzt ${n} von 5: Du bist bei deiner Einschätzung geblieben. Welcher Beleg aus der Stunde stützt sie am stärksten?` : `Am Anfang ${v}, jetzt ${n} von 5: Du hast dich bewegt. Was hat dich bewegt? Halte es in deiner Begründung fest.`; };
+/* Steht die Rückkehr schon in einem eigenen Auftrag der Stunde (L.pole.eigen), entfällt sie beim roten Faden. */
+const leitNach = () => { if (!L.pole || L.pole.eigen) return "";
+  return `<div class="w-leit nach nodruck"><p class="kennung">Zurück zur Leitfrage · 1 Minute</p>${skala("lf.nach", "Wo stehst du jetzt? " + esc(L.pole.frage || L.frage), 5, "1 = " + L.pole.links, "5 = " + L.pole.rechts)}<p class="w-beweg" aria-live="polite">${leitBeweg()}</p></div>`; };
+
+/* ---------- Erst erinnern (P2): zwei Fragen zu früheren Stunden, ohne Heft; aufdecken nach der eigenen Antwort ---------- */
+const erinnere = (fragen, pfad = "ab") => `<div class="w-erinn"><p class="kennung">Erst erinnern · ohne Heft · ${fragen.length > 1 ? "2 Minuten" : "1 Minute"}</p>${abrufen(pfad, fragen)}</div>`;
+
+/* ---------- Der Blick dieser Stunde: Der Zugang wird als Form von Geschichte offengelegt – erst selbst überlegen, was er ausblendet, dann vergleichen.
+   L.blick = { name, anker (Abschnitt der Landkarte, z. B. "2-3-8"), tut, fehlt } ---------- */
+const blickKarte = () => { const b = L.blick; if (!b) return "";
+  /* Der Blick wird erst nach der Landkarten-Aufgabe benannt: Sonst nähme die Karte die Antwort vorweg (erst die Sache, dann der Begriff). */
+  if (!S.lk.ok && !String(S.blickfehlt || "").trim()) return `<p class="w-blickzu">Der Blick dieser Stunde · öffnet sich, wenn du die Landkarten-Aufgabe geprüft hast.</p>`;
+  return `<section class="w-blickk"><p class="kennung">Der Blick dieser Stunde · 1 Minute</p><h3>So haben wir heute auf Geschichte geschaut: ${esc(b.name)}</h3><p>${esc(b.tut)}${b.anker ? ` <a href="${LK}${b.anker}" target="_blank" rel="noopener">In der Landkarte nachlesen ↗</a>` : ""}</p>
+  ${textfeld("blickfehlt", "Was blendet dieser Blick aus? Ein Satz.", { rows:2, zaehl:false, platz:"Nicht in den Blick kommt …" })}
+  ${vergleich("blickv", ["blickfehlt"], 10, "Mit einem Vorschlag vergleichen", `<p>${esc(b.fehlt)}</p><p class="hinweis">Jeder Blick zeigt etwas und lässt etwas weg. Deshalb wechselt der Blick von Stunde zu Stunde.</p>`)}</section>`; };
+
+/* ---------- Belastendes Bild: erst der Hinweis, dann der eigene Tipp (Sorgfaltsregel). Fehlt die Datei (öffentliche Fassung), verschwindet der ganze Kasten. Stand: S[pfad] ---------- */
+function bildNachTipp(pfad, b, hinweis){
+  return hol(pfad) ? `${bild(b)}<p class="nodruck"><button type="button" class="w-skipk" data-akt="setz" data-p="${pfad}" data-w="false">Foto wieder verbergen</button></p>`
+    : `<div class="w-bildzu"><img src="${b.pfad || "media/"}${b.datei}" alt="" hidden onerror="this.closest('.w-bildzu').remove()"><p><b>Hier liegt ein Foto, das belasten kann.</b> ${esc(hinweis)}</p><div class="reihe"><button type="button" class="btn" data-akt="setz" data-p="${pfad}" data-w="true">Foto ansehen</button><span class="hinweis">Du musst es nicht ansehen. Die Aufgabe lässt sich auch ohne das Foto lösen.</span></div></div>`;
+}
+
+/* ---------- Eine Adresse, eine Seite: Jeder Auftrag hat seinen Anker; das Deckblatt bleibt über das Register erreichbar ---------- */
+const geh0 = geh;
+geh = function(id){ if (BLATT() && AUF(id)) S.zuletzt = id; geh0(id); wAdresse(); };
+const wAdresse = () => { try { const z = S.seite === "start" ? "" : "#" + S.seite; if (location.hash !== z) history.replaceState(null, "", z || (location.pathname + location.search)); } catch(e) {} };
+window.addEventListener("hashchange", () => { if (!S) return; const h = location.hash.replace("#", ""), z = h && SEITE_FN[h] ? h : "start"; if (z !== S.seite && (SEITE_FN[h] || !h)) geh0(z); });
+const register0 = register;
+register = function(immer){ register0(immer); const r = document.getElementById("reg"); if (!r || !BLATT()) return; const t = r.querySelector(".ab-regtitel");
+  if (t && !r.querySelector(".w-zumdeck")) t.insertAdjacentHTML("afterend", `<button type="button" class="w-zumdeck${S.seite === "start" ? " hier" : ""}" data-geh="start"${S.seite === "start" ? ' aria-current="page"' : ""}>Deckblatt<small>Leitfrage und Ablauf</small></button>`); };
+
+/* ---------- Blatt aus Phasen: Stunden, die noch als Folge von Phasen gebaut sind (L.seiten), bekommen den Blatt-Rahmen ohne Umbau der Seiten.
+   L.blattAuto = true · L.blattPlus = { id:{ form, frei, nach, fehlt, kurz, name, min } } · Der Schreibauftrag (L.schreib) steht vor der letzten Seite (Zusammenfassung oder Merkseite). ---------- */
+function blattAusSeiten(){
+  const plus = L.blattPlus || {}, b = []; let n = 0;
+  const min = x => { const m = String(x || "").match(/(\d+)\s*[–-]\s*(\d+)/); if (m) return +m[2] - +m[1]; const e = String(x || "").match(/(\d+)/); return e ? +e[1] : 3; };
+  const seiten = L.seiten.filter(s => s[0] !== "start" && SEITE_FN[s[0]]), letzte = seiten.length ? seiten[seiten.length - 1][0] : "";
+  seiten.forEach(s => { const id = s[0], z = id === letzte, lk = id === "landkarte";
+    if (z && L.schreib) b.push({ id:"schreiben", nr:String(++n), kurz:"Schreibauftrag", name:"Schreibauftrag", form:"Allein · auch als Hausaufgabe", min:L.schreib.zeit || 15, frei:"ansage", marke:"wie in der Klassenarbeit", gleich:L.schreib.gleich || "Du schreibst einen Text, wie er in der Klassenarbeit verlangt wird." });
+    b.push(Object.assign({ id, nr:z ? "Z" : lk ? "L" : String(++n), kurz:s[2], name:s[2], form:"", min:min(s[1]), frei:"offen" }, z ? { kopf:"Zum Abheften" } : {}, plus[id] || {})); });
+  L.blatt = b; L.erledigt = Object.assign({ landkarte:() => !!S.lk.ok, schreiben:() => schreibFertig() }, L.erledigt || {});
+}
+const weiterLeiste = () => { const zl = S.zuletzt && AUF(S.zuletzt) && S.zuletzt !== L.blatt[0].id ? AUF(S.zuletzt) : null;
+  return zl ? `<p class="w-weiter nodruck"><span>Zuletzt warst du bei Auftrag ${zl.nr}: <b>${esc(zl.kurz)}</b>.</span><button type="button" class="btn primary" data-geh="${zl.id}">Weitermachen ›</button></p>` : ""; };
+
+/* ---------- Start: Was jedes Arbeitsblatt braucht, hängt hier am Kern (Linie zur Leitfrage, Blick der Stunde, Adresse und Anker) ---------- */
+const kernStart0 = kernStart;
+kernStart = function(){
+  if (L.blattAuto && !Array.isArray(L.blatt)) blattAusSeiten();
+  if (BLATT()) {
+    L.seiten = [["start","",""]].concat(L.blatt.map(a => [a.id, a.min + " Min.", a.kurz]));
+    const init0 = L.init; L.init = () => Object.assign({ lf:{ vor:null, nach:null }, blickfehlt:"", zuletzt:"" }, init0 ? init0() : {});
+    if (L.schreib && !SEITE_FN.schreiben) SEITE_FN.schreiben = schreibauftrag;
+    if (L.pole) { const id0 = L.blatt[0].id, f0 = SEITE_FN[id0]; SEITE_FN[id0] = () => leitVor() + f0();
+      if (L.zf && !L.pole.eigen) (L.zf.mein = L.zf.mein || []).push(["Die Leitfrage – am Anfang und am Ende", () => { const lf = S.lf || {}; return lf.vor == null && lf.nach == null ? "" : `Am Anfang: ${lf.vor == null ? "offen" : lf.vor + " von 5"} · am Ende: ${lf.nach == null ? "offen" : lf.nach + " von 5"} (1 = ${L.pole.links} · 5 = ${L.pole.rechts})`; }]);
+      if (L.blattAuto && !L.pole.eigen) { const zid = L.blatt[L.blatt.length - 1].id, z0 = SEITE_FN[zid]; SEITE_FN[zid] = () => leitNach() + z0(); } }
+    if (L.blick && SEITE_FN.landkarte) { const f1 = SEITE_FN.landkarte; SEITE_FN.landkarte = () => f1() + blickKarte(); }
+    if (L.blattAuto) { const s0 = SEITE_FN.start; SEITE_FN.start = () => weiterLeiste() + s0(); }
+  }
+  kernStart0();
+  /* Eine Adresse zeigt immer dieselbe Seite: ohne Anker das Deckblatt, mit Anker den Auftrag. Der gemerkte Platz bleibt als »Weitermachen« erhalten. */
+  if (BLATT()) { const h = location.hash.replace("#", ""); if (AUF(S.seite)) S.zuletzt = S.seite; if (!(h && SEITE_FN[h]) && S.seite !== "start") { S.seite = "start"; zeichne(false); } }
 };
 /* ===== Lehrkraft-Schloss · Quelle: src/lk-schloss.js – nur dort ändern =====
    Der Text für Lehrkräfte steht verschlüsselt auf dieser Seite (Datenblock mit der id lehr-daten): AES-GCM 256,
@@ -964,7 +1541,8 @@ function kopf(){
   const hub = L.hub;
   document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div>${hub ? `<a class="pill" href="../index.html">← GGK-Labor</a>` : `<span class="heim"><a class="pill" href="index.html">← Einheit</a><a class="pill" href="../index.html">GGK-Labor</a></span>`}`;
   const a = idx(S.seite);
-  document.getElementById("weg").innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
+  const weg = document.getElementById("weg"); if (!weg) return;   /* Stunden stehen im Blatt-Rahmen: Dort ersetzt das Register die Leiste */
+  weg.innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
 }
 const OWK_MARK = `<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 4v26" stroke="#24221F" stroke-width="2.4" stroke-dasharray="3 3"/><path d="M5 10h9v14H5z" fill="none" stroke="#1E4FB5" stroke-width="2.4" stroke-linejoin="round"/><path d="M20 10h9v14h-9z" fill="none" stroke="#9B402D" stroke-width="2.4" stroke-linejoin="round"/></svg>`;
 /* Zurück aus einer Stunde: den Stand der Einheit neu lesen */
@@ -1240,8 +1818,9 @@ AKTION.rraus = t => { const r = S.reihe[t.dataset.id]; r.folge = r.folge.filter(
 AKTION.rpruef = t => { S.reihe[t.dataset.id].gepr = true; speichere(); zeichneBehalte(); };
 AKTION.rneu = t => { S.reihe[t.dataset.id] = { folge:[], gepr:false }; speichere(); zeichneBehalte(); };
 /* Tabelle mit eigenen Einträgen: zeilen = [[schlüssel, Titel]], pfad = Ort in S */
-const tabelle = (pfad, kopf, zeilen) => `<div class="matrix-wrap"><table class="tab3"><thead><tr>${kopf.map(k => `<th>${esc(k)}</th>`).join("")}</tr></thead><tbody>${zeilen.map(z => `<tr><th scope="row">${esc(z[1])}</th>${kopf.slice(1).map((k, i) => { const p = pfad + "." + z[0] + (kopf.length > 2 ? "_" + i : ""); return `<td><label class="sr" for="f-${p.replace(/\W/g, "-")}">${esc(z[1])}: ${esc(k)}</label><textarea id="f-${p.replace(/\W/g, "-")}" data-f="${p}" rows="2">${esc(hol(p) || "")}</textarea></td>`; }).join("")}</tr>`).join("")}</tbody></table></div>`;
+const tabelleO = (pfad, kopf, zeilen) => `<div class="matrix-wrap"><table class="tab3"><thead><tr>${kopf.map(k => `<th>${esc(k)}</th>`).join("")}</tr></thead><tbody>${zeilen.map(z => `<tr><th scope="row">${esc(z[1])}</th>${kopf.slice(1).map((k, i) => { const p = pfad + "." + z[0] + (kopf.length > 2 ? "_" + i : ""); return `<td><label class="sr" for="f-${p.replace(/\W/g, "-")}">${esc(z[1])}: ${esc(k)}</label><textarea id="f-${p.replace(/\W/g, "-")}" data-f="${p}" rows="2">${esc(hol(p) || "")}</textarea></td>`; }).join("")}</tr>`).join("")}</tbody></table></div>`;
 function stundeStart(){
+  L.blattAuto = true; L.kapitel = L.kapitel || "Ost-West-Konflikt";   /* Blatt-Rahmen: Register links, ein Auftrag je Seite (blatt.js) */
   const eig = L.nachEingabe;
   L.nachEingabe = p => {
     if (p === "v.faden") owkSchreib(u => { u.faden[L.sid] = S.v.faden; });

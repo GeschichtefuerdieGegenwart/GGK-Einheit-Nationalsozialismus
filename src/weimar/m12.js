@@ -7,6 +7,7 @@ const L = {
   blick:{ name:"De-Konstruktion: einen Epochenbegriff prüfen", anker:"2-4-1", tut:"Du nimmst eine fertige Erzählung – die „Goldenen Zwanziger“ – auseinander und prüfst, ob sie trägt.", fehlt:"Was fehlt: eine eigene Erzählung. Wer einen Begriff prüft, weiß danach, was nicht stimmt – aber noch nicht, wie man die Jahre 1924 bis 1929 besser erzählt." },
   deck:{ dauer:"Doppelstunde · 90 Minuten", jahr:"1924–1929", hier:[5],
     satz:"Revuen, Jazz, Kino, Bauhaus: Die Jahre nach der Inflation gelten als golden. Die meisten Menschen lebten aber nicht in Berlin.",
+    bild:{ datei:"heft-m12-zwanziger.jpg", alt:"Schwarz-Weiß-Foto: Eine Festgesellschaft in Abendkleidung und Kostümen blickt in die Kamera. In der Mitte sitzen zwei kaum bekleidete Tänzerinnen auf den Schultern von Männern.", text:"Feier in den Zwanzigerjahren.", nachweis:"Bild aus dem Unterrichtsheft, M12. Ort und Jahr dort nicht angegeben; Nachweis offen." },
     ziele:["Kunst, Kultur und Lebensgefühl der Zwanzigerjahre an Beispielen beschreiben,", "Unterschiede zwischen Stadt und Land darstellen,", "mit den drei Triftigkeiten prüfen, wie gerechtfertigt der Begriff „Goldene Zwanziger“ ist."] },
   blatt:[
     { id:"vorher", nr:"1", kurz:"Bild im Kopf", name:"Erst erinnern – und dein Bild im Kopf", form:"Allein · ohne Heft", min:4, frei:"offen" },

@@ -36,7 +36,8 @@ function kopf(){
   const hub = L.hub;
   document.getElementById("kopf").innerHTML = `${L.mark}<div class="titel">${esc(L.nr)} · ${esc(L.titel)}<small>${esc(L.unter)}</small></div>${hub ? `<a class="pill" href="../index.html">← GGK-Labor</a>` : `<span class="heim"><a class="pill" href="index.html">← Einheit</a><a class="pill" href="../index.html">GGK-Labor</a></span>`}`;
   const a = idx(S.seite);
-  document.getElementById("weg").innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
+  const weg = document.getElementById("weg"); if (!weg) return;   /* Stunden stehen im Blatt-Rahmen: Dort ersetzt das Register die Leiste */
+  weg.innerHTML = L.seiten.slice(1).map((s, i) => { const k = i + 1, cls = k === a ? "akt" : (k < a ? "da" : ""); return `<button class="${cls}" data-geh="${s[0]}"${k === a ? ' aria-current="step"' : ""}><b>${esc(s[2])}</b>${esc(s[1])}</button>`; }).join("");
 }
 const OWK_MARK = `<svg class="mark" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 4v26" stroke="#24221F" stroke-width="2.4" stroke-dasharray="3 3"/><path d="M5 10h9v14H5z" fill="none" stroke="#1E4FB5" stroke-width="2.4" stroke-linejoin="round"/><path d="M20 10h9v14h-9z" fill="none" stroke="#9B402D" stroke-width="2.4" stroke-linejoin="round"/></svg>`;
 /* Zurück aus einer Stunde: den Stand der Einheit neu lesen */
