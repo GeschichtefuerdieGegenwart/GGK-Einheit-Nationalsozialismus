@@ -1,0 +1,309 @@
+/* Arbeitsblatt Geschichte · Musterblatt (Vorschlag vom 18.11.2026)
+   Layout: Schreibtisch als Grund – links das Register auf altem Papier, rechts ein Blatt auf DIN-A4-Grundlage.
+   Zwei Tinten: Schreibschwarz und die Farbe der Einheit (Platte hell, Tief dunkel). Alles andere bleibt Papier. */
+:root{
+  --grund:#F3EFE7; --blatt:#FDFBF6; --karton:#E9E2D7; --tinte:#24221F; --leise:#5A564F; --linie:#D5CEC3; --stahl:#857E73; --schreiblinie:#B9B2A6;
+  --ok:#2E5A47; --ok-hi:#D6E4DC; --achtung:#6E4F0A; --achtung-hi:#EEE2BF; --hell:#FFFAF2;
+  --platte:#A9BDD1; --tief:#2C4763; --hauch:#DFE7EF; --reg:#D4D6D5; --zwei:#2C4763;
+  --titel:"Fraunces",Georgia,"Times New Roman",serif; --text:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --a4:52.5rem; --zeile:2rem; --reg-breite:17rem; --kopf-hoehe:3.75rem;
+  --kurve:cubic-bezier(.23,1,.32,1); --d-druck:100ms; --d-mittel:220ms; --d-aufdecken:360ms;
+}
+.ab[data-richtung="W-A"]{--platte:#E3B94E;--tief:#6F4A00;--hauch:#F6EBC9;--reg:#E4D5A9;--zwei:#6F4A00}
+.ab[data-richtung="W-B"]{--platte:#9CC5A8;--tief:#1F5C46;--hauch:#DDEBDF;--reg:#D9DBC0;--zwei:#1F5C46}
+.ab[data-richtung="W-C"]{--platte:#BDB0EA;--tief:#45358A;--hauch:#E7E1F7;--reg:#E0D8C6;--zwei:#45358A}
+.ab[data-richtung="N-A"]{--platte:#A9BDD1;--tief:#2C4763;--hauch:#DFE7EF;--reg:#D4D6D5;--zwei:#2C4763}
+.ab[data-richtung="N-B"]{--platte:#C3C7CC;--tief:#3A3F46;--hauch:#E7E8EA;--reg:#D8D7D3;--zwei:#3A3F46}
+.ab[data-richtung="N-C"]{--platte:#A5CBBE;--tief:#1D4A40;--hauch:#DCEBE5;--reg:#D6D8CE;--zwei:#1D4A40}
+.ab[data-richtung="O-A"]{--platte:#A9C2F0;--tief:#173F86;--hauch:#DEE8F8;--reg:#D2DCE9;--zwei:#8A3A28}
+.ab[data-richtung="O-B"]{--platte:#93CCC6;--tief:#155552;--hauch:#D9ECEA;--reg:#D3DCD8;--zwei:#155552}
+.ab[data-richtung="O-C"]{--platte:#C9B8EE;--tief:#4F3890;--hauch:#EAE3F8;--reg:#DAD5E2;--zwei:#4F3890}
+:root[data-ansicht="beamer"]{--grund:#FFFFFF;--blatt:#FFFFFF;--karton:#E6E1D8;--tinte:#000000;--leise:#33302B;--linie:#B9B1A4;--stahl:#5C564D;--schreiblinie:#8E877B}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--grund);color:var(--tinte);font:400 clamp(1.0625rem,1rem + .25vw,1.1875rem)/1.55 var(--text);font-variant-numeric:tabular-nums;overflow-x:clip}
+h1,h2,h3{font-family:var(--titel);font-weight:600;margin:0;text-wrap:balance;color:var(--tinte)}
+h1{font-size:clamp(1.9rem,1.5rem + 1.6vw,2.6rem);line-height:1.1}
+h2{font-size:clamp(1.55rem,1.3rem + 1vw,2rem);line-height:1.15}
+h3{font-size:1.22rem;line-height:1.25}
+p{margin:0 0 .7rem;max-width:68ch}
+ul,ol{margin:0 0 .7rem;padding-left:1.25em;max-width:68ch}
+li{margin-bottom:.25rem}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--tinte);outline-offset:2px}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.klein{font-size:1rem;line-height:1.45;color:var(--leise)}
+.nachweis{font-size:1rem;line-height:1.4;color:var(--leise);margin:.5rem 0 0}
+
+/* ---------- Musterleiste: gehört nicht zum Standard, nur zum Auswählen ---------- */
+.ml{background:var(--tinte);color:var(--hell);padding-block:.9rem 1rem;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.ml__innen{max-width:86rem;margin:0 auto;display:grid;gap:.7rem}
+.ml h1{color:var(--hell);font-size:1.5rem}
+.ml p{color:#E3DDD2;margin:0;max-width:80ch}
+.ml__reihe{display:flex;flex-wrap:wrap;gap:.5rem .6rem;align-items:center}
+.ml__name{font-weight:700;min-width:7.2rem}
+.ml button{min-height:44px;padding:.3rem .85rem;border:2px solid #8F887D;border-radius:.3rem;background:transparent;color:var(--hell);font-weight:700;display:inline-flex;gap:.5rem;align-items:center}
+.ml button[aria-pressed="true"]{background:var(--hell);color:var(--tinte);border-color:var(--hell)}
+.ml .tupfer{width:1.15rem;height:1.15rem;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.55);flex:none}
+.ml button[aria-pressed="true"] .tupfer{box-shadow:inset 0 0 0 2px rgba(0,0,0,.45)}
+.ml__warum{border-left:4px solid var(--hell);padding-left:.8rem}
+.ml__warum b{color:var(--hell)}
+.ml .klein{color:#D8D1C5;margin:0}
+
+/* ---------- Kopfzeile ---------- */
+.ab-kopf{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;min-height:var(--kopf-hoehe);display:flex;align-items:center;gap:.9rem;padding:.35rem max(16px,env(safe-area-inset-right,0px)) .35rem max(16px,env(safe-area-inset-left,0px));background:var(--grund);border-bottom:2px solid var(--tinte)}
+.reiter{flex:none;display:inline-grid;place-items:center;min-width:3.4rem;padding:.2rem .6rem;background:var(--platte);color:var(--tinte);font:600 1.25rem/1.2 var(--titel);border-radius:.45rem .45rem 0 0;box-shadow:inset 0 -3px 0 0 var(--tinte)}
+.ab-kopf__titel{min-width:0;flex:1}
+.ab-kopf__titel b{display:block;font-size:1.06rem;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ab-kopf__titel span{display:block;font-size:1rem;line-height:1.3;color:var(--leise);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.knopf{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;min-height:48px;padding:.4rem 1.1rem;border:2px solid var(--tinte);border-radius:.3rem;background:var(--blatt);color:var(--tinte);font-weight:700;text-decoration:none;line-height:1.2;transition:transform var(--d-druck) var(--kurve)}
+.knopf:active{transform:translate(2px,2px)}
+.knopf--haupt{background:var(--tinte);color:var(--hell);box-shadow:4px 4px 0 0 var(--platte)}
+.knopf--haupt:active{box-shadow:2px 2px 0 0 var(--platte)}
+.knopf--still{border-color:transparent;background:transparent;text-decoration:underline;text-underline-offset:.2em;text-decoration-thickness:2px}
+.knopf[disabled]{opacity:1;border-style:dashed;border-color:var(--stahl);color:var(--leise);background:transparent;box-shadow:none;cursor:not-allowed}
+
+/* ---------- Rahmen: Register + Tisch ---------- */
+.ab-rahmen{display:grid;grid-template-columns:var(--reg-breite) minmax(0,1fr);align-items:start}
+.ab-reg{position:sticky;top:calc(var(--kopf-hoehe) + env(safe-area-inset-top,0px));height:calc(100vh - var(--kopf-hoehe));height:calc(100dvh - var(--kopf-hoehe) - env(safe-area-inset-top,0px));overflow-y:auto;padding:.8rem .6rem 1.4rem max(16px,env(safe-area-inset-left,0px));background-color:var(--reg);background-image:KORN;border-right:2px solid var(--tinte);color:var(--tinte);display:flex;flex-direction:column;gap:.5rem}
+.ab-reg__kopf{font-weight:700;font-size:1rem;margin:0 .3rem;color:#3D382F}
+.ab-reg ol{list-style:none;margin:0;padding:0;display:grid;gap:2px;max-width:none}
+.ab-reg li{margin:0}
+.reg{display:grid;grid-template-columns:2.4rem 1fr;gap:.6rem;align-items:start;width:100%;text-align:left;padding:.35rem .45rem;min-height:56px;border:2px solid transparent;border-radius:.3rem;background:transparent;color:inherit}
+.reg__nr{width:2.4rem;height:2.4rem;display:grid;place-items:center;border-radius:50%;background:var(--blatt);box-shadow:inset 0 0 0 2px var(--tinte);font:600 1.15rem/1 var(--titel)}
+.reg[data-fest] .reg__nr{border-radius:.35rem}
+.reg__text{display:grid;min-width:0}
+.reg__text b{font-size:1.04rem;line-height:1.25}
+.reg__text small{font-size:1rem;line-height:1.3;color:#3D382F}
+.reg__stand{font-size:1rem;line-height:1.3;font-weight:700;color:#3D382F}
+.reg[data-stand="erledigt"] .reg__nr{background:var(--ok);color:var(--hell);box-shadow:none}
+.reg[data-stand="erledigt"] .reg__stand{color:#1F4433}
+.reg[data-stand="ansage"] .reg__stand{color:#5C3F00}
+.reg[data-stand="ansage"] .reg__nr,.reg[data-stand="gesperrt"] .reg__nr{box-shadow:inset 0 0 0 2px var(--stahl);background:transparent}
+.reg[data-stand="ansage"] .reg__nr{box-shadow:none;border:2px dashed #5C3F00}
+.reg[aria-current="page"]{background:var(--blatt);border-color:var(--tinte);box-shadow:4px 4px 0 0 var(--platte)}
+.reg[aria-current="page"] .reg__nr{background:var(--tinte);color:var(--hell);box-shadow:none;border:0}
+.reg[aria-current="page"] .reg__stand{color:var(--tief)}
+@media (hover:hover) and (pointer:fine){.reg:hover{border-color:var(--stahl)}}
+.ab-reg__mehr{margin-top:auto}
+.ab-reg__mehr summary{min-height:44px;display:flex;align-items:center;gap:.4rem;font-weight:700;font-size:1rem;cursor:pointer;padding:0 .3rem}
+@media (min-width:60.01rem){.ab-reg__mehr summary{display:none}}
+.ab-reg__fuss{padding-top:.8rem;border-top:2px solid rgba(36,34,31,.45);display:grid;gap:.5rem}
+.ab-reg__fuss .knopf{width:100%}
+.ab-reg__fuss label{display:flex;gap:.5rem;align-items:center;min-height:44px;font-size:1rem;font-weight:700}
+.ab-reg__fuss select{min-height:44px;flex:1;border:2px solid var(--tinte);border-radius:.3rem;background:var(--blatt);padding:0 .4rem}
+.ab-reg__fuss input[type=checkbox]{width:1.5rem;height:1.5rem;accent-color:var(--tinte)}
+.ab-reg__fuss .klein{color:#3D382F;margin:0}
+
+.ab-tisch{min-width:0;padding:1.4rem max(16px,env(safe-area-inset-right,0px)) 3.5rem clamp(16px,2.4vw,2.2rem)}
+.ab-blatt{container-type:inline-size;position:relative;max-width:var(--a4);margin:0 auto;background:var(--blatt);border:1px solid var(--linie);box-shadow:6px 6px 0 0 var(--karton);padding:1.5rem clamp(1.1rem,3.4vw,2.6rem) 2.4rem clamp(1.1rem,6.4vw,4.9rem)}
+:root[data-ansicht="beamer"] .ab-blatt{box-shadow:0 0 0 2px var(--linie)}
+.blattkopf{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.2rem 1rem;font-size:1rem;line-height:1.35;color:var(--leise);border-bottom:2px solid var(--tinte);padding-bottom:.4rem;margin-bottom:1.5rem}
+.blattkopf b{color:var(--tinte)}
+.ab-fuss{max-width:var(--a4);margin:1.3rem auto 0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.7rem}
+:root:not([data-bewegung="weniger"]) .ab-blatt.neu{animation:blattein var(--d-mittel) var(--kurve)}
+@keyframes blattein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.ab-blatt.neu{animation:none!important}}
+
+/* ---------- Deckblatt ---------- */
+.deck{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:1.4rem 2rem;align-items:start}
+.deck__kopf{display:grid;gap:.75rem;justify-items:start}
+.deck .reiter{font-size:1.5rem;padding:.25rem .8rem}
+.marke{font-size:1rem;font-weight:700;color:var(--leise);margin:0}
+.zfrage{font:italic 600 clamp(1.3rem,1.1rem + .9vw,1.7rem)/1.25 var(--titel);color:var(--tief);margin:0;max-width:30ch}
+.platz{display:flex;gap:.6rem;align-items:flex-start;font-size:1rem;line-height:1.4;margin:0;padding:.45rem .7rem;background:var(--hauch);border-left:4px solid var(--tief)}
+.titelbild{margin:0}
+.titelbild svg,.titelbild img{display:block;width:100%;height:auto;border:2px solid var(--tinte);background:var(--hauch)}
+.titelbild svg text{font-family:var(--titel);font-weight:600}
+.g-hauch{fill:var(--hauch)}.g-platte{fill:var(--platte)}.g-tief{fill:var(--tief)}.g-tinte{fill:var(--tinte)}
+.s-tinte{stroke:var(--tinte);fill:none}.s-tief{stroke:var(--tief);fill:none}
+.deck__unten{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.4rem 2rem;align-items:start}
+.ablauf .form{display:block;font-size:1rem;color:var(--leise)}
+.ablauf{width:100%;border-collapse:collapse;font-size:1rem}
+.ablauf td{padding:.28rem .3rem;border-bottom:1px solid var(--linie);vertical-align:top;line-height:1.35}
+.ablauf td:first-child{width:2.2rem;font:600 1.05rem/1.3 var(--titel)}
+.ablauf td:last-child{text-align:right;white-space:nowrap}
+.ablauf tr:last-child td{border-bottom:0;font-weight:700;border-top:2px solid var(--tinte)}
+
+/* ---------- Auftrag ---------- */
+.akopf{position:relative;margin-bottom:1.1rem}
+.akopf .nr{position:absolute;left:calc(-1 * clamp(.2rem,5.2vw,3.7rem));top:.1rem;width:2.9rem;height:2.9rem;display:grid;place-items:center;border-radius:50%;background:var(--tinte);color:var(--hell);font:600 1.45rem/1 var(--titel)}
+.akopf[data-fest] .nr{border-radius:.4rem;background:var(--platte);color:var(--tinte);box-shadow:inset 0 0 0 2px var(--tinte)}
+.aart{font-size:1rem;font-weight:700;color:var(--leise);margin:0 0 .15rem}
+.ameta{font-size:1rem;font-weight:700;color:var(--tief);margin:.3rem 0 0}
+.kasten{padding:.9rem 1.1rem;border-radius:.3rem}
+.kasten>:last-child{margin-bottom:0}
+.kasten__kopf{font-size:1rem;font-weight:700;margin:0 0 .3rem}
+.kasten--auftrag{background:var(--tinte);color:var(--hell)}
+.kasten--auftrag .kasten__kopf{color:var(--platte)}
+.kasten--auftrag h3{color:var(--hell);margin-bottom:.3rem}
+.kasten--material{background:var(--karton);border-left:4px solid var(--tief)}
+.kasten--material .kasten__kopf{color:var(--tief)}
+.kasten--sichern{background:var(--blatt);border:2px solid var(--tinte);box-shadow:5px 5px 0 0 var(--platte)}
+.kasten--zu{border:2px dashed var(--stahl);color:var(--leise);background:transparent}
+.block{display:grid;gap:1.2rem}
+.block>*{min-width:0}
+.neben{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.2rem 1.6rem;align-items:start}
+.neben>*{min-width:0}
+.feld{display:grid;gap:.25rem}
+.feld label,.feld .lab{font-weight:700;line-height:1.35}
+.linien{display:block;width:100%;border:0;border-left:3px solid var(--platte);border-bottom:2px solid var(--stahl);border-radius:0;padding:0 .5rem;margin:0;line-height:var(--zeile);font-size:1.0625rem;color:var(--tinte);resize:vertical;min-height:calc(var(--zeile) * 2);background-color:transparent;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--zeile) - 2px),var(--schreiblinie) calc(var(--zeile) - 2px),var(--schreiblinie) var(--zeile));background-attachment:local;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+input.linien,select.linien{height:2.75rem;min-height:2.75rem;line-height:1.4;resize:none;background-image:none}
+.zaehler{font-size:1rem;color:var(--leise);margin:.2rem 0 0}
+.reihe{display:flex;flex-wrap:wrap;gap:.6rem .8rem;align-items:center}
+.haken{display:inline-flex;gap:.55rem;align-items:center;min-height:44px;font-weight:700}
+.haken input{width:1.5rem;height:1.5rem;accent-color:var(--tinte)}
+
+/* Schätzen und Aufdecken (NS-Muster) */
+.schieber{display:grid;gap:.3rem}
+.schieber input[type=range]{width:100%;height:44px;accent-color:var(--tief)}
+.stempel{display:inline-block;padding:.2rem .7rem;border:2px solid var(--tief);color:var(--tief);font-weight:700;border-radius:.3rem;transform:rotate(-3deg)}
+.pfelder{display:grid;gap:.7rem}
+.pfelder figure{margin:0;display:grid;grid-template-columns:6.2rem minmax(0,1fr);gap:.8rem;align-items:center}
+.pf{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;padding:.35rem;background:var(--blatt);border:2px solid var(--tinte)}
+.pf i{aspect-ratio:1;border-radius:50%;background:var(--linie)}
+.pf i.an{background:var(--tief)}
+.pf i.spanne{background:repeating-linear-gradient(45deg,var(--tief) 0 2px,var(--hauch) 2px 4px)}
+.pfelder figcaption{font-size:1rem;line-height:1.35}
+.pfelder figcaption b{display:block}
+:root:not([data-bewegung="weniger"]) .aufdecken{animation:aufdecken var(--d-aufdecken) var(--kurve)}
+@keyframes aufdecken{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.aufdecken{animation:none!important}}
+
+/* Zeit ziehen (Ost-West-Muster) */
+.zeit{display:grid;gap:.5rem}
+.zeit__bild{display:grid;grid-template-columns:repeat(13,1fr);align-items:end;gap:3px;height:9.5rem;padding:.4rem .4rem 0;border:2px solid var(--tinte);background:var(--blatt)}
+.zeit__bild i{display:block;background:var(--schreiblinie);min-height:6px}
+.zeit__bild i.da{background:var(--platte);border:2px solid var(--tinte);border-bottom:0}
+.zeit__bild i.jetzt{background:var(--tief)}
+.zeit__achse{display:grid;grid-template-columns:repeat(13,1fr);gap:3px;padding:0 .4rem;font-size:1rem;text-align:center;color:var(--leise)}
+.zeit__regler{display:grid;grid-template-columns:auto 1fr auto;gap:.5rem;align-items:center}
+.zeit__regler input{width:100%;height:44px;accent-color:var(--tief)}
+.zeit__regler button{min-width:48px;min-height:48px;border:2px solid var(--tinte);border-radius:.3rem;background:var(--blatt);font-weight:700}
+.zeit__wort{font-size:1.1rem;margin:0}
+.zeit__wort b{font:600 1.35rem/1.2 var(--titel)}
+
+/* Karten (Weimar-Muster) */
+.karten{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}
+.karten div{padding:.55rem .6rem;background:var(--blatt);border:2px solid var(--tinte);font-weight:700;line-height:1.3;hyphens:auto;overflow-wrap:anywhere;min-width:0}
+.kette{margin:0;padding:0;list-style:none;display:grid;gap:.25rem}
+.kette li{padding:.3rem .6rem;border-left:4px solid var(--tief);background:var(--hauch);margin:0}
+.kette li+li::before{content:"↓ ";font-weight:700}
+
+/* Landkarte: Wahl und gestufte Rückmeldung */
+.wahl{display:grid;gap:.5rem;border:0;padding:0;margin:0}
+.wahl legend{font-weight:700;padding:0;margin-bottom:.3rem}
+.wahl label{display:grid;grid-template-columns:1.6rem 1fr;gap:.6rem;align-items:start;padding:.55rem .7rem;border:2px solid var(--stahl);border-radius:.3rem;min-height:48px;line-height:1.35}
+.wahl input{width:1.4rem;height:1.4rem;margin:.15rem 0 0;accent-color:var(--tinte)}
+.wahl label:has(input:checked){border-color:var(--tinte);background:var(--hauch)}
+.stufe{padding:.7rem .9rem;border-left:6px solid var(--ok);background:var(--ok-hi)}
+.stufe[data-stufe="begruendbar"]{border-left:6px dashed var(--achtung);background:var(--achtung-hi)}
+.stufe[data-stufe="kaum"]{border-left:6px dotted var(--stahl);background:var(--karton)}
+.stufe b:first-child{display:block}
+
+/* Zusammenfassung */
+.zf{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.4rem 2rem}
+.zf h3{border-bottom:2px solid var(--tinte);padding-bottom:.25rem;margin-bottom:.6rem}
+.zf dl{margin:0}
+.zf dt{font-weight:700;margin-top:.5rem}
+.zf dd{margin:0}
+
+/* ---------- Hefter ---------- */
+.hefter{max-width:86rem;margin:0 auto;padding:1.6rem max(16px,env(safe-area-inset-right,0px)) 3.5rem max(16px,env(safe-area-inset-left,0px));display:grid;gap:1.8rem}
+.hefter__kopf{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:1.4rem 2.4rem;align-items:start}
+.hefter__kopf>div{display:grid;gap:.7rem;justify-items:start}
+.blick{width:100%;margin:0}
+.blick div{display:grid;grid-template-columns:5.2rem 1fr;gap:.8rem;padding:.45rem 0;border-top:1px solid var(--linie);align-items:baseline}
+.blick dt{font:600 1.5rem/1.1 var(--titel)}
+.blick dt small{font:400 1rem/1 var(--text);color:var(--leise)}
+.blick dd{margin:0;font-size:1rem;line-height:1.35}
+.hefter h2{border-top:2px solid var(--tinte);padding-top:1rem;margin-bottom:.7rem}
+.blaetter{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(19rem,1fr));gap:.7rem;max-width:none}
+.blaetter li{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:start;padding:.6rem .8rem .7rem;background:var(--blatt);border:1px solid var(--linie);border-top:3px solid var(--tinte);min-width:0}
+.blaetter li[data-hier]{border:2px solid var(--tinte);border-top-width:3px;box-shadow:5px 5px 0 0 var(--platte)}
+.blaetter .reiter{font-size:1.05rem;min-width:3rem}
+.blaetter b{display:block;line-height:1.3}
+.blaetter small{display:block;font-size:1rem;line-height:1.35;color:var(--leise)}
+.spur{list-style:none;margin:0;padding:0;display:grid;gap:.4rem;max-width:none}
+.spur li{display:grid;grid-template-columns:5.5rem 1fr;gap:.8rem;padding:.5rem .7rem;background:var(--hauch);border-left:4px solid var(--tief);margin:0}
+.drei{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}
+
+/* ---------- Bausteine (Zustandskarte) ---------- */
+.zustand{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem;align-items:start}
+.zustand>div{display:grid;gap:.4rem;align-content:start;min-width:0}
+.zustand .regprobe{background-color:var(--reg);background-image:KORN;padding:.5rem;border:1px solid var(--linie)}
+.farbtafel{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.7rem}
+.farbtafel div{border:1px solid var(--linie);background:var(--blatt)}
+.farbtafel i{display:block;height:3.4rem;border-bottom:1px solid var(--linie)}
+.farbtafel span{display:block;padding:.35rem .5rem;font-size:1rem;line-height:1.3}
+.tab{width:100%;border-collapse:collapse;font-size:1rem}
+.tab th,.tab td{text-align:left;padding:.35rem .5rem;border-bottom:1px solid var(--linie);vertical-align:top;line-height:1.35}
+.tab th{border-bottom:2px solid var(--tinte)}
+.rollen{overflow-x:auto;max-width:100%}
+.hefter>section{min-width:0}
+
+/* ---------- Datei-Fenster ---------- */
+.fenster{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:rgba(36,34,31,.55)}
+.fenster__blatt{width:min(40rem,100%);max-height:90vh;overflow:auto;background:var(--blatt);border:2px solid var(--tinte);box-shadow:8px 8px 0 0 var(--platte);padding:1.2rem 1.3rem 1.3rem;display:grid;gap:.8rem}
+.fenster textarea{width:100%;min-height:7rem;font:400 1rem/1.4 ui-monospace,Menlo,Consolas,monospace;border:2px solid var(--stahl);padding:.4rem;background:var(--hell)}
+
+/* ---------- Schmal: iPad hoch und Telefon ---------- */
+@media (max-width:60rem){
+  .ab-rahmen{grid-template-columns:minmax(0,1fr)}
+  .ab-reg{position:static;height:auto;max-height:none;border-right:0;border-bottom:2px solid var(--tinte);padding:.5rem max(16px,env(safe-area-inset-right,0px)) .5rem max(16px,env(safe-area-inset-left,0px))}
+  .ab-tisch{padding-left:max(16px,env(safe-area-inset-left,0px))}
+  .ab-reg ol{grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto;gap:.3rem;padding-bottom:.3rem}
+  .reg{grid-template-columns:2.4rem;min-height:48px;padding:.25rem}
+  .reg__text{display:none}
+  .reg[aria-current="page"]{grid-template-columns:2.4rem auto}
+  .reg[aria-current="page"] .reg__text{display:grid}
+  .reg[aria-current="page"] .reg__text small,.reg[aria-current="page"] .reg__stand{display:none}
+  .ab-reg__kopf{display:none}
+  .ab-reg__fuss{grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));margin-top:0;border-top:0;padding-top:.4rem}
+  .ab-reg__fuss .klein{grid-column:1/-1}
+  .akopf .nr{position:static;margin-bottom:.4rem}
+  .hefter__kopf{grid-template-columns:minmax(0,1fr)}
+}
+@container (max-width:40rem){
+  .deck,.deck__unten,.neben,.zf{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:30rem){
+  .ab-kopf__titel span{display:none}
+}
+
+/* ---------- Druck: jedes Blatt eine Seite DIN A4 ---------- */
+@page{size:A4;margin:14mm 14mm 14mm 22mm}
+@media print{
+  html{font-size:11pt}
+  body{background:#fff}
+  .ml,.ab-kopf,.ab-reg,.ab-fuss,.nodruck,.fenster{display:none!important}
+  .ab-rahmen{display:block}
+  .ab-tisch{padding:0}
+  .ab-blatt{max-width:none;border:0;box-shadow:none;padding:0;animation:none!important}
+  .akopf .nr{position:static;margin-bottom:2mm;width:9mm;height:9mm;font-size:13pt;background:#fff!important;color:#000!important;border:1.5pt solid #000;box-shadow:none!important}
+  .ablauf td{padding:.12rem .3rem}
+  .ablauf .form{display:inline}
+  .ablauf .form::before{content:" · "}
+  .zf{display:block}
+  .zf section+section{break-before:page;page-break-before:always}
+  .deck{gap:.8rem 1.4rem}
+  h1{font-size:20pt}
+  .zfrage{font-size:13pt}
+  .kasten--auftrag{background:#fff;color:#000;border:1.5pt solid #000}
+  .kasten--auftrag .kasten__kopf,.kasten--auftrag h3{color:#000}
+  .kasten,.pf i,.zeit__bild i,.stufe,.platz,.reiter{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .kasten--sichern{box-shadow:none}
+  .knopf{display:none!important}
+  .druckfeld{white-space:pre-wrap;border-left:2pt solid #999;border-bottom:1pt solid #666;padding:0 2mm;line-height:var(--zeile);min-height:calc(var(--zeile) * var(--zeilen,3));background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--zeile) - 1px),#888 calc(var(--zeile) - 1px),#888 var(--zeile));-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .kasten,.feld{break-inside:avoid}
+  /* Schreibblatt für die Handschrift: echte Linien, die auch ohne Hintergrunddruck erscheinen */
+  .druckfeld--hand{background-image:none;min-height:0;border-bottom:0;padding:0;flex:1;overflow:hidden}
+  .druckfeld--hand i{display:block;height:8.6mm;border-bottom:.8pt solid #555}
+  .ab-blatt.druck-hand{height:262mm;overflow:hidden;display:flex;flex-direction:column}
+  .druck-hand .schreibblatt{flex:1;min-height:0;display:flex;flex-direction:column;gap:5mm}
+  .druck-hand .textfeld,.druck-hand .textfeld .feld{flex:1;min-height:0;display:flex;flex-direction:column;break-inside:auto}
+  a{color:inherit;text-decoration:none}
+}

@@ -3,176 +3,217 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>M22 Erklärfilm</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<title>M22 · Erklärfilm zu Auftrag 4</title>
 <style>
-/* Erklärfilm zu M22, Phase 4. Bühne 1280 × 720 (Beamer), skaliert. Design-System »Gegenwart«, Theme Hell (wie M22: bewusst nur hell). */
-/* Schriften aus dem Repository wie in M22 (SIL Open Font License 1.1): Fraunces und Atkinson Hyperlegible */
+/* Erklärfilm zu M22, Auftrag 4 (»Zwei Erklärungen untersuchen«). Fassung 2 vom 18.11.2026.
+   Der Film zeigt die Oberfläche des Blatts in Fassung 5.1: Leiste der Arbeitsaufträge, Karten, Rad, Panel – in den Farben der Einheit (Archiv, kein Rot).
+   Namen, Jahre, Leitfragen, Gewichtungen und Aufträge kommen aus dem Blatt (tools/film_m22_daten.py), nicht aus dem Film.
+   Bühne 1280 × 720, skaliert. Jede Bewegung ist eine Funktion der Filmzeit: Der Film lässt sich ziehen, anhalten und zurückspringen. Ohne Ton. */
 @font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBold.woff) format("woff");font-weight:600;font-display:block}
 @font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces72pt-SemiBoldItalic.woff) format("woff");font-weight:600;font-style:italic;font-display:block}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Regular.woff2) format("woff2");font-weight:400;font-display:block}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(assets/fonts/AtkinsonHyperlegible-Bold.woff2) format("woff2");font-weight:700;font-display:block}
 :root{
   color-scheme:light;
-  --grund:#f3efe7; --flaeche:#faf8f3; --karton:#e9e2d7; --text:#2a2622; --leise:#625a52; --stahl:#7d7364; --linie:#e4dccf;
-  --petrol:#1e6b67; --auf-petrol:#fffdf9; --petrol-hi:#dbeae6; --oxid:#9b402d; --oxid-hi:#f3dfd8;
-  --kuli:#1e4fb5; --kuli-hi:#dce5f7; --dunkel:#1b1a17; --auf-dunkel:#fffaf2;
-  --e-person:#1e4fb5; --e-situation:#2e5a47; --e-weltbild:#9b402d; --e-apparat:#4b4f57; --e-vorteil:#7d5c12; /* Ebenenfarben wie in M22 */ --erfolg:#2e6b34; --erfolg-hi:#dcebdc; --warnung:#8a5300; --warnung-hi:#f5e8cf;
-  --display:"Bricolage Grotesque",system-ui,sans-serif; --stimme:"Fraunces",Georgia,serif; --schrift:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,sans-serif;
-  --platte:6px 6px 0 0 var(--karton); --kurve-aus:cubic-bezier(.23,1,.32,1);
+  --grund:#F3EFE7; --blatt:#FAF8F3; --hell:#FFFDF9; --karton:#E9E2D7; --tinte:#2A2622; --leise:#625A52; --stahl:#7D7364; --linie:#E4DCCF;
+  --platte:#A9BDD1; --tief:#2C4763; --hauch:#DFE7EF; --reg:#D4D6D5; --ok:#2E6B34; --ok-hi:#DCEBDC; --achtung:#8A5300; --achtung-hi:#F5E8CF;
+  --e-person:#1E4FB5; --e-situation:#2E6B34; --e-weltbild:#6A3B6E; --e-apparat:#4B4F57; --e-vorteil:#8A5300;   /* Ebenenfarben wie im Blatt */
+  --titel:"Fraunces",Georgia,"Times New Roman",serif; --text:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box}
-html,body{background:var(--grund);color:var(--text)}
-body{margin:0;font-family:var(--schrift);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+html,body{background:var(--grund);color:var(--tinte)}
+body{margin:0;font-family:var(--text);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
 .film{max-width:90rem;margin:0 auto;padding-block:16px 32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:12px}
-.eingebettet .film{padding-block:8px 16px}
-.eingebettet .rahmen{width:min(100%,max(320px,calc((100svh - 132px)*1.7778)))}
-.rahmen{position:relative;width:min(100%,max(320px,calc((100svh - 190px)*1.7778)));max-width:100%;aspect-ratio:16/9;margin:0 auto;background:var(--grund);border:2px solid var(--linie);overflow:hidden}
+/* Im Blatt füllt der Film das Fenster: Bühne so groß wie möglich, darunter eine Zeile Bedienung; Teile und Text stehen weiter unten */
+.eingebettet .film{max-width:none;padding:6px 8px 12px;gap:8px}
+.eingebettet .bedien{display:none}
+.schliessen{display:none}
+.eingebettet .schliessen{display:inline-flex;align-items:center}
+.rahmen{position:relative;width:min(100%,max(320px,calc((100svh - 206px)*1.7778)));max-width:100%;aspect-ratio:16/9;margin:0 auto;background:var(--grund);border:2px solid var(--linie);overflow:hidden}
+.eingebettet .rahmen{width:min(100%,max(320px,calc((100svh - 82px)*1.7778)))}
 .buehne{position:absolute;left:0;top:0;width:1280px;height:720px;transform-origin:0 0;background:var(--grund);overflow:hidden}
-.buehne *{will-change:auto}
 .a{position:absolute}
-/* Kopf: Kapitel und Satz */
-.kicker{left:64px;top:30px;font-size:17px;color:var(--leise);display:flex;gap:8px;align-items:baseline}
-.kicker b{font-family:var(--display);font-weight:700;color:var(--text);font-size:18px}
-.satz{left:64px;top:58px;width:1150px;font-family:var(--display);font-weight:600;font-size:34px;line-height:1.17;letter-spacing:-.01em;text-wrap:balance;margin:0}
-/* Punktefeld */
+p{margin:0}
+
+/* Kopf des Films: Teil und Satz */
+.kicker{left:64px;top:24px;font-size:18px;font-weight:700;color:var(--leise)}
+.satz{left:64px;top:48px;width:1152px;font-family:var(--titel);font-weight:600;font-size:31px;line-height:1.16;text-wrap:balance}
+
+/* Leiste der Arbeitsaufträge (wie das Register des Blatts, wenn es zur Nummernleiste wird) */
+.leiste{left:56px;top:124px;width:52px;height:570px;border-radius:5px;background:var(--reg)}
+.rd{width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:999px;background:var(--blatt);box-shadow:inset 0 0 0 2px var(--tinte);display:grid;place-items:center;font:600 18px/1 var(--titel);color:var(--tinte)}
+.rd.eckig{border-radius:6px}
+.rd.fertig{background:var(--ok-hi);box-shadow:inset 0 0 0 2px var(--ok)}
+.rd.hier{width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:5px;background:var(--blatt);box-shadow:inset 0 0 0 2px var(--tinte),4px 4px 0 0 var(--platte)}
+.rd.hier::before{content:"";position:absolute;inset:6px;border-radius:999px;background:var(--tinte)}
+.rd.hier span{position:relative;color:var(--grund)}
+.rd.danach{width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:5px;background:transparent;box-shadow:none;border:3px dashed var(--tief)}
+.hier-t{left:116px;top:319px;padding:5px 12px;border-radius:5px;background:var(--tinte);color:var(--grund);font-weight:700;font-size:18px;line-height:1.45;white-space:nowrap}
+.hier-t::before{content:"";position:absolute;left:-8px;top:50%;margin-top:-8px;border:8px solid transparent;border-left:0;border-right-color:var(--tinte)}
+
+/* 1 · Punktefeld */
 #feld{left:0;top:0;width:1280px;height:720px}
-.dutzend{left:952px;top:442px;width:220px;font-size:18px;font-weight:700;color:var(--text)}
-.dutzend span{display:block;font-weight:400;color:var(--leise);font-size:16px}
-.quelle{right:64px;top:604px;font-size:16px;color:var(--leise);text-align:right}
-/* Frage */
-.frage{left:340px;top:255px;width:600px;height:240px;display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--stimme);font-style:italic;font-weight:600;font-size:76px;line-height:1.05;color:var(--text);transform-origin:300px 120px}
+.dutzend{left:952px;top:442px;width:230px;font-size:19px;font-weight:700}
+.dutzend span{display:block;font-weight:400;color:var(--leise);font-size:18px}
+.quelle{right:64px;top:648px;font-size:18px;color:var(--leise);text-align:right}
+.frage{left:340px;top:255px;width:600px;height:240px;display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--titel);font-style:italic;font-weight:600;font-size:76px;line-height:1.05;transform-origin:300px 120px}
 .frage span{display:inline-block}
-/* Karten */
-.karte{width:320px;height:144px;background:var(--flaeche);border:2px solid var(--text);border-radius:4px;box-shadow:var(--platte);padding:10px 16px;display:flex;flex-direction:column;gap:3px}
-.karte .kk{display:flex;align-items:center;gap:10px}
-.buch{flex:none;width:34px;height:34px;border-radius:999px;border:2px solid var(--text);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:18px;line-height:1}
-.karte .nm{font-family:var(--display);font-weight:600;font-size:22px;line-height:1.1}
-.karte .jr{margin-left:auto;font-size:16px;color:var(--leise);font-variant-numeric:tabular-nums}
-.karte .lf{font-size:17px;line-height:1.3;margin:0}
-.ek{font-size:16px;font-weight:700;color:var(--oxid);display:flex;gap:8px}.ek .jr{margin-left:auto;font-weight:400;color:var(--leise);font-variant-numeric:tabular-nums}
-.chips{display:flex;gap:6px;margin-top:auto}.chips i{font-style:normal;font-size:16px;line-height:1;padding:3px 7px;border:1.5px solid var(--linie);border-radius:4px;color:var(--leise)}
-.chips.ok{position:absolute;left:16px;bottom:10px}.chips.ok i{background:var(--erfolg-hi);border-color:var(--erfolg);color:var(--erfolg);font-weight:700}
-/* Rad */
+
+/* Karten der sechs Erklärungen (wie im Blatt: Bild, Name, Kennung mit Jahr, Leitfrage, Stand) */
+.karte{width:322px;height:182px;background:var(--hell);border:2px solid var(--stahl);border-radius:5px;padding:9px 13px;display:grid;grid-template-columns:38px minmax(0,1fr);grid-template-rows:38px auto auto;column-gap:11px;row-gap:2px;align-content:start}
+.karte .pf{width:38px;height:38px;border-radius:5px;background:var(--karton);display:grid;place-items:center;font:600 19px/1 var(--titel);color:var(--leise);overflow:hidden}
+.karte .pf img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block}
+.karte .nm{align-self:center;font-weight:700;font-size:21px;line-height:1.15}
+.karte .kz{grid-column:1/-1;font-size:18px;line-height:1.3;color:var(--leise)}
+.karte .fr{grid-column:1/-1;font-size:18px;line-height:1.24}
+.st{left:13px;bottom:9px;display:flex;gap:6px}
+.st i{font-style:normal;font-size:18px;line-height:1.3;padding:0 7px;border:1.5px solid var(--linie);border-radius:5px;color:var(--leise);background:var(--hell);white-space:nowrap}
+.st i.ok{border-color:var(--ok);color:#1F4A24;background:var(--ok-hi)}
+.wahl{width:322px;height:182px;border:4px solid var(--tinte);border-radius:5px}
+
+/* Rad der fünf Ebenen */
 #rad,#linien{left:0;top:0;width:1280px;height:720px;overflow:visible}
-.seg{fill:color-mix(in srgb,var(--eb) 16%,#fffdf8);stroke:var(--grund);stroke-width:5}
+.seg{fill:var(--eb);fill-opacity:.16;stroke:var(--grund);stroke-width:5}
+@supports (fill:color-mix(in srgb,red,blue)){.seg{fill:color-mix(in srgb,var(--eb) 16%,#FFFDF9);fill-opacity:1}}
 #seg0{--eb:var(--e-person)}#seg1{--eb:var(--e-situation)}#seg2{--eb:var(--e-weltbild)}#seg3{--eb:var(--e-apparat)}#seg4{--eb:var(--e-vorteil)}
-.kern{fill:var(--dunkel)}
-.frage-k{left:540px;top:315px;width:200px;height:120px;display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--stimme);font-style:italic;font-weight:600;font-size:27px;line-height:1.08;color:var(--auf-dunkel)}
-.ring{fill:none;stroke:var(--stahl);stroke-width:1.5}
-.eb{width:150px;margin-left:-75px;margin-top:-30px;text-align:center;line-height:1.2}
-.eb b{display:block;font-family:var(--display);font-weight:700;font-size:20px}
-.eb span{display:block;font-size:16px;color:var(--leise);margin-top:2px}
-.modell{right:64px;top:604px;font-size:16px;color:var(--leise);text-align:right}
-.linie{fill:none;stroke:var(--petrol);stroke-linecap:round;stroke-dasharray:1 1}
-.marke{width:40px;height:40px;margin:-20px 0 0 -20px;border:2px solid var(--flaeche);border-radius:999px;background:var(--petrol);color:var(--auf-petrol);font-family:var(--display);font-weight:700;font-size:16px;display:grid;place-items:center}
-.legende{right:64px;top:600px;font-size:16px;color:var(--leise);display:flex;gap:14px;align-items:center}
-.legende{gap:6px}.legende .mk{width:30px;height:30px;border-radius:999px;background:var(--petrol);color:var(--auf-petrol);font-family:var(--display);font-weight:700;font-size:15px;display:grid;place-items:center}.legende span:last-child{margin-left:8px}
-.frei{right:64px;top:598px;padding:6px 14px;border-radius:999px;background:var(--erfolg-hi);color:var(--text);font-weight:700;font-size:17px}
+.kern{fill:var(--tinte)}
+.frage-k{left:582px;top:336px;width:176px;height:146px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--grund)}
+.frage-k b{font-family:var(--titel);font-style:italic;font-weight:600;font-size:24px;line-height:1.06}
+.frage-k span{font-size:18px;line-height:1.12;margin-top:5px;max-width:150px}
+.eb{width:150px;margin:-31px 0 0 -75px;text-align:center}
+.eb b{display:block;font-size:21px;line-height:1.1}
+.eb .kq{font-size:18px;line-height:1.15;color:var(--leise);margin-top:2px;left:0;right:0;top:23px}
+.eb .mk{left:0;right:0;top:27px;display:flex;gap:4px;justify-content:center}
+.mk i{width:28px;height:28px;border-radius:5px;background:var(--tinte);color:var(--grund);font-style:normal;font-weight:700;font-size:18px;line-height:28px;text-align:center}
+.mk i.m3{background:var(--leise)}
+.mk i.m2{background:var(--blatt);color:var(--tinte);box-shadow:inset 0 0 0 2px var(--tinte)}
+.modell{left:456px;top:622px;width:428px;font-size:18px;line-height:1.25;color:var(--leise);text-align:center}
+.lin{fill:none;stroke:var(--tief);stroke-opacity:.92;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 1}
+.frei{left:456px;top:622px;width:428px;padding:6px 12px;border-radius:5px;background:var(--ok-hi);color:#1F4A24;font-weight:700;font-size:18px;line-height:1.25;text-align:center}
+
 /* Finger */
-.finger{z-index:5;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:999px;border:3px solid var(--kuli);background:rgba(30,79,181,.16)}
-/* Panel */
-.panel{z-index:3;left:716px;top:140px;width:500px;background:var(--flaeche);border:2px solid var(--text);border-radius:4px;box-shadow:8px 8px 0 0 var(--karton);padding:14px 22px 16px;display:flex;flex-direction:column;gap:6px}
-.panel .meta{font-size:16px;color:var(--leise);margin:0}
-.panel h3{margin:0;font-family:var(--display);font-weight:600;font-size:24px;line-height:1.15}
-.schritt{display:flex;flex-direction:column;gap:3px;border-top:1px solid var(--linie);padding-top:6px}
-.schritt .sk{display:flex;gap:8px;align-items:center;font-weight:700;font-size:17px}
-.nr{flex:none;width:26px;height:26px;border-radius:999px;background:var(--text);color:var(--flaeche);display:grid;place-items:center;font-family:var(--display);font-size:15px;line-height:1}
-.reiter{position:relative;display:flex;gap:6px}
-.reiter span{flex:1;text-align:center;font-size:16px;font-weight:700;padding:2px 0;border:1.5px solid var(--stahl);border-radius:4px;background:var(--flaeche);position:relative;z-index:1}
-.reiter .zeiger{position:absolute;left:0;top:0;height:100%;width:calc((100% - 12px)/3);background:var(--kuli-hi);border:2px solid var(--kuli);border-radius:4px;z-index:2;mix-blend-mode:multiply}
-.zeile{display:grid;grid-template-columns:200px 1fr;align-items:center;gap:10px;font-size:16px;color:var(--leise);min-height:26px}
-.zeile svg{width:100%;height:26px;overflow:visible}
-.zeile path{fill:none;stroke:var(--kuli);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 1}
-.regler{display:grid;grid-template-columns:96px 176px 1fr;align-items:center;gap:10px;font-size:16px;line-height:1.3;min-height:23px}
+.finger{z-index:6;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:999px;border:3px solid var(--tief);background:rgba(44,71,99,.18)}
+
+/* Panel (wie im Blatt: rechts über der Übersicht, zum Scrollen) */
+#panel{z-index:3;left:746px;top:128px;width:470px;height:562px;background:var(--hell);border-left:2px solid var(--tinte);box-shadow:0 0 0 1px var(--stahl);overflow:hidden}
+.pin{left:0;top:0;width:468px;padding:12px 18px 18px;display:flex;flex-direction:column;gap:8px}
+.pk{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.sig{font-size:18px;font-weight:700;color:var(--leise)}
+.zu{font-size:18px;font-weight:700;padding:4px 12px;border:2px solid var(--stahl);border-radius:4px;background:var(--blatt)}
+.pin h3{margin:0;font-family:var(--titel);font-weight:600;font-size:24px;line-height:1.18}
+.pin h4{margin:10px 0 0;font-family:var(--titel);font-weight:600;font-size:21px;line-height:1.2}
+.ebv{align-self:flex-start;font-size:18px;font-style:italic;color:var(--leise);background:var(--karton);border-radius:5px;padding:1px 9px}
+.lf{font-size:18px;line-height:1.3}
+.stufen{position:relative;align-self:flex-start;display:flex;border:2px solid var(--tinte);border-radius:5px;overflow:hidden}
+.stufen span{padding:6px 13px;font-weight:700;font-size:18px;line-height:1.3;white-space:nowrap}
+.stufen .an{position:absolute;top:0;bottom:0;background:var(--tinte);color:var(--grund)}
+.lese{display:flex;flex-direction:column;gap:8px}
+.lese .sk{font-size:18px;font-weight:700;color:var(--tief)}
+.lese i{display:block;height:9px;border-radius:2px;background:var(--linie)}
+.merk-k{font-family:var(--titel);font-weight:600;font-size:19px;text-align:center;border-top:2px solid var(--tinte);border-bottom:2px solid var(--tinte);padding:5px 0;margin-top:2px}
+.fld{display:flex;flex-direction:column;gap:2px}
+.fld > span{font-size:18px;font-weight:700;line-height:1.25}
+.fld .li{position:relative;height:56px;border-left:3px solid var(--platte);border-bottom:2px solid var(--stahl);background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 26px,#B9B2A6 26px,#B9B2A6 28px)}
+.fld svg{position:absolute;left:8px;top:1px;width:330px;height:26px;overflow:visible}
+.fld path{fill:none;stroke:var(--tief);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 1}
+.regler{display:grid;grid-template-columns:92px 150px minmax(0,1fr);align-items:center;gap:13px;font-size:18px;line-height:1.3;min-height:36px}
 .regler .spur{position:relative;height:6px;background:var(--karton);border-radius:3px}
-.regler .knopf{position:absolute;left:0;top:-7px;width:20px;height:20px;margin-left:-10px;border-radius:999px;background:var(--kuli);border:2px solid var(--flaeche)}
-.regler .fb{font-weight:700;font-size:16px}
-.fb.t{color:var(--erfolg)} .fb.n{color:var(--warnung)}
-.pruefen{align-self:flex-start;display:flex;gap:12px;align-items:center;margin-top:4px}
-.pruefen span:first-child{background:var(--text);color:var(--flaeche);font-weight:700;padding:4px 18px;border-radius:4px;font-size:16px}
-.pruefen .erg{font-size:16px;color:var(--text)}
-.bsp{font-size:16px;color:var(--leise);font-weight:400;margin-left:auto}
-.kurz .hak{display:flex;gap:10px;align-items:center;font-size:18px;font-weight:700;padding:10px 0;border-top:1px solid var(--linie)}
-.kurz .hak i{font-style:normal;color:var(--erfolg)}
-/* Lernweg */
-.weg{left:64px;top:648px;width:1152px;display:grid;grid-template-columns:repeat(8,1fr);gap:0}
-.weg div{border-top:4px solid var(--linie);padding:6px 6px 0 0;font-size:16px;line-height:1.2;color:var(--leise);white-space:nowrap}
-.weg div b{font-family:var(--display);color:var(--text);margin-right:4px}
-.weg .ok{border-top-color:var(--petrol)}
-.wegok{left:0;top:640px;width:20px;height:20px;margin-left:-10px;border-radius:999px;background:var(--petrol);color:var(--auf-petrol);font-size:13px;font-weight:700;display:grid;place-items:center}
-.hier{left:496px;top:606px;padding:3px 12px;border-radius:999px;background:var(--oxid);color:var(--auf-petrol);font-weight:700;font-size:16px;white-space:nowrap;transform-origin:center bottom}
-.hier::after{content:"";position:absolute;left:18px;bottom:-7px;border:7px solid transparent;border-bottom:0;border-top-color:var(--oxid)}
-#reise{left:0;top:0;width:1280px;height:720px;overflow:visible}
-#reise path{fill:none;stroke:var(--kuli);stroke-width:3;stroke-linecap:round;stroke-dasharray:1 1}
-.ziel{left:64px;top:606px;font-size:16px;color:var(--kuli);font-weight:700;width:420px}
-/* Marktplatz */
-.stand-t{width:200px;height:72px;margin:-36px 0 0 -100px;background:var(--flaeche);border:2px solid var(--stahl);border-radius:4px;display:flex;align-items:center;gap:10px;padding:0 14px}
-.stand-t .nm{font-family:var(--display);font-weight:600;font-size:20px}
-.stand-an{width:200px;height:72px;margin:-36px 0 0 -100px;border:3px solid var(--text);border-radius:4px;box-shadow:var(--platte);pointer-events:none}
+.regler .knopf{position:absolute;left:0;top:-8px;width:22px;height:22px;margin-left:-11px;border-radius:999px;background:var(--tief);border:2px solid var(--hell)}
+.regler .wt{position:relative;height:24px}
+.regler .wt span{position:absolute;left:0;top:0;white-space:nowrap}
+.fb{font-weight:700}
+.fb.t{color:#1F4A24} .fb.n{color:#6B4000}
+.pruefen{display:flex;gap:14px;align-items:center;margin-top:2px}
+.pruefen span:first-child{background:var(--tinte);color:var(--grund);font-weight:700;padding:7px 20px;border-radius:4px;font-size:18px}
+.pruefen .erg{font-size:18px;color:var(--leise)}
+.gs{font-size:19px;line-height:1.3;font-family:var(--titel);font-weight:600}
+.hak{display:flex;gap:10px;align-items:center;font-size:19px;font-weight:700;padding:9px 0;border-top:2px solid var(--linie)}
+.hak i{font-style:normal;color:var(--ok);margin-left:auto}
+.nr{flex:none;width:28px;height:28px;border-radius:999px;background:var(--tinte);color:var(--grund);display:grid;place-items:center;font:600 18px/1 var(--titel)}
+.raffer{font-size:18px;color:var(--leise)}
+
+/* 5 · Wie es weitergeht: Auftragskopf wie im Blatt, Marktplatz */
+.akopf{left:150px;top:140px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;width:900px}
+.akopf .nrg{width:48px;height:48px;border-radius:999px;background:var(--tinte);color:var(--grund);display:grid;place-items:center;font:600 22px/1 var(--titel)}
+.akopf .ki{font-size:18px;font-weight:700;color:var(--leise)}
+.akopf .ti{font:600 30px/1.12 var(--titel);margin:1px 0 6px}
+.akopf .ma{display:flex;gap:6px}
+.akopf .ma span,.chips2 span{font-size:18px;font-weight:700;line-height:1.4;padding:1px 10px;border-radius:4px;box-shadow:inset 0 0 0 2px var(--stahl);white-space:nowrap}
+.chips2{right:64px;top:160px;display:flex;gap:6px}
+.stand-t{width:244px;height:72px;margin:-36px 0 0 -122px;background:var(--hell);border:2px solid var(--tinte);border-radius:5px;box-shadow:5px 5px 0 0 var(--platte);display:flex;align-items:center;gap:10px;padding:0 14px}
+.stand-t .bu{flex:none;width:34px;height:34px;border-radius:5px;background:var(--karton);display:grid;place-items:center;font:600 18px/1 var(--titel)}
+.stand-t .nm{font-weight:700;font-size:20px;line-height:1.15}
+.stand-t small{display:block;font-size:18px;line-height:1.3;font-weight:400;color:var(--leise)}
 .mensch{width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:999px;background:var(--stahl)}
-.mensch.ich{background:var(--kuli);box-shadow:0 0 0 4px var(--kuli-hi)}
-.ichl{font-weight:700;color:var(--kuli);font-size:17px}
-.blase{background:var(--flaeche);border:2px solid var(--kuli);border-radius:10px;padding:8px 14px;font-size:17px;line-height:1.3;width:300px;color:var(--text)}
-.blase b{color:var(--kuli)}
-.runde{left:1000px;top:148px;font-size:16px;color:var(--leise)}
-/* Tisch */
-.tisch{left:150px;top:250px;width:300px;height:190px;border-radius:40px;background:var(--flaeche);border:2px solid var(--stahl)}
-.balken{left:560px;top:206px;width:600px;display:flex;flex-direction:column;gap:14px}
-.balken .bz{display:grid;grid-template-columns:110px 300px 1fr;gap:14px;align-items:center;font-size:17px}
-.balken .bz b{font-family:var(--display);font-size:19px}
+.mensch.ich{background:var(--tief);box-shadow:0 0 0 4px var(--hauch)}
+.ichl{font-weight:700;color:var(--tief);font-size:19px}
+.blase{background:var(--hell);border:2px solid var(--tief);border-radius:10px;padding:8px 14px;font-size:19px;line-height:1.28;color:var(--tinte)}
+.blase b{color:var(--tief)}
+
+/* 6 · Tischmodell */
+.tisch{left:170px;top:330px;width:290px;height:180px;border-radius:40px;background:var(--hell);border:2px solid var(--stahl)}
+.tisch .ipad{position:absolute;left:104px;top:60px;width:84px;height:60px;border:3px solid var(--tinte);border-radius:8px;background:var(--hauch)}
+.balken{left:560px;top:312px;width:640px;display:flex;flex-direction:column;gap:13px}
+.balken .bz{display:grid;grid-template-columns:110px 300px 1fr;gap:14px;align-items:center;font-size:19px}
+.balken .bz b{font-size:20px}
 .balken .tr{height:22px;background:var(--karton);border-radius:2px;position:relative;overflow:hidden}
-.balken .fl{position:absolute;inset:0;background:var(--petrol);transform-origin:left center}
-.balken .wt{color:var(--leise)}
-.balken .bsp2{font-size:16px;color:var(--leise);margin-top:4px}
-/* Schluss */
-.merk{left:140px;top:200px;width:1000px;text-align:center;font-family:var(--stimme);font-style:italic;font-weight:600;font-size:64px;line-height:1.1;color:var(--oxid)}
+.balken .fl{position:absolute;inset:0;background:var(--eb);transform-origin:left center}
+.balken .wt2{color:var(--leise)}
+.balken .bsp2{font-size:18px;line-height:1.3;color:var(--leise);margin-top:4px}
+
+/* 7 · Schluss */
+.merk{left:140px;top:160px;width:1000px;text-align:center;font-family:var(--titel);font-style:italic;font-weight:600;font-size:62px;line-height:1.1;color:var(--tief)}
 .merk span{display:inline-block}
-.auftrag{left:290px;top:340px;width:700px;background:var(--flaeche);border:2px solid var(--text);border-radius:10px;box-shadow:var(--platte);padding:20px 26px}
-.auftrag .meta{font-size:16px;color:var(--leise);margin:0 0 6px}
-.auftrag p{margin:0;font-size:22px;line-height:1.4}
+.auftrag{left:260px;top:316px;width:760px;background:var(--tinte);color:var(--grund);border-radius:10px;padding:22px 28px;display:flex;flex-direction:column;gap:6px}
+.auftrag .form{font-size:18px;font-weight:700;color:var(--platte)}
+.auftrag .ti{font:600 28px/1.15 var(--titel)}
+.auftrag .tx{font-size:22px;line-height:1.38}
+
 /* Poster */
-.poster{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:14px;padding:0 9%;background:var(--grund)}
+.poster{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:12px;padding:0 9%;background:var(--grund)}
 .poster[hidden]{display:none}
-.poster .pm{font-size:clamp(14px,1.6vw,18px);color:var(--leise);margin:0}
-.poster h1{margin:0;font-family:var(--display);font-weight:700;font-size:clamp(24px,4.6vw,60px);line-height:1.06;letter-spacing:-.015em;max-width:16ch;text-wrap:balance}
-.poster .pf{font-family:var(--stimme);font-style:italic;font-weight:600;font-size:clamp(18px,2.4vw,30px);color:var(--oxid);margin:0}
-/* Steuerung */
+.poster .pm{font-size:clamp(16px,1.6vw,18px);color:var(--leise)}
+.poster h1{margin:0;font-family:var(--titel);font-weight:600;font-size:clamp(24px,4.4vw,58px);line-height:1.06;max-width:18ch;text-wrap:balance}
+.poster .pf{font-family:var(--titel);font-style:italic;font-weight:600;font-size:clamp(18px,2.4vw,30px);color:var(--tief)}
+.poster .pb{font-size:clamp(16px,1.5vw,18px);color:var(--leise);max-width:46ch}
+
+/* Steuerung (bleibt in Lesegröße, außerhalb der skalierten Bühne) */
+.bedien{font-size:16px;color:var(--leise)}
 .steuer{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
 button{font:inherit;color:inherit;cursor:pointer}
-.knopf-h{min-height:48px;padding:0 18px;border-radius:4px;border:2px solid var(--text);background:var(--text);color:var(--flaeche);font-weight:700;display:inline-flex;align-items:center;gap:8px}
-.knopf-n{min-height:48px;min-width:48px;padding:0 12px;border-radius:4px;border:2px solid var(--stahl);background:var(--flaeche);font-weight:700}
+.knopf-h{min-height:48px;padding:0 18px;border-radius:4px;border:2px solid var(--tinte);background:var(--tinte);color:var(--grund);font-weight:700;display:inline-flex;align-items:center;gap:8px}
+.knopf-n{min-height:48px;min-width:48px;padding:0 12px;border-radius:4px;border:2px solid var(--stahl);background:var(--blatt);font-weight:700}
 .knopf-h:active,.knopf-n:active{transform:translate(2px,2px)}
 @media (hover:hover) and (pointer:fine){.knopf-n:hover{box-shadow:4px 4px 0 0 var(--linie)}}
-.zeitregler{flex:1 1 220px;min-width:0;accent-color:var(--kuli);height:44px}
-.uhr{font-variant-numeric:tabular-nums;color:var(--leise);font-size:16px;min-width:7.5ch}
+.zeitregler{flex:1 1 220px;min-width:0;accent-color:var(--tief);height:44px}
+.uhr{color:var(--leise);font-size:16px;min-width:7.5ch}
 .schalter{display:inline-flex;gap:8px;align-items:center;font-size:16px;min-height:44px}
-.schalter input{width:20px;height:20px;accent-color:var(--kuli)}
-:focus-visible{outline:3px solid var(--text);outline-offset:2px;box-shadow:0 0 0 2px var(--flaeche)}
+.schalter input{width:22px;height:22px;accent-color:var(--tinte)}
+:focus-visible{outline:3px solid var(--tinte);outline-offset:2px;box-shadow:0 0 0 2px var(--blatt)}
 .kapitel{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
-.kapitel button{min-height:44px;padding:0 14px;border-radius:999px;border:1.5px solid var(--stahl);background:var(--flaeche);font-size:16px;font-weight:700}
-.kapitel button[aria-current=true]{background:var(--text);color:var(--flaeche);border-color:var(--text)}
-.text{border-top:1px solid var(--linie);padding-top:8px}
+.kapitel button{min-height:44px;padding:0 14px;border-radius:4px;border:2px solid var(--stahl);background:var(--blatt);font-size:16px;font-weight:700}
+.kapitel button[aria-current=true]{background:var(--tinte);color:var(--grund);border-color:var(--tinte)}
+.ort{font-size:16px;color:var(--leise)}
+.text{border-top:2px solid var(--linie);padding-top:8px}
 .text summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center}
 .text ol{margin:.4rem 0 0;padding-left:1.4rem;max-width:68ch;display:grid;gap:.5rem}
-/* Repository-Fassung: Schriften wie M22 */
-:root{--display:"Fraunces",Georgia,serif;--schrift:"Atkinson Hyperlegible",system-ui,sans-serif}
-.kicker b,.buch,.eb b,.nr,.marke,.legende .mk,.poster h1,.weg div b,.balken .bz b,.karte .nm,.satz,.stand-t .nm,.panel h3{font-weight:600}
-.satz{letter-spacing:0}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.text p{max-width:68ch;margin-top:.6rem;font-size:16px;color:var(--leise)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 @media (max-width:600px){.uhr{display:none}}
 </style>
+</head>
+<body>
 <div class="film" id="film">
   <div class="rahmen" id="rahmen">
-    <div class="buehne" id="buehne" role="img" aria-label="Erklärfilm ohne Ton zu Phase 4 von M22. Was gezeigt wird, steht unter dem Film als Text.">
+    <div class="buehne" id="buehne" role="img" aria-label="Erklärfilm ohne Ton zu Auftrag 4 von M22. Was gezeigt wird, steht unter dem Film als Text.">
       <!-- Kopf -->
-      <div class="a kicker" data-k="1"><b>1</b> Bis hierher</div>
-      <div class="a kicker" data-k="2"><b>2</b> Sechs Erklärungen</div>
-      <div class="a kicker" data-k="3"><b>3</b> Fünf Ebenen</div>
-      <div class="a kicker" data-k="4"><b>4</b> Dein Auftrag</div>
-      <div class="a kicker" data-k="5"><b>5</b> Wohin die Reise geht</div>
-      <div class="a kicker" data-k="6"><b>6</b> Euer Modell</div>
-      <div class="a kicker" data-k="7"><b>7</b> Jetzt du</div>
+      <div class="a kicker" data-k="1">Bis hierher</div>
+      <div class="a kicker" data-k="2">Sechs Erklärungen</div>
+      <div class="a kicker" data-k="3">Fünf Ebenen</div>
+      <div class="a kicker" data-k="4">Dein Auftrag</div>
+      <div class="a kicker" data-k="5">So geht es weiter</div>
+      <div class="a kicker" data-k="6">Euer Modell</div>
+      <div class="a kicker" data-k="7">Jetzt du</div>
       <p class="a satz" id="s1a">Józefów, 13. Juli 1942. Etwa 500 Hamburger Polizisten.</p>
       <p class="a satz" id="s1b">Ihr Kommandeur bietet an: Wer nicht will, darf beiseitetreten. Rund ein Dutzend tritt heraus.</p>
       <p class="a satz" id="s1c">Die anderen machen mit. Mindestens 1.500 jüdische Frauen, Männer und Kinder werden ermordet.</p>
@@ -183,143 +224,119 @@ button{font:inherit;color:inherit;cursor:pointer}
       <p class="a satz" id="s4c">Dann schreibst du deine Erklärungskarte: die These, was sie erklärt und was nicht.</p>
       <p class="a satz" id="s4d">Zuletzt schätzt du, wo die Erklärung ansetzt. Dann prüfst du gegen das Modell.</p>
       <p class="a satz" id="s4e">Erst jetzt zeigt die Übersicht, wo Browning ansetzt.</p>
-      <p class="a satz" id="s4f">Dann eine zweite Erklärung, am besten von einer anderen Ebene.</p>
+      <p class="a satz" id="s4f">Dann eine zweite Erklärung, am besten aus einer anderen Ebene.</p>
       <p class="a satz" id="s5a">Nach einem kurzen Halt bei der Landkarte geht es auf den Marktplatz.</p>
-      <p class="a satz" id="s5b">Runde 1: A, C und E erklären am Stand. Die anderen besuchen.</p>
-      <p class="a satz" id="s5c">Runde 2: Jetzt erklären B, D und F. Du besuchst zwei Stände und fragst nach.</p>
+      <p class="a satz" id="s5b">Eine Runde, fünf Minuten: Wer eine Karte zu A, C oder E hat, erklärt am Stand.</p>
+      <p class="a satz" id="s5c">Alle anderen besuchen zwei Stände und fragen nach: Was erklärt ihr nicht?</p>
       <p class="a satz" id="s6a">Zurück am Tisch baut ihr ein Modell: Was hat in Józefów wie stark gewirkt?</p>
       <p class="a satz" id="s7a">Jetzt bist du dran.</p>
 
+      <!-- Leiste der Arbeitsaufträge -->
+      <div class="a leiste" id="leiste"></div>
+      <div id="leiste-in"></div>
+      <div class="a hier-t" id="hier">Du bist hier: Auftrag 4</div>
+
       <!-- 1 · Punktefeld -->
-      <canvas class="a" id="feld" width="1280" height="720" aria-hidden="true"></canvas>
+      <canvas class="a" id="feld" width="1280" height="720"></canvas>
       <div class="a dutzend" id="dutzend">rund ein Dutzend<span>trat heraus</span></div>
       <div class="a quelle" id="quelle1">Belege: Browning 1993 · USHMM 1996</div>
+      <div class="a frage" id="frage"><div><span>Wie</span> <span>war</span> <span>das</span><br><span>möglich?</span></div></div>
 
       <!-- 3 · Rad -->
-      <svg class="a" id="rad" viewBox="0 0 1280 720" aria-hidden="true"></svg>
-      <div class="a eb" data-eb="0"><b>Person</b><span>Was bringt ein Mensch mit?</span></div>
-      <div class="a eb" data-eb="1"><b>Situation</b><span>Was tut der Moment mit ihm?</span></div>
-      <div class="a eb" data-eb="2"><b>Weltbild</b><span>Was hält er für richtig?</span></div>
-      <div class="a eb" data-eb="3"><b>Apparat</b><span>Wer tut nur ein kleines Stück?</span></div>
-      <div class="a eb" data-eb="4"><b>Vorteil</b><span>Was hat er davon?</span></div>
+      <svg class="a" id="rad" viewBox="0 0 1280 720"></svg>
+      <svg class="a" id="linien" viewBox="0 0 1280 720"></svg>
+      <div id="felder"></div>
+      <div class="a frage-k" id="frageK"><b>Wie war das möglich?</b><span>Sechs Antworten, fünf Ebenen</span></div>
       <div class="a modell" id="modell">Die fünf Ebenen sind ein Modell deiner Lehrkraft zum Ordnen, keine Messung.</div>
 
-      <!-- Frage -->
-      <div class="a frage-k" id="frageK" aria-hidden="true">Wie war das<br>möglich?</div>
-      <div class="a frage" id="frage" aria-hidden="true"><div><span>Wie</span> <span>war</span> <span>das</span><br><span>möglich?</span></div></div>
-
       <!-- 2 · Karten -->
+      <div id="karten"></div>
+      <div class="a frei" id="frei">✓ 2 Erklärungskarten. Auftrag L (Landkarte) ist frei.</div>
 
-      <div class="a karte" data-karte="A" style="left:64px;top:146px"><div class="ek">Erklärung A<span class="jr">1950 / 1966</span></div><span class="nm">Adorno</span><p class="lf">Gibt es einen Charakter, der anfällig ist?</p><span class="chips"><i>gelesen</i><i>Karte</i><i>geprüft</i></span><span class="chips ok" id="standA"><i>✓ gelesen</i><i>✓ Karte</i><i>✓ geprüft</i></span></div>
-      <div class="a karte" data-karte="B" style="left:64px;top:292px"><div class="ek">Erklärung B<span class="jr">1963</span></div><span class="nm">Arendt</span><p class="lf">War Eichmann ein Monster oder ein Beamter, der nicht dachte?</p><span class="chips"><i>gelesen</i><i>Karte</i><i>geprüft</i></span></div>
-      <div class="a karte" data-karte="C" style="left:64px;top:438px"><div class="ek">Erklärung C<span class="jr">1992</span></div><span class="nm">Browning</span><p class="lf">Wie wurden Hamburger Polizisten zu Mördern?</p><span class="chips"><i>gelesen</i><i>Karte</i><i>geprüft</i></span><span class="chips ok" id="standC"><i>✓ gelesen</i><i>✓ Karte</i><i>✓ geprüft</i></span></div>
-      <div class="a karte" data-karte="D" style="left:896px;top:146px"><div class="ek">Erklärung D<span class="jr">1996</span></div><span class="nm">Goldhagen</span><p class="lf">War der Judenhass der Deutschen der Grund?</p><span class="chips"><i>gelesen</i><i>Karte</i><i>geprüft</i></span></div>
-      <div class="a karte" data-karte="E" style="left:896px;top:292px"><div class="ek">Erklärung E<span class="jr">1963</span></div><span class="nm">Milgram</span><p class="lf">Gehorchen Menschen jeder Autorität?</p><span class="chips"><i>gelesen</i><i>Karte</i><i>geprüft</i></span></div>
-      <div class="a karte" data-karte="F" style="left:896px;top:438px"><div class="ek">Erklärung F<span class="jr">1989 / 2005</span></div><span class="nm">Bauman · Welzer</span><p class="lf">Wie machen Ordnung, Bürokratie und neue Normen das Töten möglich?</p><span class="chips"><i>gelesen</i><i>Karte</i><i>geprüft</i></span></div>
-      <!-- Linien und Marken -->
-      <div class="a legende" id="legende"><span class="mk" style="transform:scale(.65)">C</span><span class="mk" style="transform:scale(.82)">C</span><span class="mk">C</span><span>Marken am Rad: wo eine Erklärung ansetzt, größer heißt stärker. Modell der Lehrkraft.</span></div>
-      <div class="a frei" id="frei">✓ 2 Erklärungskarten. Der Marktplatz ist frei.</div>
-
-      <!-- 4 · Panel Browning -->
-      <div class="a panel" id="panelC">
-        <p class="meta">Erklärung C · 1992</p>
-        <h3>Browning: Ganz normale Männer</h3>
-        <div class="schritt" id="st1"><div class="sk"><span class="nr">1</span>Lesen</div>
-          <div class="reiter"><span>Einstieg</span><span>Vertiefung</span><span>Kontroverse</span><i class="zeiger" id="zeiger"></i></div></div>
-        <div class="schritt" id="st2"><div class="sk"><span class="nr">2</span>Deine Erklärungskarte</div>
-          <div class="zeile">These in einem Satz<svg viewBox="0 0 240 26"><path id="w1" pathLength="1" d="M2 18 C12 6 18 22 28 14 S44 8 52 16 S66 22 76 12 S92 6 100 16 S118 22 128 12 S146 8 156 16 S170 20 180 13 S198 8 206 16 S222 20 236 12"/></svg></div>
-          <div class="zeile">Was erklärt sie an Józefów?<svg viewBox="0 0 240 26"><path id="w2" pathLength="1" d="M2 15 C10 8 20 22 30 14 S46 6 56 16 S72 22 84 12 S98 8 108 16 S124 22 134 13 S150 8 160 16 S176 21 188 13"/></svg></div>
-          <div class="zeile">Was erklärt sie nicht?<svg viewBox="0 0 240 26"><path id="w3" pathLength="1" d="M2 16 C12 8 18 22 30 13 S46 7 54 16 S70 22 80 12 S96 8 106 16 S122 21 134 13 S152 8 160 15 S176 20 186 13 S204 9 214 15"/></svg></div></div>
-        <div class="schritt" id="st3"><div class="sk"><span class="nr">3</span>Gewichtungs-Check<span class="bsp">Beispiel</span></div>
-          <div class="regler"><span>Person</span><span class="spur"><i class="knopf" data-kn="0"></i></span><span class="fb t" data-fb="0">Trifft.</span></div>
-          <div class="regler"><span>Situation</span><span class="spur"><i class="knopf" data-kn="1"></i></span><span class="fb n" data-fb="1">Etwas zu niedrig.</span></div>
-          <div class="regler"><span>Weltbild</span><span class="spur"><i class="knopf" data-kn="2"></i></span><span class="fb t" data-fb="2">Trifft.</span></div>
-          <div class="regler"><span>Apparat</span><span class="spur"><i class="knopf" data-kn="3"></i></span><span class="fb n" data-fb="3">Etwas zu niedrig.</span></div>
-          <div class="regler"><span>Vorteil</span><span class="spur"><i class="knopf" data-kn="4"></i></span><span class="fb t" data-fb="4">Trifft.</span></div>
-          <div class="pruefen"><span id="pruefen">Prüfen</span><span class="erg" id="erg">3 von 5 Ebenen genau getroffen.</span></div></div>
-      </div>
-      <!-- Panel Adorno (kurz) -->
-      <div class="a panel kurz" id="panelA" style="height:auto">
-        <p class="meta">Erklärung A · 1950 / 1966</p>
-        <h3>Adorno und die Frankfurter Schule</h3>
-        <div class="hak" data-hak="0"><span class="nr">1</span>Lesen <i>✓</i></div>
-        <div class="hak" data-hak="1"><span class="nr">2</span>Deine Erklärungskarte <i>✓</i></div>
-        <div class="hak" data-hak="2"><span class="nr">3</span>Gewichtungs-Check <i>✓</i></div>
+      <!-- 4 · Panel -->
+      <div class="a" id="panel">
+        <div class="a pin" id="pin"></div>
+        <div class="a pin" id="pkurz"></div>
       </div>
 
-      <!-- 5 · Marktplatz -->
-      <div id="markt"></div>
-      <div class="a blase" id="blase1" style="left:676px;top:112px"><b>Du am Stand C:</b> These, was sie an Józefów erklärt, was nicht. In einer Minute.</div>
-      <div class="a blase" id="blase2" style="left:668px;top:350px;width:auto"><b>Du fragst:</b> Was erklärt ihr nicht?</div>
+      <!-- 5 · Wie es weitergeht -->
+      <div id="weiter"></div>
+      <div class="a blase" id="blase1" style="left:520px;top:262px;width:340px"><b>Du am Stand C:</b> die These, was sie erklärt, was nicht. In einer Minute.</div>
+      <div class="a blase" id="blase2" style="left:724px;top:566px"><b>Besuch fragt:</b> Was erklärt ihr nicht?</div>
       <div class="a ichl" id="ichl">du</div>
 
-      <!-- 6 · Tisch -->
-      <div class="a tisch" id="tisch"></div>
-      <div class="a balken" id="balken">
-        <div class="bz"><b>Person</b><span class="tr"><i class="fl" data-fl="0"></i></span><span class="wt">etwas</span></div>
-        <div class="bz"><b>Situation</b><span class="tr"><i class="fl" data-fl="1"></i></span><span class="wt">sehr wichtig</span></div>
-        <div class="bz"><b>Weltbild</b><span class="tr"><i class="fl" data-fl="2"></i></span><span class="wt">wichtig</span></div>
-        <div class="bz"><b>Apparat</b><span class="tr"><i class="fl" data-fl="3"></i></span><span class="wt">wichtig</span></div>
-        <div class="bz"><b>Vorteil</b><span class="tr"><i class="fl" data-fl="4"></i></span><span class="wt">etwas</span></div>
-        <p class="bsp2">Beispiel. Euer Modell kann ganz anders aussehen. Für die wichtigste Ebene schreibt ihr eine Begründung.</p>
-      </div>
+      <!-- 6 · Tischmodell -->
+      <div class="a chips2" id="chips6"><span>Tischgruppe</span><span>4 Minuten</span><span>ein iPad</span></div>
+      <div class="a tisch" id="tisch"><i class="ipad"></i></div>
+      <div class="a balken" id="balken"></div>
 
       <!-- 7 · Schluss -->
       <div class="a merk" id="merk"><span>Erklären</span> <span>heißt</span> <span>nicht</span> <span>entschuldigen.</span></div>
-      <div class="a auftrag" id="auftrag"><p class="meta">Phase 4 · 28–50 Min. · allein oder zu zweit</p><p>Tippe in der Übersicht auf eine Erklärung. Bearbeite <b>mindestens zwei</b>, eine davon von einer anderen Ebene.</p></div>
+      <div class="a auftrag" id="auftrag"></div>
 
-      <!-- Lernweg -->
-      <svg class="a" id="reise" viewBox="0 0 1280 720" aria-hidden="true"><path id="reisepfad" pathLength="1" d="M568 640 C620 590 800 590 856 640"/></svg>
-      <div class="a ziel" id="ziel">über die Landkarte (5) zum Marktplatz (6)</div>
-      <div class="a weg" id="weg">
-        <div data-w="0"><b>1</b>Einstieg</div><div data-w="1"><b>2</b>Faktencheck</div><div data-w="2"><b>3</b>Józefów</div><div data-w="3"><b>4</b>Erklärungen</div>
-        <div data-w="4"><b>5</b>Landkarte</div><div data-w="5"><b>6</b>Marktplatz</div><div data-w="6"><b>7</b>Diskussion</div><div data-w="7"><b>8</b>Rückblick</div>
-      </div>
-      <div class="a hier" id="hier">Du bist hier</div>
       <div class="a finger" id="finger"></div>
     </div>
     <div class="poster" id="poster">
-      <p class="pm">M22 · Phase 4 · Erklärungen · Film ohne Ton, 2 Minuten</p>
-      <h1>Was du jetzt tust und wohin die Reise geht</h1>
+      <p class="pm" id="pm">M22 · Auftrag 4 · Film ohne Ton</p>
+      <h1>So arbeitest du mit der Übersicht</h1>
       <p class="pf">Wie war das möglich?</p>
+      <p class="pb">Du kannst den Film anhalten, am Regler ziehen und zu jedem Teil springen.</p>
       <button class="knopf-h" id="start" type="button"><span aria-hidden="true">▶</span> Film abspielen</button>
     </div>
   </div>
 
+  <p class="bedien">Du kannst den Film anhalten, am Regler ziehen und zu jedem Teil springen.</p>
   <div class="steuer" role="group" aria-label="Film steuern">
     <button class="knopf-h" id="spiel" type="button"><span aria-hidden="true" id="spielz">▶</span> <span id="spielt">Abspielen</span></button>
-    <button class="knopf-n" id="zurueck" type="button" aria-label="Voriges Kapitel">‹</button>
-    <button class="knopf-n" id="vor" type="button" aria-label="Nächstes Kapitel">›</button>
-    <input class="zeitregler" id="zeit" type="range" min="0" max="1220" step="1" value="0" aria-label="Stelle im Film">
-    <span class="uhr" id="uhr">0:00 / 2:02</span>
+    <button class="knopf-n" id="zurueck" type="button" aria-label="Voriges Bild">‹</button>
+    <button class="knopf-n" id="vor" type="button" aria-label="Nächstes Bild">›</button>
+    <input class="zeitregler" id="zeit" type="range" min="0" max="1235" step="1" value="0" aria-label="Stelle im Film">
+    <span class="uhr" id="uhr">0:00 / 2:03</span>
     <label class="schalter"><input type="checkbox" id="ruhig"> Weniger Bewegung</label>
+    <button class="knopf-n schliessen" id="zu" type="button">Schließen</button>
   </div>
-  <ol class="kapitel" id="kapitel" aria-label="Kapitel"></ol>
+  <ol class="kapitel" id="kapitel" aria-label="Teile des Films"></ol>
+  <p class="ort" id="ort"></p>
   <p class="sr" id="ansage" aria-live="polite"></p>
   <details class="text">
     <summary>Text zum Film</summary>
     <ol id="skript"></ol>
+    <p id="nachweise"></p>
   </details>
 </div>
 <script>
 (() => {
 "use strict";
 if (/[?&]eingebettet/.test(location.search)) document.documentElement.classList.add("eingebettet");
+/* Daten aus dem Blatt (tools/film_m22_daten.py) – nicht von Hand ändern */
+const D = /* FILM-DATEN:ANFANG */{"akten":[{"s":"A","name":"Adorno","titel":"Adorno und die Frankfurter Schule","jahr":"1950 / 1966","frage":"Gibt es einen Charakter, der anfällig ist – und kann Erziehung schützen?","gew":[4,1,2,0,0],"datei":"media/m22-wc-adorno-horkheimer-1964.jpg","nachweis":"Max Horkheimer (links) und Theodor W. Adorno, Heidelberg, April 1964. Foto: Jeremy J. Shapiro, Wikimedia Commons, CC BY-SA 3.0"},{"s":"B","name":"Arendt","titel":"Arendt: die Banalität des Bösen","jahr":"1963","frage":"War Eichmann ein Monster – oder ein Beamter, der nicht dachte?","gew":[3,1,1,3,1],"datei":"media/m22-wc-arendt-1933.jpg","nachweis":"Hannah Arendt, 1933. Wikimedia Commons, gemeinfrei (nach Young-Bruehl, For Love of the World)"},{"s":"C","name":"Browning","titel":"Browning: Ganz normale Männer","jahr":"1992","frage":"Wie wurden Hamburger Polizisten zu Mördern?","gew":[1,4,2,2,2],"datei":"media/m22-wc-browning-2019.jpg","nachweis":"Christopher Browning, Münster 2019. Foto: Harvey Kneeslapper, Wikimedia Commons, CC BY-SA 4.0"},{"s":"D","name":"Goldhagen","titel":"Goldhagen: Hitlers willige Vollstrecker","jahr":"1996","frage":"War der Judenhass der Deutschen der Grund?","gew":[1,1,4,1,0],"datei":"media/m22-wc-goldhagen-2011.jpg","nachweis":"Daniel J. Goldhagen, Frankfurter Buchmesse 2011. Das blaue Sofa / Club Bertelsmann, Wikimedia Commons, CC BY 2.0"},{"s":"E","name":"Milgram","titel":"Milgram: Gehorsam im Experiment","jahr":"1963","frage":"Gehorchen Menschen jeder Autorität?","gew":[1,4,1,1,0],"datei":"media/m22-wc-milgram-1954.jpg","nachweis":"Stanley Milgram, 1954. Queens College Jahrbuch, Wikimedia Commons, gemeinfrei"},{"s":"F","name":"Bauman · Welzer","titel":"Bauman und Welzer: Apparat und Referenzrahmen","jahr":"1989 / 2005","frage":"Wie machen Ordnung, Bürokratie und neue Normen das Töten möglich?","gew":[0,2,3,4,1],"datei":"media/m22-wc-welzer-2013.jpg","nachweis":"Harald Welzer, 2013. Foto: Hydro, Wikimedia Commons, CC BY-SA 3.0"}],"ebenen":[["person","Person","Was bringt ein Mensch mit?"],["situation","Situation","Was tut der Moment mit ihm?"],["weltbild","Weltbild","Was hält er für richtig?"],["apparat","Apparat","Wer tut nur ein kleines Stück?"],["vorteil","Vorteil","Was hat er davon?"]],"stufe":["kaum","etwas","wichtig","sehr wichtig","entscheidend"],"auf":[{"nr":"1","kurz":"Es geht um Menschen","name":"Es geht um Menschen","form":"Plenum, dann allein","min":8},{"nr":"2","kurz":"Faktencheck","name":"Drei Sätze im Faktencheck","form":"Alle","min":7},{"nr":"3","kurz":"Der Fall Józefów","name":"Der Fall Józefów, 13. Juli 1942","form":"Plenum","min":9},{"nr":"4","kurz":"Zwei Erklärungen","name":"Zwei Erklärungen untersuchen","form":"Allein oder zu zweit","min":20},{"nr":"L","kurz":"Landkarte","name":"Landkarte: Woher kommen die Unterschiede?","form":"Allein","min":6},{"nr":"5","kurz":"Marktplatz","name":"Marktplatz und Tischmodell","form":"Tischgruppe","min":10},{"nr":"6","kurz":"Diskussion","name":"Diskussion","form":"Plenum · iPad zu","min":7},{"nr":"7","kurz":"Schreibauftrag","name":"Schreibauftrag","form":"Allein","min":15},{"nr":"8","kurz":"Rückblick","name":"Rückblick: Was denkst du jetzt?","form":"Allein, dann Plenum","min":3},{"nr":"Z","kurz":"Zusammenfassung","name":"Zusammenfassung","form":"Zum Abheften","min":5},{"nr":"＋","kurz":"Extra · freiwillig","name":"Ein Gespräch über einen Satz","form":"Freiwillig · außerhalb der 90 Minuten","min":0}]}/* FILM-DATEN:ENDE */;
 const B = document.getElementById("buehne"), R = document.getElementById("rahmen");
 const $ = s => B.querySelector(s), $$ = s => [...B.querySelectorAll(s)];
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const farbe = n => getComputedStyle(document.documentElement).getPropertyValue("--" + n).trim();
-const DAUER = 122;
-const KAP = [
-  [0, "Bis hierher", "Józefów, 13. Juli 1942. Etwa 500 Hamburger Polizisten, im Bild 500 Punkte. Ihr Kommandeur bietet an: Wer nicht will, darf beiseitetreten. Rund ein Dutzend tritt heraus; zwölf Punkte lösen sich aus dem Feld. Die anderen machen mit. Mindestens 1.500 jüdische Frauen, Männer und Kinder werden ermordet. Es bleibt die Frage: Wie war das möglich?"],
-  [23.4, "Sechs Erklärungen", "Die Frage rückt in die Mitte. Um sie herum erscheinen sechs Erklärungen der Forschung, jede mit ihrer Leitfrage: A Adorno, B Arendt, C Browning, D Goldhagen, E Milgram, F Bauman und Welzer."],
-  [33, "Fünf Ebenen", "Um die Frage legt sich ein Rad mit fünf Ebenen: Person, Situation, Weltbild, Apparat, Vorteil. Das Rad ist ein Modell deiner Lehrkraft zum Ordnen, keine Messung."],
-  [44.8, "Dein Auftrag", "Du tippst auf Browning. Rechts öffnet sich ein Fenster mit drei Schritten. 1. Lesen, in den Stufen Einstieg, Vertiefung, Kontroverse. 2. Deine Erklärungskarte: die These, was sie an Józefów erklärt und was nicht. 3. Gewichtungs-Check: Du schätzt für jede Ebene, wie stark Browning sie gewichtet, und prüfst gegen das Modell. Erst danach zeigen Marken am Rad, wo Browning ansetzt. Dann bearbeitest du eine zweite Erklärung, am besten von einer anderen Ebene, hier Adorno. Mit zwei Erklärungskarten ist der Marktplatz frei."],
-  [80, "Wohin die Reise geht", "Der Lernweg zeigt: Nach einem kurzen Halt bei der Landkarte (Phase 5) geht es auf den Marktplatz (Phase 6). Dort gibt es sechs Stände, A bis F. Runde 1: Wer A, C oder E bearbeitet hat, erklärt am Stand in einer Minute die These, was sie an Józefów erklärt und was nicht. Die anderen besuchen. Runde 2: B, D und F erklären. Du besuchst zwei Stände und fragst: Was erklärt ihr nicht?"],
-  [101.4, "Euer Modell", "Zurück am Tisch verteilt eure Gruppe Gewichtungen auf die fünf Ebenen: Was hat in Józefów wie stark gewirkt? Die Balken im Film sind ein Beispiel. Für die wichtigste Ebene schreibt ihr eine Begründung. Eure Lehrkraft zeigt die Modelle am Beamer."],
-  [112, "Jetzt du", "Erklären heißt nicht entschuldigen. Jetzt bist du dran: Tippe in der Übersicht auf eine Erklärung. Bearbeite mindestens zwei, eine davon von einer anderen Ebene. Phase 4, 28 bis 50 Minuten, allein oder zu zweit."],
-];
+const AK = Object.fromEntries(D.akten.map(a => [a.s, a])), AUF = Object.fromEntries(D.auf.map(a => [a.nr, a]));
+const EBN = D.ebenen.map(e => e[1]);                       // Person, Situation, Weltbild, Apparat, Vorteil
+const DAUER = 123.5;
 
-/* ---------- Kurven (Tokens kurve-aus, kurve-beidseits) ---------- */
+/* Beispiel im Film: Browning (C). Die Schätzung ist ein Beispiel; die Rückmeldung rechnet der Film wie das Blatt gegen das Modell der Lehrkraft. */
+const SCH = [1, 3, 2, 1, 2];
+const FB = SCH.map((v, i) => { const d = v - AK.C.gew[i]; return d === 0 ? ["Trifft.", "t"] : Math.abs(d) === 1 ? [d > 0 ? "Etwas zu hoch." : "Etwas zu niedrig.", "n"] : [d > 0 ? "Zu hoch." : "Zu niedrig.", "n"]; });
+const TREFFER = FB.filter(f => f[1] === "t").length;
+const staerkste = a => EBN[a.gew.indexOf(Math.max(...a.gew))];
+
+const KAP = [
+  [0, "Bis hierher", "Józefów, 13. Juli 1942. Etwa 500 Hamburger Polizisten, im Bild 500 Punkte. Ihr Kommandeur bietet an: Wer nicht will, darf beiseitetreten. Rund ein Dutzend tritt heraus; zwölf Punkte lösen sich aus dem Feld. Die anderen machen mit. Mindestens 1.500 jüdische Frauen, Männer und Kinder werden ermordet. Es bleibt die Frage: Wie war das möglich? Links steht die Leiste mit den Arbeitsaufträgen des Blatts. Du bist bei Auftrag 4."],
+  [23.4, "Sechs Erklärungen", `Die Frage rückt in die Mitte. Um sie herum erscheinen die sechs Erklärungen der Forschung, so wie in der Übersicht auf deinem Blatt: jede Karte mit Bild, Name, Kennung, Jahr und Leitfrage. ${D.akten.map(a => a.s + " " + a.name.replace(" · ", " und ")).join(", ")}.`],
+  [33, "Fünf Ebenen", `Um die Frage legt sich ein Rad mit fünf Ebenen. ${D.ebenen.map(e => e[1] + ": " + e[2]).join(" ")} Das Rad ist ein Modell deiner Lehrkraft zum Ordnen, keine Messung. Auf dem Blatt steht die Erklärung der Ebenen unter dem Rad.`],
+  [45, "Dein Auftrag", `Du tippst auf die Karte von ${AK.C.name}. Rechts öffnet sich das Panel. Erstens: Du liest dich ein, in den Stufen Einstieg, Vertiefung, Kontroverse. Zweitens: Du schreibst deine Erklärungskarte – die These in einem Satz, was sie am Fall Józefów erklärt und was nicht. Drittens der Gewichtungs-Check: Du stellst für jede Ebene ein, wie stark ${AK.C.name} sie gewichtet, und prüfst gegen das Modell deiner Lehrkraft. Im Beispiel sind ${TREFFER} von 5 Ebenen genau getroffen. Erst danach zeigt die Übersicht mit Linien und Marken am Rad, wo ${AK.C.name} ansetzt: vor allem bei ${staerkste(AK.C)}. Dann untersuchst du eine zweite Erklärung, am besten aus einer anderen Ebene, im Film ${AK.A.name}. Mit zwei Erklärungskarten ist Auftrag L (Landkarte) frei.`],
+  [82.2, "So geht es weiter", `Auftrag L, ${AUF.L.name} – ${AUF.L.form.toLowerCase()}, ${AUF.L.min} Minuten. Danach Auftrag 5, ${AUF["5"].name}. Der Marktplatz hat eine Runde von fünf Minuten. Wer eine Karte zu Erklärung A, C oder E hat, steht am Stand und erklärt in einer Minute: die These, was sie an Józefów erklärt und was nicht. Alle anderen besuchen zwei Stände und fragen nach: Was erklärt ihr nicht?`],
+  [102.2, "Euer Modell", "Zurück am Tisch verteilt eure Gruppe in vier Minuten an einem iPad Gewichtungen auf die fünf Ebenen: Was hat in Józefów wie stark gewirkt? Die Balken im Film sind ein Beispiel. Für die wichtigste Ebene schreibt ihr eine Begründung. Eure Lehrkraft zeigt die Modelle am Beamer."],
+  [113.2, "Jetzt du", `Erklären heißt nicht entschuldigen. Jetzt bist du dran: Auftrag 4, ${AUF["4"].form.toLowerCase()}, ${AUF["4"].min} Minuten. Tippe in der Übersicht auf eine Erklärung. Schreib mindestens zwei Erklärungskarten, eine davon aus einer anderen Ebene.`],
+];
+/* Standbilder: je Abschnitt eines. Sie sind die Sprungmarken (Pfeiltasten, ‹ ›) und die Bilder für »Weniger Bewegung«. */
+const BILD = [5.4, 11.9, 18.3, 22.8, 32.2, 43.6, 49.1, 55, 61.3, 68.6, 74.9, 81.8, 88, 95, 101.75, 112.4, DAUER];
+
+/* ---------- Kurven ---------- */
 function bez(x1, y1, x2, y2) {
   return t => {
     if (t <= 0) return 0; if (t >= 1) return 1;
@@ -328,7 +345,7 @@ function bez(x1, y1, x2, y2) {
     return 3*(1-u)*(1-u)*u*y1 + 3*(1-u)*u*u*y2 + u*u*u;
   };
 }
-const KURVE = { aus: bez(.23, 1, .32, 1), beid: bez(.77, 0, .175, 1), lin: t => t };
+const KURVE = { aus: bez(.23, 1, .32, 1), beid: bez(.65, 0, .35, 1), lin: t => t };
 
 /* ---------- Zeitleiste: Schlüsselbilder je Element, ziehbar ---------- */
 const SP = new Map();
@@ -340,53 +357,126 @@ const zu = (el, t, d, p, e = "aus") => { key(el, t, {}); key(el, t + d, p, e); }
 const tipp = (el, t) => { zu(el, t, .12, { s: .78 }); zu(el, t + .14, .22, { s: 1 }); };
 const druck = (el, t) => { zu(el, t, .1, { x: 2, y: 2 }); zu(el, t + .12, .18, { x: 0, y: 0 }); };
 const aufbau = (el, t) => [...el.querySelectorAll("span")].forEach((w, i) => ein(w, t + i * .22, .5, { y: 8 }));
+const zeig = (el, von, bis, d = .3) => { ein(el, von, d, {}); if (bis != null) aus(el, bis, d); };   // ohne Versatz ein- und ausblenden
 
 /* ---------- Bühne: Geometrie ---------- */
-const CX = 640, CY = 375, RI = 96, RA = 214;
+const CX = 670, CY = 409, RI = 94, RA = 198, RL = 146, RO = RA + 20;
 const WINKEL = [-90, -18, 54, 126, 198];
 const P = (r, gr) => [CX + r * Math.cos(gr * Math.PI / 180), CY + r * Math.sin(gr * Math.PI / 180)];
-function rad() {
-  const svg = $("#rad"), ns = "http://www.w3.org/2000/svg";
-  WINKEL.forEach((w, i) => {
-    const a0 = w - 36, a1 = w + 36, f = n => n.toFixed(1);
-    const [x0, y0] = P(RI, a0), [x1, y1] = P(RA, a0), [x2, y2] = P(RA, a1), [x3, y3] = P(RI, a1);
-    const p = document.createElementNS(ns, "path");
-    p.setAttribute("class", "seg"); p.id = "seg" + i;
-    p.setAttribute("d", `M${f(x0)} ${f(y0)} L${f(x1)} ${f(y1)} A${RA} ${RA} 0 0 1 ${f(x2)} ${f(y2)} L${f(x3)} ${f(y3)} A${RI} ${RI} 0 0 0 ${f(x0)} ${f(y0)} Z`);
-    svg.appendChild(p);
-    const [lx, ly] = P(155, w), eb = $(`[data-eb="${i}"]`);
-    eb.style.left = lx + "px"; eb.style.top = ly + "px";
-  });
-  const ring = document.createElementNS(ns, "circle");
-  ring.setAttribute("class", "ring"); ring.setAttribute("cx", CX); ring.setAttribute("cy", CY); ring.setAttribute("r", RA + 6); ring.id = "ring";
-  svg.appendChild(ring);
-  const kern = document.createElementNS(ns, "circle");
-  kern.setAttribute("class", "kern"); kern.setAttribute("cx", CX); kern.setAttribute("cy", CY); kern.setAttribute("r", RI - 8); kern.id = "kern";
-  svg.appendChild(kern);
+const KW = 322, KH = 182, KX = { l: 124, r: 894 }, KY = [128, 318, 508];
+const ORT = {}; D.akten.forEach((a, i) => { ORT[a.s] = { x: i < 3 ? KX.l : KX.r, y: KY[i % 3], links: i < 3 }; });
+const ANKER = s => [ORT[s].links ? ORT[s].x + KW : ORT[s].x, ORT[s].y + KH / 2];
+const RY = i => 150 + i * 47, RX = 82;
+const LEISTE = ["D", ...D.auf.map(a => a.nr)];
+const ns = "http://www.w3.org/2000/svg";
+function neu(cls, x, y, html, wohin) {
+  const d = document.createElement("div"); d.className = "a " + cls;
+  if (x != null) d.style.left = x + "px"; if (y != null) d.style.top = y + "px"; if (html != null) d.innerHTML = html;
+  (wohin || B).appendChild(d); return d;
 }
 function mitte(el) {
   const r = el.getBoundingClientRect(), b = B.getBoundingClientRect(), k = b.width / 1280;
   return [(r.left - b.left + r.width / 2) / k, (r.top - b.top + r.height / 2) / k];
 }
-function neu(cls, x, y, text) {
-  const d = document.createElement("div"); d.className = "a " + cls;
-  d.style.left = x + "px"; d.style.top = y + "px"; if (text) d.textContent = text;
-  B.insertBefore(d, $("#merk")); return d;
+
+/* ---------- Bühne bauen: alles, was Namen und Zahlen trägt, kommt aus den Daten ---------- */
+const RD = {}, KARTE = {}, STAND = {}, WAHL = {}, EB = [], MARKE = {}, LINIE = {};
+function bau() {
+  // Leiste
+  const li = $("#leiste-in");
+  LEISTE.forEach((n, i) => { RD[n] = neu("rd" + (n === "D" || n === "＋" ? " eckig" : ""), RX, RY(i), `<span>${esc(n)}</span>`, li); });
+  ["1", "2", "3"].forEach(n => { RD["ok" + n] = neu("rd fertig", RX, RY(LEISTE.indexOf(n)), `<span>${n}</span>`, li); });
+  RD.hier = neu("rd hier", RX, RY(LEISTE.indexOf("4")), "<span>4</span>", li);
+  RD.danach = neu("rd danach", RX, RY(LEISTE.indexOf("L")), "", li);
+  // Karten
+  const kt = $("#karten");
+  D.akten.forEach(a => {
+    const o = ORT[a.s], k = neu("karte", o.x, o.y, `<span class="pf">${a.datei ? `<img src="${esc(a.datei)}" alt="">` : esc(a.s)}</span><span class="nm">${esc(a.name)}</span><span class="kz">Erklärung ${a.s} · ${esc(a.jahr)}</span><span class="fr">${esc(a.frage)}</span>`, kt);
+    const img = k.querySelector("img"); if (img) img.addEventListener("error", () => { img.parentNode.textContent = a.s; });
+    k.dataset.karte = a.s; KARTE[a.s] = k; STAND[a.s] = [];
+    if (a.s === "A" || a.s === "C") WAHL[a.s] = neu("wahl", o.x, o.y, "", kt);   // Rahmen der gewählten Karte (im Film: Browning, dann Adorno)
+  });
+  // Rad
+  const svg = $("#rad"), f = n => n.toFixed(1);
+  WINKEL.forEach((w, i) => {
+    const a0 = w - 36, a1 = w + 36, [x0, y0] = P(RI, a0), [x1, y1] = P(RA, a0), [x2, y2] = P(RA, a1), [x3, y3] = P(RI, a1);
+    const p = document.createElementNS(ns, "path"); p.setAttribute("class", "seg"); p.id = "seg" + i;
+    p.setAttribute("d", `M${f(x0)} ${f(y0)} L${f(x1)} ${f(y1)} A${RA} ${RA} 0 0 1 ${f(x2)} ${f(y2)} L${f(x3)} ${f(y3)} A${RI} ${RI} 0 0 0 ${f(x0)} ${f(y0)} Z`);
+    svg.appendChild(p);
+    const breit = [150, 108, 136, 136, 108][i], [lx, ly] = P(i === 1 || i === 4 ? RL + 4 : RL, w);   // seitliche Felder: schmaler, damit die Frage im Feld bleibt
+    const eb = neu("eb", lx, ly, `<b>${esc(D.ebenen[i][1])}</b><span class="a kq">${esc(D.ebenen[i][2])}</span><span class="a mk"></span>`, $("#felder"));
+    eb.style.width = breit + "px"; eb.style.marginLeft = -breit / 2 + "px"; if (i === 1 || i === 4) eb.style.marginTop = "-44px"; EB.push(eb);
+  });
+  const kern = document.createElementNS(ns, "circle"); kern.setAttribute("class", "kern"); kern.id = "kern"; kern.setAttribute("cx", CX); kern.setAttribute("cy", CY); kern.setAttribute("r", RI - 6); svg.appendChild(kern);
+  // Panel: Browning ausführlich, Adorno im Zeitraffer
+  const c = AK.C, a = AK.A;
+  $("#pin").innerHTML = `<div class="pk"><span class="sig">Erklärung ${c.s} · ${esc(c.jahr)}</span><span class="zu">Schließen</span></div>
+    <h3>${esc(c.titel)}</h3><span class="ebv">Ebene: nach deinem Gewichtungs-Check</span>
+    <p class="lf"><b>Leitfrage:</b> ${esc(c.frage)}</p>
+    <div class="stufen" id="stufen"><span>Einstieg</span><span>Vertiefung</span><span>Kontroverse</span></div>
+    <div class="lese" id="lese1"><p class="sk">Einstieg</p><i style="width:97%"></i><i style="width:92%"></i><i style="width:64%"></i></div>
+    <div class="lese" id="lese2"><p class="sk">Vertiefung</p><i style="width:95%"></i><i style="width:71%"></i></div>
+    <div class="lese" id="lese3"><p class="sk">Kontroverse</p><i style="width:90%"></i><i style="width:58%"></i></div>
+    <h4 id="h-karte">Deine Erklärungskarte</h4><p class="merk-k">Erklären heißt nicht entschuldigen.</p>
+    <div class="fld"><span>1 · Die These in einem Satz, in deinen Worten</span><div class="li"><svg viewBox="0 0 330 26"><path id="w1" pathLength="1" d="M2 18 C12 6 18 22 28 14 S44 8 52 16 S66 22 76 12 S92 6 100 16 S118 22 128 12 S146 8 156 16 S170 20 180 13 S198 8 206 16 S222 20 236 12 S254 7 264 15 S282 21 296 12"/></svg></div></div>
+    <div class="fld"><span>2 · Was erklärt sie am Fall Józefów?</span><div class="li"><svg viewBox="0 0 330 26"><path id="w2" pathLength="1" d="M2 15 C10 8 20 22 30 14 S46 6 56 16 S72 22 84 12 S98 8 108 16 S124 22 134 13 S150 8 160 16 S176 21 188 13 S206 7 218 15 S236 20 250 13"/></svg></div></div>
+    <div class="fld"><span>3 · Was erklärt sie nicht?</span><div class="li"><svg viewBox="0 0 330 26"><path id="w3" pathLength="1" d="M2 16 C12 8 18 22 30 13 S46 7 54 16 S70 22 80 12 S96 8 106 16 S122 21 134 13 S152 8 160 15 S176 20 186 13 S204 9 214 15"/></svg></div></div>
+    <h4 id="h-check">Gewichtungs-Check: Wo setzt diese Erklärung an?</h4>
+    ${D.ebenen.map((e, i) => `<div class="regler"><span>${esc(e[1])}</span><span class="spur"><i class="knopf" data-kn="${i}"></i></span><span class="wt"><span data-w0="${i}">${esc(D.stufe[2])}</span><span data-w1="${i}">${esc(D.stufe[SCH[i]])}</span><span class="fb ${FB[i][1]}" data-fb="${i}">${FB[i][0]}</span></span></div>`).join("")}
+    <div class="pruefen"><span id="pruefen">Prüfen</span><span class="erg" id="zaehl">Richtig gelegen: ${TREFFER} von 5</span></div>
+    <p class="gs" id="gewsatz">${TREFFER} von 5 Ebenen genau getroffen. ${esc(c.name)} setzt vor allem bei ${staerkste(c)} an.</p>`;
+  const st = $("#stufen"); [...st.querySelectorAll("span")].forEach((s, i) => { const an = document.createElement("span"); an.className = "an"; an.dataset.an = i; an.textContent = s.textContent; an.style.left = s.offsetLeft + "px"; st.appendChild(an); });
+  $("#pkurz").innerHTML = `<div class="pk"><span class="sig">Erklärung ${a.s} · ${esc(a.jahr)}</span><span class="zu" id="zuA">Schließen</span></div>
+    <h3>${esc(a.titel)}</h3><p class="raffer">Im Zeitraffer – dieselben drei Schritte:</p>
+    <div class="hak" data-hak="0"><span class="nr">1</span>Lesen <i>✓</i></div>
+    <div class="hak" data-hak="1"><span class="nr">2</span>Deine Erklärungskarte <i>✓</i></div>
+    <div class="hak" data-hak="2"><span class="nr">3</span>Gewichtungs-Check <i>✓</i></div>
+    <p class="gs" id="gewsatzA">${esc(a.name)} setzt vor allem bei ${staerkste(a)} an.</p>`;
+  // 6 · Tischmodell und 7 · Schluss
+  const WERT = [1, 3, 2, 2, 1];
+  $("#balken").innerHTML = D.ebenen.map((e, i) => `<div class="bz"><b>${esc(e[1])}</b><span class="tr"><i class="fl" data-fl="${i}" style="--eb:var(--e-${e[0]})"></i></span><span class="wt2">${esc(D.stufe[WERT[i]])}</span></div>`).join("") +
+    `<p class="bsp2">Beispiel. Euer Modell kann ganz anders aussehen. Für die wichtigste Ebene schreibt ihr eine Begründung.</p>`;
+  const a4 = AUF["4"];
+  $("#auftrag").innerHTML = `<span class="form">Arbeitsauftrag 4 · ${esc(a4.form)} · ${a4.min} Minuten</span><span class="ti">${esc(a4.name)}</span><span class="tx">Tippe in der Übersicht auf eine Erklärung. Schreib <b>mindestens zwei</b> Erklärungskarten, eine davon aus einer anderen Ebene.</span>`;
+  document.getElementById("pm").textContent = `M22 · Auftrag 4 · ${a4.name} · Film ohne Ton, ${Math.round(DAUER / 60)} Minuten`;
+  document.getElementById("nachweise").textContent = "Bilder in den Karten: " + D.akten.filter(x => x.datei).map(x => x.nachweis).join(" · ");
+  return WERT;
+}
+/* Stand einer Karte: je Zeitabschnitt eine Zeile wie im Blatt (»noch offen«, »✓ gelesen«, »✓ Karte«, »✓ Karte ✓ geprüft«) */
+function stand(s, folge, von, bis) {
+  folge.forEach(([t, marken], i) => {
+    const el = neu("st", null, null, marken.length ? marken.map(m => `<i class="ok">✓ ${m}</i>`).join("") : "<i>noch offen</i>", KARTE[s]);
+    const ende = i + 1 < folge.length ? folge[i + 1][0] : null;
+    if (i === 0) { key(el, 0, { o: 1 }); if (ende != null) aus(el, ende, .2); } else { ein(el, t + .15, .3, {}); if (ende != null) aus(el, ende, .2); }
+  });
+}
+/* Linie von der Karte zum Segment – gerechnet wie im Blatt: zum nächsten Rand des Segments, sonst außen um das Rad herum */
+function linie(s, ei, g) {
+  const [kx, ky] = ANKER(s), ak = Math.atan2(ky - CY, kx - CX), w = WINKEL[ei] * Math.PI / 180, F5 = Math.PI / 5, n = v => v.toFixed(1);
+  let dlt = ak - w; while (dlt > Math.PI) dlt -= 2 * Math.PI; while (dlt < -Math.PI) dlt += 2 * Math.PI;
+  const aE = w + Math.max(-F5 * .8, Math.min(F5 * .8, dlt)), ex = CX + Math.cos(aE) * (RA + 6), ey = CY + Math.sin(aE) * (RA + 6);
+  let d;
+  if (Math.abs(dlt) <= F5) d = `M${kx} ${ky} L${n(ex)} ${n(ey)}`;
+  else { const ox = CX + Math.cos(ak) * RO, oy = CY + Math.sin(ak) * RO; let dA = aE - ak; while (dA > Math.PI) dA -= 2 * Math.PI; while (dA < -Math.PI) dA += 2 * Math.PI;
+    d = `M${kx} ${ky} L${n(ox)} ${n(oy)} A${RO} ${RO} 0 0 ${dA > 0 ? 1 : 0} ${n(CX + Math.cos(aE) * RO)} ${n(CY + Math.sin(aE) * RO)} L${n(ex)} ${n(ey)}`; }
+  const p = document.createElementNS(ns, "path"); p.setAttribute("class", "lin"); p.setAttribute("pathLength", "1"); p.setAttribute("d", d); p.setAttribute("stroke-width", [0, 1.5, 3, 4.5, 6][g]);
+  $("#linien").appendChild(p); return p;
 }
 
-/* ---------- Punktefeld (Phase 3 von M22): 500 Männer, rund ein Dutzend tritt heraus ---------- */
-const FELD = { sp: 25, z: 20, c: 17, r: 5 };
-FELD.x0 = CX - (FELD.sp * FELD.c) / 2 + FELD.c / 2; FELD.y0 = CY - (FELD.z * FELD.c) / 2 + FELD.c / 2;
+/* ---------- Punktefeld (Auftrag 3 des Blatts): 500 Männer, rund ein Dutzend tritt heraus ---------- */
+const FELD = { sp: 25, z: 20, c: 17, r: 5, cx: 640, cy: 375 };
+FELD.x0 = FELD.cx - (FELD.sp * FELD.c) / 2 + FELD.c / 2; FELD.y0 = FELD.cy - (FELD.z * FELD.c) / 2 + FELD.c / 2;
 const RAUS = [27, 63, 96, 141, 178, 212, 260, 301, 333, 377, 418, 466];
 const cv = $("#feld"), cx = cv.getContext("2d"); const DPR = 2;
 cv.width = 1280 * DPR; cv.height = 720 * DPR; cx.scale(DPR, DPR);
-let TINTE = "#2a2622", GRUNDF = "#f3efe7";
+let TINTE = "#2A2622", GRUNDF = "#F3EFE7";
 function feld(T) {
   cx.clearRect(0, 0, 1280, 720);
   if (T > 19.4) return;
+  const weg = Math.min(1, Math.max(0, (T - 18.6) / .8));
   for (let i = 0; i < 500; i++) {
     const zr = Math.floor(i / FELD.sp), sp = i % FELD.sp;
-    let a = Math.min(1, Math.max(0, (T - 1 - zr * .06) / .4));
+    let a = Math.min(1, Math.max(0, (T - 1 - zr * .06) / .4)) * (1 - weg);
     if (!a) continue;
     let x = FELD.x0 + sp * FELD.c, y = FELD.y0 + zr * FELD.c, ring = 0;
     const j = RAUS.indexOf(i);
@@ -404,17 +494,16 @@ function feld(T) {
 }
 
 /* ---------- Drehbuch ---------- */
-function drehbuch() {
-  const k = n => $(`[data-k="${n}"]`), s = id => $("#" + id);
-  const karte = c => $(`[data-karte="${c}"]`), F = s("finger");
+function drehbuch(WERT) {
+  const k = n => $(`[data-k="${n}"]`), s = id => $("#" + id), F = s("finger");
+  const UEBERSICHT_WEG = 82.3;
 
-  // Lernweg: 1–3 erledigt, »Du bist hier« bei 4
-  for (let i = 0; i < 3; i++) {
-    const b = neu("wegb", 64 + 144 * i, 648); b.style.cssText += ";z-index:2;width:144px;height:4px;background:var(--petrol);transform-origin:left center";
-    key(b, 0, { sx: 0 }); key(b, .4 + i * .25, { sx: 0 }); key(b, .9 + i * .25, { sx: 1 });
-  }
-  ein(s("hier"), 25.2, .5, { y: 6 });
-  tipp(s("hier"), 116.2);
+  // Leiste: steht von Anfang an; 1 bis 3 sind fertig, »Du bist hier« ist Auftrag 4
+  ein(s("leiste"), .2, .5, {});
+  LEISTE.forEach((n, i) => ein(RD[n], .3 + i * .03, .4, { x: -6 }));
+  ["1", "2", "3"].forEach((n, i) => ein(RD["ok" + n], .8 + i * .3, .4, {}));
+  ein(RD.hier, 19.8, .5, { x: -6 }); tipp(RD.hier, 117.2);
+  ein(s("hier"), 20.1, .5, { x: -8 }); aus(s("hier"), 24.4);
 
   // 1 · Bis hierher
   ein(k(1), .2); aus(k(1), 23);
@@ -423,146 +512,140 @@ function drehbuch() {
   ein(s("s1c"), 12.6); aus(s("s1c"), 18.6);
   ein(s("quelle1"), 1.4); aus(s("quelle1"), 18.6);
   ein(s("dutzend"), 9.4, .6, { x: -8 }); aus(s("dutzend"), 18.6);
-  key(s("feld"), 0, { o: 1 }); aus(s("feld"), 18.6, .8);
   aufbau(s("frage"), 19.6);
-  zu(s("frage"), 23.6, 1.3, { s: .34 }, "beid"); aus(s("frage"), 24.8, .3);
-  ein(s("kern"), 24.4, .6, {}); aus(s("kern"), 80.4);
-  ein(s("frageK"), 24.8, .3, {}); aus(s("frageK"), 80.4);
+  zu(s("frage"), 23.6, 1.3, { s: .3, x: CX - 640, y: CY - 375 - 12 }, "beid"); aus(s("frage"), 24.7, .3);
+  ein(s("kern"), 24.4, .6, {}); aus(s("kern"), UEBERSICHT_WEG, .6);
+  ein(s("frageK"), 24.8, .4, {}); aus(s("frageK"), UEBERSICHT_WEG, .6);
 
   // 2 · Sechs Erklärungen
   ein(k(2), 23.8); aus(k(2), 32.6);
   ein(s("s2a"), 24.3); aus(s("s2a"), 32.5);
-  ["A", "B", "C", "D", "E", "F"].forEach((c, i) => { ein(karte(c), 25.6 + i * .3, .7, { x: i < 3 ? -24 : 24 }); aus(karte(c), 80.4); });
+  D.akten.forEach((a, i) => { ein(KARTE[a.s], 25.6 + i * .3, .7, { x: i < 3 ? -24 : 24 }); });
 
-  // 3 · Fünf Ebenen
+  // 3 · Fünf Ebenen: Die Karten treten zurück, das Rad baut sich auf
   ein(k(3), 33.2); aus(k(3), 44.6);
   ein(s("s3a"), 33.5); aus(s("s3a"), 44.5);
-  ein(s("ring"), 34, .8, {}); aus(s("ring"), 80.4);
+  D.akten.forEach(a => { zu(KARTE[a.s], 33.3, .5, { o: .4 }); zu(KARTE[a.s], 44.2, .5, { o: 1 }); aus(KARTE[a.s], UEBERSICHT_WEG, .6); });
   WINKEL.forEach((w, i) => {
-    ein(s("seg" + i), 34.3 + i * .7, .6, {}); aus(s("seg" + i), 80.4);
-    ein($(`[data-eb="${i}"]`), 34.5 + i * .7, .6, { y: 8 }); aus($(`[data-eb="${i}"]`), 80.4);
+    ein(s("seg" + i), 34.3 + i * .9, .6, {}); aus(s("seg" + i), UEBERSICHT_WEG, .6);
+    ein(EB[i], 34.5 + i * .9, .6, { y: 8 }); aus(EB[i], UEBERSICHT_WEG, .6);
+    aus(EB[i].querySelector(".kq"), 43.9, .5);
   });
-  ein(s("modell"), 40.4); aus(s("modell"), 45);
+  ein(s("modell"), 39.6); aus(s("modell"), 44.6);
 
-  // 4 · Dein Auftrag – Browning
-  ein(k(4), 45); aus(k(4), 79.6);
-  [["s4a", 45.3, 49.2], ["s4b", 49.5, 54.9], ["s4c", 55.2, 61], ["s4d", 61.3, 67.9], ["s4e", 68.2, 73], ["s4f", 73.3, 79.4]]
+  // 4 · Dein Auftrag – Beispiel Browning
+  ein(k(4), 45); aus(k(4), 81.9);
+  [["s4a", 45.3, 49.4], ["s4b", 49.7, 55.3], ["s4c", 55.6, 61.6], ["s4d", 61.9, 68.9], ["s4e", 69.2, 75.2], ["s4f", 75.5, 81.9]]
     .forEach(([id, a, b]) => { ein(s(id), a); aus(s(id), b, .3); });
-  const kc = mitte(karte("C")), ka = mitte(karte("A"));
-  key(F, 0, { o: 0, x: 1180, y: 690 }); key(F, 45.6, { o: 0 }); key(F, 46, { o: 1 });
-  key(F, 47.2, { x: kc[0], y: kc[1] }, "beid"); tipp(F, 47.3); druck(karte("C"), 47.3);
-  const pc = s("panelC");
-  key(pc, 0, { o: 0, x: 40 }); key(pc, 47.6, { o: 0, x: 40 }); key(pc, 48.2, { o: 1, x: 0 }); zu(pc, 68.2, .25, { o: 0, x: 30 });
-  key(s("st2"), 0, { o: .3 }); key(s("st3"), 0, { o: .3 });
-  zu(s("st1"), 55.2, .3, { o: .3 }); zu(s("st2"), 55.2, .3, { o: 1 }); zu(s("st2"), 61.3, .3, { o: .3 }); zu(s("st3"), 61.3, .3, { o: 1 });
-  const reiter = $$(".reiter span").map(mitte), zg = s("zeiger"), schritt = reiter[1][0] - reiter[0][0];
-  key(zg, 0, { o: 0, x: 0 }); key(zg, 50.6, { o: 0 }); key(zg, 50.9, { o: 1 });
-  zu(zg, 51.9, .45, { x: schritt }, "beid"); zu(zg, 53.4, .45, { x: 2 * schritt }, "beid");
-  zu(F, 49.9, .7, { x: reiter[0][0], y: reiter[0][1] }, "beid"); tipp(F, 50.7);
-  zu(F, 51.4, .5, { x: reiter[1][0], y: reiter[1][1] }, "beid"); tipp(F, 51.95);
-  zu(F, 52.9, .5, { x: reiter[2][0], y: reiter[2][1] }, "beid"); tipp(F, 53.45);
-  aus(F, 54.4);
-  ["w1", "w2", "w3"].forEach((w, i) => { key(s(w), 0, { d: 0 }); key(s(w), 56 + i * 1.6, { d: 0 }); key(s(w), 57.3 + i * 1.6, { d: 1 }, "lin"); });
-  const SCH = [1, 3, 2, 1, 2];
-  $$(".knopf").forEach((kn, i) => { key(kn, 0, { x: 88 }); zu(kn, 62.1 + i * .45, .55, { x: SCH[i] * 44 }, "beid"); });
-  const pr = mitte(s("pruefen"));
-  key(F, 63.8, { o: 0, x: pr[0] + 90, y: pr[1] + 70 }); key(F, 64.1, { o: 1 });
-  key(F, 64.8, { x: pr[0], y: pr[1] }, "beid"); tipp(F, 64.9); druck(s("pruefen"), 64.9);
-  $$(".fb").forEach((f, i) => ein(f, 65.4 + i * .15, .4, { x: -6 }));
-  ein(s("erg"), 66.3, .5, { x: -6 }); aus(F, 66.2);
-  ein(s("standC"), 68.6, .4, {});
-
-  // Marken am Rad: Browning (Modell der Lehrkraft: Situation entscheidend; Weltbild, Apparat, Vorteil wichtig)
-  const GROESSE = { 2: .65, 3: .82, 4: 1 };
-  const marke = (buch, ebene, gew, von, t, versatz) => {
-    const [x, y] = P(RA + 2, WINKEL[ebene] + versatz), m = neu("marke", x, y, buch);
-    key(m, 0, { o: 0, x: von[0] - x, y: von[1] - y, s: .4 }); key(m, t, { o: 0, x: von[0] - x, y: von[1] - y, s: .4 });
-    key(m, t + .15, { o: 1 }); key(m, t + 1.1, { x: 0, y: 0, s: GROESSE[gew] }, "beid"); aus(m, 80.4);
-  };
-  const vonC = [kc[0] + 150, kc[1]], vonA = [ka[0] + 150, ka[1]];
-  [[1, 4], [2, 2], [3, 2], [4, 2]].forEach(([e, g], i) => marke("C", e, g, vonC, 69 + i * .25, -15));
-  ein(s("legende"), 70.4); aus(s("legende"), 78.6, .3);
-
-  // zweite Erklärung: Adorno (Person entscheidend, Weltbild wichtig)
-  key(F, 73.3, { o: 0, x: ka[0] + 260, y: ka[1] + 200 }); key(F, 73.7, { o: 1 });
-  key(F, 74.6, { x: ka[0], y: ka[1] }, "beid"); tipp(F, 74.7); druck(karte("A"), 74.7); aus(F, 75.3);
-  const pa = s("panelA");
-  key(pa, 0, { o: 0, x: 40 }); key(pa, 74.9, { o: 0, x: 40 }); key(pa, 75.4, { o: 1, x: 0 }); zu(pa, 77.4, .25, { o: 0, x: 30 });
-  $$("[data-hak]").forEach((h, i) => ein(h, 75.8 + i * .45, .35, { x: -6 }));
-  ein(s("standA"), 77.6, .4, {});
-  [[0, 4], [2, 2]].forEach(([e, g], i) => marke("A", e, g, vonA, 77.8 + i * .25, 15));
-  ein(s("frei"), 78.9, .5, { y: 6 }); aus(s("frei"), 80.4);
-
-  // 5 · Wohin die Reise geht
-  ein(k(5), 80.2); aus(k(5), 101.2);
-  ein(s("s5a"), 80.6); aus(s("s5a"), 86.4, .3);
-  ein(s("s5b"), 86.8); aus(s("s5b"), 93.6, .3);
-  ein(s("s5c"), 94); aus(s("s5c"), 101.2);
-  key(s("reisepfad"), 0, { d: 0 }); key(s("reisepfad"), 81, { d: 0 }); key(s("reisepfad"), 82.6, { d: 1 }, "beid"); aus(s("reisepfad"), 101.4);
-  ein(s("ziel"), 81.8); aus(s("ziel"), 86.4);
-
-  const STAENDE = { A: [300, 280], C: [640, 280], E: [980, 280], B: [300, 490], D: [640, 490], F: [980, 490] };
-  const NAME = { A: "Adorno", B: "Arendt", C: "Browning", D: "Goldhagen", E: "Milgram", F: "Bauman · Welzer" };
-  const oben = c => "ACE".includes(c);
-  const rahm = {};
-  Object.entries(STAENDE).forEach(([c, [x, y]], i) => {
-    const st = neu("stand-t", x, y); st.innerHTML = `<span class="buch">${c}</span><span class="nm">${NAME[c]}</span>`;
-    ein(st, 83 + i * .15, .5, { y: 8 }); aus(st, 101.4, .6);
-    const an = neu("stand-an", x, y); rahm[c] = an;
-    key(an, 0, { o: 0 });
+  const kc = mitte(KARTE.C), ka = mitte(KARTE.A);
+  key(F, 0, { o: 0, x: 600, y: 660 }); key(F, 45.7, { o: 0 }); key(F, 46.1, { o: 1 });
+  key(F, 47.2, { x: kc[0], y: kc[1] }, "beid"); tipp(F, 47.3); druck(KARTE.C, 47.3);
+  zeig(WAHL.C, 47.35, 76.8, .2);
+  stand("C", [[0, []], [47.3, ["gelesen"]], [59.9, ["Karte"]], [66.4, ["Karte", "geprüft"]]]);
+  stand("A", [[0, []], [76.8, ["gelesen"]], [78.7, ["Karte", "geprüft"]]]);
+  ["B", "D", "E", "F"].forEach(x => stand(x, [[0, []]]));
+  const pn = s("panel"), pin = s("pin"), pk = s("pkurz");
+  key(pn, 0, { o: 0, x: 60 }); key(pn, 47.6, { o: 0, x: 60 }); key(pn, 48.3, { o: 1, x: 0 }); zu(pn, 80.45, .45, { o: 0, x: 60 }, "beid");
+  // Schritt 1 · Lesen: drei Stufen, der Text wächst nach unten
+  const st = [...s("stufen").querySelectorAll("span:not(.an)")].map(mitte), an = i => $(`[data-an="${i}"]`);
+  key(an(0), 0, { o: 1 }); aus(an(0), 51.9, .2); zeig(an(1), 51.9, 53.4, .2); zeig(an(2), 53.4, null, .2);
+  key(s("lese2"), 0, { o: 0 }); ein(s("lese2"), 52.05, .5, { y: 6 }); key(s("lese3"), 0, { o: 0 }); ein(s("lese3"), 53.55, .5, { y: 6 });
+  zu(F, 50.2, .9, { x: st[1][0], y: st[1][1] }, "beid"); tipp(F, 51.85);
+  zu(F, 52.7, .6, { x: st[2][0], y: st[2][1] }, "beid"); tipp(F, 53.35);
+  aus(F, 54.3);
+  // Schritt 2 · Erklärungskarte: Das Panel scrollt, drei Zeilen werden geschrieben
+  const oben = el => el.getBoundingClientRect().top - pin.getBoundingClientRect().top, kB = B.getBoundingClientRect().width / 1280;
+  const y2 = -(oben(s("h-karte")) / kB - 14), y3 = -(oben(s("h-check")) / kB - 14);
+  zu(pin, 55.7, .9, { y: y2 }, "beid");
+  ["w1", "w2", "w3"].forEach((w, i) => { key(s(w), 0, { d: 0 }); key(s(w), 56.9 + i * 1.5, { d: 0 }); key(s(w), 58.1 + i * 1.5, { d: 1 }, "lin"); });
+  // Schritt 3 · Gewichtungs-Check: schätzen, dann prüfen
+  zu(pin, 62, .9, { y: y3 }, "beid");
+  $$(".knopf").forEach((kn, i) => { key(kn, 0, { x: 75 }); zu(kn, 63.2 + i * .45, .55, { x: SCH[i] * 37.5 }, "beid"); });
+  D.ebenen.forEach((e, i) => {
+    const w0 = $(`[data-w0="${i}"]`), w1 = $(`[data-w1="${i}"]`), fb = $(`[data-fb="${i}"]`);
+    key(w0, 0, { o: 1 }); aus(w0, 63.4 + i * .45, .2); zeig(w1, 63.5 + i * .45, 66.5 + i * .15, .2); ein(fb, 66.6 + i * .15, .35, { x: -6 });
   });
-  "ACE".split("").forEach(c => { key(rahm[c], 86.6, { o: 0 }); key(rahm[c], 87, { o: 1 }); aus(rahm[c], 93.9, .3); });
-  "BDF".split("").forEach(c => { key(rahm[c], 94.1, { o: 0 }); key(rahm[c], 94.5, { o: 1 }); aus(rahm[c], 101.4, .6); });
-  const heim = (c, j) => { const [x, y] = STAENDE[c]; return [x - 56 + j * 56, oben(c) ? y - 66 : y + 66]; };
-  const besuch = (c, j) => { const [x, y] = STAENDE[c]; return [x - 56 + j * 56, oben(c) ? y + 66 : y - 66]; };
-  const ICH = s("ichl"), du = { el: null };
-  const geh = (m, t, d, [x, y], h) => { zu(m, t, d, { x: x - h[0], y: y - h[1] }, "beid"); if (m === du.el) zu(ICH, t, d, { x: x - h[0], y: y - h[1] }, "beid"); };
-  Object.keys(STAENDE).forEach((c, gi) => {
-    for (let j = 0; j < 3; j++) {
-      const h = heim(c, j), m = neu("mensch", h[0], h[1]), g = "ABCDEF".indexOf(c) >> 1;
-      const ich = c === "C" && j === 1; if (ich) { m.classList.add("ich"); du.el = m; ICH.style.left = h[0] + 16 + "px"; ICH.style.top = h[1] - 36 + "px"; ein(ICH, 84.4, .4, { x: 0, y: 0 }); }
-      ein(m, 84 + (gi * 3 + j) * .02, .4, { s: .5 });
-      const gruppe = { A: 0, C: 1, E: 2, B: 0, D: 1, F: 2 }[c];
-      if (!oben(c)) {
-        geh(m, 87.4 + (gi * 3 + j) * .05, 1.6, besuch("ACE"[j], gruppe), h);
-        geh(m, 94.6 + (gi * 3 + j) * .05, 1.6, h, h);
-        aus(m, 101.4, .6);
-      } else {
-        geh(m, 94.6 + (gi * 3 + j) * .05, 1.6, besuch("BDF"[j], gruppe), h);
-        if (ich) {
-          geh(m, 98, 1.4, [STAENDE.F[0] + 84, STAENDE.F[1] - 66], h);
-          geh(m, 102, 1, [134, 345], h);
-          aus(m, 111.8); aus(ICH, 111.8);
-        } else aus(m, 101.4, .6);
-      }
+  const pr = mitte(s("pruefen")); pr[1] += y3;
+  key(F, 64.9, { o: 0, x: pr[0] + 110, y: pr[1] + 30 }); key(F, 65.3, { o: 1 });
+  key(F, 66, { x: pr[0], y: pr[1] }, "beid"); tipp(F, 66.15); druck(s("pruefen"), 66.15); aus(F, 67.4);
+  key(s("zaehl"), 0, { o: 0 }); ein(s("zaehl"), 67.3, .4, { x: -6 });
+  key(s("gewsatz"), 0, { o: 0 }); ein(s("gewsatz"), 67.6, .5, { y: 6 });
+  // Erst jetzt: Linien und Marken (nur ab »wichtig«, wie im Blatt)
+  const marke = (buch, ei, g, t) => { const m = document.createElement("i"); m.textContent = buch; m.className = "m" + g; EB[ei].querySelector(".mk").appendChild(m); key(m, 0, { o: 0, s: .5 }); key(m, t, { o: 0, s: .5 }); key(m, t + .4, { o: 1, s: 1 }); };   // gefüllt = entscheidend, grau = sehr wichtig, Rahmen = wichtig
+  AK.C.gew.forEach((g, ei) => { if (g < 2) return; const p = linie("C", ei, g); key(p, 0, { d: 0 }); key(p, 69.5 + ei * .2, { d: 0 }); key(p, 70.6 + ei * .2, { d: 1 }, "beid"); aus(p, 76.85, .3); marke("C", ei, g, 70.3 + ei * .2); });
+  // zweite Erklärung: Adorno, im Zeitraffer
+  key(F, 75.7, { o: 0, x: 560, y: 330 }); key(F, 76, { o: 1 });
+  key(F, 76.7, { x: ka[0], y: ka[1] }, "beid"); tipp(F, 76.8); druck(KARTE.A, 76.8);
+  zeig(WAHL.A, 76.85, 80.5, .2);
+  zu(pin, 76.9, .3, { o: 0 }); key(pk, 0, { o: 0 }); ein(pk, 77, .4, { x: 12 });
+  $$("[data-hak]").forEach((h, i) => { key(h, 0, { o: .3 }); zu(h, 77.5 + i * .45, .3, { o: 1 }); key(h.querySelector("i"), 0, { o: 0, s: .5 }); ein(h.querySelector("i"), 77.55 + i * .45, .3, { s: .5 }); });
+  key(s("gewsatzA"), 0, { o: 0 }); ein(s("gewsatzA"), 78.9, .4, { y: 6 });
+  AK.A.gew.forEach((g, ei) => { if (g < 2) return; const p = linie("A", ei, g); key(p, 0, { d: 0 }); key(p, 78.8 + ei * .1, { d: 0 }); key(p, 79.6 + ei * .1, { d: 1 }, "beid"); aus(p, 80.5, .3); marke("A", ei, g, 79.2 + ei * .1); });
+  const za = mitte(s("zuA"));
+  zu(F, 79.5, .7, { x: za[0], y: za[1] }, "beid"); tipp(F, 80.3); druck(s("zuA"), 80.3); aus(F, 80.9);
+  ein(s("frei"), 81, .5, { y: 6 }); aus(s("frei"), 84.6);
+  [s("rad"), s("linien")].forEach(el => key(el, 0, { o: 1 }));
+
+  // 5 · So geht es weiter: Landkarte, dann der Marktplatz mit einer Runde
+  ein(k(5), 82.4); aus(k(5), 101.9);
+  ein(s("s5a"), 82.6); aus(s("s5a"), 88.3, .3);
+  ein(s("s5b"), 88.7); aus(s("s5b"), 95.3, .3);
+  ein(s("s5c"), 95.7); aus(s("s5c"), 101.9);
+  const W = s("weiter");
+  const kopf = (nr, a) => neu("akopf", null, null, `<span class="nrg">${esc(nr)}</span><div><p class="ki">Arbeitsauftrag ${esc(nr)}</p><p class="ti">${esc(a.name)}</p><p class="ma">${a.form.split(" · ").map(x => `<span>${esc(x)}</span>`).join("")}<span>${a.min} Minuten</span></p></div>`, W);
+  const kL = kopf("L", AUF.L), k5 = kopf("5", AUF["5"]);
+  ein(RD.danach, 83, .4, { s: 1.3 }); zu(RD.danach, 86, .7, { y: RY(LEISTE.indexOf("5")) - RY(LEISTE.indexOf("L")) }, "beid"); aus(RD.danach, 112.9);
+  k5.style.top = "280px";
+  ein(kL, 83.3, .6, { x: -16 }); aus(kL, 88.2);
+  ein(k5, 86.4, .6, { x: -16 }); zu(k5, 88.3, .7, { y: -140 }, "beid"); aus(k5, 112.7);   // erst unter der Landkarte, dann rückt Auftrag 5 an ihren Platz
+  const STAENDE = { A: [330, 470], C: [670, 470], E: [1010, 470] };
+  Object.entries(STAENDE).forEach(([c, [x, y]], i) => {
+    const sd = neu("stand-t", x, y, `<span class="bu">${c}</span><span class="nm">${esc(AK[c].name)}<small>Stand ${c}</small></span>`, W);
+    ein(sd, 88.9 + i * .15, .5, { y: 8 }); aus(sd, 101.95, .45);
+    for (let j = 0; j < 2; j++) {
+      const ich = c === "C" && j === 0, m = neu("mensch" + (ich ? " ich" : ""), x - 30 + j * 60, y - 66, "", W);
+      ein(m, 89.5 + (i * 2 + j) * .05, .4, { s: .5 }); aus(m, 101.95, .45);
+      if (ich) { const l = s("ichl"); l.style.left = x - 30 - 46 + "px"; l.style.top = y - 66 - 15 + "px"; ein(l, 89.9, .4, {}); aus(l, 101.95, .45); }
     }
   });
-  ein(s("blase1"), 89.6, .5, { y: 6 }); aus(s("blase1"), 93.6, .3);
-  ein(s("blase2"), 96.6, .5, { y: 6 }); zu(s("blase2"), 98, 1.4, { x: 340 }, "beid"); aus(s("blase2"), 101.2, .4);
+  const runde = neu("chips2", null, null, "<span>eine Runde</span><span>5 Minuten</span>", W);
+  ein(runde, 89, .5, { y: 6 }); aus(runde, 101.95, .45);
+  ein(s("blase1"), 89.6, .5, { y: 6 }); aus(s("blase1"), 95.3, .3);
+  // Besuch: alle anderen – erst ein Stand, dann ein zweiter
+  const ERST = ["A", "A", "C", "C", "E", "E"], ZWEIT = ["C", "E", "E", "A", "A", "C"];
+  ERST.forEach((c1, i) => {
+    const h = [430 + i * 96, 650], m = neu("mensch", h[0], h[1], "", W), vor = (c, j) => [STAENDE[c][0] - 30 + j * 60, STAENDE[c][1] + 64];
+    ein(m, 95.8 + i * .04, .4, { s: .5 });
+    const a1 = vor(c1, i % 2), a2 = vor(ZWEIT[i], i % 2);
+    zu(m, 96.2 + i * .05, 1.4, { x: a1[0] - h[0], y: a1[1] - h[1] }, "beid");
+    zu(m, 100.3 + i * .05, 1.1, { x: a2[0] - h[0], y: a2[1] - h[1] }, "beid");
+    aus(m, 101.95, .45);
+  });
+  ein(s("blase2"), 97, .4, { y: 6 }); aus(s("blase2"), 100.3, .3);
 
-  // 6 · Euer Modell
-  ein(k(6), 101.6); aus(k(6), 111.6);
-  ein(s("s6a"), 101.9); aus(s("s6a"), 111.6);
-  ein(s("tisch"), 102.3, .6, { s: .96 }); aus(s("tisch"), 111.8);
-  [[230, 236], [370, 236], [466, 345], [300, 456]].forEach(([x, y], i) => { const m = neu("mensch", x, y); ein(m, 102.6 + i * .12, .4, { s: .5 }); aus(m, 111.8); });
-  ein(s("balken"), 103, .6, { x: 12 }); aus(s("balken"), 111.8);
-  const WERT = [1, 3, 2, 2, 1];
-  $$(".fl").forEach((f, i) => { key(f, 0, { sx: 0 }); key(f, 103.9 + i * .3, { sx: 0 }); key(f, 104.8 + i * .3, { sx: WERT[i] / 4 }, "beid"); });
-  $$(".wt").forEach((w, i) => ein(w, 104.6 + i * .3, .4, { x: -6 }));
-  ein($(".bsp2"), 106.6, .5, { y: 4 });
+  // 6 · Euer Modell (zweiter Teil von Auftrag 5)
+  ein(k(6), 102.4); aus(k(6), 112.8);
+  ein(s("s6a"), 102.6); aus(s("s6a"), 112.8);
+  ein(s("chips6"), 103.1, .5, { y: 6 }); aus(s("chips6"), 112.7);
+  ein(s("tisch"), 103, .6, { s: .96 }); aus(s("tisch"), 112.7);
+  [[250, 316], [380, 316], [474, 420], [315, 524]].forEach(([x, y], i) => { const m = neu("mensch", x, y, "", W); ein(m, 103.3 + i * .12, .4, { s: .5 }); aus(m, 112.7); });
+  ein(s("balken"), 103.8, .6, { x: 12 }); aus(s("balken"), 112.7);
+  $$(".fl").forEach((f, i) => { key(f, 0, { sx: 0 }); key(f, 104.7 + i * .3, { sx: 0 }); key(f, 105.6 + i * .3, { sx: (WERT[i] + 1) / 5 }, "beid"); });
+  $$(".wt2").forEach((w, i) => ein(w, 105.4 + i * .3, .4, { x: -6 }));
+  ein($(".bsp2"), 107, .5, { y: 4 });
 
   // 7 · Jetzt du
-  ein(k(7), 112.2);
-  ein(s("s7a"), 112.4);
-  aufbau(s("merk"), 113);
-  ein(s("auftrag"), 115.2, .6, { y: 12 });
+  ein(k(7), 113.4);
+  ein(s("s7a"), 113.6);
+  aufbau(s("merk"), 114.2);
+  ein(s("auftrag"), 116.4, .6, { y: 12 });
 }
 
 /* ---------- Abspielen ---------- */
 const LISTE = [];
 function fertig() {
   for (const [el, ks] of SP) {
-    ks.sort((a, b) => a.t - b.t);
+    ks.forEach((k, i) => { k.i = i; }); ks.sort((a, b) => a.t - b.t || a.i - b.i);
     let cur = { ...GRUND };
     ks.forEach(k => { cur = { ...cur, ...k.p }; k.v = cur; });
     LISTE.push([el, ks, el instanceof SVGPathElement && el.getAttribute("pathLength") === "1"]);
@@ -590,29 +673,30 @@ function zeichne(T) {
 
 const zeit = document.getElementById("zeit"), uhr = document.getElementById("uhr"), poster = document.getElementById("poster");
 const spielt = document.getElementById("spielt"), spielz = document.getElementById("spielz"), ruhigBox = document.getElementById("ruhig");
-const ansage = document.getElementById("ansage"), kapListe = document.getElementById("kapitel");
+const ansage = document.getElementById("ansage"), kapListe = document.getElementById("kapitel"), ort = document.getElementById("ort");
 let T = 0, laeuft = false, letzt = 0, kapAkt = -1;
 const mmss = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
 const kapVon = t => { let i = 0; KAP.forEach((k, j) => { if (t >= k[0] - .001) i = j; }); return i; };
-const kapEnde = i => (i + 1 < KAP.length ? KAP[i + 1][0] - .3 : DAUER);
+const bildVon = t => { let i = 0; while (i < BILD.length - 1 && t > BILD[i] + .001) i++; return i; };   // Abschnitt, in dem t liegt
 const ruhig = () => ruhigBox.checked;
 
 function setze(t, still) {
   T = Math.max(0, Math.min(DAUER, t));
   zeichne(T);
+  const k = kapVon(T), b = bildVon(T);
   zeit.value = Math.round(T * 10);
-  zeit.setAttribute("aria-valuetext", `${mmss(T)}, Kapitel ${kapVon(T) + 1}: ${KAP[kapVon(T)][1]}`);
+  zeit.setAttribute("aria-valuetext", `${mmss(T)}, Teil ${k + 1} von ${KAP.length}: ${KAP[k][1]}`);
   uhr.textContent = `${mmss(T)} / ${mmss(DAUER)}`;
-  const k = kapVon(T);
+  ort.textContent = `Du bist hier: Teil ${k + 1} von ${KAP.length} · ${KAP[k][1]} · Bild ${b + 1} von ${BILD.length}`;
   if (k !== kapAkt) {
     kapAkt = k;
-    [...kapListe.querySelectorAll("button")].forEach((b, i) => b.setAttribute("aria-current", i === k ? "true" : "false"));
-    if (!still) ansage.textContent = `Kapitel ${k + 1} von ${KAP.length}: ${KAP[k][1]}. ${KAP[k][2]}`;
+    [...kapListe.querySelectorAll("button")].forEach((x, i) => x.setAttribute("aria-current", i === k ? "true" : "false"));
+    if (!still) ansage.textContent = `Teil ${k + 1} von ${KAP.length}: ${KAP[k][1]}. ${KAP[k][2]}`;
   }
 }
 function zeigePoster(an) { poster.hidden = !an; }
 function knopf() {
-  if (ruhig()) { spielz.textContent = "›"; spielt.textContent = "Nächstes Bild"; return; }
+  if (ruhig()) { spielz.textContent = "›"; spielt.textContent = T >= DAUER ? "Zum Anfang" : "Nächstes Bild"; return; }
   spielz.textContent = laeuft ? "❚❚" : "▶"; spielt.textContent = laeuft ? "Anhalten" : (T >= DAUER ? "Noch einmal" : "Abspielen");
 }
 function tick(ts) {
@@ -623,53 +707,65 @@ function tick(ts) {
   requestAnimationFrame(tick);
 }
 function einblenden() { try { B.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 150 }); } catch (e) {} }
+function bild(i) { i = Math.max(0, Math.min(BILD.length - 1, i)); zeigePoster(false); setze(BILD[i]); einblenden(); knopf(); }
 function spiele() {
-  zeigePoster(false);
-  if (ruhig()) { const k = T <= 0 ? 0 : Math.min(KAP.length - 1, kapVon(T) + (T >= kapEnde(kapVon(T)) - .01 ? 1 : 0)); setze(kapEnde(k)); einblenden(); knopf(); return; }
+  const erst = !poster.hidden; zeigePoster(false);
+  if (ruhig()) { if (T >= DAUER) setze(0); else bild(T <= 0 ? 0 : bildVon(T) + (T >= BILD[bildVon(T)] - .01 ? 1 : 0)); knopf(); if (erst) document.getElementById("spiel").focus(); return; }
   if (T >= DAUER) setze(0);
   laeuft = true; knopf(); letzt = performance.now(); requestAnimationFrame(tick);
+  if (erst) document.getElementById("spiel").focus();   // der Fokus liegt nach dem Start auf »Anhalten«
 }
 function halte() { laeuft = false; knopf(); }
-function springe(i) {
-  i = Math.max(0, Math.min(KAP.length - 1, i)); zeigePoster(false);
-  if (ruhig()) { setze(kapEnde(i)); einblenden(); } else setze(KAP[i][0] + .01);
+function springe(i) {   // zu einem Teil des Films
+  i = Math.max(0, Math.min(KAP.length - 1, i)); halte(); zeigePoster(false);
+  if (ruhig()) bild(bildVon(KAP[i][0] + .01)); else setze(KAP[i][0] + .01);
   knopf();
+}
+function schritt(r) {   // Sprungmarken: voriges oder nächstes Bild
+  halte(); zeigePoster(false);
+  const b = bildVon(T);
+  bild(r > 0 ? (T >= BILD[b] - .01 ? b + 1 : b) : b - 1);
 }
 
 /* ---------- Bedienung ---------- */
 function skala() { const k = R.clientWidth / 1280; B.style.transform = `scale(${k})`; }
 function start() {
-  rad(); skala(); drehbuch(); fertig();
-  TINTE = farbe("text") || TINTE; GRUNDF = farbe("grund") || GRUNDF;
+  skala(); const WERT = bau(); drehbuch(WERT); fertig();
+  TINTE = farbe("tinte") || TINTE; GRUNDF = farbe("grund") || GRUNDF;
   KAP.forEach((k, i) => {
     const li = document.createElement("li"), b = document.createElement("button");
-    b.type = "button"; b.textContent = `${i + 1} · ${k[1]}`; b.addEventListener("click", () => springe(i));
+    b.type = "button"; b.textContent = k[1]; b.addEventListener("click", () => springe(i));
     li.appendChild(b); kapListe.appendChild(li);
-    const s = document.createElement("li"); s.innerHTML = `<b>${k[1]}.</b> ${k[2]}`; document.getElementById("skript").appendChild(s);
+    const s = document.createElement("li"); s.innerHTML = `<b>${esc(k[1])}.</b> ${esc(k[2])}`; document.getElementById("skript").appendChild(s);
   });
   ruhigBox.checked = matchMedia("(prefers-reduced-motion: reduce)").matches;
   setze(0, true); knopf();
   document.getElementById("start").addEventListener("click", spiele);
   document.getElementById("spiel").addEventListener("click", () => (laeuft ? halte() : spiele()));
-  document.getElementById("vor").addEventListener("click", () => springe(kapVon(T) + 1));
-  document.getElementById("zurueck").addEventListener("click", () => { const k = kapVon(T); springe(!ruhig() && T - KAP[k][0] > 1.5 ? k : k - 1); });
+  document.getElementById("vor").addEventListener("click", () => schritt(1));
+  document.getElementById("zurueck").addEventListener("click", () => schritt(-1));
   zeit.addEventListener("input", () => { halte(); zeigePoster(false); setze(zeit.value / 10); });
-  ruhigBox.addEventListener("change", () => { halte(); if (ruhig() && T > 0) setze(kapEnde(kapVon(T))); knopf(); });
+  ruhigBox.addEventListener("change", () => { halte(); if (ruhig() && T > 0) bild(bildVon(T)); knopf(); });
   document.addEventListener("visibilitychange", () => { if (document.hidden) halte(); });
   window.addEventListener("message", e => { if (e.data === "m22-film-halt") halte(); });
-  document.addEventListener("keydown", e => { if (e.key === "Escape" && window.parent !== window) { halte(); try { window.parent.postMessage("m22-film-zu", "*"); } catch (x) {} } });
-  document.getElementById("film").addEventListener("keydown", e => {
+  const schliesse = () => { halte(); try { window.parent.postMessage("m22-film-zu", "*"); } catch (x) {} };   // im Blatt: Das Blatt schließt den Film (Escape erreicht die Elternseite nicht)
+  document.getElementById("zu").addEventListener("click", schliesse);
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && window.parent !== window) schliesse(); });
+  if (window.parent !== window) try { document.getElementById("start").focus({ preventScroll: true }); } catch (x) {}
+  document.addEventListener("keydown", e => {
     const tag = e.target.tagName;
-    if (tag === "INPUT" || tag === "BUTTON" || tag === "SUMMARY") return;
+    if (tag === "INPUT" || tag === "BUTTON" || tag === "SUMMARY") return;   // die Leertaste hält nur an, wenn kein Bedienelement den Fokus hat
     if (e.key === " " || e.key === "k") { e.preventDefault(); laeuft ? halte() : spiele(); }
-    if (e.key === "ArrowRight") { halte(); zeigePoster(false); setze(T + 5); }
-    if (e.key === "ArrowLeft") { halte(); zeigePoster(false); setze(T - 5); }
+    if (e.key === "ArrowRight") { e.preventDefault(); schritt(1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); schritt(-1); }
   });
   new ResizeObserver(skala).observe(R);
+  /* Für die Prüfung (tools/pruef/film_pruef.py) und für gerenderte Fassungen: der Film als Funktion der Zeit */
+  window.FILM = { dauer: DAUER, teile: KAP.map(k => [k[0], k[1]]), bilder: BILD, daten: D, seek: t => { halte(); zeigePoster(false); setze(t, true); }, zeit: () => T };
 }
 const bereit = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
 bereit.then(start, start);
 })();
-
 </script>
+</body>
 </html>

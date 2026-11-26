@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="de" data-einheit="EINHEIT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Hefter NAME</title>
+<meta name="description" content="GGK · Hefter NAME: alle Arbeitsblätter der Einheit mit deinem Stand. Der Stand bleibt auf diesem Gerät oder in einer Datei.">
+<style>
+/*AB-BASIS*/
+/*AB-STIL*/
+</style>
+</head>
+<body>
+<header class="kopf"><div class="kopf-in"><span class="reiter">Hefter</span><div class="titel">NAME<small>GGK-Labor · alle Arbeitsblätter dieser Einheit</small></div><!--LABOR--><a class="btn" href="index.html">← GGK-Labor</a><!--/LABOR--></div></header>
+<main class="hefter" id="hefter"></main>
+<noscript><p style="padding:2rem;max-width:40rem;margin:auto">Der Hefter braucht JavaScript. Die Inhalte stehen auch im Unterrichtsheft.</p></noscript>
+<script>
+"use strict";
+/*AB-KERN*/
+(function () {
+  const B = window.GGKBlatt, e = B.einheit(), esc = B.esc, ziel = document.getElementById("hefter");
+  const PAKET = window.GGK_PAKET || null;   // im Moodle-Paket: die Blätter, die im Paket liegen
+  const zahlwort = ["null","ein","zwei","drei","vier","fünf","sechs","sieben","acht","neun","zehn","elf","zwölf","dreizehn","vierzehn","fünfzehn","sechzehn","siebzehn"];
+  let FRAGE = false;
+  function zeichne() {
+    const st = B.stand(), n = e.blaetter.length;
+    const karten = e.blaetter.map(b => {
+      const s = st[b.nr], da = !PAKET || PAKET.indexOf(b.nr) >= 0, fertig = !!(s && s.von && s.fertig >= s.von);
+      const wort = !da ? "liegt noch nicht in diesem Paket" : !b.ab ? "Blatt in der früheren Fassung – dein Stand steht im Blatt" : !s || !s.fertig ? "noch nicht begonnen" : fertig ? "✓ fertig" : s.fertig + " von " + s.von + " Aufträgen fertig";
+      const innen = '<span class="reiter">' + esc(b.nr) + "</span><b>" + esc(b.titel) + '</b><small class="stand' + (fertig ? " fertig" : "") + '">' + wort + "</small>" + (st._zuletzt === b.nr && da ? "<small>Hier hast du zuletzt gearbeitet.</small>" : "");
+      return "<li>" + (da ? '<a class="bl" href="' + esc(b.datei) + '"' + (st._zuletzt === b.nr ? " data-hier" : "") + ">" + innen + "</a>" : '<div class="bl fehlt">' + innen + "</div>") + "</li>";
+    }).join("");
+    const spur = e.blaetter.filter(b => st[b.nr] && st[b.nr].satz).map(b => "<li><b>" + esc(b.nr) + "</b><span>" + esc(st[b.nr].satz) + "</span></li>").join("");
+    ziel.innerHTML =
+      '<section class="hefter__kopf"><div><h1>' + esc(e.name) + "</h1>" +
+      (e.frage ? '<p class="leitfrage">' + esc(e.frage) + "</p><p>" + esc(e.frageOrt) + "</p>" : "") +
+      "<p>" + (zahlwort[n] ? zahlwort[n].charAt(0).toUpperCase() + zahlwort[n].slice(1) : n) + " Arbeitsblätter in der Reihenfolge deines Hefts. Jedes Blatt merkt sich deinen Stand auf diesem Gerät.</p></div>" +
+      '<div><p><b>Wechselst du das Gerät?</b> Sichere deinen Stand als Datei und lade ihn auf dem anderen Gerät wieder. Es gibt keine Anmeldung und keinen Server.</p>' +
+      '<div class="reihe nodruck">' + B.dateiKnoepfe("dunkel") + "</div>" +
+      '<label class="haken nodruck"><input type="checkbox" data-ab="beamer"' + (B.beamer() ? " checked" : "") + "> Ansicht für den Beamer</label></div></section>" +
+      '<section aria-labelledby="h-blaetter"><h2 id="h-blaetter">Die Arbeitsblätter</h2><ol class="blaetter">' + karten + "</ol></section>" +
+      '<section aria-labelledby="h-spur"><h2 id="h-spur">Deine Lernspur</h2>' +
+      (spur ? '<p>Je Blatt ein Satz von dir – so, wie du ihn am Ende des Blatts geschrieben hast.</p><ol class="spur">' + spur + "</ol>" : "<p>Hier sammelt sich je Blatt ein Satz von dir. Noch steht nichts da: Der Hefter zeigt nur, was du schon bearbeitet hast.</p>") + "</section>" +
+      '<section class="nodruck" aria-labelledby="h-loesch"><h2 id="h-loesch">Eingaben löschen</h2><p>Auf geteilten Geräten: am Ende der Stunde erst den Stand sichern, dann löschen.</p>' +
+      '<div class="reihe"><button type="button" class="btn" data-hefter="frage" aria-expanded="' + FRAGE + '">Alle Eingaben dieses Hefters löschen …</button></div>' +
+      '<div class="loesch-frage" id="hefter-frage"' + (FRAGE ? "" : " hidden") + ' style="margin-top:.8rem;max-width:40rem"><p><b>Wirklich alles löschen?</b> Alle Antworten in allen Blättern dieses Hefters werden auf diesem Gerät entfernt.</p><div class="reihe" style="margin-top:.6rem"><button type="button" class="btn primary" data-hefter="ja">Ja, alles löschen</button><button type="button" class="btn" data-hefter="nein">Abbrechen</button></div></div></section>' +
+      '<p class="urheberzeile">© 2026 Mario Walter · Inhalte CC BY-NC-SA 4.0 · Code MIT · mit KI-Unterstützung entwickelt</p>';
+  }
+  document.addEventListener("click", ev => {
+    const t = ev.target.closest && ev.target.closest("[data-hefter]"); if (!t) return;
+    const a = t.getAttribute("data-hefter");
+    if (a === "frage") { FRAGE = true; zeichne(); document.querySelector('[data-hefter="ja"]').focus(); }
+    else if (a === "nein") { FRAGE = false; zeichne(); document.querySelector('[data-hefter="frage"]').focus(); }
+    else if (a === "ja") { const re = new RegExp(e.schluessel), weg = []; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (re.test(k)) weg.push(k); } weg.forEach(k => localStorage.removeItem(k)); } catch (x) {} FRAGE = false; zeichne(); }
+  });
+  window.addEventListener("pageshow", zeichne);
+  zeichne();
+})();
+</script>
+</body>
+</html>
